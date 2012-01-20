@@ -5,15 +5,24 @@
 <struts-config>
 
 	<form-beans>
-		<form-bean name="turnForm" type="com.philihp.weblabora.form.TurnForm" />
+		<form-bean name="nullForm" type="com.philihp.weblabora.form.NullForm" />
 	</form-beans>
 
 	<global-forwards />
 
 	<action-mappings>
-		<action path="/showBoard" name="turnForm" type="com.philihp.weblabora.action.ShowBoard">
+		<action path="/showBoard" name="nullForm" type="com.philihp.weblabora.action.ShowBoard">
 			<forward name="default" path="/board.jsp" />
 		</action>
+		<action path="/takeGrain" name="nullForm" type="com.philihp.weblabora.action.TakeGrain">
+			<forward name="default" path="/showBoard.do" redirect="true" />
+		</action> 
+		<action path="/takeSheep" name="nullForm" type="com.philihp.weblabora.action.TakeSheep">
+			<forward name="default" path="/showBoard.do" redirect="true" />
+		</action> 
+		<action path="/pushArm" name="nullForm" type="com.philihp.weblabora.action.PushArm">
+			<forward name="default" path="/showBoard.do" redirect="true" />
+		</action> 
 	</action-mappings>
 
 </struts-config>

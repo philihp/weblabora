@@ -11,7 +11,7 @@ public class Wheel {
 	public enum Position {
 		A, B, C, D, E, F, G, H, I, J, K, L, M;
 		
-		protected Position next() {
+		public Position next() {
 			int i = this.ordinal()+1;
 			if(i == Position.values().length) i = 0;
 			return Position.values()[i];
@@ -28,7 +28,7 @@ public class Wheel {
 		protected int value() {
 			return 0;
 		}
-		protected int take() {
+		public int take() {
 			int i = wheel.arm.position.ordinal() - position.ordinal();
 			if(i < 0) i += armValues.length;
 			position = wheel.arm.position;
@@ -57,10 +57,6 @@ public class Wheel {
 	
 	public Wheel(Board game) {
 		this.game = game;
-	}
-	
-	public void pushWheel() {
-		arm.position = arm.position.next();
 	}
 
 	public Board getGame() {
@@ -97,6 +93,19 @@ public class Wheel {
 
 	public Token getArm() {
 		return arm;
+	}
+	
+	public void pushArm() {
+		Position next = arm.position.next();
+		// this ensures that if something is at 10, it stays at 10
+		if(grain.position == next) grain.position = grain.position.next();
+		if(sheep.position == next) sheep.position = sheep.position.next();
+		if(clay.position == next)  clay.position  = clay.position.next();
+		if(coin.position == next)  coin.position  = coin.position.next();
+		if(wood.position == next)  wood.position  = wood.position.next();
+		if(grape.position == next) grape.position = grape.position.next();
+		if(stone.position == next) stone.position = stone.position.next();
+		arm.position = arm.position.next();
 	}
 	
 }

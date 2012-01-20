@@ -11,6 +11,8 @@
 
 <h1>Wheel</h1>
 
+<p><i><bean:write name="message" ignore="true" /></i></p>
+
 <table>
  <tr>
   <th>Component</th>
@@ -30,8 +32,14 @@
  </tr>
 </table>
 
-<html:form action="showBoard.do">
-	<html:submit>Commit</html:submit>
+<html:form action="takeGrain.do">
+	<html:submit>Take Grain</html:submit>
+</html:form>
+<html:form action="takeSheep.do">
+	<html:submit>Take Sheep</html:submit>
+</html:form>
+<html:form action="pushArm.do">
+	<html:submit>Push Arm</html:submit>
 </html:form>
 
  </body>

@@ -10,7 +10,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.philihp.weblabora.model.Board;
 
-public class ShowBoard extends Action {
+public class TakeGrain extends Action {
 
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -23,14 +23,8 @@ public class ShowBoard extends Action {
 			request.getSession().setAttribute("board", board);
 		}
 		
-		request.setAttribute("board", board);
-		request.setAttribute("wheel", board.getWheel());
-		request.setAttribute("arm", board.getWheel().getArm());
-		request.setAttribute("grain", board.getWheel().getGrain());
-		request.setAttribute("sheep", board.getWheel().getSheep());
-		
-		request.setAttribute("message", request.getSession().getAttribute("message"));
-		request.getSession().setAttribute("message",null);
+		int got = board.getWheel().getGrain().take();
+		request.getSession().setAttribute("message", "Gathered "+got+" grain");
 		
 		return mapping.findForward("default");
 	}
