@@ -42,5 +42,7 @@
 	<html:submit>Push Arm</html:submit>
 </html:form>
 
+<a href="https://www.facebook.com/dialog/oauth?client_id=135113846608059&amp;scope=user_location,user_groups&amp;redirect_uri=http://localhost:8080/weblabora/authenticate.do">Authenticate</a>
+
  </body>
 </html>

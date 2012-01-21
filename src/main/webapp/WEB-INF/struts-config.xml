@@ -11,6 +11,9 @@
 	<global-forwards />
 
 	<action-mappings>
+		<action path="/authenticate" type="com.philihp.weblabora.action.Authenticate">
+			<forward name="default" path="/showBoard.do" redirect="true" />
+		</action>
 		<action path="/showBoard" name="nullForm" type="com.philihp.weblabora.action.ShowBoard">
 			<forward name="default" path="/board.jsp" />
 		</action>
