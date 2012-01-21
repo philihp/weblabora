@@ -25,16 +25,18 @@ public class Authenticate extends Action {
 			throws Exception {
 
 		String code = (String) request.getParameter("code");
-		if (code != null && code.equals("") != false) {
+
+		if (code != null && code.equals("") == false) {
 			URL url = new URL(
-					"http://graph.facebook.com/oauth/access_token?client_id="
-							+ Facebook.client_id
-							+ "&redirect_uri=http://localhost:8080/authenticate.do&client_secret="
+					"https://graph.facebook.com/oauth/access_token?client_id="
+							+ Facebook.client_id + "&redirect_uri="
+							+ Facebook.redirect_uri + "&client_secret="
 							+ Facebook.client_secret + "&code=" + code);
 			try {
 				String result = readURL(url);
 				String accessToken = null;
 				Integer expires = null;
+				System.out.println("result=" + result);
 				String[] pairs = result.split("&");
 				for (String pair : pairs) {
 					String[] kv = pair.split("=");
@@ -49,6 +51,7 @@ public class Authenticate extends Action {
 						}
 					}
 				}
+
 				if (accessToken != null && expires != null) {
 					System.out.println("Authenticated!");
 					System.out.println(accessToken);
