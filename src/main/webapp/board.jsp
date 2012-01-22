@@ -2,12 +2,23 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
+<%@ taglib uri="http://weblabora.philihp.com" prefix="labora"%>
 <!DOCTYPE html>
 <html>
  <head>
   <title>Board</title>
  </head>
  <body>
+
+[
+  <logic:empty name="facebook">
+    <html:link action="/authenticate.do">Login</html:link>
+  </logic:empty>
+  <logic:notEmpty name="facebook">
+    <bean:write name="facebook" property="firstName" />
+    <html:link action="/authenticateLogout.do">Logout</html:link>
+  </logic:notEmpty>
+]
 
 <h1>Wheel</h1>
 

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib
+        PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+        "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib>
+	<tlib-version>1</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>labora</short-name>
+	<uri>http://weblabora.philihp.com</uri>
+	<description>
+        <![CDATA[  ]]>
+	</description>
+	<tag>
+		<name>login</name>
+		<tag-class>com.philihp.weblabora.util.LoginTag</tag-class>
+		<body-content>empty</body-content>
+		<description>
+            <![CDATA[
+Renders a tag that displays the logged in user, and a link to login or logout.
+    ]]>
+		</description>
+	</tag>
+</taglib>
+
+
+

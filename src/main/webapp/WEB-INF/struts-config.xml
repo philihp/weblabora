@@ -12,20 +12,33 @@
 
 	<action-mappings>
 		<action path="/authenticate" type="com.philihp.weblabora.action.Authenticate">
+			<forward name="default" path="/authenticateGetInfo.do" />
+			<forward name="facebook"
+				path="https://www.facebook.com/dialog/oauth?client_id=135113846608059&amp;scope=user_location,user_groups&amp;redirect_uri=http://localhost:8080/weblabora/authenticate.do"
+				redirect="true" />
+		</action>
+		<action path="/authenticateGetInfo" type="com.philihp.weblabora.action.AuthenticateGetInfo">
+			<forward name="default" path="/showBoard.do" redirect="true" />
+			<forward name="authenticate" path="/authenticate.do" redirect="true" />
+		</action>
+		<action path="/authenticateLogout" type="com.philihp.weblabora.action.AuthenticateLogout">
 			<forward name="default" path="/showBoard.do" redirect="true" />
 		</action>
+
+
 		<action path="/showBoard" name="nullForm" type="com.philihp.weblabora.action.ShowBoard">
 			<forward name="default" path="/board.jsp" />
 		</action>
 		<action path="/takeGrain" name="nullForm" type="com.philihp.weblabora.action.TakeGrain">
 			<forward name="default" path="/showBoard.do" redirect="true" />
-		</action> 
+		</action>
 		<action path="/takeSheep" name="nullForm" type="com.philihp.weblabora.action.TakeSheep">
 			<forward name="default" path="/showBoard.do" redirect="true" />
-		</action> 
+		</action>
 		<action path="/pushArm" name="nullForm" type="com.philihp.weblabora.action.PushArm">
 			<forward name="default" path="/showBoard.do" redirect="true" />
-		</action> 
+		</action>
+
 	</action-mappings>
 
 </struts-config>

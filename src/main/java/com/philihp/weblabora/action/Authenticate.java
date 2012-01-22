@@ -1,9 +1,11 @@
 package com.philihp.weblabora.action;
 
 import java.io.ByteArrayOutputStream;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +38,6 @@ public class Authenticate extends Action {
 				String result = readURL(url);
 				String accessToken = null;
 				Integer expires = null;
-				System.out.println("result=" + result);
 				String[] pairs = result.split("&");
 				for (String pair : pairs) {
 					String[] kv = pair.split("=");
@@ -51,21 +52,19 @@ public class Authenticate extends Action {
 						}
 					}
 				}
-
-				if (accessToken != null && expires != null) {
-					System.out.println("Authenticated!");
-					System.out.println(accessToken);
-					System.out.println(expires);
-				} else {
-					System.out.println("Not Authenticated!");
-					System.out.println(accessToken);
-					System.out.println(expires);
-				}
+				
+				Date expiresDate = new Date((new Date().getTime()) + expires*1000);
+				request.getSession().setAttribute("accessToken", accessToken);
+				request.getSession().setAttribute("accessExpires", expiresDate);
+				
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
+			return mapping.findForward("default");
 		}
-		return mapping.findForward("default");
+		else {
+			return mapping.findForward("facebook");
+		}
 	}
 
 	private String readURL(URL url) throws IOException {
