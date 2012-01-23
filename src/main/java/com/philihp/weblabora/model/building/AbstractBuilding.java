@@ -6,7 +6,7 @@ import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Terrain;
 
-public class AbstractBuilding {
+abstract public class AbstractBuilding {
 	
 	protected Board board;
 	
@@ -29,5 +29,7 @@ public class AbstractBuilding {
 		this.shieldValue = shieldValue;
 		this.terrains = terrains;
 	}
+	
+	public abstract void use(Board board, BuildCost input);
 	
 }

@@ -28,6 +28,7 @@ public class ShowBoard extends Action {
 		request.setAttribute("arm", board.getWheel().getArm());
 		request.setAttribute("grain", board.getWheel().getGrain());
 		request.setAttribute("sheep", board.getWheel().getSheep());
+		request.setAttribute("players", board.getPlayers());
 		
 		request.setAttribute("message", request.getSession().getAttribute("message"));
 		request.getSession().setAttribute("message",null);

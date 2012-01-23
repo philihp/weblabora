@@ -38,6 +38,7 @@ public class AuthenticateGetInfo extends Action {
 			return mapping.findForward("authenticate");
 		} else {
 			String accessToken = (String) request.getSession().getAttribute("accessToken");
+			System.out.println("access token: "+accessToken);
 			URL url = new URL("https://graph.facebook.com/me/?access_token=" + accessToken);
 			HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
 			if (connection.getResponseCode() == 400) {
@@ -50,12 +51,7 @@ public class AuthenticateGetInfo extends Action {
 						new FacebookCredentialsDeserializer()).create();
 				FacebookCredentials credentials = gson.fromJson(reader, FacebookCredentials.class);
 
-
-				System.out.println("setting="+request.getSession().getAttribute("facebook"));
 				request.getSession().setAttribute("facebook", credentials);
-				System.out.println("setting="+request.getSession().getAttribute("facebook"));
-
-				request.setAttribute("output", credentials.toString());
 
 				return mapping.findForward("default");
 			}

@@ -6,6 +6,7 @@ public class BuildCost {
 	private int stone = 0;
 	private int straw = 0;
 	private int coin = 0;
+	private int peat = 0;
 
 	private BuildCost() {
 	}
@@ -38,6 +39,11 @@ public class BuildCost {
 		coin += quantity;
 		return this;
 	}
+	
+	public BuildCost peat(int quantity) {
+		peat += quantity;
+		return this;
+	}
 
 	public int getWood() {
 		return wood;
@@ -57,6 +63,10 @@ public class BuildCost {
 
 	public int getCoin() {
 		return coin;
+	}
+	
+	public int getPeat() {
+		return peat;
 	}
 
 }

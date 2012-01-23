@@ -31,6 +31,9 @@ public class FacebookCredentialsDeserializer implements JsonDeserializer<Faceboo
 			case "link":
 				credentials.setLink(entry.getValue().getAsString());
 				break;
+			case "username":
+				credentials.setUsername(entry.getValue().getAsString());
+				break;
 			}
 		}
 		return credentials;
