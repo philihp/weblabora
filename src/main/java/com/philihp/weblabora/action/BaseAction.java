@@ -23,15 +23,10 @@ abstract class BaseAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		try {
-			ActionForward forward = null;
-			forward = run(mapping, form, request, response);
-			if(forward == null) forward = mapping.findForward("default");
-			return forward;
-		}
-		catch(AuthenticationException e) {
-			return mapping.findForward("authenticate");
-		}
+		ActionForward forward = null;
+		forward = run(mapping, form, request, response);
+		if(forward == null) forward = mapping.findForward("default");
+		return forward;
 	}
 	
 	abstract ActionForward run(ActionMapping mapping, ActionForm form,

@@ -9,13 +9,18 @@
 		<form-bean name="hijackForm" type="com.philihp.weblabora.form.HijackForm" />
 	</form-beans>
 
+	<global-exceptions>
+		<exception type="com.philihp.weblabora.action.AuthenticationException" path="/authenticate.do" key="" />
+	</global-exceptions>
+
 	<global-forwards>
 		<forward name="authenticate" path="/authenticate.do" redirect="true" />
 		<forward name="root" redirect="true" path="/" />
-		
+
 		<!-- only index.jsp should use this, but it must be global -->
 		<forward name="board" redirect="false" path="/showBoard.do" />
 	</global-forwards>
+
 
 	<action-mappings>
 		<action path="/authenticate" type="com.philihp.weblabora.action.Authenticate">
