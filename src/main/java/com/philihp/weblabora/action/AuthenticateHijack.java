@@ -31,14 +31,13 @@ import com.philihp.weblabora.util.FacebookCredentialsDeserializer;
 public class AuthenticateHijack extends BaseAction {
 
 	@Override
-	public ActionForward run(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
-			HttpServletResponse response) throws AuthenticationException, Exception {
+	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+			HttpServletResponse response, FacebookCredentials credentials) throws AuthenticationException, Exception {
 
 		String accessToken = (String) request.getSession().getAttribute("accessToken");
 		if (accessToken == null)
 			throw new AuthenticationException();
 
-		FacebookCredentials credentials = (FacebookCredentials)request.getSession().getAttribute("facebook");
 		HijackForm form = (HijackForm)actionForm;
 		if(form.getFacebookId() == null) form.setFacebookId(credentials.getFacebookId());
 

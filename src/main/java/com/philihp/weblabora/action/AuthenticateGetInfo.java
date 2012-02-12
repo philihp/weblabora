@@ -30,8 +30,8 @@ import com.philihp.weblabora.util.FacebookCredentialsDeserializer;
 public class AuthenticateGetInfo extends BaseAction {
 
 	@Override
-	public ActionForward run(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws AuthenticationException, Exception {
+	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response, FacebookCredentials credentials) throws AuthenticationException, Exception {
 
 		String accessToken = (String) request.getSession().getAttribute("accessToken");
 		if (accessToken == null)
@@ -44,7 +44,7 @@ public class AuthenticateGetInfo extends BaseAction {
 
 		Gson gson = new GsonBuilder().registerTypeAdapter(FacebookCredentials.class, new FacebookCredentialsDeserializer())
 				.create();
-		FacebookCredentials credentials = gson.fromJson(new InputStreamReader(connection.getInputStream()),
+		credentials = gson.fromJson(new InputStreamReader(connection.getInputStream()),
 				FacebookCredentials.class);
 
 		request.getSession().setAttribute("facebook", credentials);

@@ -18,12 +18,13 @@ import org.apache.struts.action.ActionMapping;
 import antlr.StringUtils;
 
 import com.philihp.weblabora.util.Facebook;
+import com.philihp.weblabora.util.FacebookCredentials;
 
 public class AuthenticateLogout extends BaseAction {
 
 	@Override
-	public ActionForward run(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response, FacebookCredentials credentials) throws Exception {
 		
 		request.getSession().setAttribute("facebook", null);
 		request.getSession().setAttribute("accessToken", null);

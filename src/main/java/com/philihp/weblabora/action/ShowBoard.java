@@ -9,15 +9,14 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.philihp.weblabora.model.Board;
+import com.philihp.weblabora.util.FacebookCredentials;
 
 public class ShowBoard extends BaseAction {
 
 	@Override
-	public ActionForward run(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
+	public ActionForward execute(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response, FacebookCredentials credentials)
 			throws Exception {
-		
-		if(request.getSession().getAttribute("facebook") == null) throw new AuthenticationException(); 
 
 		return mapping.findForward("default");
 	}

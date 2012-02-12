@@ -18,11 +18,12 @@ import org.apache.struts.action.ActionMapping;
 import antlr.StringUtils;
 
 import com.philihp.weblabora.util.Facebook;
+import com.philihp.weblabora.util.FacebookCredentials;
 
 public class Authenticate extends BaseAction {
 
-	public ActionForward run(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
+	public ActionForward execute(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response, FacebookCredentials credentials)
 			throws Exception {
 
 		String code = (String) request.getParameter("code");
@@ -68,6 +69,6 @@ public class Authenticate extends BaseAction {
 		else {
 			return mapping.findForward("facebook");
 		}
-		return null;
+		return mapping.findForward("default");
 	}
 }
