@@ -9,4 +9,6 @@
 		url="jdbc:mysql://localhost:3306/philihp?zeroDateTimeBehavior=convertToNull"
 		maxActive="200"
 		maxIdle="3" />
+  <!-- Disable Session Persistence -->
+  <Manager pathname="" />
 </Context>
