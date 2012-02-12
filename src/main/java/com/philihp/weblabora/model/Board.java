@@ -79,4 +79,8 @@ public class Board {
 		return buildings;
 	}
 
+	public List<AbstractBuilding> getUnbuiltBuildings() {
+		return unbuiltBuildings;
+	}
+
 }

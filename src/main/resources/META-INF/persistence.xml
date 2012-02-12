@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="labora-pu" transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<non-jta-data-source>java:comp/env/jdbc/LaboraDB</non-jta-data-source>
+		<class>com.philihp.weblabora.jpa.User</class>
+		<class>com.philihp.weblabora.jpa.Game</class>
+		<class>com.philihp.weblabora.jpa.BasicEntity</class>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+
+		<shared-cache-mode>NONE</shared-cache-mode>
+		<properties>
+			<property name="eclipselink.logging.level" value="FINE" />
+			<property name="eclipselink.target-database" value="MySQL" />
+
+			<!-- this is a workaround for Tomcat, otherwise Eclipselink can't find the JNDI datasource -->
+			<property name="eclipselink.session.customizer" value="com.philihp.weblabora.util.JPAEclipseLinkSessionCustomizer" />
+
+			<!-- meh caching. synchronization issues. headaches. -->
+			<property name="eclipselink.query-results-cache" value="false" />
+
+			<property name="eclipselink.ddl-generation" value="none" />
+			<!-- BE VERY CAREFUL ABOUT COMMITTING WITH DROP -->
+			<!--<property name="eclipselink.ddl-generation" value="create-tables" />-->
+			<!--<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />-->
+			<property name="eclipselink.ddl-generation.output-mode" value="database" />
+			
+		</properties>
+	</persistence-unit>
+</persistence>

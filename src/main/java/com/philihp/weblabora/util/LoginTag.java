@@ -7,8 +7,6 @@ import org.apache.struts.taglib.TagUtils;
 
 public class LoginTag extends TagSupport {
 	
-	private String scope = null;
-
   public int doStartTag() throws JspException {
   	TagUtils tag = TagUtils.getInstance();
   	

@@ -23,7 +23,7 @@ public class FacebookCredentialsDeserializer implements JsonDeserializer<Faceboo
 				credentials.setName(entry.getValue().getAsString());
 				break;
 			case "id":
-				credentials.setId(entry.getValue().getAsInt());
+				credentials.setFacebookId(entry.getValue().getAsString());
 				break;
 			case "first_name":
 				credentials.setFirstName(entry.getValue().getAsString());

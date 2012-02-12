@@ -2,7 +2,7 @@ package com.philihp.weblabora.util;
 
 public class FacebookCredentials {
 
-	private int id;
+	private String facebookId;
 	private String name;
 	private String firstName;
 	private String link;
@@ -14,14 +14,6 @@ public class FacebookCredentials {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getName() {
@@ -49,7 +41,15 @@ public class FacebookCredentials {
 	}
 
 	public String toString() {
-		return "FacebookCredentials{id=" + id + ", name=\"" + name + "\", firstName=\"" + firstName + "\", link=\"" + link
+		return "FacebookCredentials{facebookId=" + facebookId + ", name=\"" + name + "\", firstName=\"" + firstName + "\", link=\"" + link
 				+ "\"}";
+	}
+
+	public String getFacebookId() {
+		return facebookId;
+	}
+
+	public void setFacebookId(String facebookId) {
+		this.facebookId = facebookId;
 	}
 }

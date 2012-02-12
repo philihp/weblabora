@@ -7,65 +7,80 @@
 <html>
 <head>
 <title>Board</title>
+<link rel="stylesheet" href="css/style.css" />
+<style>
+body {
+	margin: 10px;
+	background: #f0f0f0;
+}
+
+body,button,input,select,textarea {
+	font-family: Verdana, "BitStream vera Sans", Helvetica, Sans-serif;
+	font-size: 13px;
+}
+
+div.userbar {
+	box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
+	background: #fcfcfc;
+	border: 1px solid #b3b3b3;
+	border-radius: 4px;
+	font-size: 16px;
+	padding: 10px;
+}
+
+div.userbar img {
+	box-shadow: 0 1px 10px #a7a7a7;
+	border: 1px solid #b3b3b3;
+	border-radius: 4px;
+}
+</style>
+<link rel="stylesheet" href="css/colorbox.css" />
+
+
+<script src="https://www.google.com/jsapi"></script>
+<script>
+	google.load("jquery", "1.7.1");
+</script>
+<script src="js/jquery.colorbox-min.js"></script>
+<script>
+	$(document).bind('cbox_complete', function() {
+		$('#cboxLoadedContent').addClass('styled');
+		$('#cboxContent').addClass('styled');
+		$('#cboxClose').addClass('styled');
+	});
+	$(document).bind('cbox_cleanup', function() {
+		$('#cboxLoadedContent').removeClass('styled');
+		$('#cboxContent').removeClass('styled');
+		$('#cboxClose').removeClass('styled');
+	});
+
+	$().ready(function() {
+		$('#findGamesButton').colorbox({
+			href : "findGames.do"
+		});
+	});
+</script>
+
 </head>
+
 <body>
 
-	[
-	<logic:empty name="facebook">
-		<html:link action="/authenticate.do">Login</html:link>
-	</logic:empty>
-	<logic:notEmpty name="facebook">
-		<bean:write name="facebook" property="firstName" />
-		(#<bean:write name="facebook" property="id" />)
-		<html:link action="/authenticateLogout.do">Logout</html:link>
-	</logic:notEmpty>
-	]
+	<div class="userbar">
+		<img src="http://graph.facebook.com/<bean:write name="facebook" property="facebookId" />/picture" height="50" width="50" />
+		<logic:empty name="facebook">
+			<html:link action="/authenticate.do">Login</html:link>
+		</logic:empty>
+		<logic:notEmpty name="facebook">
+			<span title="#<bean:write name="facebook" property="facebookId" />"><bean:write name="facebook" property="name" /></span>
+			<html:form action="/authenticateHijack.do" style="display: inline">
+				<html:text property="facebookId"></html:text>
+				<html:submit>Hijack</html:submit>
+			</html:form>
+			<button id="findGamesButton">Find Games</button>
+		</logic:notEmpty>
+	</div>
 
-	<h1>Wheel</h1>
-
-	<p>
-		<i><bean:write name="message" ignore="true" /></i>
-	</p>
-
-	<table>
-		<tr>
-			<th>Component</th>
-			<th>Position</th>
-		</tr>
-		<tr>
-			<td>Arm</td>
-			<td><bean:write name="arm" property="position" /></td>
-		</tr>
-		<tr>
-			<td>Grain</td>
-			<td><bean:write name="grain" property="position" /></td>
-		</tr>
-		<tr>
-			<td>Sheep</td>
-			<td><bean:write name="sheep" property="position" /></td>
-		</tr>
-	</table>
-
-	<html:form action="takeGrain.do">
-		<html:submit>Take Grain</html:submit>
-	</html:form>
-	<html:form action="takeSheep.do">
-		<html:submit>Take Sheep</html:submit>
-	</html:form>
-	<html:form action="pushArm.do">
-		<html:submit>Push Arm</html:submit>
-	</html:form>
-
-	<logic:iterate name="players" id="player">
-	<p>
-		<h1><bean:write name="player" property="color" /></h1>
-		<ul>
-			<logic:iterate name="player" property="inventory" id="entry">
-				<li><bean:write name="entry" property="type" />: <bean:write name="entry" property="quantity" /></li>
-			</logic:iterate>
-		</ul>
-	</p>
-	</logic:iterate>
+	<img src="http://i.imgur.com/b4rGt.jpg" width="747" height="803" />
 
 </body>
 </html>

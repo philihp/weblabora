@@ -21,7 +21,6 @@ public class FacebookAuthorizer implements Command {
 		return execute((ServletActionContext) context);
 	}
 
-	@SuppressWarnings("unchecked")
 	public boolean execute(ServletActionContext saContext) throws Exception {
 		ActionConfig actionConfig = saContext.getActionConfig();
 

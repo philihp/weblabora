@@ -23,28 +23,33 @@ import antlr.StringUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.philihp.weblabora.form.HijackForm;
 import com.philihp.weblabora.util.Facebook;
 import com.philihp.weblabora.util.FacebookCredentials;
 import com.philihp.weblabora.util.FacebookCredentialsDeserializer;
 
-public class AuthenticateGetInfo extends BaseAction {
+public class AuthenticateHijack extends BaseAction {
 
 	@Override
-	public ActionForward run(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	public ActionForward run(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response) throws AuthenticationException, Exception {
 
 		String accessToken = (String) request.getSession().getAttribute("accessToken");
 		if (accessToken == null)
 			throw new AuthenticationException();
 
-		URL url = new URL("https://graph.facebook.com/me/?access_token=" + accessToken);
+		FacebookCredentials credentials = (FacebookCredentials)request.getSession().getAttribute("facebook");
+		HijackForm form = (HijackForm)actionForm;
+		if(form.getFacebookId() == null) form.setFacebookId(credentials.getFacebookId());
+
+		URL url = new URL("https://graph.facebook.com/"+form.getFacebookId()+"/?access_token=" + accessToken);
 		HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
 		if (connection.getResponseCode() == 400)
 			throw new AuthenticationException();
 
 		Gson gson = new GsonBuilder().registerTypeAdapter(FacebookCredentials.class, new FacebookCredentialsDeserializer())
 				.create();
-		FacebookCredentials credentials = gson.fromJson(new InputStreamReader(connection.getInputStream()),
+		credentials = gson.fromJson(new InputStreamReader(connection.getInputStream()),
 				FacebookCredentials.class);
 
 		request.getSession().setAttribute("facebook", credentials);

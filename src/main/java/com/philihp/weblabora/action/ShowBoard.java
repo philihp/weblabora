@@ -10,29 +10,15 @@ import org.apache.struts.action.ActionMapping;
 
 import com.philihp.weblabora.model.Board;
 
-public class ShowBoard extends Action {
+public class ShowBoard extends BaseAction {
 
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form,
+	public ActionForward run(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
-		Board board = (Board)request.getSession().getAttribute("board");
-		if(board == null) { 
-			board = new Board();
-			request.getSession().setAttribute("board", board);
-		}
-		
-		request.setAttribute("board", board);
-		request.setAttribute("wheel", board.getWheel());
-		request.setAttribute("arm", board.getWheel().getArm());
-		request.setAttribute("grain", board.getWheel().getGrain());
-		request.setAttribute("sheep", board.getWheel().getSheep());
-		request.setAttribute("players", board.getPlayers());
-		
-		request.setAttribute("message", request.getSession().getAttribute("message"));
-		request.getSession().setAttribute("message",null);
-		
+		if(request.getSession().getAttribute("facebook") == null) throw new AuthenticationException(); 
+
 		return mapping.findForward("default");
 	}
 

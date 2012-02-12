@@ -19,10 +19,9 @@ import antlr.StringUtils;
 
 import com.philihp.weblabora.util.Facebook;
 
-public class Authenticate extends Action {
+public class Authenticate extends BaseAction {
 
-	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form,
+	public ActionForward run(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
@@ -55,25 +54,20 @@ public class Authenticate extends Action {
 				
 				Date expiresDate = new Date((new Date().getTime()) + expires*1000);
 				request.getSession().setAttribute("accessToken", accessToken);
+				
+				//going to save this, even though we don't really care
 				request.getSession().setAttribute("accessExpires", expiresDate);
+				
+				System.out.println("access= "+accessToken);
+				System.out.println("expires= "+expiresDate);
 				
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
-			return mapping.findForward("default");
 		}
 		else {
 			return mapping.findForward("facebook");
 		}
-	}
-
-	private String readURL(URL url) throws IOException {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		InputStream is = url.openStream();
-		int r;
-		while ((r = is.read()) != -1) {
-			baos.write(r);
-		}
-		return new String(baos.toByteArray());
+		return null;
 	}
 }

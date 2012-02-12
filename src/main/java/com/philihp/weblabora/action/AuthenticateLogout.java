@@ -19,19 +19,15 @@ import antlr.StringUtils;
 
 import com.philihp.weblabora.util.Facebook;
 
-public class AuthenticateLogout extends Action {
+public class AuthenticateLogout extends BaseAction {
 
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	public ActionForward run(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
-		System.out.println("fb="+request.getSession().getAttribute("facebook"));
-
 		request.getSession().setAttribute("facebook", null);
 		request.getSession().setAttribute("accessToken", null);
 		request.getSession().setAttribute("accessExpires", null);
-
-		System.out.println("fb="+request.getSession().getAttribute("facebook"));
 
 		return mapping.findForward("default");
 	}

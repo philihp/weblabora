@@ -293,4 +293,8 @@ public class Player {
 		return nickel;
 	}
 
+	public Board getBoard() {
+		return board;
+	}
+
 }

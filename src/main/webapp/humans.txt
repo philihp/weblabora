@@ -1,0 +1,20 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+
+/* TEAM */
+  Developer: Philihp Busby
+  Blog: http://philihp.com/
+  Twitter: philihp
+  Location: Raleigh, NC, USA
+
+/* THANKS */
+  Uwe Rosenberg (Designer of Ora et Labora)
+  Zev Shlasinger (Z-man Games)
+  Paul Irish (Boilerplate, HTML5, etc)
+   
+
+/* SITE */
+  Last Built: ${maven.build.timestamp}
+  Language: English
+  Software: Java 5, Tomcat 6.0, Struts 1.3, EclipseLink 2.2.0, Maven 2
