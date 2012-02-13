@@ -56,7 +56,7 @@ div.userbar img {
 
 	$().ready(function() {
 		$('#findGamesButton').colorbox({
-			href : "findGames.do"
+			href : "showGames.do"
 		});
 	});
 </script>
@@ -66,18 +66,22 @@ div.userbar img {
 <body>
 
 	<div class="userbar">
-		<img src="http://graph.facebook.com/<bean:write name="facebook" property="facebookId" />/picture" height="50" width="50" />
-		<logic:empty name="facebook">
+		<img src="http://graph.facebook.com/<bean:write name="user" property="facebookId" />/picture" height="50" width="50" />
+		<logic:empty name="user">
 			<html:link action="/authenticate.do">Login</html:link>
 		</logic:empty>
-		<logic:notEmpty name="facebook">
-			<span title="#<bean:write name="facebook" property="facebookId" />"><bean:write name="facebook" property="name" /></span>
+		<logic:notEmpty name="user">
+			<span title="#<bean:write name="user" property="facebookId" />"><bean:write name="user" property="name" /></span>
 			<html:form action="/authenticateHijack.do" style="display: inline">
 				<html:text property="facebookId"></html:text>
 				<html:submit>Hijack</html:submit>
 			</html:form>
 			<button id="findGamesButton">Find Games</button>
 		</logic:notEmpty>
+		<html:form action="/setActiveGame.do">
+			<html:select property="gameId">
+			</html:select>
+		</html:form>
 	</div>
 
 	<img src="http://i.imgur.com/b4rGt.jpg" width="747" height="803" />

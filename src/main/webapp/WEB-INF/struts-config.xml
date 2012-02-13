@@ -7,6 +7,7 @@
 	<form-beans>
 		<form-bean name="nullForm" type="com.philihp.weblabora.form.NullForm" />
 		<form-bean name="hijackForm" type="com.philihp.weblabora.form.HijackForm" />
+		<form-bean name="gameForm" type="com.philihp.weblabora.form.GameForm" />
 	</form-beans>
 
 	<global-exceptions>
@@ -39,9 +40,17 @@
 			<forward name="default" path="/" redirect="true" />
 		</action>
 
-
 		<action path="/showBoard" name="nullForm" type="com.philihp.weblabora.action.ShowBoard">
-			<forward name="default" path="/board.jsp" />
+			<forward name="default" path="/showBoard.jsp" />
+		</action>
+		<action path="/showGames" type="com.philihp.weblabora.action.ShowGames">
+			<forward name="default" path="/showGames.jsp" />
+		</action>
+		<action path="/createGame" name="nullForm" type="com.philihp.weblabora.action.CreateGame">
+			<forward name="default" path="/" redirect="true" />
+		</action>
+		<action path="/setActiveGame" name="gameForm" type="com.philihp.weblabora.action.SetActiveGame">
+			<forward name="default" path="/" redirect="true" />
 		</action>
 
 	</action-mappings>

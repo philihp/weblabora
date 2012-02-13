@@ -17,13 +17,14 @@ import org.apache.struts.action.ActionMapping;
 
 import antlr.StringUtils;
 
+import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.util.Facebook;
 import com.philihp.weblabora.util.FacebookCredentials;
 
 public class Authenticate extends BaseAction {
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response, FacebookCredentials credentials)
+			HttpServletRequest request, HttpServletResponse response, User user)
 			throws Exception {
 
 		String code = (String) request.getParameter("code");

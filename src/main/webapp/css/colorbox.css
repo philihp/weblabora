@@ -24,10 +24,6 @@
 	position: relative;
 }
 
-#cboxLoadedContent {
-	overflow: auto;
-}
-
 #cboxTitle {
 	margin: 0;
 }
@@ -87,12 +83,13 @@
 }
 
 #cboxLoadedContent {
+	overflow: auto;
 	background: #fcfcfc;;
-	padding: 1px;
+	padding: 16px;
 }
 
 #cboxLoadingGraphic {
-	x-background: url(../images/loading.gif) no-repeat center center;
+	/* background: url(../images/loading.gif) no-repeat center center; */
 }
 
 #cboxLoadingOverlay {

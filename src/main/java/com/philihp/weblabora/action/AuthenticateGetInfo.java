@@ -9,8 +9,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Date;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,6 +26,8 @@ import antlr.StringUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.philihp.weblabora.jpa.User;
+import com.philihp.weblabora.util.EntityManagerManager;
 import com.philihp.weblabora.util.Facebook;
 import com.philihp.weblabora.util.FacebookCredentials;
 import com.philihp.weblabora.util.FacebookCredentialsDeserializer;
@@ -31,7 +36,7 @@ public class AuthenticateGetInfo extends BaseAction {
 
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response, FacebookCredentials credentials) throws AuthenticationException, Exception {
+			HttpServletResponse response, User user) throws AuthenticationException, Exception {
 
 		String accessToken = (String) request.getSession().getAttribute("accessToken");
 		if (accessToken == null)
@@ -44,12 +49,12 @@ public class AuthenticateGetInfo extends BaseAction {
 
 		Gson gson = new GsonBuilder().registerTypeAdapter(FacebookCredentials.class, new FacebookCredentialsDeserializer())
 				.create();
-		credentials = gson.fromJson(new InputStreamReader(connection.getInputStream()),
-				FacebookCredentials.class);
+		FacebookCredentials credentials = gson.fromJson(new InputStreamReader(connection.getInputStream()), FacebookCredentials.class);
 
-		request.getSession().setAttribute("facebook", credentials);
+		request.getSession().setAttribute("user", findUser(credentials));
 
 		return mapping.findForward("default");
 
 	}
+
 }

@@ -8,7 +8,7 @@ import javax.persistence.*;
 import static javax.persistence.FetchType.LAZY;
 import org.eclipse.persistence.annotations.ReadOnly;
 
-@Entity(name = "game")
+@Entity(name = "Game")
 @Access(FIELD)
 @Table(name = "weblabora_game")
 public class Game extends BasicEntity {
@@ -66,6 +66,15 @@ public class Game extends BasicEntity {
 	@AssociationOverride(name = "user", joinColumns = @JoinColumn(name = "player4_user_id", referencedColumnName = "user_id"))
 	private Player player4;
 
+	
+	public Game() {
+		// player1-4 must not be null
+		this.player1 = new Player();
+		this.player2 = new Player();
+		this.player3 = new Player();
+		this.player4 = new Player();
+	}
+	
 	public int getGameId() {
 		return gameId;
 	}
@@ -104,6 +113,13 @@ public class Game extends BasicEntity {
 
 	public void setPlayer4(Player player4) {
 		this.player4 = player4;
+	}
+	
+	public boolean isUserAPlayer(User u) {
+		return player1.user != null && player1.user.equals(u) ||
+				player2.user != null && player2.user.equals(u) ||
+				player3.user != null && player3.user.equals(u) ||
+				player4.user != null && player4.user.equals(u);
 	}
 
 }
