@@ -8,35 +8,8 @@
 <head>
 <title>Board</title>
 <link rel="stylesheet" href="css/style.css" />
-<style>
-body {
-	margin: 10px;
-	background: #f0f0f0;
-}
-
-body,button,input,select,textarea {
-	font-family: Verdana, "BitStream vera Sans", Helvetica, Sans-serif;
-	font-size: 13px;
-}
-
-div.userbar {
-	box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
-	background: #fcfcfc;
-	border: 1px solid #b3b3b3;
-	border-radius: 4px;
-	font-size: 16px;
-	padding: 10px;
-}
-
-div.userbar img {
-	box-shadow: 0 1px 10px #a7a7a7;
-	border: 1px solid #b3b3b3;
-	border-radius: 4px;
-}
-</style>
 <link rel="stylesheet" href="css/colorbox.css" />
-
-
+<link rel="stylesheet" href="css/weblabora.css" />
 <script src="https://www.google.com/jsapi"></script>
 <script>
 	google.load("jquery", "1.7.1");
@@ -56,7 +29,9 @@ div.userbar img {
 
 	$().ready(function() {
 		$('#findGamesButton').colorbox({
-			href : "showGames.do"
+			href : "showGames.do",
+			speed : 150,
+			transition: "elastic"
 		});
 	});
 </script>
