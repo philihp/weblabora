@@ -51,7 +51,9 @@ public class AuthenticateGetInfo extends BaseAction {
 				.create();
 		FacebookCredentials credentials = gson.fromJson(new InputStreamReader(connection.getInputStream()), FacebookCredentials.class);
 
-		request.getSession().setAttribute("user", findUser(credentials));
+		user = findUser(credentials.getFacebookId());
+		user.setName(credentials.getName());
+		request.getSession().setAttribute("user", user);
 
 		return mapping.findForward("default");
 

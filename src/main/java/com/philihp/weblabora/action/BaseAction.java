@@ -33,13 +33,15 @@ abstract class BaseAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		
-		User credentials = (User)request.getSession().getAttribute("user");
-		if(isActionPrivate() && credentials == null) throw new AuthenticationException();
-
 		System.out.println("Action: "+this.getClass().getCanonicalName());
+		
+		//can't just use the old user from the session attributes because
+		//it was registered with an EntityManager from a different thread.
+		User user = findUser((User)request.getSession().getAttribute("user"));
+		
+		if(isActionPrivate() && user == null) throw new AuthenticationException();
 
-		return execute(mapping, actionForm, request, response, credentials);
+		return execute(mapping, actionForm, request, response, user);
 	}
 	
 	abstract ActionForward execute(ActionMapping mapping, ActionForm actionForm,
@@ -59,17 +61,21 @@ abstract class BaseAction extends Action {
 	private boolean isActionPrivate() {
 		return PUBLIC_ACTIONS.contains(this.getClass()) == false;
 	}
-
-	protected User findUser(FacebookCredentials credentials) {
+	
+	protected User findUser(User user) {
+		if(user == null) return null;
+		return findUser(user.getFacebookId());
+	}
+	
+	protected User findUser(String facebookId) {
 		EntityManager em = EntityManagerManager.get();
 		TypedQuery<User> query = em.createNamedQuery("findUserByFacebookId", User.class);
-		query.setParameter("facebookId", credentials.getFacebookId());
+		query.setParameter("facebookId", facebookId);
 		List<User> results = query.getResultList();
 		if (results.size() == 0) {
 			User user = new User();
-			user.setFacebookId(credentials.getFacebookId());
-			user.setName(credentials.getName());
 			em.persist(user);
+			user.setFacebookId(facebookId);
 			return user;
 		} else {
 			return results.get(0);

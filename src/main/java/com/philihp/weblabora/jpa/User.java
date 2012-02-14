@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Basic;
+import javax.persistence.JoinColumn;
 
 @Entity(name = "User")
 @Table(name = "weblabora_user")
@@ -29,6 +30,9 @@ public class User extends BasicEntity {
 	@Basic(optional = false)
 	@Column(name = "name", nullable = false)
 	private String name;
+	
+	@JoinColumn(name = "active_game_id", referencedColumnName = "game_id")
+	private Game activeGame;
 
 	public int getUserId() {
 		return userId;
@@ -52,6 +56,14 @@ public class User extends BasicEntity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Game getActiveGame() {
+		return activeGame;
+	}
+
+	public void setActiveGame(Game activeGame) {
+		this.activeGame = activeGame;
 	}
 
 }

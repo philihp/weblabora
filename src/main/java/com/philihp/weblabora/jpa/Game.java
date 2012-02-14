@@ -3,6 +3,8 @@ package com.philihp.weblabora.jpa;
 import static javax.persistence.AccessType.FIELD;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+
 import javax.persistence.*;
 
 import static javax.persistence.FetchType.LAZY;
@@ -66,7 +68,6 @@ public class Game extends BasicEntity {
 	@AssociationOverride(name = "user", joinColumns = @JoinColumn(name = "player4_user_id", referencedColumnName = "user_id"))
 	private Player player4;
 
-	
 	public Game() {
 		// player1-4 must not be null
 		this.player1 = new Player();
@@ -74,7 +75,7 @@ public class Game extends BasicEntity {
 		this.player3 = new Player();
 		this.player4 = new Player();
 	}
-	
+
 	public int getGameId() {
 		return gameId;
 	}
@@ -114,12 +115,22 @@ public class Game extends BasicEntity {
 	public void setPlayer4(Player player4) {
 		this.player4 = player4;
 	}
-	
-	public boolean isUserAPlayer(User u) {
-		return player1.user != null && player1.user.equals(u) ||
-				player2.user != null && player2.user.equals(u) ||
-				player3.user != null && player3.user.equals(u) ||
-				player4.user != null && player4.user.equals(u);
+
+	public boolean isUserAPlayer(User user) {
+		if(user == null) return false;
+		boolean player1Match = player1.user != null && player1.user.getUserId() == user.getUserId();
+		boolean player2Match = player2.user != null && player2.user.getUserId() == user.getUserId();
+		boolean player3Match = player3.user != null && player3.user.getUserId() == user.getUserId();
+		boolean player4Match = player4.user != null && player4.user.getUserId() == user.getUserId();
+		return player1Match || player2Match || player3Match || player4Match;
+	}
+
+	public String getName() {
+		String name = "Game started @ " + new SimpleDateFormat("yyyy-MM-dd").format(getDateCreated());
+		// if(player1.user != null) {
+		// name += " by "+player1.user.getName();
+		// }
+		return name;
 	}
 
 }

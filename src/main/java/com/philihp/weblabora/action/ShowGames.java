@@ -25,8 +25,18 @@ public class ShowGames extends BaseAction {
 			HttpServletResponse response, User user) throws Exception {
 
 		EntityManager em = EntityManagerManager.get();
-
-		TypedQuery<Game> query = em.createQuery("SELECT g FROM Game g", Game.class);
+		
+		TypedQuery<Game> query = em
+				.createQuery(
+						"SELECT g " +
+						"FROM Game g " +
+						"WHERE (g.player1.user IS NOT NULL AND g.player1.user != :user OR g.player1.user IS NULL)" +
+						  "AND (g.player2.user IS NOT NULL AND g.player2.user != :user OR g.player2.user IS NULL)" +
+						  "AND (g.player3.user IS NOT NULL AND g.player3.user != :user OR g.player3.user IS NULL)" +
+						  "AND (g.player4.user IS NOT NULL AND g.player4.user != :user OR g.player4.user IS NULL)" +
+						  "AND (g.player1.user IS NULL OR g.player2.user IS NULL OR g.player3.user IS NULL OR g.player4.user IS NULL)",
+						Game.class);
+		query.setParameter("user", user);
 		List<Game> results = query.getResultList();
 
 		request.setAttribute("games", results);

@@ -7,7 +7,7 @@ public class GameForm extends ActionForm {
 	private Integer gameId;
 
 	public void reset() {
-		this.gameId = null;
+		this.gameId = 0;
 	}
 
 	public Integer getGameId() {

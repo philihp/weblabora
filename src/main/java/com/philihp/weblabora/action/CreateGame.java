@@ -28,6 +28,7 @@ public class CreateGame extends BaseAction {
 
 		Game game = new Game();
 		game.getPlayer1().setUser(user);
+		user.setActiveGame(game);
 		em.persist(game);
 
 		return mapping.findForward("default");
