@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 
 @MappedSuperclass
 @Access(FIELD)
-abstract class BasicEntity implements Serializable{
+public abstract class BasicEntity implements Serializable{
 
 	@Column(name = "date_created")
 	@Temporal(TemporalType.TIMESTAMP)
