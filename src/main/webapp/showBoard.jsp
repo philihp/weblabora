@@ -66,25 +66,26 @@ div.userbar img {
 <body>
 
 	<div class="userbar">
-		<img src="http://graph.facebook.com/<bean:write name="user" property="facebookId" />/picture" height="50" width="50" />
-		<logic:empty name="user">
-			<html:link action="/authenticate.do">Login</html:link>
-		</logic:empty>
-		<logic:notEmpty name="user">
-			<span title="#<bean:write name="user" property="facebookId" />"><bean:write name="user" property="name" /></span>
-			<html:form action="/authenticateHijack.do" style="display: inline">
-				<html:text property="facebookId"></html:text>
-				<html:submit>Hijack</html:submit>
-			</html:form>
-			<button id="findGamesButton">Find Games</button>
-		</logic:notEmpty>
-		<html:form action="/setActiveGame.do">
+		<img src="http://graph.facebook.com/<bean:write name="user" property="facebookId" />/picture" height="50" width="50" title="#<bean:write name="user" property="facebookId" />"/>
+		<bean:write name="user" property="name" />
+		|
+		<html:form action="/setActiveGame.do" method="GET" style="display: inline">
 			<html:select property="gameId">
+				<html:option value="">(no active game)</html:option>
+				<html:options collection="myGames" property="gameId" labelProperty="name" />
+				<html:submit>Set Active Game</html:submit>
 			</html:select>
 		</html:form>
+		|
+		<button id="findGamesButton">Find Games</button>
 	</div>
 
 	<img src="http://i.imgur.com/b4rGt.jpg" width="747" height="803" />
+
+	<html:form action="/authenticateHijack.do">
+		<html:text property="facebookId"></html:text>
+		<html:submit>Hijack</html:submit>
+	</html:form>
 
 </body>
 </html>
