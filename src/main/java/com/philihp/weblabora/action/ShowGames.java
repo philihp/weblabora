@@ -1,5 +1,6 @@
 package com.philihp.weblabora.action;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -38,7 +39,7 @@ public class ShowGames extends BaseAction {
 						Game.class);
 		query.setParameter("user", user);
 		List<Game> results = query.getResultList();
-
+		
 		request.setAttribute("games", results);
 
 		return mapping.findForward("default");
