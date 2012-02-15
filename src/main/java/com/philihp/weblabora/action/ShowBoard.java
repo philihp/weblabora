@@ -26,7 +26,7 @@ public class ShowBoard extends BaseAction {
 			HttpServletResponse response, User user) throws Exception {
 		GameForm form = (GameForm)actionForm;
 		
-		//since the SetActiveGame.do action uses the same form bean, and it's kept in the session scope, we can do this to prepop the form
+		// TODO: rather than use this page's form bean, stuff this in a new form bean and have the html:form tag use the name param. this way we don't have to keep so much in session. 
 		Game activeGame = user.getActiveGame();
 		if(activeGame != null) form.setGameId(activeGame.getGameId());
 
