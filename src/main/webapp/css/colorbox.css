@@ -97,6 +97,7 @@
 }
 
 #cboxClose {
+	visibility: hidden;
 	position: absolute;
 	right: -13px;
 	top: -13px;
@@ -118,5 +119,6 @@
 	border-radius: 4px;
 }
 #cboxClose.styled {
+	visibility: visible;;
 	box-shadow: 0 0 10px rgba(0,0,0,.5);
 }

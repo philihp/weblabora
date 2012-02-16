@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.philihp.weblabora.jpa.Game;
+import com.philihp.weblabora.jpa.State;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.util.EntityManagerManager;
@@ -29,6 +30,7 @@ public class CreateGame extends BaseAction {
 		Game game = new Game();
 		game.getPlayer1().setUser(user);
 		user.setActiveGame(game);
+		game.setState(em.find(State.class, 1));
 		em.persist(game);
 
 		return mapping.findForward("root");

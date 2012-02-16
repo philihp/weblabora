@@ -47,7 +47,6 @@
 		
 		${user.name}
 		|
-		${user.activeGame.gameId}
 		<html:form action="/setActiveGame.do" method="GET" style="display: inline">
 			<html:select property="gameId" value="${user.activeGame.gameId}">
 				<html:option value="">(no active game)</html:option>
@@ -59,16 +58,25 @@
 		<button id="findGamesButton">Find Games</button>
 	</div>
 	
+	<hr />
+	
 	Current State ID: ${game.state.stateId}<br />
 	Current Move: ${game.state.moveNumber}<br /> 
 	
-	Explored Moves:
+	<hr />
+	
+	Previously Explored Moves:
 	<ul>
 		<c:forEach items="${game.state.dstStates}" var="possibleState">
 			<li>${possibleState.stateId} - ${possibleState.token}</li>
 		</c:forEach>
 	</ul>
 	Explore New Move:
+	<html:form action="/makeMove.do">
+		<html:hidden property="gameId" value="${game.gameId}" />
+		<html:text property="token" value="" />
+		<html:submit>Explore</html:submit>
+	</html:form>
 	
 	<hr />
 

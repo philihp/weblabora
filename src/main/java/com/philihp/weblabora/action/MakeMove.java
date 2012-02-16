@@ -44,6 +44,7 @@ public class MakeMove extends BaseAction {
 			state = new State();
 			state.setToken(form.getToken());
 			state.setMoveNumber(1+game.getState().getMoveNumber());
+			state.setSrcState(game.getState());
 			em.persist(state);
 			game.setState(state);
 		}

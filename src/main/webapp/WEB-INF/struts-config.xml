@@ -9,6 +9,7 @@
 		<form-bean name="hijackForm" type="com.philihp.weblabora.form.HijackForm" />
 		<form-bean name="gameForm" type="com.philihp.weblabora.form.GameForm" />
 		<form-bean name="joinGameForm" type="com.philihp.weblabora.form.JoinGameForm" />
+		<form-bean name="moveForm" type="com.philihp.weblabora.form.MoveForm" />
 	</form-beans>
 
 	<global-exceptions>
@@ -44,6 +45,7 @@
 		<action path="/createGame" name="nullForm" type="com.philihp.weblabora.action.CreateGame" />
 		<action path="/setActiveGame" name="gameForm" type="com.philihp.weblabora.action.SetActiveGame" />
 		<action path="/joinGame" name="joinGameForm" type="com.philihp.weblabora.action.JoinGame" />
+		<action path="/makeMove" name="moveForm" type="com.philihp.weblabora.action.MakeMove" />
 
 	</action-mappings>
 
