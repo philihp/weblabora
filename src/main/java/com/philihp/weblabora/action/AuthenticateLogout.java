@@ -31,7 +31,7 @@ public class AuthenticateLogout extends BaseAction {
 		request.getSession().setAttribute("accessToken", null);
 		request.getSession().setAttribute("accessExpires", null);
 
-		return mapping.findForward("default");
+		return mapping.findForward("root");
 	}
 
 }

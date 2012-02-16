@@ -31,7 +31,7 @@ public class CreateGame extends BaseAction {
 		user.setActiveGame(game);
 		em.persist(game);
 
-		return mapping.findForward("default");
+		return mapping.findForward("root");
 	}
 
 }

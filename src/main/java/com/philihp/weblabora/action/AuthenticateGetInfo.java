@@ -55,7 +55,7 @@ public class AuthenticateGetInfo extends BaseAction {
 		user.setName(credentials.getName());
 		request.getSession().setAttribute("user", user);
 
-		return mapping.findForward("default");
+		return mapping.findForward("root");
 
 	}
 

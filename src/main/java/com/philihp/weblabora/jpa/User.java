@@ -61,6 +61,9 @@ public class User extends BasicEntity {
 	public Game getActiveGame() {
 		return activeGame;
 	}
+	public Integer getActiveGameId() {
+		return activeGame==null?null:activeGame.getGameId();
+	}
 
 	public void setActiveGame(Game activeGame) {
 		this.activeGame = activeGame;

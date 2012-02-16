@@ -13,41 +13,36 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.philihp.weblabora.form.GameForm;
+import com.philihp.weblabora.form.JoinGameForm;
 import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.model.Board;
+import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.util.EntityManagerManager;
 import com.philihp.weblabora.util.FacebookCredentials;
 
-public class ShowBoard extends BaseAction {
+public class JoinGame extends BaseAction {
 
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response, User user) throws Exception {
-
-		//prepopulate active game
-		GameForm gameForm = (GameForm)actionForm;
-		gameForm.setGameId(user.getActiveGameId());
-
-		request.setAttribute("myGames", findGamesForUser(user));
-
-		return mapping.findForward("view");
-	}
-
-	private List<Game> findGamesForUser(User user) {
+		JoinGameForm form = (JoinGameForm) actionForm;
 		EntityManager em = EntityManagerManager.get();
-		TypedQuery<Game> query = em
-				.createQuery(
-						"SELECT g " +
-						"FROM Game g " +
-						"WHERE g.player1.user = :user " +
-						   "OR g.player2.user = :user " +
-						   "OR g.player3.user = :user " +
-						   "OR g.player4.user = :user",
-						Game.class);
-		query.setParameter("user", user);
-		List<Game> results = query.getResultList();
-		return results;
+		
+		TypedQuery<Game> query = em.createQuery("SELECT g FROM Game g WHERE g.gameId = :gameId", Game.class);
+		query.setParameter("gameId", form.getGameId());
+		Game game = query.getSingleResult();
+		
+		for(Game.Player player : game.getAllPlayers()) {
+			if(user.equals(player.getUser())) {
+				player.setUser(null);
+			}
+		}
+
+		game.getSeat(form.getSeat()).setUser(user);
+		user.setActiveGame(game);
+		
+		return mapping.findForward("root");
 	}
 
 }

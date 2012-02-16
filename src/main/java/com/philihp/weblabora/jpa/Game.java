@@ -10,6 +10,8 @@ import javax.persistence.*;
 import static javax.persistence.FetchType.LAZY;
 import org.eclipse.persistence.annotations.ReadOnly;
 
+import com.philihp.weblabora.model.WeblaboraException;
+
 @Entity(name = "Game")
 @Access(FIELD)
 @Table(name = "weblabora_game")
@@ -123,6 +125,20 @@ public class Game extends BasicEntity {
 		boolean player3Match = player3.user != null && player3.user.getUserId() == user.getUserId();
 		boolean player4Match = player4.user != null && player4.user.getUserId() == user.getUserId();
 		return player1Match || player2Match || player3Match || player4Match;
+	}
+
+	public Player getSeat(int seat) throws WeblaboraException {
+		switch(seat) {
+		case 1: return player1;
+		case 2: return player2;
+		case 3: return player3;
+		case 4: return player4;
+		default: throw new WeblaboraException("Invalid seat "+seat+", a game only has four seats");
+		}
+	}
+	
+	public Player[] getAllPlayers() {
+		return new Player[] {player1, player2, player3, player4};
 	}
 
 	public String getName() {

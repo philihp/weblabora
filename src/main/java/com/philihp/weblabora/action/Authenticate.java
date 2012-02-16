@@ -70,6 +70,6 @@ public class Authenticate extends BaseAction {
 		else {
 			return mapping.findForward("facebook");
 		}
-		return mapping.findForward("default");
+		return mapping.findForward("getInfo");
 	}
 }

@@ -45,7 +45,7 @@ public class SetActiveGame extends BaseAction {
 		
 		em.flush();
 
-		return mapping.findForward("default");
+		return mapping.findForward("root");
 	}
 
 }

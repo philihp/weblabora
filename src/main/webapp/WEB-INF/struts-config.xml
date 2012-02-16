@@ -8,6 +8,7 @@
 		<form-bean name="nullForm" type="com.philihp.weblabora.form.NullForm" />
 		<form-bean name="hijackForm" type="com.philihp.weblabora.form.HijackForm" />
 		<form-bean name="gameForm" type="com.philihp.weblabora.form.GameForm" />
+		<form-bean name="joinGameForm" type="com.philihp.weblabora.form.JoinGameForm" />
 	</form-beans>
 
 	<global-exceptions>
@@ -25,33 +26,24 @@
 
 	<action-mappings>
 		<action path="/authenticate" type="com.philihp.weblabora.action.Authenticate">
-			<forward name="default" path="/authenticateGetInfo.do" />
+			<forward name="getInfo" path="/authenticateGetInfo.do" />
 			<forward name="facebook"
 				path="https://www.facebook.com/dialog/oauth?client_id=135113846608059&amp;scope=user_location,user_groups&amp;redirect_uri=http://localhost:8080/weblabora/authenticate.do"
 				redirect="true" />
 		</action>
-		<action path="/authenticateGetInfo" type="com.philihp.weblabora.action.AuthenticateGetInfo">
-			<forward name="default" path="/" redirect="true" />
-		</action>
-		<action path="/authenticateLogout" type="com.philihp.weblabora.action.AuthenticateLogout">
-			<forward name="default" path="/" redirect="true" />
-		</action>
-		<action path="/authenticateHijack" name="hijackForm" type="com.philihp.weblabora.action.AuthenticateHijack">
-			<forward name="default" path="/" redirect="true" />
-		</action>
+		<action path="/authenticateGetInfo" type="com.philihp.weblabora.action.AuthenticateGetInfo" />
+		<action path="/authenticateLogout" type="com.philihp.weblabora.action.AuthenticateLogout" />
+		<action path="/authenticateHijack" name="hijackForm" type="com.philihp.weblabora.action.AuthenticateHijack" />
 
-		<action path="/showBoard" name="gameForm" scope="session" type="com.philihp.weblabora.action.ShowBoard">
-			<forward name="default" path="/showBoard.jsp" />
+		<action path="/showBoard" name="gameForm" type="com.philihp.weblabora.action.ShowBoard">
+			<forward name="view" path="/showBoard.jsp" />
 		</action>
 		<action path="/showGames" type="com.philihp.weblabora.action.ShowGames">
-			<forward name="default" path="/showGames.jsp" />
+			<forward name="view" path="/showGames.jsp" />
 		</action>
-		<action path="/createGame" name="nullForm" type="com.philihp.weblabora.action.CreateGame">
-			<forward name="default" path="/" redirect="true" />
-		</action>
-		<action path="/setActiveGame" name="gameForm" scope="session" type="com.philihp.weblabora.action.SetActiveGame">
-			<forward name="default" path="/" redirect="true" />
-		</action>
+		<action path="/createGame" name="nullForm" type="com.philihp.weblabora.action.CreateGame" />
+		<action path="/setActiveGame" name="gameForm" type="com.philihp.weblabora.action.SetActiveGame" />
+		<action path="/joinGame" name="joinGameForm" type="com.philihp.weblabora.action.JoinGame" />
 
 	</action-mappings>
 

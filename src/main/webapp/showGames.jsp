@@ -37,7 +37,11 @@
 							<td>
 								<c:choose>
 									<c:when test="${empty game.player1.user}">
-										<button>Sit</button>
+										<html:form action="/joinGame.do">
+											<html:hidden property="gameId" value="${game.gameId}" />
+											<html:hidden property="seat" value="1"/>
+											<html:submit>Join</html:submit>
+										</html:form>
 									</c:when>
 									<c:otherwise>
 										<img src="http://graph.facebook.com/${game.player1.user.facebookId}/picture" class="avatar" title="${game.player1.user.name}" />
@@ -47,7 +51,11 @@
 							<td>
 								<c:choose>
 									<c:when test="${empty game.player2.user}">
-										<button>Sit</button>
+										<html:form action="/joinGame.do">
+											<html:hidden property="gameId" value="${game.gameId}" />
+											<html:hidden property="seat" value="2"/>
+											<html:submit>Join</html:submit>
+										</html:form>
 									</c:when>
 									<c:otherwise>
 										<img src="http://graph.facebook.com/${game.player2.user.facebookId}/picture" class="avatar" title="${game.player2.user.name}" />
@@ -57,7 +65,11 @@
 							<td>
 								<c:choose>
 									<c:when test="${empty game.player3.user}">
-										<button>Sit</button>
+										<html:form action="/joinGame.do">
+											<html:hidden property="gameId" value="${game.gameId}" />
+											<html:hidden property="seat" value="3"/>
+											<html:submit>Join</html:submit>
+										</html:form>
 									</c:when>
 									<c:otherwise>
 										<img src="http://graph.facebook.com/${game.player3.user.facebookId}/picture" class="avatar" title="${game.player3.user.name}" />
@@ -67,7 +79,11 @@
 							<td>
 								<c:choose>
 									<c:when test="${empty game.player4.user}">
-										<button>Sit</button>
+										<html:form action="/joinGame.do">
+											<html:hidden property="gameId" value="${game.gameId}" />
+											<html:hidden property="seat" value="4"/>
+											<html:submit>Join</html:submit>
+										</html:form>
 									</c:when>
 									<c:otherwise>
 										<img src="http://graph.facebook.com/${game.player4.user.facebookId}/picture" class="avatar" title="${game.player4.user.name}" />

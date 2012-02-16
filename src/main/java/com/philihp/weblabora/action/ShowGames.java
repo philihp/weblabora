@@ -31,18 +31,16 @@ public class ShowGames extends BaseAction {
 				.createQuery(
 						"SELECT g " +
 						"FROM Game g " +
-						"WHERE (g.player1.user IS NOT NULL AND g.player1.user != :user OR g.player1.user IS NULL)" +
-						  "AND (g.player2.user IS NOT NULL AND g.player2.user != :user OR g.player2.user IS NULL)" +
-						  "AND (g.player3.user IS NOT NULL AND g.player3.user != :user OR g.player3.user IS NULL)" +
-						  "AND (g.player4.user IS NOT NULL AND g.player4.user != :user OR g.player4.user IS NULL)" +
-						  "AND (g.player1.user IS NULL OR g.player2.user IS NULL OR g.player3.user IS NULL OR g.player4.user IS NULL)",
+						"WHERE g.player1.user IS NULL " +
+						   "OR g.player2.user IS NULL " +
+						   "OR g.player3.user IS NULL " +
+						   "OR g.player4.user IS NULL ",
 						Game.class);
-		query.setParameter("user", user);
 		List<Game> results = query.getResultList();
 		
 		request.setAttribute("games", results);
 
-		return mapping.findForward("default");
+		return mapping.findForward("view");
 	}
 
 }
