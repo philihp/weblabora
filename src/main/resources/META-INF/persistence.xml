@@ -7,10 +7,11 @@
 	<persistence-unit name="labora-pu" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<non-jta-data-source>java:comp/env/jdbc/LaboraDB</non-jta-data-source>
+		<class>com.philihp.weblabora.jpa.BasicEntity</class>
 		<class>com.philihp.weblabora.jpa.User</class>
 		<class>com.philihp.weblabora.jpa.Game</class>
 		<class>com.philihp.weblabora.jpa.Game$Player</class>
-		<class>com.philihp.weblabora.jpa.BasicEntity</class>
+		<class>com.philihp.weblabora.jpa.State</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 
 		<shared-cache-mode>NONE</shared-cache-mode>

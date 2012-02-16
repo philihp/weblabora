@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Basic;
@@ -31,6 +32,7 @@ public class User extends BasicEntity {
 	@Column(name = "name", nullable = false)
 	private String name;
 	
+	@ManyToOne(targetEntity = com.philihp.weblabora.jpa.Game.class)
 	@JoinColumn(name = "active_game_id", referencedColumnName = "game_id")
 	private Game activeGame;
 

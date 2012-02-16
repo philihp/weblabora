@@ -25,11 +25,10 @@ public class ShowBoard extends BaseAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response, User user) throws Exception {
 
-		//prepopulate active game
-		GameForm gameForm = (GameForm)actionForm;
-		gameForm.setGameId(user.getActiveGameId());
-
 		request.setAttribute("myGames", findGamesForUser(user));
+		
+		//convenience
+		request.setAttribute("game", user.getActiveGame());
 
 		return mapping.findForward("view");
 	}
@@ -46,6 +45,7 @@ public class ShowBoard extends BaseAction {
 						   "OR g.player4.user = :user",
 						Game.class);
 		query.setParameter("user", user);
+		
 		List<Game> results = query.getResultList();
 		return results;
 	}

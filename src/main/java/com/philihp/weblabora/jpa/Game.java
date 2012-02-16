@@ -1,14 +1,25 @@
 package com.philihp.weblabora.jpa;
 
 import static javax.persistence.AccessType.FIELD;
+import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 
-import javax.persistence.*;
-
-import static javax.persistence.FetchType.LAZY;
-import org.eclipse.persistence.annotations.ReadOnly;
+import javax.persistence.Access;
+import javax.persistence.AssociationOverride;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.philihp.weblabora.model.WeblaboraException;
 
@@ -27,6 +38,7 @@ public class Game extends BasicEntity {
 		@Basic
 		@Column(name = "color")
 		private String color;
+		
 
 		public User getUser() {
 			return user;
@@ -69,6 +81,10 @@ public class Game extends BasicEntity {
 	@AttributeOverride(name = "color", column = @Column(name = "player4_color"))
 	@AssociationOverride(name = "user", joinColumns = @JoinColumn(name = "player4_user_id", referencedColumnName = "user_id"))
 	private Player player4;
+	
+	@ManyToOne(fetch = EAGER, targetEntity = com.philihp.weblabora.jpa.State.class)
+	@JoinColumn(name = "state_id", referencedColumnName = "state_id")
+	private State state;
 
 	public Game() {
 		// player1-4 must not be null
@@ -118,6 +134,15 @@ public class Game extends BasicEntity {
 		this.player4 = player4;
 	}
 
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State currentState) {
+		this.state = currentState;
+	}
+
+
 	public boolean isUserAPlayer(User user) {
 		if(user == null) return false;
 		boolean player1Match = player1.user != null && player1.user.getUserId() == user.getUserId();
@@ -142,11 +167,10 @@ public class Game extends BasicEntity {
 	}
 
 	public String getName() {
-		String name = "Game started @ " + new SimpleDateFormat("yyyy-MM-dd").format(getDateCreated());
+		String name = "Game #"+gameId+", " + new SimpleDateFormat("yyyy-MM-dd").format(getDateCreated());
 		// if(player1.user != null) {
 		// name += " by "+player1.user.getName();
 		// }
 		return name;
 	}
-
 }

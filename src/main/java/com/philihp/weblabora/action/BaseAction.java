@@ -38,6 +38,7 @@ abstract class BaseAction extends Action {
 		//can't just use the old user from the session attributes because
 		//it was registered with an EntityManager from a different thread.
 		User user = findUser((User)request.getSession().getAttribute("user"));
+		request.getSession().setAttribute("user", user);
 		
 		if(isActionPrivate() && user == null) throw new AuthenticationException();
 
