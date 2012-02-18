@@ -22,10 +22,18 @@ import com.philihp.weblabora.util.Facebook;
 import com.philihp.weblabora.util.FacebookCredentials;
 
 public class Authenticate extends BaseAction {
+	
+	public static final String TOKEN = "AAAB64qTU0LsBAAlVCyaJUlJQpS1UONZBuYxcvzqxHKQqiFAODEbOrnytH41zsqOQXSdXMWmT1fsKPxWY9MzaPfOzkx0aBseUbYioukgZDZD";
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response, User user)
 			throws Exception {
+		
+		//development-time hack
+		if(TOKEN != null) {
+			request.getSession().setAttribute("accessToken", TOKEN);
+			return mapping.findForward("getInfo");
+		}
 
 		String code = (String) request.getParameter("code");
 

@@ -57,11 +57,46 @@
 		|
 		<button id="findGamesButton">Find Games</button>
 	</div>
-	
 	<hr />
+
+	Players:
+	<ul>
+		<li>
+			<img src="http://graph.facebook.com/${game.player1.user.facebookId}/picture" height="50" width="50" title="${game.player1.user.facebookId}"/>
+			${game.player1.user.name}
+		</li>
+		<li>
+			<img src="http://graph.facebook.com/${game.player2.user.facebookId}/picture" height="50" width="50" title="${game.player2.user.facebookId}"/>
+			${game.player2.user.name}
+		</li>
+		<li>
+			<img src="http://graph.facebook.com/${game.player3.user.facebookId}/picture" height="50" width="50" title="${game.player3.user.facebookId}"/>
+			${game.player3.user.name}
+		</li>
+		<li>
+			<img src="http://graph.facebook.com/${game.player4.user.facebookId}/picture" height="50" width="50" title="${game.player4.user.facebookId}"/>
+			${game.player4.user.name}
+		</li>
+	</ul>
+
+	Moves:
+	<ul>
+		<c:forEach items="${game.moves}" var="move" varStatus="status">
+			<li>
+				${status.index} ${move}
+				<c:if test="${status.index} % 5 = 0">
+				end
+				</c:if>
+			</li>
+		</c:forEach>
+	</ul>
 	
 	Current State ID: ${game.state.stateId}<br />
 	Current Move: ${game.state.moveNumber}<br /> 
+	
+	<hr />
+	
+	Board: ${board}
 	
 	<hr />
 	

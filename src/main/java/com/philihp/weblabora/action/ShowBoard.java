@@ -27,8 +27,10 @@ public class ShowBoard extends BaseAction {
 
 		request.setAttribute("myGames", findGamesForUser(user));
 		
-		//convenience
 		request.setAttribute("game", user.getActiveGame());
+		
+		Board board = new Board();
+		request.setAttribute("board", board);
 
 		return mapping.findForward("view");
 	}

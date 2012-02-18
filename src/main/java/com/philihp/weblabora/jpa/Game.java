@@ -5,6 +5,9 @@ import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AssociationOverride;
@@ -164,6 +167,18 @@ public class Game extends BasicEntity {
 	
 	public Player[] getAllPlayers() {
 		return new Player[] {player1, player2, player3, player4};
+	}
+	
+	public List<String> getMoves() {
+		List<String> list = new ArrayList<String>();
+		State state = getState();
+		do {
+			if(state.getToken() != null) 
+				list.add(state.getToken());
+			state = state.getSrcState();
+		} while(state != null);
+		Collections.reverse(list);
+		return list;
 	}
 
 	public String getName() {
