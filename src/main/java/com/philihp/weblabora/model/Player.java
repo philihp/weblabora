@@ -34,7 +34,7 @@ public class Player {
 	private int wine = 0;
 	private int beer = 0;
 	private int reliquary = 0;
-
+	
 	public Player(Board board, Color color) {
 		this.board = board;
 		this.color = color;

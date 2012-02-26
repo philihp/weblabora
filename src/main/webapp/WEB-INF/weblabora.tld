@@ -5,10 +5,10 @@
 <taglib>
 	<tlib-version>1</tlib-version>
 	<jsp-version>1.2</jsp-version>
-	<short-name>labora</short-name>
-	<uri>http://weblabora.philihp.com</uri>
+	<short-name>ora</short-name>
+	<uri>http://philihp.com/jsp/ora</uri>
 	<description>
-        <![CDATA[  ]]>
+        <![CDATA[ Custom Tags for WebLabora ]]>
 	</description>
 	<tag>
 		<name>login</name>

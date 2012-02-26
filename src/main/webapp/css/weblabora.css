@@ -1,6 +1,5 @@
 body {
-	margin: 10px;
-	background: #f0f0f0;
+	background: #f0f0f0; 
 }
 
 body,button,input,select,textarea {
@@ -9,21 +8,103 @@ body,button,input,select,textarea {
 }
 
 div.userbar {
-	box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
-	background: #fcfcfc;
-	border: 1px solid #b3b3b3;
-	border-radius: 4px;
-	font-size: 16px;
-	padding: 10px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	background: -moz-linear-gradient(#fafafa,#eaeaea);
+	background: -webkit-linear-gradient(#fafafa,#eaeaea);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa',endColorstr='#eaeaea')";
+	background: linear-gradient(#fafafa,#eaeaea);
+	border-bottom:1px solid #cacaca;
+	height: 50px;
+	box-shadow:0 0 0 rgba(255,255,255,0.4),0 0 10px rgba(0,0,0,0.1);
 }
 
 div.userbar img {
-	box-shadow: 0 1px 10px #a7a7a7;
-	border: 1px solid #b3b3b3;
-	border-radius: 4px;
 }
 
 img.avatar {
 	height: 50px;
 	width: 50px;
 }
+
+div.container {
+	width: 920px;
+	margin: 0 auto;
+}
+
+div.wheel {
+	width: 333px;
+	margin: 15px 0;
+}
+div.wheel svg {
+	width: 300px;
+	height: 300px;
+	border: 1px dashed gray;
+}
+
+ul.tabs {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	height: 35px;
+}
+ul.tabs li {
+	padding: 5px;
+	background: #fcfcfc;
+	border: 1px solid #b3b3b3;
+	border-bottom: 0;
+	border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+	float: left;
+	margin: 0 0.5em 0 0;
+	width: 20%;
+	height: 25px;
+	overflow: hidden;
+	line-height: 20px;
+}
+ul.tabs li img {
+	height: 25px;
+	width: 25px;
+}
+
+div.board {
+	padding: 5px;
+	border: 1px solid #b3b3b3;
+	background: #fcfcfc;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+div.board-active {
+	
+}
+div.board-inactive {
+	display: none;
+}
+div.board table {
+	border-color: gray;
+	border-style: outset;
+	border-width: 1px;
+	border-collapse: collapse;
+}
+div.board table td {
+	height: 50px;
+	width: 50px;
+	text-align: center;
+	vertical-align: middle;
+	border-color: gray;
+	border-width: 1px;
+	border-style: inset;
+	border-collapse: collapse;
+}
+
+
+
+
+
+
+
+
+
+
+
