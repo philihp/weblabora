@@ -85,7 +85,7 @@ public class Game extends BasicEntity {
 	@AssociationOverride(name = "user", joinColumns = @JoinColumn(name = "player4_user_id", referencedColumnName = "user_id"))
 	private Player player4;
 	
-	@ManyToOne(fetch = EAGER, targetEntity = com.philihp.weblabora.jpa.State.class)
+	@ManyToOne(fetch = LAZY, targetEntity = com.philihp.weblabora.jpa.State.class)
 	@JoinColumn(name = "state_id", referencedColumnName = "state_id")
 	private State state;
 

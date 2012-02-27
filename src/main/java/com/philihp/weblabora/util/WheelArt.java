@@ -1,8 +1,10 @@
 package com.philihp.weblabora.util;
 
+import com.philihp.weblabora.model.Wheel;
+
 public class WheelArt {
 
-	public class Point {
+	public static class Point {
 		private double x;
 		private double y;
 
@@ -31,66 +33,14 @@ public class WheelArt {
 	private static final double ARM_LENGTH = 110;
 	private static final double ARM_TEXT_RADIUS = 25;
 
-	private final Point[] points = new Point[13];
-	{
+	private static final Point[] points = new Point[13];
+	static {
 		double x, y;
 		for (int n = 0; n < points.length; n++) {
 			x = -Math.sin(n * Math.PI * 2 / points.length) * WHEEL_RADIUS;
 			y = -Math.cos(n * Math.PI * 2 / points.length) * WHEEL_RADIUS;
 			points[n] = new Point(x, y);
 		}
-	}
-
-	public String getRotArmA() {
-		return Double.toString(360 * 12d / points.length);
-	}
-
-	public String getRotArmB() {
-		return Double.toString(360 * 11d / points.length);
-	}
-
-	public String getRotArmC() {
-		return Double.toString(360 * 10d / points.length);
-	}
-
-	public String getRotArmD() {
-		return Double.toString(360 * 9d / points.length);
-	}
-
-	public String getRotArmE() {
-		return Double.toString(360 * 8d / points.length);
-	}
-
-	public String getRotArmF() {
-		return Double.toString(360 * 7d / points.length);
-	}
-
-	public String getRotArmG() {
-		return Double.toString(360 * 6d / points.length);
-	}
-
-	public String getRotArmH() {
-		return Double.toString(360 * 5d / points.length);
-	}
-
-	public String getRotArmI() {
-		return Double.toString(360 * 4d / points.length);
-	}
-
-	public String getRotArmJ() {
-		return Double.toString(360 * 3d / points.length);
-	}
-
-	public String getRotArmK() {
-		return Double.toString(360 * 2d / points.length);
-	}
-
-	public String getRotArmL() {
-		return Double.toString(360 * 1d / points.length);
-	}
-
-	public String getRotArmM() {
-		return Double.toString(360 * 0d / points.length);
 	}
 
 	public String getRotA() {
@@ -245,5 +195,35 @@ public class WheelArt {
 
 	public String getHouseTextY() {
 		return Double.toString(-HOUSE_TEXT_RADIUS);
+	}
+
+	public static double deg(String pos) {
+		if (pos.equals("A"))
+			return 360 * 12d / points.length;
+		if (pos.equals("B"))
+			return 360 * 11d / points.length;
+		if (pos.equals("C"))
+			return 360 * 10d / points.length;
+		if (pos.equals("D"))
+			return 360 * 9d / points.length;
+		if (pos.equals("E"))
+			return 360 * 8d / points.length;
+		if (pos.equals("F"))
+			return 360 * 7d / points.length;
+		if (pos.equals("G"))
+			return 360 * 6d / points.length;
+		if (pos.equals("H"))
+			return 360 * 5d / points.length;
+		if (pos.equals("I"))
+			return 360 * 4d / points.length;
+		if (pos.equals("J"))
+			return 360 * 3d / points.length;
+		if (pos.equals("K"))
+			return 360 * 2d / points.length;
+		if (pos.equals("L"))
+			return 360 * 1d / points.length;
+		if (pos.equals("M"))
+			return 360 * 0d / points.length;
+		return 0;
 	}
 }

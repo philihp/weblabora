@@ -18,7 +18,7 @@
 		<properties>
 			<property name="eclipselink.logging.level" value="FINE" />
 			<property name="eclipselink.target-database" value="MySQL" />
-
+			
 			<!-- this is a workaround for Tomcat, otherwise Eclipselink can't find the JNDI datasource -->
 			<property name="eclipselink.session.customizer" value="com.philihp.weblabora.util.JPAEclipseLinkSessionCustomizer" />
 
@@ -30,6 +30,8 @@
 			<!--<property name="eclipselink.ddl-generation" value="create-tables" />-->
 			<!--<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />-->
 			<property name="eclipselink.ddl-generation.output-mode" value="database" />
+			
+			
 			
 		</properties>
 	</persistence-unit>

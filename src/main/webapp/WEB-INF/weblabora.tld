@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE taglib
-        PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
-        "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
-<taglib>
-	<tlib-version>1</tlib-version>
-	<jsp-version>1.2</jsp-version>
-	<short-name>ora</short-name>
-	<uri>http://philihp.com/jsp/ora</uri>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+  version="2.0">
 	<description>
         <![CDATA[ Custom Tags for WebLabora ]]>
 	</description>
-	<tag>
-		<name>login</name>
-		<tag-class>com.philihp.weblabora.util.LoginTag</tag-class>
-		<body-content>empty</body-content>
-		<description>
-            <![CDATA[
-Renders a tag that displays the logged in user, and a link to login or logout.
+	<display-name>WebLabora Tags</display-name>
+	<tlib-version>1.1</tlib-version>
+  <short-name>ora</short-name>
+	<uri>http://philihp.com/jsp/ora</uri>
+	
+  <function>
+    <description>
+      Takes in the wheel position and returns the number of degrees to rotate to get to it
+    </description>
+    <name>deg</name>
+    <function-class>com.philihp.weblabora.util.WheelArt</function-class>
+    <function-signature>double deg(java.lang.String)</function-signature>
+    <example>
+    <![CDATA[ 
+      <c:out value="${ora:deg(board.wheel.arm.position)}">
     ]]>
-		</description>
-	</tag>
+    </example>
+  </function>
+	
 </taglib>
 
 

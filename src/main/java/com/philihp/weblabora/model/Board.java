@@ -21,12 +21,15 @@ public class Board {
 
 	private List<AbstractBuilding> unbuiltBuildings;
 	
-	private int currentMove;
+	protected int currentMove;
 
 	public Board() {
 		gamePlayers = GamePlayers.FOUR;
 		gameType = GameType.LONG;
+		
 		wheel = new Wheel(this);
+		getWheel().pushArm();
+		
 		players = new Player[4];
 		players[0] = new Player(this, Color.RED);
 		players[1] = new Player(this, Color.GREEN);
@@ -85,17 +88,9 @@ public class Board {
 	public List<AbstractBuilding> getUnbuiltBuildings() {
 		return unbuiltBuildings;
 	}
-	
-	public void processMove(String move) {
-		
-	}
 
 	public int getCurrentMove() {
 		return currentMove;
-	}
-
-	public void setCurrentMove(int currentMove) {
-		this.currentMove = currentMove;
 	}
 
 }

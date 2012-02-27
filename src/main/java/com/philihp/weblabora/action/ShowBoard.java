@@ -16,6 +16,7 @@ import com.philihp.weblabora.form.GameForm;
 import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.model.Board;
+import com.philihp.weblabora.model.MoveProcessor;
 import com.philihp.weblabora.util.EntityManagerManager;
 import com.philihp.weblabora.util.FacebookCredentials;
 
@@ -29,9 +30,14 @@ public class ShowBoard extends BaseAction {
 		
 		request.setAttribute("game", user.getActiveGame());
 		
-		Board board = new Board();
-		request.setAttribute("board", board);
-
+		if(user.getActiveGame() != null) {
+			Board board = new Board();
+			for(String move : user.getActiveGame().getMoves()) {
+				MoveProcessor.processMove(board,move);
+			}
+			request.setAttribute("board", board);
+		}
+			
 		return mapping.findForward("view");
 	}
 

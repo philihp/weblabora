@@ -4,7 +4,6 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic-el" prefix="logic"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://philihp.com/jsp/ora" prefix="ora"%>
 <!DOCTYPE html>
 <html:html>
 <head>
@@ -87,7 +86,6 @@
 									</c:when>
 									<c:otherwise>
 										<img src="http://graph.facebook.com/${game.player4.user.facebookId}/picture" class="avatar" title="${game.player4.user.name}" />
-										
 									</c:otherwise>
 								</c:choose>
 							</td>

@@ -63,6 +63,11 @@ ul.tabs li img {
 	height: 25px;
 	width: 25px;
 }
+ul.tabs li:hover img {
+	-webkit-transform: scale(1.25);
+  -webkit-transition-timing-function: ease-out;
+  -webkit-transition-duration: 200ms;
+}
 
 div.board {
 	padding: 5px;

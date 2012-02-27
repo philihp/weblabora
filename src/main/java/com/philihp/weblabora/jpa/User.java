@@ -12,6 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Basic;
 import javax.persistence.JoinColumn;
+import static javax.persistence.FetchType.LAZY;
 
 @Entity(name = "User")
 @Table(name = "weblabora_user")
@@ -32,7 +33,7 @@ public class User extends BasicEntity {
 	@Column(name = "name", nullable = false)
 	private String name;
 	
-	@ManyToOne(targetEntity = com.philihp.weblabora.jpa.Game.class)
+	@ManyToOne(fetch = LAZY, targetEntity = com.philihp.weblabora.jpa.Game.class)
 	@JoinColumn(name = "active_game_id", referencedColumnName = "game_id")
 	private Game activeGame;
 

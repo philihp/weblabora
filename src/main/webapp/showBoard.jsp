@@ -4,7 +4,8 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic-el" prefix="logic"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://philihp.com/jsp/ora" prefix="ora"%>
+<%@ taglib uri="http://philihp.com/jsp/ora" prefix="ora" %>
+
 <!DOCTYPE html>
 <html:html>
 <head>
@@ -63,7 +64,8 @@
 		
 	
 	<div class="container">
-	
+		Current State ID: ${game.state.stateId}<br />
+		
 		<div class="wheel">
 			<svg style="width: 300px; height: 300px;" viewbox="-150.5 -150.5 300 300">
 			  <defs>
@@ -93,7 +95,7 @@
 				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeL}" />
 				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeM}" />
 				</g>
-				<g id="arm"  transform="rotate(${wheelArt.rotArmA})" style="font-size: 10px; text-anchor: middle">
+				<g id="arm"  transform="rotate(${ora:deg(board.wheel.arm.position)})" style="font-size: 10px; text-anchor: middle">
 				  <path d="${wheelArt.armPath}"
 				        style="fill:#ffffff; fill-opacity: 1; stroke:#686868; stroke-width: 1" />
 				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotA})">10</text>
@@ -228,9 +230,7 @@
 			</table>
 		</div>
 		
-	
-		Moves:
-		<table>
+			<table>
 			<c:forEach items="${game.moves}" var="move" varStatus="status">
 				<c:if test="${status.index % 5 == 0}">
 					<tr>
@@ -242,12 +242,6 @@
 				</c:if>
 			</c:forEach>
 		</table>
-		
-		Current State ID: ${game.state.stateId}<br />
-		
-		<hr />
-		
-		Board: ${board}
 		
 		<hr />
 		

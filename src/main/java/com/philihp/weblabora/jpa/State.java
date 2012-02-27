@@ -31,10 +31,10 @@ public class State extends BasicEntity {
 	@Column(name = "token")
 	private String token;
 
-	@OneToMany(mappedBy = "srcState", fetch = LAZY, targetEntity = com.philihp.weblabora.jpa.State.class)
+	@OneToMany(fetch = LAZY, mappedBy = "srcState", targetEntity = com.philihp.weblabora.jpa.State.class)
 	private List<State> dstStates;
 
-	@ManyToOne(targetEntity = com.philihp.weblabora.jpa.State.class)
+	@ManyToOne(fetch = LAZY, targetEntity = com.philihp.weblabora.jpa.State.class)
 	@JoinColumn(name = "src_state_id", referencedColumnName="state_id")
 	private State srcState;
 
