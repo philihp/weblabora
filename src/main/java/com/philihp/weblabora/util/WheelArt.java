@@ -24,26 +24,73 @@ public class WheelArt {
 		}
 	}
 
-	// offsetting this by 0.5 makes the lines centered on pixels rather than
-	// half in two pixels
-	private final Point center = new Point(0f, 0f);
-
 	private static final double WHEEL_RADIUS = 140;
-	
+
 	private static final double ARM_RADIUS = 35;
 	private static final double ARM_WIDTH = 6;
 	private static final double ARM_LENGTH = 110;
 	private static final double ARM_TEXT_RADIUS = 25;
-	
 
 	private final Point[] points = new Point[13];
 	{
 		double x, y;
 		for (int n = 0; n < points.length; n++) {
-			x = -Math.sin(n * Math.PI * 2 / points.length) * WHEEL_RADIUS + center.x;
-			y = -Math.cos(n * Math.PI * 2 / points.length) * WHEEL_RADIUS + center.y;
+			x = -Math.sin(n * Math.PI * 2 / points.length) * WHEEL_RADIUS;
+			y = -Math.cos(n * Math.PI * 2 / points.length) * WHEEL_RADIUS;
 			points[n] = new Point(x, y);
 		}
+	}
+
+	public String getRotArmA() {
+		return Double.toString(360 * 12d / points.length);
+	}
+
+	public String getRotArmB() {
+		return Double.toString(360 * 11d / points.length);
+	}
+
+	public String getRotArmC() {
+		return Double.toString(360 * 10d / points.length);
+	}
+
+	public String getRotArmD() {
+		return Double.toString(360 * 9d / points.length);
+	}
+
+	public String getRotArmE() {
+		return Double.toString(360 * 8d / points.length);
+	}
+
+	public String getRotArmF() {
+		return Double.toString(360 * 7d / points.length);
+	}
+
+	public String getRotArmG() {
+		return Double.toString(360 * 6d / points.length);
+	}
+
+	public String getRotArmH() {
+		return Double.toString(360 * 5d / points.length);
+	}
+
+	public String getRotArmI() {
+		return Double.toString(360 * 4d / points.length);
+	}
+
+	public String getRotArmJ() {
+		return Double.toString(360 * 3d / points.length);
+	}
+
+	public String getRotArmK() {
+		return Double.toString(360 * 2d / points.length);
+	}
+
+	public String getRotArmL() {
+		return Double.toString(360 * 1d / points.length);
+	}
+
+	public String getRotArmM() {
+		return Double.toString(360 * 0d / points.length);
 	}
 
 	public String getRotA() {
@@ -99,70 +146,61 @@ public class WheelArt {
 	}
 
 	public String getWedgeA() {
-		return center + " " + points[0] + " " + points[1] + " " + center;
+		return "0,0 " + points[0] + " " + points[1] + " 0,0";
 	}
 
 	public String getWedgeB() {
-		return center + " " + points[1] + " " + points[2] + " " + center;
+		return "0,0 " + points[1] + " " + points[2] + " 0,0";
 	}
 
 	public String getWedgeC() {
-		return center + " " + points[2] + " " + points[3] + " " + center;
+		return "0,0 " + points[2] + " " + points[3] + " 0,0";
 	}
 
 	public String getWedgeD() {
-		return center + " " + points[3] + " " + points[4] + " " + center;
+		return "0,0 " + points[3] + " " + points[4] + " 0,0";
 	}
 
 	public String getWedgeE() {
-		return center + " " + points[4] + " " + points[5] + " " + center;
+		return "0,0 " + points[4] + " " + points[5] + " 0,0";
 	}
 
 	public String getWedgeF() {
-		return center + " " + points[5] + " " + points[6] + " " + center;
+		return "0,0 " + points[5] + " " + points[6] + " 0,0";
 	}
 
 	public String getWedgeG() {
-		return center + " " + points[6] + " " + points[7] + " " + center;
+		return "0,0 " + points[6] + " " + points[7] + " 0,0";
 	}
 
 	public String getWedgeH() {
-		return center + " " + points[7] + " " + points[8] + " " + center;
+		return "0,0 " + points[7] + " " + points[8] + " 0,0";
 	}
 
 	public String getWedgeI() {
-		return center + " " + points[8] + " " + points[9] + " " + center;
+		return "0,0 " + points[8] + " " + points[9] + " 0,0";
 	}
 
 	public String getWedgeJ() {
-		return center + " " + points[9] + " " + points[10] + " " + center;
+		return "0,0 " + points[9] + " " + points[10] + " 0,0";
 	}
 
 	public String getWedgeK() {
-		return center + " " + points[10] + " " + points[11] + " " + center;
+		return "0,0 " + points[10] + " " + points[11] + " 0,0";
 	}
 
 	public String getWedgeL() {
-		return center + " " + points[11] + " " + points[12] + " " + center;
+		return "0,0 " + points[11] + " " + points[12] + " 0,0";
 	}
 
 	public String getWedgeM() {
-		return center + " " + points[12] + " " + points[0] + " " + center;
+		return "0,0 " + points[12] + " " + points[0] + " 0,0";
 	}
-	
+
 	public String getMask() {
 		return points[0] + " " + points[1] + " " + points[2] + " " + points[3] + " " + points[4] + " " + points[5] + " "
 				+ points[6] + " " + points[7] + " " + points[8] + " " + points[9] + " " + points[10] + " " + points[11] + " "
 				+ points[12] + " " + points[0];
-	}
-	
-
-	public String getCenterX() {
-		return Double.toString(center.x);
-	}
-
-	public String getCenterY() {
-		return Double.toString(center.y);
 	}
 
 	public String getArmRadius() {
@@ -173,33 +211,39 @@ public class WheelArt {
 		// uses the point where the circle would have been at the top as a control
 		// point for
 		// a quadratic bezier curve to the arm's extent
-		return "M" + (center.x - ARM_WIDTH / 2) + "," + (center.y - ARM_LENGTH) + " " + "Q" + (center.x - ARM_WIDTH / 2)
-				+ "," + (center.y - ARM_RADIUS) + " " + (center.x + Math.sin((12d / 13d) * 2 * Math.PI) * ARM_RADIUS) + ","
-				+ (center.y - Math.cos((12d / 13d) * 2 * Math.PI) * ARM_RADIUS) + " " + "A" + ARM_RADIUS + "," + ARM_RADIUS
-				+ " 0 1,0 " + (center.x + Math.sin((1d / 13d) * 2 * Math.PI) * ARM_RADIUS) + ","
-				+ (center.y - Math.cos((1d / 13d) * 2 * Math.PI) * ARM_RADIUS) + " " + "Q" + (center.x + ARM_WIDTH / 2) + ","
-				+ (center.y - ARM_RADIUS) + " " + (center.x + ARM_WIDTH / 2) + "," + (center.y - ARM_LENGTH) + " " + "z";
+		return "M" + (-ARM_WIDTH / 2) + "," + (-ARM_LENGTH) + " " + "Q" + (-ARM_WIDTH / 2)
+				+ "," + (-ARM_RADIUS) + " " + (Math.sin((12d / 13d) * 2 * Math.PI) * ARM_RADIUS) + ","
+				+ (-Math.cos((12d / 13d) * 2 * Math.PI) * ARM_RADIUS) + " " + "A" + ARM_RADIUS + "," + ARM_RADIUS
+				+ " 0 1,0 " + (Math.sin((1d / 13d) * 2 * Math.PI) * ARM_RADIUS) + ","
+				+ (-Math.cos((1d / 13d) * 2 * Math.PI) * ARM_RADIUS) + " " + "Q" + (ARM_WIDTH / 2) + ","
+				+ (-ARM_RADIUS) + " " + (ARM_WIDTH / 2) + "," + (-ARM_LENGTH) + " " + "z";
 	}
-	
+
+	private static final double ARROW_RADIUS = 44;
+	private static final double ARROW_SIZE = 7;
+
+	public String getArrowPath() {
+		return "M" + (-ARROW_SIZE / 2) + "," + (-ARROW_RADIUS) + " " + "l" + ARROW_SIZE + ","
+				+ ARROW_SIZE / 2 + " " + "v" + -ARROW_SIZE + " " + "z";
+	}
+
 	private static final double HOUSE_ROOF_PEAK_RADIUS = 130;
+	private static final double HOUSE_TEXT_RADIUS = 119;
 	private static final double HOUSE_ROOF_HEIGHT = 5;
 	private static final double HOUSE_FLOOR_HEIGHT = 8;
 	private static final double HOUSE_WIDTH = 12;
-	
+
 	public String getHousePath() {
-		return "M" + (center.x) + ","+ (center.y-HOUSE_ROOF_PEAK_RADIUS) + " "
-				+ "l" + -HOUSE_WIDTH/2 + ","+ HOUSE_ROOF_HEIGHT + " "
-				+ "v" + HOUSE_FLOOR_HEIGHT + " "
-				+ "h" + HOUSE_WIDTH + " "
-				+ "v" + -HOUSE_FLOOR_HEIGHT + " "
-				+ "z";
+		return "M0" + "," + (-HOUSE_ROOF_PEAK_RADIUS) + " " + "l" + -HOUSE_WIDTH / 2 + ","
+				+ HOUSE_ROOF_HEIGHT + " " + "v" + HOUSE_FLOOR_HEIGHT + " " + "h" + HOUSE_WIDTH + " " + "v"
+				+ -HOUSE_FLOOR_HEIGHT + " " + "z";
 	}
 
 	public String getArmTextY() {
-		return Double.toString(center.y - ARM_TEXT_RADIUS);
+		return Double.toString(-ARM_TEXT_RADIUS);
 	}
 
 	public String getHouseTextY() {
-		return Double.toString(center.y - HOUSE_ROOF_PEAK_RADIUS);
+		return Double.toString(-HOUSE_TEXT_RADIUS);
 	}
 }

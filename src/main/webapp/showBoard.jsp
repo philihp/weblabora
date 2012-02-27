@@ -68,8 +68,8 @@
 			<svg style="width: 300px; height: 300px;" viewbox="-150.5 -150.5 300 300">
 			  <defs>
     			<linearGradient id="housefill" x1="0%" y1="0%" x2="100%" y2="0%">
-      			<stop offset="0%" style="stop-color:rgb(112,146,190);stop-opacity:1" />
-      			<stop offset="100%" style="stop-color:rgb(153,217,234);stop-opacity:1" />
+      			<stop offset="0%" style="stop-color:#004e85;stop-opacity:1" />
+      			<stop offset="100%" style="stop-color:#1973b2;stop-opacity:1" />
     			</linearGradient>
 			    <filter id="shadow">
 			      <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
@@ -93,39 +93,43 @@
 				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeL}" />
 				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeM}" />
 				</g>
-				<g id="arm"  transform="rotate(0,150.5,150.5)" style="font-size: 10px; text-anchor: middle">
-				<!--<circle fill="#ededed" stroke="#202020" cx="${wheelArt.centerX}" cy="${wheelArt.centerY}" r="${wheelArt.armRadius}" />-->
+				<g id="arm"  transform="rotate(${wheelArt.rotArmA})" style="font-size: 10px; text-anchor: middle">
 				  <path d="${wheelArt.armPath}"
 				        style="fill:#ffffff; fill-opacity: 1; stroke:#686868; stroke-width: 1" />
-				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotA},${wheelArt.centerX},${wheelArt.centerY})">10</text>
-				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotB},${wheelArt.centerX},${wheelArt.centerY})">9</text>
-				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotC},${wheelArt.centerX},${wheelArt.centerY})">8</text>
-				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotD},${wheelArt.centerX},${wheelArt.centerY})">8</text>
-				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotE},${wheelArt.centerX},${wheelArt.centerY})">7</text>
-				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotF},${wheelArt.centerX},${wheelArt.centerY})">7</text>
-				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotG},${wheelArt.centerX},${wheelArt.centerY})">6</text>
-				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotH},${wheelArt.centerX},${wheelArt.centerY})">6</text>
-				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotI},${wheelArt.centerX},${wheelArt.centerY})">5</text>
-				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotJ},${wheelArt.centerX},${wheelArt.centerY})">4</text>
-				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotK},${wheelArt.centerX},${wheelArt.centerY})">3</text>
-				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotL},${wheelArt.centerX},${wheelArt.centerY})">2</text>
-				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotM},${wheelArt.centerX},${wheelArt.centerY})">0</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotA})">10</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotB})">9</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotC})">8</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotD})">8</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotE})">7</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotF})">7</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotG})">6</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotH})">6</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotI})">5</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotJ})">4</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotK})">3</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotL})">2</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotM})">0</text>
+				  <path d="${wheelArt.arrowPath}" fill="#000" />
 				</g>
-				<g id="settlement-a" transform="rotate(${wheelArt.rotG},${wheelArt.centerX},${wheelArt.centerY})">
+				<g id="settlement-a" transform="rotate(${wheelArt.rotG})">
 					<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
-					<text x="${wheelArt.centerX}" y="${wheelArt.houseTextY}">A</text>
+					<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">A</text>
 				</g>
-				<g id="settlement-b" transform="rotate(${wheelArt.rotJ},${wheelArt.centerX},${wheelArt.centerY})">
+				<g id="settlement-b" transform="rotate(${wheelArt.rotJ})">
 					<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+					<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">B</text>
 				</g>
-				<g id="settlement-c" transform="rotate(${wheelArt.rotC},${wheelArt.centerX},${wheelArt.centerY})">
+				<g id="settlement-c" transform="rotate(${wheelArt.rotC})">
 					<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+					<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle;  fill:#fff">C</text>
 				</g>
-				<g id="settlement-d" transform="rotate(${wheelArt.rotF},${wheelArt.centerX},${wheelArt.centerY})">
+				<g id="settlement-d" transform="rotate(${wheelArt.rotF})">
 					<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+					<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">D</text>
 				</g>
-				<g id="settlement-e" transform="rotate(${wheelArt.rotM},${wheelArt.centerX},${wheelArt.centerY})">
+				<g id="settlement-e" transform="rotate(${wheelArt.rotM})">
 					<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+					<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">E</text>
 				</g>
 			</svg>
 		</div>
