@@ -20,6 +20,8 @@ public class Board {
 	private int activePlayer;
 
 	private List<AbstractBuilding> unbuiltBuildings;
+	
+	private int currentMove;
 
 	public Board() {
 		gamePlayers = GamePlayers.FOUR;
@@ -30,6 +32,7 @@ public class Board {
 		players[1] = new Player(this, Color.GREEN);
 		players[2] = new Player(this, Color.BLUE);
 		players[3] = new Player(this, Color.WHITE);
+		currentMove = 1;
 
 		players[0].gameStart();
 		players[1].gameStart();
@@ -81,6 +84,18 @@ public class Board {
 
 	public List<AbstractBuilding> getUnbuiltBuildings() {
 		return unbuiltBuildings;
+	}
+	
+	public void processMove(String move) {
+		
+	}
+
+	public int getCurrentMove() {
+		return currentMove;
+	}
+
+	public void setCurrentMove(int currentMove) {
+		this.currentMove = currentMove;
 	}
 
 }

@@ -27,10 +27,6 @@ public class State extends BasicEntity {
 	@Column(name = "state_id")
 	private int stateId;
 
-	@Basic(optional = false)
-	@Column(name = "move_number", nullable = false)
-	private int moveNumber;
-
 	@Basic
 	@Column(name = "token")
 	private String token;
@@ -48,14 +44,6 @@ public class State extends BasicEntity {
 
 	public void setStateId(int stateId) {
 		this.stateId = stateId;
-	}
-
-	public int getMoveNumber() {
-		return moveNumber;
-	}
-
-	public void setMoveNumber(int moveNumber) {
-		this.moveNumber = moveNumber;
 	}
 
 	public List<State> getDstStates() {

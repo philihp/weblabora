@@ -244,7 +244,6 @@
 		</table>
 		
 		Current State ID: ${game.state.stateId}<br />
-		Current Move: ${game.state.moveNumber}<br /> 
 		
 		<hr />
 		
