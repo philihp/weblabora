@@ -65,26 +65,38 @@
 	<div class="container">
 	
 		<div class="wheel">
-			<svg>
+			<svg style="width: 300px; height: 300px;" viewbox="-150.5 -150.5 300 300">
+			  <defs>
+    			<linearGradient id="housefill" x1="0%" y1="0%" x2="100%" y2="0%">
+      			<stop offset="0%" style="stop-color:rgb(112,146,190);stop-opacity:1" />
+      			<stop offset="100%" style="stop-color:rgb(153,217,234);stop-opacity:1" />
+    			</linearGradient>
+			    <filter id="shadow">
+			      <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+			    </filter>
+  			</defs>
+  			<g id="shadowMask" opacity="0.1">
+					<polyline points="${wheelArt.mask}" fill="black" filter="url(#shadow)" />
+				</g>
 				<g id="wheel">
-				<polyline fill="#e7e7e7" stroke="#202020" stroke-width="1" points="${wheelArt.wedgeA}" />
-				<polyline fill="#e7e7e7" stroke="#202020" stroke-width="1" points="${wheelArt.wedgeB}" />
-				<polyline fill="#e7e7e7" stroke="#202020" stroke-width="1" points="${wheelArt.wedgeC}" />
-				<polyline fill="#e7e7e7" stroke="#202020" stroke-width="1" points="${wheelArt.wedgeD}" />
-				<polyline fill="#e7e7e7" stroke="#202020" stroke-width="1" points="${wheelArt.wedgeE}" />
-				<polyline fill="#e7e7e7" stroke="#202020" stroke-width="1" points="${wheelArt.wedgeF}" />
-				<polyline fill="#e7e7e7" stroke="#202020" stroke-width="1" points="${wheelArt.wedgeG}" />
-				<polyline fill="#e7e7e7" stroke="#202020" stroke-width="1" points="${wheelArt.wedgeH}" />
-				<polyline fill="#e7e7e7" stroke="#202020" stroke-width="1" points="${wheelArt.wedgeI}" />
-				<polyline fill="#e7e7e7" stroke="#202020" stroke-width="1" points="${wheelArt.wedgeJ}" />
-				<polyline fill="#e7e7e7" stroke="#202020" stroke-width="1" points="${wheelArt.wedgeK}" />
-				<polyline fill="#e7e7e7" stroke="#202020" stroke-width="1" points="${wheelArt.wedgeL}" />
-				<polyline fill="#e7e7e7" stroke="#202020" stroke-width="1" points="${wheelArt.wedgeM}" />
+				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeA}" />
+				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeB}" />
+				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeC}" />
+				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeD}" />
+				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeE}" />
+				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeF}" />
+				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeG}" />
+				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeH}" />
+				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeI}" />
+				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeJ}" />
+				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeK}" />
+				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeL}" />
+				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeM}" />
 				</g>
 				<g id="arm"  transform="rotate(0,150.5,150.5)" style="font-size: 10px; text-anchor: middle">
 				<!--<circle fill="#ededed" stroke="#202020" cx="${wheelArt.centerX}" cy="${wheelArt.centerY}" r="${wheelArt.armRadius}" />-->
 				  <path d="${wheelArt.armPath}"
-				        style="fill:#e7e7e7; fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+				        style="fill:#ffffff; fill-opacity: 1; stroke:#686868; stroke-width: 1" />
 				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotA},${wheelArt.centerX},${wheelArt.centerY})">10</text>
 				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotB},${wheelArt.centerX},${wheelArt.centerY})">9</text>
 				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotC},${wheelArt.centerX},${wheelArt.centerY})">8</text>
@@ -98,6 +110,22 @@
 				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotK},${wheelArt.centerX},${wheelArt.centerY})">3</text>
 				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotL},${wheelArt.centerX},${wheelArt.centerY})">2</text>
 				  <text x="${wheelArt.centerX}" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotM},${wheelArt.centerX},${wheelArt.centerY})">0</text>
+				</g>
+				<g id="settlement-a" transform="rotate(${wheelArt.rotG},${wheelArt.centerX},${wheelArt.centerY})">
+					<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+					<text x="${wheelArt.centerX}" y="${wheelArt.houseTextY}">A</text>
+				</g>
+				<g id="settlement-b" transform="rotate(${wheelArt.rotJ},${wheelArt.centerX},${wheelArt.centerY})">
+					<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+				</g>
+				<g id="settlement-c" transform="rotate(${wheelArt.rotC},${wheelArt.centerX},${wheelArt.centerY})">
+					<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+				</g>
+				<g id="settlement-d" transform="rotate(${wheelArt.rotF},${wheelArt.centerX},${wheelArt.centerY})">
+					<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+				</g>
+				<g id="settlement-e" transform="rotate(${wheelArt.rotM},${wheelArt.centerX},${wheelArt.centerY})">
+					<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
 				</g>
 			</svg>
 		</div>

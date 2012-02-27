@@ -37,9 +37,6 @@ div.wheel {
 	margin: 15px 0;
 }
 div.wheel svg {
-	width: 300px;
-	height: 300px;
-	border: 1px dashed gray;
 }
 
 ul.tabs {
@@ -88,8 +85,8 @@ div.board table {
 	border-collapse: collapse;
 }
 div.board table td {
-	height: 50px;
-	width: 50px;
+	height: 80px;
+	width: 65px;
 	text-align: center;
 	vertical-align: middle;
 	border-color: gray;
