@@ -50,8 +50,10 @@ public class Wheel {
 	protected Token wood = new Token(this);
 	
 	protected Token grape = new Token(this);
-	
+
 	protected Token stone = new Token(this);
+	
+	protected Token joker = new Token(this);
 
 	protected Token arm = new Token(this);
 	
@@ -90,6 +92,10 @@ public class Wheel {
 	public Token getStone() {
 		return stone;
 	}
+	
+	public Token getJoker() {
+		return joker;
+	}
 
 	public Token getArm() {
 		return arm;
@@ -105,6 +111,7 @@ public class Wheel {
 		if(wood.position == next)  wood.position  = wood.position.next();
 		if(grape.position == next) grape.position = grape.position.next();
 		if(stone.position == next) stone.position = stone.position.next();
+		if(joker.position == next) joker.position = joker.position.next();
 		arm.position = arm.position.next();
 	}
 	

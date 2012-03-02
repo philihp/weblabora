@@ -12,21 +12,19 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.Terrain;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.WeblaboraException;
 
-public class PeatCoalKiln extends AbstractBuilding {
+public class Palace extends AbstractBuilding {
 
-	public PeatCoalKiln() {
-		super("G07", "", 0, "Peat Coal Kiln", BuildCost.is().clay(1), -2, 4, EnumSet.of(COAST, PLAINS, HILLSIDE), false);
+	public Palace() {
+		super("F27", "C", 0, "Palace", BuildCost.is().coin(25), 8, 25, EnumSet.of(HILLSIDE), false);
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) {
+	public void use(Board board, UsageParam input) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
-		player.setCoal(player.getCoal() + 1);
-		player.setPenny(player.getPenny() + 1);
-
-		// turn peat into coal
-		player.setPeat(player.getPeat()-input.getPeat());
-		player.setCoal(input.getPeat());
+		player.setWine(player.getWine()-1);
+		AbstractBuilding building = (AbstractBuilding)input.getCard();
+		building.use(board, input);
 	}
 }

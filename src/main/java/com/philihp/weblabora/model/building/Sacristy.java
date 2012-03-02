@@ -13,21 +13,19 @@ import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.Terrain;
 import com.philihp.weblabora.model.UsageParam;
 
-public class BuildersMarket extends AbstractBuilding {
+public class Sacristy extends AbstractBuilding {
 
-	public BuildersMarket() {
-		super("G13", "", 4, "Builders' Market", BuildCost.is().clay(2), 1, 6, EnumSet.of(COAST, PLAINS, HILLSIDE), false);
+	public Sacristy() {
+		super("G34", "D", 0, "Sacristy", BuildCost.is().stone(3).straw(2), 7, 10, EnumSet.of(COAST, PLAINS, HILLSIDE), true);
 	}
 
 	@Override
 	public void use(Board board, UsageParam input) {
-		Player activePlayer = board.getPlayer(board.getActivePlayer());
-		
-		activePlayer.setPenny(activePlayer.getPenny()-2);
-		
-		activePlayer.setWood(activePlayer.getWood()+2);
-		activePlayer.setClay(activePlayer.getClay()+2);
-		activePlayer.setStone(activePlayer.getStone()+1);
-		activePlayer.setStraw(activePlayer.getStraw()+1);
+		Player player = board.getPlayer(board.getActivePlayer());
+		player.setBook(player.getBook()-1);
+		player.setPottery(player.getPottery()-1);
+		player.setOrnament(player.getOrnament()-1);
+		player.setReliquary(player.getReliquary()-1);
+		player.claimWonder(board.claimWonder());
 	}
 }

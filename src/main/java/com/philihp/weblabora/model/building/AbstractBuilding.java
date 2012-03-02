@@ -5,8 +5,10 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Terrain;
+import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.WeblaboraException;
 
-abstract public class AbstractBuilding {
+abstract public class AbstractBuilding extends Card {
 	
 	protected Board board;
 	
@@ -18,8 +20,9 @@ abstract public class AbstractBuilding {
 	protected final int settlementValue;
 	protected final int shieldValue;
 	protected final Set<Terrain> terrains;
+	protected final boolean cloister;
 	
-	public AbstractBuilding(String id, String stage, int players, String name, BuildCost buildCost, int settlementValue, int shieldValue, Set<Terrain> terrains) {
+	public AbstractBuilding(String id, String stage, int players, String name, BuildCost buildCost, int settlementValue, int shieldValue, Set<Terrain> terrains, boolean cloister) {
 		this.id = id;
 		this.stage = stage;
 		this.players = players;
@@ -28,8 +31,9 @@ abstract public class AbstractBuilding {
 		this.settlementValue = settlementValue;
 		this.shieldValue = shieldValue;
 		this.terrains = terrains;
+		this.cloister = cloister;
 	}
 	
-	public abstract void use(Board board, BuildCost input);
+	public abstract void use(Board board, UsageParam input) throws WeblaboraException;
 	
 }

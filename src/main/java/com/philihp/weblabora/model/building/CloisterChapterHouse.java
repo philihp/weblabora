@@ -7,6 +7,7 @@ import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.Terrain;
+import com.philihp.weblabora.model.UsageParam;
 
 import static com.philihp.weblabora.model.Terrain.*;
 
@@ -14,11 +15,11 @@ public class CloisterChapterHouse extends AbstractBuilding {
 
 	public CloisterChapterHouse() {
 		super("G16", "A", 3, "Cloister Chapter House", BuildCost.is().clay(3).straw(1), 5, 2, EnumSet.of(COAST, PLAINS,
-				HILLSIDE));
+				HILLSIDE), true);
 	}
 
 	@Override
-	public void use(Board board, BuildCost input) {
+	public void use(Board board, UsageParam input) {
 		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		activePlayer.setClay(activePlayer.getClay() + 1);
 		activePlayer.setWood(activePlayer.getWood() + 1);

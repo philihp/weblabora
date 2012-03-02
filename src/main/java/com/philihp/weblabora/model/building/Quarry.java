@@ -1,6 +1,7 @@
 package com.philihp.weblabora.model.building;
 
 import static com.philihp.weblabora.model.Terrain.COAST;
+import static com.philihp.weblabora.model.Terrain.MOUNTAIN;
 import static com.philihp.weblabora.model.Terrain.HILLSIDE;
 import static com.philihp.weblabora.model.Terrain.PLAINS;
 
@@ -12,22 +13,19 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.Terrain;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.Wheel;
 
-public class BuildersMarket extends AbstractBuilding {
+public class Quarry extends AbstractBuilding {
 
-	public BuildersMarket() {
-		super("G13", "", 4, "Builders' Market", BuildCost.is().clay(2), 1, 6, EnumSet.of(COAST, PLAINS, HILLSIDE), false);
+	public Quarry() {
+		super("G22", "B", 0, "Quarry", BuildCost.is().coin(5), -4, 7, EnumSet.of(MOUNTAIN), false);
 	}
 
 	@Override
 	public void use(Board board, UsageParam input) {
-		Player activePlayer = board.getPlayer(board.getActivePlayer());
-		
-		activePlayer.setPenny(activePlayer.getPenny()-2);
-		
-		activePlayer.setWood(activePlayer.getWood()+2);
-		activePlayer.setClay(activePlayer.getClay()+2);
-		activePlayer.setStone(activePlayer.getStone()+1);
-		activePlayer.setStraw(activePlayer.getStraw()+1);
+		Player player = board.getPlayer(board.getActivePlayer());
+		Wheel wheel = board.getWheel();
+		Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getStone();
+		player.setStone(player.getStone() + token.take());
 	}
 }

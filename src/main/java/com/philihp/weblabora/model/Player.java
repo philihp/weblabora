@@ -35,6 +35,8 @@ public class Player {
 	private int beer = 0;
 	private int reliquary = 0;
 	
+	private List<Wonder> wonders = new ArrayList<Wonder>(0);
+	
 	public Player(Board board, Color color) {
 		this.board = board;
 		this.color = color;
@@ -295,6 +297,10 @@ public class Player {
 
 	public Board getBoard() {
 		return board;
+	}
+
+	public void claimWonder(Wonder wonder) {
+		wonders.add(wonder);
 	}
 
 }
