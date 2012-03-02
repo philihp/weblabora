@@ -73,7 +73,10 @@ public class Board {
 			try {
 				Constructor<? extends AbstractBuilding> constructor = id.clazz.getDeclaredConstructor();
 				AbstractBuilding building = constructor.newInstance();
-				buildings.add(building);
+				if("".equals(building.getStage())) {
+					//if starting building
+					buildings.add(building);
+				}
 			} catch (NoSuchMethodException e) {
 				e.printStackTrace();
 			} catch (InstantiationException e) {
