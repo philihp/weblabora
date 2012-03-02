@@ -27,7 +27,6 @@ public class ShowBoard extends BaseAction {
 			HttpServletResponse response, User user) throws Exception {
 
 		request.setAttribute("myGames", findGamesForUser(user));
-		
 		request.setAttribute("game", user.getActiveGame());
 		
 		if(user.getActiveGame() != null) {
