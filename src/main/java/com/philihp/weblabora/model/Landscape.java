@@ -15,17 +15,21 @@ public class Landscape {
 	private Table<Integer, Integer, Terrain> terrain;
 
 	public Landscape() {
-		this.terrain = ArrayTable.create(Arrays.asList(0, 1), Arrays.asList(-2, -1, 0, 1, 2, 3, 4, 5, 6));
-		terrain.put(0, 0, new Terrain(this, PEAT, null));
-		terrain.put(0, 1, new Terrain(this, FOREST, null));
-		terrain.put(0, 2, new Terrain(this, FOREST, null));
-		terrain.put(0, 3, new Terrain(this, PLAINS, null));
-		terrain.put(0, 4, new Terrain(this, PLAINS, null));
-		terrain.put(1, 0, new Terrain(this, PEAT, null));
+		this.terrain = ArrayTable.create(Arrays.asList(-2, -1, 0, 1, 2, 3, 4, 5, 6), Arrays.asList(0, 1));
+		terrain.put(0, 0, new Terrain(this, MOOR, null));
+		terrain.put(1, 0, new Terrain(this, FOREST, null));
+		terrain.put(2, 0, new Terrain(this, FOREST, null));
+		terrain.put(3, 0, new Terrain(this, PLAINS, null));
+		terrain.put(4, 0, new Terrain(this, PLAINS, null));
+		terrain.put(0, 1, new Terrain(this, MOOR, null));
 		terrain.put(1, 1, new Terrain(this, FOREST, null));
-		terrain.put(1, 2, new Terrain(this, PLAINS, null));
-		terrain.put(1, 3, new Terrain(this, PLAINS, null));
-		terrain.put(1, 4, new Terrain(this, PLAINS, null));
+		terrain.put(2, 1, new Terrain(this, PLAINS, null));
+		terrain.put(3, 1, new Terrain(this, PLAINS, null));
+		terrain.put(4, 1, new Terrain(this, PLAINS, null));
+	}
+
+	public Table<Integer, Integer, Terrain> getTerrain() {
+		return terrain;
 	}
 
 }

@@ -95,24 +95,6 @@
 				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeL}" />
 				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeM}" />
 				</g>
-				<g id="arm"  transform="rotate(${ora:deg(board.wheel.arm.position)-13.846})" style="font-size: 10px; text-anchor: middle">
-				  <path d="${wheelArt.armPath}"
-				        style="fill:#ffffff; fill-opacity: 1; stroke:#686868; stroke-width: 1" />
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotA})">10</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotB})">9</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotC})">8</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotD})">8</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotE})">7</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotF})">7</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotG})">6</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotH})">6</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotI})">5</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotJ})">4</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotK})">3</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotL})">2</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotM})">0</text>
-				  <path d="${wheelArt.arrowPath}" fill="#000" />
-				</g>
 				<g id="settlement-a" transform="rotate(${wheelArt.rotG})">
 					<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
 					<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">A</text>
@@ -134,25 +116,46 @@
 					<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">E</text>
 				</g>
 				<g id="grain" transform="rotate(${ora:deg(board.wheel.grain.position)})">
-					<text x="0" y="-104" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Grain</text>
+					<text x="0" y="-114" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Grain</text>
 				</g>
 				<g id="grain" transform="rotate(${ora:deg(board.wheel.sheep.position)})">
-					<text x="0" y="-95" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Sheep</text>
+					<text x="0" y="-105" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Sheep</text>
 				</g>
 				<g id="grain" transform="rotate(${ora:deg(board.wheel.grape.position)})">
-					<text x="0" y="-86" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Grape</text>
+					<text x="0" y="-96" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Grape</text>
 				</g>
 				<g id="grain" transform="rotate(${ora:deg(board.wheel.stone.position)})">
-					<text x="0" y="-77" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Stone</text>
+					<text x="0" y="-87" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Stone</text>
 				</g>
 				<g id="grain" transform="rotate(${ora:deg(board.wheel.joker.position)})">
-					<text x="0" y="-68" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Joker</text>
+					<text x="0" y="-78" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Joker</text>
 				</g>
 				<g id="grain" transform="rotate(${ora:deg(board.wheel.wood.position)})">
-					<text x="0" y="-59" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Wood</text>
+					<text x="0" y="-69" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Wood</text>
 				</g>
 				<g id="grain" transform="rotate(${ora:deg(board.wheel.clay.position)})">
-					<text x="0" y="-50" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Clay</text>
+					<text x="0" y="-60" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Clay</text>
+				</g>
+				<g id="grain" transform="rotate(${ora:deg(board.wheel.peat.position)})">
+					<text x="0" y="-51" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Peat</text>
+				</g>
+				<g id="arm"  transform="rotate(${ora:deg(board.wheel.arm.position)-13.846})" style="font-size: 10px; text-anchor: middle">
+				  <path d="${wheelArt.armPath}"
+				        style="fill:#ffffff; fill-opacity: 1; stroke:#686868; stroke-width: 1" />
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotA})">10</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotB})">9</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotC})">8</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotD})">8</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotE})">7</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotF})">7</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotG})">6</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotH})">6</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotI})">5</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotJ})">4</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotK})">3</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotL})">2</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotM})">0</text>
+				  <path d="${wheelArt.arrowPath}" fill="#000" />
 				</g>
 			</svg>
 		</div>

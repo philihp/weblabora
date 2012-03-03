@@ -30,4 +30,12 @@ public class Terrain {
 		this.landscape = landscape;
 	}
 
+	public TerrainTypeEnum getTerrainType() {
+		return terrainType;
+	}
+
+	public void setTerrainType(TerrainTypeEnum terrainType) {
+		this.terrainType = terrainType;
+	}
+
 }

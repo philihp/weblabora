@@ -7,13 +7,6 @@ import java.util.Map;
 import com.google.common.collect.ArrayTable;
 
 public class Player {
-	
-	private ArrayTable<Integer, Integer, Terrain> landscape;
-	
-	private Board board;
-
-	private Color color;
-
 	private int peat = 0;
 	private int penny = 0;
 	private int clay = 0;
@@ -38,9 +31,15 @@ public class Player {
 	private int wine = 0;
 	private int beer = 0;
 	private int reliquary = 0;
-	
+
+	private Landscape landscape = new Landscape();;
+
+	private Board board;
+
+	private Color color;
+
 	private List<Wonder> wonders = new ArrayList<Wonder>(0);
-	
+
 	public Player(Board board, Color color) {
 		this.board = board;
 		this.color = color;
@@ -158,13 +157,16 @@ public class Player {
 	public class InventoryEntry {
 		private final String type;
 		private final int quantity;
+
 		public InventoryEntry(String type, int quantity) {
 			this.type = type;
 			this.quantity = quantity;
 		}
+
 		public String getType() {
 			return type;
 		}
+
 		public Integer getQuantity() {
 			return quantity;
 		}
@@ -234,7 +236,7 @@ public class Player {
 	public void setGrapes(int grapes) {
 		this.grapes = grapes;
 	}
-	
+
 	public void setPenny(int penny) {
 		this.penny = penny;
 	}
@@ -305,6 +307,14 @@ public class Player {
 
 	public void claimWonder(Wonder wonder) {
 		wonders.add(wonder);
+	}
+
+	public Landscape getLandscape() {
+		return landscape;
+	}
+
+	public void setLandscape(Landscape landscape) {
+		this.landscape = landscape;
 	}
 
 }

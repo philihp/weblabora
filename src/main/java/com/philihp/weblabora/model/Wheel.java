@@ -40,6 +40,8 @@ public class Wheel {
 	}
 
 	protected Token grain = new Token(this);
+
+	protected Token peat = new Token(this);
 	
 	protected Token sheep = new Token(this);
 	
@@ -96,6 +98,10 @@ public class Wheel {
 	public Token getJoker() {
 		return joker;
 	}
+	
+	public Token getPeat() {
+		return peat;
+	}
 
 	public Token getArm() {
 		return arm;
@@ -112,6 +118,7 @@ public class Wheel {
 		if(grape.position == next) grape.position = grape.position.next();
 		if(stone.position == next) stone.position = stone.position.next();
 		if(joker.position == next) joker.position = joker.position.next();
+		if(peat.position == next) peat.position = peat.position.next();
 		arm.position = arm.position.next();
 	}
 	
