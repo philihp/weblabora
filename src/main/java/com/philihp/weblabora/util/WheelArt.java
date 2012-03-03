@@ -199,31 +199,31 @@ public class WheelArt {
 
 	public static double deg(String pos) {
 		if (pos.equals("A"))
-			return 360 * 12d / points.length;
+			return 360 * 12.5 / points.length;
 		if (pos.equals("B"))
-			return 360 * 11d / points.length;
+			return 360 * 11.5 / points.length;
 		if (pos.equals("C"))
-			return 360 * 10d / points.length;
+			return 360 * 10.5 / points.length;
 		if (pos.equals("D"))
-			return 360 * 9d / points.length;
+			return 360 * 9.5 / points.length;
 		if (pos.equals("E"))
-			return 360 * 8d / points.length;
+			return 360 * 8.5 / points.length;
 		if (pos.equals("F"))
-			return 360 * 7d / points.length;
+			return 360 * 7.5 / points.length;
 		if (pos.equals("G"))
-			return 360 * 6d / points.length;
+			return 360 * 6.5 / points.length;
 		if (pos.equals("H"))
-			return 360 * 5d / points.length;
+			return 360 * 5.5 / points.length;
 		if (pos.equals("I"))
-			return 360 * 4d / points.length;
+			return 360 * 4.5 / points.length;
 		if (pos.equals("J"))
-			return 360 * 3d / points.length;
+			return 360 * 3.5 / points.length;
 		if (pos.equals("K"))
-			return 360 * 2d / points.length;
+			return 360 * 2.5 / points.length;
 		if (pos.equals("L"))
-			return 360 * 1d / points.length;
+			return 360 * 1.5 / points.length;
 		if (pos.equals("M"))
-			return 360 * 0d / points.length;
+			return 360 * 0.5 / points.length;
 		return 0;
 	}
 }

@@ -95,7 +95,7 @@
 				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeL}" />
 				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeM}" />
 				</g>
-				<g id="arm"  transform="rotate(${ora:deg(board.wheel.arm.position)})" style="font-size: 10px; text-anchor: middle">
+				<g id="arm"  transform="rotate(${ora:deg(board.wheel.arm.position)-13.846})" style="font-size: 10px; text-anchor: middle">
 				  <path d="${wheelArt.armPath}"
 				        style="fill:#ffffff; fill-opacity: 1; stroke:#686868; stroke-width: 1" />
 				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotA})">10</text>
@@ -132,6 +132,27 @@
 				<g id="settlement-e" transform="rotate(${wheelArt.rotM})">
 					<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
 					<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">E</text>
+				</g>
+				<g id="grain" transform="rotate(${ora:deg(board.wheel.grain.position)})">
+					<text x="0" y="-104" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Grain</text>
+				</g>
+				<g id="grain" transform="rotate(${ora:deg(board.wheel.sheep.position)})">
+					<text x="0" y="-95" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Sheep</text>
+				</g>
+				<g id="grain" transform="rotate(${ora:deg(board.wheel.grape.position)})">
+					<text x="0" y="-86" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Grape</text>
+				</g>
+				<g id="grain" transform="rotate(${ora:deg(board.wheel.stone.position)})">
+					<text x="0" y="-77" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Stone</text>
+				</g>
+				<g id="grain" transform="rotate(${ora:deg(board.wheel.joker.position)})">
+					<text x="0" y="-68" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Joker</text>
+				</g>
+				<g id="grain" transform="rotate(${ora:deg(board.wheel.wood.position)})">
+					<text x="0" y="-59" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Wood</text>
+				</g>
+				<g id="grain" transform="rotate(${ora:deg(board.wheel.clay.position)})">
+					<text x="0" y="-50" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Clay</text>
 				</g>
 			</svg>
 		</div>
@@ -230,15 +251,13 @@
 			</table>
 		</div>
 		
-			<table>
 			<c:forEach items="${game.moves}" var="move" varStatus="status">
 				<c:if test="${status.index % 5 == 0}">
-					<tr>
-						<th>Round <fmt:formatNumber value="${status.index / 5 + 1}" maxFractionDigits="0"/></th>
+						<b>Round <fmt:formatNumber value="${status.index / 5 + 1}" maxFractionDigits="0"/></b><br />
 				</c:if>
-				<td>${move}</td>
+				${move}<br />
 				<c:if test="${status.index % 5 == 4 || status.last}">
-					</tr>
+				...
 				</c:if>
 			</c:forEach>
 		</table>
