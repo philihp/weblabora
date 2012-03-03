@@ -26,6 +26,7 @@ public final class MoveProcessor {
 		if (board.currentMove % 5 == 1) {
 			board.getWheel().pushArm();
 		}
+		board.nextActivePlayer();
 	}
 
 	public static void processSingleMove(Board board, String move) throws WeblaboraException {

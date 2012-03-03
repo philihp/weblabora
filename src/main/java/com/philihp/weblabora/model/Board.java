@@ -117,4 +117,8 @@ public class Board {
 		return currentMove;
 	}
 
+	public void nextActivePlayer() {
+		if(++activePlayer >= players.length) activePlayer = 0;
+	}
+
 }
