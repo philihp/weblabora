@@ -32,7 +32,7 @@ public class ShowBoard extends BaseAction {
 		if(user.getActiveGame() != null) {
 			Board board = new Board();
 			for(String move : user.getActiveGame().getMoves()) {
-				MoveProcessor.processMove(board,move);
+				MoveProcessor.processMoves(board,move);
 			}
 			request.setAttribute("board", board);
 		}

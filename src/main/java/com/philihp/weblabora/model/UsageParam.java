@@ -1,7 +1,7 @@
 package com.philihp.weblabora.model;
 
 import com.philihp.weblabora.model.building.AbstractBuilding;
-import com.philihp.weblabora.model.building.Card;
+import com.philihp.weblabora.model.building.Erection;
 
 public class UsageParam {
 	private int peat = 0;
@@ -29,7 +29,7 @@ public class UsageParam {
 	private int beer = 0;
 	private int reliquary = 0;
 
-	private Card card = null;
+	private Erection card = null;
 	
 	private boolean withJoker = false;
 
@@ -150,7 +150,7 @@ public class UsageParam {
 		return this;
 	}
 
-	public UsageParam card(Card card) {
+	public UsageParam card(Erection card) {
 		this.card = card;
 		return this;
 	}
@@ -243,7 +243,7 @@ public class UsageParam {
 		return reliquary;
 	}
 
-	public Card getCard() {
+	public Erection getCard() {
 		return card;
 	}
 	

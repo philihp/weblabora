@@ -6,10 +6,10 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
-import com.philihp.weblabora.model.Terrain;
+import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 
-import static com.philihp.weblabora.model.Terrain.*;
+import static com.philihp.weblabora.model.TerrainTypeEnum.*;
 
 public class CloisterChapterHouse extends AbstractBuilding {
 

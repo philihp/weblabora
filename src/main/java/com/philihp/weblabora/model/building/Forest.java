@@ -1,5 +1,5 @@
 package com.philihp.weblabora.model.building;
 
-public class Forest extends Card {
+public class Forest extends Erection {
 
 }

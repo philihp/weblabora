@@ -4,11 +4,11 @@ import java.util.Set;
 
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
-import com.philihp.weblabora.model.Terrain;
+import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 
-abstract public class AbstractBuilding extends Card {
+abstract public class AbstractBuilding extends Erection {
 
 	protected Board board;
 
@@ -19,11 +19,11 @@ abstract public class AbstractBuilding extends Card {
 	protected final BuildCost buildCost;
 	protected final int settlementValue;
 	protected final int shieldValue;
-	protected final Set<Terrain> terrains;
+	protected final Set<TerrainTypeEnum> terrains;
 	protected final boolean cloister;
 
 	public AbstractBuilding(String id, String stage, int players, String name, BuildCost buildCost, int settlementValue,
-			int shieldValue, Set<Terrain> terrains, boolean cloister) {
+			int shieldValue, Set<TerrainTypeEnum> terrains, boolean cloister) {
 		this.id = id;
 		this.stage = stage;
 		this.players = players;

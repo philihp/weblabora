@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.ArrayTable;
+
 public class Player {
+	
+	private ArrayTable<Integer, Integer, Terrain> landscape;
 	
 	private Board board;
 

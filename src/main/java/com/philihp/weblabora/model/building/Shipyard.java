@@ -1,6 +1,6 @@
 package com.philihp.weblabora.model.building;
 
-import static com.philihp.weblabora.model.Terrain.COAST;
+import static com.philihp.weblabora.model.TerrainTypeEnum.COAST;
 
 import java.util.EnumSet;
 
