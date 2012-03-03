@@ -178,83 +178,24 @@
 				${game.player4.user.name}
 			</li>
 		</ul>
-		
-		
-		
-		<div class="board" id="board1">
-			<table>
-				<tr>
-					<td>Peat</td>
-					<td>Forest</td>
-					<td>Forest</td>
-					<td>Plains</td>
-					<td>Plains</td>
-				</tr>
-				<tr>
-					<td>Peat</td>
-					<td>Forest</td>
-					<td>Plains</td>
-					<td>Plains</td>
-					<td>Plains</td>
-				</tr>
-			</table>
-		</div>
-		<div class="board board-inactive" id="board2">
-			<table>
-				<tr>
-					<td>Peat</td>
-					<td>Forest</td>
-					<td>Forest</td>
-					<td>Plains</td>
-					<td>Plains</td>
-				</tr>
-				<tr>
-					<td>Peat</td>
-					<td>Forest</td>
-					<td>Plains</td>
-					<td>Plains</td>
-					<td>Plains</td>
-				</tr>
-			</table>
-		</div>
-		<div class="board board-inactive" id="board3">
-			<table>
-				<tr>
-					<td>Peat</td>
-					<td>Forest</td>
-					<td>Forest</td>
-					<td>Plains</td>
-					<td>Plains</td>
-				</tr>
-				<tr>
-					<td>Peat</td>
-					<td>Forest</td>
-					<td>Plains</td>
-					<td>Plains</td>
-					<td>Plains</td>
-				</tr>
-			</table>
-		</div>
-		<div class="board board-inactive" id="board4">
-			<table>
-				<tr>
-					<td>Peat</td>
-					<td>Forest</td>
-					<td>Forest</td>
-					<td>Plains</td>
-					<td>Plains</td>
-				</tr>
-				<tr>
-					<td>Peat</td>
-					<td>Forest</td>
-					<td>Plains</td>
-					<td>Plains</td>
-					<td>Plains</td>
-				</tr>
-			</table>
-		</div>
-		
-			<c:forEach items="${game.moves}" var="move" varStatus="status">
+
+
+
+		<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
+			<div class="board" id="board${playerStatus.index+1}">
+				<table>
+					<c:forEach items="${player.landscape.table}" var="row">
+						<tr>
+							<c:forEach items="${row}" var="cell">
+								<td>${cell.terrainType.properCase}</td>
+							</c:forEach>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+		</c:forEach>
+
+		<c:forEach items="${game.moves}" var="move" varStatus="status">
 				<c:if test="${status.index % 5 == 0}">
 						<b>Round <fmt:formatNumber value="${status.index / 5 + 1}" maxFractionDigits="0"/></b><br />
 				</c:if>

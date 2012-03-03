@@ -8,7 +8,7 @@ public class CommandFellTrees {
 
 	public static void execute(Board board, int x, int y) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
-		Terrain spot = player.getLandscape().getTerrain().get(x, y);
+		Terrain spot = player.getLandscape().getTerrain().get(y, x);
 
 		if (spot.getTerrainType() != FOREST)
 			throw new WeblaboraException("Tried to Fell Trees on " + spot.getTerrainType() + " at (" + x + "," + y

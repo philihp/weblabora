@@ -313,8 +313,4 @@ public class Player {
 		return landscape;
 	}
 
-	public void setLandscape(Landscape landscape) {
-		this.landscape = landscape;
-	}
-
 }
