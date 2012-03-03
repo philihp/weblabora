@@ -64,8 +64,6 @@
 		
 	
 	<div class="container">
-		Current State ID: ${game.state.stateId}<br />
-		
 		<div class="wheel">
 			<svg style="width: 300px; height: 300px;" viewbox="-150.5 -150.5 300 300">
 			  <defs>
@@ -159,6 +157,14 @@
 				</g>
 			</svg>
 		</div>
+		<div class="buildings">
+		  Buildings Available:
+		  <ul>
+		  	<c:forEach items="${board.unbuiltBuildings}" var="building">
+		  		<li>${building}</li>
+		  	</c:forEach>
+		  </ul>
+		</div>
 
 		<ul class="tabs">
 			<li>
@@ -195,6 +201,8 @@
 			</div>
 		</c:forEach>
 
+		Current State ID: ${game.state.stateId}<br />
+		
 		<c:forEach items="${game.moves}" var="move" varStatus="status">
 				<c:if test="${status.index % 5 == 0}">
 						<b>Round <fmt:formatNumber value="${status.index / 5 + 1}" maxFractionDigits="0"/></b><br />

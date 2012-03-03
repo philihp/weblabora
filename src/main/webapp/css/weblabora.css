@@ -34,9 +34,14 @@ div.container {
 
 div.wheel {
 	width: 333px;
-	margin: 15px 0;
+	height: 304px;
+	float: left;
 }
 div.wheel svg {
+}
+div.buildings {
+	height: 304px;
+	margin: 15px 0;
 }
 
 ul.tabs {
