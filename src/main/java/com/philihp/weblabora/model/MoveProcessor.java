@@ -15,7 +15,8 @@ public final class MoveProcessor {
 	private MoveProcessor() {
 	}
 
-	public static void processMoves(Board board, String moves) throws WeblaboraException {
+	public static void processMoves(Board board, String moves)
+			throws WeblaboraException {
 		board.currentMove++;
 
 		for (String move : moves.split("\\|")) {
@@ -29,27 +30,33 @@ public final class MoveProcessor {
 		board.nextActivePlayer();
 	}
 
-	public static void processSingleMove(Board board, String move) throws WeblaboraException {
+	public static void processSingleMove(Board board, String move)
+			throws WeblaboraException {
 		Scanner scanner = new Scanner(move);
 		scanner.useDelimiter("\\(");
-		char command = Character.toUpperCase(scanner.next().charAt(0));
+		char commandChar = Character.toUpperCase(scanner.next().charAt(0));
 		scanner.useDelimiter("[\\(,\\)]");
-		List<String> paramList = new ArrayList<String>(2);
+		List<String> params = new ArrayList<String>(2);
 		while (scanner.hasNext()) {
 			String param = scanner.next();
-			paramList.add(param);
-		}
-		
-		switch(command) {
-		case 'F':
-			CommandFellTrees.execute(board, Integer.parseInt(paramList.get(0)), Integer.parseInt(paramList.get(1)));
-			break;
-		case 'C':
-			CommandCutPeat.execute(board, Integer.parseInt(paramList.get(0)), Integer.parseInt(paramList.get(1)));
-			break;
-		default:
-			throw new WeblaboraException("Unknown Command \""+move+"\"");
+			params.add(param);
 		}
 
+		MoveCommand moveCommand = pickCommand(commandChar);
+		moveCommand.execute(board, params);
+
+	}
+
+	public static MoveCommand pickCommand(char commandChar) throws WeblaboraException {
+		switch(commandChar) {
+		case 'F':
+			return new CommandFellTrees();
+		case 'C':
+			return new CommandCutPeat();
+		case 'B':
+			return new CommandBuild();
+		default:
+			throw new WeblaboraException("Unknown Command \""+commandChar+"\"");
+		}
 	}
 }

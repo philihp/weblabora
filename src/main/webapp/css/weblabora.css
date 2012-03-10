@@ -41,7 +41,15 @@ div.wheel svg {
 }
 div.buildings {
 	height: 304px;
-	margin: 15px 0;
+	margin: 15px 0 15px 333px;
+}
+div.buildings div.header {
+}
+div.building {
+	border: 1px solid black;
+	display: inline-block;
+	height: 100px;
+	width: 130px;
 }
 
 ul.tabs {
@@ -104,14 +112,3 @@ div.board table td {
 	border-style: inset;
 	border-collapse: collapse;
 }
-
-
-
-
-
-
-
-
-
-
-

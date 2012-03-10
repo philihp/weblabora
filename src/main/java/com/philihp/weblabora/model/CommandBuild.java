@@ -2,19 +2,26 @@ package com.philihp.weblabora.model;
 
 import static com.philihp.weblabora.model.TerrainTypeEnum.*;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-public class CommandFellTrees implements MoveCommand {
+import com.philihp.weblabora.model.building.*;
+
+public class CommandBuild implements MoveCommand {
+
 
 	@Override
 	public void execute(Board board, List<String> params)
 			throws WeblaboraException {
+		
 		execute(board,
-				Integer.parseInt(params.get(0)),
-				Integer.parseInt(params.get(1)));
+				BuildingEnum.getInstance(params.get(0)),
+				Integer.parseInt(params.get(1)),
+				Integer.parseInt(params.get(2)));
 	}
-
-	public static void execute(Board board, int x, int y)
+	
+	public static void execute(Board board, AbstractBuilding building, int x, int y)
 			throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 		Terrain spot = player.getLandscape().getTerrain().get(y, x);

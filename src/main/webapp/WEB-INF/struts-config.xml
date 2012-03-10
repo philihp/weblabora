@@ -14,6 +14,7 @@
 
 	<global-exceptions>
 		<exception type="com.philihp.weblabora.action.AuthenticationException" path="/authenticate.do" key="" />
+		<exception type="java.net.UnknownHostException" path="/error.jsp" key="exception.unknownHost" />
 	</global-exceptions>
 
 	<global-forwards>
@@ -23,7 +24,6 @@
 		<!-- only index.jsp should use this, but it must be global -->
 		<forward name="board" redirect="false" path="/showBoard.do" />
 	</global-forwards>
-
 
 	<action-mappings>
 		<action path="/authenticate" type="com.philihp.weblabora.action.Authenticate">
@@ -35,6 +35,7 @@
 		<action path="/authenticateGetInfo" type="com.philihp.weblabora.action.AuthenticateGetInfo" />
 		<action path="/authenticateLogout" type="com.philihp.weblabora.action.AuthenticateLogout" />
 		<action path="/authenticateHijack" name="hijackForm" type="com.philihp.weblabora.action.AuthenticateHijack" />
+		<action path="/offline" type="com.philihp.weblabora.action.Offline" />
 
 		<action path="/showBoard" name="nullForm" type="com.philihp.weblabora.action.ShowBoard">
 			<forward name="view" path="/showBoard.jsp" />

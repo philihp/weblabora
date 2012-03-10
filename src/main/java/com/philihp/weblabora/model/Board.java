@@ -69,25 +69,10 @@ public class Board {
 
 	private List<AbstractBuilding> gameStartBuildings() {
 		List<AbstractBuilding> buildings = new ArrayList<AbstractBuilding>();
-		for (BuildingEnum id : BuildingEnum.values()) {
-			try {
-				Constructor<? extends AbstractBuilding> constructor = id.clazz.getDeclaredConstructor();
-				AbstractBuilding building = constructor.newInstance();
-				if("".equals(building.getStage())) {
-					//if starting building
-					buildings.add(building);
-				}
-			} catch (NoSuchMethodException e) {
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}
+		for (BuildingEnum buildingId : BuildingEnum.values()) {
+			AbstractBuilding building = buildingId.getInstance();
+			if ("".equals(building.getStage()))
+				buildings.add(building);
 		}
 		return buildings;
 	}
@@ -104,9 +89,9 @@ public class Board {
 		wonders.add(new Wonder());
 		return wonders;
 	}
-	
+
 	public Wonder claimWonder() {
-		return unclaimedWonders.remove(unclaimedWonders.size()-1);
+		return unclaimedWonders.remove(unclaimedWonders.size() - 1);
 	}
 
 	public List<AbstractBuilding> getUnbuiltBuildings() {
@@ -118,7 +103,8 @@ public class Board {
 	}
 
 	public void nextActivePlayer() {
-		if(++activePlayer >= players.length) activePlayer = 0;
+		if (++activePlayer >= players.length)
+			activePlayer = 0;
 	}
 
 }

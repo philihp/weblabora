@@ -158,12 +158,14 @@
 			</svg>
 		</div>
 		<div class="buildings">
-		  Buildings Available:
-		  <ul>
-		  	<c:forEach items="${board.unbuiltBuildings}" var="building">
-		  		<li>${building}</li>
-		  	</c:forEach>
-		  </ul>
+		  <div class="header">Buildings Available:</div>
+		  <c:forEach items="${board.unbuiltBuildings}" var="building">
+		  	<div class="building">
+		  	  <b>${building.id}</b><br />
+		  	  ${building.name}
+		  	  
+		  	</div>
+		  </c:forEach>
 		</div>
 
 		<ul class="tabs">
