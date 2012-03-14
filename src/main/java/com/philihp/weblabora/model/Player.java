@@ -7,6 +7,9 @@ import java.util.Map;
 import com.google.common.collect.ArrayTable;
 
 public class Player {
+	
+	private boolean active;
+	
 	private int peat = 0;
 	private int penny = 0;
 	private int clay = 0;
@@ -32,7 +35,7 @@ public class Player {
 	private int beer = 0;
 	private int reliquary = 0;
 
-	private Landscape landscape = new Landscape();;
+	private Landscape landscape = new Landscape(this);
 
 	private Board board;
 
@@ -312,5 +315,18 @@ public class Player {
 	public Landscape getLandscape() {
 		return landscape;
 	}
+	
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	
+	public String getActiveClass() {
+		return isActive()?"active":"inactive";
+	}
+
 
 }

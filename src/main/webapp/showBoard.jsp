@@ -14,11 +14,12 @@
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/colorbox.css" />
 <link rel="stylesheet" href="css/weblabora.css" />
-<script src="https://www.google.com/jsapi"></script>
-<script>
-	google.load("jquery", "1.7.1");
-</script>
-<script src="js/jquery.colorbox-min.js"></script>
+<!--<script src="https://www.google.com/jsapi"></script>-->
+<!-- <script> -->
+<!-- 	google.load("jquery", "1.7.1");-->
+<!-- </script> -->
+<script src="js/jquery-1.7.1.js"></script>
+<script src="js/jquery.colorbox.js"></script>
 <script>
 	$(document).bind('cbox_complete', function() {
 		$('#cboxLoadedContent').addClass('styled');
@@ -31,12 +32,30 @@
 		$('#cboxClose').removeClass('styled');
 	});
 
-	$().ready(function() {
+	function showboard(player) {
+		$('#tab1').removeClass('tab--active').addClass('tab--inactive');
+		$('#tab2').removeClass('tab--active').addClass('tab--inactive');
+		$('#tab3').removeClass('tab--active').addClass('tab--inactive');
+		$('#tab4').removeClass('tab--active').addClass('tab--inactive');
+		$('#tab'+player).removeClass('tab--inactive').addClass('tab--active');
+		$('#board1').removeClass('board--active').addClass('board--inactive');
+		$('#board2').removeClass('board--active').addClass('board--inactive');
+		$('#board3').removeClass('board--active').addClass('board--inactive');
+		$('#board4').removeClass('board--active').addClass('board--inactive');
+		$('#board'+player).removeClass('board--inactive').addClass('board--active');
+	}
+	
+	$(function() {
 		$('#findGamesButton').colorbox({
 			href : "showGames.do",
 			speed : 150,
 			transition: "elastic"
 		});
+
+		$('#tab1').click(function() {showboard(1);});
+		$('#tab2').click(function() {showboard(2);});
+		$('#tab3').click(function() {showboard(3);});
+		$('#tab4').click(function() {showboard(4);});
 	});
 </script>
 
@@ -169,33 +188,40 @@
 		</div>
 
 		<ul class="tabs">
-			<li>
+			<li id="tab1" class="tab tab--${board.players[0].activeClass}">
 				<img src="http://graph.facebook.com/${game.player1.user.facebookId}/picture" height="50" width="50" title="${game.player1.user.facebookId}"/>
 				${game.player1.user.name}
 			</li>
-			<li>
+			<li id="tab2" class="tab tab--${board.players[1].activeClass}">
 				<img src="http://graph.facebook.com/${game.player2.user.facebookId}/picture" height="50" width="50" title="${game.player2.user.facebookId}"/>
 				${game.player2.user.name}
 			</li>
-			<li>
+			<li id="tab3" class="tab tab--${board.players[2].activeClass}">
 				<img src="http://graph.facebook.com/${game.player3.user.facebookId}/picture" height="50" width="50" title="${game.player3.user.facebookId}"/>
 				${game.player3.user.name}
 			</li>
-			<li>
+			<li id="tab4" class="tab tab--${board.players[3].activeClass}">
 				<img src="http://graph.facebook.com/${game.player4.user.facebookId}/picture" height="50" width="50" title="${game.player4.user.facebookId}"/>
 				${game.player4.user.name}
 			</li>
 		</ul>
 
-
-
 		<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
-			<div class="board" id="board${playerStatus.index+1}">
+			<div class="board board--${player.activeClass}" id="board${playerStatus.index+1}">
 				<table>
 					<c:forEach items="${player.landscape.table}" var="row">
 						<tr>
 							<c:forEach items="${row}" var="cell">
-								<td>${cell.terrainType.properCase}</td>
+								<td>
+									<c:choose>
+										<c:when test="${empty cell.erection}">
+											${cell.terrainType.properCase}
+										</c:when>
+										<c:otherwise>
+											${cell.erection.name}
+										</c:otherwise>
+									</c:choose>
+								</td>
 							</c:forEach>
 						</tr>
 					</c:forEach>
@@ -206,15 +232,17 @@
 		Current State ID: ${game.state.stateId}<br />
 		
 		<c:forEach items="${game.moves}" var="move" varStatus="status">
-				<c:if test="${status.index % 5 == 0}">
-						<b>Round <fmt:formatNumber value="${status.index / 5 + 1}" maxFractionDigits="0"/></b><br />
-				</c:if>
-				${move}<br />
-				<c:if test="${status.index % 5 == 4 || status.last}">
+			<c:if test="${status.first}">
+			  <b>Round 1</b><br />
+			</c:if>
+		${status.index}- ${move}<br />
+			<c:if test="${status.index % 5 == 4}">
+				<b>Round <fmt:formatNumber value="${status.index / 5 + 1}" maxFractionDigits="0"/></b><br />
+			</c:if>	
+			<c:if test="${status.index % 5 == 4 || status.last}">
 				...
-				</c:if>
-			</c:forEach>
-		</table>
+			</c:if>
+		</c:forEach>
 		
 		<hr />
 		

@@ -52,13 +52,13 @@ div.building {
 	width: 130px;
 }
 
-ul.tabs {
+.tabs {
 	list-style: none;
 	padding: 0;
 	margin: 0;
 	height: 35px;
 }
-ul.tabs li {
+.tab {
 	padding: 5px;
 	background: #fcfcfc;
 	border: 1px solid #b3b3b3;
@@ -71,18 +71,14 @@ ul.tabs li {
 	height: 25px;
 	overflow: hidden;
 	line-height: 20px;
+	cursor: pointer;
 }
-ul.tabs li img {
+.tab img {
 	height: 25px;
 	width: 25px;
 }
-ul.tabs li:hover img {
-	-webkit-transform: scale(1.25);
-  -webkit-transition-timing-function: ease-out;
-  -webkit-transition-duration: 200ms;
-}
 
-div.board {
+.board {
 	padding: 5px;
 	border: 1px solid #b3b3b3;
 	background: #fcfcfc;
@@ -90,19 +86,13 @@ div.board {
 	border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
 }
-div.board-active {
-	
-}
-div.board-inactive {
-	display: none;
-}
-div.board table {
+.board table {
 	border-color: gray;
 	border-style: outset;
 	border-width: 1px;
 	border-collapse: collapse;
 }
-div.board table td {
+.board table td {
 	height: 80px;
 	width: 65px;
 	text-align: center;
@@ -111,4 +101,17 @@ div.board table td {
 	border-width: 1px;
 	border-style: inset;
 	border-collapse: collapse;
+}
+
+.board--active {
+	
+}
+.board--inactive {
+	display: none;
+}
+.tab--active {
+	/*box-shadow: 0 0 7px rgba(255,200,0,0.5) inset;*/
+}
+.tab--inactive {
+	opacity: 0.5;
 }

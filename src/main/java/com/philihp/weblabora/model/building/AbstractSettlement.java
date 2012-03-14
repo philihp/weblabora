@@ -7,9 +7,9 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 
 abstract public class AbstractSettlement extends Erection {
-	
+
 	protected Board board;
-	
+
 	protected final String id;
 	protected final String stage;
 	protected final String name;
@@ -18,8 +18,10 @@ abstract public class AbstractSettlement extends Erection {
 	protected final int settlementValue;
 	protected final int shieldValue;
 	protected final Set<TerrainTypeEnum> terrains;
-	
-	public AbstractSettlement(String id, String stage, String name,  int foodCost, int energyCost, int settlementValue, int shieldValue, Set<TerrainTypeEnum> terrains) {
+
+	public AbstractSettlement(String id, String stage, String name,
+			int foodCost, int energyCost, int settlementValue, int shieldValue,
+			Set<TerrainTypeEnum> terrains) {
 		this.id = id;
 		this.stage = stage;
 		this.name = name;
@@ -29,5 +31,5 @@ abstract public class AbstractSettlement extends Erection {
 		this.shieldValue = shieldValue;
 		this.terrains = terrains;
 	}
-	
+
 }

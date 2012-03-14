@@ -1,26 +1,20 @@
 package com.philihp.weblabora.model.building;
 
+import com.philihp.weblabora.model.Landscape;
 import com.philihp.weblabora.model.Player;
 
 public abstract class Erection {
 
-	protected int x;
-	protected int y;
+	private Landscape owner;
 
-	public int getX() {
-		return x;
+	public Landscape getOwner() {
+		return owner;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void setOwner(Landscape owner) {
+		this.owner = owner;
 	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
+	
+	
 
 }

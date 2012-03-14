@@ -103,8 +103,10 @@ public class Board {
 	}
 
 	public void nextActivePlayer() {
+		players[activePlayer].setActive(false);
 		if (++activePlayer >= players.length)
 			activePlayer = 0;
+		players[activePlayer].setActive(true);
 	}
 
 }
