@@ -181,8 +181,10 @@
 		  <c:forEach items="${board.unbuiltBuildings}" var="building">
 		  	<div class="building">
 		  	  <b>${building.id}</b><br />
-		  	  ${building.name}
-		  	  
+		  	  ${building.name}<br />
+					<c:set var="buildCost" value="${building.buildCost}" scope="request" />
+					<c:import url="jsp/buildCost.jsp" />
+		  	  <c:remove var="buildCost"/>
 		  	</div>
 		  </c:forEach>
 		</div>
@@ -226,6 +228,11 @@
 						</tr>
 					</c:forEach>
 				</table>
+				<h3>Inventory</h3>
+				<c:set var="player" value="${player}" scope="request" />
+				<c:import url="jsp/inventory.jsp" />
+				<c:remove var="player"/>
+				<br />
 			</div>
 		</c:forEach>
 
