@@ -328,5 +328,23 @@ public class Player {
 		return isActive()?"active":"inactive";
 	}
 
+	public boolean canAffordCost(BuildCost buildCost) {
+		if (buildCost.getWood() > this.getWood())
+			return false;
+		if (buildCost.getClay() > this.getClay())
+			return false;
+		if (buildCost.getStone() > this.getStone())
+			return false;
+		if (buildCost.getStraw() > this.getStraw())
+			return false;
+		return true;
+	}
+
+	public void payBuildCost(BuildCost buildCost) {
+		this.setWood(this.getWood() - buildCost.getWood());
+		this.setClay(this.getClay() - buildCost.getClay());
+		this.setStone(this.getStone() - buildCost.getStone());
+		this.setStraw(this.getStraw() - buildCost.getStraw());
+	}
 
 }

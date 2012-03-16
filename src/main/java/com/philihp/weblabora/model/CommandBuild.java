@@ -16,28 +16,44 @@ public class CommandBuild implements MoveCommand {
 			throws WeblaboraException {
 		
 		execute(board,
-				BuildingEnum.getInstance(params.get(0)),
+				params.get(0),
 				Integer.parseInt(params.get(1)),
 				Integer.parseInt(params.get(2)));
+		
+		System.out.println("Building "+params.get(0)+" at ("+params.get(1)+","+params.get(2)+")");
 	}
 	
-	public static void execute(Board board, AbstractBuilding building, int x, int y)
+	public static void execute(Board board, String buildingId, int x, int y)
 			throws WeblaboraException {
+		AbstractBuilding building = null;
 		Player player = board.getPlayer(board.getActivePlayer());
 		Terrain spot = player.getLandscape().getTerrain().get(y, x);
+		
+		for(AbstractBuilding possibleBuilding : board.getUnbuiltBuildings()) {
+			if(possibleBuilding.getId().equals(buildingId)) {
+				building = possibleBuilding;
+				board.getUnbuiltBuildings().remove(building);
+				break;
+			}
+		}
+		if(building == null) {
+			throw new WeblaboraException("Building "+buildingId+" was not be found in unbuilt buildings");
+		}
 
-		if (spot.getTerrainType() != FOREST)
-			throw new WeblaboraException("Tried to Fell Trees on "
-					+ spot.getTerrainType() + " at (" + x + "," + y
-					+ ") for player " + board.getActivePlayer()
-					+ ", but it is not a forest");
+		if(spot.getErection() != null) {
+			throw new WeblaboraException("There is already an erection at ("+x+","+y+"): "+spot.getErection());
+		}
+		
+		if(building.getTerrains().contains(spot.getTerrainType()) == false) {
+			throw new WeblaboraException("The location at ("+x+","+y+") has a terrain of "+spot.getTerrainType()+", which is not appropriate for "+building);
+		}
+		
+		if(player.canAffordCost(building.getBuildCost()) == false) {
+			throw new WeblaboraException("Player could not afford build cost");
+		}
+		
+		player.payBuildCost(building.getBuildCost());
+		spot.setErection(building);
 
-		spot.setTerrainType(PLAINS);
-		int woodTaken = board.getWheel().getWood().take();
-		player.setWood(player.getWood() + woodTaken);
-		// TODO could use joker
-
-		System.out.println("Felling trees at " + x + "," + y + "; got wood: "
-				+ woodTaken);
 	}
 }
