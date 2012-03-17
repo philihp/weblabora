@@ -11,7 +11,20 @@ public enum BuildingEnum {
 	G22(Quarry.class),
 	G26(Shipyard.class),
 	F27(Palace.class),
-	G34(Sacristy.class);
+	G34(Sacristy.class),
+	LR1(ClayMound.class),
+	LG1(ClayMound.class),
+	LB1(ClayMound.class),
+	LW1(ClayMound.class),
+	LR2(Farmyard.class),
+	LG2(Farmyard.class),
+	LB2(Farmyard.class),
+	LW2(Farmyard.class),
+	LR3(CloisterOffice.class),
+	LG3(CloisterOffice.class),
+	LB3(CloisterOffice.class),
+	LW3(CloisterOffice.class);
+	
 
 	public final Class<? extends AbstractBuilding> clazz;
 

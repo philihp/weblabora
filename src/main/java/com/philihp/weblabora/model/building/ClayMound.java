@@ -18,7 +18,7 @@ import com.philihp.weblabora.model.Wheel;
 public class ClayMound extends AbstractBuilding {
 
 	public ClayMound() {
-		super("LX1", "", 0, "Clay Mound", BuildCost.is(), 3, 0, EnumSet.of(HILLSIDE), false);
+		super("LX1", "L", 0, "Clay Mound", BuildCost.is(), 3, 0, EnumSet.of(HILLSIDE), false);
 	}
 
 	@Override

@@ -55,6 +55,11 @@ public final class MoveProcessor {
 			return new CommandCutPeat();
 		case 'B':
 			return new CommandBuild();
+		case 'U':
+			return new CommandUse();
+		case 'W':
+		case 'K':
+			return new CommandWorkorder();
 		default:
 			throw new WeblaboraException("Unknown Command \""+commandChar+"\"");
 		}

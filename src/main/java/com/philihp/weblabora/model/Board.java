@@ -1,12 +1,19 @@
 package com.philihp.weblabora.model;
 
 import java.lang.reflect.Constructor;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
 import com.philihp.weblabora.model.building.AbstractBuilding;
 import com.philihp.weblabora.model.building.BuildingEnum;
+import com.philihp.weblabora.model.building.ClayMound;
+import com.philihp.weblabora.model.building.CloisterOffice;
+import com.philihp.weblabora.model.building.Farmyard;
+
+import static com.philihp.weblabora.model.building.BuildingEnum.*;
 
 public class Board {
 
@@ -21,6 +28,11 @@ public class Board {
 	private int activePlayer;
 
 	private List<AbstractBuilding> unbuiltBuildings;
+	
+	/**
+	 * This makes lookups from {@link CommandUse CommandUse}
+	 */
+	private EnumMap<BuildingEnum, AbstractBuilding> allBuildings;
 
 	private List<Wonder> unclaimedWonders;
 
@@ -49,6 +61,8 @@ public class Board {
 		unclaimedWonders = gameStartWonders();
 
 		activePlayer = 0;
+		
+		allBuildings = generateBuildingsMap();
 	}
 
 	public Wheel getWheel() {
@@ -75,6 +89,34 @@ public class Board {
 				buildings.add(building);
 		}
 		return buildings;
+	}
+	
+	private EnumMap<BuildingEnum, AbstractBuilding> generateBuildingsMap() {
+		EnumMap<BuildingEnum, AbstractBuilding> map = 
+				new EnumMap<BuildingEnum, AbstractBuilding>(BuildingEnum.class);
+
+		map.put(LR1, (ClayMound)players[0].getLandscape().getTerrainAt(4, 0).getErection());
+		map.put(LG1, (ClayMound)players[1].getLandscape().getTerrainAt(4, 0).getErection());
+		map.put(LB1, (ClayMound)players[2].getLandscape().getTerrainAt(4, 0).getErection());
+		map.put(LW1, (ClayMound)players[3].getLandscape().getTerrainAt(4, 0).getErection());
+		map.put(LR2, (Farmyard)players[0].getLandscape().getTerrainAt(2, 1).getErection());
+		map.put(LG2, (Farmyard)players[1].getLandscape().getTerrainAt(2, 1).getErection());
+		map.put(LB2, (Farmyard)players[2].getLandscape().getTerrainAt(2, 1).getErection());
+		map.put(LW2, (Farmyard)players[3].getLandscape().getTerrainAt(2, 1).getErection());
+		map.put(LR3, (CloisterOffice)players[0].getLandscape().getTerrainAt(4, 1).getErection());
+		map.put(LG3, (CloisterOffice)players[1].getLandscape().getTerrainAt(4, 1).getErection());
+		map.put(LB3, (CloisterOffice)players[2].getLandscape().getTerrainAt(4, 1).getErection());
+		map.put(LW3, (CloisterOffice)players[3].getLandscape().getTerrainAt(4, 1).getErection());
+		
+		for(AbstractBuilding building : unbuiltBuildings) {
+			map.put(BuildingEnum.valueOf(building.getId()), building);
+		}
+		
+		return map;
+	}
+	
+	public AbstractBuilding findBuildingInstance(BuildingEnum buildingId) {
+		return allBuildings.get(buildingId);
 	}
 
 	private List<Wonder> gameStartWonders() {

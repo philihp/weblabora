@@ -33,11 +33,58 @@ public class UsageParam {
 	
 	private boolean withJoker = false;
 
-	private UsageParam() {
+	public UsageParam(String in) {
+		for(int i = 0; i < in.length()/2; i++) {
+			String token = in.substring(i,i+2);
+			if("Wo".equals(token))
+				wood++;
+			else if("Gn".equals(token))
+				grain++;
+			else if("Sh".equals(token))
+				sheep++;
+			else if("Cl".equals(token))
+				clay++;
+			else if("Pt".equals(token))
+				peat++;
+			else if("Pn".equals(token))
+				penny++;
+			else if("Sn".equals(token))
+				stone++;
+			else if("Fl".equals(token))
+				flour++;
+			else if("Gp".equals(token))
+				grapes++;
+			else if("Ni".equals(token))
+				nickel++;
+			else if("Ho".equals(token))
+				hops++;
+			else if("Co".equals(token))
+				coal++;
+			else if("Bo".equals(token))
+				book++;
+			else if("Po".equals(token))
+				pottery++;
+			else if("Wh".equals(token))
+				whiskey++;
+			else if("Sw".equals(token))
+				straw++;
+			else if("Mt".equals(token))
+				meat++;
+			else if("Or".equals(token))
+				ornament++;
+			else if("Br".equals(token))
+				bread++;
+			else if("Wn".equals(token))
+				wine++;
+			else if("Rq".equals(token))
+				reliquary++;
+			else if("Jo".equals(token))
+			  withJoker = true;
+		}
 	}
 
 	public static UsageParam is() {
-		return new UsageParam();
+		return new UsageParam("");
 	}
 
 	public UsageParam peat(int quantity) {
@@ -254,5 +301,9 @@ public class UsageParam {
 	public boolean isWithJoker() {
 		return withJoker;
 	}
-
+	
+	public boolean isWithGift() {
+		return whiskey != 0 || wine != 0;
+	}
+	
 }

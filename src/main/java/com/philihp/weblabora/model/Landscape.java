@@ -51,6 +51,10 @@ public class Landscape {
 	public Terrain[][] getTable() {
 		return terrain.toArray(Terrain.class);
 	}
+	
+	public Terrain getTerrainAt(int x,int y) {
+		return terrain.get(y, x);
+	}
 
 	public Player getOwner() {
 		return owner;

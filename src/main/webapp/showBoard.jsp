@@ -242,11 +242,11 @@
 			<c:if test="${status.first}">
 			  <b>Round 1</b><br />
 			</c:if>
-		${status.index}- ${move}<br />
+			[${status.index}] ${move}<br />
 			<c:if test="${status.index % 5 == 4}">
 				<b>Round <fmt:formatNumber value="${status.index / 5 + 1}" maxFractionDigits="0"/></b><br />
 			</c:if>	
-			<c:if test="${status.index % 5 == 4 || status.last}">
+			<c:if test="${status.last}">
 				...
 			</c:if>
 		</c:forEach>

@@ -19,7 +19,7 @@ import com.philihp.weblabora.model.Wheel;
 public class Farmyard extends AbstractBuilding {
 
 	public Farmyard() {
-		super("LX2", "", 0, "Farmyard", BuildCost.is(), 2, 0, EnumSet.of(PLAINS), true);
+		super("LX2", "L", 0, "Farmyard", BuildCost.is(), 2, 0, EnumSet.of(PLAINS), true);
 	}
 
 	@Override
