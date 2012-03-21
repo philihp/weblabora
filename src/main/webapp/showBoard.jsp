@@ -18,8 +18,8 @@
 <!-- <script> -->
 <!-- 	google.load("jquery", "1.7.1");-->
 <!-- </script> -->
-<script src="js/jquery-1.7.1.js"></script>
-<script src="js/jquery.colorbox.js"></script>
+<script src="js/lib/jquery-1.7.1.js"></script>
+<script src="js/lib/jquery.colorbox.js"></script>
 <script>
 	$(document).bind('cbox_complete', function() {
 		$('#cboxLoadedContent').addClass('styled');
@@ -245,7 +245,7 @@
 			[${status.index}] ${move}<br />
 			<c:if test="${status.index % 5 == 4}">
 				<b>Round <fmt:formatNumber value="${status.index / 5 + 1}" maxFractionDigits="0"/></b><br />
-			</c:if>	
+			</c:if>
 			<c:if test="${status.last}">
 				...
 			</c:if>
