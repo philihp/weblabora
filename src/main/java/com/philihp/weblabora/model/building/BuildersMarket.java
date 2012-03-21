@@ -23,11 +23,11 @@ public class BuildersMarket extends AbstractBuilding {
 	public void use(Board board, UsageParam input) {
 		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		
-		activePlayer.setPenny(activePlayer.getPenny()-2);
+		activePlayer.subtractPenny(2);
 		
-		activePlayer.setWood(activePlayer.getWood()+2);
-		activePlayer.setClay(activePlayer.getClay()+2);
-		activePlayer.setStone(activePlayer.getStone()+1);
-		activePlayer.setStraw(activePlayer.getStraw()+1);
+		activePlayer.addWood(2);
+		activePlayer.addClay(2);
+		activePlayer.addStone(1);
+		activePlayer.addStraw(1);
 	}
 }

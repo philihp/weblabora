@@ -3,8 +3,19 @@ package com.philihp.weblabora.model.building;
 import java.lang.reflect.Constructor;
 
 public enum BuildingEnum {
+	F05(Bakery.class),
+	G02(CloisterCourtyard.class),
+	F11(HarborPromenade.class),
+	F08(Market.class),
 	G07(PeatCoalKiln.class),
+	G12(StoneMerchant.class),
+	F04(Windmill.class),
+	F09(CloisterGarden.class),
+	G06(FuelMerchant.class),
+	G01(Priory.class),
 	G13(BuildersMarket.class),
+	F10(Carpentry.class),
+	F03(GrainStorage.class),
 	G16(CloisterChapterHouse.class), 
 	G19(Slaughterhouse.class),
 	F24(CloisterChurch.class),

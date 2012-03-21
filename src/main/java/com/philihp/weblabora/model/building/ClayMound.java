@@ -26,6 +26,6 @@ public class ClayMound extends AbstractBuilding {
 		Player player = board.getPlayer(board.getActivePlayer());
 		Wheel wheel = board.getWheel();
 		Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getClay();
-		player.setClay(player.getClay() + token.take());
+		player.addClay(token.take());
 	}
 }

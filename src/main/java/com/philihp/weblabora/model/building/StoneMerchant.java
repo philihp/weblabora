@@ -14,17 +14,24 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 
-public class Palace extends AbstractBuilding {
+public class StoneMerchant extends AbstractBuilding {
 
-	public Palace() {
-		super("F27", "C", 0, "Palace", BuildCost.is().coin(25), 8, 25, EnumSet.of(HILLSIDE), false);
+	public StoneMerchant() {
+		super("G12", "", 2, "Stone Merchant", BuildCost.is().wood(1), 1, 6,
+				EnumSet.of(COAST, PLAINS, HILLSIDE), false);
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) throws WeblaboraException {
+	public void use(Board board, UsageParam param) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
-		player.subtractWine(1);
-		AbstractBuilding building = (AbstractBuilding)input.getCard();
-		building.use(board, input);
+		double energy = param.getEnergy();
+		double food = param.getFood();
+
+		double iterations = Math.floor(Math.min(Math.min(energy, food / 2), 5));
+
+		// it's possible to give the Stone Merchant more than it needs, but it
+		// can never know what you want to keep, so it just eats it all.
+		player.subtractAll(param);
+		player.addStone((int) iterations);
 	}
 }

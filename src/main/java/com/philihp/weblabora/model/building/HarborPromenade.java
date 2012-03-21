@@ -12,22 +12,20 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.WeblaboraException;
 
-public class Sacristy extends AbstractBuilding {
+public class HarborPromenade extends AbstractBuilding {
 
-	public Sacristy() {
-		super("G34", "D", 0, "Sacristy", BuildCost.is().stone(3).straw(2), 7, 10, EnumSet.of(COAST, PLAINS, HILLSIDE), true);
+	public HarborPromenade() {
+		super("F11", "", 2, "Harbor Promenade", BuildCost.is().wood(1).stone(1), 7, 1, EnumSet.of(COAST), false);
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) {
+	public void use(Board board, UsageParam param) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
-		player.subtractBook(1);
-		player.subtractPottery(1);
-		player.subtractOrnament(1);
-		player.subtractReliquary(1);
-		player.claimWonder(board.claimWonder());
-		
-		
+		player.addWood(1);
+		player.addWine(1);
+		player.addPenny(1);
+		player.addPottery(1);
 	}
 }

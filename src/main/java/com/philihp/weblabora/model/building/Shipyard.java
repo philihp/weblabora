@@ -18,8 +18,8 @@ public class Shipyard extends AbstractBuilding {
 	@Override
 	public void use(Board board, UsageParam input) {
 		Player player = board.getPlayer(board.getActivePlayer());
-		player.setWood(player.getWood()-2);
-		player.setOrnament(player.getOrnament()+1);
-		player.setNickel(player.getNickel()+1);
+		player.subtractWood(2);
+		player.addOrnament(1);
+		player.addNickel(1);
 	}
 }

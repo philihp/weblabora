@@ -14,17 +14,24 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 
-public class Palace extends AbstractBuilding {
+public class Bakery extends AbstractBuilding {
 
-	public Palace() {
-		super("F27", "C", 0, "Palace", BuildCost.is().coin(25), 8, 25, EnumSet.of(HILLSIDE), false);
+	public Bakery() {
+		super("F05", "", 2, "Bakery", BuildCost.is().clay(2).straw(1), 5, 4, EnumSet.of(COAST, PLAINS, HILLSIDE), false);
 	}
 
 	@Override
 	public void use(Board board, UsageParam input) throws WeblaboraException {
-		Player player = board.getPlayer(board.getActivePlayer());
-		player.subtractWine(1);
-		AbstractBuilding building = (AbstractBuilding)input.getCard();
-		building.use(board, input);
+		Player activePlayer = board.getPlayer(board.getActivePlayer());
+		
+		if(input.getFlour() > input.getEnergy()/0.5)
+			throw new WeblaboraException("Bakery was given "+input.getFlour()+" flour, but it only had "+input.getEnergy()+" energy");
+		
+		int quantity = input.getFlour();
+		
+		activePlayer.subtractFlour(quantity);
+		activePlayer.subtractEnergy(input);
+		
+		activePlayer.addBread(quantity);		
 	}
 }

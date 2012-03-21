@@ -36,9 +36,9 @@ public class CloisterChurch extends AbstractBuilding {
 		
 		//max of 2 times
 		exchanged = Math.min(exchanged, 2);
-		
-		player.setWine(player.getWine()-exchanged);
-		player.setBread(player.getBread()-exchanged);
-		player.setReliquary(player.getReliquary()+exchanged);
+
+		player.subtractWine(exchanged);
+		player.subtractBread(exchanged);
+		player.addReliquary(exchanged);
 	}
 }

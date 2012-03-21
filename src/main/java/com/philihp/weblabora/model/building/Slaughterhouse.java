@@ -23,9 +23,10 @@ public class Slaughterhouse extends AbstractBuilding {
 	@Override
 	public void use(Board board, UsageParam input) {
 		Player player = board.getPlayer(board.getActivePlayer());
-		player.setSheep(player.getSheep() - input.getSheep());
-		player.setStraw(player.getStraw() - input.getStraw());
-		player.setGrain(player.getGrain() - input.getGrain());
-		player.setMeat(player.getMeat() + input.getSheep());
+		
+		player.subtractSheep(input.getSheep());
+		player.subtractStraw(input.getStraw());
+		player.subtractGrain(input.getGrain());
+		player.addMeat(input.getSheep());
 	}
 }

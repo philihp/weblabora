@@ -12,22 +12,23 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.WeblaboraException;
 
-public class Sacristy extends AbstractBuilding {
+public class Windmill extends AbstractBuilding {
 
-	public Sacristy() {
-		super("G34", "D", 0, "Sacristy", BuildCost.is().stone(3).straw(2), 7, 10, EnumSet.of(COAST, PLAINS, HILLSIDE), true);
+	public Windmill() {
+		super("F04", "", 2, "Windmill", BuildCost.is().wood(3).clay(2), 6, 10,
+				EnumSet.of(COAST, HILLSIDE), false);
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) {
+	public void use(Board board, UsageParam param) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
-		player.subtractBook(1);
-		player.subtractPottery(1);
-		player.subtractOrnament(1);
-		player.subtractReliquary(1);
-		player.claimWonder(board.claimWonder());
 		
+		int iterations = Math.min(param.getGrain(), 7);
 		
+		player.subtractGrain(iterations);
+		player.addFlour(iterations);
+		player.addStraw(iterations);
 	}
 }

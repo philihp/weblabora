@@ -347,4 +347,225 @@ public class Player {
 		this.setStraw(this.getStraw() - buildCost.getStraw());
 	}
 
+
+
+	public void addPeat(int peat) {
+		this.peat += peat;
+	}
+
+	public void addClay(int clay) {
+		this.clay += clay;
+	}
+
+	public void addWood(int wood) {
+		this.wood += wood;
+	}
+
+	public void addGrain(int grain) {
+		this.grain += grain;
+	}
+
+	public void addSheep(int sheep) {
+		this.sheep += sheep;
+	}
+
+	public void addStone(int stone) {
+		this.stone += stone;
+	}
+
+	public void addFlour(int flour) {
+		this.flour += flour;
+	}
+
+	public void addGrapes(int grapes) {
+		this.grapes += grapes;
+	}
+
+	public void addPenny(int penny) {
+		this.penny += penny;
+	}
+
+	public void addNickel(int nickel) {
+		this.nickel += nickel;
+	}
+
+	public void addHops(int hops) {
+		this.hops += hops;
+	}
+
+	public void addCoal(int coal) {
+		this.coal += coal;
+	}
+
+	public void addBook(int book) {
+		this.book += book;
+	}
+
+	public void addPottery(int pottery) {
+		this.pottery += pottery;
+	}
+
+	public void addWhiskey(int whiskey) {
+		this.whiskey += whiskey;
+	}
+
+	public void addStraw(int straw) {
+		this.straw += straw;
+	}
+
+	public void addMeat(int meat) {
+		this.meat += meat;
+	}
+
+	public void addOrnament(int ornament) {
+		this.ornament += ornament;
+	}
+
+	public void addBread(int bread) {
+		this.bread += bread;
+	}
+
+	public void addWine(int wine) {
+		this.wine += wine;
+	}
+
+	public void addBeer(int beer) {
+		this.beer += beer;
+	}
+
+	public void addReliquary(int reliquary) {
+		this.reliquary += reliquary;
+	}
+
+	public void subtractPeat(int peat) {
+		this.peat -= peat;
+	}
+
+	public void subtractClay(int clay) {
+		this.clay -= clay;
+	}
+
+	public void subtractWood(int wood) {
+		this.wood -= wood;
+	}
+
+	public void subtractGrain(int grain) {
+		this.grain -= grain;
+	}
+
+	public void subtractSheep(int sheep) {
+		this.sheep -= sheep;
+	}
+
+	public void subtractStone(int stone) {
+		this.stone -= stone;
+	}
+
+	public void subtractFlour(int flour) {
+		this.flour -= flour;
+	}
+
+	public void subtractGrapes(int grapes) {
+		this.grapes -= grapes;
+	}
+
+	public void subtractPenny(int penniesToSubtract) {
+		this.penny -= penniesToSubtract;
+		//if subtracting those pennies pushes us into the negative, then convert the pennies into nickels
+		while(this.penny < 0 && this.nickel > 0) {
+			this.penny += 5;
+			this.nickel -= 1;
+		}
+		
+		//i think we can do the same with wine, but i haven't wrapped my head around if that's totally cool.
+	}
+
+	public void subtractNickel(int nickel) {
+		this.nickel -= nickel;
+	}
+
+	public void subtractHops(int hops) {
+		this.hops -= hops;
+	}
+
+	public void subtractCoal(int coal) {
+		this.coal -= coal;
+	}
+
+	public void subtractBook(int book) {
+		this.book -= book;
+	}
+
+	public void subtractPottery(int pottery) {
+		this.pottery -= pottery;
+	}
+
+	public void subtractWhiskey(int whiskey) {
+		this.whiskey -= whiskey;
+	}
+
+	public void subtractStraw(int straw) {
+		this.straw -= straw;
+		
+		//if we are negative on straw, and there is enough grain to convert it into straw, then do it
+		if(this.straw < 0 && this.grain + this.straw > 0) {
+			this.grain += this.straw;
+			this.straw = 0;
+		}
+	}
+
+	public void subtractMeat(int meat) {
+		this.meat -= meat;
+	}
+
+	public void subtractOrnament(int ornament) {
+		this.ornament -= ornament;
+	}
+
+	public void subtractBread(int bread) {
+		this.bread -= bread;
+	}
+
+	public void subtractWine(int wine) {
+		this.wine -= wine;
+	}
+
+	public void subtractBeer(int beer) {
+		this.beer -= beer;
+	}
+
+	public void subtractReliquary(int reliquary) {
+		this.reliquary -= reliquary;
+	}
+
+	public void subtractEnergy(UsageParam param) {
+		subtractCoal(param.getCoal());
+		subtractPeat(param.getPeat());
+		subtractWood(param.getWood());
+		subtractStraw(param.getStraw());
+	}
+	public void subtractAll(UsageParam param) {
+		subtractPeat(param.getPeat());
+		subtractClay(param.getClay());
+		subtractWood(param.getWood());
+		subtractGrain(param.getGrain());
+		subtractSheep(param.getSheep());
+		subtractStone(param.getStone());
+		subtractFlour(param.getFlour());
+		subtractGrapes(param.getGrapes());
+		subtractPenny(param.getPenny());
+		subtractNickel(param.getNickel());
+		subtractHops(param.getHops());
+		subtractCoal(param.getCoal());
+		subtractBook(param.getBook());
+		subtractPottery(param.getPottery());
+		subtractWhiskey(param.getWhiskey());
+		subtractStraw(param.getStraw());
+		subtractMeat(param.getMeat());
+		subtractOrnament(param.getOrnament());
+		subtractBread(param.getBread());
+		subtractWine(param.getWine());
+		subtractBeer(param.getBeer());
+		subtractReliquary(param.getReliquary());
+	}
 }

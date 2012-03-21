@@ -4,6 +4,12 @@ import com.philihp.weblabora.model.building.AbstractBuilding;
 import com.philihp.weblabora.model.building.Erection;
 
 public class UsageParam {
+	
+	private String param;
+	
+	private int x = -999;
+	private int y = -999;
+	
 	private int peat = 0;
 	private int penny = 0;
 	private int clay = 0;
@@ -32,8 +38,42 @@ public class UsageParam {
 	private Erection card = null;
 	
 	private boolean withJoker = false;
+	
+	public int differentSingularGoods() {
+		int different = 0;
+		if(peat == 1) different++;
+		if(penny == 1) different++;
+		if(clay == 1) different++;
+		if(wood == 1) different++;
+		if(grain == 1) different++;
+		if(sheep == 1) different++;
+		if(stone == 1) different++;
+		if(flour == 1) different++;
+		if(grapes == 1) different++;
+		if(nickel == 1) different++;
+		if(hops == 1) different++;
+		if(coal == 1) different++;
+		if(book == 1) different++;
+		if(pottery == 1) different++;
+		if(whiskey == 1) different++;
+		if(straw == 1) different++;
+		if(meat == 1) different++;
+		if(ornament == 1) different++;
+		if(bread == 1) different++;
+		if(wine == 1) different++;
+		if(beer == 1) different++;
+		if(reliquary == 1) different++;
+		return different;
+	}
+	
+	public UsageParam(int x, int y) {
+		this("");
+		this.x = x;
+		this.y = y;
+	}
 
 	public UsageParam(String in) {
+		this.param = in;
 		for(int i = 0; i < in.length()/2; i++) {
 			String token = in.substring(i,i+2);
 			if("Wo".equals(token))
@@ -306,4 +346,34 @@ public class UsageParam {
 		return whiskey != 0 || wine != 0;
 	}
 	
+	public double getEnergy() {
+		return getCoal()*3 + getPeat()*2 + getWood() + getStraw()*0.5; 
+	}
+	
+	public double getFood() {
+		return getPenny() + getGrain() + getSheep() * 2 + getFlour()
+				+ getGrapes() + getNickel() * 5 + getHops() + getWhiskey() * 2
+				+ getMeat() * 5 + getBread() * 3 + getWine() + getBeer() * 5;
+	}
+	
+	public String getParam() {
+		return this.param;
+	}
+	
+	public int getX() {
+		return this.x;
+	}
+	
+	public int getY() {
+		return this.y;
+	}
+	
+	public String toString() {
+		if(x == -999 && y == -999) {
+			return "("+x+","+y+")";
+		}
+		else {
+			return "("+this.param+")"; 
+		}
+	}
 }

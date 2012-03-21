@@ -26,6 +26,6 @@ public class Quarry extends AbstractBuilding {
 		Player player = board.getPlayer(board.getActivePlayer());
 		Wheel wheel = board.getWheel();
 		Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getStone();
-		player.setStone(player.getStone() + token.take());
+		player.addStone(token.take());
 	}
 }

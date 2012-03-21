@@ -15,12 +15,22 @@ public class CommandUse implements MoveCommand {
 	public void execute(Board board, List<String> params)
 			throws WeblaboraException {
 		
+		String buildingId = params.get(0);
+		String buildingParam = params.get(1);
+		UsageParam usageParam = null;
+		if(Character.isDigit(buildingParam.charAt(0))) {
+			usageParam = new UsageParam(Integer.parseInt(params.get(1)), Integer.parseInt(params.get(2)));
+		}
+		else {
+			usageParam = new UsageParam(params.get(1));
+		}
+		
 		execute(board,
-				BuildingEnum.valueOf(params.get(0)),
-				new UsageParam(params.get(1))
+				BuildingEnum.valueOf(buildingId),
+				usageParam
 				);
 		
-		System.out.println("Using "+params.get(0)+" ("+params.get(1)+")");
+		System.out.println("Using "+buildingId+" with "+usageParam);
 	}
 	
 	public static void execute(Board board, BuildingEnum buildingId, UsageParam param)

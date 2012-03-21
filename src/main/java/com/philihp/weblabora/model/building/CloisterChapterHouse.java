@@ -20,13 +20,14 @@ public class CloisterChapterHouse extends AbstractBuilding {
 
 	@Override
 	public void use(Board board, UsageParam input) {
-		Player activePlayer = board.getPlayer(board.getActivePlayer());
-		activePlayer.setClay(activePlayer.getClay() + 1);
-		activePlayer.setWood(activePlayer.getWood() + 1);
-		activePlayer.setPeat(activePlayer.getPeat() + 1);
-		activePlayer.setSheep(activePlayer.getSheep() + 1);
-		activePlayer.setGrain(activePlayer.getGrain() + 1);
-		activePlayer.setPenny(activePlayer.getPenny() + 1);
+		Player player = board.getPlayer(board.getActivePlayer());
+		
+		player.addClay(1);
+		player.addWood(1);
+		player.addPeat(1);
+		player.addSheep(1);
+		player.addGrain(1);
+		player.addPenny(1);
 	}
 
 }

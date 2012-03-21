@@ -26,6 +26,6 @@ public class CloisterOffice extends AbstractBuilding {
 		Player player = board.getPlayer(board.getActivePlayer());
 		Wheel wheel = board.getWheel();
 		Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getCoin();
-		player.setPenny(player.getPenny() + token.take());
+		player.addPenny(token.take());
 	}
 }

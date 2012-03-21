@@ -22,11 +22,12 @@ public class PeatCoalKiln extends AbstractBuilding {
 	@Override
 	public void use(Board board, UsageParam input) {
 		Player player = board.getPlayer(board.getActivePlayer());
-		player.setCoal(player.getCoal() + 1);
-		player.setPenny(player.getPenny() + 1);
+		player.addCoal(1);
+		player.addPenny(1);
 
 		// turn peat into coal
-		player.setPeat(player.getPeat()-input.getPeat());
-		player.setCoal(input.getPeat());
+		int quantity = input.getPeat();
+		player.subtractPeat(quantity);
+		player.addCoal(quantity);
 	}
 }
