@@ -14,7 +14,7 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 
-public class Priory extends AbstractBuilding {
+public class Priory extends Building {
 
 	public Priory() {
 		super("G01", "", 3, "Priory", BuildCost.is().wood(1).clay(1), 3, 4,

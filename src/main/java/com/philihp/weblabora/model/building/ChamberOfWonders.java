@@ -10,25 +10,24 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
-import com.philihp.weblabora.model.Terrain;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 
-public class Carpentry extends Building {
+public class ChamberOfWonders extends Building {
 
-	public Carpentry() {
-		super("F10", "", 4, "Carpentry", BuildCost.is().wood(2).clay(1), 0, 7,
+	public ChamberOfWonders() {
+		//TODO: isn't this a cloister?
+		super("F25", "B", 4, "Chamber of Wonders", BuildCost.is().wood(1).clay(1), 6, 0,
 				EnumSet.of(COAST, PLAINS, HILLSIDE), false);
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) throws WeblaboraException {
-		Player activePlayer = board.getPlayer(board.getActivePlayer());
-		Terrain spot = activePlayer.getLandscape().getTerrainAt(input.getCoordinate());
-		if(spot.getTerrainType() != TerrainTypeEnum.FOREST)
-			throw new WeblaboraException("Carpentry can't remove "+spot.getTerrainType()+" at "+input+", it can only remove FOREST");
-		else
-			spot.setTerrainType(TerrainTypeEnum.PLAINS);
+	public void use(Board board, UsageParam param) throws WeblaboraException {
+		Player player = board.getPlayer(board.getActivePlayer());
+		if(param.differentSingularGoods() == 13) {
+			player.subtractAll(param);
+			player.claimWonder(board.claimWonder());
+		}
 	}
 }

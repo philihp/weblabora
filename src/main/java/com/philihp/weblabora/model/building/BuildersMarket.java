@@ -13,7 +13,7 @@ import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 
-public class BuildersMarket extends AbstractBuilding {
+public class BuildersMarket extends Building {
 
 	public BuildersMarket() {
 		super("G13", "", 4, "Builders' Market", BuildCost.is().clay(2), 1, 6, EnumSet.of(COAST, PLAINS, HILLSIDE), false);
@@ -23,7 +23,7 @@ public class BuildersMarket extends AbstractBuilding {
 	public void use(Board board, UsageParam input) {
 		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		
-		activePlayer.subtractPenny(2);
+		activePlayer.subtractCoins(2);
 		
 		activePlayer.addWood(2);
 		activePlayer.addClay(2);

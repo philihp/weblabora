@@ -13,31 +13,26 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
-import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.model.Wheel;
 
-public class Farmyard extends Building {
+abstract class Dormitory extends Building {
 
-	public Farmyard() {
-		super("LX2", "L", 0, "Farmyard", BuildCost.is(), 2, 0, EnumSet.of(PLAINS), true);
+	public Dormitory(String id, String stage, int players) {
+		super("F37","D",0, "Dormitory", BuildCost.is().clay(3), 4, 3, EnumSet
+				.of(PLAINS, HILLSIDE, COAST), true);
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) throws WeblaboraException {
+	public void use(Board board, UsageParam input) {
 		Player player = board.getPlayer(board.getActivePlayer());
-		Wheel wheel = board.getWheel();
 		
-		if(input.getSheep() != 0) {
-			Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getSheep();
-			player.addSheep(token.take());
-		}
-		else if(input.getGrain() != 0) {
-			Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getGrain();
-			player.addGrain(token.take());
-		}
-		else {
-			throw new WeblaboraException("Usage of Farmyard must specify if Sheep or Grain is desired.");
-		}
+		//get a pottery
+		player.addPottery(1);
 		
+		//additionally, convert straw+wood into bibles
+		int iterations = Math.min(input.getStraw(), input.getWood());
+		player.subtractStraw(iterations);
+		player.subtractWood(iterations);
+		player.addBooks(iterations);
 	}
 }

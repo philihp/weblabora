@@ -13,31 +13,27 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
-import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.model.Wheel;
 
-public class Farmyard extends Building {
+public class ShippingCompany extends Building {
 
-	public Farmyard() {
-		super("LX2", "L", 0, "Farmyard", BuildCost.is(), 2, 0, EnumSet.of(PLAINS), true);
+	public ShippingCompany() {
+		super("F33", "C", 0, "Shipping Company", BuildCost.is().wood(3).clay(3), 4, 8,
+				EnumSet.of(COAST), false);
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) throws WeblaboraException {
+	public void use(Board board, UsageParam input) {
 		Player player = board.getPlayer(board.getActivePlayer());
-		Wheel wheel = board.getWheel();
-		
-		if(input.getSheep() != 0) {
-			Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getSheep();
-			player.addSheep(token.take());
+		int amount = board.getWheel().getJoker().take();
+		if(input.getMeat() != 0) {
+			player.addMeat(amount);
 		}
-		else if(input.getGrain() != 0) {
-			Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getGrain();
-			player.addGrain(token.take());
+		else if(input.getBread() != 0) {
+			player.addBread(amount);
 		}
-		else {
-			throw new WeblaboraException("Usage of Farmyard must specify if Sheep or Grain is desired.");
+		else if(input.getWine() != 0) {
+			player.addWine(amount);
 		}
-		
 	}
 }

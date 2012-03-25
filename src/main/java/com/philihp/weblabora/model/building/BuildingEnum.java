@@ -23,10 +23,27 @@ public enum BuildingEnum {
 	G16(CloisterChapterHouse.class),
 	F15(FinancedEstate.class),
 	F24(CloisterChurch.class),
-	G22(Quarry.class),
+	G22(QuarryA.class),
 	G26(Shipyard.class),
+	F21(Winery.class),
+	F20(Inn.class),
+	F23(Bathhouse.class),
+	F25(ChamberOfWonders.class),
+	G28(Castle.class),
 	F27(Palace.class),
+	F33(ShippingCompany.class),
+	F30(TownEstate.class),
+	F32(Calefactory.class),
+	F29(QuarryB.class),
+	F31(Grapevine.class),
+	F37(Dormitory.class),
+	F35(ForgersWorkshop.class),
+	G41(HouseOfTheBrotherhood.class),
+	F38(PrintingOffice.class),
 	G34(Sacristy.class),
+	F40(Hospice.class),
+	F36(PilgrimageSite.class),
+	G39(Estate.class),
 	LR1(ClayMound.class),
 	LG1(ClayMound.class),
 	LB1(ClayMound.class),
@@ -41,21 +58,21 @@ public enum BuildingEnum {
 	LW3(CloisterOffice.class);
 	
 
-	public final Class<? extends AbstractBuilding> clazz;
+	public final Class<? extends Building> clazz;
 
-	BuildingEnum(Class<? extends AbstractBuilding> clazz) {
+	BuildingEnum(Class<? extends Building> clazz) {
 		this.clazz = clazz;
 	}
 	
-	public AbstractBuilding getInstance() {
+	public Building getInstance() {
 		return getInstance(this.toString());
 	}
 
-	public static AbstractBuilding getInstance(String id) {
+	public static Building getInstance(String id) {
 		BuildingEnum buildingId = BuildingEnum.valueOf(id);
-		AbstractBuilding building = null;
+		Building building = null;
 		try {
-			Constructor<? extends AbstractBuilding> constructor = buildingId.clazz
+			Constructor<? extends Building> constructor = buildingId.clazz
 					.getDeclaredConstructor();
 			building = constructor.newInstance();
 		} catch (Exception e) {

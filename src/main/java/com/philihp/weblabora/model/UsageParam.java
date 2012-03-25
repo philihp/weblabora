@@ -1,14 +1,20 @@
 package com.philihp.weblabora.model;
 
-import com.philihp.weblabora.model.building.AbstractBuilding;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+
+import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.Erection;
 
 public class UsageParam {
 	
+	private List<Coordinate> coordinates = new ArrayList<Coordinate>();
+	
 	private String param;
 	
-	private int x = -999;
-	private int y = -999;
+	private int bonusPoints = 0;
 	
 	private int peat = 0;
 	private int penny = 0;
@@ -66,12 +72,6 @@ public class UsageParam {
 		return different;
 	}
 	
-	public UsageParam(int x, int y) {
-		this("");
-		this.x = x;
-		this.y = y;
-	}
-
 	public UsageParam(String in) {
 		this.param = in;
 		for(int i = 0; i < in.length()/2; i++) {
@@ -118,6 +118,8 @@ public class UsageParam {
 				wine++;
 			else if("Rq".equals(token))
 				reliquary++;
+			else if("Bp".equals(token))
+				bonusPoints++;
 			else if("Jo".equals(token))
 			  withJoker = true;
 		}
@@ -125,6 +127,11 @@ public class UsageParam {
 
 	public static UsageParam is() {
 		return new UsageParam("");
+	}
+	
+	public UsageParam bonusPoint(int quantity) {
+		bonusPoints += quantity;
+		return this;
 	}
 
 	public UsageParam peat(int quantity) {
@@ -334,6 +341,10 @@ public class UsageParam {
 		return card;
 	}
 	
+	public int getBonusPoints() {
+		return bonusPoints;
+	}
+	
 	public void setWithJoker(boolean withJoker) {
 		this.withJoker = withJoker;
 	}
@@ -356,24 +367,39 @@ public class UsageParam {
 				+ getMeat() * 5 + getBread() * 3 + getWine() + getBeer() * 5;
 	}
 	
+	public int getCoins() {
+		return getPenny() + getNickel()*5;
+	}
+	
 	public String getParam() {
 		return this.param;
 	}
 	
-	public int getX() {
-		return this.x;
+	public Coordinate getCoordinate() {
+		return coordinates.get(0);
 	}
 	
-	public int getY() {
-		return this.y;
+	public List<Coordinate> getCoordinates() {
+		return Collections.unmodifiableList(coordinates);
+	}
+	
+	public void pushCoordinate(Coordinate coordinate) {
+		coordinates.add(coordinate);
+	}
+	
+	public void pushCoordinate(int x, int y) {
+		pushCoordinate(new Coordinate(x, y));
 	}
 	
 	public String toString() {
-		if(x == -999 && y == -999) {
-			return "("+x+","+y+")";
+		StringBuilder builder = new StringBuilder("("+this.param+")"); 
+		for(Coordinate coordinate : getCoordinates()) {
+			return "("+coordinate.getX()+","+coordinate.getY()+")";
 		}
-		else {
-			return "("+this.param+")"; 
-		}
+		return builder.toString();
+	}
+
+	public void subtractWine(int wine) {
+		this.wine -= wine;
 	}
 }

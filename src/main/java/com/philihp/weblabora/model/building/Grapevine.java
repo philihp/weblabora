@@ -15,7 +15,7 @@ import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.model.Wheel;
 
-public class Grapevine extends AbstractBuilding {
+public class Grapevine extends Building {
 
 	public Grapevine() {
 		super("F14", "A", 2, "Grapevine", BuildCost.is().wood(1), 6, 3,

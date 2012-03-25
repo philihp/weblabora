@@ -10,22 +10,25 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
-import com.philihp.weblabora.model.Terrain;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 
-public class GrainStorage extends Building {
+public class Bathhouse extends Building {
 
-	public GrainStorage() {
-		super("F03", "", 4, "Grain Storage", BuildCost.is().wood(1).straw(1), 4, 3,
-				EnumSet.of(COAST, PLAINS, HILLSIDE), false);
+	public Bathhouse() {
+		super("F23", "B", 4, "Bathhouse", BuildCost.is().stone(1).straw(1), 6, 2,
+				EnumSet.of(COAST, PLAINS, HILLSIDE), true);
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) throws WeblaboraException {
+	public void use(Board board, UsageParam param) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
-		player.subtractCoins(1);
-		player.addGrain(6);
+		
+		player.subtractCoins(param.getPenny());
+		player.addBooks(1);
+		player.addPottery(1);
+		
+		//TODO: take back clergymen
 	}
 }

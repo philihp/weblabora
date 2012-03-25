@@ -13,7 +13,7 @@ import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 
-public class Slaughterhouse extends AbstractBuilding {
+public class Slaughterhouse extends Building {
 
 	public Slaughterhouse() {
 		super("G19", "A", 0, "Slaughterhouse", BuildCost.is().wood(2).clay(2), -3, 8, EnumSet.of(COAST, PLAINS, HILLSIDE),

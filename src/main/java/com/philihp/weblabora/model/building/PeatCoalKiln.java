@@ -13,7 +13,7 @@ import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 
-public class PeatCoalKiln extends AbstractBuilding {
+public class PeatCoalKiln extends Building {
 
 	public PeatCoalKiln() {
 		super("G07", "", 0, "Peat Coal Kiln", BuildCost.is().clay(1), -2, 4, EnumSet.of(COAST, PLAINS, HILLSIDE), false);

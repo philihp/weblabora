@@ -13,31 +13,25 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
-import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.model.Wheel;
 
-public class Farmyard extends Building {
+abstract class HouseOfTheBrotherhood extends Building {
 
-	public Farmyard() {
-		super("LX2", "L", 0, "Farmyard", BuildCost.is(), 2, 0, EnumSet.of(PLAINS), true);
+	public HouseOfTheBrotherhood(String id, String stage, int players) {
+		super("G41", "D", 0, "House of the Brotherhood", BuildCost.is().clay(1)
+				.stone(1), 3, 3, EnumSet.of(PLAINS, HILLSIDE, COAST), true);
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) throws WeblaboraException {
+	public void use(Board board, UsageParam input) {
 		Player player = board.getPlayer(board.getActivePlayer());
-		Wheel wheel = board.getWheel();
-		
-		if(input.getSheep() != 0) {
-			Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getSheep();
-			player.addSheep(token.take());
+		player.subtractCoins(5);
+
+		int cloisters = 0;
+		for (Building building : player.getLandscape().getBuildings()) {
+			if (building.isCloister())
+				cloisters++;
 		}
-		else if(input.getGrain() != 0) {
-			Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getGrain();
-			player.addGrain(token.take());
-		}
-		else {
-			throw new WeblaboraException("Usage of Farmyard must specify if Sheep or Grain is desired.");
-		}
-		
+		player.addBonusPoints(2*cloisters);
 	}
 }

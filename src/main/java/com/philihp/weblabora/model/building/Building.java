@@ -8,7 +8,7 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 
-abstract public class AbstractBuilding extends Erection {
+abstract public class Building extends Erection {
 
 	protected Board board;
 
@@ -22,7 +22,7 @@ abstract public class AbstractBuilding extends Erection {
 	protected final Set<TerrainTypeEnum> terrains;
 	protected final boolean cloister;
 
-	public AbstractBuilding(String id, String stage, int players, String name,
+	public Building(String id, String stage, int players, String name,
 			BuildCost buildCost, int settlementValue, int shieldValue,
 			Set<TerrainTypeEnum> terrains, boolean cloister) {
 		this.id = id;

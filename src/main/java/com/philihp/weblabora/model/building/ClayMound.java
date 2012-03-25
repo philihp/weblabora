@@ -15,7 +15,7 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.Wheel;
 
-public class ClayMound extends AbstractBuilding {
+public class ClayMound extends Building {
 
 	public ClayMound() {
 		super("LX1", "L", 0, "Clay Mound", BuildCost.is(), 3, 0, EnumSet.of(HILLSIDE), false);

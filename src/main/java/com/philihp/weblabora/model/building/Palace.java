@@ -14,7 +14,7 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 
-public class Palace extends AbstractBuilding {
+public class Palace extends Building {
 
 	public Palace() {
 		super("F27", "C", 0, "Palace", BuildCost.is().coin(25), 8, 25, EnumSet.of(HILLSIDE), false);
@@ -24,7 +24,7 @@ public class Palace extends AbstractBuilding {
 	public void use(Board board, UsageParam input) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 		player.subtractWine(1);
-		AbstractBuilding building = (AbstractBuilding)input.getCard();
+		Building building = (Building)input.getCard();
 		building.use(board, input);
 	}
 }

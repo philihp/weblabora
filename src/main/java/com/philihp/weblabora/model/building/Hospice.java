@@ -1,6 +1,7 @@
 package com.philihp.weblabora.model.building;
 
 import static com.philihp.weblabora.model.TerrainTypeEnum.COAST;
+import static com.philihp.weblabora.model.TerrainTypeEnum.MOUNTAIN;
 import static com.philihp.weblabora.model.TerrainTypeEnum.HILLSIDE;
 import static com.philihp.weblabora.model.TerrainTypeEnum.PLAINS;
 
@@ -9,23 +10,23 @@ import java.util.Set;
 
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
+import com.philihp.weblabora.model.Coordinate;
+import com.philihp.weblabora.model.Landscape;
 import com.philihp.weblabora.model.Player;
-import com.philihp.weblabora.model.Terrain;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
-import com.philihp.weblabora.model.WeblaboraException;
+import com.philihp.weblabora.model.Wheel;
 
-public class GrainStorage extends Building {
+abstract class Hospice extends Building {
 
-	public GrainStorage() {
-		super("F03", "", 4, "Grain Storage", BuildCost.is().wood(1).straw(1), 4, 3,
-				EnumSet.of(COAST, PLAINS, HILLSIDE), false);
+	public Hospice(String id, String stage, int players) {
+		super("F40", "D", 3, "Hospice",
+				BuildCost.is().wood(3).straw(1), 5, 7, EnumSet.of(PLAINS,
+						HILLSIDE, COAST), true);
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) throws WeblaboraException {
-		Player player = board.getPlayer(board.getActivePlayer());
-		player.subtractCoins(1);
-		player.addGrain(6);
+	public void use(Board board, UsageParam input) {
+		//use any building
 	}
 }

@@ -15,7 +15,7 @@ import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.model.Wheel;
 
-public class FinancedEstate extends AbstractBuilding {
+public class FinancedEstate extends Building {
 
 	public FinancedEstate() {
 		super("F15", "A", 4, "Financed Estate", BuildCost.is().clay(1).stone(1), 6, 4,
@@ -25,8 +25,8 @@ public class FinancedEstate extends AbstractBuilding {
 	@Override
 	public void use(Board board, UsageParam input) {
 		Player player = board.getPlayer(board.getActivePlayer());
-		player.subtractPenny(1);
-		player.addBook(1);
+		player.subtractCoins(1);
+		player.addBooks(1);
 		player.addBread(1);
 		player.addGrapes(2);
 		player.addFlour(2);

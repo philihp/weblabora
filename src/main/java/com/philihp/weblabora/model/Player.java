@@ -10,6 +10,8 @@ public class Player {
 	
 	private boolean active;
 	
+	private int bonusPoints = 0;
+	
 	private int peat = 0;
 	private int penny = 0;
 	private int clay = 0;
@@ -71,10 +73,15 @@ public class Player {
 		wine = 0;
 		beer = 0;
 		reliquary = 0;
+		bonusPoints = 0;
 	}
 
 	public Color getColor() {
 		return color;
+	}
+	
+	public int getPoints() {
+		return bonusPoints;
 	}
 
 	public int getPeat() {
@@ -205,9 +212,14 @@ public class Player {
 		addEntry(inventory, "Wine", wine);
 		addEntry(inventory, "Beer", beer);
 		addEntry(inventory, "Reliquary", reliquary);
+		addEntry(inventory, "Points", bonusPoints);
 		return inventory;
 	}
 
+	public void setBonusPoints(int bonusPoints) {
+		this.bonusPoints = bonusPoints;
+	}
+	
 	public void setPeat(int peat) {
 		this.peat = peat;
 	}
@@ -347,7 +359,9 @@ public class Player {
 		this.setStraw(this.getStraw() - buildCost.getStraw());
 	}
 
-
+	public void addBonusPoints(int bonusPoints) {
+		this.bonusPoints += bonusPoints;
+	}
 
 	public void addPeat(int peat) {
 		this.peat += peat;
@@ -397,7 +411,7 @@ public class Player {
 		this.coal += coal;
 	}
 
-	public void addBook(int book) {
+	public void addBooks(int book) {
 		this.book += book;
 	}
 
@@ -436,6 +450,10 @@ public class Player {
 	public void addReliquary(int reliquary) {
 		this.reliquary += reliquary;
 	}
+	
+	public void subtractBonusPoints(int points) {
+		this.bonusPoints -= points;
+	}
 
 	public void subtractPeat(int peat) {
 		this.peat -= peat;
@@ -469,7 +487,7 @@ public class Player {
 		this.grapes -= grapes;
 	}
 
-	public void subtractPenny(int penniesToSubtract) {
+	public void subtractCoins(int penniesToSubtract) {
 		this.penny -= penniesToSubtract;
 		//if subtracting those pennies pushes us into the negative, then convert the pennies into nickels
 		while(this.penny < 0 && this.nickel > 0) {
@@ -553,7 +571,7 @@ public class Player {
 		subtractStone(param.getStone());
 		subtractFlour(param.getFlour());
 		subtractGrapes(param.getGrapes());
-		subtractPenny(param.getPenny());
+		subtractCoins(param.getPenny());
 		subtractNickel(param.getNickel());
 		subtractHops(param.getHops());
 		subtractCoal(param.getCoal());
@@ -567,5 +585,6 @@ public class Player {
 		subtractWine(param.getWine());
 		subtractBeer(param.getBeer());
 		subtractReliquary(param.getReliquary());
+		subtractBonusPoints(param.getBonusPoints());
 	}
 }

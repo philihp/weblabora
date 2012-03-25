@@ -14,7 +14,7 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 
-public class Windmill extends AbstractBuilding {
+public class Windmill extends Building {
 
 	public Windmill() {
 		super("F04", "", 2, "Windmill", BuildCost.is().wood(3).clay(2), 6, 10,

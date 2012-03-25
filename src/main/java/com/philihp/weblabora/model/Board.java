@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
-import com.philihp.weblabora.model.building.AbstractBuilding;
+import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.BuildingEnum;
 import com.philihp.weblabora.model.building.ClayMound;
 import com.philihp.weblabora.model.building.CloisterOffice;
@@ -27,12 +27,12 @@ public class Board {
 
 	private int activePlayer;
 
-	private List<AbstractBuilding> unbuiltBuildings;
+	private List<Building> unbuiltBuildings;
 	
 	/**
 	 * This makes lookups from {@link CommandUse CommandUse}
 	 */
-	private EnumMap<BuildingEnum, AbstractBuilding> allBuildings;
+	private EnumMap<BuildingEnum, Building> allBuildings;
 
 	private List<Wonder> unclaimedWonders;
 
@@ -81,41 +81,41 @@ public class Board {
 		return activePlayer;
 	}
 
-	private List<AbstractBuilding> gameStartBuildings() {
-		List<AbstractBuilding> buildings = new ArrayList<AbstractBuilding>();
+	private List<Building> gameStartBuildings() {
+		List<Building> buildings = new ArrayList<Building>();
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
-			AbstractBuilding building = buildingId.getInstance();
+			Building building = buildingId.getInstance();
 			if ("".equals(building.getStage()))
 				buildings.add(building);
 		}
 		return buildings;
 	}
 	
-	private EnumMap<BuildingEnum, AbstractBuilding> generateBuildingsMap() {
-		EnumMap<BuildingEnum, AbstractBuilding> map = 
-				new EnumMap<BuildingEnum, AbstractBuilding>(BuildingEnum.class);
+	private EnumMap<BuildingEnum, Building> generateBuildingsMap() {
+		EnumMap<BuildingEnum, Building> map = 
+				new EnumMap<BuildingEnum, Building>(BuildingEnum.class);
 
-		map.put(LR1, (ClayMound)players[0].getLandscape().getTerrainAt(4, 0).getErection());
-		map.put(LG1, (ClayMound)players[1].getLandscape().getTerrainAt(4, 0).getErection());
-		map.put(LB1, (ClayMound)players[2].getLandscape().getTerrainAt(4, 0).getErection());
-		map.put(LW1, (ClayMound)players[3].getLandscape().getTerrainAt(4, 0).getErection());
-		map.put(LR2, (Farmyard)players[0].getLandscape().getTerrainAt(2, 1).getErection());
-		map.put(LG2, (Farmyard)players[1].getLandscape().getTerrainAt(2, 1).getErection());
-		map.put(LB2, (Farmyard)players[2].getLandscape().getTerrainAt(2, 1).getErection());
-		map.put(LW2, (Farmyard)players[3].getLandscape().getTerrainAt(2, 1).getErection());
-		map.put(LR3, (CloisterOffice)players[0].getLandscape().getTerrainAt(4, 1).getErection());
-		map.put(LG3, (CloisterOffice)players[1].getLandscape().getTerrainAt(4, 1).getErection());
-		map.put(LB3, (CloisterOffice)players[2].getLandscape().getTerrainAt(4, 1).getErection());
-		map.put(LW3, (CloisterOffice)players[3].getLandscape().getTerrainAt(4, 1).getErection());
+		map.put(LR1, (ClayMound)players[0].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
+		map.put(LG1, (ClayMound)players[1].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
+		map.put(LB1, (ClayMound)players[2].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
+		map.put(LW1, (ClayMound)players[3].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
+		map.put(LR2, (Farmyard)players[0].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
+		map.put(LG2, (Farmyard)players[1].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
+		map.put(LB2, (Farmyard)players[2].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
+		map.put(LW2, (Farmyard)players[3].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
+		map.put(LR3, (CloisterOffice)players[0].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
+		map.put(LG3, (CloisterOffice)players[1].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
+		map.put(LB3, (CloisterOffice)players[2].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
+		map.put(LW3, (CloisterOffice)players[3].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
 		
-		for(AbstractBuilding building : unbuiltBuildings) {
+		for(Building building : unbuiltBuildings) {
 			map.put(BuildingEnum.valueOf(building.getId()), building);
 		}
 		
 		return map;
 	}
 	
-	public AbstractBuilding findBuildingInstance(BuildingEnum buildingId) {
+	public Building findBuildingInstance(BuildingEnum buildingId) {
 		return allBuildings.get(buildingId);
 	}
 
@@ -136,7 +136,7 @@ public class Board {
 		return unclaimedWonders.remove(unclaimedWonders.size() - 1);
 	}
 
-	public List<AbstractBuilding> getUnbuiltBuildings() {
+	public List<Building> getUnbuiltBuildings() {
 		return unbuiltBuildings;
 	}
 

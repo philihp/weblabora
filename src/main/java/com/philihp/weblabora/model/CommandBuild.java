@@ -25,11 +25,11 @@ public class CommandBuild implements MoveCommand {
 	
 	public static void execute(Board board, String buildingId, int x, int y)
 			throws WeblaboraException {
-		AbstractBuilding building = null;
+		Building building = null;
 		Player player = board.getPlayer(board.getActivePlayer());
 		Terrain spot = player.getLandscape().getTerrain().get(y, x);
 		
-		for(AbstractBuilding possibleBuilding : board.getUnbuiltBuildings()) {
+		for(Building possibleBuilding : board.getUnbuiltBuildings()) {
 			if(possibleBuilding.getId().equals(buildingId)) {
 				building = possibleBuilding;
 				board.getUnbuiltBuildings().remove(building);

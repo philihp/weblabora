@@ -13,31 +13,25 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
-import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.model.Wheel;
 
-public class Farmyard extends Building {
+abstract class ForgersWorkshop extends Building {
 
-	public Farmyard() {
-		super("LX2", "L", 0, "Farmyard", BuildCost.is(), 2, 0, EnumSet.of(PLAINS), true);
+	public ForgersWorkshop(String id, String stage, int players) {
+		super("F35","D",0, "Forger's Workshop", BuildCost.is().clay(2).straw(1), 2,4, EnumSet
+				.of(PLAINS, HILLSIDE, COAST), false);
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) throws WeblaboraException {
+	public void use(Board board, UsageParam input) {
 		Player player = board.getPlayer(board.getActivePlayer());
-		Wheel wheel = board.getWheel();
-		
-		if(input.getSheep() != 0) {
-			Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getSheep();
-			player.addSheep(token.take());
+		if(input.getCoins() >= 5) {
+			player.addReliquary(1);
+			player.subtractCoins(5);
 		}
-		else if(input.getGrain() != 0) {
-			Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getGrain();
-			player.addGrain(token.take());
+		if(input.getCoins() >= 15) {
+			player.addReliquary(1);
+			player.subtractCoins(10);
 		}
-		else {
-			throw new WeblaboraException("Usage of Farmyard must specify if Sheep or Grain is desired.");
-		}
-		
 	}
 }

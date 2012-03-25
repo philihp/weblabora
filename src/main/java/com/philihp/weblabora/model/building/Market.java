@@ -14,7 +14,7 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 
-public class Market extends AbstractBuilding {
+public class Market extends Building {
 
 	public Market() {
 		super("F08", "", 2, "Market", BuildCost.is().stone(2), 8, 5, EnumSet.of(COAST,PLAINS,HILLSIDE), false);

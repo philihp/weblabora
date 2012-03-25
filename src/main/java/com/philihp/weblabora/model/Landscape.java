@@ -9,8 +9,10 @@ import static com.philihp.weblabora.model.TerrainTypeEnum.*;
 
 import com.google.common.collect.ArrayTable;
 import com.google.common.collect.Table;
+import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.ClayMound;
 import com.philihp.weblabora.model.building.CloisterOffice;
+import com.philihp.weblabora.model.building.Erection;
 import com.philihp.weblabora.model.building.Farmyard;
 
 public class Landscape {
@@ -51,9 +53,29 @@ public class Landscape {
 	public Terrain[][] getTable() {
 		return terrain.toArray(Terrain.class);
 	}
-	
-	public Terrain getTerrainAt(int x,int y) {
-		return terrain.get(y, x);
+
+	public List<Erection> getErections() {
+		List<Erection> list = new ArrayList<Erection>(3);
+		for (Terrain[] row : getTable()) {
+			for (Terrain cell : row) {
+				list.add(cell.getErection());
+			}
+		}
+		return list;
+	}
+
+	public List<Building> getBuildings() {
+		List<Building> list = new ArrayList<Building>(3);
+		for (Erection erection : getErections()) {
+			if (erection instanceof Building) {
+				list.add((Building) erection);
+			}
+		}
+		return list;
+	}
+
+	public Terrain getTerrainAt(Coordinate coordinate) {
+		return terrain.get(coordinate.getY(), coordinate.getX());
 	}
 
 	public Player getOwner() {

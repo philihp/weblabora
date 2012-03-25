@@ -15,7 +15,7 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.Wheel;
 
-public class CloisterOffice extends AbstractBuilding {
+public class CloisterOffice extends Building {
 
 	public CloisterOffice() {
 		super("LX3", "L", 0, "Cloister Office", BuildCost.is(), 2, 0, EnumSet.of(PLAINS), true);

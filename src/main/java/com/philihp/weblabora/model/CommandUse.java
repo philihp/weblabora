@@ -16,10 +16,12 @@ public class CommandUse implements MoveCommand {
 			throws WeblaboraException {
 		
 		String buildingId = params.get(0);
-		String buildingParam = params.get(1);
 		UsageParam usageParam = null;
-		if(Character.isDigit(buildingParam.charAt(0))) {
-			usageParam = new UsageParam(Integer.parseInt(params.get(1)), Integer.parseInt(params.get(2)));
+		if(params.get(2) != null) {
+			usageParam = new UsageParam("");
+			for(int i = 0; params.get(i*2+1) != null && params.get(i*2+2) != null; i++) {
+				usageParam.pushCoordinate(Integer.parseInt(params.get(i*2+1)), Integer.parseInt(params.get(i*2+2)));
+			}
 		}
 		else {
 			usageParam = new UsageParam(params.get(1));
@@ -35,7 +37,7 @@ public class CommandUse implements MoveCommand {
 	
 	public static void execute(Board board, BuildingEnum buildingId, UsageParam param)
 			throws WeblaboraException {
-		AbstractBuilding building = board.findBuildingInstance(buildingId);
+		Building building = board.findBuildingInstance(buildingId);
 		building.use(board, param);
 	}
 }

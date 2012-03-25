@@ -14,7 +14,7 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 
-public class CloisterCourtyard extends AbstractBuilding {
+public class CloisterCourtyard extends Building {
 
 	public CloisterCourtyard() {
 		super("G02", "", 2, "Cloister Courtyard", BuildCost.is().wood(2), 4, 4, EnumSet.of(COAST, PLAINS, HILLSIDE), true);
@@ -36,7 +36,7 @@ public class CloisterCourtyard extends AbstractBuilding {
 		if(param.getStone() == 1) player.subtractStone(1);
 		if(param.getFlour() == 1) player.subtractFlour(1);
 		if(param.getGrapes() == 1) player.subtractGrapes(1);
-		if(param.getPenny() == 1) player.subtractPenny(1);
+		if(param.getPenny() == 1) player.subtractCoins(1);
 		if(param.getNickel() == 1) player.subtractNickel(1);
 		if(param.getHops() == 1) player.subtractHops(1);
 		if(param.getCoal() == 1) player.subtractCoal(1);
@@ -63,7 +63,7 @@ public class CloisterCourtyard extends AbstractBuilding {
 		if(param.getNickel() == 6) player.addNickel(6);
 		if(param.getHops() == 6) player.addHops(6);
 		if(param.getCoal() == 6) player.addCoal(6);
-		if(param.getBook() == 6) player.addBook(6);
+		if(param.getBook() == 6) player.addBooks(6);
 		if(param.getPottery() == 6) player.addPottery(6);
 		if(param.getWhiskey() == 6) player.addWhiskey(6);
 		if(param.getStraw() == 6) player.addStraw(6);

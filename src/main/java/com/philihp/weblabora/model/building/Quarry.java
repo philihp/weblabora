@@ -15,17 +15,19 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.Wheel;
 
-public class Quarry extends AbstractBuilding {
+abstract class Quarry extends Building {
 
-	public Quarry() {
-		super("G22", "B", 0, "Quarry", BuildCost.is().coin(5), -4, 7, EnumSet.of(MOUNTAIN), false);
+	public Quarry(String id, String stage, int players) {
+		super(id, stage, players, "Quarry", BuildCost.is().coin(5), -4, 7, EnumSet
+				.of(MOUNTAIN), false);
 	}
 
 	@Override
 	public void use(Board board, UsageParam input) {
 		Player player = board.getPlayer(board.getActivePlayer());
 		Wheel wheel = board.getWheel();
-		Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getStone();
+		Wheel.Token token = input.isWithJoker() ? wheel.getJoker() : wheel
+				.getStone();
 		player.addStone(token.take());
 	}
 }

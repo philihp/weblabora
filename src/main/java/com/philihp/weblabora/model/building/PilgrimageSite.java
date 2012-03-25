@@ -10,34 +10,35 @@ import java.util.Set;
 
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
+import com.philihp.weblabora.model.Coordinate;
+import com.philihp.weblabora.model.Landscape;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.model.Wheel;
 
-public class Farmyard extends Building {
+abstract class PilgrimageSite extends Building {
 
-	public Farmyard() {
-		super("LX2", "L", 0, "Farmyard", BuildCost.is(), 2, 0, EnumSet.of(PLAINS), true);
+	public PilgrimageSite(String id, String stage, int players) {
+		super("F36", "D", 3, "Pilgrimage Site", BuildCost.is().coin(6), 6, 2,
+				EnumSet.of(PLAINS, HILLSIDE, COAST), false);
 	}
 
 	@Override
 	public void use(Board board, UsageParam input) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
-		Wheel wheel = board.getWheel();
 		
-		if(input.getSheep() != 0) {
-			Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getSheep();
-			player.addSheep(token.take());
-		}
-		else if(input.getGrain() != 0) {
-			Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getGrain();
-			player.addGrain(token.take());
-		}
-		else {
-			throw new WeblaboraException("Usage of Farmyard must specify if Sheep or Grain is desired.");
-		}
+		if(input.getBook() + input.getPottery() + input.getOrnament() > 2)
+			throw new WeblaboraException("Pilgrimmage Site can only convert twice.");
 		
+		player.subtractBook(input.getBook());
+		player.addPottery(input.getBook());
+		
+		player.subtractPottery(input.getPottery());
+		player.addOrnament(input.getPottery());
+		
+		player.subtractOrnament(input.getOrnament());
+		player.addReliquary(input.getOrnament());
 	}
 }

@@ -14,7 +14,7 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 
-public class CloisterGarden extends AbstractBuilding {
+public class CloisterGarden extends Building {
 
 	public CloisterGarden() {
 		super("F09", "", 3, "Cloister Graden", BuildCost.is().coin(3), 0, 5,

@@ -14,7 +14,7 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 
-public class FuelMerchant extends AbstractBuilding {
+public class FuelMerchant extends Building {
 
 	public FuelMerchant() {
 		super("G06", "", 3, "Fuel Merchant", BuildCost.is().clay(1).straw(1), 2, 5,

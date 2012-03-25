@@ -10,34 +10,35 @@ import java.util.Set;
 
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
+import com.philihp.weblabora.model.Coordinate;
+import com.philihp.weblabora.model.Landscape;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.model.Wheel;
 
-public class Farmyard extends Building {
+abstract class Estate extends Building {
 
-	public Farmyard() {
-		super("LX2", "L", 0, "Farmyard", BuildCost.is(), 2, 0, EnumSet.of(PLAINS), true);
+	public Estate(String id, String stage, int players) {
+		super("G39", "D", 4, "Estate", BuildCost.is().wood(2).stone(2), 6, 5,
+				EnumSet.of(PLAINS, HILLSIDE, COAST), false);
 	}
 
 	@Override
 	public void use(Board board, UsageParam input) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
-		Wheel wheel = board.getWheel();
 		
-		if(input.getSheep() != 0) {
-			Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getSheep();
-			player.addSheep(token.take());
-		}
-		else if(input.getGrain() != 0) {
-			Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getGrain();
-			player.addGrain(token.take());
-		}
-		else {
-			throw new WeblaboraException("Usage of Farmyard must specify if Sheep or Grain is desired.");
-		}
+		player.subtractAll(input);
+		int energy = (int)input.getEnergy();
+		int food = (int)input.getFood();
 		
+		int iterations = 0;
+		while(iterations++ < 2 && (energy >= 6 || food >= 10)) {
+			energy -= 6;
+			food -= 10;
+			player.addBooks(1);
+			player.addOrnament(1);
+		}
 	}
 }

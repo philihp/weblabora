@@ -14,7 +14,7 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 
-public class StoneMerchant extends AbstractBuilding {
+public class StoneMerchant extends Building {
 
 	public StoneMerchant() {
 		super("G12", "", 2, "Stone Merchant", BuildCost.is().wood(1), 1, 6,
