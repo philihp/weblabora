@@ -15,9 +15,9 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.Wheel;
 
-abstract class HouseOfTheBrotherhood extends Building {
+public class HouseOfTheBrotherhood extends Building {
 
-	public HouseOfTheBrotherhood(String id, String stage, int players) {
+	public HouseOfTheBrotherhood() {
 		super("G41", "D", 0, "House of the Brotherhood", BuildCost.is().clay(1)
 				.stone(1), 3, 3, EnumSet.of(PLAINS, HILLSIDE, COAST), true);
 	}

@@ -15,9 +15,9 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.Wheel;
 
-abstract class Dormitory extends Building {
+public class Dormitory extends Building {
 
-	public Dormitory(String id, String stage, int players) {
+	public Dormitory() {
 		super("F37","D",0, "Dormitory", BuildCost.is().clay(3), 4, 3, EnumSet
 				.of(PLAINS, HILLSIDE, COAST), true);
 	}

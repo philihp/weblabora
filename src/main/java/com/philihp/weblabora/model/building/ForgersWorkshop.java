@@ -15,9 +15,9 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.Wheel;
 
-abstract class ForgersWorkshop extends Building {
+public class ForgersWorkshop extends Building {
 
-	public ForgersWorkshop(String id, String stage, int players) {
+	public ForgersWorkshop() {
 		super("F35","D",0, "Forger's Workshop", BuildCost.is().clay(2).straw(1), 2,4, EnumSet
 				.of(PLAINS, HILLSIDE, COAST), false);
 	}

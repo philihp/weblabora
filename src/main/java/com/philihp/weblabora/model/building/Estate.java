@@ -18,9 +18,9 @@ import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.model.Wheel;
 
-abstract class Estate extends Building {
+public class Estate extends Building {
 
-	public Estate(String id, String stage, int players) {
+	public Estate() {
 		super("G39", "D", 4, "Estate", BuildCost.is().wood(2).stone(2), 6, 5,
 				EnumSet.of(PLAINS, HILLSIDE, COAST), false);
 	}

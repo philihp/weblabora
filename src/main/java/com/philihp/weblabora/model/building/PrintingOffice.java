@@ -17,9 +17,9 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.Wheel;
 
-abstract class PrintingOffice extends Building {
+public class PrintingOffice extends Building {
 
-	public PrintingOffice(String id, String stage, int players) {
+	public PrintingOffice() {
 		super("F38", "D", 0, "Printing Office",
 				BuildCost.is().wood(1).stone(2), 5, 5, EnumSet.of(PLAINS,
 						HILLSIDE, COAST), false);

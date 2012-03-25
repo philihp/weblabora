@@ -18,9 +18,9 @@ import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.model.Wheel;
 
-abstract class PilgrimageSite extends Building {
+public class PilgrimageSite extends Building {
 
-	public PilgrimageSite(String id, String stage, int players) {
+	public PilgrimageSite() {
 		super("F36", "D", 3, "Pilgrimage Site", BuildCost.is().coin(6), 6, 2,
 				EnumSet.of(PLAINS, HILLSIDE, COAST), false);
 	}

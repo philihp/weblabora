@@ -17,8 +17,8 @@ import com.philihp.weblabora.model.Wheel;
 
 public class Grapevine extends Building {
 
-	public Grapevine() {
-		super("F14", "A", 2, "Grapevine", BuildCost.is().wood(1), 6, 3,
+	public Grapevine(String id, String stage, int players) {
+		super(id, stage, players, "Grapevine", BuildCost.is().wood(1), 6, 3,
 				EnumSet.of(HILLSIDE), false);
 	}
 
