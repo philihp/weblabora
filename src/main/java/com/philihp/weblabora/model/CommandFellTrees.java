@@ -13,7 +13,7 @@ public class CommandFellTrees implements MoveCommand {
 		boolean joker = false;
 		if(params.size() > 2) {
 			String third = params.get(2);
-			joker = third.toUpperCase().equals("JOKER");
+			joker = third.equals("Jo");
 		}
 		
 		execute(board,
@@ -37,7 +37,6 @@ public class CommandFellTrees implements MoveCommand {
 		Token token = joker?board.getWheel().getJoker():board.getWheel().getWood();
 		int woodTaken = token.take();
 		player.setWood(player.getWood() + woodTaken);
-		// TODO could use joker
 
 		System.out.println("Felling trees at " + x + "," + y + "; got wood: "
 				+ woodTaken);
