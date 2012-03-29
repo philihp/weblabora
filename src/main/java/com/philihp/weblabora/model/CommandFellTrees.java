@@ -9,12 +9,20 @@ public class CommandFellTrees implements MoveCommand {
 	@Override
 	public void execute(Board board, List<String> params)
 			throws WeblaboraException {
+		
+		boolean joker = false;
+		if(params.size() > 2) {
+			String third = params.get(2);
+			joker = third.toUpperCase().equals("JOKER");
+		}
+		
 		execute(board,
 				Integer.parseInt(params.get(0)),
-				Integer.parseInt(params.get(1)));
+				Integer.parseInt(params.get(1)),
+				joker);
 	}
 
-	public static void execute(Board board, int x, int y)
+	public static void execute(Board board, int x, int y, boolean joker)
 			throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 		Terrain spot = player.getLandscape().getTerrain().get(y, x);
@@ -26,7 +34,8 @@ public class CommandFellTrees implements MoveCommand {
 					+ ", but it is not a forest");
 
 		spot.setTerrainType(PLAINS);
-		int woodTaken = board.getWheel().getWood().take();
+		Token token = joker?board.getWheel().getJoker():board.getWheel().getWood();
+		int woodTaken = token.take();
 		player.setWood(player.getWood() + woodTaken);
 		// TODO could use joker
 
