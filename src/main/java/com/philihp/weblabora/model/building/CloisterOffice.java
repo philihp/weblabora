@@ -12,6 +12,7 @@ import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
+import com.philihp.weblabora.model.Token;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.Wheel;
 
@@ -25,7 +26,7 @@ public class CloisterOffice extends Building {
 	public void use(Board board, UsageParam input) {
 		Player player = board.getPlayer(board.getActivePlayer());
 		Wheel wheel = board.getWheel();
-		Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getCoin();
+		Token token = input.isWithJoker()?wheel.getJoker():wheel.getCoin();
 		player.addPenny(token.take());
 	}
 }

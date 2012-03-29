@@ -12,6 +12,7 @@ import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
+import com.philihp.weblabora.model.Token;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.model.Wheel;
@@ -28,11 +29,11 @@ public class Farmyard extends Building {
 		Wheel wheel = board.getWheel();
 		
 		if(input.getSheep() != 0) {
-			Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getSheep();
+			Token token = input.isWithJoker()?wheel.getJoker():wheel.getSheep();
 			player.addSheep(token.take());
 		}
 		else if(input.getGrain() != 0) {
-			Wheel.Token token = input.isWithJoker()?wheel.getJoker():wheel.getGrain();
+			Token token = input.isWithJoker()?wheel.getJoker():wheel.getGrain();
 			player.addGrain(token.take());
 		}
 		else {
