@@ -75,7 +75,7 @@ public class UsageParam {
 	public UsageParam(String in) {
 		this.param = in;
 		for(int i = 0; i < in.length()/2; i++) {
-			String token = in.substring(i,i+2);
+			String token = in.substring(i*2,i*2+2);
 			if("Wo".equals(token))
 				wood++;
 			else if("Gn".equals(token))
