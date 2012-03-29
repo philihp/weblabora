@@ -176,18 +176,17 @@
 				</g>
 			</svg>
 		</div>
-		<div class="buildings">
-		  <div class="header">Buildings Available:</div>
+		<div class="buildinglist"><!-- comment out white-space for inline-block spacing
 		  <c:forEach items="${board.unbuiltBuildings}" var="building">
-		  	<div class="building">
+		  	--><div class="building">
 		  	  <b>${building.id}</b><br />
 		  	  ${building.name}<br />
 					<c:set var="buildCost" value="${building.buildCost}" scope="request" />
 					<c:import url="jsp/buildCost.jsp" />
 		  	  <c:remove var="buildCost"/>
-		  	</div>
+		  	</div><!--
 		  </c:forEach>
-		</div>
+		--></div>
 
 		<ul class="tabs">
 			<li id="tab1" class="tab tab--${board.players[0].activeClass}">

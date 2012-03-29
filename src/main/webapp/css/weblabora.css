@@ -32,25 +32,40 @@ div.container {
 	margin: 0 auto;
 }
 
-div.wheel {
+
+
+
+.wheel {
 	width: 333px;
 	height: 304px;
 	float: left;
 }
-div.wheel svg {
-}
-div.buildings {
+
+
+
+
+.buildinglist {
 	height: 304px;
-	margin: 15px 0 15px 333px;
+	display: block;
+	margin-top: 15px;
+	margin-bottom: 0;
+	margin-left: 0;
+	margin-right: 0;
 }
-div.buildings div.header {
-}
-div.building {
-	border: 1px solid black;
+.building {
+	border: 1px solid #939393;
+	box-shadow: 0 0 10px rgba(0,0,0,0.1);
+	font-size: 8pt;
+	height: 80px;
+	width: 80px;
 	display: inline-block;
-	height: 100px;
-	width: 130px;
+	vertical-align: top;
+	padding: 2px;
+	margin: 3px;
 }
+
+
+
 
 .tabs {
 	list-style: none;
@@ -64,7 +79,7 @@ div.building {
 	border: 1px solid #b3b3b3;
 	border-bottom: 0;
 	border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+	border-top-right-radius: 4px;
 	float: left;
 	margin: 0 0.5em 0 0;
 	width: 20%;
@@ -84,7 +99,7 @@ div.building {
 	background: #fcfcfc;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
-  border-top-right-radius: 5px;
+	border-top-right-radius: 5px;
 }
 .board table {
 	border-color: gray;
