@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface MoveCommand {
 
-	 public void execute(Board board, List<String> params) throws WeblaboraException;
+	 public void execute(Board board, CommandParameters params) throws WeblaboraException;
 
 }

@@ -32,17 +32,24 @@ public final class MoveProcessor {
 
 	public static void processSingleMove(Board board, String move)
 			throws WeblaboraException {
-		Scanner scanner = new Scanner(move);
-		scanner.useDelimiter("\\(");
-		char commandChar = Character.toUpperCase(scanner.next().charAt(0));
-		scanner.useDelimiter("[\\(,\\)]");
-		List<String> params = new ArrayList<String>(2);
+		CommandParameters params = new CommandParameters();
+		
+		String prefix = move.substring(0, move.indexOf('('));
+		String inner = move.substring(move.indexOf('(')+1, move.indexOf(')'));
+		String suffix = move.substring(move.indexOf(')')+1);
+		
+		params.setCommand(Character.toUpperCase(prefix.charAt(0)));
+		
+		Scanner scanner = new Scanner(inner);
+		scanner.useDelimiter(",");
 		while (scanner.hasNext()) {
 			String param = scanner.next();
-			params.add(param);
+			params.getParams().add(param);
 		}
 
-		MoveCommand moveCommand = pickCommand(commandChar);
+		params.setSuffix(suffix);
+		
+		MoveCommand moveCommand = pickCommand(params.getCommand());
 		moveCommand.execute(board, params);
 
 	}

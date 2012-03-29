@@ -7,7 +7,7 @@ import java.util.List;
 public class CommandFellTrees implements MoveCommand {
 
 	@Override
-	public void execute(Board board, List<String> params)
+	public void execute(Board board, CommandParameters params)
 			throws WeblaboraException {
 		
 		boolean joker = false;

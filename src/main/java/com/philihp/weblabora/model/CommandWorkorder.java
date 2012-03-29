@@ -12,7 +12,7 @@ public class CommandWorkorder implements MoveCommand {
 
 
 	@Override
-	public void execute(Board board, List<String> params)
+	public void execute(Board board, CommandParameters params)
 			throws WeblaboraException {
 		
 		execute(board,
