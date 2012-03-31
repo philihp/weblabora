@@ -29,6 +29,6 @@ public class Bathhouse extends Building {
 		player.addBooks(1);
 		player.addPottery(1);
 		
-		//TODO: take back clergymen
+		player.resetClergymen();
 	}
 }
