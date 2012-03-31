@@ -17,7 +17,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class CloisterGarden extends Building {
 
 	public CloisterGarden() {
-		super("F09", "", 3, "Cloister Graden", BuildCost.is().coin(3), 0, 5,
+		super("F09", "", 3, "Cloister Garden", BuildCost.is().coin(3), 0, 5,
 				EnumSet.of(COAST, PLAINS, HILLSIDE), true);
 	}
 
