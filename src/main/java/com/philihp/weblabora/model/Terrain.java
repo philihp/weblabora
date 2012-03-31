@@ -12,6 +12,9 @@ public class Terrain {
 		this.terrainType = terrainType;
 		this.landscape = landscape;
 		this.erection = erection;
+		
+		if(erection != null)
+			erection.setLocation(this);
 	}
 
 	public Erection getErection() {
@@ -20,6 +23,8 @@ public class Terrain {
 
 	public void setErection(Erection erection) {
 		this.erection = erection;
+		if(erection.getLocation() != this)
+			erection.setLocation(this);
 	}
 
 	public Landscape getLandscape() {

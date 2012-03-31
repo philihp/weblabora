@@ -1,6 +1,7 @@
 package com.philihp.weblabora.model;
 
 import java.util.ArrayList;
+import static com.philihp.weblabora.model.Clergyman.Type.*;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +45,10 @@ public class Player {
 	private Color color;
 
 	private List<Wonder> wonders = new ArrayList<Wonder>(0);
+	
+	private Clergyman layBrother1 = new Clergyman(this, LAYBROTHER);
+	private Clergyman layBrother2 = new Clergyman(this, LAYBROTHER);
+	private Clergyman prior = new Clergyman(this, PRIOR);
 
 	public Player(Board board, Color color) {
 		this.board = board;
@@ -586,5 +591,54 @@ public class Player {
 		subtractBeer(param.getBeer());
 		subtractReliquary(param.getReliquary());
 		subtractBonusPoints(param.getBonusPoints());
+	}
+	
+	public void placeClergyman(Terrain location) throws WeblaboraException {
+		Clergyman dude = null;
+		if(layBrother1.getLocation() == null) dude = layBrother1;
+		else if(layBrother2.getLocation() == null) dude = layBrother2;
+		else if(prior.getLocation() == null) dude = prior;
+		else
+			throw new WeblaboraException("Attempted to place " + color
+					+ " clergyman when none were free. They are on "
+					+ layBrother1.getLocation().getErection() + ", "
+					+ layBrother2.getLocation().getErection() + ", and "
+					+ prior.getLocation().getErection() + ".");
+		
+		dude.setLocation(location);
+	}
+	
+	public void placePrior(Terrain location) throws WeblaboraException {
+		if (prior.getLocation() != null)
+			throw new WeblaboraException("Attempted to place " + color
+					+ " prior when it is already on "
+					+ prior.getLocation().getErection() + ".");
+		
+		prior.setLocation(location);
+	}
+	
+	public boolean isClergymenAllPlaced() {
+		return layBrother1.getLocation() != null &&
+				layBrother2.getLocation() != null &&
+				prior.getLocation() != null;
+	}
+	
+	public void resetClergymen() {
+		//doing this directly circumvents the bi-directional protections in the setter
+		layBrother1.location = null;
+		layBrother2.location = null;
+		prior.location = null;
+	}
+
+	public Clergyman getLayBrother1() {
+		return layBrother1;
+	}
+
+	public Clergyman getLayBrother2() {
+		return layBrother2;
+	}
+
+	public Clergyman getPrior() {
+		return prior;
 	}
 }

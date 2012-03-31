@@ -220,6 +220,8 @@
 										</c:when>
 										<c:otherwise>
 											${cell.erection.name}
+											<br />
+											${ora:clergy(cell.erection.clergyman.type)}
 										</c:otherwise>
 									</c:choose>
 								</td>
@@ -227,6 +229,12 @@
 						</tr>
 					</c:forEach>
 				</table>
+				
+				<h3>Clergymen</h3>
+				<c:if test="${empty player.layBrother1.location}">[Lay Brother]</c:if>
+				<c:if test="${empty player.layBrother2.location}">[Lay Brother]</c:if>
+				<c:if test="${empty player.prior.location}">[Prior]</c:if>
+				
 				<h3>Inventory</h3>
 				<c:set var="player" value="${player}" scope="request" />
 				<c:import url="jsp/inventory.jsp" />

@@ -1,30 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
-  version="2.0">
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
 	<description>
         <![CDATA[ Custom Tags for WebLabora ]]>
 	</description>
 	<display-name>WebLabora Tags</display-name>
 	<tlib-version>1.1</tlib-version>
-  <short-name>ora</short-name>
+	<short-name>ora</short-name>
 	<uri>http://philihp.com/jsp/ora</uri>
+
+	<function>
+		<description>
+			Takes in the wheel position and returns the number of degrees to rotate to get to it
+    	</description>
+		<name>deg</name>
+		<function-class>com.philihp.weblabora.util.WheelArt</function-class>
+		<function-signature>double deg(java.lang.String)</function-signature>
+		<example>
+    		<![CDATA[ 
+			<c:out value="${ora:deg(board.wheel.arm.position)}" />
+			]]>
+		</example>
+	</function>
 	
-  <function>
-    <description>
-      Takes in the wheel position and returns the number of degrees to rotate to get to it
-    </description>
-    <name>deg</name>
-    <function-class>com.philihp.weblabora.util.WheelArt</function-class>
-    <function-signature>double deg(java.lang.String)</function-signature>
-    <example>
-    <![CDATA[ 
-      <c:out value="${ora:deg(board.wheel.arm.position)}">
-    ]]>
-    </example>
-  </function>
-	
+	<function>
+		<description>
+			Turns "LAYBROTHER" or "PRIOR" into "[Lay Brother]" or "[Prior]" respectively.
+		</description>
+		<name>clergy</name>
+		<function-class>com.philihp.weblabora.model.Clergyman</function-class>
+		<function-signature>java.lang.String format(java.lang.String)</function-signature>
+		<example>
+			<![CDATA[
+			<c:out value="${ora:clergy(building.clergyman.type)}" />
+			]]>
+		</example>
+	</function>
 </taglib>
 
 

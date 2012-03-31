@@ -27,8 +27,9 @@ public class CommandBuild implements MoveCommand {
 			throws WeblaboraException {
 		Building building = null;
 		Player player = board.getPlayer(board.getActivePlayer());
-		Terrain spot = player.getLandscape().getTerrain().get(y, x);
+		Terrain location = player.getLandscape().getTerrain().get(y, x);
 		
+		//remove the building from the unused buildings
 		for(Building possibleBuilding : board.getUnbuiltBuildings()) {
 			if(possibleBuilding.getId().equals(buildingId)) {
 				building = possibleBuilding;
@@ -40,12 +41,12 @@ public class CommandBuild implements MoveCommand {
 			throw new WeblaboraException("Building "+buildingId+" was not be found in unbuilt buildings");
 		}
 
-		if(spot.getErection() != null) {
-			throw new WeblaboraException("There is already an erection at ("+x+","+y+"): "+spot.getErection());
+		if(location.getErection() != null) {
+			throw new WeblaboraException("There is already an erection at ("+x+","+y+"): "+location.getErection());
 		}
 		
-		if(building.getTerrains().contains(spot.getTerrainType()) == false) {
-			throw new WeblaboraException("The location at ("+x+","+y+") has a terrain of "+spot.getTerrainType()+", which is not appropriate for "+building);
+		if(building.getTerrains().contains(location.getTerrainType()) == false) {
+			throw new WeblaboraException("The location at ("+x+","+y+") has a terrain of "+location.getTerrainType()+", which is not appropriate for "+building);
 		}
 		
 		if(player.canAffordCost(building.getBuildCost()) == false) {
@@ -53,7 +54,6 @@ public class CommandBuild implements MoveCommand {
 		}
 		
 		player.payBuildCost(building.getBuildCost());
-		spot.setErection(building);
-
+		location.setErection(building);
 	}
 }

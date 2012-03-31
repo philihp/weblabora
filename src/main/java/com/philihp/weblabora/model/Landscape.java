@@ -19,10 +19,10 @@ public class Landscape {
 
 	private ArrayTable<Integer, Integer, Terrain> terrain;
 
-	private Player owner;
+	private Player player;
 
-	public Landscape(Player owner) {
-		this.owner = owner;
+	public Landscape(Player player) {
+		this.player = player;
 
 		ClayMound clayMound = new ClayMound();
 		Farmyard farmyard = new Farmyard();
@@ -40,10 +40,6 @@ public class Landscape {
 		terrain.put(1, 2, new Terrain(this, PLAINS, farmyard));
 		terrain.put(1, 3, new Terrain(this, PLAINS, null));
 		terrain.put(1, 4, new Terrain(this, PLAINS, cloisterOffice));
-
-		clayMound.setOwner(this);
-		farmyard.setOwner(this);
-		cloisterOffice.setOwner(this);
 	}
 
 	public Table<Integer, Integer, Terrain> getTerrain() {
@@ -78,8 +74,8 @@ public class Landscape {
 		return terrain.get(coordinate.getY(), coordinate.getX());
 	}
 
-	public Player getOwner() {
-		return owner;
+	public Player getPlayer() {
+		return player;
 	}
 
 }

@@ -4,13 +4,12 @@ import java.util.Set;
 
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
+import com.philihp.weblabora.model.Terrain;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 
 abstract public class Building extends Erection {
-
-	protected Board board;
 
 	protected final String id;
 	protected final String stage;

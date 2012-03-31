@@ -26,7 +26,12 @@ public final class MoveProcessor {
 
 		if (board.currentMove % 5 == 1) {
 			board.getWheel().pushArm();
+			for(Player player : board.getPlayers()) {
+				if(player.isClergymenAllPlaced())
+					player.resetClergymen();
+			}
 		}
+		
 		board.nextActivePlayer();
 	}
 
