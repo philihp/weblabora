@@ -12,14 +12,17 @@
 
 <h1>Bad Move</h1>
 
-The move you tried to make, <code>${token}</code> could not be made because it resulted in an invalid game state. This could
-happen for a number of things, such as:
+Tried to make this move:
+<blockquote><code>${token}</code></blockquote>
+
+But couldn't, because it resulted in an invalid state of the board. This could
+happen for a number of things, for example (but not limited to):
 <ul>
 	<li>Build something without the proper resources</li>
 	<li>Building a building that isn't available</li>
 	<li>Using a building without an available lay person</li>
 	<li>Trying to cut peat/fell trees in something other than moor/forest</li>
-	<li>Between any action, having less than 0 of anything</li>
+	<li>At any point in your turn having a negative amount of anything</li>
 </ul>
 
 The specific error was:
@@ -28,6 +31,8 @@ The specific error was:
 ${error}
 </pre>
 
+Game ID <code>${game.gameId}</code><br />
+from State ID <code>${game.state.stateId}</code>
 
 </body>
 </html:html>

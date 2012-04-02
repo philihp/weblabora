@@ -364,10 +364,11 @@ public class Player {
 	}
 
 	public void payBuildCost(BuildCost buildCost) {
-		this.setWood(this.getWood() - buildCost.getWood());
-		this.setClay(this.getClay() - buildCost.getClay());
-		this.setStone(this.getStone() - buildCost.getStone());
-		this.setStraw(this.getStraw() - buildCost.getStraw());
+		subtractWood(buildCost.getWood());
+		subtractClay(buildCost.getClay());
+		subtractStone(buildCost.getStone());
+		subtractStraw(buildCost.getStraw());
+		subtractCoins(buildCost.getCoin());
 	}
 
 	public void addBonusPoints(int bonusPoints) {

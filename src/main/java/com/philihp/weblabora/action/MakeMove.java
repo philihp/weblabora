@@ -50,6 +50,7 @@ public class MakeMove extends BaseAction {
 			}
 			catch(WeblaboraException e) {
 				request.setAttribute("error", e);
+				request.setAttribute("game", game);
 				request.setAttribute("token", form.getToken());
 				return mapping.findForward("badMove");
 			}
