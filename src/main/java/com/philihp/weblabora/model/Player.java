@@ -88,7 +88,7 @@ public class Player {
 		return color;
 	}
 	
-	public int getPoints() {
+	public int getBonusPoints() {
 		return bonusPoints;
 	}
 
@@ -653,5 +653,54 @@ public class Player {
 	}
 	public User getUser() {
 		return user;
+	}
+
+	public void testValidity() throws WeblaboraException {
+		if(getBonusPoints() < 0)
+			throw new WeblaboraException(color + " has "+getBonusPoints()+" points");
+		if(getPeat() < 0)
+			throw new WeblaboraException(color + " has "+getPeat()+" peat");
+		if(getPenny() < 0)
+			throw new WeblaboraException(color + " has "+getPenny()+" pennies");
+		if(getClay() < 0)
+			throw new WeblaboraException(color + " has "+getClay()+" clay");
+		if(getWood() < 0)
+			throw new WeblaboraException(color + " has "+getWood()+" wood");
+		if(getGrain() < 0)
+			throw new WeblaboraException(color + " has "+getGrain()+" grain");
+		if(getSheep() < 0)
+			throw new WeblaboraException(color + " has "+getSheep()+" sheep");
+		if(getStone() < 0)
+			throw new WeblaboraException(color + " has "+getStone()+" stone");
+		if(getFlour() < 0)
+			throw new WeblaboraException(color + " has "+getFlour()+" flour");
+		if(getGrapes() < 0)
+			throw new WeblaboraException(color + " has "+getGrapes()+" grapes");
+		if(getNickel() < 0)
+			throw new WeblaboraException(color + " has "+getNickel()+" nickels");
+		if(getHops() < 0)
+			throw new WeblaboraException(color + " has "+getHops()+" hops");
+		if(getCoal() < 0)
+			throw new WeblaboraException(color + " has "+getCoal()+" coal");
+		if(getBook() < 0)
+			throw new WeblaboraException(color + " has "+getBook()+" books");
+		if(getPottery() < 0)
+			throw new WeblaboraException(color + " has "+getPottery()+" pottery");
+		if(getWhiskey() < 0)
+			throw new WeblaboraException(color + " has "+getWhiskey()+" whiskey");
+		if(getStraw() < 0)
+			throw new WeblaboraException(color + " has "+getStraw()+" straw");
+		if(getMeat() < 0)
+			throw new WeblaboraException(color + " has "+getMeat()+" meat");
+		if(getOrnament() < 0)
+			throw new WeblaboraException(color + " has "+getOrnament()+" ornaments");
+		if(getWine() < 0)
+			throw new WeblaboraException(color + " has "+getWine()+" wine");
+		if(getBeer() < 0)
+			throw new WeblaboraException(color + " has "+getBeer()+" beers");
+		if(getReliquary() < 0)
+			throw new WeblaboraException(color + " has "+getReliquary()+" reliquary");
+		
+		landscape.checkValidity();
 	}
 }

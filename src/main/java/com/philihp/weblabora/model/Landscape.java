@@ -78,4 +78,8 @@ public class Landscape {
 		return player;
 	}
 
+	public void checkValidity() {
+		//TODO: check the validity of the arrangement of the landscape. plots need to be touching a district/homeland
+	}
+
 }

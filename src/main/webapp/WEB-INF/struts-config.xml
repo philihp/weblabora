@@ -46,7 +46,9 @@
 		<action path="/createGame" name="nullForm" type="com.philihp.weblabora.action.CreateGame" />
 		<action path="/setActiveGame" name="gameForm" type="com.philihp.weblabora.action.SetActiveGame" />
 		<action path="/joinGame" name="joinGameForm" type="com.philihp.weblabora.action.JoinGame" />
-		<action path="/makeMove" name="moveForm" type="com.philihp.weblabora.action.MakeMove" />
+		<action path="/makeMove" name="moveForm" type="com.philihp.weblabora.action.MakeMove">
+			<forward name="badMove" path="/badMove.jsp" />
+		</action>
 
 	</action-mappings>
 

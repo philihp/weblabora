@@ -160,4 +160,10 @@ public class Board {
 		players[3].populatePlayer(game.getPlayer4());
 	}
 
+	public void testValidity() throws WeblaboraException {
+		for(Player player : players) {
+			player.testValidity();
+		}
+	}
+
 }

@@ -43,10 +43,16 @@ public class MakeMove extends BaseAction {
 		} else {
 			
 			Board board = new Board();
-			for(String move : user.getActiveGame().getMoves()) {
-				MoveProcessor.processMoves(board,move);
+			MoveProcessor.processMoves(board, user.getActiveGame().getMoves());
+			try {
+				MoveProcessor.processMoves(board, form.getToken());
+				board.testValidity();
 			}
-
+			catch(WeblaboraException e) {
+				request.setAttribute("error", e);
+				request.setAttribute("token", form.getToken());
+				return mapping.findForward("badMove");
+			}
 			
 			state = new State();
 			state.setToken(form.getToken());
