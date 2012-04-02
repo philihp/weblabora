@@ -14,6 +14,13 @@ import org.apache.commons.chain.Context;
 public final class MoveProcessor {
 	private MoveProcessor() {
 	}
+	
+
+	public static void processMoves(Board board, Iterable<String> allMoves) throws WeblaboraException {
+		for(String move : allMoves) {
+			processMoves(board,move);
+		}
+	}
 
 	public static void processMoves(Board board, String moves)
 			throws WeblaboraException {

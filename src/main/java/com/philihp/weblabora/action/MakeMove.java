@@ -19,6 +19,7 @@ import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.State;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.model.Board;
+import com.philihp.weblabora.model.MoveProcessor;
 import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.util.EntityManagerManager;
 import com.philihp.weblabora.util.FacebookCredentials;
@@ -40,7 +41,13 @@ public class MakeMove extends BaseAction {
 			// all of this has happened before. all of this will happen again.
 			game.setState(state);
 		} else {
-			// the state is new. create it.
+			
+			Board board = new Board();
+			for(String move : user.getActiveGame().getMoves()) {
+				MoveProcessor.processMoves(board,move);
+			}
+
+			
 			state = new State();
 			state.setToken(form.getToken());
 			state.setSrcState(game.getState());
