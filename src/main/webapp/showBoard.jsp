@@ -33,16 +33,16 @@
 	});
 
 	function showboard(player) {
-		$('#tab1').removeClass('tab--active').addClass('tab--inactive');
-		$('#tab2').removeClass('tab--active').addClass('tab--inactive');
-		$('#tab3').removeClass('tab--active').addClass('tab--inactive');
-		$('#tab4').removeClass('tab--active').addClass('tab--inactive');
-		$('#tab'+player).removeClass('tab--inactive').addClass('tab--active');
-		$('#board1').removeClass('board--active').addClass('board--inactive');
-		$('#board2').removeClass('board--active').addClass('board--inactive');
-		$('#board3').removeClass('board--active').addClass('board--inactive');
-		$('#board4').removeClass('board--active').addClass('board--inactive');
-		$('#board'+player).removeClass('board--inactive').addClass('board--active');
+		$('#tab1').removeClass('tab--selected').addClass('tab--unselected');
+		$('#tab2').removeClass('tab--selected').addClass('tab--unselected');
+		$('#tab3').removeClass('tab--selected').addClass('tab--unselected');
+		$('#tab4').removeClass('tab--selected').addClass('tab--unselected');
+		$('#tab'+player).removeClass('tab--unselected').addClass('tab--selected');
+		$('#board1').removeClass('board--selected').addClass('board--unselected');
+		$('#board2').removeClass('board--selected').addClass('board--unselected');
+		$('#board3').removeClass('board--selected').addClass('board--unselected');
+		$('#board4').removeClass('board--selected').addClass('board--unselected');
+		$('#board'+player).removeClass('board--unselected').addClass('board--selected');
 	}
 	
 	$(function() {
@@ -189,26 +189,15 @@
 		--></div>
 
 		<ul class="tabs">
-			<li id="tab1" class="tab tab--${board.players[0].activeClass}">
-				<img src="http://graph.facebook.com/${game.player1.user.facebookId}/picture" height="50" width="50" title="${game.player1.user.facebookId}"/>
-				${game.player1.user.name}
-			</li>
-			<li id="tab2" class="tab tab--${board.players[1].activeClass}">
-				<img src="http://graph.facebook.com/${game.player2.user.facebookId}/picture" height="50" width="50" title="${game.player2.user.facebookId}"/>
-				${game.player2.user.name}
-			</li>
-			<li id="tab3" class="tab tab--${board.players[2].activeClass}">
-				<img src="http://graph.facebook.com/${game.player3.user.facebookId}/picture" height="50" width="50" title="${game.player3.user.facebookId}"/>
-				${game.player3.user.name}
-			</li>
-			<li id="tab4" class="tab tab--${board.players[3].activeClass}">
-				<img src="http://graph.facebook.com/${game.player4.user.facebookId}/picture" height="50" width="50" title="${game.player4.user.facebookId}"/>
-				${game.player4.user.name}
-			</li>
+			<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
+				<li id="tab${playerStatus.index+1}" class="tab tab--${player.activeClass} tab--${player.selectedClass}">
+					<img src="http://graph.facebook.com/${player.user.facebookId}/picture" height="50" width="50" title="${player.user.facebookId}"/>
+					${player.user.name}
+				</li>
+			</c:forEach>
 		</ul>
-
 		<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
-			<div class="board board--${player.activeClass}" id="board${playerStatus.index+1}">
+			<div class="board board--${player.activeClass} board--${player.selectedClass}" id="board${playerStatus.index+1}">
 				<table>
 					<c:forEach items="${player.landscape.table}" var="row">
 						<tr>

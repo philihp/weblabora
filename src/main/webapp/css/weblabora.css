@@ -118,15 +118,20 @@ div.container {
 	border-collapse: collapse;
 }
 
-.board--active {
+.board--selected {
 	
 }
-.board--inactive {
+.board--unselected {
 	display: none;
 }
+.tab--selected {
+}
+.tab--unselected {
+	opacity: 0.5;
+}
 .tab--active {
-	/*box-shadow: 0 0 7px rgba(255,200,0,0.5) inset;*/
+	box-shadow: 0 0 7px rgba(255,200,0,0.5) inset;
+	background-color: #FFBF7F;
 }
 .tab--inactive {
-	opacity: 0.5;
 }

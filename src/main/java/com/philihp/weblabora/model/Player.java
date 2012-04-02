@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.ArrayTable;
+import com.philihp.weblabora.jpa.User;
 
 public class Player {
+	
+	private User user;
 	
 	private boolean active;
 	
@@ -340,9 +343,12 @@ public class Player {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
+
 	public String getActiveClass() {
 		return isActive()?"active":"inactive";
+	}
+	public String getSelectedClass() {
+		return isActive()?"selected":"unselected";
 	}
 
 	public boolean canAffordCost(BuildCost buildCost) {
@@ -640,5 +646,12 @@ public class Player {
 
 	public Clergyman getPrior() {
 		return prior;
+	}
+
+	public void populatePlayer(com.philihp.weblabora.jpa.Game.Player player) {
+		user = player.getUser();
+	}
+	public User getUser() {
+		return user;
 	}
 }

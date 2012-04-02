@@ -31,6 +31,7 @@ public class ShowBoard extends BaseAction {
 		
 		if(user.getActiveGame() != null) {
 			Board board = new Board();
+			board.populateDetails(user.getActiveGame());
 			for(String move : user.getActiveGame().getMoves()) {
 				MoveProcessor.processMoves(board,move);
 			}

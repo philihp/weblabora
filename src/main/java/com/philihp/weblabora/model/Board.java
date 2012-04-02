@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
+
+import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.BuildingEnum;
 import com.philihp.weblabora.model.building.ClayMound;
@@ -149,6 +151,13 @@ public class Board {
 		if (++activePlayer >= players.length)
 			activePlayer = 0;
 		players[activePlayer].setActive(true);
+	}
+
+	public void populateDetails(Game game) {
+		players[0].populatePlayer(game.getPlayer1());
+		players[1].populatePlayer(game.getPlayer2());
+		players[2].populatePlayer(game.getPlayer3());
+		players[3].populatePlayer(game.getPlayer4());
 	}
 
 }
