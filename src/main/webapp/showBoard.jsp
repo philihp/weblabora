@@ -208,9 +208,12 @@
 											${cell.terrainType.properCase}
 										</c:when>
 										<c:otherwise>
-											${cell.erection.name}
-											<br />
-											${ora:clergy(cell.erection.clergyman.type)}
+											<div class="building">
+		  	  									<b>${cell.erection.id}</b><br />
+		  	  									${cell.erection.name}<br />
+		  	  									<br />
+												${ora:clergy(cell.erection.clergyman.type)}
+										  	</div>
 										</c:otherwise>
 									</c:choose>
 								</td>

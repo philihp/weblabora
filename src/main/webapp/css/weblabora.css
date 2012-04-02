@@ -66,6 +66,7 @@ div.container {
 	width: 80px;
 	display: inline-block;
 	vertical-align: top;
+	text-align: left;
 	padding: 2px;
 	margin: 3px;
 }

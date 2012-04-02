@@ -11,27 +11,22 @@ import com.philihp.weblabora.model.WeblaboraException;
 
 abstract public class Building extends Erection {
 
-	protected final String id;
 	protected final String stage;
 	protected final int players;
-	protected final String name;
 	protected final BuildCost buildCost;
 	protected final int settlementValue;
 	protected final int shieldValue;
-	protected final Set<TerrainTypeEnum> terrains;
 	protected final boolean cloister;
 
 	public Building(String id, String stage, int players, String name,
 			BuildCost buildCost, int settlementValue, int shieldValue,
 			Set<TerrainTypeEnum> terrains, boolean cloister) {
-		this.id = id;
+		super(id, name, terrains);
 		this.stage = stage;
 		this.players = players;
-		this.name = name;
 		this.buildCost = buildCost;
 		this.settlementValue = settlementValue;
 		this.shieldValue = shieldValue;
-		this.terrains = terrains;
 		this.cloister = cloister;
 	}
 
@@ -40,14 +35,6 @@ abstract public class Building extends Erection {
 
 	public String getStage() {
 		return stage;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public BuildCost getBuildCost() {
@@ -60,10 +47,6 @@ abstract public class Building extends Erection {
 
 	public int getShieldValue() {
 		return shieldValue;
-	}
-
-	public Set<TerrainTypeEnum> getTerrains() {
-		return terrains;
 	}
 
 	public boolean isCloister() {
