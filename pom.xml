@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.philihp</groupId>
 	<artifactId>weblabora</artifactId>
-	<version>0.1</version>
+	<version>0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>WebLabora</name>
 	<description>Web-enabled Ora et Labora Game</description>
@@ -17,9 +17,9 @@
 	</developers>
 
 	<scm>
-		<connection>scm:git:git@github.comgithub.com:philihp/WebLabora.git</connection>
-		<developerConnection>scm:git:git@github.com:philihp/WebLabora.git</developerConnection>
-		<url>scm:git:git@github.com:philihp/WebLabora.git</url>
+		<connection>scm:git:ssh://github.com/philihp/${project.artifactId}.git</connection>
+		<developerConnection>scm:git:ssh://github.com/philihp/${project.artifactId}.git</developerConnection>
+		<url>http://github.com:philihp/${project.artifactId}</url>
 	</scm>
 	
 	
@@ -30,8 +30,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.6</source>
+					<target>1.6</target>
 				</configuration>
 			</plugin>
 			<plugin>

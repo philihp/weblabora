@@ -28,7 +28,9 @@ import com.philihp.weblabora.util.FacebookCredentials;
 
 abstract class BaseAction extends Action {
 	
+	@SuppressWarnings("unchecked")
 	private static final Set<Object> PUBLIC_ACTIONS = new HashSet<Object>(Arrays.asList(Authenticate.class, AuthenticateGetInfo.class, Offline.class));
+	
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm,
 			HttpServletRequest request, HttpServletResponse response)
