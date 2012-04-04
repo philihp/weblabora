@@ -17,9 +17,9 @@
 	</developers>
 
 	<scm>
-		<connection>scm:git:git@github.comgithub.com/philihp/WebLabora.git</connection>
-		<developerConnection>scm:git:git@github.com/philihp/WebLabora.git</developerConnection>
-		<url>scm:git:git@github.com/philihp/WebLabora.git</url>
+		<connection>scm:git:git@github.comgithub.com:philihp/WebLabora.git</connection>
+		<developerConnection>scm:git:git@github.com:philihp/WebLabora.git</developerConnection>
+		<url>scm:git:git@github.com:philihp/WebLabora.git</url>
 	</scm>
 	
 	
