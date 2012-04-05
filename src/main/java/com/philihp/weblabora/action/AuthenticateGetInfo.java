@@ -38,18 +38,13 @@ public class AuthenticateGetInfo extends BaseAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response, User user) throws AuthenticationException, Exception {
 
-		String accessToken = (String) request.getSession().getAttribute("accessToken");
-		if (accessToken == null)
-			throw new AuthenticationException();
+		String meJson = (String)request.getAttribute("me.json");
+		if(meJson == null) throw new AuthenticationException();
 
-		URL url = new URL("https://graph.facebook.com/me/?access_token=" + accessToken);
-		HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-		if (connection.getResponseCode() == 400)
-			throw new AuthenticationException();
-
-		Gson gson = new GsonBuilder().registerTypeAdapter(FacebookCredentials.class, new FacebookCredentialsDeserializer())
-				.create();
-		FacebookCredentials credentials = gson.fromJson(new InputStreamReader(connection.getInputStream()), FacebookCredentials.class);
+		Gson gson = new GsonBuilder().registerTypeAdapter(
+				FacebookCredentials.class,
+				new FacebookCredentialsDeserializer()).create();
+		FacebookCredentials credentials = gson.fromJson(meJson, FacebookCredentials.class);
 
 		user = findUser(credentials.getFacebookId());
 		user.setName(credentials.getName());

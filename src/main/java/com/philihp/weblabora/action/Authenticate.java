@@ -14,6 +14,14 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.scribe.builder.ServiceBuilder;
+import org.scribe.builder.api.FacebookApi;
+import org.scribe.model.OAuthRequest;
+import org.scribe.model.Response;
+import org.scribe.model.Token;
+import org.scribe.model.Verb;
+import org.scribe.model.Verifier;
+import org.scribe.oauth.OAuthService;
 
 import antlr.StringUtils;
 
@@ -22,62 +30,31 @@ import com.philihp.weblabora.util.Facebook;
 import com.philihp.weblabora.util.FacebookCredentials;
 
 public class Authenticate extends BaseAction {
-	
-	public static final String TOKEN = "AAAB64qTU0LsBAAlVCyaJUlJQpS1UONZBuYxcvzqxHKQqiFAODEbOrnytH41zsqOQXSdXMWmT1fsKPxWY9MzaPfOzkx0aBseUbYioukgZDZD";
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response, User user)
 			throws Exception {
+
+		OAuthService service = new ServiceBuilder().provider(FacebookApi.class)
+				.apiKey(Facebook.client_id).apiSecret(Facebook.client_secret)
+				.callback(Facebook.redirect_uri).build();
 		
-		//development-time hack
-		if(TOKEN != null) {
-			request.getSession().setAttribute("accessToken", TOKEN);
-			return mapping.findForward("getInfo");
-		}
-
-		String code = (String) request.getParameter("code");
-
-		if (code != null && code.equals("") == false) {
-			URL url = new URL(
-					"https://graph.facebook.com/oauth/access_token?client_id="
-							+ Facebook.client_id + "&redirect_uri="
-							+ Facebook.redirect_uri + "&client_secret="
-							+ Facebook.client_secret + "&code=" + code);
-			try {
-				String result = readURL(url);
-				String accessToken = null;
-				Integer expires = null;
-				String[] pairs = result.split("&");
-				for (String pair : pairs) {
-					String[] kv = pair.split("=");
-					if (kv.length != 2) {
-						throw new RuntimeException("Unexpected auth response");
-					} else {
-						if (kv[0].equals("access_token")) {
-							accessToken = kv[1];
-						}
-						if (kv[0].equals("expires")) {
-							expires = Integer.valueOf(kv[1]);
-						}
-					}
-				}
-				
-				Date expiresDate = new Date((new Date().getTime()) + expires*1000);
-				request.getSession().setAttribute("accessToken", accessToken);
-				
-				//going to save this, even though we don't really care
-				request.getSession().setAttribute("accessExpires", expiresDate);
-				
-				System.out.println("access= "+accessToken);
-				System.out.println("expires= "+expiresDate);
-				
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
+		String verifier = request.getParameter("code");
+		
+		if(verifier == null) {
+			String authURL = service.getAuthorizationUrl(null);
+			System.out.println("Authorization URL: "+authURL);
+			return new ActionForward(authURL, true);
 		}
 		else {
-			return mapping.findForward("facebook");
+			Token accessToken = service.getAccessToken((Token)null, new Verifier(verifier));
+			OAuthRequest authRequest = new OAuthRequest(Verb.GET, "https://graph.facebook.com/me");
+			service.signRequest(accessToken, authRequest);
+			Response authResponse = authRequest.send();
+			
+			request.setAttribute("me.json", authResponse.getBody());
+			
+			return mapping.findForward("getInfo");
 		}
-		return mapping.findForward("getInfo");
 	}
 }

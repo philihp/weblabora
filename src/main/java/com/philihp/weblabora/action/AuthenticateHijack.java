@@ -35,25 +35,10 @@ public class AuthenticateHijack extends BaseAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response, User user) throws AuthenticationException, Exception {
 
-		String accessToken = (String) request.getSession().getAttribute("accessToken");
-		if (accessToken == null)
-			throw new AuthenticationException();
-
 		HijackForm form = (HijackForm)actionForm;
 		if(form.getFacebookId() == null) form.setFacebookId(user.getFacebookId());
 
-		URL url = new URL("https://graph.facebook.com/"+form.getFacebookId()+"/?access_token=" + accessToken);
-		HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-		if (connection.getResponseCode() == 400)
-			throw new AuthenticationException();
-
-		Gson gson = new GsonBuilder().registerTypeAdapter(FacebookCredentials.class, new FacebookCredentialsDeserializer())
-				.create();
-		FacebookCredentials credentials = gson.fromJson(new InputStreamReader(connection.getInputStream()),
-				FacebookCredentials.class);
-
-		user = findUser(credentials.getFacebookId());
-		user.setName(credentials.getName());
+		user = findUser(form.getFacebookId());
 		request.getSession().setAttribute("user", user);
 
 		return mapping.findForward("root");

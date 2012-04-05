@@ -28,8 +28,6 @@ public class AuthenticateLogout extends BaseAction {
 			HttpServletResponse response, User user) throws Exception {
 		
 		request.getSession().setAttribute("user", null);
-		request.getSession().setAttribute("accessToken", null);
-		request.getSession().setAttribute("accessExpires", null);
 
 		return mapping.findForward("root");
 	}

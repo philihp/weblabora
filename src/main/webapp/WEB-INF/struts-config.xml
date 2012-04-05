@@ -28,9 +28,6 @@
 	<action-mappings>
 		<action path="/authenticate" type="com.philihp.weblabora.action.Authenticate">
 			<forward name="getInfo" path="/authenticateGetInfo.do" />
-			<forward name="facebook"
-				path="https://www.facebook.com/dialog/oauth?client_id=135113846608059&amp;scope=user_location,user_groups&amp;redirect_uri=http://localhost:8080/weblabora/authenticate.do"
-				redirect="true" />
 		</action>
 		<action path="/authenticateGetInfo" type="com.philihp.weblabora.action.AuthenticateGetInfo" />
 		<action path="/authenticateLogout" type="com.philihp.weblabora.action.AuthenticateLogout" />

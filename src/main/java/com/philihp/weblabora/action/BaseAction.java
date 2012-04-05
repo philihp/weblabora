@@ -37,8 +37,8 @@ abstract class BaseAction extends Action {
 			throws Exception {
 		System.out.println("Action: "+this.getClass().getCanonicalName());
 		
-		//can't just use the old user from the session attributes because
-		//it was registered with an EntityManager from a different thread.
+		//get the User from the session, but use it to find a new User, because
+		//the old object might not be registered with the current therad's EntityManager
 		User user = findUser((User)request.getSession().getAttribute("user"));
 		request.getSession().setAttribute("user", user);
 		
