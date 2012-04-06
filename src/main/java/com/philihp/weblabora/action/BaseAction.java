@@ -1,11 +1,6 @@
 package com.philihp.weblabora.action;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,8 +17,6 @@ import org.apache.struts.action.ActionMapping;
 
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.util.EntityManagerManager;
-import com.philihp.weblabora.util.Facebook;
-import com.philihp.weblabora.util.FacebookCredentials;
 
 
 abstract class BaseAction extends Action {
