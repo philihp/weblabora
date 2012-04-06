@@ -35,9 +35,13 @@ public class Authenticate extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response, User user)
 			throws Exception {
 
+		String clientId = (String)getServlet().getServletContext().getAttribute("client_id");
+		String clientSecret = (String)getServlet().getServletContext().getAttribute("client_secret");
+		String redirectURI = (String)getServlet().getServletContext().getAttribute("redirect_uri");
+		
 		OAuthService service = new ServiceBuilder().provider(FacebookApi.class)
-				.apiKey(Facebook.client_id).apiSecret(Facebook.client_secret)
-				.callback(Facebook.redirect_uri).build();
+				.apiKey(clientId).apiSecret(clientSecret)
+				.callback(redirectURI).build();
 		
 		String verifier = request.getParameter("code");
 		

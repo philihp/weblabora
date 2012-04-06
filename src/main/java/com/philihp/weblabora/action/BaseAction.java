@@ -51,16 +51,6 @@ abstract class BaseAction extends Action {
 			HttpServletRequest request, HttpServletResponse response, User user)
 			throws AuthenticationException, Exception;
 
-	protected String readURL(URL url) throws IOException {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		InputStream is = url.openStream();
-		int r;
-		while ((r = is.read()) != -1) {
-			baos.write(r);
-		}
-		return new String(baos.toByteArray());
-	}
-
 	private boolean isActionPrivate() {
 		return PUBLIC_ACTIONS.contains(this.getClass()) == false;
 	}

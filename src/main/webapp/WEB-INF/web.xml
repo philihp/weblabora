@@ -12,6 +12,10 @@
   <listener>
     <listener-class>com.philihp.weblabora.util.JPAContextListener</listener-class>
   </listener>
+  <listener>
+  	<!-- must come second because it relies on JPA to load config -->
+    <listener-class>com.philihp.weblabora.util.ApplicationScopeLoader</listener-class>
+  </listener>
   <filter>
     <filter-name>jpa-filter</filter-name>
     <filter-class>com.philihp.weblabora.util.EntityManagerFilter</filter-class>
@@ -54,7 +58,4 @@
   <session-config>
     <session-timeout>-1</session-timeout>
   </session-config>
-  <listener>
-    <listener-class>com.philihp.weblabora.util.ApplicationScopeLoader</listener-class>
-  </listener>
 </web-app>

@@ -12,6 +12,7 @@
 		<class>com.philihp.weblabora.jpa.Game</class>
 		<class>com.philihp.weblabora.jpa.Game$Player</class>
 		<class>com.philihp.weblabora.jpa.State</class>
+		<class>com.philihp.weblabora.jpa.Config</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 
 		<shared-cache-mode>NONE</shared-cache-mode>
