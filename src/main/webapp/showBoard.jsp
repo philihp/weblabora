@@ -156,6 +156,9 @@
 				<g id="grain" transform="rotate(${ora:deg(board.wheel.peat.position)})">
 					<text x="0" y="-51" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Peat</text>
 				</g>
+				<g id="grain" transform="rotate(${ora:deg(board.wheel.coin.position)})">
+					<text x="0" y="-42" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Coin</text>
+				</g>
 				<g id="arm"  transform="rotate(${ora:deg(board.wheel.arm.position)-13.846})" style="font-size: 10px; text-anchor: middle">
 				  <path d="${wheelArt.armPath}"
 				        style="fill:#ffffff; fill-opacity: 1; stroke:#686868; stroke-width: 1" />
