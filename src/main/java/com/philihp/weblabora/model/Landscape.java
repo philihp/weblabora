@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static com.philihp.weblabora.model.TerrainTypeEnum.*;
 
 import com.google.common.collect.ArrayTable;
+import com.google.common.collect.DiscreteDomains;
+import com.google.common.collect.Ranges;
 import com.google.common.collect.Table;
 import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.ClayMound;
@@ -28,8 +31,11 @@ public class Landscape {
 		Farmyard farmyard = new Farmyard();
 		CloisterOffice cloisterOffice = new CloisterOffice();
 
-		this.terrain = ArrayTable.create(Arrays.asList(0, 1),
-				Arrays.asList(-2, -1, 0, 1, 2, 3, 4, 5, 6));
+
+		Set<Integer> rows = Ranges.closed(0, 1).asSet(DiscreteDomains.integers());
+		Set<Integer> cols = Ranges.closed(0, 4).asSet(DiscreteDomains.integers());
+		this.terrain = ArrayTable.create(rows,cols);
+		
 		terrain.put(0, 0, new Terrain(this, MOOR, null));
 		terrain.put(0, 1, new Terrain(this, FOREST, null));
 		terrain.put(0, 2, new Terrain(this, FOREST, null));
@@ -44,6 +50,10 @@ public class Landscape {
 
 	public Table<Integer, Integer, Terrain> getTerrain() {
 		return terrain;
+	}
+	
+	public void setTerrain(ArrayTable<Integer, Integer, Terrain> terrain) {
+		this.terrain = terrain;
 	}
 
 	public Terrain[][] getTable() {

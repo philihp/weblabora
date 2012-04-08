@@ -18,6 +18,9 @@ import com.philihp.weblabora.model.building.Farmyard;
 import static com.philihp.weblabora.model.building.BuildingEnum.*;
 
 public class Board {
+	
+	public static final int[] PLOT_PURCHASE_PRICE = {3,4,4,5,5,5,6,6,7};
+	public static final int[] DISTRICT_PURCHASE_PRICE = {2,3,4,4,5,5,6,7,8};
 
 	protected final GamePlayers gamePlayers;
 
@@ -30,6 +33,10 @@ public class Board {
 	private int activePlayer;
 
 	private List<Building> unbuiltBuildings;
+	
+	private int plotsPurchased;
+	
+	private int districtsPurchased;
 	
 	/**
 	 * This makes lookups from {@link CommandUse CommandUse}
@@ -164,6 +171,14 @@ public class Board {
 		for(Player player : players) {
 			player.testValidity();
 		}
+	}
+	
+	public int purchasePlot() {
+		return PLOT_PURCHASE_PRICE[plotsPurchased++];
+	}
+	
+	public int purchaseDistrict() {
+		return DISTRICT_PURCHASE_PRICE[districtsPurchased++];
 	}
 
 }
