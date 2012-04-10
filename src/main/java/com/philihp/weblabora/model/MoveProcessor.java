@@ -83,6 +83,8 @@ public final class MoveProcessor {
 			return new CommandBuyDistrict();
 		case 'P':
 			return new CommandBuyPlot();
+		case 'V':
+			return new CommandConvert();
 		default:
 			throw new WeblaboraException("Unknown Command \""+commandChar+"\"");
 		}

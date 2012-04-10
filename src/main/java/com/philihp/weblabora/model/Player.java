@@ -512,6 +512,10 @@ public class Player {
 		//i think we can do the same with wine, but i haven't wrapped my head around if that's totally cool.
 	}
 	
+	public void subtractPenny(int penny) {
+		this.penny -= penny;
+	}
+	
 	public int getCoins() {
 		return getNickel()*5 + getPenny();
 	}
