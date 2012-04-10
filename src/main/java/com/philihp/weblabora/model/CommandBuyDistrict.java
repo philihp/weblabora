@@ -20,8 +20,8 @@ public class CommandBuyDistrict implements MoveCommand {
 		Side(TerrainTypeEnum... types) {
 			this.types = types;
 		}
-		public TerrainTypeEnum getType(int i) {
-			return types[i];
+		public TerrainTypeEnum getType(int column) {
+			return types[column];
 		}
 	};
 
@@ -41,12 +41,15 @@ public class CommandBuyDistrict implements MoveCommand {
 		
 		int cost = board.purchaseDistrict();
 		if(player.getCoins() < cost) 
-			throw new WeblaboraException("Purchase price for a plot is "+cost+", but player "+player.getColor()+" only has "+player.getCoins()+".");
+			throw new WeblaboraException("Purchase price for a district is "+cost+", but player "+player.getColor()+" only has "+player.getCoins()+".");
 		player.subtractCoins(cost);
 		
 		Landscape landscape = player.getLandscape();
 		
 		Table<Integer, Integer, Terrain> oldTerrain = landscape.getTerrain();
+		
+		checkForOverlap(oldTerrain, y);
+		checkForConnection(oldTerrain, y);
 		
 		Set<Integer> oldRows = oldTerrain.rowKeySet();
 		Set<Integer> oldColumns = oldTerrain.columnKeySet();
@@ -73,6 +76,24 @@ public class CommandBuyDistrict implements MoveCommand {
 		}
 		
 		landscape.setTerrain(newTerrain);
+		
+	}
+	private static void checkForConnection(
+			Table<Integer, Integer, Terrain> oldTerrain, int y) throws WeblaboraException {
+		if(oldTerrain.contains(y, -1)==false && //left
+			oldTerrain.contains(y, 5)==false && //right
+			oldTerrain.contains(y-1, 0)==false && //top
+			oldTerrain.contains(y+1, 0)==false) { //bottom
+			throw new WeblaboraException("Cannot put a district at "+y+", as it does not connect to the rest of the landscape");
+		}
+		
+	}
+
+	private static void checkForOverlap(
+			Table<Integer, Integer, Terrain> oldTerrain, int y) throws WeblaboraException {
+		if(oldTerrain.contains(y, 0)) {
+			throw new WeblaboraException("Cannot put a district at "+y+", as it would overlap");
+		}
 		
 	}
 }
