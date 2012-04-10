@@ -27,9 +27,9 @@ public class Landscape {
 	public Landscape(Player player) {
 		this.player = player;
 
-		ClayMound clayMound = new ClayMound();
-		Farmyard farmyard = new Farmyard();
-		CloisterOffice cloisterOffice = new CloisterOffice();
+		ClayMound clayMound = ClayMound.make(player.getColor());
+		Farmyard farmyard = Farmyard.make(player.getColor());
+		CloisterOffice cloisterOffice = CloisterOffice.make(player.getColor());
 
 
 		Set<Integer> rows = Ranges.closed(0, 1).asSet(DiscreteDomains.integers());
@@ -91,5 +91,4 @@ public class Landscape {
 	public void checkValidity() {
 		//TODO: check the validity of the arrangement of the landscape. plots need to be touching a district/homeland
 	}
-
 }

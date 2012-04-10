@@ -10,6 +10,7 @@ import java.util.Set;
 
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
+import com.philihp.weblabora.model.Color;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.Token;
@@ -18,8 +19,8 @@ import com.philihp.weblabora.model.Wheel;
 
 public class CloisterOffice extends Building {
 
-	public CloisterOffice() {
-		super("LX3", "L", 0, "Cloister Office", BuildCost.is(), 2, 0, EnumSet.of(PLAINS), true);
+	public CloisterOffice(String id, String stage, int players) {
+		super(id, stage, players, "Cloister Office", BuildCost.is(), 2, 0, EnumSet.of(PLAINS), true);
 	}
 
 	@Override
@@ -28,5 +29,20 @@ public class CloisterOffice extends Building {
 		Wheel wheel = board.getWheel();
 		Token token = input.isWithJoker()?wheel.getJoker():wheel.getCoin();
 		player.addPenny(token.take());
+	}
+
+	public static CloisterOffice make(Color color) {
+		switch (color) {
+		case RED:
+			return new CloisterOfficeR();
+		case GREEN:
+			return new CloisterOfficeG();
+		case BLUE:
+			return new CloisterOfficeB();
+		case WHITE:
+			return new CloisterOfficeW();
+		default:
+			throw new RuntimeException("Unknown color " + color);
+		}
 	}
 }

@@ -18,7 +18,7 @@ import com.philihp.weblabora.model.Wheel;
 
 abstract class Quarry extends Building {
 
-	public Quarry(String id, String stage, int players) {
+	protected Quarry(String id, String stage, int players) {
 		super(id, stage, players, "Quarry", BuildCost.is().coin(5), -4, 7, EnumSet
 				.of(MOUNTAIN), false);
 	}

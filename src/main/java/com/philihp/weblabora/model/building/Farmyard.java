@@ -10,6 +10,7 @@ import java.util.Set;
 
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
+import com.philihp.weblabora.model.Color;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.Token;
@@ -19,8 +20,8 @@ import com.philihp.weblabora.model.Wheel;
 
 public class Farmyard extends Building {
 
-	public Farmyard() {
-		super("LX2", "L", 0, "Farmyard", BuildCost.is(), 2, 0, EnumSet.of(PLAINS), true);
+	public Farmyard(String id, String stage, int players) {
+		super(id, stage, players, "Farmyard", BuildCost.is(), 2, 0, EnumSet.of(PLAINS), true);
 	}
 
 	@Override
@@ -40,5 +41,20 @@ public class Farmyard extends Building {
 			throw new WeblaboraException("Usage of Farmyard must specify if Sheep or Grain is desired.");
 		}
 		
+	}
+
+	public static Farmyard make(Color color) {
+		switch (color) {
+		case RED:
+			return new FarmyardR();
+		case GREEN:
+			return new FarmyardG();
+		case BLUE:
+			return new FarmyardB();
+		case WHITE:
+			return new FarmyardW();
+		default:
+			throw new RuntimeException("Unknown color " + color);
+		}
 	}
 }

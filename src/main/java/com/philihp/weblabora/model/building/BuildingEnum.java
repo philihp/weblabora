@@ -44,18 +44,18 @@ public enum BuildingEnum {
 	F40(Hospice.class),
 	F36(PilgrimageSite.class),
 	G39(Estate.class),
-	LR1(ClayMound.class),
-	LG1(ClayMound.class),
-	LB1(ClayMound.class),
-	LW1(ClayMound.class),
-	LR2(Farmyard.class),
-	LG2(Farmyard.class),
-	LB2(Farmyard.class),
-	LW2(Farmyard.class),
-	LR3(CloisterOffice.class),
-	LG3(CloisterOffice.class),
-	LB3(CloisterOffice.class),
-	LW3(CloisterOffice.class);
+	LR1(ClayMoundR.class),
+	LG1(ClayMoundG.class),
+	LB1(ClayMoundB.class),
+	LW1(ClayMoundW.class),
+	LR2(FarmyardR.class),
+	LG2(FarmyardG.class),
+	LB2(FarmyardB.class),
+	LW2(FarmyardW.class),
+	LR3(CloisterOfficeR.class),
+	LG3(CloisterOfficeG.class),
+	LB3(CloisterOfficeB.class),
+	LW3(CloisterOfficeW.class);
 	
 
 	public final Class<? extends Building> clazz;

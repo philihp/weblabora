@@ -41,7 +41,7 @@ public class Player {
 	private int beer = 0;
 	private int reliquary = 0;
 
-	private Landscape landscape = new Landscape(this);
+	private Landscape landscape;
 
 	private Board board;
 
@@ -56,6 +56,8 @@ public class Player {
 	public Player(Board board, Color color) {
 		this.board = board;
 		this.color = color;
+		//landscape must be initialized AFTER color, because it uses that color's 
+		this.landscape = new Landscape(this);
 	}
 
 	public void gameStart() {
