@@ -73,7 +73,7 @@ public class User extends BasicEntity {
 	}
 	
 	public String toString() {
-		return getName()+"("+getFacebookId()+")";
+		return "<a href=\"http://facebook.com/"+getFacebookId()+"\">"+getName()+"</a>";
 	}
 
 }
