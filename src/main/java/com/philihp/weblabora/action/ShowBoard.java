@@ -29,13 +29,15 @@ public class ShowBoard extends BaseAction {
 		request.setAttribute("myGames", findGamesForUser(user));
 		request.setAttribute("game", user.getActiveGame());
 		
+		Board board = null;
 		if(user.getActiveGame() != null) {
-			Board board = new Board();
+			board = new Board();
 			board.populateDetails(user.getActiveGame());
 			MoveProcessor.processMoves(board, user.getActiveGame().getMoves());
 			request.setAttribute("board", board);
 		}
-			
+		board.preMove(); //upkeep stuff before player makes a move	
+		
 		return mapping.findForward("view");
 	}
 

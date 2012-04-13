@@ -34,4 +34,10 @@ public class Winery extends Building {
 			player.addPenny(2);
 		}
 	}
+
+	@Override
+	public void build(Board board) {
+		super.build(board);
+		board.getStartingMarker().setCost(2);
+	}
 }

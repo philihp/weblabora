@@ -55,5 +55,8 @@ public class CommandBuild implements MoveCommand {
 		
 		player.payBuildCost(building.getBuildCost());
 		location.setErection(building);
+		
+		//call the building's hook, in case it needs to do something. i think this is just the winery.
+		building.build(board);
 	}
 }

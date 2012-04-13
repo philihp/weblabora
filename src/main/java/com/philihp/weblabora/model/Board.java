@@ -38,6 +38,12 @@ public class Board {
 	
 	private int districtsPurchased;
 	
+	private int startingPlayer;
+	private StartingMarker startingMarker;
+	
+	private int round;
+	private int moveInRound;
+
 	/**
 	 * This makes lookups from {@link CommandUse CommandUse}
 	 */
@@ -45,21 +51,17 @@ public class Board {
 
 	private List<Wonder> unclaimedWonders;
 
-	protected int currentMove;
-
 	public Board() {
 		gamePlayers = GamePlayers.FOUR;
 		gameType = GameType.LONG;
 
 		wheel = new Wheel(this);
-		getWheel().pushArm();
 
 		players = new Player[4];
 		players[0] = new Player(this, Color.RED);
 		players[1] = new Player(this, Color.GREEN);
 		players[2] = new Player(this, Color.BLUE);
 		players[3] = new Player(this, Color.WHITE);
-		currentMove = 1;
 
 		players[0].gameStart();
 		players[1].gameStart();
@@ -72,6 +74,12 @@ public class Board {
 		activePlayer = 0;
 		
 		allBuildings = generateBuildingsMap();
+		
+		
+		round = 1;
+		moveInRound = 1;
+		startingPlayer = 0;
+		startingMarker = new StartingMarker(players[0]);
 	}
 
 	public Wheel getWheel() {
@@ -149,10 +157,6 @@ public class Board {
 		return unbuiltBuildings;
 	}
 
-	public int getCurrentMove() {
-		return currentMove;
-	}
-
 	public void nextActivePlayer() {
 		players[activePlayer].setActive(false);
 		if (++activePlayer >= players.length)
@@ -179,6 +183,86 @@ public class Board {
 	
 	public int purchaseDistrict() {
 		return DISTRICT_PURCHASE_PRICE[districtsPurchased++];
+	}
+	
+	public StartingMarker getStartingMarker() {
+		return startingMarker;
+	}
+
+	/**
+	 * Called before every round.
+	 */
+	public void preRound() {
+
+		//1 - reset clergymen
+		for(Player player : getPlayers()) {
+			if(player.isClergymenAllPlaced())
+				player.resetClergymen();
+		}
+		
+		//2 - push arm
+		getWheel().pushArm();
+		
+		//3 - settlement
+	}
+	
+	/**
+	 * Called before every move.
+	 */
+	public void preMove() {
+		if(moveInRound == 1) {
+			preRound();
+		}
+	}
+	
+	/**
+	 * Called after every move.
+	 */
+	public void postMove() {
+		nextActivePlayer();
+		
+		if(++moveInRound == 6) {
+			moveInRound = 1;
+			//end of round
+			round++;
+			postRound();
+			
+			//TODO: this is where we decide if a settlement round happens next
+		}
+	}
+	
+	/**
+	 * Called after every round.
+	 */
+	public void postRound() {
+		//5 -- pass starting player
+		if(++startingPlayer == players.length) startingPlayer = 0;
+		startingMarker.setOwner(players[startingPlayer]);
+	}
+
+	public int getRound() {
+		return round;
+	}
+
+	public String getMove() {
+		switch (moveInRound) {
+		case 1:
+			return "first";
+		case 2:
+			return "second";
+		case 3:
+			return "third";
+		case 4:
+			return "fourth";
+		case 5:
+			return "last";
+		default:
+			throw new RuntimeException("Illegal Round Number " + moveInRound);
+		}
+	}
+	
+	public String getActivePlayerColor() {
+		return getPlayer(getActivePlayer()).getColor().toString();
 	}
 
 }

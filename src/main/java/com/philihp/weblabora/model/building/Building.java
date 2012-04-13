@@ -29,6 +29,10 @@ abstract public class Building extends Erection {
 		this.shieldValue = shieldValue;
 		this.cloister = cloister;
 	}
+	
+	public void build(Board board) {
+		//hook for winery, usually useless
+	}
 
 	public abstract void use(Board board, UsageParam input)
 			throws WeblaboraException;

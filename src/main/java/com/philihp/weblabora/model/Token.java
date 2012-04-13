@@ -1,15 +1,15 @@
 package com.philihp.weblabora.model;
 
-import static com.philihp.weblabora.model.Wheel.Position.A;
+import static com.philihp.weblabora.model.Wheel.Position.*;
 
 import com.philihp.weblabora.model.Wheel.Position;
 
 public class Token {
-	protected Position position;
-	protected Wheel wheel;
+	private Position position;
+	private Wheel wheel;
 	protected Token(Wheel wheel) {
 		this.wheel = wheel;
-		this.position = A;
+		this.position = M;
 	}
 	protected int value() {
 		return 0;
@@ -22,5 +22,8 @@ public class Token {
 	}
 	public Position getPosition() {
 		return position;
+	}
+	public void setPosition(Position position) {
+		this.position = position;
 	}
 }

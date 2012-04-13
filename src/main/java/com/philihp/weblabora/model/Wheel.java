@@ -41,6 +41,7 @@ public class Wheel {
 	
 	public Wheel(Board game) {
 		this.game = game;
+		this.arm.setPosition(M);
 	}
 
 	public Board getGame() {
@@ -88,18 +89,18 @@ public class Wheel {
 	}
 	
 	public void pushArm() {
-		Position next = arm.position.next();
+		Position next = arm.getPosition().next();
 		// this ensures that if something is at 10, it stays at 10
-		if(grain.position == next) grain.position = grain.position.next();
-		if(sheep.position == next) sheep.position = sheep.position.next();
-		if(clay.position == next)  clay.position  = clay.position.next();
-		if(coin.position == next)  coin.position  = coin.position.next();
-		if(wood.position == next)  wood.position  = wood.position.next();
-		if(grape.position == next) grape.position = grape.position.next();
-		if(stone.position == next) stone.position = stone.position.next();
-		if(joker.position == next) joker.position = joker.position.next();
-		if(peat.position == next) peat.position = peat.position.next();
-		arm.position = arm.position.next();
+		if(grain.getPosition() == next) grain.setPosition(grain.getPosition().next());
+		if(sheep.getPosition() == next) sheep.setPosition(sheep.getPosition().next());
+		if(clay.getPosition() == next)  clay.setPosition( clay.getPosition().next());
+		if(coin.getPosition() == next)  coin.setPosition( coin.getPosition().next());
+		if(wood.getPosition() == next)  wood.setPosition( wood.getPosition().next());
+		if(grape.getPosition() == next) grape.setPosition(grape.getPosition().next());
+		if(stone.getPosition() == next) stone.setPosition(stone.getPosition().next());
+		if(joker.getPosition() == next) joker.setPosition(joker.getPosition().next());
+		if(peat.getPosition() == next)  peat.setPosition( peat.getPosition().next());
+		arm.setPosition(next);
 	}
 	
 }

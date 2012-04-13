@@ -190,6 +190,9 @@
 		  	</div><!--
 		  </c:forEach>
 		--></div>
+		
+		<h3>Round ${board.round}, ${board.move} move. Waiting on ${board.activePlayerColor}.</h3>
+		
 
 		<ul class="tabs">
 			<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
@@ -224,6 +227,12 @@
 						</tr>
 					</c:forEach>
 				</table>
+				
+				<hr />
+				
+				<c:if test="${not empty player.startingMarker}">
+				[Starting Player (contract cost is ${board.startingMarker.cost})]
+				</c:if>
 				
 				<h3>Clergymen</h3>
 				<c:if test="${empty player.layBrother1.location}">[Lay Brother]</c:if>

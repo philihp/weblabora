@@ -18,31 +18,21 @@ public final class MoveProcessor {
 
 	public static void processMoves(Board board, Iterable<String> allMoves) throws WeblaboraException {
 		for(String move : allMoves) {
-			processMoves(board,move);
+			board.preMove();
+			processActions(board,move);
+			board.postMove();
 		}
 	}
 
-	public static void processMoves(Board board, String moves)
+	public static void processActions(Board board, String actions)
 			throws WeblaboraException {
-		board.currentMove++;
-
-		for (String move : moves.split("\\|")) {
-			System.out.println("move: " + move);
-			processSingleMove(board, move);
+		for (String action : actions.split("\\|")) {
+			System.out.println("move: " + action);
+			processSingleAction(board, action);
 		}
-
-		if (board.currentMove % 5 == 1) {
-			board.getWheel().pushArm();
-			for(Player player : board.getPlayers()) {
-				if(player.isClergymenAllPlaced())
-					player.resetClergymen();
-			}
-		}
-		
-		board.nextActivePlayer();
 	}
 
-	public static void processSingleMove(Board board, String move)
+	public static void processSingleAction(Board board, String move)
 			throws WeblaboraException {
 		CommandParameters params = new CommandParameters();
 		

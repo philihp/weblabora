@@ -52,6 +52,8 @@ public class Player {
 	private Clergyman layBrother1 = new Clergyman(this, LAYBROTHER);
 	private Clergyman layBrother2 = new Clergyman(this, LAYBROTHER);
 	private Clergyman prior = new Clergyman(this, PRIOR);
+	
+	private StartingMarker startingMarker = null;
 
 	public Player(Board board, Color color) {
 		this.board = board;
@@ -713,5 +715,13 @@ public class Player {
 			throw new WeblaboraException(color + " has "+getReliquary()+" reliquary");
 		
 		landscape.checkValidity();
+	}
+
+	public StartingMarker getStartingMarker() {
+		return startingMarker;
+	}
+
+	public void setStartingMarker(StartingMarker startingMarker) {
+		this.startingMarker = startingMarker;
 	}
 }

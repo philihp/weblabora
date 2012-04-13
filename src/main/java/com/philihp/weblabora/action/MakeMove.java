@@ -44,8 +44,9 @@ public class MakeMove extends BaseAction {
 			
 			Board board = new Board();
 			MoveProcessor.processMoves(board, user.getActiveGame().getMoves());
+			board.preMove();
 			try {
-				MoveProcessor.processMoves(board, form.getToken());
+				MoveProcessor.processActions(board, form.getToken());
 				board.testValidity();
 			}
 			catch(WeblaboraException e) {
