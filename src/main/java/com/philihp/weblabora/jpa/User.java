@@ -71,5 +71,9 @@ public class User extends BasicEntity {
 	public void setActiveGame(Game activeGame) {
 		this.activeGame = activeGame;
 	}
+	
+	public String toString() {
+		return getName()+"("+getFacebookId()+")";
+	}
 
 }
