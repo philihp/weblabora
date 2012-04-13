@@ -128,35 +128,35 @@
 					<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
 					<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">D</text>
 				</g>
-				<g id="settlement-e" transform="rotate(${wheelArt.rotM})">
+				<g id="settlement-e" transform="rotate(${wheelArt.rotL})">
 					<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
 					<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">E</text>
 				</g>
 				<g id="grain" transform="rotate(${ora:deg(board.wheel.grain.position)})">
 					<text x="0" y="-114" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Grain</text>
 				</g>
-				<g id="grain" transform="rotate(${ora:deg(board.wheel.sheep.position)})">
+				<g id="sheep" transform="rotate(${ora:deg(board.wheel.sheep.position)})">
 					<text x="0" y="-105" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Sheep</text>
 				</g>
-				<g id="grain" transform="rotate(${ora:deg(board.wheel.grape.position)})">
+				<g id="grape" transform="rotate(${ora:deg(board.wheel.grape.position)})">
 					<text x="0" y="-96" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Grape</text>
 				</g>
-				<g id="grain" transform="rotate(${ora:deg(board.wheel.stone.position)})">
+				<g id="stone" transform="rotate(${ora:deg(board.wheel.stone.position)})">
 					<text x="0" y="-87" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Stone</text>
 				</g>
-				<g id="grain" transform="rotate(${ora:deg(board.wheel.joker.position)})">
+				<g id="joker" transform="rotate(${ora:deg(board.wheel.joker.position)})">
 					<text x="0" y="-78" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Joker</text>
 				</g>
-				<g id="grain" transform="rotate(${ora:deg(board.wheel.wood.position)})">
+				<g id="wood" transform="rotate(${ora:deg(board.wheel.wood.position)})">
 					<text x="0" y="-69" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Wood</text>
 				</g>
-				<g id="grain" transform="rotate(${ora:deg(board.wheel.clay.position)})">
+				<g id="clay" transform="rotate(${ora:deg(board.wheel.clay.position)})">
 					<text x="0" y="-60" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Clay</text>
 				</g>
-				<g id="grain" transform="rotate(${ora:deg(board.wheel.peat.position)})">
+				<g id="peat" transform="rotate(${ora:deg(board.wheel.peat.position)})">
 					<text x="0" y="-51" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Peat</text>
 				</g>
-				<g id="grain" transform="rotate(${ora:deg(board.wheel.coin.position)})">
+				<g id="coin" transform="rotate(${ora:deg(board.wheel.coin.position)})">
 					<text x="0" y="-42" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Coin</text>
 				</g>
 				<g id="arm"  transform="rotate(${ora:deg(board.wheel.arm.position)-13.846})" style="font-size: 10px; text-anchor: middle">
