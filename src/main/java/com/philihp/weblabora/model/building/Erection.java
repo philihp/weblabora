@@ -28,6 +28,14 @@ public abstract class Erection {
 	public Clergyman getClergyman() {
 		return clergyman;
 	}
+	
+	public void clearClergyman() {
+		if(this.clergyman != null) {
+			Clergyman oldClergyman = this.clergyman;
+			this.clergyman = null;
+			if(oldClergyman != null) oldClergyman.clearLocation();
+		}
+	}
 
 	public void setClergyman(Clergyman clergyman) throws WeblaboraException {
 		if (getClergyman() != null)

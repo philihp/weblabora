@@ -28,6 +28,14 @@ public class Clergyman {
 	public Terrain getLocation() {
 		return location;
 	}
+	
+	public void clearLocation() {
+		if(this.location != null) {
+			Terrain oldLocation = this.location;
+			this.location = null;
+			oldLocation.getErection().clearClergyman();
+		}
+	}
 
 	public void setLocation(Terrain location) throws WeblaboraException {
 		if (location.getErection().getClergyman() != null)

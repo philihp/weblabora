@@ -644,9 +644,9 @@ public class Player {
 	
 	public void resetClergymen() {
 		//doing this directly circumvents the bi-directional protections in the setter
-		layBrother1.location = null;
-		layBrother2.location = null;
-		prior.location = null;
+		layBrother1.clearLocation();
+		layBrother2.clearLocation();
+		prior.clearLocation();
 	}
 
 	public Clergyman getLayBrother1() {
