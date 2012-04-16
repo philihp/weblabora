@@ -12,10 +12,10 @@ import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 
 public final class MoveProcessor {
+	
 	private MoveProcessor() {
 	}
 	
-
 	public static void processMoves(Board board, Iterable<String> allMoves) throws WeblaboraException {
 		for(String move : allMoves) {
 			board.preMove();
@@ -26,13 +26,14 @@ public final class MoveProcessor {
 
 	public static void processActions(Board board, String actions)
 			throws WeblaboraException {
+		boolean firstUse = true;
 		for (String action : actions.split("\\|")) {
-			System.out.println("move: " + action);
-			processSingleAction(board, action);
+			System.out.println("move: " + action + " firstUse=" +firstUse);
+			firstUse = processSingleAction(board, action, firstUse);
 		}
 	}
 
-	public static void processSingleAction(Board board, String move)
+	public static boolean processSingleAction(Board board, String move, boolean firstUse)
 			throws WeblaboraException {
 		CommandParameters params = new CommandParameters();
 		
@@ -41,6 +42,7 @@ public final class MoveProcessor {
 		String suffix = move.substring(move.indexOf(')')+1);
 		
 		params.setCommand(Character.toUpperCase(prefix.charAt(0)));
+		params.setPlaceClergyman(firstUse);
 		
 		Scanner scanner = new Scanner(inner);
 		scanner.useDelimiter(",");
@@ -54,6 +56,7 @@ public final class MoveProcessor {
 		MoveCommand moveCommand = pickCommand(params.getCommand());
 		moveCommand.execute(board, params);
 
+		return moveCommand instanceof CommandUse == false;
 	}
 
 	public static MoveCommand pickCommand(char commandChar) throws WeblaboraException {

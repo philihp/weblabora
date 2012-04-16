@@ -36,24 +36,25 @@ public class CommandUse implements MoveCommand {
 			break;
 		}
 
-		execute(board, BuildingEnum.valueOf(buildingId), usageParam, usingPrior);
+		execute(board, BuildingEnum.valueOf(buildingId), usageParam, usingPrior, params.getPlaceClergyman());
 
 		System.out.println("Using " + buildingId + " with " + usageParam);
 	}
 
 	public static void execute(Board board, BuildingEnum buildingId,
-			UsageParam param, boolean usingPrior) throws WeblaboraException {
+			UsageParam param, boolean usingPrior, boolean placeClergyman) throws WeblaboraException {
 		Building building = board.findBuildingInstance(buildingId);
 		Player buildingOwner = building.getLocation().getLandscape().getPlayer();
 		Terrain location = building.getLocation();
-		
-		if(usingPrior) {
-			buildingOwner.placePrior(location);
+
+		if (placeClergyman) {
+			if (usingPrior) {
+				buildingOwner.placePrior(location);
+			} else {
+				buildingOwner.placeClergyman(location);
+			}
 		}
-		else {
-			buildingOwner.placeClergyman(location);
-		}
-		
+
 		building.use(board, param);
 	}
 }

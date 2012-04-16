@@ -19,6 +19,8 @@ public class CommandParameters {
 	 * The last token.
 	 */
 	private String suffix;
+	
+	private boolean placeClergyman;
 
 	public CommandParameters() {
 	}
@@ -53,5 +55,13 @@ public class CommandParameters {
 	
 	public int size() {
 		return params.size();
+	}
+
+	public void setPlaceClergyman(boolean placeClergyman) {
+		this.placeClergyman = placeClergyman;
+	}
+	
+	public boolean getPlaceClergyman() {
+		return this.placeClergyman;
 	}
 }
