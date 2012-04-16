@@ -29,12 +29,12 @@ public class CommandWorkorder implements MoveCommand {
 		Player orderedPlayer = board.getPlayer(orderedPlayerColor.ordinal());
 
 		if(payment.isWithGift()) {
-			activePlayer.setWhiskey(activePlayer.getWhiskey() - payment.getWhiskey());
-			activePlayer.setWine(activePlayer.getWine() - payment.getWine());
+			activePlayer.subtractWhiskey(payment.getWhiskey());
+			activePlayer.subtractWine(payment.getWine());
 		}
 		else {
-			activePlayer.setPenny(activePlayer.getPenny() - payment.getPenny());
-			orderedPlayer.setPenny(orderedPlayer.getPenny() + payment.getPenny());
+			activePlayer.subtractPenny(payment.getPenny());
+			orderedPlayer.addPenny(payment.getPenny());
 		}
 	}
 }
