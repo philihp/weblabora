@@ -12,7 +12,8 @@ import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 
 public final class MoveProcessor {
-	
+
+
 	private MoveProcessor() {
 	}
 	
@@ -26,14 +27,14 @@ public final class MoveProcessor {
 
 	public static void processActions(Board board, String actions)
 			throws WeblaboraException {
-		boolean firstUse = true;
+		MoveHistory history = new MoveHistory();
 		for (String action : actions.split("\\|")) {
-			System.out.println("move: " + action + " firstUse=" +firstUse);
-			firstUse = processSingleAction(board, action, firstUse);
+			System.out.println("history="+history+"\t move: " + action);
+			processSingleAction(board, action, history);
 		}
 	}
 
-	public static boolean processSingleAction(Board board, String move, boolean firstUse)
+	public static void processSingleAction(Board board, String move, MoveHistory history)
 			throws WeblaboraException {
 		CommandParameters params = new CommandParameters();
 		
@@ -42,7 +43,7 @@ public final class MoveProcessor {
 		String suffix = move.substring(move.indexOf(')')+1);
 		
 		params.setCommand(Character.toUpperCase(prefix.charAt(0)));
-		params.setPlaceClergyman(firstUse);
+		params.setPlaceClergyman(history.isPreviousUse() == false);
 		
 		Scanner scanner = new Scanner(inner);
 		scanner.useDelimiter(",");
@@ -53,13 +54,13 @@ public final class MoveProcessor {
 
 		params.setSuffix(suffix);
 		
-		MoveCommand moveCommand = pickCommand(params.getCommand());
+		MoveCommand moveCommand = pickCommand(params.getCommand(), history);
 		moveCommand.execute(board, params);
-
-		return moveCommand instanceof CommandUse == false;
+		
+		history.setPreviousUse(moveCommand instanceof CommandUse); 
 	}
 
-	public static MoveCommand pickCommand(char commandChar) throws WeblaboraException {
+	public static MoveCommand pickCommand(char commandChar, MoveHistory history) throws WeblaboraException {
 		switch(commandChar) {
 		case 'F':
 			return new CommandFellTrees();
