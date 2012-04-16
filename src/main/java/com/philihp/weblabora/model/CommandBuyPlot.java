@@ -119,9 +119,12 @@ public class CommandBuyPlot implements MoveCommand {
 				if(oldTerrain.contains(rowKey, columnKey)) {
 					newTerrain.put(rowKey, columnKey, oldTerrain.get(rowKey, columnKey));
 				}
-				else if(side.hasType(y, rowKey, columnKey)) {
-					newTerrain.put(rowKey, columnKey, new Terrain(landscape, side.getType(columnKey), null));
-				}
+			}
+		}
+
+		for(Integer rowKey : Ranges.closed(y,y+1).asSet(DiscreteDomains.integers())) {
+			for(Integer columnKey : Ranges.closed(side.getOriginColumn(),side.getOriginColumn()+1).asSet(DiscreteDomains.integers())) {
+				newTerrain.put(rowKey, columnKey, new Terrain(landscape, side.getType(columnKey), null));
 			}
 		}
 		
