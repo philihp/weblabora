@@ -98,7 +98,7 @@ public class UsageParam {
 		else return false;
 	}
 	
-	public UsageParam(String in) {
+	public UsageParam(String in) throws WeblaboraException {
 		this.param = in;
 		for(int i = 0; i < in.length()/2; i++) {
 			String token = in.substring(i*2,i*2+2);
@@ -148,11 +148,17 @@ public class UsageParam {
 				bonusPoints++;
 			else if("Jo".equals(token))
 			  withJoker = true;
+			else throw new WeblaboraException("Unknown token ["+token+"]");
 		}
 	}
 
 	public static UsageParam is() {
-		return new UsageParam("");
+		try {
+			return new UsageParam("");
+		}
+		catch(WeblaboraException e) {
+			throw new RuntimeException("Error when instantiating an empty UsageParam", e);
+		}
 	}
 	
 	public UsageParam bonusPoint(int quantity) {
@@ -384,7 +390,7 @@ public class UsageParam {
 	}
 	
 	public double getEnergy() {
-		return getCoal()*3 + getPeat()*2 + getWood() + getStraw()*0.5; 
+		return getCoal()*3 + getPeat()*2 + getWood() + getStraw()*0.5d; 
 	}
 	
 	public double getFood() {
