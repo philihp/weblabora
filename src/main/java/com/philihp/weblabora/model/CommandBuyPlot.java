@@ -134,10 +134,12 @@ public class CommandBuyPlot implements MoveCommand {
 
 	private static void checkForConnection(
 			Table<Integer, Integer, Terrain> oldTerrain, Integer rowKey, Integer columnKey) throws WeblaboraException {
-		if(oldTerrain.contains(rowKey-1, columnKey)==false &&
-		   oldTerrain.contains(rowKey, columnKey+2)==false &&
-		   oldTerrain.contains(rowKey+1, columnKey+2)==false &&
-		   oldTerrain.contains(rowKey+2, columnKey)==false) {
+		if(oldTerrain.contains(rowKey-1, columnKey)==false && //above
+		   oldTerrain.contains(rowKey, columnKey+2)==false && //right
+		   oldTerrain.contains(rowKey+1, columnKey+2)==false && //right, next row
+		   oldTerrain.contains(rowKey+2, columnKey)==false && // below
+		   oldTerrain.contains(rowKey, columnKey-1)==false && // left
+		   oldTerrain.contains(rowKey+1, columnKey-1)==false) { //left, next row
 			throw new WeblaboraException("Cannot put a plot at "+rowKey+", as it does not connect to the rest of the landscape");
 		}
 	}
