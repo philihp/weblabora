@@ -192,7 +192,16 @@
 		--></div>
 		
 		<h3>Round ${board.round}, ${board.move} move. Waiting on ${board.activePlayerColor}.</h3>
-		
+		<h4>Plot Costs: 
+			<c:forEach items="${board.plotCosts}" var="cost" varStatus="costStatus">
+				${cost}<c:if test="${not costStatus.last}">,</c:if>
+			</c:forEach>
+		</h4>
+		<h4>District Costs: 
+			<c:forEach items="${board.districtCosts}" var="cost" varStatus="costStatus">
+				${cost}<c:if test="${not costStatus.last}">,</c:if>
+			</c:forEach>
+		</h4>
 
 		<ul class="tabs">
 			<c:forEach items="${board.players}" var="player" varStatus="playerStatus">

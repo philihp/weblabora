@@ -264,5 +264,13 @@ public class Board {
 	public String getActivePlayerColor() {
 		return getPlayer(getActivePlayer()).getColor().toString();
 	}
+	
+	public int[] getPlotCosts() {
+		return Arrays.copyOfRange(PLOT_PURCHASE_PRICE, plotsPurchased, PLOT_PURCHASE_PRICE.length); 
+	}
+	
+	public int[] getDistrictCosts() {
+		return Arrays.copyOfRange(DISTRICT_PURCHASE_PRICE, districtsPurchased, DISTRICT_PURCHASE_PRICE.length); 
+	}
 
 }
