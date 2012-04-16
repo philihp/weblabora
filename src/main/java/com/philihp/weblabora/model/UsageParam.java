@@ -44,7 +44,7 @@ public class UsageParam {
 	private Erection card = null;
 	
 	private boolean withJoker = false;
-	
+
 	public int differentSingularGoods() {
 		int different = 0;
 		if(peat == 1) different++;
@@ -70,6 +70,32 @@ public class UsageParam {
 		if(beer == 1) different++;
 		if(reliquary == 1) different++;
 		return different;
+	}
+	
+	public boolean hasSomethingWith(int quantity) {
+		if(peat == quantity) return true;
+		else if(penny == quantity) return true;
+		else if(clay == quantity) return true;
+		else if(wood == quantity) return true;
+		else if(grain == quantity) return true;
+		else if(sheep == quantity) return true;
+		else if(stone == quantity) return true;
+		else if(flour == quantity) return true;
+		else if(grapes == quantity) return true;
+		else if(nickel == quantity) return true;
+		else if(hops == quantity) return true;
+		else if(coal == quantity) return true;
+		else if(book == quantity) return true;
+		else if(pottery == quantity) return true;
+		else if(whiskey == quantity) return true;
+		else if(straw == quantity) return true;
+		else if(meat == quantity) return true;
+		else if(ornament == quantity) return true;
+		else if(bread == quantity) return true;
+		else if(wine == quantity) return true;
+		else if(beer == quantity) return true;
+		else if(reliquary == quantity) return true;
+		else return false;
 	}
 	
 	public UsageParam(String in) {

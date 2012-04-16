@@ -24,7 +24,7 @@ public class CloisterCourtyard extends Building {
 	public void use(Board board, UsageParam param) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 		
-		if(param.differentSingularGoods() != 3) {
+		if((param.differentSingularGoods() == 3 || param.differentSingularGoods() == 2 && param.hasSomethingWith(7)) == false) {
 			throw new WeblaboraException("Cloister Courtyard requires three single, different goods. Not "+param.differentSingularGoods());
 		}
 		
