@@ -69,10 +69,11 @@ public class CommandBuyDistrict implements MoveCommand {
 				if(oldTerrain.contains(rowKey, columnKey)) {
 					newTerrain.put(rowKey, columnKey, oldTerrain.get(rowKey, columnKey));
 				}
-				else {
-					newTerrain.put(rowKey, columnKey, new Terrain(landscape, side.getType(columnKey), null));
-				}
 			}
+		}
+		
+		for(Integer columnKey : Ranges.closed(0,4).asSet(DiscreteDomains.integers())) {
+			newTerrain.put(y, columnKey, new Terrain(landscape, side.getType(columnKey), null));	
 		}
 		
 		landscape.setTerrain(newTerrain);
@@ -91,7 +92,7 @@ public class CommandBuyDistrict implements MoveCommand {
 
 	private static void checkForOverlap(
 			Table<Integer, Integer, Terrain> oldTerrain, int y) throws WeblaboraException {
-		if(oldTerrain.contains(y, 0)) {
+		if(oldTerrain.contains(y, 0) && oldTerrain.get(y, 0) != null) {
 			throw new WeblaboraException("Cannot put a district at "+y+", as it would overlap");
 		}
 		
