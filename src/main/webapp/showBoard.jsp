@@ -159,7 +159,7 @@
 				<g id="coin" transform="rotate(${ora:deg(board.wheel.coin.position)})">
 					<text x="0" y="-42" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Coin</text>
 				</g>
-				<g id="arm"  transform="rotate(${ora:deg(board.wheel.arm.position)-13.846})" style="font-size: 10px; text-anchor: middle">
+				<g id="arm"  transform="rotate(${ora:deg(board.wheel.arm.position)-board.armOffset})" style="font-size: 10px; text-anchor: middle">
 				  <path d="${wheelArt.armPath}"
 				        style="fill:#ffffff; fill-opacity: 1; stroke:#686868; stroke-width: 1" />
 				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotA})">10</text>
@@ -251,8 +251,19 @@
 				<h3>Inventory</h3>
 				<c:set var="player" value="${player}" scope="request" />
 				<c:import url="jsp/inventory.jsp" />
+				
+				<hr />
+				
+				<div class="settlementlist"><!-- comment out white-space for inline-block spacing
+				  <c:forEach items="${player.unbuiltSettlements}" var="settlement">
+				  	--><div class="settlement">
+				  	  <b>${settlement.id}</b><br />
+				  	  ${settlement.name}<br />
+				  	</div><!--
+				  </c:forEach>
+				--></div>
+				
 				<c:remove var="player"/>
-				<br />
 			</div>
 		</c:forEach>
 

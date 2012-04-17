@@ -71,7 +71,23 @@ div.container {
 	margin: 3px;
 }
 
+.settlementlist {
+}
+.settlement {
+	background-color: #EAE3E3;
+	border: 1px solid #C6BCBC;
+	border-radius: 3px;
+	box-shadow: 0 0 3px rgba(0,0,0,0.1);
 
+	font-size: 8pt;
+	height: 80px;
+	width: 80px;
+	display: inline-block;
+	vertical-align: top;
+	text-align: left;
+	padding: 2px;
+	margin: 3px;
+}
 
 
 .tabs {

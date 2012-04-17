@@ -14,12 +14,15 @@ import com.philihp.weblabora.model.building.BuildingEnum;
 import com.philihp.weblabora.model.building.ClayMound;
 import com.philihp.weblabora.model.building.CloisterOffice;
 import com.philihp.weblabora.model.building.Farmyard;
+import com.philihp.weblabora.model.building.Settlement;
+import com.philihp.weblabora.model.building.SettlementEnum;
 
 import static com.philihp.weblabora.model.building.BuildingEnum.*;
 
 public class Board {
 	
 	public static final int[] PLOT_PURCHASE_PRICE = {3,4,4,5,5,5,6,6,7};
+	
 	public static final int[] DISTRICT_PURCHASE_PRICE = {2,3,4,4,5,5,6,7,8};
 
 	protected final GamePlayers gamePlayers;
@@ -39,11 +42,15 @@ public class Board {
 	private int districtsPurchased;
 	
 	private int startingPlayer;
+	
 	private StartingMarker startingMarker;
 	
 	private int round;
+
 	private int moveInRound;
 
+	private boolean settling;
+	
 	/**
 	 * This makes lookups from {@link CommandUse CommandUse}
 	 */
@@ -75,6 +82,7 @@ public class Board {
 		
 		allBuildings = generateBuildingsMap();
 		
+		generateSettlements(players);
 		
 		round = 1;
 		moveInRound = 1;
@@ -96,6 +104,23 @@ public class Board {
 
 	public int getActivePlayer() {
 		return activePlayer;
+	}
+
+
+	private void generateSettlements(Player[] players) {
+		players[0].setUnbuiltSettlements(new ArrayList<Settlement>(8));
+		players[1].setUnbuiltSettlements(new ArrayList<Settlement>(8));
+		players[2].setUnbuiltSettlements(new ArrayList<Settlement>(8));
+		players[3].setUnbuiltSettlements(new ArrayList<Settlement>(8));
+		
+		int i=0;
+		for(SettlementEnum settlementId : SettlementEnum.values()) {
+			Settlement settlement = settlementId.getInstance();
+			if("".equals(settlement.getStage()))
+				players[i].getUnbuiltSettlements().add(settlement);
+			
+			if(++i == players.length) i=0;
+		}
 	}
 
 	private List<Building> gameStartBuildings() {
@@ -188,6 +213,39 @@ public class Board {
 	public StartingMarker getStartingMarker() {
 		return startingMarker;
 	}
+	
+	public boolean isSettling() {
+		return settling;
+	}
+
+	public void setSettling(boolean settling) {
+		this.settling = settling;
+	}
+	
+	public float getArmOffset() {
+		return isSettling()?27.692f:13.846f; 
+	}
+	
+	public static boolean isRoundBeforeSettlement(int round) {
+		return roundBeforeSettlement(round) != null;
+	}
+	
+	public static String roundBeforeSettlement(int round) {
+		switch (round) {
+		case 6:
+			return "A";
+		case 9:
+			return "B";
+		case 15:
+			return "C";
+		case 18:
+			return "D";
+		case 24:
+			return "E";
+		default:
+			return null;
+		}
+	}
 
 	/**
 	 * Called before every round.
@@ -204,13 +262,14 @@ public class Board {
 		getWheel().pushArm();
 		
 		//3 - settlement
+		
 	}
 	
 	/**
 	 * Called before every move.
 	 */
 	public void preMove() {
-		if(moveInRound == 1) {
+		if(!isSettling() && moveInRound == 1) {
 			preRound();
 		}
 	}
@@ -221,13 +280,28 @@ public class Board {
 	public void postMove() {
 		nextActivePlayer();
 		
-		if(++moveInRound == 6) {
+		++moveInRound;
+		
+		if(isSettling() && moveInRound == 5) {
+			System.out.println("------End Settlement------");
+			//end of settlement round
+			setSettling(false);
+			round++;
+		}
+		else if(!isSettling() && moveInRound == 6) {
+			System.out.println("======END OF ROUND "+round+"======");
+			//end of normal round
 			moveInRound = 1;
 			//end of round
-			round++;
-			postRound();
+			if(isRoundBeforeSettlement(round)) {
+				System.out.println("------Begin Settlement------");
+				setSettling(true);
+			}
+			else {
+				round++;
+			}
 			
-			//TODO: this is where we decide if a settlement round happens next
+			postRound();
 		}
 	}
 	

@@ -9,15 +9,14 @@ import com.philihp.weblabora.model.TerrainTypeEnum;
 abstract public class Settlement extends Erection {
 
 	protected Board board;
-
 	protected final String stage;
 	protected final int foodCost;
 	protected final int energyCost;
 	protected final int settlementValue;
 	protected final int shieldValue;
 
-	public Settlement(String id, String stage, String name,
-			int foodCost, int energyCost, int settlementValue, int shieldValue,
+	public Settlement(String id, String stage, String name, int foodCost,
+			int energyCost, int settlementValue, int shieldValue,
 			Set<TerrainTypeEnum> terrains) {
 		super(id, name, terrains);
 		this.stage = stage;
@@ -25,6 +24,30 @@ abstract public class Settlement extends Erection {
 		this.energyCost = energyCost;
 		this.settlementValue = settlementValue;
 		this.shieldValue = shieldValue;
+	}
+
+	public Board getBoard() {
+		return board;
+	}
+
+	public String getStage() {
+		return stage;
+	}
+
+	public int getFoodCost() {
+		return foodCost;
+	}
+
+	public int getEnergyCost() {
+		return energyCost;
+	}
+
+	public int getSettlementValue() {
+		return settlementValue;
+	}
+
+	public int getShieldValue() {
+		return shieldValue;
 	}
 
 }

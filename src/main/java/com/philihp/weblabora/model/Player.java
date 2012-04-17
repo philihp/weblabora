@@ -7,6 +7,8 @@ import java.util.Map;
 
 import com.google.common.collect.ArrayTable;
 import com.philihp.weblabora.jpa.User;
+import com.philihp.weblabora.model.building.Building;
+import com.philihp.weblabora.model.building.Settlement;
 
 public class Player {
 	
@@ -54,6 +56,8 @@ public class Player {
 	private Clergyman prior = new Clergyman(this, PRIOR);
 	
 	private StartingMarker startingMarker = null;
+	
+	private List<Settlement> unbuiltSettlements;
 
 	public Player(Board board, Color color) {
 		this.board = board;
@@ -86,6 +90,15 @@ public class Player {
 		beer = 0;
 		reliquary = 0;
 		bonusPoints = 0;
+		
+	}
+
+	public List<Settlement> getUnbuiltSettlements() {
+		return unbuiltSettlements;
+	}
+
+	public void setUnbuiltSettlements(List<Settlement> unbuiltSettlements) {
+		this.unbuiltSettlements = unbuiltSettlements;
 	}
 
 	public Color getColor() {
