@@ -27,7 +27,7 @@ public final class MoveProcessor {
 
 	public static void processActions(Board board, String actions)
 			throws WeblaboraException {
-		MoveHistory history = new MoveHistory();
+		MoveHistory history = new MoveHistory(board.isSettling());
 		for (String action : actions.split("\\|")) {
 			System.out.println("history="+history+"\t move: " + action);
 			processSingleAction(board, action, history);
@@ -61,26 +61,44 @@ public final class MoveProcessor {
 	}
 
 	public static MoveCommand pickCommand(char commandChar, MoveHistory history) throws WeblaboraException {
+		MoveCommand command = null;
 		switch(commandChar) {
 		case 'F':
-			return new CommandFellTrees();
+			command = new CommandFellTrees();
+			break;
 		case 'C':
-			return new CommandCutPeat();
+			command = new CommandCutPeat();
+			break;
 		case 'B':
-			return new CommandBuild();
+			command = new CommandBuild();
+			break;
 		case 'U':
-			return new CommandUse();
+			command = new CommandUse();
+			break;
 		case 'W':
 		case 'K':
-			return new CommandWorkorder();
+			command = new CommandWorkorder();
+			break;
 		case 'D':
-			return new CommandBuyDistrict();
+			command = new CommandBuyDistrict();
+			break;
 		case 'P':
-			return new CommandBuyPlot();
+			command = new CommandBuyPlot();
+			break;
 		case 'V':
-			return new CommandConvert();
+			command = new CommandConvert();
+			break;
+		case 'S':
+			command = new CommandSettle();
+			break;
 		default:
 			throw new WeblaboraException("Unknown Command \""+commandChar+"\"");
 		}
+		
+		if(history.isSettling() && (command instanceof InvalidDuringSettlement)) {
+			throw new WeblaboraException("Invalid Command \""+commandChar+"\" during settlement.");
+		}
+		
+		return command;
 	}
 }

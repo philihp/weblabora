@@ -4,7 +4,7 @@ import static com.philihp.weblabora.model.TerrainTypeEnum.*;
 
 import java.util.List;
 
-public class CommandFellTrees implements MoveCommand {
+public class CommandFellTrees implements MoveCommand, InvalidDuringSettlement {
 
 	@Override
 	public void execute(Board board, CommandParameters params)

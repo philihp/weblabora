@@ -10,7 +10,6 @@ import com.philihp.weblabora.model.building.*;
 
 public class CommandSettle implements MoveCommand {
 
-
 	@Override
 	public void execute(Board board, CommandParameters params)
 			throws WeblaboraException {

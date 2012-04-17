@@ -8,7 +8,7 @@ import java.util.List;
 
 import com.philihp.weblabora.model.building.*;
 
-public class CommandWorkorder implements MoveCommand {
+public class CommandWorkorder implements MoveCommand, InvalidDuringSettlement {
 
 
 	@Override

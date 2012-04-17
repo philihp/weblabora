@@ -4,7 +4,7 @@ import static com.philihp.weblabora.model.TerrainTypeEnum.*;
 
 import java.util.List;
 
-public class CommandCutPeat implements MoveCommand {
+public class CommandCutPeat implements MoveCommand, InvalidDuringSettlement {
 
 	@Override
 	public void execute(Board board, CommandParameters params)

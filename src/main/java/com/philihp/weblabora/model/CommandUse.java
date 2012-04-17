@@ -8,7 +8,7 @@ import java.util.List;
 
 import com.philihp.weblabora.model.building.*;
 
-public class CommandUse implements MoveCommand {
+public class CommandUse implements MoveCommand, InvalidDuringSettlement {
 
 	@Override
 	public void execute(Board board, CommandParameters params)
