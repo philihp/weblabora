@@ -55,8 +55,8 @@ div.container {
 .building {
 	border: 1px solid #BDC3C8;
 	border-radius: 3px;
-	box-shadow: 0 0 3px rgba(0,0,0,0.1);
-
+	box-shadow: 0 0 3px rgba(0,0,0,0.3);
+	background-color: #fff;
 	font-size: 8pt;
 	height: 125px;
 	width: 75px;
@@ -88,7 +88,8 @@ div.container {
 .settlement {
 	border: 1px solid #C6BCBC;
 	border-radius: 3px;
-	box-shadow: 0 0 3px rgba(0,0,0,0.1);
+	box-shadow: 0 0 3px rgba(0,0,0,0.3);
+	background-color: #fff;
 	font-size: 8pt;
 	height: 125px;
 	width: 75px;
