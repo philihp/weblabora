@@ -44,7 +44,7 @@ div.container {
 
 
 
-.buildinglist {
+.building-list {
 	height: 304px;
 	display: block;
 	margin-top: 15px;
@@ -55,23 +55,39 @@ div.container {
 .building {
 	/*
 	border: 1px solid #939393;
-	*/
 	background-color: #E3E8EA;
+	*/
 	border: 1px solid #BDC3C8;
 	border-radius: 3px;
 	box-shadow: 0 0 3px rgba(0,0,0,0.1);
 
 	font-size: 8pt;
-	height: 80px;
-	width: 80px;
+	height: 125px;
+	width: 75px;
 	display: inline-block;
 	vertical-align: top;
 	text-align: left;
 	padding: 2px;
 	margin: 3px;
 }
+.building-image {
+	height: 125px;
+	width: 75px;
+}
+.building-laybrother:after {
+	content: url('../images/laybrother.svg');
+	position: relative;
+	top: -105px;
+	left: 25px;
+}
+.building-prior:after {
+	content: url('../images/prior.svg');
+	position: relative;
+	top: -105px;
+	left: 25px;
+}
 
-.settlementlist {
+.settlement-list {
 }
 .settlement {
 	background-color: #EAE3E3;

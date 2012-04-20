@@ -48,8 +48,8 @@ public class Clergyman {
 	}
 	
 	public static String format(String s) {
-		if("LAYBROTHER".equals(s)) return "[Lay Brother]";
-		else if("PRIOR".equals(s)) return "[Prior]";
+		if("LAYBROTHER".equals(s)) return "building-laybrother";
+		else if("PRIOR".equals(s)) return "building-prior";
 		else return null;
 	}
 

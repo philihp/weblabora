@@ -179,14 +179,10 @@
 				</g>
 			</svg>
 		</div>
-		<div class="buildinglist"><!-- comment out white-space for inline-block spacing
+		<div class="building-list"><!-- comment out white-space for inline-block spacing
 		  <c:forEach items="${board.unbuiltBuildings}" var="building">
 		  	--><div class="building">
-		  	  <b>${building.id}</b><br />
-		  	  ${building.name}<br />
-					<c:set var="buildCost" value="${building.buildCost}" scope="request" />
-					<c:import url="jsp/buildCost.jsp" />
-		  	  <c:remove var="buildCost"/>
+		  	  <img src="images/building/${building.id}.jpg" class="building-image" />
 		  	</div><!--
 		  </c:forEach>
 		--></div>
@@ -223,11 +219,8 @@
 											${cell.terrainType.properCase}
 										</c:when>
 										<c:otherwise>
-											<div class="building">
-		  	  									<b>${cell.erection.id}</b><br />
-		  	  									${cell.erection.name}<br />
-		  	  									<br />
-												${ora:clergy(cell.erection.clergyman.type)}
+											<div class="building ${ora:clergy(cell.erection.clergyman.type)}">
+		  	  									<img src="images/building/${cell.erection.id}.jpg" class="building-image" />
 										  	</div>
 										</c:otherwise>
 									</c:choose>
@@ -244,9 +237,9 @@
 				</c:if>
 				
 				<h3>Clergymen</h3>
-				<c:if test="${empty player.layBrother1.location}">[Lay Brother]</c:if>
-				<c:if test="${empty player.layBrother2.location}">[Lay Brother]</c:if>
-				<c:if test="${empty player.prior.location}">[Prior]</c:if>
+				<c:if test="${empty player.layBrother1.location}"><img src="images/laybrother.svg" alt="Lay Brother" /></c:if>
+				<c:if test="${empty player.layBrother2.location}"><img src="images/laybrother.svg" alt="Lay Brother" /></c:if>
+				<c:if test="${empty player.prior.location}"><img src="images/prior.svg" /></c:if>
 				
 				<h3>Inventory</h3>
 				<c:set var="player" value="${player}" scope="request" />
@@ -254,7 +247,7 @@
 				
 				<hr />
 				
-				<div class="settlementlist"><!-- comment out white-space for inline-block spacing
+				<div class="settlement-list"><!-- comment out white-space for inline-block spacing
 				  <c:forEach items="${player.unbuiltSettlements}" var="settlement">
 				  	--><div class="settlement">
 				  	  <b>${settlement.id}</b><br />
