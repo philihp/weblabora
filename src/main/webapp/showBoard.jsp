@@ -250,8 +250,7 @@
 				<div class="settlement-list"><!-- comment out white-space for inline-block spacing
 				  <c:forEach items="${player.unbuiltSettlements}" var="settlement">
 				  	--><div class="settlement">
-				  	  <b>${settlement.id}</b><br />
-				  	  ${settlement.name}<br />
+                      <img src="images/building/${settlement.id}.jpg" class="settlement-image" />
 				  	</div><!--
 				  </c:forEach>
 				--></div>

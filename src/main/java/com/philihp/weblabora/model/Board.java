@@ -108,18 +108,13 @@ public class Board {
 
 
 	private void generateSettlements(Player[] players) {
-		players[0].setUnbuiltSettlements(new ArrayList<Settlement>(8));
-		players[1].setUnbuiltSettlements(new ArrayList<Settlement>(8));
-		players[2].setUnbuiltSettlements(new ArrayList<Settlement>(8));
-		players[3].setUnbuiltSettlements(new ArrayList<Settlement>(8));
-		
-		int i=0;
-		for(SettlementEnum settlementId : SettlementEnum.values()) {
-			Settlement settlement = settlementId.getInstance();
-			if("".equals(settlement.getStage()))
-				players[i].getUnbuiltSettlements().add(settlement);
-			
-			if(++i == players.length) i=0;
+		for (Player player : players) {
+			player.setUnbuiltSettlements(new ArrayList<Settlement>(8));
+			for (SettlementEnum settlementId : SettlementEnum.values()) {
+				Settlement settlement = settlementId.getInstance();
+				if ("".equals(settlement.getStage()))
+					player.getUnbuiltSettlements().add(settlement);
+			}
 		}
 	}
 
