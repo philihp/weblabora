@@ -34,9 +34,9 @@ public class ShowBoard extends BaseAction {
 			board = new Board();
 			board.populateDetails(user.getActiveGame());
 			MoveProcessor.processMoves(board, user.getActiveGame().getMoves());
+			board.preMove(); //upkeep stuff before player makes a move	
 			request.setAttribute("board", board);
 		}
-		board.preMove(); //upkeep stuff before player makes a move	
 		
 		return mapping.findForward("view");
 	}
