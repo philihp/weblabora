@@ -60,7 +60,8 @@
     ordered & tabbed in a way that represents the nesting of the generated HTML.
 */
 #cboxOverlay {
-	background: #f0f0f0;
+	/*background:url(../images/overlay.png) repeat 0 0;*/
+	background-color: rgba(0,0,0,0.5);
 }
 
 #colorbox {
@@ -85,7 +86,7 @@
 #cboxLoadedContent {
 	overflow: auto;
 	background: #fcfcfc;;
-	padding: 16px;
+	padding: 4px;
 }
 
 #cboxLoadingGraphic {
@@ -115,7 +116,7 @@
 	border-radius: 4px;
 }
 #cboxContent.styled {
-	box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
+	box-shadow: 0 1px 10px #000, inset 0 1px 0 #fff;
 	border-radius: 4px;
 }
 #cboxClose.styled {

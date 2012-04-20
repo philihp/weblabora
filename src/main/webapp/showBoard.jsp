@@ -48,9 +48,35 @@
 	$(function() {
 		$('#findGamesButton').colorbox({
 			href : "showGames.do",
-			speed : 150,
+			speed : 200,
 			transition: "elastic"
 		});
+
+		$(".building-link").colorbox({
+			rel:'building-link',
+			speed : 200,
+			transition: "elastic",
+			current: "",
+			next: "",
+			previous: ""
+		});
+		$(".erection-link").colorbox({
+			rel:'erection-link',
+			speed : 200,
+			transition: "elastic",
+			current: "",
+			next: "",
+			previous: ""
+		});
+		$(".settlement-link").colorbox({
+			rel:'settlement-link',
+			speed : 200,
+			transition: "elastic",
+			current: "",
+			next: "",
+			previous: ""
+		});
+
 
 		$('#tab1').click(function() {showboard(1);});
 		$('#tab2').click(function() {showboard(2);});
@@ -182,7 +208,7 @@
 		<div class="building-list"><!-- comment out white-space for inline-block spacing
 		  <c:forEach items="${board.unbuiltBuildings}" var="building">
 		  	--><div class="building">
-		  	  <img src="images/building/${building.id}.jpg" class="building-image" />
+		  	  <a class="building-link" href="images/building/${building.id}.jpg"><img src="images/building/${building.id}.jpg" class="building-image" /></a>
 		  	</div><!--
 		  </c:forEach>
 		--></div>
@@ -220,7 +246,7 @@
 										</c:when>
 										<c:otherwise>
 											<div class="building ${ora:clergy(cell.erection.clergyman.type)}">
-		  	  									<img src="images/building/${cell.erection.id}.jpg" class="building-image" />
+												<a class="erection-link" href="images/building/${cell.erection.id}.jpg"><img src="images/building/${cell.erection.id}.jpg" class="building-image" /></a>
 										  	</div>
 										</c:otherwise>
 									</c:choose>
@@ -250,7 +276,7 @@
 				<div class="settlement-list"><!-- comment out white-space for inline-block spacing
 				  <c:forEach items="${player.unbuiltSettlements}" var="settlement">
 				  	--><div class="settlement">
-                      <img src="images/building/${settlement.id}.jpg" class="settlement-image" />
+				  		<a class="settlement-link" href="images/building/${settlement.id}.jpg"><img src="images/building/${settlement.id}.jpg" class="settlement-image" /></a>
 				  	</div><!--
 				  </c:forEach>
 				--></div>
@@ -258,8 +284,6 @@
 				<c:remove var="player"/>
 			</div>
 		</c:forEach>
-
-		Current State ID: ${game.state.stateId}<br />
 		
 		<c:forEach items="${game.moves}" var="move" varStatus="status">
 			<c:if test="${status.first}">
