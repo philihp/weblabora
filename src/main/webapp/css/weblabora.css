@@ -195,3 +195,7 @@ div.container {
 	box-shadow: 0 0 0 1px #181818;
 	display: inline-block;
 }
+.movelist-color {
+	float: left;
+	width: 5em;
+}
