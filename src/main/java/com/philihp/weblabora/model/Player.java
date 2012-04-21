@@ -380,7 +380,7 @@ public class Player {
 		return true;
 	}
 
-	public void payBuildCost(BuildCost buildCost) {
+	public void subtractAll(BuildCost buildCost) {
 		subtractWood(buildCost.getWood());
 		subtractClay(buildCost.getClay());
 		subtractStone(buildCost.getStone());

@@ -46,14 +46,14 @@ public class CommandBuild implements MoveCommand, InvalidDuringSettlement {
 		}
 		
 		if(building.getTerrains().contains(location.getTerrainType()) == false) {
-			throw new WeblaboraException("The location at ("+x+","+y+") has a terrain of "+location.getTerrainType()+", which is not appropriate for "+building);
+			throw new WeblaboraException("The location at ("+x+","+y+") has a terrain of "+location.getTerrainType()+", but "+building.getName()+" can only be built on "+building.getTerrains());
 		}
 		
 		if(player.canAffordCost(building.getBuildCost()) == false) {
-			throw new WeblaboraException("Player could not afford build cost");
+			throw new WeblaboraException("Player could not afford "+building.getBuildCost()+" to build "+building.getName());
 		}
 		
-		player.payBuildCost(building.getBuildCost());
+		player.subtractAll(building.getBuildCost());
 		location.setErection(building);
 		
 		//call the building's hook, in case it needs to do something. i think this is just the winery.
