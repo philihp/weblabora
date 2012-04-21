@@ -43,6 +43,11 @@ public class Farmyard extends Building {
 		
 	}
 
+	@Override
+	public String getImage() {
+		return "L02";
+	}
+	
 	public static Farmyard make(Color color) {
 		switch (color) {
 		case RED:

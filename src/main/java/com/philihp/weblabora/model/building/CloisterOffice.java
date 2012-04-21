@@ -30,7 +30,12 @@ public class CloisterOffice extends Building {
 		Token token = input.isWithJoker()?wheel.getJoker():wheel.getCoin();
 		player.addPenny(token.take());
 	}
-
+	
+	@Override
+	public String getImage() {
+		return "L03";
+	}
+	
 	public static CloisterOffice make(Color color) {
 		switch (color) {
 		case RED:

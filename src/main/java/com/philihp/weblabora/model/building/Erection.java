@@ -66,5 +66,9 @@ public abstract class Erection {
 	public Set<TerrainTypeEnum> getTerrains() {
 		return terrains;
 	}
+	
+	public String getImage() {
+		return id;
+	}
 
 }

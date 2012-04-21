@@ -208,7 +208,7 @@
 		<div class="building-list"><!-- comment out white-space for inline-block spacing
 		  <c:forEach items="${board.unbuiltBuildings}" var="building">
 		  	--><div class="building">
-		  	  <a class="building-link" href="images/building/${building.id}.jpg"><img src="images/building/${building.id}.jpg" class="building-image" /></a>
+		  	  <a class="building-link" href="images/building/${building.image}.jpg"><img src="images/building/${building.image}.jpg" class="building-image" /></a>
 		  	</div><!--
 		  </c:forEach>
 		--></div>
@@ -246,7 +246,7 @@
 										</c:when>
 										<c:otherwise>
 											<div class="building ${ora:clergy(cell.erection.clergyman.type)}">
-												<a class="erection-link" href="images/building/${cell.erection.id}.jpg"><img src="images/building/${cell.erection.id}.jpg" class="building-image" /></a>
+												<a class="erection-link" href="images/building/${cell.erection.image}.jpg"><img src="images/building/${cell.erection.image}.jpg" class="building-image" /></a>
 										  	</div>
 										</c:otherwise>
 									</c:choose>
@@ -276,7 +276,7 @@
 				<div class="settlement-list"><!-- comment out white-space for inline-block spacing
 				  <c:forEach items="${player.unbuiltSettlements}" var="settlement">
 				  	--><div class="settlement">
-				  		<a class="settlement-link" href="images/building/${settlement.id}.jpg"><img src="images/building/${settlement.id}.jpg" class="settlement-image" /></a>
+				  		<a class="settlement-link" href="images/building/${settlement.image}.jpg"><img src="images/building/${settlement.image}.jpg" class="settlement-image" /></a>
 				  	</div><!--
 				  </c:forEach>
 				--></div>

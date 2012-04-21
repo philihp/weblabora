@@ -30,6 +30,12 @@ public class ClayMound extends Building {
 		Token token = input.isWithJoker()?wheel.getJoker():wheel.getClay();
 		player.addClay(token.take());
 	}
+	
+	@Override
+	public String getImage() {
+		return "L01";
+	}
+	
 
 	public static ClayMound make(Color color) {
 		switch (color) {
