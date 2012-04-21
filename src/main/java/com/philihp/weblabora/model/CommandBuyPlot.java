@@ -17,8 +17,8 @@ public class CommandBuyPlot implements MoveCommand {
 	 */
 	
 	public static enum Side {
-		COAST(-2, WATER, TerrainTypeEnum.COAST),
-		MOUNTAIN(5, HILLSIDE, TerrainTypeEnum.MOUNTAIN);
+		COAST(-2, WATER, TerrainTypeEnum.COAST, WATER, TerrainTypeEnum.COAST),
+		MOUNTAIN(5, HILLSIDE, TerrainTypeEnum.MOUNTAIN, HILLSIDE, HIDDEN);
 		
 		private int originColumn;
 		private TerrainTypeEnum[] terrains;
@@ -29,20 +29,15 @@ public class CommandBuyPlot implements MoveCommand {
 		public int getOriginColumn() {
 			return originColumn;
 		}
-		public boolean hasType(int y, int row, int column) {
-			return (column == originColumn || column == originColumn+1)
-					&&
-			       (row    == y            || row == y+1);
-		}
 		
-		public TerrainTypeEnum getType(int column) {
+		public TerrainTypeEnum getType(int row, int column) {
 			switch (this) {
 			case COAST:
 				switch (column) {
 				case -2:
-					return terrains[0];
+					return terrains[row*2+0];
 				case -1:
-					return terrains[1];
+					return terrains[row*2+1];
 				default:
 					throw new RuntimeException(this
 							+ " does not have a TerrainType for column "
@@ -51,9 +46,9 @@ public class CommandBuyPlot implements MoveCommand {
 			case MOUNTAIN:
 				switch (column) {
 				case 5:
-					return terrains[0];
+					return terrains[row*2+0];
 				case 6:
-					return terrains[1];
+					return terrains[row*2+1];
 				default:
 					throw new RuntimeException(this
 							+ " does not have a TerrainType for column "
@@ -124,7 +119,7 @@ public class CommandBuyPlot implements MoveCommand {
 
 		for(Integer rowKey : Ranges.closed(y,y+1).asSet(DiscreteDomains.integers())) {
 			for(Integer columnKey : Ranges.closed(side.getOriginColumn(),side.getOriginColumn()+1).asSet(DiscreteDomains.integers())) {
-				newTerrain.put(rowKey, columnKey, new Terrain(landscape, side.getType(columnKey), null));
+				newTerrain.put(rowKey, columnKey, new Terrain(landscape, side.getType(rowKey-y,columnKey), null));
 			}
 		}
 		

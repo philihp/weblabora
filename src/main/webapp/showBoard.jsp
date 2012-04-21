@@ -236,27 +236,29 @@
 		<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
 			<div class="board board--${player.activeClass} board--${player.selectedClass}" id="board${playerStatus.index+1}">
 				<table>
-					<c:forEach items="${player.landscape.table}" var="row">
+					<c:forEach items="${player.landscape.table}" var="row" varStatus="rowStatus">
 						<tr>
 							<c:forEach items="${row}" var="cell">
-								<td>
-									<c:choose>
-										<c:when test="${not empty cell.erection}">
-											<div class="building ${ora:clergy(cell.erection.clergyman.type)}">
-												<a class="erection-link" href="images/building/${cell.erection.image}.jpg" title="${cell.erection.id}"><img src="images/building/${cell.erection.image}.jpg" class="building-image" /></a>
-										  	</div>
-										</c:when>
-										<c:when test="${cell.terrainType eq 'FOREST'}">
-											<img src="images/building/Wood.jpg" class="landscape-tile" />
-										</c:when>
-										<c:when test="${cell.terrainType eq 'MOOR'}">
-											<img src="images/building/Peat.jpg" class="landscape-tile" />
-										</c:when>
-										<c:otherwise>
-											${cell.terrainType.properCase}
-										</c:otherwise>
-									</c:choose>
-								</td>
+								<c:if test="${cell.terrainType ne 'HIDDEN'}">
+									<td${cell.terrainType.rowspanAttr}>
+										<c:choose>
+											<c:when test="${not empty cell.erection}">
+												<div class="building ${ora:clergy(cell.erection.clergyman.type)}">
+													<a class="erection-link" href="images/building/${cell.erection.image}.jpg" title="${cell.erection.id}"><img src="images/building/${cell.erection.image}.jpg" class="building-image" /></a>
+											  	</div>
+											</c:when>
+											<c:when test="${cell.terrainType eq 'FOREST'}">
+												<img src="images/building/Wood.jpg" class="landscape-tile" />
+											</c:when>
+											<c:when test="${cell.terrainType eq 'MOOR'}">
+												<img src="images/building/Peat.jpg" class="landscape-tile" />
+											</c:when>
+											<c:otherwise>
+												${cell.terrainType.properCase}
+											</c:otherwise>
+										</c:choose>
+									</td>
+								</c:if>
 							</c:forEach>
 						</tr>
 					</c:forEach>
