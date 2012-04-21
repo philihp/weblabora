@@ -146,6 +146,8 @@ public class UsageParam {
 				reliquary++;
 			else if("Bp".equals(token))
 				bonusPoints++;
+			else if("Be".equals(token))
+				beer++;
 			else if("Jo".equals(token))
 			  withJoker = true;
 			else throw new WeblaboraException("Unknown token ["+token+"]");

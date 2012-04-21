@@ -254,7 +254,8 @@
 												<img src="images/building/Peat.jpg" class="landscape-tile" />
 											</c:when>
 											<c:otherwise>
-												${cell.terrainType.properCase}
+												${cell.terrainType.properCase}<br />
+												${cell.coords}
 											</c:otherwise>
 										</c:choose>
 									</td>

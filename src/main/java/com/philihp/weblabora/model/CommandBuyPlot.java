@@ -119,7 +119,7 @@ public class CommandBuyPlot implements MoveCommand {
 
 		for(Integer rowKey : Ranges.closed(y,y+1).asSet(DiscreteDomains.integers())) {
 			for(Integer columnKey : Ranges.closed(side.getOriginColumn(),side.getOriginColumn()+1).asSet(DiscreteDomains.integers())) {
-				newTerrain.put(rowKey, columnKey, new Terrain(landscape, side.getType(rowKey-y,columnKey), null));
+				newTerrain.put(rowKey, columnKey, new Terrain(landscape, side.getType(rowKey-y,columnKey), null, columnKey, rowKey));
 			}
 		}
 		

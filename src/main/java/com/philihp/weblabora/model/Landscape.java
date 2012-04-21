@@ -36,18 +36,22 @@ public class Landscape {
 		Set<Integer> cols = Ranges.closed(0, 4).asSet(DiscreteDomains.integers());
 		this.terrain = ArrayTable.create(rows,cols);
 		
-		terrain.put(0, 0, new Terrain(this, MOOR, null));
-		terrain.put(0, 1, new Terrain(this, FOREST, null));
-		terrain.put(0, 2, new Terrain(this, FOREST, null));
-		terrain.put(0, 3, new Terrain(this, PLAINS, null));
-		terrain.put(0, 4, new Terrain(this, HILLSIDE, clayMound));
-		terrain.put(1, 0, new Terrain(this, MOOR, null));
-		terrain.put(1, 1, new Terrain(this, FOREST, null));
-		terrain.put(1, 2, new Terrain(this, PLAINS, farmyard));
-		terrain.put(1, 3, new Terrain(this, PLAINS, null));
-		terrain.put(1, 4, new Terrain(this, PLAINS, cloisterOffice));
+		terrainPut(0, 0, MOOR, null);
+		terrainPut(0, 1, FOREST, null);
+		terrainPut(0, 2, FOREST, null);
+		terrainPut(0, 3, PLAINS, null);
+		terrainPut(0, 4, HILLSIDE, clayMound);
+		terrainPut(1, 0, MOOR, null);
+		terrainPut(1, 1, FOREST, null);
+		terrainPut(1, 2, PLAINS, farmyard);
+		terrainPut(1, 3, PLAINS, null);
+		terrainPut(1, 4, PLAINS, cloisterOffice);
 	}
-
+	
+	private void terrainPut(int x, int y, TerrainTypeEnum type, Erection erection) {
+		terrain.put(x, y, new Terrain(this, type, erection, x, y));
+	}
+	
 	public Table<Integer, Integer, Terrain> getTerrain() {
 		return terrain;
 	}
@@ -90,5 +94,7 @@ public class Landscape {
 
 	public void checkValidity() {
 		//TODO: check the validity of the arrangement of the landscape. plots need to be touching a district/homeland
+		
+		//might not be necessary since i did such a swell job of plot and district commands :)
 	}
 }

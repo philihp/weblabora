@@ -73,7 +73,7 @@ public class CommandBuyDistrict implements MoveCommand {
 		}
 		
 		for(Integer columnKey : Ranges.closed(0,4).asSet(DiscreteDomains.integers())) {
-			newTerrain.put(y, columnKey, new Terrain(landscape, side.getType(columnKey), null));	
+			newTerrain.put(y, columnKey, new Terrain(landscape, side.getType(columnKey), null, columnKey, y));	
 		}
 		
 		landscape.setTerrain(newTerrain);

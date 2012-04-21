@@ -188,3 +188,10 @@ div.container {
 }
 .tab--inactive {
 }
+
+.resource {
+	border-radius: 4px;
+	margin: 3px;
+	box-shadow: 0 0 0 1px #181818;
+	display: inline-block;
+}
