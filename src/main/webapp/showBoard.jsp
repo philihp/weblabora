@@ -103,8 +103,12 @@
 					<html:submit>Set Active Game</html:submit>
 				</html:select>
 			</html:form>
+			
+			<html:form action="/leaveGame.do" method="POST" style="display: inline">
+				<html:submit>Leave Game</html:submit>
+			</html:form>
 			|
-			<button id="findGamesButton">Find Games</button>
+			<button id="findGamesButton">Find A Game To Join</button>
 		</div>
 	</div>
 		
@@ -250,7 +254,7 @@
 									<td${cell.terrainType.rowspanAttr}>
 										<c:choose>
 											<c:when test="${not empty cell.erection}">
-												<div class="building ${ora:clergy(cell.erection.clergyman.type)}">
+												<div class="building building-${fn:toLowerCase(cell.erection.clergyman.type)}-${fn:toLowerCase(player.color)}">
 													<a class="erection-link" href="images/building/${cell.erection.image}.jpg" title="${cell.erection.id}"><img src="images/building/${cell.erection.image}.jpg" class="building-image" /></a>
 											  	</div>
 											</c:when>
@@ -279,9 +283,9 @@
 				</c:if>
 				
 				<h3>Clergymen</h3>
-				<c:if test="${empty player.layBrother1.location}"><img src="images/laybrother.svg" alt="Lay Brother" /></c:if>
-				<c:if test="${empty player.layBrother2.location}"><img src="images/laybrother.svg" alt="Lay Brother" /></c:if>
-				<c:if test="${empty player.prior.location}"><img src="images/prior.svg" /></c:if>
+				<c:if test="${empty player.layBrother1.location}"><img src="images/laybrother-${fn:toLowerCase(player.color)}.svg" alt="Lay Brother" /></c:if>
+				<c:if test="${empty player.layBrother2.location}"><img src="images/laybrother-${fn:toLowerCase(player.color)}.svg" alt="Lay Brother" /></c:if>
+				<c:if test="${empty player.prior.location}"><img src="images/prior-${fn:toLowerCase(player.color)}.svg" /></c:if>
 								
 				<hr />
 				
@@ -326,12 +330,10 @@
 		</html:form>
 		
 		<hr />
-	<!--
 		<html:form action="/authenticateHijack.do">
 			<html:text property="facebookId"></html:text>
 			<html:submit>Hijack</html:submit>
 		</html:form>
-	-->
 	</div>
 
 </body>

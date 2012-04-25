@@ -22,7 +22,7 @@
 			</c:when>
 			<c:otherwise>
 			  The following games have seats open:
-			  <table style="border: 1px solid red">
+			  <table>
 			  	<tr>
 			  		<th>Started</th>
 			  		<th>Red</th>

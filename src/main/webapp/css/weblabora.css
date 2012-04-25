@@ -70,14 +70,50 @@ div.container {
 	height: 125px;
 	width: 75px;
 }
-.building-laybrother:after {
-	content: url('../images/laybrother.svg');
+.building-laybrother-red:after {
+	content: url('../images/laybrother-red.svg');
 	position: relative;
 	top: -105px;
 	left: 25px;
 }
-.building-prior:after {
-	content: url('../images/prior.svg');
+.building-laybrother-green:after {
+	content: url('../images/laybrother-green.svg');
+	position: relative;
+	top: -105px;
+	left: 25px;
+}
+.building-laybrother-blue:after {
+	content: url('../images/laybrother-blue.svg');
+	position: relative;
+	top: -105px;
+	left: 25px;
+}
+.building-laybrother-white:after {
+	content: url('../images/laybrother-white.svg');
+	position: relative;
+	top: -105px;
+	left: 25px;
+}
+.building-prior-red:after {
+	content: url('../images/prior-red.svg');
+	position: relative;
+	top: -105px;
+	left: 25px;
+}
+.building-prior-green:after {
+	content: url('../images/prior-green.svg');
+	position: relative;
+	top: -105px;
+	left: 25px;
+}
+.building-prior-blue:after {
+	content: url('../images/prior-blue.svg');
+	position: relative;
+	top: -105px;
+	left: 25px;
+}
+.building-prior-white:after {
+	content: url('../images/prior-white.svg');
 	position: relative;
 	top: -105px;
 	left: 25px;

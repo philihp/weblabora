@@ -46,11 +46,5 @@ public class Clergyman {
 		this.location = location;
 		location.getErection().setClergyman(this);
 	}
-	
-	public static String format(String s) {
-		if("LAYBROTHER".equals(s)) return "building-laybrother";
-		else if("PRIOR".equals(s)) return "building-prior";
-		else return null;
-	}
 
 }
