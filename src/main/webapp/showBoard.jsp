@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://philihp.com/jsp/ora" prefix="ora" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 <html:html>
@@ -227,7 +228,7 @@
 
 		<ul class="tabs">
 			<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
-				<li id="tab${playerStatus.index+1}" class="tab tab--${player.activeClass} tab--${player.selectedClass}">
+				<li id="tab${playerStatus.index+1}" class="tab tab--${player.activeClass} tab--${player.selectedClass} tab--${fn:toLowerCase(player.color)}">
 					<img src="http://graph.facebook.com/${player.user.facebookId}/picture" height="50" width="50" title="${player.user.facebookId}"/>
 					${player.user.name}
 				</li>
@@ -235,6 +236,12 @@
 		</ul>
 		<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
 			<div class="board board--${player.activeClass} board--${player.selectedClass}" id="board${playerStatus.index+1}">
+	
+				<c:set var="player" value="${player}" scope="request" />
+				<c:import url="jsp/inventory.jsp" />
+				
+				<hr />
+	
 				<table>
 					<c:forEach items="${player.landscape.table}" var="row" varStatus="rowStatus">
 						<tr>
@@ -275,11 +282,7 @@
 				<c:if test="${empty player.layBrother1.location}"><img src="images/laybrother.svg" alt="Lay Brother" /></c:if>
 				<c:if test="${empty player.layBrother2.location}"><img src="images/laybrother.svg" alt="Lay Brother" /></c:if>
 				<c:if test="${empty player.prior.location}"><img src="images/prior.svg" /></c:if>
-				
-				<h3>Inventory</h3>
-				<c:set var="player" value="${player}" scope="request" />
-				<c:import url="jsp/inventory.jsp" />
-				
+								
 				<hr />
 				
 				<div class="settlement-list"><!-- comment out white-space for inline-block spacing
