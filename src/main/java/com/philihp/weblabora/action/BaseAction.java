@@ -48,12 +48,12 @@ abstract class BaseAction extends Action {
 		return PUBLIC_ACTIONS.contains(this.getClass()) == false;
 	}
 	
-	protected User findUser(User user) {
+	protected static User findUser(User user) {
 		if(user == null) return null;
 		return findUser(user.getFacebookId());
 	}
 	
-	protected User findUser(String facebookId) {
+	protected static User findUser(String facebookId) {
 		EntityManager em = EntityManagerManager.get();
 		TypedQuery<User> query = em.createNamedQuery("findUserByFacebookId", User.class);
 		query.setParameter("facebookId", facebookId);
