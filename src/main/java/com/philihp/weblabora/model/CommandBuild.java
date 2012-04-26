@@ -54,7 +54,7 @@ public class CommandBuild implements MoveCommand, InvalidDuringSettlement {
 		}
 		
 		if(player.canAffordCost(building.getBuildCost()) == false) {
-			throw new WeblaboraException("Player could not afford "+building.getBuildCost()+" to build "+building.getName());
+			throw new WeblaboraException("Player does not have "+building.getBuildCost()+" necessary to build "+building.getName());
 		}
 		
 		player.subtractAll(building.getBuildCost());
