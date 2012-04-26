@@ -259,10 +259,10 @@
 											  	</div>
 											</c:when>
 											<c:when test="${cell.terrainType eq 'FOREST'}">
-												<img src="images/building/Wood.jpg" class="landscape-tile" />
+												<img src="images/building/Wood.jpg" class="landscape-tile" title="${cell.coords}" />
 											</c:when>
 											<c:when test="${cell.terrainType eq 'MOOR'}">
-												<img src="images/building/Peat.jpg" class="landscape-tile" />
+												<img src="images/building/Peat.jpg" class="landscape-tile" title="${cell.coords}" />
 											</c:when>
 											<c:otherwise>
 												${cell.terrainType.properCase}<br />
