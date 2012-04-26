@@ -250,7 +250,7 @@ public class Board {
 		}
 		
 		//2 - push arm
-		getWheel().pushArm();
+		getWheel().pushArm(round);
 		
 		//3 - settlement
 		
