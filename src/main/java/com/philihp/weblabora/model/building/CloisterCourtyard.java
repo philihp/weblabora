@@ -96,5 +96,7 @@ public class CloisterCourtyard extends Building {
 		else if(param.getWine() == 7) player.addWine(5);
 		else if(param.getBeer() == 7) player.addBeer(5);
 		else if(param.getReliquary() == 7) player.addReliquary(5);
+		
+		else throw new WeblaboraException("Cloister Courtyard needs to know what basic item (Penny, Clay, Wood, Peat, Sheep, Grain) to output six of.");
 	}
 }
