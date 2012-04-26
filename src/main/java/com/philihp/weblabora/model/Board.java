@@ -83,7 +83,9 @@ public class Board {
 
 		activePlayer = 0;
 		
-		generateSettlements(players);
+		for(Player player : players) {
+			player.getUnbuiltSettlements().addAll(roundSettlements(""));
+		}
 		
 		round = 1;
 		moveInRound = 1;
@@ -108,15 +110,15 @@ public class Board {
 	}
 
 
-	private void generateSettlements(Player[] players) {
-		for (Player player : players) {
-			player.setUnbuiltSettlements(new ArrayList<Settlement>(8));
-			for (SettlementEnum settlementId : SettlementEnum.values()) {
-				Settlement settlement = settlementId.getInstance();
-				if ("".equals(settlement.getStage()))
-					player.getUnbuiltSettlements().add(settlement);
-			}
+	private List<Settlement> roundSettlements(String round) {
+		List<Settlement> settlements = new ArrayList<Settlement>(8);
+		if(round == null) return settlements;
+		for (SettlementEnum settlementId : SettlementEnum.values()) {
+			Settlement settlement = settlementId.getInstance();
+			if (round.equals(settlement.getStage()))
+				settlements.add(settlement);
 		}
+		return settlements;
 	}
 
 	private List<Building> roundBuildings(String phase) {
@@ -256,6 +258,11 @@ public class Board {
 		
 	}
 	
+	public void preSettling() {
+		System.out.println("------Begin Settlement------");
+		setSettling(true);
+	}
+	
 	/**
 	 * Called before every move.
 	 */
@@ -274,29 +281,9 @@ public class Board {
 		++moveInRound;
 		
 		if(isSettling() && moveInRound == 5) {
-			System.out.println("------End Settlement------");
-			//end of settlement round
-			setSettling(false);
-			
-			List<Building> newBuildings = roundBuildings(roundBeforeSettlement(round));
-			unbuiltBuildings.addAll(newBuildings);
-			
-			round++;
-			moveInRound=1;
+			postSettlement();
 		}
 		else if(!isSettling() && moveInRound == 6) {
-			System.out.println("======END OF ROUND "+round+"======");
-			//end of normal round
-			moveInRound = 1;
-			//end of round
-			if(isRoundBeforeSettlement(round)) {
-				System.out.println("------Begin Settlement------");
-				setSettling(true);
-			}
-			else {
-				round++;
-			}
-			
 			postRound();
 		}
 	}
@@ -305,9 +292,35 @@ public class Board {
 	 * Called after every round.
 	 */
 	public void postRound() {
+		System.out.println("======END OF ROUND "+round+"======");
+		//end of normal round
+		moveInRound = 1;
+		//end of round
+		if(isRoundBeforeSettlement(round)) {
+			preSettling();
+		}
+		else {
+			round++;
+		}
+		
 		//5 -- pass starting player
 		if(++startingPlayer == players.length) startingPlayer = 0;
 		startingMarker.setOwner(players[startingPlayer]);
+	}
+	
+	public void postSettlement() {
+		System.out.println("------End Settlement------");
+		//end of settlement round
+		setSettling(false);
+		
+		List<Building> newBuildings = roundBuildings(roundBeforeSettlement(round));
+		unbuiltBuildings.addAll(newBuildings);
+		for(Player player : players) {
+			player.getUnbuiltSettlements().addAll(roundSettlements(roundBeforeSettlement(round)));
+		}
+		
+		round++;
+		moveInRound=1;
 	}
 
 	public int getRound() {
