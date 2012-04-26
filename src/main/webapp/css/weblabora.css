@@ -70,14 +70,50 @@ div.container {
 	height: 125px;
 	width: 75px;
 }
-.building-laybrother:after {
-	content: url('../images/laybrother.svg');
+.building-laybrother-red:after {
+	content: url('../images/laybrother-red.svg');
 	position: relative;
 	top: -105px;
 	left: 25px;
 }
-.building-prior:after {
-	content: url('../images/prior.svg');
+.building-laybrother-green:after {
+	content: url('../images/laybrother-green.svg');
+	position: relative;
+	top: -105px;
+	left: 25px;
+}
+.building-laybrother-blue:after {
+	content: url('../images/laybrother-blue.svg');
+	position: relative;
+	top: -105px;
+	left: 25px;
+}
+.building-laybrother-white:after {
+	content: url('../images/laybrother-white.svg');
+	position: relative;
+	top: -105px;
+	left: 25px;
+}
+.building-prior-red:after {
+	content: url('../images/prior-red.svg');
+	position: relative;
+	top: -105px;
+	left: 25px;
+}
+.building-prior-green:after {
+	content: url('../images/prior-green.svg');
+	position: relative;
+	top: -105px;
+	left: 25px;
+}
+.building-prior-blue:after {
+	content: url('../images/prior-blue.svg');
+	position: relative;
+	top: -105px;
+	left: 25px;
+}
+.building-prior-white:after {
+	content: url('../images/prior-white.svg');
 	position: relative;
 	top: -105px;
 	left: 25px;
@@ -113,8 +149,7 @@ div.container {
 }
 .tab {
 	padding: 5px;
-	background: #fcfcfc;
-	border: 1px solid #b3b3b3;
+	border: 2px solid #b3b3b3;
 	border-bottom: 0;
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
@@ -125,6 +160,8 @@ div.container {
 	overflow: hidden;
 	line-height: 20px;
 	cursor: pointer;
+	top: -1px;
+	position: relative;
 }
 .tab img {
 	height: 25px;
@@ -183,10 +220,22 @@ div.container {
 	opacity: 0.5;
 }
 .tab--active {
-	box-shadow: 0 0 7px rgba(255,200,0,0.5) inset;
-	background-color: #FFBF7F;
 }
 .tab--inactive {
+}
+
+
+.tab--red {
+	border-color: red;
+}
+.tab--green {
+	border-color: green;
+}
+.tab--blue {
+	border-color: blue;
+}
+.tab--white {
+	border-color: grey;
 }
 
 .resource {

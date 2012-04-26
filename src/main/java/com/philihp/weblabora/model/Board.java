@@ -54,7 +54,8 @@ public class Board {
 	/**
 	 * This makes lookups from {@link CommandUse CommandUse}
 	 */
-	private EnumMap<BuildingEnum, Building> allBuildings;
+	private EnumMap<BuildingEnum, Building> allBuildings = 
+			new EnumMap<BuildingEnum, Building>(BuildingEnum.class);;
 
 	private List<Wonder> unclaimedWonders;
 
@@ -75,12 +76,12 @@ public class Board {
 		players[2].gameStart();
 		players[3].gameStart();
 
-		unbuiltBuildings = gameStartBuildings();
+		
+		addLandscapeBuildings();
+		unbuiltBuildings = roundBuildings("");
 		unclaimedWonders = gameStartWonders();
 
 		activePlayer = 0;
-		
-		allBuildings = generateBuildingsMap();
 		
 		generateSettlements(players);
 		
@@ -118,38 +119,33 @@ public class Board {
 		}
 	}
 
-	private List<Building> gameStartBuildings() {
+	private List<Building> roundBuildings(String phase) {
 		List<Building> buildings = new ArrayList<Building>();
+		if(phase == null) return buildings;
+		
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
 			Building building = buildingId.getInstance();
-			if ("".equals(building.getStage()))
+			if (phase.equals(building.getStage())) {
 				buildings.add(building);
+				allBuildings.put(BuildingEnum.valueOf(building.getId()), building);
+			}
 		}
 		return buildings;
 	}
 	
-	private EnumMap<BuildingEnum, Building> generateBuildingsMap() {
-		EnumMap<BuildingEnum, Building> map = 
-				new EnumMap<BuildingEnum, Building>(BuildingEnum.class);
-
-		map.put(LR1, (ClayMound)players[0].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
-		map.put(LG1, (ClayMound)players[1].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
-		map.put(LB1, (ClayMound)players[2].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
-		map.put(LW1, (ClayMound)players[3].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
-		map.put(LR2, (Farmyard)players[0].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
-		map.put(LG2, (Farmyard)players[1].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
-		map.put(LB2, (Farmyard)players[2].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
-		map.put(LW2, (Farmyard)players[3].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
-		map.put(LR3, (CloisterOffice)players[0].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
-		map.put(LG3, (CloisterOffice)players[1].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
-		map.put(LB3, (CloisterOffice)players[2].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
-		map.put(LW3, (CloisterOffice)players[3].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
-		
-		for(Building building : unbuiltBuildings) {
-			map.put(BuildingEnum.valueOf(building.getId()), building);
-		}
-		
-		return map;
+	private void addLandscapeBuildings() {
+		allBuildings.put(LR1, (ClayMound)players[0].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
+		allBuildings.put(LG1, (ClayMound)players[1].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
+		allBuildings.put(LB1, (ClayMound)players[2].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
+		allBuildings.put(LW1, (ClayMound)players[3].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
+		allBuildings.put(LR2, (Farmyard)players[0].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
+		allBuildings.put(LG2, (Farmyard)players[1].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
+		allBuildings.put(LB2, (Farmyard)players[2].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
+		allBuildings.put(LW2, (Farmyard)players[3].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
+		allBuildings.put(LR3, (CloisterOffice)players[0].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
+		allBuildings.put(LG3, (CloisterOffice)players[1].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
+		allBuildings.put(LB3, (CloisterOffice)players[2].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
+		allBuildings.put(LW3, (CloisterOffice)players[3].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
 	}
 	
 	public Building findBuildingInstance(BuildingEnum buildingId) {
@@ -281,7 +277,12 @@ public class Board {
 			System.out.println("------End Settlement------");
 			//end of settlement round
 			setSettling(false);
+			
+			List<Building> newBuildings = roundBuildings(roundBeforeSettlement(round));
+			unbuiltBuildings.addAll(newBuildings);
+			
 			round++;
+			moveInRound=1;
 		}
 		else if(!isSettling() && moveInRound == 6) {
 			System.out.println("======END OF ROUND "+round+"======");

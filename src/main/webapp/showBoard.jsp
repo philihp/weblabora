@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://philihp.com/jsp/ora" prefix="ora" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 <html:html>
@@ -102,8 +103,12 @@
 					<html:submit>Set Active Game</html:submit>
 				</html:select>
 			</html:form>
+			
+			<html:form action="/leaveGame.do" method="POST" style="display: inline">
+				<html:submit>Leave Game</html:submit>
+			</html:form>
 			|
-			<button id="findGamesButton">Find Games</button>
+			<button id="findGamesButton">Find A Game To Join</button>
 		</div>
 	</div>
 		
@@ -227,7 +232,7 @@
 
 		<ul class="tabs">
 			<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
-				<li id="tab${playerStatus.index+1}" class="tab tab--${player.activeClass} tab--${player.selectedClass}">
+				<li id="tab${playerStatus.index+1}" class="tab tab--${player.activeClass} tab--${player.selectedClass} tab--${fn:toLowerCase(player.color)}">
 					<img src="http://graph.facebook.com/${player.user.facebookId}/picture" height="50" width="50" title="${player.user.facebookId}"/>
 					${player.user.name}
 				</li>
@@ -235,6 +240,12 @@
 		</ul>
 		<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
 			<div class="board board--${player.activeClass} board--${player.selectedClass}" id="board${playerStatus.index+1}">
+	
+				<c:set var="player" value="${player}" scope="request" />
+				<c:import url="jsp/inventory.jsp" />
+				
+				<hr />
+	
 				<table>
 					<c:forEach items="${player.landscape.table}" var="row" varStatus="rowStatus">
 						<tr>
@@ -243,15 +254,15 @@
 									<td${cell.terrainType.rowspanAttr}>
 										<c:choose>
 											<c:when test="${not empty cell.erection}">
-												<div class="building ${ora:clergy(cell.erection.clergyman.type)}">
+												<div class="building building-${fn:toLowerCase(cell.erection.clergyman.type)}-${fn:toLowerCase(player.color)}">
 													<a class="erection-link" href="images/building/${cell.erection.image}.jpg" title="${cell.erection.id}"><img src="images/building/${cell.erection.image}.jpg" class="building-image" /></a>
 											  	</div>
 											</c:when>
 											<c:when test="${cell.terrainType eq 'FOREST'}">
-												<img src="images/building/Wood.jpg" class="landscape-tile" />
+												<img src="images/building/Wood.jpg" class="landscape-tile" title="${cell.coords}" />
 											</c:when>
 											<c:when test="${cell.terrainType eq 'MOOR'}">
-												<img src="images/building/Peat.jpg" class="landscape-tile" />
+												<img src="images/building/Peat.jpg" class="landscape-tile" title="${cell.coords}" />
 											</c:when>
 											<c:otherwise>
 												${cell.terrainType.properCase}<br />
@@ -272,14 +283,10 @@
 				</c:if>
 				
 				<h3>Clergymen</h3>
-				<c:if test="${empty player.layBrother1.location}"><img src="images/laybrother.svg" alt="Lay Brother" /></c:if>
-				<c:if test="${empty player.layBrother2.location}"><img src="images/laybrother.svg" alt="Lay Brother" /></c:if>
-				<c:if test="${empty player.prior.location}"><img src="images/prior.svg" /></c:if>
-				
-				<h3>Inventory</h3>
-				<c:set var="player" value="${player}" scope="request" />
-				<c:import url="jsp/inventory.jsp" />
-				
+				<c:if test="${empty player.layBrother1.location}"><img src="images/laybrother-${fn:toLowerCase(player.color)}.svg" alt="Lay Brother" /></c:if>
+				<c:if test="${empty player.layBrother2.location}"><img src="images/laybrother-${fn:toLowerCase(player.color)}.svg" alt="Lay Brother" /></c:if>
+				<c:if test="${empty player.prior.location}"><img src="images/prior-${fn:toLowerCase(player.color)}.svg" /></c:if>
+								
 				<hr />
 				
 				<div class="settlement-list"><!-- comment out white-space for inline-block spacing
@@ -323,12 +330,10 @@
 		</html:form>
 		
 		<hr />
-	<!--
 		<html:form action="/authenticateHijack.do">
 			<html:text property="facebookId"></html:text>
 			<html:submit>Hijack</html:submit>
 		</html:form>
-	-->
 	</div>
 
 </body>

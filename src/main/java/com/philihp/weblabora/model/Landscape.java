@@ -48,8 +48,8 @@ public class Landscape {
 		terrainPut(1, 4, PLAINS, cloisterOffice);
 	}
 	
-	private void terrainPut(int x, int y, TerrainTypeEnum type, Erection erection) {
-		terrain.put(x, y, new Terrain(this, type, erection, x, y));
+	private void terrainPut(int y, int x, TerrainTypeEnum type, Erection erection) {
+		terrain.put(y, x, new Terrain(this, type, erection, x, y));
 	}
 	
 	public Table<Integer, Integer, Terrain> getTerrain() {

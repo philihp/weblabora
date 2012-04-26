@@ -10,6 +10,18 @@ public class BuildCost {
 
 	private BuildCost() {
 	}
+	
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		if(getWood() > 0) s.append(", "+getWood()+" wood");
+		if(getClay() > 0) s.append(", "+getClay()+" clay");
+		if(getStone() > 0) s.append(", "+getStone()+" stone");
+		if(getStraw() > 0) s.append(", "+getStraw()+" straw");
+		if(getCoin() > 0) s.append(", "+getCoin()+" coins");
+		if(getPeat() > 0) s.append(", "+getPeat()+" peat");
+		if("".equals(s.toString())) return "";
+		return s.toString().substring(2);
+	}
 
 	public static BuildCost is() {
 		return new BuildCost();

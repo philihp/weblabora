@@ -52,19 +52,6 @@ public class Terrain {
 		this.terrainType = terrainType;
 	}
 	
-	private void figureOutCoordinates() {
-		Table<Integer,Integer,Terrain> terrain = landscape.getTerrain();
-		for(Integer columnKey : terrain.columnKeySet()) {
-			for(Integer rowKey : terrain.rowKeySet()) {
-				if(terrain.contains(rowKey, columnKey) && terrain.get(rowKey, columnKey).equals(this)) {
-					this.x = rowKey;
-					this.y = columnKey;
-					return;
-				}
-			}
-		}
-	}
-	
 	public String getCoords() {
 		return "("+x+","+y+")";
 	}

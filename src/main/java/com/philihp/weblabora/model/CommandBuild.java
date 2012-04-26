@@ -40,6 +40,10 @@ public class CommandBuild implements MoveCommand, InvalidDuringSettlement {
 		if(building == null) {
 			throw new WeblaboraException("Building "+buildingId+" was not be found in unbuilt buildings");
 		}
+		
+		if(location == null) {
+			throw new WeblaboraException("The landscape location at ("+x+","+y+") does not exist or has not been purchased yet");
+		}
 
 		if(location.getErection() != null) {
 			throw new WeblaboraException("There is already an erection at ("+x+","+y+"): "+location.getErection());
@@ -50,7 +54,7 @@ public class CommandBuild implements MoveCommand, InvalidDuringSettlement {
 		}
 		
 		if(player.canAffordCost(building.getBuildCost()) == false) {
-			throw new WeblaboraException("Player could not afford "+building.getBuildCost()+" to build "+building.getName());
+			throw new WeblaboraException("Player does not have "+building.getBuildCost()+" necessary to build "+building.getName());
 		}
 		
 		player.subtractAll(building.getBuildCost());
