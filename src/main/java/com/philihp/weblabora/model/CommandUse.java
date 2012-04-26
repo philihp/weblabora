@@ -27,11 +27,19 @@ public class CommandUse implements MoveCommand, InvalidDuringSettlement {
 			break;
 		default:
 			usageParam = new UsageParam("");
-			for (int i = 0; params.get(i * 2 + 1) != null
-					&& params.get(i * 2 + 2) != null; i++) {
-				usageParam.pushCoordinate(
-						Integer.parseInt(params.get(i * 2 + 1)),
-						Integer.parseInt(params.get(i * 2 + 2)));
+			Integer x = null;
+			for (int i = 1; i < params.size(); i++) {
+				if(x == null) {
+					x = Integer.parseInt(params.get(i));
+				}
+				else {
+					usageParam.pushCoordinate(
+						x, Integer.parseInt(params.get(i)));
+					x = null;
+				}
+			}
+			if(x != null) {
+				throw new WeblaboraException("Coordinate building usage parameters must come in pairs. Parsed "+x+" for the x, but no y number.");
 			}
 			break;
 		}
