@@ -196,6 +196,14 @@ div.container {
 	display: inline-block;
 }
 .movelist-color {
+	color: #7f7f7f;
 	float: left;
 	width: 5em;
+	text-transform: lowercase;
+}
+.movelist-color:first-letter {
+	text-transform: uppercase;
+}
+.movelist-color:after {
+	content: ':';
 }

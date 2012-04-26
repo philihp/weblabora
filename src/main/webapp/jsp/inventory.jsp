@@ -1,14 +1,9 @@
 <%@page import="java.util.Enumeration"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:import url="jsp/inventoryType.jsp">
-	<c:param name="type" value="Peat" />
-	<c:param name="abbr" value="Pt" />
-	<c:param name="amount" value="${player.peat}" />
-</c:import>
-<c:import url="jsp/inventoryType.jsp">
-	<c:param name="type" value="Penny" />
-	<c:param name="abbr" value="Pn" />
-	<c:param name="amount" value="${player.penny}" />
+	<c:param name="type" value="Wood" />
+	<c:param name="abbr" value="Wo" />
+	<c:param name="amount" value="${player.wood}" />
 </c:import>
 <c:import url="jsp/inventoryType.jsp">
 	<c:param name="type" value="Clay" />
@@ -16,9 +11,24 @@
 	<c:param name="amount" value="${player.clay}" />
 </c:import>
 <c:import url="jsp/inventoryType.jsp">
-	<c:param name="type" value="Wood" />
-	<c:param name="abbr" value="Wo" />
-	<c:param name="amount" value="${player.wood}" />
+	<c:param name="type" value="Stone" />
+	<c:param name="abbr" value="Sn" />
+	<c:param name="amount" value="${player.stone}" />
+</c:import>
+<c:import url="jsp/inventoryType.jsp">
+	<c:param name="type" value="Straw" />
+	<c:param name="abbr" value="Sw" />
+	<c:param name="amount" value="${player.straw}" />
+</c:import>
+<c:import url="jsp/inventoryType.jsp">
+	<c:param name="type" value="Penny" />
+	<c:param name="abbr" value="Pn" />
+	<c:param name="amount" value="${player.penny}" />
+</c:import>
+<c:import url="jsp/inventoryType.jsp">
+	<c:param name="type" value="Peat" />
+	<c:param name="abbr" value="Pt" />
+	<c:param name="amount" value="${player.peat}" />
 </c:import>
 <c:import url="jsp/inventoryType.jsp">
 	<c:param name="type" value="Grain" />
@@ -29,11 +39,6 @@
 	<c:param name="type" value="Sheep" />
 	<c:param name="abbr" value="Sh" />
 	<c:param name="amount" value="${player.sheep}" />
-</c:import>
-<c:import url="jsp/inventoryType.jsp">
-	<c:param name="type" value="Stone" />
-	<c:param name="abbr" value="Sn" />
-	<c:param name="amount" value="${player.stone}" />
 </c:import>
 <c:import url="jsp/inventoryType.jsp">
 	<c:param name="type" value="Flour" />
@@ -74,11 +79,6 @@
 	<c:param name="type" value="Whiskey" />
 	<c:param name="abbr" value="Wh" />
 	<c:param name="amount" value="${player.whiskey}" />
-</c:import>
-<c:import url="jsp/inventoryType.jsp">
-	<c:param name="type" value="Straw" />
-	<c:param name="abbr" value="Sw" />
-	<c:param name="amount" value="${player.straw}" />
 </c:import>
 <c:import url="jsp/inventoryType.jsp">
 	<c:param name="type" value="Meat" />
