@@ -282,6 +282,7 @@ public class Board {
 			//end of settlement round
 			setSettling(false);
 			round++;
+			moveInRound=1;
 		}
 		else if(!isSettling() && moveInRound == 6) {
 			System.out.println("======END OF ROUND "+round+"======");
