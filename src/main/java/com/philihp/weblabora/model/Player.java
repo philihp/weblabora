@@ -57,7 +57,7 @@ public class Player {
 	
 	private StartingMarker startingMarker = null;
 	
-	private List<Settlement> unbuiltSettlements;
+	private List<Settlement> unbuiltSettlements = new ArrayList<Settlement>(5);
 
 	public Player(Board board, Color color) {
 		this.board = board;
