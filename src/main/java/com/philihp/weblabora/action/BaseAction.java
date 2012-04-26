@@ -19,7 +19,7 @@ import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.util.EntityManagerManager;
 
 
-abstract class BaseAction extends Action {
+abstract public class BaseAction extends Action {
 	
 	@SuppressWarnings("unchecked")
 	private static final Set<Object> PUBLIC_ACTIONS = new HashSet<Object>(Arrays.asList(Authenticate.class, AuthenticateGetInfo.class, Offline.class));
@@ -53,7 +53,7 @@ abstract class BaseAction extends Action {
 		return findUser(user.getFacebookId());
 	}
 	
-	protected static User findUser(String facebookId) {
+	public static User findUser(String facebookId) {
 		EntityManager em = EntityManagerManager.get();
 		TypedQuery<User> query = em.createNamedQuery("findUserByFacebookId", User.class);
 		query.setParameter("facebookId", facebookId);
