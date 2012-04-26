@@ -21,6 +21,11 @@
 	<c:param name="amount" value="${player.straw}" />
 </c:import>
 <c:import url="jsp/inventoryType.jsp">
+	<c:param name="type" value="Nickel" />
+	<c:param name="abbr" value="Ni" />
+	<c:param name="amount" value="${player.nickel}" />
+</c:import>
+<c:import url="jsp/inventoryType.jsp">
 	<c:param name="type" value="Penny" />
 	<c:param name="abbr" value="Pn" />
 	<c:param name="amount" value="${player.penny}" />
@@ -49,11 +54,6 @@
 	<c:param name="type" value="Grapes" />
 	<c:param name="abbr" value="Gp" />
 	<c:param name="amount" value="${player.grapes}" />
-</c:import>
-<c:import url="jsp/inventoryType.jsp">
-	<c:param name="type" value="Nickel" />
-	<c:param name="abbr" value="Ni" />
-	<c:param name="amount" value="${player.nickel}" />
 </c:import>
 <c:import url="jsp/inventoryType.jsp">
 	<c:param name="type" value="Hops" />
