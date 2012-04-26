@@ -51,6 +51,8 @@ public class Board {
 
 	private boolean settling;
 	
+	private List<String> moveList = new ArrayList<String>();
+	
 	/**
 	 * This makes lookups from {@link CommandUse CommandUse}
 	 */
@@ -244,6 +246,8 @@ public class Board {
 	 * Called before every round.
 	 */
 	public void preRound() {
+		
+		getMoveList().add("<b>Round "+round+"</b><br />");
 
 		//1 - reset clergymen
 		for(Player player : getPlayers()) {
@@ -260,16 +264,19 @@ public class Board {
 	
 	public void preSettling() {
 		System.out.println("------Begin Settlement------");
+		
+		getMoveList().add("<b>Settlement ("+roundBeforeSettlement(round)+")</b><br />");
 		setSettling(true);
 	}
 	
 	/**
 	 * Called before every move.
 	 */
-	public void preMove() {
+	public void preMove(String move) {
 		if(!isSettling() && moveInRound == 1) {
 			preRound();
 		}
+		getMoveList().add("<div class=\"movelist-color\">"+getPlayer(getActivePlayer()).getColor()+"</div>"+move+"<br />");
 	}
 	
 	/**
@@ -354,6 +361,10 @@ public class Board {
 	
 	public int[] getDistrictCosts() {
 		return Arrays.copyOfRange(DISTRICT_PURCHASE_PRICE, districtsPurchased, DISTRICT_PURCHASE_PRICE.length); 
+	}
+
+	public List<String> getMoveList() {
+		return moveList;
 	}
 
 }

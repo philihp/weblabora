@@ -19,7 +19,7 @@ public final class MoveProcessor {
 	
 	public static void processMoves(Board board, Iterable<String> allMoves) throws WeblaboraException {
 		for(String move : allMoves) {
-			board.preMove();
+			board.preMove(move);
 			processActions(board,move);
 			board.postMove();
 		}
