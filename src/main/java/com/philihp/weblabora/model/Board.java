@@ -276,7 +276,7 @@ public class Board {
 		if(!isSettling() && moveInRound == 1) {
 			preRound();
 		}
-		getMoveList().add("<div class=\"movelist-color\">"+getPlayer(getActivePlayer()).getColor()+"</div>"+move+"<br />");
+		getMoveList().add("<div class=\"movelist-color\">"+getPlayer(getActivePlayer()).getColor()+"</div><div class=\"movelist-move\">"+move+"</div>");
 	}
 	
 	/**

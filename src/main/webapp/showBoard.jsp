@@ -103,9 +103,9 @@
 					<html:submit>Set Active Game</html:submit>
 				</html:select>
 			</html:form>
-			
+			|
 			<html:form action="/leaveGame.do" method="POST" style="display: inline">
-				<html:submit>Leave Game</html:submit>
+				<html:submit>Leave Active Game</html:submit>
 			</html:form>
 			|
 			<button id="findGamesButton">Find A Game To Join</button>
