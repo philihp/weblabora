@@ -9,6 +9,15 @@ import java.util.List;
 import com.philihp.weblabora.model.building.*;
 
 public class CommandSettle implements MoveCommand {
+	
+	private Integer grokParam(String num, String name, String param) throws WeblaboraException {
+		try {
+			return new Integer(param);
+		}
+		catch(NumberFormatException e) {
+			throw new WeblaboraException(num+" parameter, "+name+"=\""+param+"\" needs to be a number");
+		}
+	}
 
 	@Override
 	public void execute(Board board, CommandParameters params)
@@ -16,10 +25,11 @@ public class CommandSettle implements MoveCommand {
 		
 		execute(board,
 				params.get(0),
-				Integer.parseInt(params.get(1)),
-				Integer.parseInt(params.get(2)),
+				grokParam("Second", "x", params.get(1)),
+				grokParam("Third", "y", params.get(2)),
 				new UsageParam(params.get(3))
 				);
+		
 		
 		System.out.println("Settling "+params.get(0)+" at ("+params.get(1)+","+params.get(2)+")");
 	}
