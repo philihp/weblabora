@@ -98,19 +98,22 @@
 			$(this).hide();
 			$('.show-future-building-button').show();
 		});
+		
 
-		$(".show-future-settlements-button").click(function(event) {
+		<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
+		$(".show-future-settlements-button-${fn:toLowerCase(player.color)}").click(function(event) {
 			event.preventDefault();
-			$(".future-settlement").css('display','inline-block');
+			$(".future-settlement-${fn:toLowerCase(player.color)}").css('display','inline-block');
 			$(this).hide();
-			$('.hide-future-settlements-button').show();
+			$('.hide-future-settlements-button-${fn:toLowerCase(player.color)}').show();
 		});
-		$(".hide-future-settlements-button").click(function(event) {
+		$(".hide-future-settlements-button-${fn:toLowerCase(player.color)}").click(function(event) {
 			event.preventDefault();
-			$(".future-settlement").css('display','none');
+			$(".future-settlement-${fn:toLowerCase(player.color)}").css('display','none');
 			$(this).hide();
-			$('.show-future-settlements-button').show();
+			$('.show-future-settlements-button-${fn:toLowerCase(player.color)}').show();
 		});
+		</c:forEach>
 		
 		$('#tab1').click(function() {showboard(1);});
 		$('#tab2').click(function() {showboard(2);});
@@ -341,14 +344,14 @@
 				  	</div><!--
 				  </c:forEach>
 				  <c:forEach items="${board.futureSettlements}" var="settlement">
-				  	--><div class="settlement future-settlement">
-				  	  <a class="settlement-link" href="images/building/${settlement.image}.jpg" title="${settlement.id}"><img src="images/building/${settlement.image}.jpg" class="settlement-image" /></a>
+				  	--><div class="settlement future-settlement future-settlement-${fn:toLowerCase(player.color)}">
+				  	  <a class="settlement-link settlement-link-${fn:toLowerCase(player.color)}" href="images/building/${settlement.image}.jpg" title="${settlement.id}"><img src="images/building/${settlement.image}.jpg" class="settlement-image settlement-image-${fn:toLowerCase(player.color)}" /></a>
 				  	</div><!--
 				  </c:forEach>
 				--></div>
 				
-			<a class="show-future-settlements-button">Show Future Settlements</a>
-			<a class="hide-future-settlements-button">Hide Future Settlements</a>
+			<a class="show-future-settlements-button show-future-settlements-button-${fn:toLowerCase(player.color)}">Show Future Settlements</a>
+			<a class="hide-future-settlements-button hide-future-settlements-button-${fn:toLowerCase(player.color)}">Hide Future Settlements</a>
 				
 				<c:remove var="player"/>
 			</div>
