@@ -613,7 +613,6 @@ public class Player {
 		subtractGrapes(param.getGrapes());
 		subtractPenny(param.getPenny());
 		subtractNickel(param.getNickel());
-		subtractNickel(param.getNickel());
 		subtractHops(param.getHops());
 		subtractCoal(param.getCoal());
 		subtractBook(param.getBook());
