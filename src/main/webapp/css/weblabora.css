@@ -45,11 +45,10 @@ div.container {
 
 
 .building-list {
-	height: 304px;
 	display: block;
 	margin-top: 15px;
 	margin-bottom: 0;
-	margin-left: 0;
+	margin-left: 333px;
 	margin-right: 0;
 }
 .building {
@@ -141,7 +140,56 @@ div.container {
 }
 
 
+
+.future-list {
+	height: 304px;
+	display: block;
+	margin-top: 15px;
+	margin-bottom: 0;
+	margin-left: 0;
+	margin-right: 0;
+}
+.future {
+	border: 1px solid #FBEC00;
+	border-radius: 3px;
+	box-shadow: 0 0 3px rgba(0,0,0,0.3);
+	background-color: #fff;
+	font-size: 8pt;
+	height: 125px;
+	width: 75px;
+	display: none;
+	vertical-align: top;
+	text-align: left;
+	padding: 2px;
+	margin: 3px;
+}
+.show-future {
+	height: 125px;
+	width: 75px;
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+	padding: 2px;
+	margin: 3px;
+}
+.future-image {
+	height: 125px;
+	width: 75px;
+}
+
+.show-future-button {
+	cursor: pointer; 
+}
+
+.info {
+	float: right;
+}
+.info-line {
+	margin: 0;
+}
+
 .tabs {
+	clear: both;
 	list-style: none;
 	padding: 0;
 	margin: 0;

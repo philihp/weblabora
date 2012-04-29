@@ -61,6 +61,14 @@
 			next: "",
 			previous: ""
 		});
+		$(".future-link").colorbox({
+			rel:'future-link',
+			speed : 200,
+			transition: "elastic",
+			current: "",
+			next: "",
+			previous: ""
+		});
 		$(".erection-link").colorbox({
 			rel:'erection-link',
 			speed : 200,
@@ -78,6 +86,9 @@
 			previous: ""
 		});
 
+		$(".show-future-button").click(function() {
+			$(".future").css('display','inline-block');
+		})
 
 		$('#tab1').click(function() {showboard(1);});
 		$('#tab2').click(function() {showboard(2);});
@@ -210,26 +221,37 @@
 				</g>
 			</svg>
 		</div>
+		
+		<div class="info">
+			<h3 class="info-line">Round ${board.round}, ${board.move} move.</h3>
+			<h3 class="info-line">Waiting on ${board.activePlayerColor}.</h3>
+			<hr />
+			<h4 class="info-line">Plot Costs: 
+				<c:forEach items="${board.plotCosts}" var="cost" varStatus="costStatus">
+					${cost}<c:if test="${not costStatus.last}">,</c:if>
+				</c:forEach>
+			</h4>
+			<h4 class="info-line">District Costs: 
+				<c:forEach items="${board.districtCosts}" var="cost" varStatus="costStatus">
+					${cost}<c:if test="${not costStatus.last}">,</c:if>
+				</c:forEach>
+			</h4>
+			<a class="show-future-button">Show Future Buildings</a>
+		</div>
+		
 		<div class="building-list"><!-- comment out white-space for inline-block spacing
 		  <c:forEach items="${board.unbuiltBuildings}" var="building">
 		  	--><div class="building">
 		  	  <a class="building-link" href="images/building/${building.image}.jpg" title="${building.id}"><img src="images/building/${building.image}.jpg" class="building-image" /></a>
 		  	</div><!--
 		  </c:forEach>
+		  <c:forEach items="${board.futureBuildings}" var="building">
+		  	--><div class="future">
+		  	  <a class="future-link" href="images/building/${building.image}.jpg" title="${building.id}"><img src="images/building/${building.image}.jpg" class="future-image" /></a>
+		  	</div><!--
+		  </c:forEach>
 		--></div>
-		
-		<h3>Round ${board.round}, ${board.move} move. Waiting on ${board.activePlayerColor}.</h3>
-		<h4>Plot Costs: 
-			<c:forEach items="${board.plotCosts}" var="cost" varStatus="costStatus">
-				${cost}<c:if test="${not costStatus.last}">,</c:if>
-			</c:forEach>
-		</h4>
-		<h4>District Costs: 
-			<c:forEach items="${board.districtCosts}" var="cost" varStatus="costStatus">
-				${cost}<c:if test="${not costStatus.last}">,</c:if>
-			</c:forEach>
-		</h4>
-
+			
 		<ul class="tabs">
 			<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
 				<li id="tab${playerStatus.index+1}" class="tab tab--${player.activeClass} tab--${player.selectedClass} tab--${fn:toLowerCase(player.color)}">

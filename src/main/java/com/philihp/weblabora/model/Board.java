@@ -137,6 +137,16 @@ public class Board {
 		return buildings;
 	}
 	
+	public List<Building> getFutureBuildings() {
+		List<Building> buildings = new ArrayList<Building>();
+		for(BuildingEnum buildingId : BuildingEnum.values()) {
+			if(allBuildings.containsKey(buildingId) == false) {
+				buildings.add(buildingId.getInstance());
+			}
+		}
+		return buildings;
+	}
+	
 	private void addLandscapeBuildings() {
 		allBuildings.put(LR1, (ClayMound)players[0].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
 		allBuildings.put(LG1, (ClayMound)players[1].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());

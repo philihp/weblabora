@@ -2,6 +2,8 @@ package com.philihp.weblabora.action;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,7 @@ import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.MoveProcessor;
+import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.util.EntityManagerManager;
 import com.philihp.weblabora.util.FacebookCredentials;
 
@@ -28,17 +31,20 @@ public class ShowBoard extends BaseAction {
 
 		request.setAttribute("myGames", findGamesForUser(user));
 		request.setAttribute("game", user.getActiveGame());
-		
-		Board board = null;
-		if(user.getActiveGame() != null) {
-			board = new Board();
-			board.populateDetails(user.getActiveGame());
-			MoveProcessor.processMoves(board, user.getActiveGame().getMoves());
-			board.preMove("..."); //upkeep stuff before player makes a move	
-			request.setAttribute("board", board);
-		}
+		request.setAttribute("board", prepareBoard(user.getActiveGame()));
 		
 		return mapping.findForward("view");
+	}
+	
+	protected static Board prepareBoard(Game game) throws WeblaboraException {
+		Board board = null;
+		if(game != null) {
+			board = new Board();
+			board.populateDetails(game);
+			MoveProcessor.processMoves(board, game.getMoves());
+			board.preMove("..."); //upkeep stuff before player makes a move	
+		}
+		return board;
 	}
 
 	private List<Game> findGamesForUser(User user) {
