@@ -28,7 +28,7 @@ happen for a number of things, for example (but not limited to):
 The specific error was:
 
 <pre>
-${error}
+${error.message}
 </pre>
 
 Game ID <code>${game.gameId}</code><br />
