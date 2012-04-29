@@ -141,7 +141,7 @@ public class CommandBuyPlot implements MoveCommand {
 
 	private static void checkForOverlap(
 			Table<Integer, Integer, Terrain> oldTerrain, int y, Integer rowKey, Integer columnKey) throws WeblaboraException {
-		if(oldTerrain.contains(rowKey, columnKey)) {
+		if(oldTerrain.contains(rowKey, columnKey) && oldTerrain.get(rowKey, columnKey) != null) {
 			throw new WeblaboraException("Cannot put a plot at "+y+", as it would overlap on row "+rowKey);
 		}
 		
