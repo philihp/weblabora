@@ -13,6 +13,7 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.model.Wheel;
 
 public class Calefactory extends Building {
@@ -23,7 +24,7 @@ public class Calefactory extends Building {
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) {
+	public void use(Board board, UsageParam input) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 		player.subtractCoins(1);
 	}

@@ -23,7 +23,7 @@ public class FinancedEstate extends Building {
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) {
+	public void use(Board board, UsageParam input) throws WeblaboraException  {
 		Player player = board.getPlayer(board.getActivePlayer());
 		player.subtractCoins(1);
 		player.addBooks(1);

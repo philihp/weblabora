@@ -380,7 +380,7 @@ public class Player {
 		return true;
 	}
 
-	public void subtractAll(BuildCost buildCost) {
+	public void subtractAll(BuildCost buildCost) throws WeblaboraException  {
 		subtractWood(buildCost.getWood());
 		subtractClay(buildCost.getClay());
 		subtractStone(buildCost.getStone());
@@ -516,7 +516,10 @@ public class Player {
 		this.grapes -= grapes;
 	}
 
-	public void subtractCoins(int penniesToSubtract) {
+	public void subtractCoins(int penniesToSubtract) throws WeblaboraException {
+		if(getCoins() < penniesToSubtract)
+			throw new WeblaboraException("Unable to subtract "+penniesToSubtract+" coins, player only had "+getCoins()+" coins.");
+				
 		this.penny -= penniesToSubtract;
 		//if subtracting those pennies pushes us into the negative, then convert the pennies into nickels
 		while(this.penny < 0 && this.nickel > 0) {
@@ -608,7 +611,8 @@ public class Player {
 		subtractStone(param.getStone());
 		subtractFlour(param.getFlour());
 		subtractGrapes(param.getGrapes());
-		subtractCoins(param.getPenny());
+		subtractPenny(param.getPenny());
+		subtractNickel(param.getNickel());
 		subtractNickel(param.getNickel());
 		subtractHops(param.getHops());
 		subtractCoal(param.getCoal());

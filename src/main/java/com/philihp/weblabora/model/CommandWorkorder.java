@@ -27,14 +27,16 @@ public class CommandWorkorder implements MoveCommand, InvalidDuringSettlement {
 			throws WeblaboraException {
 		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		Player orderedPlayer = board.getPlayer(orderedPlayerColor.ordinal());
-
 		if(payment.isWithGift()) {
 			activePlayer.subtractWhiskey(payment.getWhiskey());
 			activePlayer.subtractWine(payment.getWine());
 		}
 		else {
-			activePlayer.subtractPenny(payment.getPenny());
-			orderedPlayer.addPenny(payment.getPenny());
+			if(board.getStartingMarker().getCost() <= payment.getCoins()) {
+				activePlayer.subtractCoins(board.getStartingMarker().getCost());
+				orderedPlayer.addPenny(board.getStartingMarker().getCost());
+			}
+			else throw new WeblaboraException("Insufficient payment, workorders cost "+board.getStartingMarker().getCost()+" coins.");
 		}
 	}
 }

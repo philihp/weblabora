@@ -12,6 +12,7 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.WeblaboraException;
 
 public class BuildersMarket extends Building {
 
@@ -20,7 +21,7 @@ public class BuildersMarket extends Building {
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) {
+	public void use(Board board, UsageParam input) throws WeblaboraException {
 		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		
 		activePlayer.subtractCoins(2);
