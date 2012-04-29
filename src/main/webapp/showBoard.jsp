@@ -61,8 +61,8 @@
 			next: "",
 			previous: ""
 		});
-		$(".future-link").colorbox({
-			rel:'future-link',
+		$(".future-building-link").colorbox({
+			rel:'future-building-link',
 			speed : 200,
 			transition: "elastic",
 			current: "",
@@ -86,10 +86,32 @@
 			previous: ""
 		});
 
-		$(".show-future-button").click(function() {
-			$(".future").css('display','inline-block');
-		})
+		$(".show-future-building-button").click(function(event) {
+			event.preventDefault();
+			$(".future-building").css('display','inline-block');
+			$(this).hide();
+			$('.hide-future-building-button').show();
+		});
+		$(".hide-future-building-button").click(function(event) {
+			event.preventDefault();
+			$(".future-building").css('display','none');
+			$(this).hide();
+			$('.show-future-building-button').show();
+		});
 
+		$(".show-future-settlements-button").click(function(event) {
+			event.preventDefault();
+			$(".future-settlement").css('display','inline-block');
+			$(this).hide();
+			$('.hide-future-settlements-button').show();
+		});
+		$(".hide-future-settlements-button").click(function(event) {
+			event.preventDefault();
+			$(".future-settlement").css('display','none');
+			$(this).hide();
+			$('.show-future-settlements-button').show();
+		});
+		
 		$('#tab1').click(function() {showboard(1);});
 		$('#tab2').click(function() {showboard(2);});
 		$('#tab3').click(function() {showboard(3);});
@@ -236,7 +258,8 @@
 					${cost}<c:if test="${not costStatus.last}">,</c:if>
 				</c:forEach>
 			</h4>
-			<a class="show-future-button">Show Future Buildings</a>
+			<a class="show-future-building-button">Show Future Buildings</a>
+			<a class="hide-future-building-button">Hide Future Buildings</a>
 		</div>
 		
 		<div class="building-list"><!-- comment out white-space for inline-block spacing
@@ -246,8 +269,8 @@
 		  	</div><!--
 		  </c:forEach>
 		  <c:forEach items="${board.futureBuildings}" var="building">
-		  	--><div class="future">
-		  	  <a class="future-link" href="images/building/${building.image}.jpg" title="${building.id}"><img src="images/building/${building.image}.jpg" class="future-image" /></a>
+		  	--><div class="future-building">
+		  	  <a class="future-building-link" href="images/building/${building.image}.jpg" title="${building.id}"><img src="images/building/${building.image}.jpg" class="future-building-image" /></a>
 		  	</div><!--
 		  </c:forEach>
 		--></div>
@@ -317,7 +340,15 @@
 				  		<a class="settlement-link" href="images/building/${settlement.image}.jpg" title="${settlement.id}"><img src="images/building/${settlement.image}.jpg" class="settlement-image" /></a>
 				  	</div><!--
 				  </c:forEach>
+				  <c:forEach items="${board.futureSettlements}" var="settlement">
+				  	--><div class="settlement future-settlement">
+				  	  <a class="settlement-link" href="images/building/${settlement.image}.jpg" title="${settlement.id}"><img src="images/building/${settlement.image}.jpg" class="settlement-image" /></a>
+				  	</div><!--
+				  </c:forEach>
 				--></div>
+				
+			<a class="show-future-settlements-button">Show Future Settlements</a>
+			<a class="hide-future-settlements-button">Hide Future Settlements</a>
 				
 				<c:remove var="player"/>
 			</div>

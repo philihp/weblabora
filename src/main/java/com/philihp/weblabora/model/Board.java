@@ -46,6 +46,8 @@ public class Board {
 	private StartingMarker startingMarker;
 	
 	private int round;
+	
+	private SettlementRound settlementRound;
 
 	private int moveInRound;
 
@@ -64,9 +66,12 @@ public class Board {
 	public Board() {
 		gamePlayers = GamePlayers.FOUR;
 		gameType = GameType.LONG;
+		
+		settlementRound = SettlementRound.S;
 
 		wheel = new Wheel(this);
 
+		activePlayer = 0;
 		players = new Player[4];
 		players[0] = new Player(this, Color.RED);
 		players[1] = new Player(this, Color.GREEN);
@@ -78,15 +83,12 @@ public class Board {
 		players[2].gameStart();
 		players[3].gameStart();
 
+		unclaimedWonders = gameStartWonders();
 		
 		addLandscapeBuildings();
-		unbuiltBuildings = roundBuildings("");
-		unclaimedWonders = gameStartWonders();
-
-		activePlayer = 0;
-		
+		unbuiltBuildings = roundBuildings(SettlementRound.S);
 		for(Player player : players) {
-			player.getUnbuiltSettlements().addAll(roundSettlements(""));
+			player.getUnbuiltSettlements().addAll(roundSettlements(SettlementRound.S));
 		}
 		
 		round = 1;
@@ -112,20 +114,24 @@ public class Board {
 	}
 
 
-	private List<Settlement> roundSettlements(String round) {
+	private List<Settlement> roundSettlements(SettlementRound round) {
 		List<Settlement> settlements = new ArrayList<Settlement>(8);
 		if(round == null) return settlements;
 		for (SettlementEnum settlementId : SettlementEnum.values()) {
 			Settlement settlement = settlementId.getInstance();
-			if (round.equals(settlement.getStage()))
+			if (round == settlement.getRound())
 				settlements.add(settlement);
 		}
 		return settlements;
 	}
 
-	private List<Building> roundBuildings(String phase) {
+	private List<Building> roundBuildings(SettlementRound round) {
 		List<Building> buildings = new ArrayList<Building>();
-		if(phase == null) return buildings;
+		if(round == null) return buildings;
+		
+		//TODO: should change this later so buildings use Round enum
+		String phase = round.toString();
+		if(phase.equals("S")) phase = "";
 		
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
 			Building building = buildingId.getInstance();
@@ -136,7 +142,7 @@ public class Board {
 		}
 		return buildings;
 	}
-	
+
 	public List<Building> getFutureBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
 		for(BuildingEnum buildingId : BuildingEnum.values()) {
@@ -145,6 +151,17 @@ public class Board {
 			}
 		}
 		return buildings;
+	}
+	
+	public List<Settlement> getFutureSettlements() {
+		List<Settlement> settlements = new ArrayList<Settlement>();
+		for(SettlementEnum settlementId : SettlementEnum.values()) {
+			Settlement settlement = settlementId.getInstance();
+			if(settlement.getRound().ordinal() > getSettlementRound().ordinal()) {
+				settlements.add(settlementId.getInstance());
+			}
+		}
+		return settlements;
 	}
 	
 	private void addLandscapeBuildings() {
@@ -230,23 +247,31 @@ public class Board {
 	public float getArmOffset() {
 		return isSettling()?27.692f:13.846f; 
 	}
+
+	public void setSettlementRound(SettlementRound settlementRound) {
+		this.settlementRound = settlementRound;
+	}
+
+	public SettlementRound getSettlementRound() {
+		return settlementRound;
+	}
 	
 	public static boolean isRoundBeforeSettlement(int round) {
 		return roundBeforeSettlement(round) != null;
 	}
 	
-	public static String roundBeforeSettlement(int round) {
+	public static SettlementRound roundBeforeSettlement(int round) {
 		switch (round) {
 		case 6:
-			return "A";
+			return SettlementRound.A;
 		case 9:
-			return "B";
+			return SettlementRound.B;
 		case 15:
-			return "C";
+			return SettlementRound.C;
 		case 18:
-			return "D";
+			return SettlementRound.D;
 		case 24:
-			return "E";
+			return SettlementRound.E;
 		default:
 			return null;
 		}
@@ -335,6 +360,8 @@ public class Board {
 		for(Player player : players) {
 			player.getUnbuiltSettlements().addAll(roundSettlements(roundBeforeSettlement(round)));
 		}
+		
+		setSettlementRound(getSettlementRound().next());
 		
 		round++;
 		moveInRound=1;
