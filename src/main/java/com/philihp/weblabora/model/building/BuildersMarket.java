@@ -24,7 +24,9 @@ public class BuildersMarket extends Building {
 	public void use(Board board, UsageParam input) throws WeblaboraException {
 		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		
-		activePlayer.subtractCoins(2);
+		if(input.getCoins() == 2) {
+			activePlayer.subtractAll(input);
+		}
 		
 		activePlayer.addWood(2);
 		activePlayer.addClay(2);

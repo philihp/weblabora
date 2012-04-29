@@ -56,5 +56,9 @@ abstract public class Building extends Erection {
 	public boolean isCloister() {
 		return cloister;
 	}
+	
+	public String toString() {
+		return getName();
+	}
 
 }

@@ -635,9 +635,9 @@ public class Player {
 		else if(prior.getLocation() == null) dude = prior;
 		else
 			throw new WeblaboraException("Attempted to place " + color
-					+ " clergyman when none were free. They are on "
-					+ layBrother1.getLocation().getErection() + ", "
-					+ layBrother2.getLocation().getErection() + ", and "
+					+ " clergyman when none were free. They are on the "
+					+ layBrother1.getLocation().getErection() + ", the "
+					+ layBrother2.getLocation().getErection() + ", and the "
 					+ prior.getLocation().getErection() + ".");
 		
 		dude.setLocation(location);
