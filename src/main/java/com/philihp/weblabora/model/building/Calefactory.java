@@ -26,6 +26,9 @@ public class Calefactory extends Building {
 	@Override
 	public void use(Board board, UsageParam input) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
-		player.subtractCoins(1);
+		if(input.getCoins() == 1)
+			player.subtractAll(input);
+		else
+			throw new WeblaboraException("Calefactory requires 1 coin for input");
 	}
 }
