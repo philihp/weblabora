@@ -32,6 +32,10 @@ public class Bakery extends Building {
 		activePlayer.subtractFlour(quantity);
 		activePlayer.subtractEnergy(input);
 		
-		activePlayer.addBread(quantity);		
+		activePlayer.addBread(quantity);
+		
+		//convert up to two bread to money
+		activePlayer.addCoins(Math.min(input.getSecondary().getBread(), 2) * 4);
+		activePlayer.subtractBread(Math.min(input.getSecondary().getBread(), 2));
 	}
 }

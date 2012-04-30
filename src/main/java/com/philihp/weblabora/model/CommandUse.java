@@ -7,6 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import com.philihp.weblabora.model.building.*;
+import com.philihp.weblabora.util.IntegerUtil;
 
 public class CommandUse implements MoveCommand, InvalidDuringSettlement {
 
@@ -18,14 +19,17 @@ public class CommandUse implements MoveCommand, InvalidDuringSettlement {
 		UsageParam usageParam = null;
 		boolean usingPrior = params.getSuffix().contains("*");
 
-		switch (params.size()) {
-		case 1:
+		if(params.size() == 1) {
 			usageParam = new UsageParam("");
-			break;
-		case 2:
+		}
+		else if(params.size() == 2) {
 			usageParam = new UsageParam(params.get(1));
-			break;
-		default:
+		}
+		else if(params.size() == 3 && IntegerUtil.isInteger(params.get(2)) == false) {
+			usageParam = new UsageParam(params.get(1));
+			usageParam.setSecondary(new UsageParam(params.get(2)));
+		}
+		else {
 			usageParam = new UsageParam("");
 			Integer x = null;
 			for (int i = 1; i < params.size(); i++) {
@@ -41,7 +45,6 @@ public class CommandUse implements MoveCommand, InvalidDuringSettlement {
 			if(x != null) {
 				throw new WeblaboraException("Coordinate building usage parameters must come in pairs. Parsed "+x+" for the x, but no y number.");
 			}
-			break;
 		}
 
 		execute(board, BuildingEnum.valueOf(buildingId), usageParam, usingPrior, params.getPlaceClergyman());

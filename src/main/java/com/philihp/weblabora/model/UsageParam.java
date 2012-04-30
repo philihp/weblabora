@@ -98,6 +98,24 @@ public class UsageParam {
 		else return false;
 	}
 	
+	private UsageParam secondary = null;
+	
+	public UsageParam getSecondary() {
+		if(secondary == null) {
+			try {
+				secondary = new UsageParam("");
+			}
+			catch(WeblaboraException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return this.secondary;
+	}
+	
+	protected void setSecondary(UsageParam usageParam) {
+		this.secondary = usageParam;
+	}
+	
 	public UsageParam(String in) throws WeblaboraException {
 		this.param = in;
 		for(int i = 0; i < in.length()/2; i++) {

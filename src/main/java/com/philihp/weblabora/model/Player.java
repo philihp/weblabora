@@ -534,7 +534,10 @@ public class Player {
 			wine += penny;
 			penny = 0;
 		}
-		
+	}
+	public void addCoins(int penniesToAdd) {
+		addPenny(penniesToAdd%5);
+		addNickel(penniesToAdd/5);
 	}
 	
 	public void subtractPenny(int penny) {
