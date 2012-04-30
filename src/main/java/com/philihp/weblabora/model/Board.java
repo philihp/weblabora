@@ -53,6 +53,10 @@ public class Board {
 
 	private boolean settling;
 	
+	private boolean extraRound;
+	
+	private boolean gameOver = false;
+	
 	private List<String> moveList = new ArrayList<String>();
 	
 	/**
@@ -260,6 +264,10 @@ public class Board {
 		return roundBeforeSettlement(round) != null;
 	}
 	
+	public static boolean isExtraRound(int round) {
+		return round >= 24;
+	}
+	
 	public static SettlementRound roundBeforeSettlement(int round) {
 		switch (round) {
 		case 6:
@@ -270,7 +278,7 @@ public class Board {
 			return SettlementRound.C;
 		case 18:
 			return SettlementRound.D;
-		case 24:
+		case 25:
 			return SettlementRound.E;
 		default:
 			return null;
@@ -301,14 +309,31 @@ public class Board {
 		System.out.println("------Begin Settlement------");
 		
 		getMoveList().add("<b>Settlement ("+roundBeforeSettlement(round)+")</b><br />");
-		setSettling(true);
+	}
+	
+	public void preExtraRound() {
+		System.out.println("------FINAL ROUND--------");
+
+		for(Player player : players) {
+			player.getPrior().clearLocation();
+		}
+		
+		setExtraRound(true);
+		getMoveList().add("<b>Extra Round</b><br />");
 	}
 	
 	/**
 	 * Called before every move.
 	 */
 	public void preMove(String move) {
-		if(!isSettling() && moveInRound == 1) {
+
+		if(isExtraRound() && moveInRound == 1) {
+			preExtraRound();
+		}
+		else if(isSettling() && moveInRound == 1) {
+			preSettling();
+		}
+		else if(moveInRound == 1) {
 			preRound();
 		}
 		getMoveList().add("<div class=\"movelist-color\">"+getPlayer(getActivePlayer()).getColor()+"</div><div class=\"movelist-move\">"+move+"</div>");
@@ -321,7 +346,9 @@ public class Board {
 		nextActivePlayer();
 		
 		++moveInRound;
-		
+		if(isExtraRound() && moveInRound == 5) {
+			postExtraRound();
+		}
 		if(isSettling() && moveInRound == 5) {
 			postSettlement();
 		}
@@ -338,8 +365,12 @@ public class Board {
 		//end of normal round
 		moveInRound = 1;
 		//end of round
-		if(isRoundBeforeSettlement(round)) {
-			preSettling();
+		if(isExtraRound(round)) {
+			round++;
+			setExtraRound(true);
+		}
+		else if(isRoundBeforeSettlement(round)) {
+			setSettling(true);
 		}
 		else {
 			round++;
@@ -362,8 +393,28 @@ public class Board {
 		}
 		
 		setSettlementRound(getSettlementRound().next());
+
+		if(settlementRound == SettlementRound.E) {
+			setGameOver(true);
+			getMoveList().add("<b>Game Over</b>");
+		}
 		
 		round++;
+		moveInRound=1;
+	}
+	
+	public boolean isGameOver() {
+		return gameOver;
+	}
+
+	public void setGameOver(boolean gameOver) {
+		this.gameOver = gameOver;
+	}
+
+	public void postExtraRound() {
+		System.out.println("------End Final Round ---------");
+		setExtraRound(false);
+		setSettling(true);
 		moveInRound=1;
 	}
 
@@ -372,6 +423,7 @@ public class Board {
 	}
 
 	public String getMove() {
+		if(isExtraRound()) return "extra";
 		switch (moveInRound) {
 		case 1:
 			return "first";
@@ -404,4 +456,11 @@ public class Board {
 		return moveList;
 	}
 
+	public boolean isExtraRound() {
+		return extraRound;
+	}
+
+	public void setExtraRound(boolean extraRound) {
+		this.extraRound = extraRound;
+	}
 }

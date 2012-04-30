@@ -43,7 +43,12 @@ public final class MoveProcessor {
 		String suffix = move.substring(move.indexOf(')')+1);
 		
 		params.setCommand(Character.toUpperCase(prefix.charAt(0)));
-		params.setPlaceClergyman(history.isPreviousUse() == false);
+		if(board.isExtraRound()) {
+			params.setPlaceClergyman(false);
+		}
+		else {
+			params.setPlaceClergyman(history.isPreviousUse() == false);
+		}
 		
 		Scanner scanner = new Scanner(inner);
 		scanner.useDelimiter(",");

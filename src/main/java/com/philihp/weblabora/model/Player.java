@@ -349,6 +349,10 @@ public class Player {
 		wonders.add(wonder);
 	}
 
+	public List<Wonder> getWonders() {
+		return wonders;
+	}
+
 	public Landscape getLandscape() {
 		return landscape;
 	}
@@ -526,8 +530,11 @@ public class Player {
 			this.penny += 5;
 			this.nickel -= 1;
 		}
+		if(penny < 0 && penny+wine >= 0) {
+			wine += penny;
+			penny = 0;
+		}
 		
-		//i think we can do the same with wine, but i haven't wrapped my head around if that's totally cool.
 	}
 	
 	public void subtractPenny(int penny) {
@@ -535,7 +542,7 @@ public class Player {
 	}
 	
 	public int getCoins() {
-		return getNickel()*5 + getPenny();
+		return getNickel()*5 + getPenny() + getWine();
 	}
 
 	public void subtractNickel(int nickel) {

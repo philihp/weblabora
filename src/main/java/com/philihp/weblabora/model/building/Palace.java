@@ -24,7 +24,5 @@ public class Palace extends Building {
 	public void use(Board board, UsageParam input) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 		player.subtractWine(1);
-		Building building = (Building)input.getCard();
-		building.use(board, input);
 	}
 }

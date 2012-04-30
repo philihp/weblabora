@@ -42,7 +42,8 @@ public class ShowBoard extends BaseAction {
 			board = new Board();
 			board.populateDetails(game);
 			MoveProcessor.processMoves(board, game.getMoves());
-			board.preMove("..."); //upkeep stuff before player makes a move	
+			if(board.isGameOver() == false)
+				board.preMove("..."); //upkeep stuff before player makes a move	
 		}
 		return board;
 	}
