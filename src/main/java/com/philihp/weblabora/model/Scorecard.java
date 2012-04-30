@@ -37,6 +37,11 @@ public class Scorecard {
 		private int getSettlementScoreAt(Coordinate c) {
 			Terrain spot = settlement.getLocation().getLandscape().getTerrainAt(c);
 			if(spot == null) return 0;
+			
+			//handle mountain offsets
+			if(spot.getTerrainType() == TerrainTypeEnum.HIDDEN)
+				spot = settlement.getLocation().getLandscape().getTerrainAt(c.north());
+			
 			Erection erection = spot.getErection();
 			if(erection == null) return 0;
 			return erection.getSettlementValue();
