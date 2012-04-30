@@ -61,6 +61,7 @@ public class Scorecard {
 			itemScore = player.getBonusPoints() + player.getNickel() * 2
 					+ player.getBook() * 2 + player.getPottery() * 3
 					+ player.getOrnament() * 4 + player.getReliquary() * 8
+					+ player.getWine() 
 					+ player.getWonders().size() * 30;
 		}
 
