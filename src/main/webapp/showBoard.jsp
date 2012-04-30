@@ -383,7 +383,12 @@
 		Previously Explored Moves:
 		<ul>
 			<c:forEach items="${game.state.dstStates}" var="possibleState">
-				<li>${possibleState.stateId} - ${possibleState.token}</li>
+				<li>
+				<html:form action="/makeMove.do">
+					<html:hidden property="token" value="${possibleState.token}" />
+					<html:submit>${possibleState.token}</html:submit>
+				</html:form>
+				</li>
 			</c:forEach>
 		</ul>
 		Explore New Move:
