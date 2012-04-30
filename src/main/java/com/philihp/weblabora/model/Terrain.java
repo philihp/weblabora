@@ -55,5 +55,8 @@ public class Terrain {
 	public String getCoords() {
 		return "("+x+","+y+")";
 	}
-
+	
+	public Coordinate getCoordinate() {
+		return new Coordinate(x, y);
+	}
 }

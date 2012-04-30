@@ -14,15 +14,27 @@ public abstract class Erection {
 	protected Terrain location;
 	private Clergyman clergyman;
 
-	private String id;
-	private String name;
+	private final String id;
+	private final String name;
 	private final Set<TerrainTypeEnum> terrains;
+	private final int shieldValue;
+	private final int settlementValue;
 
-	public Erection(String id, String name, Set<TerrainTypeEnum> terrains) {
+	public Erection(String id, String name, Set<TerrainTypeEnum> terrains, int settlementValue, int shieldValue) {
 		//id, name, and terrains are the things common to both Settlement and Building
 		this.id = id;
 		this.name = name;
 		this.terrains = terrains;
+		this.settlementValue = settlementValue;
+		this.shieldValue = shieldValue;
+	}
+	
+	public int getSettlementValue() {
+		return this.settlementValue;
+	}
+	
+	public int getShieldValue() {
+		return this.shieldValue;
 	}
 
 	public Clergyman getClergyman() {

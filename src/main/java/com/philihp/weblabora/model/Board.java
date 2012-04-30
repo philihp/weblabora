@@ -396,7 +396,7 @@ public class Board {
 
 		if(settlementRound == SettlementRound.E) {
 			setGameOver(true);
-			getMoveList().add("<b>Game Over</b>");
+			getMoveList().add("<b>Game Over</b><br />");
 		}
 		
 		round++;
@@ -462,5 +462,9 @@ public class Board {
 
 	public void setExtraRound(boolean extraRound) {
 		this.extraRound = extraRound;
+	}
+	
+	public Scorecard getScorecard() {
+		return new Scorecard(this);
 	}
 }

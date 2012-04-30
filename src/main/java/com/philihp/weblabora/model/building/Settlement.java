@@ -13,18 +13,14 @@ abstract public class Settlement extends Erection {
 	protected final SettlementRound round;
 	protected final int foodCost;
 	protected final int energyCost;
-	protected final int settlementValue;
-	protected final int shieldValue;
-
+	
 	public Settlement(String id, SettlementRound round, String name, int foodCost,
 			int energyCost, int settlementValue, int shieldValue,
 			Set<TerrainTypeEnum> terrains) {
-		super(id, name, terrains);
+		super(id, name, terrains, settlementValue, shieldValue);
 		this.round = round;
 		this.foodCost = foodCost;
 		this.energyCost = energyCost;
-		this.settlementValue = settlementValue;
-		this.shieldValue = shieldValue;
 	}
 
 	public Board getBoard() {
@@ -41,14 +37,6 @@ abstract public class Settlement extends Erection {
 
 	public int getEnergyCost() {
 		return energyCost;
-	}
-
-	public int getSettlementValue() {
-		return settlementValue;
-	}
-
-	public int getShieldValue() {
-		return shieldValue;
 	}
 
 }

@@ -14,19 +14,15 @@ abstract public class Building extends Erection {
 	protected final String stage;
 	protected final int players;
 	protected final BuildCost buildCost;
-	protected final int settlementValue;
-	protected final int shieldValue;
 	protected final boolean cloister;
 
 	public Building(String id, String stage, int players, String name,
 			BuildCost buildCost, int settlementValue, int shieldValue,
 			Set<TerrainTypeEnum> terrains, boolean cloister) {
-		super(id, name, terrains);
+		super(id, name, terrains, settlementValue, shieldValue);
 		this.stage = stage;
 		this.players = players;
 		this.buildCost = buildCost;
-		this.settlementValue = settlementValue;
-		this.shieldValue = shieldValue;
 		this.cloister = cloister;
 	}
 	
@@ -43,14 +39,6 @@ abstract public class Building extends Erection {
 
 	public BuildCost getBuildCost() {
 		return buildCost;
-	}
-
-	public int getSettlementValue() {
-		return settlementValue;
-	}
-
-	public int getShieldValue() {
-		return shieldValue;
 	}
 
 	public boolean isCloister() {

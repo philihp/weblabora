@@ -16,4 +16,20 @@ public class Coordinate {
 	public int getY() {
 		return y;
 	}
+	
+	public Coordinate north() {
+		return new Coordinate(x, y-1);
+	}
+	
+	public Coordinate south() {
+		return new Coordinate(x, y+1);
+	}
+	
+	public Coordinate east() {
+		return new Coordinate(x+1, y);
+	}
+	
+	public Coordinate west() {
+		return new Coordinate(x-1, y);
+	}
 }

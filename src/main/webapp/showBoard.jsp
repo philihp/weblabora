@@ -292,7 +292,7 @@
 				<c:set var="player" value="${player}" scope="request" />
 				<c:import url="jsp/inventory.jsp" />
 				
-				<hr />
+				<hr style="clear: both" />
 	
 				<table>
 					<c:forEach items="${player.landscape.table}" var="row" varStatus="rowStatus">
@@ -358,6 +358,18 @@
 		</c:forEach>
 		
 		<c:forEach items="${board.moveList}" var="move">${move}</c:forEach>
+		
+		<c:forEach items="${board.scorecard.scores}" var="entry">
+			<br />
+			<b>${entry.key}</b>:<br />
+			<c:forEach items="${entry.value.settlementScores}" var="settlementScore">
+				${settlementScore.settlement.name}: ${settlementScore.score}<br />
+			</c:forEach>
+			Settlement Score: ${entry.value.settlementTotalScore}<br />
+			Shield Score: ${entry.value.shieldScore}<br />
+			Item Score: ${entry.value.itemScore}<br />
+			<i>Total Score: ${entr.value.settlementTotalScore + entry.value.shieldScore + entry.value.itemScore}</i><br />
+		</c:forEach>
 		
 		<hr />
 		

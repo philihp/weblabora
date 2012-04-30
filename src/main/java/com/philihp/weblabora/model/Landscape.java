@@ -17,6 +17,7 @@ import com.philihp.weblabora.model.building.ClayMound;
 import com.philihp.weblabora.model.building.CloisterOffice;
 import com.philihp.weblabora.model.building.Erection;
 import com.philihp.weblabora.model.building.Farmyard;
+import com.philihp.weblabora.model.building.Settlement;
 
 public class Landscape {
 
@@ -30,8 +31,7 @@ public class Landscape {
 		ClayMound clayMound = ClayMound.make(player.getColor());
 		Farmyard farmyard = Farmyard.make(player.getColor());
 		CloisterOffice cloisterOffice = CloisterOffice.make(player.getColor());
-
-
+		
 		Set<Integer> rows = Ranges.closed(0, 1).asSet(DiscreteDomains.integers());
 		Set<Integer> cols = Ranges.closed(0, 4).asSet(DiscreteDomains.integers());
 		this.terrain = ArrayTable.create(rows,cols);
@@ -68,7 +68,18 @@ public class Landscape {
 		List<Erection> list = new ArrayList<Erection>(3);
 		for (Terrain[] row : getTable()) {
 			for (Terrain cell : row) {
-				list.add(cell.getErection());
+				if(cell != null && cell.getErection() != null) 
+					list.add(cell.getErection());
+			}
+		}
+		return list;
+	}
+	
+	public List<Settlement> getSettlements() {
+		List<Settlement> list = new ArrayList<Settlement>(8);
+		for(Erection erection : getErections()) {
+			if(erection instanceof Settlement) {
+				list.add((Settlement)erection);
 			}
 		}
 		return list;
@@ -85,7 +96,9 @@ public class Landscape {
 	}
 
 	public Terrain getTerrainAt(Coordinate coordinate) {
-		return terrain.get(coordinate.getY(), coordinate.getX());
+		if(terrain.contains(coordinate.getY(), coordinate.getX()))
+			return terrain.get(coordinate.getY(), coordinate.getX());
+		return null;
 	}
 
 	public Player getPlayer() {
