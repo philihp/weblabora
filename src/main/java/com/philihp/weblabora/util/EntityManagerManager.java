@@ -19,6 +19,7 @@ public class EntityManagerManager {
 	}
 	
 	public static void clear() {
+		MAGICAL_THREAD_SAFE_LAND.get().clear();
 		MAGICAL_THREAD_SAFE_LAND.remove();
 	}
 }
