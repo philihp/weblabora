@@ -248,8 +248,13 @@
 		</div>
 		
 		<div class="info">
-			<h3 class="info-line">Round ${board.round}, ${board.move} move.</h3>
-			<h3 class="info-line">Waiting on ${board.activePlayerColor}.</h3>
+			<c:if test="${!board.gameOver}">
+				<h3 class="info-line">Round ${board.round}, ${board.move} move.</h3>
+				<h3 class="info-line">Waiting on ${board.activePlayerColor}.</h3>
+			</c:if>
+			<c:if test="${board.gameOver}">
+				<h3 class="info-line">Game Over</h3>
+			</c:if>
 			<hr />
 			<h4 class="info-line">Plot Costs: 
 				<c:forEach items="${board.plotCosts}" var="cost" varStatus="costStatus">

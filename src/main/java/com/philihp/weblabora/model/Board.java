@@ -326,7 +326,8 @@ public class Board {
 	 * Called before every move.
 	 */
 	public void preMove(String move) {
-
+		if(isGameOver()) return;
+		
 		if(isExtraRound() && moveInRound == 1) {
 			preExtraRound();
 		}
@@ -415,6 +416,7 @@ public class Board {
 		System.out.println("------End Final Round ---------");
 		setExtraRound(false);
 		setSettling(true);
+		wheel.pushArm(round);
 		moveInRound=1;
 	}
 

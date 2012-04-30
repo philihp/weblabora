@@ -27,6 +27,8 @@ public final class MoveProcessor {
 
 	public static void processActions(Board board, String actions)
 			throws WeblaboraException {
+		if(board.isGameOver()) return;
+		
 		MoveHistory history = new MoveHistory(board.isSettling());
 		for (String action : actions.split("\\|")) {
 			System.out.println("history="+history+"\t move: " + action);
