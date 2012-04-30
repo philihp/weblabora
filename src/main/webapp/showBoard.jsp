@@ -364,17 +364,19 @@
 		
 		<c:forEach items="${board.moveList}" var="move">${move}</c:forEach>
 		
-		<c:forEach items="${board.scorecard.scores}" var="entry">
-			<br />
-			<b>${entry.key}</b>:<br />
-			<c:forEach items="${entry.value.settlementScores}" var="settlementScore">
-				${settlementScore.settlement.name}: ${settlementScore.score}<br />
+		<c:if test="${board.gameOver}">
+			<c:forEach items="${board.scorecard.scores}" var="entry">
+				<br />
+				<b>${entry.key}</b>:<br />
+				<c:forEach items="${entry.value.settlementScores}" var="settlementScore">
+					${settlementScore.settlement.name}: ${settlementScore.score}<br />
+				</c:forEach>
+				Settlement Score: ${entry.value.settlementTotalScore}<br />
+				Shield Score: ${entry.value.shieldScore}<br />
+				Item Score: ${entry.value.itemScore}<br />
+				<i>Total Score: ${entr.value.settlementTotalScore + entry.value.shieldScore + entry.value.itemScore}</i><br />
 			</c:forEach>
-			Settlement Score: ${entry.value.settlementTotalScore}<br />
-			Shield Score: ${entry.value.shieldScore}<br />
-			Item Score: ${entry.value.itemScore}<br />
-			<i>Total Score: ${entr.value.settlementTotalScore + entry.value.shieldScore + entry.value.itemScore}</i><br />
-		</c:forEach>
+		</c:if>
 		
 		<hr />
 		
