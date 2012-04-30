@@ -34,9 +34,10 @@ public class Estate extends Building {
 		int food = (int)input.getFood();
 		
 		int iterations = 0;
-		while(iterations++ < 2 && (energy >= 6 || food >= 10)) {
-			energy -= 6;
-			food -= 10;
+		while(iterations++ < 2) {
+			if(energy >= 6) energy -= 6;
+			else if(food >= 0) food -= 10;
+			else break;
 			player.addBooks(1);
 			player.addOrnament(1);
 		}
