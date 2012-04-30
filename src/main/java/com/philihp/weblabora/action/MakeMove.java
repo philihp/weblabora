@@ -45,6 +45,8 @@ public class MakeMove extends BaseAction {
 			Board board = new Board();
 			MoveProcessor.processMoves(board, user.getActiveGame().getMoves());
 			try {
+				if(board.isGameOver())
+					throw new WeblaboraException("Game has already ended.");
 				board.preMove(form.getToken());
 				MoveProcessor.processActions(board, form.getToken());
 				board.testValidity();
