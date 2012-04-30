@@ -1,5 +1,6 @@
 <%@page import="java.util.Enumeration"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:forEach items="${player.wonders}" var="wonder"><div style="float: left; border: 1px solid red; height: 100px; width: 100px; display: inline-block">Wonder</div></c:forEach>
 <c:import url="jsp/inventoryType.jsp">
 	<c:param name="type" value="Wood" />
 	<c:param name="abbr" value="Wo" />
@@ -66,16 +67,6 @@
 	<c:param name="amount" value="${player.coal}" />
 </c:import>
 <c:import url="jsp/inventoryType.jsp">
-	<c:param name="type" value="Book" />
-	<c:param name="abbr" value="Bo" />
-	<c:param name="amount" value="${player.book}" />
-</c:import>
-<c:import url="jsp/inventoryType.jsp">
-	<c:param name="type" value="Pot" />
-	<c:param name="abbr" value="Po" />
-	<c:param name="amount" value="${player.pottery}" />
-</c:import>
-<c:import url="jsp/inventoryType.jsp">
 	<c:param name="type" value="Whiskey" />
 	<c:param name="abbr" value="Wh" />
 	<c:param name="amount" value="${player.whiskey}" />
@@ -84,11 +75,6 @@
 	<c:param name="type" value="Meat" />
 	<c:param name="abbr" value="Mt" />
 	<c:param name="amount" value="${player.meat}" />
-</c:import>
-<c:import url="jsp/inventoryType.jsp">
-	<c:param name="type" value="Ornament" />
-	<c:param name="abbr" value="Or" />
-	<c:param name="amount" value="${player.ornament}" />
 </c:import>
 <c:import url="jsp/inventoryType.jsp">
 	<c:param name="type" value="Bread" />
@@ -104,6 +90,21 @@
 	<c:param name="type" value="Beer" />
 	<c:param name="abbr" value="Be" />
 	<c:param name="amount" value="${player.beer}" />
+</c:import>
+<c:import url="jsp/inventoryType.jsp">
+	<c:param name="type" value="Book" />
+	<c:param name="abbr" value="Bo" />
+	<c:param name="amount" value="${player.book}" />
+</c:import>
+<c:import url="jsp/inventoryType.jsp">
+	<c:param name="type" value="Pot" />
+	<c:param name="abbr" value="Po" />
+	<c:param name="amount" value="${player.pottery}" />
+</c:import>
+<c:import url="jsp/inventoryType.jsp">
+	<c:param name="type" value="Ornament" />
+	<c:param name="abbr" value="Or" />
+	<c:param name="amount" value="${player.ornament}" />
 </c:import>
 <c:import url="jsp/inventoryType.jsp">
 	<c:param name="type" value="Reliquary" />
