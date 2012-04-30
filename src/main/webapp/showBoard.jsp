@@ -374,7 +374,7 @@
 				Settlement Score: ${entry.value.settlementTotalScore}<br />
 				Shield Score: ${entry.value.shieldScore}<br />
 				Item Score: ${entry.value.itemScore}<br />
-				<i>Total Score: ${entr.value.settlementTotalScore + entry.value.shieldScore + entry.value.itemScore}</i><br />
+				<i>Total Score: ${entry.value.settlementTotalScore + entry.value.shieldScore + entry.value.itemScore}</i><br />
 			</c:forEach>
 		</c:if>
 		
