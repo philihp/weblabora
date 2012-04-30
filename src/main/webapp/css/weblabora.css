@@ -311,3 +311,19 @@ div.container {
 .movelist-color:after {
 	content: ':';
 }
+
+.wonder {
+	float: left;
+	height: 106px;
+	width: 106px;
+	line-height: 103px;
+	display: inline-block;
+	margin: 3px;
+	font-weight: bold;
+	color: white;
+	border-radius: 8px;
+	box-shadow: 0 0 0 1px #181818, inset 0 0 20px white;
+	background-color: #23506E;
+	vertical-align: middle;
+	text-align: center;
+}

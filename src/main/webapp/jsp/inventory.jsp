@@ -1,6 +1,8 @@
 <%@page import="java.util.Enumeration"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:forEach items="${player.wonders}" var="wonder"><div style="float: left; border: 1px solid red; height: 100px; width: 100px; display: inline-block">Wonder</div></c:forEach>
+<c:forEach items="${player.wonders}" var="wonder">
+	<div class="wonder">Wonder!</div>
+</c:forEach>
 <c:import url="jsp/inventoryType.jsp">
 	<c:param name="type" value="Wood" />
 	<c:param name="abbr" value="Wo" />

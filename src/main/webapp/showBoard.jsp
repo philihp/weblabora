@@ -380,7 +380,8 @@
 		
 		<hr />
 		
-		Previously Explored Moves:
+		<c:if test="${not empty game.state.dstStates}">
+		Previous Moves:
 		<ul>
 			<c:forEach items="${game.state.dstStates}" var="possibleState">
 				<li>
@@ -391,7 +392,9 @@
 				</li>
 			</c:forEach>
 		</ul>
-		Explore New Move:
+		</c:if>
+		
+		New Move:
 		<html:form action="/makeMove.do">
 			<html:hidden property="gameId" value="${game.gameId}" />
 			<html:text property="token" value="" />
