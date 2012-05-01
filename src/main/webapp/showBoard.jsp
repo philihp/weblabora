@@ -407,10 +407,6 @@
 		</html:form>
 		
 		<hr />
-		<html:form action="/authenticateHijack.do">
-			<html:text property="facebookId"></html:text>
-			<html:submit>Hijack</html:submit>
-		</html:form>
 	</div>
 
 </body>

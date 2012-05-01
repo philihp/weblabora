@@ -31,7 +31,9 @@
 		</action>
 		<action path="/authenticateGetInfo" type="com.philihp.weblabora.action.AuthenticateGetInfo" />
 		<action path="/authenticateLogout" type="com.philihp.weblabora.action.AuthenticateLogout" />
+		<!--
 		<action path="/authenticateHijack" name="hijackForm" type="com.philihp.weblabora.action.AuthenticateHijack" />
+		-->
 		<action path="/offline" type="com.philihp.weblabora.action.Offline" />
 
 		<action path="/showBoard" name="gameForm" scope="request" type="com.philihp.weblabora.action.ShowBoard">
