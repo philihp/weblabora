@@ -119,6 +119,11 @@
 		$('#tab2').click(function() {showboard(2);});
 		$('#tab3').click(function() {showboard(3);});
 		$('#tab4').click(function() {showboard(4);});
+		
+		$('#gamesList').change(function() {
+			$(this).closest('form').submit();
+		});
+		
 	});
 </script>
 
@@ -132,16 +137,16 @@
 			
 			${user.name}
 			|
-			<html:form action="/setActiveGame.do" method="GET" style="display: inline">
-				<html:select property="gameId" value="${user.activeGame.gameId}">
-					<html:option value="">(no active game)</html:option>
+			<html:form action="/showBoard.do" method="GET" style="display: inline">
+				<html:select property="gameId" value="${user.activeGame.gameId}" styleId="gamesList">
 					<html:options collection="myGames" property="gameId" labelProperty="name" />
-					<html:submit>Set Active Game</html:submit>
+					<html:submit>&#x25B6;</html:submit>
 				</html:select>
 			</html:form>
 			|
 			<html:form action="/leaveGame.do" method="POST" style="display: inline">
-				<html:submit>Leave Active Game</html:submit>
+				<html:hidden property="gameId" />
+				<html:submit>Leave Game</html:submit>
 			</html:form>
 			|
 			<button id="findGamesButton">Find A Game To Join</button>

@@ -31,7 +31,6 @@ public final class MoveProcessor {
 		
 		MoveHistory history = new MoveHistory(board.isSettling());
 		for (String action : actions.split("\\|")) {
-			System.out.println("history="+history+"\t move: " + action);
 			processSingleAction(board, action, history);
 		}
 	}

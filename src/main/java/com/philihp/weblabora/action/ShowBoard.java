@@ -33,11 +33,13 @@ public class ShowBoard extends BaseAction {
 		if(form.getGameId() == null) {
 			return mapping.findForward("no-game");
 		}
-		System.out.println("form="+form.getGameId());
 		
 		request.setAttribute("myGames", findGamesForUser(user));
-		request.setAttribute("game", user.getActiveGame());
-		request.setAttribute("board", prepareBoard(user.getActiveGame()));
+		
+		Game game = findGame(form.getGameId());
+		user.setActiveGame(game);
+		request.setAttribute("game", game);
+		request.setAttribute("board", prepareBoard(game));
 		
 		return mapping.findForward("view");
 	}
@@ -52,6 +54,11 @@ public class ShowBoard extends BaseAction {
 				board.preMove("..."); //upkeep stuff before player makes a move	
 		}
 		return board;
+	}
+	
+	private Game findGame(int gameId) {
+		EntityManager em = EntityManagerManager.get();
+		return em.find(Game.class, gameId);
 	}
 
 	private List<Game> findGamesForUser(User user) {
