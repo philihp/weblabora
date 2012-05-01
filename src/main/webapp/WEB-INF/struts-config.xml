@@ -34,8 +34,12 @@
 		<action path="/authenticateHijack" name="hijackForm" type="com.philihp.weblabora.action.AuthenticateHijack" />
 		<action path="/offline" type="com.philihp.weblabora.action.Offline" />
 
-		<action path="/showBoard" name="nullForm" type="com.philihp.weblabora.action.ShowBoard">
+		<action path="/showBoard" name="gameForm" type="com.philihp.weblabora.action.ShowBoard">
 			<forward name="view" path="/showBoard.jsp" />
+			<forward name="no-game" path="/selectGame.do" />
+		</action>
+		<action path="/selectGame" name="nullForm" type="com.philihp.weblabora.action.SelectGame">
+			<forward name="show-board" path="/showBoard.do" redirect="true" />
 		</action>
 		<action path="/showGames" type="com.philihp.weblabora.action.ShowGames">
 			<forward name="view" path="/showGames.jsp" />

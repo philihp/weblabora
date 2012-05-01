@@ -29,6 +29,12 @@ public class ShowBoard extends BaseAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response, User user) throws Exception {
 
+		GameForm form = (GameForm)actionForm;
+		if(form.getGameId() == null) {
+			return mapping.findForward("no-game");
+		}
+		System.out.println("form="+form.getGameId());
+		
 		request.setAttribute("myGames", findGamesForUser(user));
 		request.setAttribute("game", user.getActiveGame());
 		request.setAttribute("board", prepareBoard(user.getActiveGame()));

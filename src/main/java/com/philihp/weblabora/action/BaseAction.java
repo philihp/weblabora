@@ -48,7 +48,7 @@ abstract public class BaseAction extends Action {
 		return PUBLIC_ACTIONS.contains(this.getClass()) == false;
 	}
 	
-	protected static User findUser(User user) {
+	public static User findUser(User user) {
 		if(user == null) return null;
 		return findUser(user.getFacebookId());
 	}
