@@ -1,5 +1,6 @@
 package com.philihp.weblabora.action;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -45,6 +46,9 @@ public class MakeMove extends BaseAction {
 			Board board = new Board();
 			MoveProcessor.processMoves(board, user.getActiveGame().getMoves());
 			try {
+				if(Arrays.asList(game.getAllUsers()).contains(user) == false)
+					throw new WeblaboraException("User "+user+" is not one of the players in game "+game.getGameId()); 
+				
 				if(board.isGameOver())
 					throw new WeblaboraException("Game has already ended.");
 				board.preMove(form.getToken());

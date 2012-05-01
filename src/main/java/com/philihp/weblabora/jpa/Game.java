@@ -169,6 +169,10 @@ public class Game extends BasicEntity {
 		return new Player[] {player1, player2, player3, player4};
 	}
 	
+	public User[] getAllUsers() {
+		return new User[] {player1.user, player2.user, player3.user, player4.user};
+	}
+	
 	public List<String> getMoves() {
 		List<String> list = new ArrayList<String>();
 		State state = getState();
