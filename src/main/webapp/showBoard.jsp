@@ -405,6 +405,7 @@
 			<html:text property="token" value="" />
 			<html:submit>Explore</html:submit>
 		</html:form>
+		<a href="https://github.com/philihp/WebLabora/wiki">Command Syntax Reference</a>
 		
 		<hr />
 	</div>
