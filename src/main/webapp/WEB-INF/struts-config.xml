@@ -40,12 +40,15 @@
 		</action>
 		<action path="/selectGame" name="nullForm" type="com.philihp.weblabora.action.SelectGame">
 			<forward name="show-board" path="/showBoard.do" redirect="true" />
+			<forward name="no-games" path="/showGamePicker.do" redirect="true" />
 		</action>
 		<action path="/showGames" type="com.philihp.weblabora.action.ShowGames">
 			<forward name="view" path="/showGames.jsp" />
 		</action>
+		<action path="/showGamePicker" type="com.philihp.weblabora.action.ShowGamePicker">
+			<forward name="view" path="/showGamePicker.jsp" />
+		</action>
 		<action path="/createGame" name="nullForm" type="com.philihp.weblabora.action.CreateGame" />
-		<action path="/setActiveGame" name="gameForm" type="com.philihp.weblabora.action.SetActiveGame" />
 		<action path="/joinGame" name="joinGameForm" type="com.philihp.weblabora.action.JoinGame" />
 		<action path="/leaveGame" name="gameForm" scope="request" type="com.philihp.weblabora.action.LeaveGame" />
 		<action path="/makeMove" name="moveForm" type="com.philihp.weblabora.action.MakeMove">

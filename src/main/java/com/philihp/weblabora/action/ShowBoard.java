@@ -61,7 +61,7 @@ public class ShowBoard extends BaseAction {
 		return em.find(Game.class, gameId);
 	}
 
-	private List<Game> findGamesForUser(User user) {
+	protected static List<Game> findGamesForUser(User user) {
 		EntityManager em = EntityManagerManager.get();
 		TypedQuery<Game> query = em
 				.createQuery(

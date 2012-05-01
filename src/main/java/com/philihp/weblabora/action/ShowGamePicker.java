@@ -23,30 +23,15 @@ import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.util.EntityManagerManager;
 import com.philihp.weblabora.util.FacebookCredentials;
 
-public class SelectGame extends BaseAction {
+public class ShowGamePicker extends BaseAction {
 
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response, User user) throws Exception {
 
-		ActionForward forward = mapping.findForward("show-board");
+		request.setAttribute("myGames", ShowBoard.findGamesForUser(user));
 		
-		Integer gameId = user.getActiveGameId();
-		if(gameId == null) {
-			List<Game> games = ShowBoard.findGamesForUser(user);
-			if(games.size() >= 1) {
-				user.setActiveGame(games.get(0));
-				gameId = user.getActiveGameId();
-			}
-			else {
-				System.out.println("No Games");
-				return mapping.findForward("no-games");
-			}
-		}
-		
-		ActionForward modifiedForward = new ActionForward(forward.getPath()+"?gameId="+gameId, forward.getRedirect());
-		
-		return modifiedForward;
+		return mapping.findForward("view");
 	}
-	
+
 }
