@@ -10,8 +10,6 @@ import com.philihp.weblabora.model.building.Erection;
 
 public class UsageParam {
 	
-	private List<Coordinate> coordinates = new ArrayList<Coordinate>();
-	
 	private String param;
 	
 	private int bonusPoints = 0;
@@ -409,28 +407,8 @@ public class UsageParam {
 		return this.param;
 	}
 	
-	public Coordinate getCoordinate() {
-		return coordinates.get(0);
-	}
-	
-	public List<Coordinate> getCoordinates() {
-		return Collections.unmodifiableList(coordinates);
-	}
-	
-	public void pushCoordinate(Coordinate coordinate) {
-		coordinates.add(coordinate);
-	}
-	
-	public void pushCoordinate(int x, int y) {
-		pushCoordinate(new Coordinate(x, y));
-	}
-	
 	public String toString() {
-		StringBuilder builder = new StringBuilder("("+this.param+")"); 
-		for(Coordinate coordinate : getCoordinates()) {
-			return "("+coordinate.getX()+","+coordinate.getY()+")";
-		}
-		return builder.toString();
+		return "("+this.param+")";
 	}
 
 	public void subtractWine(int wine) {

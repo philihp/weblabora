@@ -13,9 +13,10 @@ import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.Terrain;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.UsageParamSingle;
 import com.philihp.weblabora.model.WeblaboraException;
 
-public class GrainStorage extends Building {
+public class GrainStorage extends BuildingSingleUsage {
 
 	public GrainStorage() {
 		super("F03", "", 4, "Grain Storage", BuildCost.is().wood(1).straw(1), 4, 3,
@@ -23,7 +24,7 @@ public class GrainStorage extends Building {
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) throws WeblaboraException {
+	public void use(Board board, UsageParamSingle input) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 		player.subtractCoins(1);
 		player.addGrain(6);

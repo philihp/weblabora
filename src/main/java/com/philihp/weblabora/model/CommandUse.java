@@ -27,7 +27,7 @@ public class CommandUse implements MoveCommand, InvalidDuringSettlement {
 		}
 		else if(params.size() == 3 && IntegerUtil.isInteger(params.get(2)) == false) {
 			usageParam = new UsageParamDouble(params.get(1));
-			((UsageParamDouble)usageParam).setSecondary(new UsageParam(params.get(2)));
+			((UsageParamDouble)usageParam).setSecondary(new UsageParamSingle(params.get(2)));
 		}
 		else {
 			usageParam = new UsageParamCoordinates("");
@@ -37,7 +37,7 @@ public class CommandUse implements MoveCommand, InvalidDuringSettlement {
 					x = Integer.parseInt(params.get(i));
 				}
 				else {
-					usageParam.pushCoordinate(
+					((UsageParamCoordinates)usageParam).pushCoordinate(
 						x, Integer.parseInt(params.get(i)));
 					x = null;
 				}

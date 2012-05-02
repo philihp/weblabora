@@ -9,9 +9,9 @@ import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.UsageParamDouble;
 import com.philihp.weblabora.model.WeblaboraException;
 
-abstract class BuildingDoubleChit extends Building {
+abstract class BuildingDoubleUsage extends Building {
 
-	public BuildingDoubleChit(String id, String stage, int players,
+	public BuildingDoubleUsage(String id, String stage, int players,
 			String name, BuildCost buildCost, int settlementValue,
 			int shieldValue, Set<TerrainTypeEnum> terrains, boolean cloister) {
 		super(id, stage, players, name, buildCost, settlementValue,

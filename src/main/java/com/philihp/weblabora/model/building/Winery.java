@@ -12,9 +12,10 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.UsageParamDouble;
 import com.philihp.weblabora.model.WeblaboraException;
 
-public class Winery extends Building {
+public class Winery extends BuildingDoubleUsage {
 
 	public Winery() {
 		super("F21", "B", 2, "Winery", BuildCost.is().clay(2).straw(2), 5, 4,
@@ -22,14 +23,14 @@ public class Winery extends Building {
 	}
 
 	@Override
-	public void use(Board board, UsageParam param) throws WeblaboraException {
+	public void use(Board board, UsageParamDouble param) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 		
 		player.subtractGrapes(param.getGrapes());
 		player.addWine(param.getGrapes());
 		
-		if(param.getWine() != 0) {
-			player.subtractWine(param.getWine());
+		if(param.getSecondary().getWine() != 0) {
+			player.subtractWine(param.getSecondary().getWine());
 			player.addNickel(1);
 			player.addPenny(2);
 		}

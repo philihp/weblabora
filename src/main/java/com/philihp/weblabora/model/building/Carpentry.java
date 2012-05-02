@@ -13,9 +13,10 @@ import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.Terrain;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.UsageParamCoordinates;
 import com.philihp.weblabora.model.WeblaboraException;
 
-public class Carpentry extends Building {
+public class Carpentry extends BuildingCoordinateUsage {
 
 	public Carpentry() {
 		super("F10", "", 4, "Carpentry", BuildCost.is().wood(2).clay(1), 0, 7,
@@ -23,7 +24,7 @@ public class Carpentry extends Building {
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) throws WeblaboraException {
+	public void use(Board board, UsageParamCoordinates input) throws WeblaboraException {
 		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		Terrain spot = activePlayer.getLandscape().getTerrainAt(input.getCoordinate());
 		if(spot.getTerrainType() != TerrainTypeEnum.FOREST)

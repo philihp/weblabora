@@ -22,6 +22,8 @@ public final class MoveProcessor {
 			board.preMove(move);
 			processActions(board,move);
 			board.postMove();
+			System.out.println("Testing Validity");
+			board.testValidity();
 		}
 	}
 

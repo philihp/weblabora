@@ -391,6 +391,7 @@
 			<c:forEach items="${game.state.dstStates}" var="possibleState">
 				<li>
 				<html:form action="/makeMove.do">
+					<html:hidden property="gameId" value="${game.gameId}" />
 					<html:hidden property="token" value="${possibleState.token}" />
 					<html:submit>${possibleState.token}</html:submit>
 				</html:form>

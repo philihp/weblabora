@@ -15,10 +15,12 @@ import com.philihp.weblabora.model.Landscape;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.UsageParamDouble;
+import com.philihp.weblabora.model.UsageParamSingle;
 import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.model.Wheel;
 
-public class PilgrimageSite extends Building {
+public class PilgrimageSite extends BuildingDoubleUsage {
 
 	public PilgrimageSite() {
 		super("F36", "D", 3, "Pilgrimage Site", BuildCost.is().coin(6), 6, 2,
@@ -26,19 +28,32 @@ public class PilgrimageSite extends Building {
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) throws WeblaboraException {
+	public void use(Board board, UsageParamDouble first) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
+		UsageParamSingle second = first.getSecondary();
+
+		if(first.getBook() + first.getPottery() + first.getOrnament() > 1)
+			throw new WeblaboraException("First parameter may only have one book, pottery, or ornament");
 		
-		if(input.getBook() + input.getPottery() + input.getOrnament() > 2)
-			throw new WeblaboraException("Pilgrimmage Site can only convert twice.");
+		if(second.getBook() + second.getPottery() + second.getOrnament() > 1)
+			throw new WeblaboraException("Second parameter may only have one book, pottery, or ornament");
 		
-		player.subtractBook(input.getBook());
-		player.addPottery(input.getBook());
-		
-		player.subtractPottery(input.getPottery());
-		player.addOrnament(input.getPottery());
-		
-		player.subtractOrnament(input.getOrnament());
-		player.addReliquary(input.getOrnament());
+		doIt(player, first);
+		doIt(player, second);
+	}
+	
+	private void doIt(Player player, UsageParam input) {
+		if(input.getBook() == 1) {
+			player.subtractBook(input.getBook());
+			player.addPottery(input.getBook());
+		}
+		else if(input.getPottery() == 1) {
+			player.subtractPottery(input.getPottery());
+			player.addOrnament(input.getPottery());
+		}
+		else if(input.getOrnament() == 1) {
+			player.subtractOrnament(input.getOrnament());
+			player.addReliquary(input.getOrnament());
+		}
 	}
 }

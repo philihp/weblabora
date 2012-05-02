@@ -15,9 +15,10 @@ import com.philihp.weblabora.model.Landscape;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.UsageParamCoordinates;
 import com.philihp.weblabora.model.Wheel;
 
-public class PrintingOffice extends Building {
+public class PrintingOffice extends BuildingCoordinateUsage {
 
 	public PrintingOffice() {
 		super("F38", "D", 0, "Printing Office",
@@ -26,7 +27,7 @@ public class PrintingOffice extends Building {
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) {
+	public void use(Board board, UsageParamCoordinates input) {
 		Player player = board.getPlayer(board.getActivePlayer());
 		Landscape landscape = player.getLandscape();
 		for(Coordinate coord : input.getCoordinates()) {

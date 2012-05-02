@@ -12,9 +12,10 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.UsageParamDouble;
 import com.philihp.weblabora.model.WeblaboraException;
 
-public class CloisterLibrary extends Building {
+public class CloisterLibrary extends BuildingDoubleUsage {
 
 	public CloisterLibrary() {
 		super("F17", "A", 2, "Cloister Library", BuildCost.is().stone(2).straw(1), 7, 7,
@@ -22,13 +23,13 @@ public class CloisterLibrary extends Building {
 	}
 
 	@Override
-	public void use(Board board, UsageParam param) throws WeblaboraException {
+	public void use(Board board, UsageParamDouble param) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 		
 		player.addBooks(param.getPenny());
 		player.subtractCoins(param.getPenny());
 		
-		if(param.getBook() == 1) {
+		if(param.getSecondary().getBook() == 1) {
 			player.subtractBook(1);
 			player.addMeat(1);
 			player.addWine(1);

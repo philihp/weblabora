@@ -6,12 +6,12 @@ public class UsageParamDouble extends UsageParam {
 		super(in);
 	}
 
-	private UsageParam secondary = null;
+	private UsageParamSingle secondary = null;
 	
-	public UsageParam getSecondary() {
+	public UsageParamSingle getSecondary() {
 		if(secondary == null) {
 			try {
-				secondary = new UsageParam("");
+				secondary = new UsageParamSingle("");
 			}
 			catch(WeblaboraException e) {
 				throw new RuntimeException(e);
@@ -20,7 +20,7 @@ public class UsageParamDouble extends UsageParam {
 		return this.secondary;
 	}
 	
-	protected void setSecondary(UsageParam usageParam) {
+	public void setSecondary(UsageParamSingle usageParam) {
 		this.secondary = usageParam;
 	}
 	
