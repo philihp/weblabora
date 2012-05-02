@@ -51,10 +51,7 @@ public final class MoveProcessor {
 			params.setPlaceClergyman(history.isPreviousUse() == false);
 		}
 		
-		Scanner scanner = new Scanner(inner);
-		scanner.useDelimiter(",");
-		while (scanner.hasNext()) {
-			String param = scanner.next();
+		for(String param : inner.split(",",-1)) {
 			params.getParams().add(param);
 		}
 

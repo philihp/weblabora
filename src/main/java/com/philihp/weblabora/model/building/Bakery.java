@@ -12,16 +12,17 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.UsageParamDouble;
 import com.philihp.weblabora.model.WeblaboraException;
 
-public class Bakery extends Building {
+public class Bakery extends BuildingDoubleChit {
 
 	public Bakery() {
 		super("F05", "", 2, "Bakery", BuildCost.is().clay(2).straw(1), 5, 4, EnumSet.of(COAST, PLAINS, HILLSIDE), false);
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) throws WeblaboraException {
+	public void use(Board board, UsageParamDouble input) throws WeblaboraException {
 		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		
 		if(input.getFlour() > input.getEnergy()/0.5)

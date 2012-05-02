@@ -20,17 +20,17 @@ public class CommandUse implements MoveCommand, InvalidDuringSettlement {
 		boolean usingPrior = params.getSuffix().contains("*");
 
 		if(params.size() == 1) {
-			usageParam = new UsageParam("");
+			usageParam = new UsageParamSingle("");
 		}
 		else if(params.size() == 2) {
-			usageParam = new UsageParam(params.get(1));
+			usageParam = new UsageParamSingle(params.get(1));
 		}
 		else if(params.size() == 3 && IntegerUtil.isInteger(params.get(2)) == false) {
-			usageParam = new UsageParam(params.get(1));
-			usageParam.setSecondary(new UsageParam(params.get(2)));
+			usageParam = new UsageParamDouble(params.get(1));
+			((UsageParamDouble)usageParam).setSecondary(new UsageParam(params.get(2)));
 		}
 		else {
-			usageParam = new UsageParam("");
+			usageParam = new UsageParamCoordinates("");
 			Integer x = null;
 			for (int i = 1; i < params.size(); i++) {
 				if(x == null) {
@@ -52,7 +52,7 @@ public class CommandUse implements MoveCommand, InvalidDuringSettlement {
 		System.out.println("Using " + buildingId + " with " + usageParam);
 	}
 
-	public static void execute(Board board, BuildingEnum buildingId,
+	private static void execute(Board board, BuildingEnum buildingId,
 			UsageParam param, boolean usingPrior, boolean placeClergyman) throws WeblaboraException {
 		Building building = board.findBuildingInstance(buildingId);
 		Terrain location = building.getLocation();
