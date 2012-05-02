@@ -534,6 +534,10 @@ public class Player {
 			wine += penny;
 			penny = 0;
 		}
+		while(penny < 0 && whiskey > 0) {
+			penny += 2;
+			whiskey -= 1;
+		} 
 	}
 	public void addCoins(int penniesToAdd) {
 		addPenny(penniesToAdd%5);
