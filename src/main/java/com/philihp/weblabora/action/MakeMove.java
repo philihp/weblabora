@@ -36,7 +36,12 @@ public class MakeMove extends BaseAction {
 		TypedQuery<Game> query = em.createQuery("SELECT g FROM Game g WHERE g.gameId = :gameId", Game.class);
 		query.setParameter("gameId", form.getGameId());
 		Game game = query.getSingleResult();
-
+		
+		if(game.getState().getStateId() != form.getStateId()) {
+			return mapping.findForward("root");
+		}
+		
+		
 		State state = searchForExploredState(game, form.getToken());
 		if (state != null) {
 			// all of this has happened before. all of this will happen again.

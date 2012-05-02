@@ -9,9 +9,20 @@ public class MoveForm extends GameForm {
 	 */
 	private String token;
 
+	private Integer stateId;
+
+	public Integer getStateId() {
+		return stateId;
+	}
+
+	public void setStateId(Integer stateId) {
+		this.stateId = stateId;
+	}
+
 	public void reset() {
 		super.reset();
 		this.token = null;
+		this.stateId = null;
 	}
 
 	public String getToken() {
