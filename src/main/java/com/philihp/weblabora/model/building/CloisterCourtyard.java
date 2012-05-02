@@ -40,7 +40,7 @@ public class CloisterCourtyard extends BuildingDoubleUsage {
 		else if(output.getClay() >= 1) player.addClay(6);
 		else if(output.getWood() >= 1) player.addWood(6);
 		else if(output.getSheep() >= 1) player.addSheep(6);
-		else if(output.getStone() >= 1) player.addStone(6);
+		else if(output.getGrain() >= 1) player.addGrain(6);
 		else if(output.getPenny() >= 1) player.addPenny(6);
 		else throw new WeblaboraException(getName()+" can only make basic goods, not "+output.getParam());
 	}
