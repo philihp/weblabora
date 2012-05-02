@@ -26,8 +26,8 @@ public class CloisterLibrary extends BuildingDoubleUsage {
 	public void use(Board board, UsageParamDouble param) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 		
-		player.addBooks(param.getPenny());
-		player.subtractCoins(param.getPenny());
+		player.addBooks(Math.min(3, param.getCoins()));
+		player.subtractCoins(Math.min(3, param.getCoins()));
 		
 		if(param.getSecondary().getBook() == 1) {
 			player.subtractBook(1);
