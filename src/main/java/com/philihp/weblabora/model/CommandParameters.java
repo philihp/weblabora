@@ -13,16 +13,22 @@ public class CommandParameters {
 	/**
 	 * Everything in the middle
 	 */
-	private List<String> params = new ArrayList<String>(2); //default it to an capacity of 2, since that's what it usually is
+	private List<String> params = new ArrayList<String>(2); // default it to an
+															// capacity of 2,
+															// since that's what
+															// it usually is
 
 	/**
 	 * The last token.
 	 */
 	private String suffix;
-	
+
 	private boolean placeClergyman;
 
-	public CommandParameters() {
+	private boolean mustBePrior;
+
+	public CommandParameters(boolean mustBePrior) {
+		this.mustBePrior = mustBePrior;
 	}
 
 	public char getCommand() {
@@ -48,11 +54,11 @@ public class CommandParameters {
 	public void setSuffix(String suffix) {
 		this.suffix = suffix;
 	}
-	
+
 	public String get(int i) {
 		return params.get(i);
 	}
-	
+
 	public int size() {
 		return params.size();
 	}
@@ -60,8 +66,13 @@ public class CommandParameters {
 	public void setPlaceClergyman(boolean placeClergyman) {
 		this.placeClergyman = placeClergyman;
 	}
-	
+
 	public boolean getPlaceClergyman() {
 		return this.placeClergyman;
 	}
+
+	public boolean isMustBePrior() {
+		return mustBePrior;
+	}
+
 }

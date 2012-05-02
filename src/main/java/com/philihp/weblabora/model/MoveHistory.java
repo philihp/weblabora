@@ -3,6 +3,7 @@ package com.philihp.weblabora.model;
 public class MoveHistory {
 	private boolean previousUse = false;
 	private boolean settling;
+	private boolean previousBuild = false;
 
 	public MoveHistory(boolean settling) {
 		this.settling = settling;
@@ -12,8 +13,12 @@ public class MoveHistory {
 		return settling;
 	}
 
-	public String toString() {
-		return "{previousUse=" + previousUse + "}";
+	public boolean isPreviousBuild() {
+		return previousBuild;
+	}
+
+	public void setPreviousBuild(boolean previousBuild) {
+		this.previousBuild = this.previousBuild || previousBuild;
 	}
 
 	public boolean isPreviousUse() {
@@ -21,6 +26,6 @@ public class MoveHistory {
 	}
 
 	public void setPreviousUse(boolean isPreviousUse) {
-		this.previousUse = isPreviousUse;
+		this.previousUse = this.previousUse || isPreviousUse;
 	}
 }

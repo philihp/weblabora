@@ -22,8 +22,6 @@ public final class MoveProcessor {
 			board.preMove(move);
 			processActions(board,move);
 			board.postMove();
-			System.out.println("Testing Validity");
-			board.testValidity();
 		}
 	}
 
@@ -39,7 +37,7 @@ public final class MoveProcessor {
 
 	public static void processSingleAction(Board board, String move, MoveHistory history)
 			throws WeblaboraException {
-		CommandParameters params = new CommandParameters();
+		CommandParameters params = new CommandParameters(history.isPreviousBuild());
 		
 		String prefix = move.substring(0, move.indexOf('('));
 		String inner = move.substring(move.indexOf('(')+1, move.indexOf(')'));
@@ -62,7 +60,8 @@ public final class MoveProcessor {
 		MoveCommand moveCommand = pickCommand(params.getCommand(), history);
 		moveCommand.execute(board, params);
 		
-		history.setPreviousUse(moveCommand instanceof CommandUse); 
+		history.setPreviousUse(moveCommand instanceof CommandUse);
+		history.setPreviousBuild(moveCommand instanceof CommandBuild);
 	}
 
 	public static MoveCommand pickCommand(char commandChar, MoveHistory history) throws WeblaboraException {

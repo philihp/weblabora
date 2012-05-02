@@ -17,7 +17,7 @@ public class CommandUse implements MoveCommand, InvalidDuringSettlement {
 
 		String buildingId = params.get(0);
 		UsageParam usageParam = null;
-		boolean usingPrior = params.getSuffix().contains("*");
+		boolean usingPrior = params.getSuffix().contains("*") || params.isMustBePrior();
 
 		if(params.size() == 1) {
 			usageParam = new UsageParamSingle("");
