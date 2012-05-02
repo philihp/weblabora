@@ -37,6 +37,6 @@ public class FuelMerchant extends Building {
 		}
 		else return;
 		
-		player.subtractAll(param);
+		player.subtractEnergy(param);
 	}
 }
