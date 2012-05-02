@@ -420,7 +420,7 @@ public class UsageParam {
 	}
 	
 	public int getCoins() {
-		return getPenny() + getNickel()*5 + getWine();
+		return getPenny() + getNickel()*5 + getWine() + getWhiskey()*2;
 	}
 	
 	public String getParam() {

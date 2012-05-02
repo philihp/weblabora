@@ -25,12 +25,15 @@ public class BuildersMarket extends Building {
 		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		
 		if(input.getCoins() == 2) {
-			activePlayer.subtractAll(input);
+			activePlayer.subtractMoney(input);
+			activePlayer.addWood(2);
+			activePlayer.addClay(2);
+			activePlayer.addStone(1);
+			activePlayer.addStraw(1);
+		}
+		else {
+			throw new WeblaboraException("Builders' Market takes two coins, but it was given "+input.getCoins());
 		}
 		
-		activePlayer.addWood(2);
-		activePlayer.addClay(2);
-		activePlayer.addStone(1);
-		activePlayer.addStraw(1);
 	}
 }

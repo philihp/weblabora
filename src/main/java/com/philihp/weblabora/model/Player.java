@@ -612,6 +612,12 @@ public class Player {
 		subtractWood(param.getWood());
 		subtractStraw(param.getStraw());
 	}
+	public void subtractMoney(UsageParam param) {
+		subtractPenny(param.getPenny());
+		subtractNickel(param.getNickel());
+		subtractWhiskey(param.getWhiskey());
+		subtractWine(param.getWine());
+	}
 	public void subtractAll(UsageParam param) {
 		subtractPeat(param.getPeat());
 		subtractClay(param.getClay());
