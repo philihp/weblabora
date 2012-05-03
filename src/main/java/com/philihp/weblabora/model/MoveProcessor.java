@@ -28,6 +28,8 @@ public final class MoveProcessor {
 	public static void processActions(Board board, String actions)
 			throws WeblaboraException {
 		if(board.isGameOver()) return;
+		if(actions != null) actions = actions.trim();
+		if(actions == null) return;
 		
 		MoveHistory history = new MoveHistory(board.isSettling());
 		for (String action : actions.split("\\|")) {
@@ -39,9 +41,17 @@ public final class MoveProcessor {
 			throws WeblaboraException {
 		CommandParameters params = new CommandParameters(history.isPreviousBuild());
 		
-		String prefix = move.substring(0, move.indexOf('('));
-		String inner = move.substring(move.indexOf('(')+1, move.indexOf(')'));
-		String suffix = move.substring(move.indexOf(')')+1);
+		String prefix;
+		String inner;
+		String suffix;
+		try {
+			prefix = move.substring(0, move.indexOf('('));
+			inner = move.substring(move.indexOf('(')+1, move.indexOf(')'));
+			suffix = move.substring(move.indexOf(')')+1);
+		}
+		catch(Exception e) {
+			throw new WeblaboraException("Every action must have exactly one '(' and one ')'.");
+		}
 		
 		params.setCommand(Character.toUpperCase(prefix.charAt(0)));
 		if(board.isExtraRound()) {

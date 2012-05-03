@@ -33,6 +33,9 @@ public class MakeMove extends BaseAction {
 		MoveForm form = (MoveForm) actionForm;
 		EntityManager em = EntityManagerManager.get();
 
+		String submit = request.getParameter("submit");
+		if(submit != null && submit.equalsIgnoreCase("Explore") == false) return mapping.findForward("save");
+
 		TypedQuery<Game> query = em.createQuery("SELECT g FROM Game g WHERE g.gameId = :gameId", Game.class);
 		query.setParameter("gameId", form.getGameId());
 		Game game = query.getSingleResult();

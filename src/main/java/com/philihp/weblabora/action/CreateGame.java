@@ -16,6 +16,7 @@ import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.State;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.model.Board;
+import com.philihp.weblabora.model.Color;
 import com.philihp.weblabora.util.EntityManagerManager;
 import com.philihp.weblabora.util.FacebookCredentials;
 
@@ -29,6 +30,14 @@ public class CreateGame extends BaseAction {
 
 		Game game = new Game();
 		game.getPlayer1().setUser(user);
+		game.getPlayer1().setColor(Color.RED.toString());
+		game.getPlayer1().setMove("");
+		game.getPlayer2().setColor(Color.GREEN.toString());
+		game.getPlayer2().setMove("");
+		game.getPlayer3().setColor(Color.BLUE.toString());
+		game.getPlayer3().setMove("");
+		game.getPlayer4().setColor(Color.WHITE.toString());
+		game.getPlayer4().setMove("");
 		user.setActiveGame(game);
 		game.setState(em.find(State.class, 1));
 		em.persist(game);

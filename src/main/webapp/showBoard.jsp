@@ -405,8 +405,9 @@
 		<html:form action="/makeMove.do">
 			<html:hidden property="stateId" value="${game.state.stateId}" />
 			<html:hidden property="gameId" value="${game.gameId}" />
-			<html:text property="token" value="" />
-			<html:submit>Explore</html:submit>
+			<html:text property="token" value="${savedMove}" />
+			<html:submit property="submit">Explore</html:submit>
+			<html:submit property="submit">Save (for later)</html:submit>
 		</html:form>
 		<a href="https://github.com/philihp/WebLabora/wiki">Command Syntax Reference</a>
 		

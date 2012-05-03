@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.Access;
 import javax.persistence.AssociationOverride;
 import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -42,6 +43,9 @@ public class Game extends BasicEntity {
 		@Column(name = "color")
 		private String color;
 		
+		@Basic
+		@Column(name = "move")
+		private String move;
 
 		public User getUser() {
 			return user;
@@ -58,6 +62,15 @@ public class Game extends BasicEntity {
 		public void setColor(String color) {
 			this.color = color;
 		}
+		
+		public String getMove() {
+			return move;
+		}
+
+		public void setMove(String move) {
+			this.move = move;
+		}
+
 	}
 
 	@Id
@@ -66,22 +79,34 @@ public class Game extends BasicEntity {
 	private int gameId;
 
 	@Embedded
+	@AttributeOverrides({
+		@AttributeOverride(name = "color", column = @Column(name = "player1_color")),
+		@AttributeOverride(name = "move", column = @Column(name = "player1_move"))
+	})
 	@AssociationOverride(name = "user", joinColumns = @JoinColumn(name = "player1_user_id", referencedColumnName = "user_id"))
-	@AttributeOverride(name = "color", column = @Column(name = "player1_color"))
 	private Player player1;
 
 	@Embedded
-	@AttributeOverride(name = "color", column = @Column(name = "player2_color"))
+	@AttributeOverrides({
+		@AttributeOverride(name = "color", column = @Column(name = "player2_color")),
+		@AttributeOverride(name = "move", column = @Column(name = "player2_move"))
+	})
 	@AssociationOverride(name = "user", joinColumns = @JoinColumn(name = "player2_user_id", referencedColumnName = "user_id"))
 	private Player player2;
 
 	@Embedded
-	@AttributeOverride(name = "color", column = @Column(name = "player3_color"))
+	@AttributeOverrides({
+		@AttributeOverride(name = "color", column = @Column(name = "player3_color")),
+		@AttributeOverride(name = "move", column = @Column(name = "player3_move"))
+	})
 	@AssociationOverride(name = "user", joinColumns = @JoinColumn(name = "player3_user_id", referencedColumnName = "user_id"))
 	private Player player3;
 
 	@Embedded
-	@AttributeOverride(name = "color", column = @Column(name = "player4_color"))
+	@AttributeOverrides({
+		@AttributeOverride(name = "color", column = @Column(name = "player4_color")),
+		@AttributeOverride(name = "move", column = @Column(name = "player4_move"))
+	})
 	@AssociationOverride(name = "user", joinColumns = @JoinColumn(name = "player4_user_id", referencedColumnName = "user_id"))
 	private Player player4;
 	

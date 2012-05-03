@@ -1,5 +1,6 @@
 package com.philihp.weblabora.action;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -19,6 +20,7 @@ import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.MoveProcessor;
+import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.util.EntityManagerManager;
 import com.philihp.weblabora.util.FacebookCredentials;
@@ -40,10 +42,29 @@ public class ShowBoard extends BaseAction {
 		user.setActiveGame(game);
 		request.setAttribute("game", game);
 		request.setAttribute("board", prepareBoard(game));
+		request.setAttribute("savedMove", findSavedMove(game, user)); 
 		
 		return mapping.findForward("view");
 	}
+
+	protected static Game.Player findPlayerInGame(Game game, User user) {
+		if(user == null) return null;
+		String facebookId = user.getFacebookId();
+		if(facebookId == null) return null;
+		for(Game.Player player : game.getAllPlayers()) {
+			if(player != null && player.getUser() != null && player.getUser().getFacebookId() != null && player.getUser().getFacebookId().equals(facebookId)) {
+				return player;
+			}
+		}
+		return null;
+	}
 	
+	protected static String findSavedMove(Game game, User user) {
+		Game.Player player = findPlayerInGame(game, user);
+		if(player == null) return null;
+		return player.getMove();
+	}
+
 	protected static Board prepareBoard(Game game) throws WeblaboraException {
 		Board board = null;
 		if(game != null) {
@@ -56,7 +77,7 @@ public class ShowBoard extends BaseAction {
 		return board;
 	}
 	
-	private Game findGame(int gameId) {
+	protected static Game findGame(int gameId) {
 		EntityManager em = EntityManagerManager.get();
 		return em.find(Game.class, gameId);
 	}
