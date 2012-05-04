@@ -75,6 +75,11 @@ public class MakeMove extends BaseAction {
 			state.setSrcState(game.getState());
 			em.persist(state);
 			game.setState(state);
+
+			Game.Player player = ShowBoard.findPlayerInGame(game, user);
+			if(player != null) {
+				player.setMove("");
+			}
 		}
 
 		return mapping.findForward("root");
