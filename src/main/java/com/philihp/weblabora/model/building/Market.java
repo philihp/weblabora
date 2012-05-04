@@ -25,7 +25,7 @@ public class Market extends Building {
 		Player player = board.getPlayer(board.getActivePlayer());
 		if(param.differentSingularGoods() != 4)
 			throw new WeblaboraException("Market requires 4 different goods, but was given "+param.differentSingularGoods());
-		
+		player.subtractAll(param);
 		player.addBread(1);
 		player.addNickel(1);
 		player.addPenny(2);
