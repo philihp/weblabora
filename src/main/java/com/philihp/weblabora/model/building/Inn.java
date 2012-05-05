@@ -29,6 +29,7 @@ public class Inn extends Building {
 		
 		if(param.getWine() != 0) {
 			param.subtractWine(1);
+			player.subtractWine(1);
 			payout += 6;
 		}
 		
