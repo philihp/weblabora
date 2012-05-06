@@ -367,7 +367,19 @@
 			</div>
 		</c:forEach>
 		
-		<c:forEach items="${board.moveList}" var="move">${move}</c:forEach>
+		New Move:
+		<html:form action="/makeMove.do">
+			<html:hidden property="stateId" value="${game.state.stateId}" />
+			<html:hidden property="gameId" value="${game.gameId}" />
+			<html:text property="token" value="${savedMove}" />
+			<html:submit property="submit">Explore</html:submit>
+			<html:submit property="submit">Save (for later)</html:submit>
+		</html:form>
+		<a href="https://github.com/philihp/WebLabora/wiki">Command Syntax Reference</a>
+		
+		<hr />
+		
+		<c:forEach items="${board.moveListReversed}" var="move">${move}</c:forEach>
 		
 		<c:if test="${board.gameOver}">
 			<c:forEach items="${board.scorecard.scores}" var="entry">
@@ -384,7 +396,6 @@
 		</c:if>
 		
 		<hr />
-		
 		<c:if test="${not empty game.state.dstStates}">
 		Previous Moves:
 		<ul>
@@ -400,16 +411,6 @@
 			</c:forEach>
 		</ul>
 		</c:if>
-		
-		New Move:
-		<html:form action="/makeMove.do">
-			<html:hidden property="stateId" value="${game.state.stateId}" />
-			<html:hidden property="gameId" value="${game.gameId}" />
-			<html:text property="token" value="${savedMove}" />
-			<html:submit property="submit">Explore</html:submit>
-			<html:submit property="submit">Save (for later)</html:submit>
-		</html:form>
-		<a href="https://github.com/philihp/WebLabora/wiki">Command Syntax Reference</a>
 		
 		<hr />
 	</div>
