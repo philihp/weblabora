@@ -13,10 +13,12 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.UsageParamDouble;
+import com.philihp.weblabora.model.UsageParamSingle;
 import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.model.Wheel;
 
-public class HouseOfTheBrotherhood extends Building {
+public class HouseOfTheBrotherhood extends BuildingDoubleUsage {
 
 	public HouseOfTheBrotherhood() {
 		super("G41", "D", 0, "House of the Brotherhood", BuildCost.is().clay(1)
@@ -24,15 +26,32 @@ public class HouseOfTheBrotherhood extends Building {
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) throws WeblaboraException  {
+	public void use(Board board, UsageParamDouble input) throws WeblaboraException  {
 		Player player = board.getPlayer(board.getActivePlayer());
-		player.subtractCoins(5);
+		UsageParamSingle output = input.getSecondary();
+		
+		if(input.getCoins() < 5)
+			throw new WeblaboraException(getName()+" requires 5 coins.");
+		
+		player.subtractAll(input);
 
+		float possiblePoints = 0;
 		int cloisters = 0;
 		for (Building building : player.getLandscape().getBuildings()) {
 			if (building.isCloister())
 				cloisters++;
 		}
-		player.addBonusPoints(2*cloisters);
+		possiblePoints = cloisters * 2;
+		
+		int requestedPoints = output.getBook()*2 + output.getPottery()*3 + output.getOrnament()*4 + output.getReliquary()*8;
+		
+		if(possiblePoints < requestedPoints)
+			throw new WeblaboraException(getName()+" was asked to make "+requestedPoints+" points, but only "+possiblePoints+" is allowed.");
+		
+		player.addBooks(output.getBook());
+		player.addPottery(output.getPottery());
+		player.addOrnament(output.getOrnament());
+		player.addReliquary(output.getReliquary());
+		
 	}
 }

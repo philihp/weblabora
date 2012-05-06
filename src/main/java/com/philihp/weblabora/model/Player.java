@@ -16,8 +16,6 @@ public class Player {
 	
 	private boolean active;
 	
-	private int bonusPoints = 0;
-	
 	private int peat = 0;
 	private int penny = 0;
 	private int clay = 0;
@@ -88,9 +86,7 @@ public class Player {
 		bread = 0;
 		wine = 0;
 		beer = 0;
-		reliquary = 0;
-		bonusPoints = 0;
-		
+		reliquary = 0;		
 	}
 
 	public List<Settlement> getUnbuiltSettlements() {
@@ -105,10 +101,6 @@ public class Player {
 		return color;
 	}
 	
-	public int getBonusPoints() {
-		return bonusPoints;
-	}
-
 	public int getPeat() {
 		return peat;
 	}
@@ -237,14 +229,9 @@ public class Player {
 		addEntry(inventory, "Wine", wine);
 		addEntry(inventory, "Beer", beer);
 		addEntry(inventory, "Reliquary", reliquary);
-		addEntry(inventory, "Points", bonusPoints);
 		return inventory;
 	}
 
-	public void setBonusPoints(int bonusPoints) {
-		this.bonusPoints = bonusPoints;
-	}
-	
 	public void setPeat(int peat) {
 		this.peat = peat;
 	}
@@ -392,10 +379,6 @@ public class Player {
 		subtractCoins(buildCost.getCoin());
 	}
 
-	public void addBonusPoints(int bonusPoints) {
-		this.bonusPoints += bonusPoints;
-	}
-
 	public void addPeat(int peat) {
 		this.peat += peat;
 	}
@@ -482,10 +465,6 @@ public class Player {
 
 	public void addReliquary(int reliquary) {
 		this.reliquary += reliquary;
-	}
-	
-	public void subtractBonusPoints(int points) {
-		this.bonusPoints -= points;
 	}
 
 	public void subtractPeat(int peat) {
@@ -645,7 +624,6 @@ public class Player {
 		subtractWine(param.getWine());
 		subtractBeer(param.getBeer());
 		subtractReliquary(param.getReliquary());
-		subtractBonusPoints(param.getBonusPoints());
 	}
 	
 	public void placeClergyman(Terrain location) throws WeblaboraException {
@@ -705,8 +683,6 @@ public class Player {
 	}
 
 	public void testValidity() throws WeblaboraException {
-		if(getBonusPoints() < 0)
-			throw new WeblaboraException(color + " has "+getBonusPoints()+" points");
 		if(getPeat() < 0)
 			throw new WeblaboraException(color + " has "+getPeat()+" peat");
 		if(getPenny() < 0)

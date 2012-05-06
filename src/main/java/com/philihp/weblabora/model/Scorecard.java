@@ -70,7 +70,7 @@ public class Scorecard {
 			for (Erection erection : player.getLandscape().getErections()) {
 				shieldScore += erection.getShieldValue();
 			}
-			itemScore = player.getBonusPoints() + player.getNickel() * 2
+			itemScore = player.getNickel() * 2
 					+ player.getBook() * 2 + player.getPottery() * 3
 					+ player.getOrnament() * 4 + player.getReliquary() * 8
 					+ player.getWine() 

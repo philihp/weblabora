@@ -113,6 +113,3 @@
 	<c:param name="abbr" value="Rq" />
 	<c:param name="amount" value="${player.reliquary}" />
 </c:import>
-<c:if test="${player.bonusPoints ne 0}">
-<div class="bonusPoints" title="Bp">Bonus Points: ${player.bonusPoints}</div>
-</c:if>
