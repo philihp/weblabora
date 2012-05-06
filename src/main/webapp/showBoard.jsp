@@ -150,6 +150,8 @@
 			</html:form>
 			|
 			<button id="findGamesButton">Find A Game To Join</button>
+			|
+			<a href="http://github.com/philihp/WebLabora/issues/new">Report Bug</a>
 		</div>
 	</div>
 		
