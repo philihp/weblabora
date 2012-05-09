@@ -32,4 +32,8 @@ public class Coordinate {
 	public Coordinate west() {
 		return new Coordinate(x-1, y);
 	}
+
+	public String toString() {
+		return "("+x+","+y+")";
+	}
 }
