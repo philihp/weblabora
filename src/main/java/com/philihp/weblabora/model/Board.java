@@ -10,6 +10,7 @@ import java.util.EnumMap;
 import java.util.List;
 
 import com.philihp.weblabora.jpa.Game;
+import com.philihp.weblabora.jpa.State;
 import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.BuildingEnum;
 import com.philihp.weblabora.model.building.ClayMound;
@@ -58,7 +59,9 @@ public class Board {
 	
 	private boolean gameOver = false;
 	
-	private List<String> moveList = new ArrayList<String>();
+	private List<HistoryEntry> moveList = new ArrayList<HistoryEntry>();
+	
+	private State nextState;
 	
 	/**
 	 * This makes lookups from {@link CommandUse CommandUse}
@@ -291,7 +294,7 @@ public class Board {
 	 */
 	public void preRound() {
 		
-		getMoveList().add("<b>Round "+round+"</b><br />");
+		getMoveList().add(new HistoryEntry("Round "+round));
 
 		//1 - reset clergymen
 		for(Player player : getPlayers()) {
@@ -309,7 +312,7 @@ public class Board {
 	public void preSettling() {
 		System.out.println("------Begin Settlement------");
 		
-		getMoveList().add("<b>Settlement ("+roundBeforeSettlement(round)+")</b><br />");
+		getMoveList().add(new HistoryEntry("Settlement ("+roundBeforeSettlement(round)+")"));
 	}
 	
 	public void preExtraRound() {
@@ -320,13 +323,13 @@ public class Board {
 		}
 		
 		setExtraRound(true);
-		getMoveList().add("<b>Extra Round</b><br />");
+		getMoveList().add(new HistoryEntry("Extra Round"));
 	}
 	
 	/**
 	 * Called before every move.
 	 */
-	public void preMove(String move) {
+	public void preMove(State state) {
 		if(isGameOver()) return;
 		
 		if(isExtraRound() && moveInRound == 1) {
@@ -338,7 +341,7 @@ public class Board {
 		else if(moveInRound == 1) {
 			preRound();
 		}
-		getMoveList().add("<div class=\"movelist-color\">"+getPlayer(getActivePlayer()).getColor()+"</div><div class=\"movelist-move\">"+move+"</div>");
+		getMoveList().add(new HistoryEntry(state, getPlayer(getActivePlayer()).getColor()));
 	}
 	
 	/**
@@ -363,7 +366,6 @@ public class Board {
 	 * Called after every round.
 	 */
 	public void postRound() {
-		System.out.println("======END OF ROUND "+round+"======");
 		//end of normal round
 		moveInRound = 1;
 		//end of round
@@ -384,7 +386,6 @@ public class Board {
 	}
 	
 	public void postSettlement() {
-		System.out.println("------End Settlement------");
 		//end of settlement round
 		setSettling(false);
 		
@@ -398,7 +399,7 @@ public class Board {
 
 		if(settlementRound == SettlementRound.E) {
 			setGameOver(true);
-			getMoveList().add("<b>Game Over</b><br />");
+			getMoveList().add(new HistoryEntry("Game Over"));
 		}
 		
 		round++;
@@ -414,7 +415,6 @@ public class Board {
 	}
 
 	public void postExtraRound() {
-		System.out.println("------End Final Round ---------");
 		setExtraRound(false);
 		setSettling(true);
 		wheel.pushArm(round);
@@ -455,12 +455,12 @@ public class Board {
 		return Arrays.copyOfRange(DISTRICT_PURCHASE_PRICE, districtsPurchased, DISTRICT_PURCHASE_PRICE.length); 
 	}
 
-	public List<String> getMoveList() {
+	public List<HistoryEntry> getMoveList() {
 		return moveList;
 	}
 	
-	public List<String> getMoveListReversed() {
-		List<String> newList = new ArrayList<String>(getMoveList());
+	public List<HistoryEntry> getMoveListReversed() {
+		List<HistoryEntry> newList = new ArrayList<HistoryEntry>(getMoveList());
 		Collections.reverse(newList);
 		return newList;
 	}
@@ -475,5 +475,13 @@ public class Board {
 	
 	public Scorecard getScorecard() {
 		return new Scorecard(this);
+	}
+
+	public State getNextState() {
+		return nextState;
+	}
+
+	public void setNextState(State nextState) {
+		this.nextState = nextState;
 	}
 }

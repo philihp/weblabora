@@ -32,8 +32,8 @@ public class SaveMove extends BaseAction {
 			HttpServletResponse response, User user) throws Exception {
 		MoveForm form = (MoveForm) actionForm;
 
-		Game game = ShowBoard.findGame(form.getGameId());
-		Game.Player player = ShowBoard.findPlayerInGame(game, user);
+		Game game = ShowGame.findGame(form.getGameId());
+		Game.Player player = ShowGame.findPlayerInGame(game, user);
 		if(player != null) {
 			player.setMove(form.getToken());
 		}

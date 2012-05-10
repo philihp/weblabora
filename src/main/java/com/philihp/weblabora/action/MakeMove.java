@@ -52,14 +52,18 @@ public class MakeMove extends BaseAction {
 		} else {
 			
 			Board board = new Board();
-			MoveProcessor.processMoves(board, user.getActiveGame().getMoves());
+			MoveProcessor.processMoves(board, user.getActiveGame().getStates(),null);
 			try {
 				if(Arrays.asList(game.getAllUsers()).contains(user) == false)
 					throw new WeblaboraException("User "+user+" is not one of the players in game "+game.getGameId()); 
 				
 				if(board.isGameOver())
 					throw new WeblaboraException("Game has already ended.");
-				board.preMove(form.getToken());
+				
+				state = new State();
+				state.setToken(form.getToken());
+				state.setSrcState(game.getState());
+				board.preMove(state);
 				MoveProcessor.processActions(board, form.getToken());
 				board.testValidity();
 			}
@@ -70,13 +74,10 @@ public class MakeMove extends BaseAction {
 				return mapping.findForward("badMove");
 			}
 			
-			state = new State();
-			state.setToken(form.getToken());
-			state.setSrcState(game.getState());
 			em.persist(state);
 			game.setState(state);
 
-			Game.Player player = ShowBoard.findPlayerInGame(game, user);
+			Game.Player player = ShowGame.findPlayerInGame(game, user);
 			if(player != null) {
 				player.setMove("");
 			}

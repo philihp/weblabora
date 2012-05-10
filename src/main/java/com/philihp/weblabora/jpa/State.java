@@ -2,6 +2,8 @@ package com.philihp.weblabora.jpa;
 
 import static javax.persistence.AccessType.FIELD;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Access;
@@ -68,6 +70,18 @@ public class State extends BasicEntity {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public List<State> getStates() {
+		List<State> list = new ArrayList<State>();
+		State state = this;
+		do {
+			if(state.getToken() != null) 
+				list.add(state);
+			state = state.getSrcState();
+		} while(state != null);
+		Collections.reverse(list);
+		return list;
 	}
 
 }

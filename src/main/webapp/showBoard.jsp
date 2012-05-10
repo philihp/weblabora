@@ -137,7 +137,7 @@
 			
 			${user.name}
 			|
-			<html:form action="/showBoard.do" method="GET" style="display: inline">
+			<html:form action="/showGame.do" method="GET" style="display: inline">
 				<html:select property="gameId" value="${user.activeGame.gameId}" styleId="gamesList">
 					<html:options collection="myGames" property="gameId" labelProperty="name" />
 					<html:submit>&#x25B6;</html:submit>
@@ -369,19 +369,49 @@
 			</div>
 		</c:forEach>
 		
-		New Move:
-		<html:form action="/makeMove.do">
-			<html:hidden property="stateId" value="${game.state.stateId}" />
-			<html:hidden property="gameId" value="${game.gameId}" />
-			<html:text property="token" value="${savedMove}" />
-			<html:submit property="submit">Explore</html:submit>
-			<html:submit property="submit">Save (for later)</html:submit>
-		</html:form>
-		<a href="https://github.com/philihp/WebLabora/wiki">Command Syntax Reference</a>
+		<c:if test="${empty param.stateId}">
+			<hr />
+			New Move:
+			<html:form action="/makeMove.do">
+				<html:hidden property="stateId" value="${game.state.stateId}" />
+				<html:hidden property="gameId" value="${game.gameId}" />
+				<html:text property="token" value="${savedMove}" />
+				<html:submit property="submit">Explore</html:submit>
+				<html:submit property="submit">Save (for later)</html:submit>
+			</html:form>
+			<a href="https://github.com/philihp/WebLabora/wiki">Command Syntax Reference</a>
+		</c:if>
 		
 		<hr />
 		
-		<c:forEach items="${board.moveListReversed}" var="move">${move}</c:forEach>
+		<c:forEach items="${board.moveListReversed}" var="move">
+			<div class="movelist-color">${move.color}</div>
+			<div class="movelist-move">
+			<c:choose>
+				<c:when test="${empty move.state}">
+					<b>${move.text}</b>
+				</c:when>
+				<c:when test="${move.state.stateId == 0 and empty board.nextState}">
+					...
+				</c:when>
+				<c:when test="${move.state.stateId == 0 and board.nextState.stateId == game.state.stateId}">
+					[<a href="showGame.do?gameId=${game.gameId}">view</a>] ...
+				</c:when>
+				<c:when test="${move.state.stateId == 0}">
+					[<a href="showGame.do?gameId=${game.gameId}&amp;stateId=${board.nextState.stateId}">view</a>] ...
+				</c:when>
+				<c:when test="${false}">
+					[<a href="showGame.do?gameId=${game.gameId}">view</a>] ...
+				</c:when>
+				<c:when test="${move.state.stateId == param.stateId or move.state.stateId == game.state.stateId}">
+					[view] ${move.text}
+				</c:when>
+				<c:otherwise>
+					[<a href="showGame.do?gameId=${game.gameId}&amp;stateId=${move.state.stateId}">view</a>] ${move.text}
+				</c:otherwise>
+			</c:choose>
+			</div>
+		</c:forEach>
 		
 		<c:if test="${board.gameOver}">
 			<c:forEach items="${board.scorecard.scores}" var="entry">
@@ -397,7 +427,7 @@
 			</c:forEach>
 		</c:if>
 
-		<c:if test="${not empty game.state.dstStates}">
+		<c:if test="${not empty game.state.dstStates and empty param.stateId}">
 		<hr />
 		Previous Moves:
 		<ul>

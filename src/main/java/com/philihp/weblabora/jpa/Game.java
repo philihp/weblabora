@@ -198,16 +198,13 @@ public class Game extends BasicEntity {
 		return new User[] {player1.user, player2.user, player3.user, player4.user};
 	}
 	
-	public List<String> getMoves() {
-		List<String> list = new ArrayList<String>();
-		State state = getState();
-		do {
-			if(state.getToken() != null) 
-				list.add(state.getToken());
-			state = state.getSrcState();
-		} while(state != null);
-		Collections.reverse(list);
-		return list;
+	public List<State> getStates() {
+		if(getState() != null) {
+			return getState().getStates();
+		}
+		else {
+			return new ArrayList<State>();
+		}
 	}
 
 	public String getName() {

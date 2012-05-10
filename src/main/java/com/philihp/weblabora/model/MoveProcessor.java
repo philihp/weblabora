@@ -11,17 +11,28 @@ import java.util.StringTokenizer;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 
+import com.philihp.weblabora.jpa.State;
+
 public final class MoveProcessor {
 
 
 	private MoveProcessor() {
 	}
 	
-	public static void processMoves(Board board, Iterable<String> allMoves) throws WeblaboraException {
-		for(String move : allMoves) {
-			board.preMove(move);
-			processActions(board,move);
+	public static void processMoves(Board board, Iterable<State> allMoves, Integer endStateId) throws WeblaboraException {
+		boolean breakNextIteration = false;
+		for(State state : allMoves) {
+			if(breakNextIteration) {
+				board.setNextState(state);
+				break;
+			}
+			System.out.println("State: "+state.getStateId());
+			board.preMove(state);
+			processActions(board,state.getToken());
 			board.postMove();
+			if(state.getStateId() == endStateId) {
+				breakNextIteration = true;
+			}
 		}
 	}
 

@@ -33,7 +33,7 @@ public class SelectGame extends BaseAction {
 		
 		Integer gameId = user.getActiveGameId();
 		if(gameId == null) {
-			List<Game> games = ShowBoard.findGamesForUser(user);
+			List<Game> games = ShowGame.findGamesForUser(user);
 			if(games.size() >= 1) {
 				user.setActiveGame(games.get(0));
 				gameId = user.getActiveGameId();
