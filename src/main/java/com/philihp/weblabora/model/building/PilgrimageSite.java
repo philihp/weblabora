@@ -42,16 +42,19 @@ public class PilgrimageSite extends BuildingDoubleUsage {
 		doIt(player, second);
 	}
 	
-	private void doIt(Player player, UsageParam input) {
+	private void doIt(Player player, UsageParam input) throws WeblaboraException {
 		if(input.getBook() == 1) {
+			if(player.getBook() <= 0) throw new WeblaboraException(getName()+" couldn't find a book to convert");
 			player.subtractBook(input.getBook());
 			player.addPottery(input.getBook());
 		}
 		else if(input.getPottery() == 1) {
+			if(player.getPottery() <= 0) throw new WeblaboraException(getName()+" couldn't find a ceramic to convert");
 			player.subtractPottery(input.getPottery());
 			player.addOrnament(input.getPottery());
 		}
 		else if(input.getOrnament() == 1) {
+			if(player.getOrnament() <= 0) throw new WeblaboraException(getName()+" couldn't find an ornament to convert");
 			player.subtractOrnament(input.getOrnament());
 			player.addReliquary(input.getOrnament());
 		}
