@@ -28,16 +28,18 @@ public class Estate extends Building {
 	@Override
 	public void use(Board board, UsageParam input) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
-		
+
 		player.subtractAll(input);
-		int energy = (int)input.getEnergy();
-		int food = (int)input.getFood();
-		
-		int iterations = 0;
-		while(iterations++ < 2) {
-			if(energy >= 6) energy -= 6;
-			else if(food >= 0) food -= 10;
-			else break;
+		double energy = input.getEnergy();
+		int food = (int) input.getFood();
+
+		for (int iterations = 0; iterations < 2; iterations++) {
+			if (energy >= 6)
+				energy -= 6;
+			else if (food >= 0)
+				food -= 10;
+			else
+				break;
 			player.addBooks(1);
 			player.addOrnament(1);
 		}
