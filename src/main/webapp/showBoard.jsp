@@ -396,9 +396,9 @@
 				<i>Total Score: ${entry.value.settlementTotalScore + entry.value.shieldScore + entry.value.itemScore}</i><br />
 			</c:forEach>
 		</c:if>
-		
-		<hr />
+
 		<c:if test="${not empty game.state.dstStates}">
+		<hr />
 		Previous Moves:
 		<ul>
 			<c:forEach items="${game.state.dstStates}" var="possibleState">
