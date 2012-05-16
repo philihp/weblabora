@@ -19,6 +19,7 @@ public class MoveHistory {
 
 	public void setPreviousBuild(boolean previousBuild) {
 		this.previousBuild = this.previousBuild || previousBuild;
+		if(previousBuild) this.previousUse = false;
 	}
 
 	public boolean isPreviousUse() {
