@@ -63,6 +63,7 @@ public class MakeMove extends BaseAction {
 				state = new State();
 				state.setToken(form.getToken());
 				state.setSrcState(game.getState());
+				state.setExplorer(user);
 				board.preMove(state);
 				MoveProcessor.processActions(board, form.getToken());
 				board.testValidity();

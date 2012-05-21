@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Basic;
 import javax.persistence.JoinColumn;
+import javax.persistence.Transient;
+
 import static javax.persistence.FetchType.LAZY;
 
 @Entity(name = "State")
@@ -39,6 +41,10 @@ public class State extends BasicEntity {
 	@ManyToOne(fetch = LAZY, targetEntity = com.philihp.weblabora.jpa.State.class)
 	@JoinColumn(name = "src_state_id", referencedColumnName="state_id")
 	private State srcState;
+	
+	@ManyToOne(fetch = LAZY, targetEntity = com.philihp.weblabora.jpa.User.class)
+	@JoinColumn(name = "explorer_id", referencedColumnName = "user_id")
+	private User explorer;
 
 	public int getStateId() {
 		return stateId;
@@ -72,6 +78,15 @@ public class State extends BasicEntity {
 		this.token = token;
 	}
 
+	public User getExplorer() {
+		return explorer;
+	}
+
+	public void setExplorer(User explorer) {
+		this.explorer = explorer;
+	}
+
+	@Transient
 	public List<State> getStates() {
 		List<State> list = new ArrayList<State>();
 		State state = this;
