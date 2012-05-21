@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/colorbox.css" />
 <link rel="stylesheet" href="css/weblabora.css" />
-<!--<script src="https://www.google.com/jsapi"></script>-->
+<!--<script src="//www.google.com/jsapi"></script>-->
 <!-- <script> -->
 <!-- 	google.load("jquery", "1.7.1");-->
 <!-- </script> -->
@@ -127,13 +127,39 @@
 	});
 </script>
 
+<script src="//connect.facebook.net/en_US/all.js"></script>
+<script>
+console.log('initializing FB');
+
+$(document).ready(function() {
+	FB.init({
+		appId: ${client_id},
+		frictionlessRequests: true
+	});
+});
+
+function poke(id) {
+	console.log('poke');
+	FB.ui({
+		method: 'apprequests',
+		message: 'I made my move',
+		to: '11812290,11803497,1357625924,11803542'
+	}, requestCallback);
+}
+
+function requestCallback(response) {
+	console.log('callback');
+	console.log(response);
+}
+
+</script>
+
 </head>
 
 <body>
-
 	<div class="userbar">
 		<div class="container">
-			<img src="http://graph.facebook.com/${user.facebookId}/picture" height="50" width="50" title="${user.facebookId}"/>
+			<img src="//graph.facebook.com/${user.facebookId}/picture" height="50" width="50" title="${user.facebookId}"/>
 			
 			${user.name}
 			|
@@ -157,6 +183,7 @@
 		
 	
 	<div class="container">
+		<div id="fb-root"></div>
 		<div class="wheel">
 			<svg style="width: 300px; height: 300px;" viewbox="-150.5 -150.5 300 300">
 			  <defs>
@@ -293,8 +320,9 @@
 		<ul class="tabs">
 			<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
 				<li id="tab${playerStatus.index+1}" class="tab tab--${player.activeClass} tab--${player.selectedClass} tab--${fn:toLowerCase(player.color)}">
-					<img src="http://graph.facebook.com/${player.user.facebookId}/picture" height="50" width="50" title="${player.user.facebookId}"/>
+					<img src="//graph.facebook.com/${player.user.facebookId}/picture" height="50" width="50" title="${player.user.facebookId}"/>
 					${player.user.name}
+					[<a href="javascript:poke(${player.user.facebookId})">poke</a>]
 				</li>
 			</c:forEach>
 		</ul>

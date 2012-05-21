@@ -58,6 +58,7 @@
 		<action path="/leaveGame" name="gameForm" scope="request" type="com.philihp.weblabora.action.LeaveGame" />
 		<action path="/makeMove" name="moveForm" type="com.philihp.weblabora.action.MakeMove">
 			<forward name="badMove" path="/badMove.jsp" />
+			<forward name="madeMove" path="/madeMove.jsp" />
 			<forward name="save" path="/saveMove.do" />
 		</action>
 		<action path="/saveMove" name="moveForm" type="com.philihp.weblabora.action.SaveMove" />

@@ -8,6 +8,7 @@ import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -82,9 +83,20 @@ public class MakeMove extends BaseAction {
 			if(player != null) {
 				player.setMove("");
 			}
+			
 		}
+		
+		String to = null;
+		for(User gameUser : game.getAllUsers()) {
+			if(to == null) 
+				to = gameUser.getFacebookId();
+			else
+				to += ","+gameUser.getFacebookId();
+		}
+		request.setAttribute("to",to);
+		request.setAttribute("move",form.getToken());
 
-		return mapping.findForward("root");
+		return mapping.findForward("madeMove");
 	}
 
 	protected State searchForExploredState(Game game, String token) throws WeblaboraException {
