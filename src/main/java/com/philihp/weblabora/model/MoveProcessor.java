@@ -30,7 +30,7 @@ public final class MoveProcessor {
 			board.preMove(state);
 			processActions(board,state.getToken());
 			board.postMove();
-			if(state.getStateId() == endStateId) {
+			if(endStateId != null && state.getStateId() == endStateId) {
 				breakNextIteration = true;
 			}
 		}
