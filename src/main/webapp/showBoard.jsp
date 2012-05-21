@@ -129,8 +129,6 @@
 
 <script src="//connect.facebook.net/en_US/all.js"></script>
 <script>
-console.log('initializing FB');
-
 $(document).ready(function() {
 	FB.init({
 		appId: ${client_id},
@@ -142,8 +140,8 @@ function poke(id) {
 	console.log('poke');
 	FB.ui({
 		method: 'apprequests',
-		message: 'I made my move',
-		to: '11812290,11803497,1357625924,11803542'
+		message: 'Your turn',
+		to: id
 	}, requestCallback);
 }
 
@@ -320,9 +318,8 @@ function requestCallback(response) {
 		<ul class="tabs">
 			<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
 				<li id="tab${playerStatus.index+1}" class="tab tab--${player.activeClass} tab--${player.selectedClass} tab--${fn:toLowerCase(player.color)}">
-					<img src="//graph.facebook.com/${player.user.facebookId}/picture" height="50" width="50" title="${player.user.facebookId}"/>
+					<a href="javascript:poke(${player.user.facebookId})"><img src="//graph.facebook.com/${player.user.facebookId}/picture" height="50" width="50" title="${player.user.facebookId}"/></a>
 					${player.user.name}
-					[<a href="javascript:poke(${player.user.facebookId})">poke</a>]
 				</li>
 			</c:forEach>
 		</ul>
