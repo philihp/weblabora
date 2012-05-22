@@ -88,10 +88,12 @@ public class MakeMove extends BaseAction {
 		
 		String to = null;
 		for(User gameUser : game.getAllUsers()) {
-			if(to == null) 
-				to = gameUser.getFacebookId();
-			else
-				to += ","+gameUser.getFacebookId();
+			if(gameUser != null) {
+				if(to == null) 
+					to = gameUser.getFacebookId();
+				else
+					to += ","+gameUser.getFacebookId();
+			}
 		}
 		request.setAttribute("to",to);
 		request.setAttribute("move",form.getToken());
