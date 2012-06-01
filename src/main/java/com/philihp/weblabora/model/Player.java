@@ -725,6 +725,8 @@ public class Player {
 			throw new WeblaboraException(color + " has "+getBeer()+" beers");
 		if(getReliquary() < 0)
 			throw new WeblaboraException(color + " has "+getReliquary()+" reliquary");
+		if(getBread() < 0)
+			throw new WeblaboraException(color + " has "+getBread()+" bread");
 		
 		landscape.checkValidity();
 	}
