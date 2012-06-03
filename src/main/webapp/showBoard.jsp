@@ -404,7 +404,7 @@ function requestCallback(response) {
 				<html:submit property="submit">Explore</html:submit>
 				<html:submit property="submit">Save (for later)</html:submit>
 			</html:form>
-			<a href="https://github.com/philihp/WebLabora/wiki">Command Syntax Reference</a>
+			<a href="http://philihp.github.com/WebLabora/">Command Syntax Reference</a>
 		</c:if>
 		
 		<hr />
