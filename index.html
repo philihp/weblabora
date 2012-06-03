@@ -1,56 +1,143 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Weblabora by philihp</title>
     
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
   </head>
   <body>
     <div class="wrapper">
       <header>
-        <h1>Weblabora</h1>
-        <p>Website based Ora et Labora board game persistence</p>
-        <p class="view"><a href="https://github.com/philihp/WebLabora">View the Project on GitHub <small>philihp/WebLabora</small></a></p>
+        <h1><a href="http://philihp.com/weblabora/">Weblabora</a></h1>
+        <h3>Weblabora Alpha Test Manual</h3>
         <ul>
-          <li><a href="https://github.com/philihp/WebLabora/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/philihp/WebLabora/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/philihp/WebLabora">Fork On <strong>GitHub</strong></a></li>
+          <li><a href="index.html">Commands</a>
+            <ul>
+              <li><b>C</b>ut Peat</li>
+              <li><b>F</b>ell Trees</li>
+              <li><b>B</b>uild</li>
+              <li><b>U</b>se</li>
+              <li><b>W</b>ork Contract</li>
+              <li>Con<b>V</b>ert</li>
+              <li>Buy <b>P</b>lot</li>
+              <li>Buy <b>D</b>istrict</li>
+              <li><b>S</b>ettle</li>
+            </ul>
+          </li>
+          <li><a href="buildings.html">Buildings</a></li>
+          <li><a href="chits.html">Chits</a></li>
+          <li><a href="land.html">Land</a></li>
+          <li><a href="settlements.html">Settlements</a></li>
+          <li><a href="wheel.html">Wheel</a></li>
         </ul>
       </header>
       <section>
-        <h3>Welcome to GitHub Pages.</h3>
+        <h4>Commands</h4>
+<pre>
+  move: command[|move]
+</pre>
+<pre>
+  command:
+    F(x,y)                         //fell trees
+    C(x,y)                         //cut peat
+    B(id,x,y)                      //build
+    U(id)[*]                       //use (with prior, add *)
+    U(id,resources)[*]             //use (with resources as input) (with prior, add *)
+    U(id,resources1,resources2)[*] //use (with resources as input) (with prior, add *)
+    U(id,x1,y1[,x2,y2[,]])[*]      //use (on the tiles on your landscape at the listed coordinates)
+    W(color,payment)               //work contract a player... basically it just pays them
+    V(resources)                   //convert grain, pennies, nickels, wine, and beer
+    P(y,plotside)                  //buy a plot, place its upper left corner on the row y
+    D(y,districtside)              //buy a district, place it on the row y
+    S(id,x,y,resources)            //settle a settlement (e.g. S04) at (x,y), pay for it with resources.
+</pre>
+<pre>
+  id: @## //the building id
+</pre>
+<pre>
+  resources1: resources //usually the "inputs"
+</pre>
+<pre>
+  resources2: resources //usually the "output", but sometimes a secondary action
+</pre>
+<pre>
+  resources: resource[resources]
+</pre>
+<pre>
+  resource:
+    Wo //Wood
+    Wh //Whiskey
+    Gn //Grain
+    Sw //Straw
+    Sh //Sheep
+    Mt //Meat
+    Cl //Clay
+    Po //Pottery
+    Pt //Peat
+    Co //Coal
+    Pn //Penny
+    Bo //Book
+    Sn //Stone
+    Or //Ornament
+    Fl //Flour
+    Br //Bread
+    Gp //Grape
+    Wn //Wine
+    Ni //Nickel
+    Rq //Reliquary
+    Ho //Hops
+    Be //Beer
+    Bp //Bonus Point
+    Jo //Use the Joker
+</pre>
+<pre>
+  color:
+    RED   //first player
+    GREEN //second player
+    BLUE  //third player
+    WHITE //forth player
+</pre>
+<pre>
+  payment:
+    Pn
+    PnPn
+    Wn
+    Wh
+</pre>
+<pre>
+  plotside:
+    COAST
+    MOUNTAIN
+  districtside:
+    HILLS
+    PLAINS
+</pre>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+        <p>Sometimes (a lot of the time) you need to do a lot of things in a turn, such as Workorder someone and then Use a building, or use a building which lets you use another building, such as the Calefactory which lets you fell trees AND cut peat. Rather than trying to figure out some sort of complicated nested nature of the U() command, the syntax just lets you string together many commands into a single move.</p>
+        <p>This means you're allowed to do a lot of things that aren't really legal, such as build multiple times, or Fell-Trees your entire land in one go. The user has to police things like this, since it would be a pain to enforce this in the program. Every building feels like it is an exception to the rule.</p>
+        <h4>Coordinates</h4>
+        <p>The upper left square of your original 5x2 landscape is 0,0. Positive X is right, Positive Y is down. Coordinates can go negative obviously, but 0,0 always stays the origin.</p>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+        <h4>Buildings</h4>
+        <p>Almost all buildings consume the "resources" for their 3rd parameter of the Use command.</p>
+        <p>The buildings that get you things from tokens on the wheel (Farmyard, Cloister Office, Quarry, etc) just take an input of the token. So for instance if you want to use your Clay Mound to take Clay, do U(LR1,Cl). If you want to take clay with the Joker, add Jo. The farmyard needs to know if you want sheep or grain, so if you want sheep, do U(LR2,Sh). If you want to use the farmyard to take sheep by using the joker, do U(LR2,ShJo) or U(LR2,JoSh). Order doesn't matter.</p>
+        <p>Printing Office is the only building that uses more than one coordinate. You feed it coordinates of every forest you want to remove in exchange for a book.</p>
+        <p>Some buildings take two resource parameters. They are:</p>
+        <ul>
+          <li>Bakery</li>
+          <li>Cloister Courtyard</li>
+          <li>Cloister Library</li>
+          <li>Pilgrimage Site</li>
+          <li>Shipping Company</li>
+          <li>Winery</li>
+          <li>House of the Brotherhood</li>
+        </ul>
 
-<h3>Designer Templates</h3>
+        <h4>Using the Priory</h4>
+        <p>To use the priory to use another building, just use the priory <code>U(G01)</code>, then use another building. Right now the game doesn't check to make sure that the building you use with it has a prior on it.</p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact support@github.com and we’ll help you sort it out.</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/philihp">philihp</a></p>
