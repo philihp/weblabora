@@ -1,0 +1,27 @@
+﻿<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Bakery</title>
+  </head>
+  <body>
+
+<h1>Bakery</h1>
+
+<p>Turns flour into bread at a cost of 1/2 energy per flour. Also converts one/two bread into four/eight coins.</p>
+
+<p>Takes two parameters. The first is an amount of flour and energy. You can have an excess of energy (because sometimes you gotta burn more than you need), but it will error if you have excess flour. The second parameter is the amount of bread you want to convert into four/eight coins. Usually you want to convert as much as you can, because four coins is worth four food and one bread is worth three food. This may not always be the case though, like if you need different goods for the Chamber of Wonders</p>
+
+<p>Example:</p>
+
+<pre>U(F05,FlFlFlFlFlPtPt,BrBr)</pre>
+
+<p>Converts 5 flour, 2 peat into 5 bread, and then turns 2 bread into 8 coins. The 1.5 extra energy is lost.</p>
+
+<pre>U(F05,FlFlWo,)</pre>
+
+<p>Converts 2 flour into 2 bread consuming 1 wood for energy. Does not convert that bread into coins, because maybe you want to use that bread in the Cloister Church to make Reliquaries.</p>
+
+  </body>
+</html>
