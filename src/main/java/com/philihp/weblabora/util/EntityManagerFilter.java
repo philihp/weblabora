@@ -26,7 +26,7 @@ public class EntityManagerFilter implements Filter {
 		EntityManager em = null;
 		try {
 			em = emf.createEntityManager();
-			EntityManagerManager.set(em);
+			request.setAttribute("em", em);
 			em.getTransaction().begin();
 
 			/* ******** STUFF HAPPENS ******* */
@@ -34,7 +34,6 @@ public class EntityManagerFilter implements Filter {
 			/* ******** STUFF HAPPENS ******* */
 			
 			em.getTransaction().commit();
-			EntityManagerManager.clear();
 		} finally {
 			if (em != null)
 				em.close();
@@ -43,6 +42,8 @@ public class EntityManagerFilter implements Filter {
 	
 
 	public void destroy() {
+		if(emf != null)
+			emf.close();
 	}
 
 }

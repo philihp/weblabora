@@ -1,13 +1,9 @@
 package com.philihp.weblabora.action;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -15,10 +11,7 @@ import org.apache.struts.action.ActionMapping;
 import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.State;
 import com.philihp.weblabora.jpa.User;
-import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.Color;
-import com.philihp.weblabora.util.EntityManagerManager;
-import com.philihp.weblabora.util.FacebookCredentials;
 
 public class CreateGame extends BaseAction {
 
@@ -26,7 +19,7 @@ public class CreateGame extends BaseAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response, User user) throws Exception {
 
-		EntityManager em = EntityManagerManager.get();
+		EntityManager em = (EntityManager)request.getAttribute("em");
 
 		Game game = new Game();
 		game.getPlayer1().setUser(user);

@@ -1,6 +1,8 @@
 package com.philihp.weblabora.util;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+
 import com.philihp.weblabora.action.*;
 import com.philihp.weblabora.jpa.User;
 
@@ -27,8 +29,13 @@ public class SessionScopeLoader implements HttpSessionListener {
     	System.out.println("Session Created, OfflineID = "+offlineId);
 
 		if (offlineId != null) {
-			User user = BaseAction.findUser(offlineId);
+			EntityManagerFactory emf = (EntityManagerFactory)se.getSession().getServletContext().getAttribute("emf");
+			EntityManager em = emf.createEntityManager();
+			User user = BaseAction.findUser(em, offlineId);
 			se.getSession().setAttribute("user", user);
+			em.close();
+			emf.close();
+			//TODO: not sure if this is the right thing here, not sure how else to get the em and emf.
 		}
     }
 

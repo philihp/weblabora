@@ -1,16 +1,9 @@
 package com.philihp.weblabora.action;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -21,10 +14,7 @@ import com.philihp.weblabora.jpa.State;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.MoveProcessor;
-import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.WeblaboraException;
-import com.philihp.weblabora.util.EntityManagerManager;
-import com.philihp.weblabora.util.FacebookCredentials;
 
 public class ShowGameState extends BaseAction {
 
@@ -33,8 +23,9 @@ public class ShowGameState extends BaseAction {
 			HttpServletResponse response, User user) throws Exception {
 
 		GameForm form = (GameForm)actionForm;
+		EntityManager em = (EntityManager)request.getAttribute("em");
 		
-		request.setAttribute("myGames", ShowGame.findGamesForUser(user));
+		request.setAttribute("myGames", ShowGame.findGamesForUser(em, user));
 		
 		Game game = (Game)request.getAttribute("game");
 		

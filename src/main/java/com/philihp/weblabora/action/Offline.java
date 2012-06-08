@@ -1,5 +1,6 @@
 package com.philihp.weblabora.action;
 
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,8 +17,9 @@ public class Offline extends BaseAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response, User user)
 			throws Exception {
+		EntityManager em = (EntityManager)request.getAttribute("em");
 
-		user = findUser("11803742");
+		user = findUser(em, "11803742");
 		request.getSession().setAttribute("user", user);
 		
 		return mapping.findForward("root");

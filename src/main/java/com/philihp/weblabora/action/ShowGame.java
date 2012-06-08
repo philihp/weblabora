@@ -1,16 +1,12 @@
 package com.philihp.weblabora.action;
 
-import java.util.Arrays;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -18,25 +14,20 @@ import org.apache.struts.action.ActionMapping;
 import com.philihp.weblabora.form.GameForm;
 import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.User;
-import com.philihp.weblabora.model.Board;
-import com.philihp.weblabora.model.MoveProcessor;
-import com.philihp.weblabora.model.Player;
-import com.philihp.weblabora.model.WeblaboraException;
-import com.philihp.weblabora.util.EntityManagerManager;
-import com.philihp.weblabora.util.FacebookCredentials;
 
 public class ShowGame extends BaseAction {
 
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response, User user) throws Exception {
+		EntityManager em = (EntityManager)request.getAttribute("em");
 
 		GameForm form = (GameForm)actionForm;
 		if(form.getGameId() == null) {
 			return mapping.findForward("no-game");
 		}
 		
-		Game game = findGame(form.getGameId());
+		Game game = findGame(em, form.getGameId());
 		user.setActiveGame(game);
 		request.setAttribute("game", game);
 		
@@ -59,13 +50,11 @@ public class ShowGame extends BaseAction {
 		return null;
 	}
 
-	protected static Game findGame(int gameId) {
-		EntityManager em = EntityManagerManager.get();
+	protected static Game findGame(EntityManager em, int gameId) {
 		return em.find(Game.class, gameId);
 	}
 
-	protected static List<Game> findGamesForUser(User user) {
-		EntityManager em = EntityManagerManager.get();
+	protected static List<Game> findGamesForUser(EntityManager em, User user) {
 		TypedQuery<Game> query = em
 				.createQuery(
 						"SELECT g " +

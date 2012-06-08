@@ -1,5 +1,6 @@
 package com.philihp.weblabora.action;
 
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,6 +19,7 @@ public class AuthenticateGetInfo extends BaseAction {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response, User user) throws AuthenticationException, Exception {
+		EntityManager em = (EntityManager)request.getAttribute("em");
 
 		String meJson = (String)request.getAttribute("me.json");
 		if(meJson == null) throw new AuthenticationException();
@@ -27,7 +29,7 @@ public class AuthenticateGetInfo extends BaseAction {
 				new FacebookCredentialsDeserializer()).create();
 		FacebookCredentials credentials = gson.fromJson(meJson, FacebookCredentials.class);
 
-		user = findUser(credentials.getFacebookId());
+		user = findUser(em, credentials.getFacebookId());
 		user.setName(credentials.getName());
 		request.getSession().setAttribute("user", user);
 

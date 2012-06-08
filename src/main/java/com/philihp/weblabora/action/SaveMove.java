@@ -1,29 +1,20 @@
 package com.philihp.weblabora.action;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.philihp.weblabora.form.GameForm;
-import com.philihp.weblabora.form.JoinGameForm;
 import com.philihp.weblabora.form.MoveForm;
 import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.State;
 import com.philihp.weblabora.jpa.User;
-import com.philihp.weblabora.model.Board;
-import com.philihp.weblabora.model.MoveProcessor;
 import com.philihp.weblabora.model.WeblaboraException;
-import com.philihp.weblabora.util.EntityManagerManager;
-import com.philihp.weblabora.util.FacebookCredentials;
 
 public class SaveMove extends BaseAction {
 
@@ -31,8 +22,9 @@ public class SaveMove extends BaseAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response, User user) throws Exception {
 		MoveForm form = (MoveForm) actionForm;
+		EntityManager em = (EntityManager)request.getAttribute("em");
 
-		Game game = ShowGame.findGame(form.getGameId());
+		Game game = ShowGame.findGame(em, form.getGameId());
 		Game.Player player = ShowGame.findPlayerInGame(game, user);
 		if(player != null) {
 			player.setMove(form.getToken());

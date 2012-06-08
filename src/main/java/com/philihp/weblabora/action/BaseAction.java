@@ -19,7 +19,6 @@ import org.apache.struts.action.ActionMapping;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.philihp.weblabora.jpa.User;
-import com.philihp.weblabora.util.EntityManagerManager;
 import com.philihp.weblabora.util.FacebookSignedRequest;
 import com.philihp.weblabora.util.FacebookSignedRequestDeserializer;
 import com.philihp.weblabora.util.FacebookUtil;
@@ -36,13 +35,14 @@ abstract public class BaseAction extends Action {
 			throws Exception {
 		System.out.println("Action: "+this.getClass().getCanonicalName());
 
+		EntityManager em = (EntityManager)request.getAttribute("em");
 		User user = null;
 		
 		//first check signed_request and see if we can find user from that
 		if(request.getMethod().equals("POST") && request.getParameter("signed_request") != null) {
 			String signedRequest = request.getParameter("signed_request");
 			String clientSecret = (String)getServlet().getServletContext().getAttribute("client_secret");
-			user = findUserFromSignedRequest(signedRequest, clientSecret);
+			user = findUserFromSignedRequest(em, signedRequest, clientSecret);
 
 			if(user != null) 
 				request.getSession().setAttribute("user", user);
@@ -50,7 +50,7 @@ abstract public class BaseAction extends Action {
 
 		//if no user yet, check the session
 		if(user == null) {
-			user = findUser((User)request.getSession().getAttribute("user"));
+			user = findUser(em, (User)request.getSession().getAttribute("user"));
 			
 			if(user != null)
 				request.getSession().setAttribute("user", user);
@@ -64,7 +64,7 @@ abstract public class BaseAction extends Action {
 		return execute(mapping, actionForm, request, response, user);
 	}
 	
-	private User findUserFromSignedRequest(String signedRequest, String clientSecret) throws AuthenticationException {
+	private User findUserFromSignedRequest(EntityManager em, String signedRequest, String clientSecret) throws AuthenticationException {
 		String[] segments = signedRequest.split("[.]", 2);
 		String givenSignature = segments[0];
 		String payload = segments[1];
@@ -84,7 +84,7 @@ abstract public class BaseAction extends Action {
 		if (fsr.getUserId() == null)
 			return null;
 		else
-			return findUser(fsr.getUserId());
+			return findUser(em, fsr.getUserId());
 	}
 
 	abstract ActionForward execute(ActionMapping mapping, ActionForm actionForm,
@@ -95,13 +95,12 @@ abstract public class BaseAction extends Action {
 		return PUBLIC_ACTIONS.contains(this.getClass()) == false;
 	}
 	
-	public static User findUser(User user) {
+	public static User findUser(EntityManager em, User user) {
 		if(user == null) return null;
-		return findUser(user.getFacebookId());
+		return findUser(em, user.getFacebookId());
 	}
 	
-	public static User findUser(String facebookId) {
-		EntityManager em = EntityManagerManager.get();
+	public static User findUser(EntityManager em, String facebookId) {
 		TypedQuery<User> query = em.createNamedQuery("findUserByFacebookId", User.class);
 		query.setParameter("facebookId", facebookId);
 		List<User> results = query.getResultList();
