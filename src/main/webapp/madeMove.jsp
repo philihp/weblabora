@@ -26,7 +26,7 @@ console.log('initializing FB');
 
 $(document).ready(function() {
 	FB.init({
-		appId: ${client_id},
+		appId: '${client_id}',
 		frictionlessRequests: true
 	});
 	console.log('calling message');

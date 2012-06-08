@@ -404,7 +404,7 @@ function requestCallback(response) {
 				<html:submit property="submit">Explore</html:submit>
 				<html:submit property="submit">Save (for later)</html:submit>
 			</html:form>
-			<a href="https://github.com/philihp/WebLabora/wiki">Command Syntax Reference</a>
+			<a href="http://philihp.github.com/WebLabora/">Command Syntax Reference</a>
 		</c:if>
 		
 		<hr />
@@ -425,14 +425,11 @@ function requestCallback(response) {
 				<c:when test="${move.state.stateId == 0}">
 					[<a href="showGame.do?gameId=${game.gameId}&amp;stateId=${board.nextState.stateId}">view</a>] ...
 				</c:when>
-				<c:when test="${false}">
-					[<a href="showGame.do?gameId=${game.gameId}">view</a>] ...
-				</c:when>
 				<c:when test="${move.state.stateId == param.stateId or move.state.stateId == game.state.stateId}">
 					[view] ${move.text}
 				</c:when>
 				<c:otherwise>
-					[<a href="showGame.do?gameId=${game.gameId}&amp;stateId=${move.state.stateId}">view</a>] ${move.text}
+					[<a href="showGame.do?gameId=${game.gameId}&amp;stateId=${move.state.stateId}">view</a>] ${move.text} - ${move.state.explorer.name}
 				</c:otherwise>
 			</c:choose>
 			</div>
