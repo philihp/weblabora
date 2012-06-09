@@ -32,7 +32,7 @@ public class ShippingCompany extends BuildingDoubleUsage {
 		if(input.getEnergy() < 3) {
 			throw new WeblaboraException("Not enough energy. "+getName()+" needs 3 energy, but was only given "+input.getEnergy());
 		}
-		//player.subtractEnergy(input);
+		player.subtractEnergy(input);
 		
 		UsageParamSingle output = input.getSecondary();
 		
