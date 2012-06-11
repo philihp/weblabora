@@ -173,7 +173,7 @@ function requestCallback(response) {
 				<html:submit>Leave Game</html:submit>
 			</html:form>
 			|
-			<button id="findGamesButton">Find A Game To Join</button>
+			<button id="findGamesButton">Join a Game</button>
 			|
 			<a href="http://github.com/philihp/WebLabora/issues/new">Report Bug</a>
 		</div>

@@ -7,18 +7,16 @@
 <!DOCTYPE html>
 <html:html>
 <head>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/colorbox.css" />
+<link rel="stylesheet" href="css/weblabora.css" />
 </head>
 <body>
 
 	<div>
 		<c:choose>
 			<c:when test="${empty games}">
-				<span style="font-style: italic"><b>No Games Found</b><br /> <br />There are no games available with open seats. Create a new game, or if you have any friends, ask
-					them to create one.</span>
-				<hr />
-				<html:form action="/createGame.do">
-					<html:submit>Create New Game</html:submit>
-				</html:form>
+				<span style="font-style: italic"><b>No Games Found</b><br /> <br />There are no games available with open seats.</span>
 			</c:when>
 			<c:otherwise>
 			  The following games have seats open:
@@ -94,6 +92,17 @@
 				</table>
 			</c:otherwise>
 		</c:choose>
+
+		<hr />
+		<script>
+		$('#createGameButton').colorbox({
+			href : "createGameForm.do",
+			speed : 200,
+			transition: "elastic"
+		});
+		</script>
+		<button id="createGameButton">Create New Game</button>
+
 	</div>
 
 </body>

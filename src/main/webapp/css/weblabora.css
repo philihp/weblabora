@@ -275,6 +275,10 @@ div.container {
 	opacity: 0.5;
 }
 .tab--active {
+	background: #FFC966; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFC966', endColorstr='#FFFFFF'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFC966), to(#FFFFFF)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #FFC966,  #FFFFFF); /* for firefox 3.6+ */ 
 }
 .tab--inactive {
 }
@@ -326,4 +330,19 @@ div.container {
 	background-color: #23506E;
 	vertical-align: middle;
 	text-align: center;
+}
+
+
+fieldset {
+	border: 1px groove #f0f0f0;
+	margin-left: 2px;
+	margin-right: 2px;
+	padding-left: 9px;
+	padding-right: 9px;
+	padding-top: 4px;
+	padding-bottom: 8px;
+}
+legend {
+	display: block;
+	padding: 2px;
 }
