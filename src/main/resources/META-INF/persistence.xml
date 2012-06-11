@@ -17,7 +17,11 @@
 
 		<shared-cache-mode>NONE</shared-cache-mode>
 		<properties>
-			<property name="eclipselink.logging.level" value="FINE" />
+			<property name="eclipselink.logging.level" value="WARNING" /> <!-- FINE turns on queries -->
+			<property name="eclipselink.logging.timestamp" value="false" />
+			<property name="eclipselink.logging.session" value="false" />
+			<property name="eclipselink.logging.thread" value="false" />
+			
 			<property name="eclipselink.target-database" value="MySQL" />
 			
 			<!-- this is a workaround for Tomcat, otherwise Eclipselink can't find the JNDI datasource -->
