@@ -34,8 +34,6 @@ public class SessionScopeLoader implements HttpSessionListener {
 			User user = BaseAction.findUser(em, offlineId);
 			se.getSession().setAttribute("user", user);
 			em.close();
-			emf.close();
-			//TODO: not sure if this is the right thing here, not sure how else to get the em and emf.
 		}
     }
 

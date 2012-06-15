@@ -42,7 +42,7 @@ public class EntityManagerFilter implements Filter {
 	
 
 	public void destroy() {
-		if(emf != null)
+		if(emf != null && emf.isOpen())
 			emf.close();
 	}
 
