@@ -499,4 +499,18 @@ public class Board {
 	public void setNextState(State nextState) {
 		this.nextState = nextState;
 	}
+
+	public GamePlayers getGamePlayers() {
+		return gamePlayers;
+	}
+
+	public GameLength getGameLength() {
+		return gameLength;
+	}
+
+	public GameCountry getGameCountry() {
+		return gameCountry;
+	}
+	
+	
 }

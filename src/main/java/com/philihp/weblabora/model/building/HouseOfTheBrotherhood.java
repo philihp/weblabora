@@ -10,6 +10,8 @@ import java.util.Set;
 
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
+import com.philihp.weblabora.model.GameLength;
+import com.philihp.weblabora.model.GamePlayers;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
@@ -35,13 +37,22 @@ public class HouseOfTheBrotherhood extends BuildingDoubleUsage {
 		
 		player.subtractAll(input);
 
-		float possiblePoints = 0;
+		double possiblePoints = 0;
 		int cloisters = 0;
 		for (Building building : player.getLandscape().getBuildings()) {
 			if (building.isCloister())
 				cloisters++;
 		}
-		possiblePoints = cloisters * 2;
+		
+		if(board.getGamePlayers() == GamePlayers.ONE) {
+			possiblePoints = cloisters * 1;
+		}
+		else if(board.getGamePlayers() == GamePlayers.TWO && board.getGameLength() == GameLength.LONG) {
+			possiblePoints = Math.floor(cloisters * 1.5);
+		}
+		else { 
+			possiblePoints = cloisters * 2;
+		}
 		
 		int requestedPoints = output.getBook()*2 + output.getPottery()*3 + output.getOrnament()*4 + output.getReliquary()*8;
 		
