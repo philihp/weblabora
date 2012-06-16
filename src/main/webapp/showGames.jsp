@@ -22,7 +22,7 @@
 			  The following games have seats open:
 			  <table>
 			  	<tr>
-			  		<th>Started</th>
+			  		<th>ID, Started</th>
 			  		<th>Red</th>
 			  		<th>Green</th>
 			  		<th>Blue</th>
@@ -30,62 +30,70 @@
 			  	</tr>
 					<c:forEach items="${games}" var="game">
 						<tr>
-							<td><fmt:formatDate value="${game.dateCreated}" pattern="yyyy-MM-dd" /></td>
+							<td>#${game.gameId}, <fmt:formatDate value="${game.dateCreated}" pattern="yyyy-MM-dd" /></td>
 							<td>
-								<c:choose>
-									<c:when test="${empty game.player1.user}">
-										<html:form action="/joinGame.do">
-											<html:hidden property="gameId" value="${game.gameId}" />
-											<html:hidden property="seat" value="1"/>
-											<html:submit>Join</html:submit>
-										</html:form>
-									</c:when>
-									<c:otherwise>
-										<img src="http://graph.facebook.com/${game.player1.user.facebookId}/picture" class="avatar" title="${game.player1.user.name}" />
-									</c:otherwise>
-								</c:choose>
+								<c:if test="${game.players >= 1}">
+									<c:choose>
+										<c:when test="${empty game.player1.user}">
+											<html:form action="/joinGame.do">
+												<html:hidden property="gameId" value="${game.gameId}" />
+												<html:hidden property="seat" value="1"/>
+												<html:submit>Join</html:submit>
+											</html:form>
+										</c:when>
+										<c:otherwise>
+											<img src="http://graph.facebook.com/${game.player1.user.facebookId}/picture" class="avatar" title="${game.player1.user.name}" />
+										</c:otherwise>
+									</c:choose>
+								</c:if>
 							</td>
 							<td>
-								<c:choose>
-									<c:when test="${empty game.player2.user}">
-										<html:form action="/joinGame.do">
-											<html:hidden property="gameId" value="${game.gameId}" />
-											<html:hidden property="seat" value="2"/>
-											<html:submit>Join</html:submit>
-										</html:form>
-									</c:when>
-									<c:otherwise>
-										<img src="http://graph.facebook.com/${game.player2.user.facebookId}/picture" class="avatar" title="${game.player2.user.name}" />
-									</c:otherwise>
-								</c:choose>
+								<c:if test="${game.players >= 2}">
+									<c:choose>
+										<c:when test="${empty game.player2.user and game.players >= 2}">
+											<html:form action="/joinGame.do">
+												<html:hidden property="gameId" value="${game.gameId}" />
+												<html:hidden property="seat" value="2"/>
+												<html:submit>Join</html:submit>
+											</html:form>
+										</c:when>
+										<c:otherwise>
+											<img src="http://graph.facebook.com/${game.player2.user.facebookId}/picture" class="avatar" title="${game.player2.user.name}" />
+										</c:otherwise>
+									</c:choose>
+								</c:if>
 							</td>
 							<td>
-								<c:choose>
-									<c:when test="${empty game.player3.user}">
-										<html:form action="/joinGame.do">
-											<html:hidden property="gameId" value="${game.gameId}" />
-											<html:hidden property="seat" value="3"/>
-											<html:submit>Join</html:submit>
-										</html:form>
-									</c:when>
-									<c:otherwise>
-										<img src="http://graph.facebook.com/${game.player3.user.facebookId}/picture" class="avatar" title="${game.player3.user.name}" />
-									</c:otherwise>
-								</c:choose>
+								<c:if test="${game.players >= 3}">
+									<c:choose>
+										<c:when test="${empty game.player3.user and game.players >= 3}">
+											<html:form action="/joinGame.do">
+												<html:hidden property="gameId" value="${game.gameId}" />
+												<html:hidden property="seat" value="3"/>
+												<html:submit>Join</html:submit>
+											</html:form>
+										</c:when>
+										<c:otherwise>
+											<img src="http://graph.facebook.com/${game.player3.user.facebookId}/picture" class="avatar" title="${game.player3.user.name}" />
+										</c:otherwise>
+									</c:choose>
+								</c:if>
 							</td>
 							<td>
-								<c:choose>
-									<c:when test="${empty game.player4.user}">
-										<html:form action="/joinGame.do">
-											<html:hidden property="gameId" value="${game.gameId}" />
-											<html:hidden property="seat" value="4"/>
-											<html:submit>Join</html:submit>
-										</html:form>
-									</c:when>
-									<c:otherwise>
-										<img src="http://graph.facebook.com/${game.player4.user.facebookId}/picture" class="avatar" title="${game.player4.user.name}" />
-									</c:otherwise>
-								</c:choose>
+								<c:if test="${game.players >= 4}">
+									<c:choose>
+										<c:when test="${empty game.player4.user and game.players >= 4}">
+											<html:form action="/joinGame.do">
+												<html:hidden property="gameId" value="${game.gameId}" />
+												<html:hidden property="seat" value="4"/>
+												<html:submit>Join</html:submit>
+											</html:form>
+										</c:when>
+										<c:otherwise>
+											<img src="http://graph.facebook.com/${game.player4.user.facebookId}/picture" class="avatar" title="${game.player4.user.name}" />
+										</c:otherwise>
+									</c:choose>
+								</c:if>
 							</td>
 						</tr>
 					</c:forEach>

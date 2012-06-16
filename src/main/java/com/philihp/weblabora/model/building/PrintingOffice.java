@@ -24,7 +24,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class PrintingOffice extends BuildingCoordinateUsage {
 
 	public PrintingOffice() {
-		super("F38", "D", 0, "Printing Office",
+		super("F38", "D", 1, "Printing Office",
 				BuildCost.is().wood(1).stone(2), 5, 5, EnumSet.of(PLAINS,
 						HILLSIDE, COAST), false);
 	}

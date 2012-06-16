@@ -17,7 +17,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class Palace extends Building {
 
 	public Palace() {
-		super("F27", "C", 0, "Palace", BuildCost.is().coin(25), 8, 25, EnumSet.of(HILLSIDE), false);
+		super("F27", "C", 1, "Palace", BuildCost.is().coin(25), 8, 25, EnumSet.of(HILLSIDE), false);
 	}
 
 	@Override

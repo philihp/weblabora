@@ -17,6 +17,9 @@ import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.State;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.model.Board;
+import com.philihp.weblabora.model.GameCountry;
+import com.philihp.weblabora.model.GameLength;
+import com.philihp.weblabora.model.GamePlayers;
 import com.philihp.weblabora.model.MoveProcessor;
 import com.philihp.weblabora.model.WeblaboraException;
 
@@ -45,8 +48,11 @@ public class MakeMove extends BaseAction {
 			// all of this has happened before. all of this will happen again.
 			game.setState(state);
 		} else {
-			
-			Board board = new Board();
+			Board board = new Board(
+					GamePlayers.valueOf(game.getPlayers()),
+					GameLength.valueOf(game.getLength()),
+					GameCountry.valueOf(game.getCountry())
+					);
 			MoveProcessor.processMoves(board, user.getActiveGame().getStates(),null);
 			try {
 				if(Arrays.asList(game.getAllUsers()).contains(user) == false)

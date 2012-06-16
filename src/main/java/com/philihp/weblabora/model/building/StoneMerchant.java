@@ -17,7 +17,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class StoneMerchant extends Building {
 
 	public StoneMerchant() {
-		super("G12", "", 2, "Stone Merchant", BuildCost.is().wood(1), 1, 6,
+		super("G12", "", 1, "Stone Merchant", BuildCost.is().wood(1), 1, 6,
 				EnumSet.of(COAST, PLAINS, HILLSIDE), false);
 	}
 

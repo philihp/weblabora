@@ -21,7 +21,7 @@ import com.philihp.weblabora.model.Wheel;
 public class HouseOfTheBrotherhood extends BuildingDoubleUsage {
 
 	public HouseOfTheBrotherhood() {
-		super("G41", "D", 0, "House of the Brotherhood", BuildCost.is().clay(1)
+		super("G41", "D", 1, "House of the Brotherhood", BuildCost.is().clay(1)
 				.stone(1), 3, 3, EnumSet.of(PLAINS, HILLSIDE, COAST), true);
 	}
 

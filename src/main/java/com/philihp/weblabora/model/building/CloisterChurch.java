@@ -16,7 +16,7 @@ import com.philihp.weblabora.model.UsageParam;
 public class CloisterChurch extends Building {
 
 	public CloisterChurch() {
-		super("F24", "B", 0, "Cloister Church", BuildCost.is().clay(5).stone(3), 9, 12, EnumSet.of(COAST, PLAINS, HILLSIDE), true);
+		super("F24", "B", 1, "Cloister Church", BuildCost.is().clay(5).stone(3), 9, 12, EnumSet.of(COAST, PLAINS, HILLSIDE), true);
 	}
 
 	@Override

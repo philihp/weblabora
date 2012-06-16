@@ -19,7 +19,7 @@ import com.philihp.weblabora.model.Wheel;
 public class ForgersWorkshop extends Building {
 
 	public ForgersWorkshop() {
-		super("F35","D",0, "Forger's Workshop", BuildCost.is().clay(2).straw(1), 2,4, EnumSet
+		super("F35","D",1, "Forger's Workshop", BuildCost.is().clay(2).straw(1), 2,4, EnumSet
 				.of(PLAINS, HILLSIDE, COAST), false);
 	}
 

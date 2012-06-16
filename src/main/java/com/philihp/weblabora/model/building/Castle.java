@@ -18,7 +18,7 @@ import com.philihp.weblabora.model.Wheel;
 public class Castle extends Building {
 
 	public Castle() {
-		super("G28", "C", 0, "Castle", BuildCost.is().wood(6).stone(5), 7, 15,
+		super("G28", "C", 1, "Castle", BuildCost.is().wood(6).stone(5), 7, 15,
 				EnumSet.of(HILLSIDE, MOUNTAIN), false);
 	}
 

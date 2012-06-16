@@ -18,7 +18,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class CloisterLibrary extends BuildingDoubleUsage {
 
 	public CloisterLibrary() {
-		super("F17", "A", 2, "Cloister Library", BuildCost.is().stone(2).straw(1), 7, 7,
+		super("F17", "A", 1, "Cloister Library", BuildCost.is().stone(2).straw(1), 7, 7,
 				EnumSet.of(COAST, PLAINS, HILLSIDE), true);
 	}
 

@@ -20,4 +20,8 @@ public enum Color {
 		}
 		return null;
 	}
+	
+	public static Color toColor(int i) {
+		return Color.values()[i];
+	}
 }

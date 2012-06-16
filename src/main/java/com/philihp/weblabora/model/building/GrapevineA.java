@@ -18,6 +18,6 @@ import com.philihp.weblabora.model.Wheel;
 public class GrapevineA extends Grapevine {
 
 	public GrapevineA() {
-		super("F14", "A", 2);
+		super("F14", "A", 1);
 	}
 }

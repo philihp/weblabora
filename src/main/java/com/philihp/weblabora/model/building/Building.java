@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
+import com.philihp.weblabora.model.GamePlayers;
 import com.philihp.weblabora.model.Terrain;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
@@ -47,6 +48,10 @@ abstract public class Building extends Erection {
 	
 	public String toString() {
 		return getName();
+	}
+	
+	public GamePlayers getPlayers() {
+		return GamePlayers.valueOf(players);
 	}
 
 }

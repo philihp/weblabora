@@ -21,7 +21,7 @@ import com.philihp.weblabora.model.Wheel;
 public class ShippingCompany extends BuildingDoubleUsage {
 
 	public ShippingCompany() {
-		super("F33", "C", 0, "Shipping Company", BuildCost.is().wood(3).clay(3), 4, 8,
+		super("F33", "C", 1, "Shipping Company", BuildCost.is().wood(3).clay(3), 4, 8,
 				EnumSet.of(COAST), false);
 	}
 

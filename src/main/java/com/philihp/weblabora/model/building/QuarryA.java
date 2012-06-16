@@ -18,7 +18,7 @@ import com.philihp.weblabora.model.Wheel;
 public class QuarryA extends Quarry {
 
 	public QuarryA() {
-		super("G22", "B", 0);
+		super("G22", "B", 1);
 	}
 	
 }

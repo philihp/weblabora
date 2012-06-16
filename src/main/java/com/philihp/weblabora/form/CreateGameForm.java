@@ -8,15 +8,19 @@ import static com.philihp.weblabora.model.GamePlayers.*;
 
 public class CreateGameForm extends ActionForm {
 
-	String players;
+	Integer players;
 	String length;
 	String country;
+	
+	public CreateGameForm() {
+		reset();
+	}
 
-	public String getPlayers() {
+	public Integer getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(String players) {
+	public void setPlayers(Integer players) {
 		this.players = players;
 	}
 
@@ -37,7 +41,9 @@ public class CreateGameForm extends ActionForm {
 	}
 
 	public void reset() {
-		players = "FOUR";
+		players = 4;
+		length = "LONG";
+		country = "FRANCE";
 	}
 
 }

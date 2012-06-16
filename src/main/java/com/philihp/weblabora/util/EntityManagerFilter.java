@@ -17,8 +17,7 @@ public class EntityManagerFilter implements Filter {
 
 	public void init(FilterConfig filterConfig) throws ServletException {
 		destroy();
-		emf = (EntityManagerFactory) filterConfig.getServletContext().getAttribute(
-				"emf");
+		emf = (EntityManagerFactory) filterConfig.getServletContext().getAttribute("emf");
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response,

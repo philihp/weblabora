@@ -17,7 +17,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class CloisterWorkshop extends Building {
 
 	public CloisterWorkshop() {
-		super("G18", "A", 2, "Cloister Workshop", BuildCost.is().wood(3), 2, 7,
+		super("G18", "A", 1, "Cloister Workshop", BuildCost.is().wood(3), 2, 7,
 				EnumSet.of(COAST, PLAINS, HILLSIDE), true);
 	}
 

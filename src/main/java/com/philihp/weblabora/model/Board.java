@@ -29,7 +29,9 @@ public class Board {
 
 	protected final GamePlayers gamePlayers;
 
-	protected final GameType gameType;
+	protected final GameLength gameLength;
+	
+	protected final GameCountry gameCountry;
 
 	protected Wheel wheel;
 
@@ -71,25 +73,22 @@ public class Board {
 
 	private List<Wonder> unclaimedWonders;
 
-	public Board() {
-		gamePlayers = GamePlayers.FOUR;
-		gameType = GameType.LONG;
+	public Board(GamePlayers gamePlayers, GameLength gameLength, GameCountry gameCountry) {
+		int i;
+		this.gamePlayers = gamePlayers;
+		this.gameLength = gameLength;
+		this.gameCountry = gameCountry;
 		
 		settlementRound = SettlementRound.S;
 
 		wheel = new Wheel(this);
 
 		activePlayer = 0;
-		players = new Player[4];
-		players[0] = new Player(this, Color.RED);
-		players[1] = new Player(this, Color.GREEN);
-		players[2] = new Player(this, Color.BLUE);
-		players[3] = new Player(this, Color.WHITE);
-
-		players[0].gameStart();
-		players[1].gameStart();
-		players[2].gameStart();
-		players[3].gameStart();
+		players = new Player[gamePlayers.asNumber()];
+		for(i = 0;i < players.length; i++) {
+			players[i] = new Player(this, Color.toColor(i));
+			players[i].gameStart();
+		}
 
 		unclaimedWonders = gameStartWonders();
 		
@@ -143,7 +142,11 @@ public class Board {
 		
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
 			Building building = buildingId.getInstance();
-			if (phase.equals(building.getStage())) {
+			
+			GamePlayers buildingPlayers = building.getPlayers();
+			GamePlayers boardPlayers = gamePlayers;
+			
+			if (phase.equals(building.getStage()) && buildingPlayers.ordinal() <= boardPlayers.ordinal()) {
 				buildings.add(building);
 				allBuildings.put(BuildingEnum.valueOf(building.getId()), building);
 			}
@@ -173,18 +176,26 @@ public class Board {
 	}
 	
 	private void addLandscapeBuildings() {
-		allBuildings.put(LR1, (ClayMound)players[0].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
-		allBuildings.put(LG1, (ClayMound)players[1].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
-		allBuildings.put(LB1, (ClayMound)players[2].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
-		allBuildings.put(LW1, (ClayMound)players[3].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
-		allBuildings.put(LR2, (Farmyard)players[0].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
-		allBuildings.put(LG2, (Farmyard)players[1].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
-		allBuildings.put(LB2, (Farmyard)players[2].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
-		allBuildings.put(LW2, (Farmyard)players[3].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
-		allBuildings.put(LR3, (CloisterOffice)players[0].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
-		allBuildings.put(LG3, (CloisterOffice)players[1].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
-		allBuildings.put(LB3, (CloisterOffice)players[2].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
-		allBuildings.put(LW3, (CloisterOffice)players[3].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
+		if(players.length >= 1) {
+			allBuildings.put(LR1, (ClayMound)players[0].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
+			allBuildings.put(LR2, (Farmyard)players[0].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
+			allBuildings.put(LR3, (CloisterOffice)players[0].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
+		}
+		if(players.length >= 2) {
+			allBuildings.put(LG1, (ClayMound)players[1].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
+			allBuildings.put(LG2, (Farmyard)players[1].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
+			allBuildings.put(LG3, (CloisterOffice)players[1].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
+		}
+		if(players.length >= 3) {
+			allBuildings.put(LB1, (ClayMound)players[2].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
+			allBuildings.put(LB2, (Farmyard)players[2].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
+			allBuildings.put(LB3, (CloisterOffice)players[2].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
+		}
+		if(players.length >= 4) {
+			allBuildings.put(LW1, (ClayMound)players[3].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
+			allBuildings.put(LW2, (Farmyard)players[3].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
+			allBuildings.put(LW3, (CloisterOffice)players[3].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
+		}
 	}
 	
 	public Building findBuildingInstance(BuildingEnum buildingId) {
@@ -220,10 +231,14 @@ public class Board {
 	}
 
 	public void populateDetails(Game game) {
-		players[0].populatePlayer(game.getPlayer1());
-		players[1].populatePlayer(game.getPlayer2());
-		players[2].populatePlayer(game.getPlayer3());
-		players[3].populatePlayer(game.getPlayer4());
+		if(players.length >= 1)
+			players[0].populatePlayer(game.getPlayer1());
+		if(players.length >= 2)
+			players[1].populatePlayer(game.getPlayer2());
+		if(players.length >= 3)
+			players[2].populatePlayer(game.getPlayer3());
+		if(players.length >= 4)
+			players[3].populatePlayer(game.getPlayer4());
 	}
 
 	public void testValidity() throws WeblaboraException {

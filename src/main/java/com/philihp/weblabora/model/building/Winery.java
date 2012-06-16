@@ -18,7 +18,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class Winery extends BuildingDoubleUsage {
 
 	public Winery() {
-		super("F21", "B", 2, "Winery", BuildCost.is().clay(2).straw(2), 5, 4,
+		super("F21", "B", 1, "Winery", BuildCost.is().clay(2).straw(2), 5, 4,
 				EnumSet.of(COAST, PLAINS,HILLSIDE), false);
 	}
 

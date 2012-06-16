@@ -16,7 +16,7 @@ import com.philihp.weblabora.model.UsageParam;
 public class Sacristy extends Building {
 
 	public Sacristy() {
-		super("G34", "D", 0, "Sacristy", BuildCost.is().stone(3).straw(2), 7, 10, EnumSet.of(COAST, PLAINS, HILLSIDE), true);
+		super("G34", "D", 1, "Sacristy", BuildCost.is().stone(3).straw(2), 7, 10, EnumSet.of(COAST, PLAINS, HILLSIDE), true);
 	}
 
 	@Override

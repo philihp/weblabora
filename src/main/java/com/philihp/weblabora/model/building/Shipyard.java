@@ -12,7 +12,7 @@ import com.philihp.weblabora.model.UsageParam;
 public class Shipyard extends Building {
 
 	public Shipyard() {
-		super("G26", "B", 0, "Shipyard", BuildCost.is().clay(4).stone(1), -2, 15, EnumSet.of(COAST), false);
+		super("G26", "B", 1, "Shipyard", BuildCost.is().clay(4).stone(1), -2, 15, EnumSet.of(COAST), false);
 	}
 
 	@Override

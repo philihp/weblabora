@@ -24,8 +24,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.philihp.weblabora.model.WeblaboraException;
+import javax.persistence.Enumerated;
+import static javax.persistence.EnumType.STRING;
 
 @Entity(name = "Game")
 @Access(FIELD)
@@ -114,6 +117,18 @@ public class Game extends BasicEntity {
 	@JoinColumn(name = "state_id", referencedColumnName = "state_id")
 	private State state;
 
+	@Column(name = "length")
+	@Basic
+	private String length;
+
+	@Column(name = "players")
+	@Basic
+	private Integer players;
+	
+	@Column(name = "country")
+	@Basic
+	private String country;
+
 	public Game() {
 		// player1-4 must not be null
 		this.player1 = new Player();
@@ -170,7 +185,31 @@ public class Game extends BasicEntity {
 		this.state = currentState;
 	}
 
+	public String getLength() {
+		return length;
+	}
 
+	public void setLength(String length) {
+		this.length = length;
+	}
+
+	public Integer getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(Integer players) {
+		this.players = players;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	@Transient
 	public boolean isUserAPlayer(User user) {
 		if(user == null) return false;
 		boolean player1Match = player1.user != null && player1.user.getUserId() == user.getUserId();
@@ -180,6 +219,7 @@ public class Game extends BasicEntity {
 		return player1Match || player2Match || player3Match || player4Match;
 	}
 
+	@Transient
 	public Player getSeat(int seat) throws WeblaboraException {
 		switch(seat) {
 		case 1: return player1;
@@ -190,14 +230,19 @@ public class Game extends BasicEntity {
 		}
 	}
 	
+	@Transient
 	public Player[] getAllPlayers() {
 		return new Player[] {player1, player2, player3, player4};
 	}
 	
+	@Transient
 	public User[] getAllUsers() {
 		return new User[] {player1.user, player2.user, player3.user, player4.user};
 	}
 	
+	
+	
+	@Transient
 	public List<State> getStates() {
 		if(getState() != null) {
 			return getState().getStates();
@@ -207,6 +252,7 @@ public class Game extends BasicEntity {
 		}
 	}
 
+	@Transient
 	public String getName() {
 		String name = "Game #"+gameId+", " + new SimpleDateFormat("yyyy-MM-dd").format(getDateCreated());
 		// if(player1.user != null) {

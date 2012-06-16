@@ -18,7 +18,7 @@ import com.philihp.weblabora.model.Wheel;
 public class Dormitory extends Building {
 
 	public Dormitory() {
-		super("F37","D",0, "Dormitory", BuildCost.is().clay(3), 4, 3, EnumSet
+		super("F37","D",1, "Dormitory", BuildCost.is().clay(3), 4, 3, EnumSet
 				.of(PLAINS, HILLSIDE, COAST), true);
 	}
 

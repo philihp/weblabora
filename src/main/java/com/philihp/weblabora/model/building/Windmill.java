@@ -17,7 +17,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class Windmill extends Building {
 
 	public Windmill() {
-		super("F04", "", 2, "Windmill", BuildCost.is().wood(3).clay(2), 6, 10,
+		super("F04", "", 1, "Windmill", BuildCost.is().wood(3).clay(2), 6, 10,
 				EnumSet.of(COAST, HILLSIDE), false);
 	}
 

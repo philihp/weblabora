@@ -26,10 +26,21 @@ public class ShowGames extends BaseAction {
 				.createQuery(
 						"SELECT g " +
 						"FROM Game g " +
-						"WHERE g.player1.user IS NULL " +
+						"WHERE " +
+						"     g.players=4 AND" +
+						"     (g.player1.user IS NULL " +
 						   "OR g.player2.user IS NULL " +
 						   "OR g.player3.user IS NULL " +
-						   "OR g.player4.user IS NULL ",
+						   "OR g.player4.user IS NULL)" +
+						   "OR" +
+						"     g.players=3 AND" +
+						"     (g.player1.user IS NULL " +
+						   "OR g.player2.user IS NULL " +
+						   "OR g.player3.user IS NULL)" +
+						   "OR" +
+						"     g.players=2 AND" +
+						"     (g.player1.user IS NULL " +
+						   "OR g.player2.user IS NULL)",
 						Game.class);
 		List<Game> results = query.getResultList();
 		

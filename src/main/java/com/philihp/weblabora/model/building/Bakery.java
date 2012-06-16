@@ -18,7 +18,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class Bakery extends BuildingDoubleUsage {
 
 	public Bakery() {
-		super("F05", "", 2, "Bakery", BuildCost.is().clay(2).straw(1), 5, 4, EnumSet.of(COAST, PLAINS, HILLSIDE), false);
+		super("F05", "", 1, "Bakery", BuildCost.is().clay(2).straw(1), 5, 4, EnumSet.of(COAST, PLAINS, HILLSIDE), false);
 	}
 
 	@Override

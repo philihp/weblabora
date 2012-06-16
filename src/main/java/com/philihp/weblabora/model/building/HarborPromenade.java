@@ -17,7 +17,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class HarborPromenade extends Building {
 
 	public HarborPromenade() {
-		super("F11", "", 2, "Harbor Promenade", BuildCost.is().wood(1).stone(1), 7, 1, EnumSet.of(COAST), false);
+		super("F11", "", 1, "Harbor Promenade", BuildCost.is().wood(1).stone(1), 7, 1, EnumSet.of(COAST), false);
 	}
 
 	@Override

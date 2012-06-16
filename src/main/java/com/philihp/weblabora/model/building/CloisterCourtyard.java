@@ -19,7 +19,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class CloisterCourtyard extends BuildingDoubleUsage {
 
 	public CloisterCourtyard() {
-		super("G02", "", 2, "Cloister Courtyard", BuildCost.is().wood(2), 4, 4, EnumSet.of(COAST, PLAINS, HILLSIDE), true);
+		super("G02", "", 1, "Cloister Courtyard", BuildCost.is().wood(2), 4, 4, EnumSet.of(COAST, PLAINS, HILLSIDE), true);
 	}
 
 	@Override
