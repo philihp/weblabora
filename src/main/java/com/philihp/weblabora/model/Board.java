@@ -84,7 +84,7 @@ public class Board {
 		wheel = new Wheel(this);
 
 		activePlayer = 0;
-		players = new Player[gamePlayers.asNumber()];
+		players = new Player[gamePlayers.getAsNumber()];
 		for(i = 0;i < players.length; i++) {
 			players[i] = new Player(this, Color.toColor(i));
 			players[i].gameStart();
@@ -279,7 +279,7 @@ public class Board {
 		return settlementRound;
 	}
 	
-	public static boolean isRoundBeforeSettlement(int round) {
+	public boolean isRoundBeforeSettlement(int round) {
 		return roundBeforeSettlement(round) != null;
 	}
 	
@@ -287,20 +287,39 @@ public class Board {
 		return round >= 24;
 	}
 	
-	public static SettlementRound roundBeforeSettlement(int round) {
-		switch (round) {
-		case 6:
-			return SettlementRound.A;
-		case 9:
-			return SettlementRound.B;
-		case 15:
-			return SettlementRound.C;
-		case 18:
-			return SettlementRound.D;
-		case 25:
-			return SettlementRound.E;
-		default:
-			return null;
+	public SettlementRound roundBeforeSettlement(int round) {
+		switch(gamePlayers) {
+		case THREE:
+			switch (round) {
+			case 5:
+				return SettlementRound.A;
+			case 10:
+				return SettlementRound.B;
+			case 14:
+				return SettlementRound.C;
+			case 19:
+				return SettlementRound.D;
+			case 25:
+				return SettlementRound.E;
+			default:
+				return null;
+			}
+		case FOUR:
+			switch (round) {
+			case 6:
+				return SettlementRound.A;
+			case 9:
+				return SettlementRound.B;
+			case 15:
+				return SettlementRound.C;
+			case 18:
+				return SettlementRound.D;
+			case 25:
+				return SettlementRound.E;
+			default:
+				return null;
+			}
+		default: throw new RuntimeException("Unknown game players mode "+gamePlayers); 
 		}
 	}
 

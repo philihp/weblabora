@@ -7,12 +7,12 @@ public enum GamePlayers {
   private GamePlayers(int num) {
 	  this.num = num;
   }
-  public int asNumber() {
+  public int getAsNumber() {
 	  return num;
   }
   public static GamePlayers valueOf(int i) {
 	  for(GamePlayers gamePlayers: GamePlayers.values()) {
-		  if(gamePlayers.asNumber() == i) {
+		  if(gamePlayers.getAsNumber() == i) {
 			  return gamePlayers;
 		  }
 	  }
