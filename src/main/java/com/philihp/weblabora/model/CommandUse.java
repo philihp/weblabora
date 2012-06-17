@@ -15,7 +15,18 @@ public class CommandUse implements MoveCommand, InvalidDuringSettlement {
 	public void execute(Board board, CommandParameters params)
 			throws WeblaboraException {
 
-		String buildingId = params.get(0);
+		BuildingEnum buildingId = null;
+		//TODO: this try/catch should be put into a method on BuildingEnum
+		try {
+			buildingId = BuildingEnum.valueOf(params.get(0));
+		}
+		catch(IllegalArgumentException e) {
+			String suggestedId = params.get(0).substring(1);
+			if(params.get(0).charAt(0) == 'F') suggestedId = 'G'+suggestedId;
+			if(params.get(0).charAt(0) == 'G') suggestedId = 'F'+suggestedId;
+			throw new WeblaboraException("Unknown building ID \""+params.get(0)+"\", did you mean \""+suggestedId+"\"?");
+		}
+		
 		UsageParam usageParam = null;
 		boolean usingPrior = params.getSuffix().contains("*") || params.isMustBePrior();
 
@@ -46,8 +57,8 @@ public class CommandUse implements MoveCommand, InvalidDuringSettlement {
 				throw new WeblaboraException("Coordinate building usage parameters must come in pairs. Parsed "+x+" for the x, but no y number.");
 			}
 		}
-
-		execute(board, BuildingEnum.valueOf(buildingId), usageParam, usingPrior, params.getPlaceClergyman());
+		
+		execute(board, buildingId, usageParam, usingPrior, params.getPlaceClergyman());
 
 		System.out.println("Using " + buildingId + " with " + usageParam);
 	}
