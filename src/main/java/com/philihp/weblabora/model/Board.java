@@ -104,6 +104,7 @@ public class Board {
 			players[i] = new Player(this, Color.toColor(i));
 			players[i].gameStart();
 		}
+		players[0].setActive(true);
 
 		unclaimedWonders = gameStartWonders();
 		
@@ -316,6 +317,17 @@ public class Board {
 	
 	public SettlementRound roundBeforeSettlement(int round) {
 		switch(gamePlayers) {
+		case TWO:
+			switch (round) {
+			case 5:
+				return SettlementRound.A;
+			case 12:
+				return SettlementRound.B;
+			case 19:
+				return SettlementRound.C;
+			case 26:
+				return SettlementRound.D;
+			}
 		case THREE:
 			switch (round) {
 			case 5:
@@ -516,7 +528,7 @@ public class Board {
 			case 5:
 				return "last";
 			default:
-				throw new RuntimeException("Illegal Round Number " + moveInRound);
+				throw new RuntimeException("Illegal Move Number " + moveInRound);
 			}
 		}
 		else if(gamePlayers == GamePlayers.THREE) {
@@ -530,10 +542,22 @@ public class Board {
 			case 4:
 				return "last";
 			default:
-				throw new RuntimeException("Illegal Round Number " + moveInRound);
+				throw new RuntimeException("Illegal Move Number " + moveInRound);
 			}
 		}
-		else return "derp";
+		else if(gamePlayers == GamePlayers.TWO) {
+			switch (moveInRound) {
+			case 1:
+				return "first half of first";
+			case 2:
+				return "second half of first";
+			case 3:
+				return "second";
+			default:
+				throw new RuntimeException("Illegal Move Number " + moveInRound);
+			}
+		}
+		else return "ERROR";
 	}
 	
 	public String getActivePlayerColor() {
