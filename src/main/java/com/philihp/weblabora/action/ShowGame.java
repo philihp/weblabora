@@ -62,7 +62,8 @@ public class ShowGame extends BaseAction {
 						"WHERE g.player1.user = :user " +
 						   "OR g.player2.user = :user " +
 						   "OR g.player3.user = :user " +
-						   "OR g.player4.user = :user",
+						   "OR g.player4.user = :user " +
+						"ORDER BY g.gameId",
 						Game.class);
 		query.setParameter("user", user);
 		
