@@ -4,7 +4,7 @@ import static com.philihp.weblabora.model.Wheel.Position.*;
 
 public class Wheel {
 	
-	protected Board game;
+	protected Board board;
 	
 	protected int[] armValues = {0, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8, 9, 10};  
 	
@@ -19,34 +19,45 @@ public class Wheel {
 	}
 	
 
-	protected Token grain = new Token(this);
+	protected Token grain = new Token(this,-87);
 
-	protected Token peat = new Token(this);
+	protected Token peat = new Token(this,-51);
 	
-	protected Token sheep = new Token(this);
+	protected Token sheep = new Token(this,-96);
 	
-	protected Token clay = new Token(this);
+	protected Token clay = new Token(this,-60);
 	
-	protected Token coin = new Token(this);
+	protected Token coin = new Token(this,-42);
 	
-	protected Token wood = new Token(this);
+	protected Token wood = new Token(this,-69);
 	
-	protected Token grape = new Token(this);
+	protected Token grape = new Token(this,-105);
 
-	protected Token stone = new Token(this);
+	protected Token stone = new Token(this,-114);
 	
-	protected Token joker = new Token(this);
+	protected Token joker = new Token(this,-78);
 
-	protected Token arm = new Token(this);
+	protected Token arm = new Token(this,0);
 	
-	public Wheel(Board game) {
-		this.game = game;
+	public Wheel(Board board) {
+		this.board = board;
 		this.arm.setPosition(M);
-		this.grape.setPosition(H);
+		switch(board.getGamePlayers()) {
+		case TWO:
+			this.grape.setPosition(K);
+			this.stone.setPosition(E);
+			break;
+		case THREE:
+		case FOUR:
+			this.grape.setPosition(H);
+			break;
+		}
+		this.grape.setActive(false);
+		this.stone.setActive(false);
 	}
 
-	public Board getGame() {
-		return game;
+	public Board getBoard() {
+		return board;
 	}
 
 	public Token getGrain() {
@@ -92,15 +103,15 @@ public class Wheel {
 	public void pushArm(int round) {
 		Position next = arm.getPosition().next();
 		// this ensures that if something is at 10, it stays at 10
-		if(grain.getPosition() == next) grain.setPosition(grain.getPosition().next());
-		if(sheep.getPosition() == next) sheep.setPosition(sheep.getPosition().next());
-		if(clay.getPosition() == next)  clay.setPosition( clay.getPosition().next());
-		if(coin.getPosition() == next)  coin.setPosition( coin.getPosition().next());
-		if(wood.getPosition() == next)  wood.setPosition( wood.getPosition().next());
-		if(joker.getPosition() == next) joker.setPosition(joker.getPosition().next());
-		if(peat.getPosition() == next)  peat.setPosition( peat.getPosition().next());
-		if(grape.getPosition() == next && round > 8) grape.setPosition(grape.getPosition().next());
-		if(stone.getPosition() == next && round > 13) stone.setPosition(stone.getPosition().next());
+		if(grain.getPosition() == next && grain.isActive()) grain.setPosition(grain.getPosition().next());
+		if(sheep.getPosition() == next && sheep.isActive()) sheep.setPosition(sheep.getPosition().next());
+		if(clay.getPosition() == next  && clay.isActive())  clay.setPosition( clay.getPosition().next());
+		if(coin.getPosition() == next  && coin.isActive())  coin.setPosition( coin.getPosition().next());
+		if(wood.getPosition() == next  && wood.isActive())  wood.setPosition( wood.getPosition().next());
+		if(joker.getPosition() == next && joker.isActive()) joker.setPosition(joker.getPosition().next());
+		if(peat.getPosition() == next  && peat.isActive())  peat.setPosition( peat.getPosition().next());
+		if(grape.getPosition() == next && grape.isActive()) grape.setPosition(grape.getPosition().next());
+		if(stone.getPosition() == next && stone.isActive()) stone.setPosition(stone.getPosition().next());
 		arm.setPosition(next);
 	}
 	

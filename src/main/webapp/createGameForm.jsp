@@ -19,7 +19,7 @@
 			<fieldset>
 				<legend>Players</legend>
 				<html:radio property="players" value="1" styleId="players.one" disabled="true"/><label for="players.one"> One</label><br />
-				<html:radio property="players" value="2" styleId="players.two" disabled="true"/><label for="players.two"> Two</label><br />
+				<html:radio property="players" value="2" styleId="players.two"/><label for="players.two"> Two</label><br />
 				<html:radio property="players" value="3" styleId="players.three"/><label for="players.three"> Three</label><br />
 				<html:radio property="players" value="4" styleId="players.four"/><label for="players.four"> Four</label>
 			</fieldset>

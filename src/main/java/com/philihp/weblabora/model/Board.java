@@ -1,8 +1,18 @@
 package com.philihp.weblabora.model;
 
-import java.lang.reflect.Constructor;
+import static com.philihp.weblabora.model.building.BuildingEnum.LB1;
+import static com.philihp.weblabora.model.building.BuildingEnum.LB2;
+import static com.philihp.weblabora.model.building.BuildingEnum.LB3;
+import static com.philihp.weblabora.model.building.BuildingEnum.LG1;
+import static com.philihp.weblabora.model.building.BuildingEnum.LG2;
+import static com.philihp.weblabora.model.building.BuildingEnum.LG3;
+import static com.philihp.weblabora.model.building.BuildingEnum.LR1;
+import static com.philihp.weblabora.model.building.BuildingEnum.LR2;
+import static com.philihp.weblabora.model.building.BuildingEnum.LR3;
+import static com.philihp.weblabora.model.building.BuildingEnum.LW1;
+import static com.philihp.weblabora.model.building.BuildingEnum.LW2;
+import static com.philihp.weblabora.model.building.BuildingEnum.LW3;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,8 +28,6 @@ import com.philihp.weblabora.model.building.CloisterOffice;
 import com.philihp.weblabora.model.building.Farmyard;
 import com.philihp.weblabora.model.building.Settlement;
 import com.philihp.weblabora.model.building.SettlementEnum;
-
-import static com.philihp.weblabora.model.building.BuildingEnum.*;
 
 public class Board {
 	
@@ -339,14 +347,15 @@ public class Board {
 		//2 - push arm
 		getWheel().pushArm(round);
 		
-		//3 - settlement
-		
+		//3 - check to see if grapes/stone should become active
+		if(round == grapeActiveOnRound()) getWheel().getGrape().setActive(true);
+		if(round == stoneActiveOnRound()) getWheel().getStone().setActive(true);
 	}
 	
 	public void preSettling() {
 		System.out.println("------Begin Settlement------");
-		
-		getMoveList().add(new HistoryEntry("Settlement ("+roundBeforeSettlement(round)+")"));
+		setSettlementRound(getSettlementRound().next());
+		getMoveList().add(new HistoryEntry("Settlement ("+getSettlementRound()+")"));
 	}
 	
 	public void preExtraRound() {
@@ -423,13 +432,11 @@ public class Board {
 		//end of settlement round
 		setSettling(false);
 		
-		List<Building> newBuildings = roundBuildings(roundBeforeSettlement(round));
+		List<Building> newBuildings = roundBuildings(settlementRound);
 		unbuiltBuildings.addAll(newBuildings);
 		for(Player player : players) {
-			player.getUnbuiltSettlements().addAll(roundSettlements(roundBeforeSettlement(round)));
+			player.getUnbuiltSettlements().addAll(roundSettlements(settlementRound));
 		}
-		
-		setSettlementRound(getSettlementRound().next());
 
 		if(settlementRound == SettlementRound.E) {
 			setGameOver(true);
@@ -530,6 +537,29 @@ public class Board {
 	public GameCountry getGameCountry() {
 		return gameCountry;
 	}
-	
+
+	private int grapeActiveOnRound() {
+		switch(gamePlayers) {
+		case TWO:
+			return 11;
+		case THREE:
+		case FOUR:
+			return 8;
+		default:
+			throw new RuntimeException("Unknown Game Players");
+		}
+	}
+
+	private int stoneActiveOnRound() {
+		switch(gamePlayers) {
+		case TWO:
+			return 18;
+		case THREE:
+		case FOUR:
+			return 13;
+		default:
+			throw new RuntimeException("Unknown Game Players");
+		}
+	}
 	
 }

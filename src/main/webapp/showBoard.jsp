@@ -255,32 +255,50 @@ function requestCallback(response) {
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">E</text>
 					</g>
 				</c:if>
-				<g id="grain" transform="rotate(${ora:deg(board.wheel.grain.position)})">
-					<text x="0" y="-114" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Grain</text>
-				</g>
-				<g id="sheep" transform="rotate(${ora:deg(board.wheel.sheep.position)})">
-					<text x="0" y="-105" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Sheep</text>
-				</g>
+				<c:if test="${board.gamePlayers eq 'TWO'}">
+					<g id="settlement-a" transform="rotate(${wheelArt.rotG})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">A</text>
+					</g>
+					<g id="settlement-b" transform="rotate(${wheelArt.rotA})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">B</text>
+					</g>
+					<g id="settlement-c" transform="rotate(${wheelArt.rotH})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle;  fill:#fff">C</text>
+					</g>
+					<g id="settlement-d" transform="rotate(${wheelArt.rotB})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">D</text>
+					</g>
+				</c:if>
 				<g id="grape" transform="rotate(${ora:deg(board.wheel.grape.position)})">
-					<text x="0" y="-96" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Grape</text>
+					<text x="0" y="${board.wheel.grape.radius}" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Grape</text>
 				</g>
 				<g id="stone" transform="rotate(${ora:deg(board.wheel.stone.position)})">
-					<text x="0" y="-87" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Stone</text>
+					<text x="0" y="${board.wheel.stone.radius}" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Stone</text>
+				</g>
+				<g id="grain" transform="rotate(${ora:deg(board.wheel.grain.position)})">
+					<text x="0" y="${board.wheel.grain.radius}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Grain</text>
+				</g>
+				<g id="sheep" transform="rotate(${ora:deg(board.wheel.sheep.position)})">
+					<text x="0" y="${board.wheel.sheep.radius}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Sheep</text>
 				</g>
 				<g id="joker" transform="rotate(${ora:deg(board.wheel.joker.position)})">
-					<text x="0" y="-78" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Joker</text>
+					<text x="0" y="${board.wheel.joker.radius}" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Joker</text>
 				</g>
 				<g id="wood" transform="rotate(${ora:deg(board.wheel.wood.position)})">
-					<text x="0" y="-69" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Wood</text>
+					<text x="0" y="${board.wheel.wood.radius}" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Wood</text>
 				</g>
 				<g id="clay" transform="rotate(${ora:deg(board.wheel.clay.position)})">
-					<text x="0" y="-60" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Clay</text>
+					<text x="0" y="${board.wheel.clay.radius}" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Clay</text>
 				</g>
 				<g id="peat" transform="rotate(${ora:deg(board.wheel.peat.position)})">
-					<text x="0" y="-51" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Peat</text>
+					<text x="0" y="${board.wheel.peat.radius}" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Peat</text>
 				</g>
 				<g id="coin" transform="rotate(${ora:deg(board.wheel.coin.position)})">
-					<text x="0" y="-42" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Coin</text>
+					<text x="0" y="${board.wheel.coin.radius}" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Coin</text>
 				</g>
 				<g id="arm"  transform="rotate(${ora:deg(board.wheel.arm.position)-board.armOffset})" style="font-size: 10px; text-anchor: middle">
 				  <path d="${wheelArt.armPath}"
@@ -304,13 +322,19 @@ function requestCallback(response) {
 		</div>
 		
 		<div class="info">
-			<c:if test="${!board.gameOver}">
-				<h3 class="info-line">Round ${board.round}, ${board.move} move.</h3>
-				<h3 class="info-line">Waiting on ${board.activePlayerColor}.</h3>
-			</c:if>
-			<c:if test="${board.gameOver}">
-				<h3 class="info-line">Game Over</h3>
-			</c:if>
+			<c:choose>
+				<c:when test="${board.gameOver}">
+					<h3 class="info-line">Game Over</h3>
+				</c:when>
+				<c:when test="${board.settling}">
+					<h3 class="info-line">Settlement ${board.settlementRound}</h3>
+					<h3 class="info-line">Waiting on ${board.activePlayerColor}.</h3>
+				</c:when>
+				<c:otherwise>
+					<h3 class="info-line">Round ${board.round}, ${board.move} move.</h3>
+					<h3 class="info-line">Waiting on ${board.activePlayerColor}.</h3>
+				</c:otherwise>
+			</c:choose>
 			<hr />
 			<h4 class="info-line">Plot Costs: 
 				<c:forEach items="${board.plotCosts}" var="cost" varStatus="costStatus">

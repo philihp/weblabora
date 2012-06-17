@@ -7,9 +7,12 @@ import com.philihp.weblabora.model.Wheel.Position;
 public class Token {
 	private Position position;
 	private Wheel wheel;
-	protected Token(Wheel wheel) {
+	private boolean active = true;
+	private int radius;
+	protected Token(Wheel wheel, int radius) {
 		this.wheel = wheel;
 		this.position = M;
+		this.radius = radius;
 	}
 	protected int value() {
 		return 0;
@@ -25,5 +28,19 @@ public class Token {
 	}
 	public void setPosition(Position position) {
 		this.position = position;
+	}
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	public int getRadius() {
+		if(isActive()) {
+			return radius;
+		}
+		else {
+			return -140;
+		}
 	}
 }
