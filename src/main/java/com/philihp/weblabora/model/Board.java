@@ -150,11 +150,7 @@ public class Board {
 		
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
 			Building building = buildingId.getInstance();
-			
-			GamePlayers buildingPlayers = building.getPlayers();
-			GamePlayers boardPlayers = gamePlayers;
-			
-			if (phase.equals(building.getStage()) && buildingPlayers.ordinal() <= boardPlayers.ordinal()) {
+			if (phase.equals(building.getStage()) && building.getPlayers().ordinal() <= gamePlayers.ordinal()) {
 				buildings.add(building);
 				allBuildings.put(BuildingEnum.valueOf(building.getId()), building);
 			}
@@ -165,8 +161,9 @@ public class Board {
 	public List<Building> getFutureBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
 		for(BuildingEnum buildingId : BuildingEnum.values()) {
-			if(allBuildings.containsKey(buildingId) == false) {
-				buildings.add(buildingId.getInstance());
+			Building building = buildingId.getInstance();
+			if(allBuildings.containsKey(buildingId) == false && building.getPlayers().ordinal() <= gamePlayers.ordinal()) {
+				buildings.add(building);
 			}
 		}
 		return buildings;
