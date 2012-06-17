@@ -311,8 +311,17 @@ public class Board {
 		return roundBeforeSettlement(round) != null;
 	}
 	
-	public static boolean isExtraRound(int round) {
-		return round >= 24;
+	public boolean isExtraRound(int round) {
+		switch(gamePlayers) {
+		case TWO:
+			//there is no extra round for TWO
+			return false;
+		case THREE:
+		case FOUR:
+			return round >= 24;
+		default:
+			throw new RuntimeException("Unsupported game players for extra round");
+		}
 	}
 	
 	public SettlementRound roundBeforeSettlement(int round) {
