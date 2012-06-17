@@ -303,19 +303,19 @@ function requestCallback(response) {
 				<g id="arm"  transform="rotate(${ora:deg(board.wheel.arm.position)-board.armOffset})" style="font-size: 10px; text-anchor: middle">
 				  <path d="${wheelArt.armPath}"
 				        style="fill:#ffffff; fill-opacity: 1; stroke:#686868; stroke-width: 1" />
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotA})">10</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotB})">9</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotC})">8</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotD})">8</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotE})">7</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotF})">7</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotG})">6</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotH})">6</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotI})">5</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotJ})">4</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotK})">3</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotL})">2</text>
-				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotM})">0</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotA})">${board.wheel.armValues[12]}</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotB})">${board.wheel.armValues[11]}</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotC})">${board.wheel.armValues[10]}</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotD})">${board.wheel.armValues[9]}</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotE})">${board.wheel.armValues[8]}</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotF})">${board.wheel.armValues[7]}</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotG})">${board.wheel.armValues[6]}</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotH})">${board.wheel.armValues[5]}</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotI})">${board.wheel.armValues[4]}</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotJ})">${board.wheel.armValues[3]}</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotK})">${board.wheel.armValues[2]}</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotL})">${board.wheel.armValues[1]}</text>
+				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotM})">${board.wheel.armValues[0]}</text>
 				  <path d="${wheelArt.arrowPath}" fill="#000" />
 				</g>
 			</svg>

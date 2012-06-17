@@ -6,7 +6,7 @@ public class Wheel {
 	
 	protected Board board;
 	
-	protected int[] armValues = {0, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8, 9, 10};  
+	protected int[] armValues;  
 	
 	public enum Position {
 		A, B, C, D, E, F, G, H, I, J, K, L, M;
@@ -39,8 +39,9 @@ public class Wheel {
 
 	protected Token arm = new Token(this,0);
 	
-	public Wheel(Board board) {
+	public Wheel(Board board, int[] armValues) {
 		this.board = board;
+		this.armValues = armValues;
 		this.arm.setPosition(M);
 		switch(board.getGamePlayers()) {
 		case TWO:
@@ -98,6 +99,10 @@ public class Wheel {
 
 	public Token getArm() {
 		return arm;
+	}
+	
+	public int[] getArmValues() {
+		return armValues;
 	}
 	
 	public void pushArm(int round) {
