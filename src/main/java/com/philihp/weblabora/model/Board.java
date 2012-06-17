@@ -424,7 +424,7 @@ public class Board {
 	public void postMove() {
 		switch(gamePlayers) {
 		case TWO:
-			if(moveInRound != 1) { 
+			if(moveInRound == 2) { 
 				nextActivePlayer();
 			}
 			++moveInRound;
