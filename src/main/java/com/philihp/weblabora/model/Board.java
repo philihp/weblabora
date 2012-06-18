@@ -328,7 +328,7 @@ public class Board {
 		switch(gamePlayers) {
 		case TWO:
 			switch (round) {
-			case 5:
+			case 6:
 				return SettlementRound.A;
 			case 12:
 				return SettlementRound.B;
@@ -336,6 +336,8 @@ public class Board {
 				return SettlementRound.C;
 			case 26:
 				return SettlementRound.D;
+			default:
+				return null;
 			}
 		case THREE:
 			switch (round) {
@@ -433,11 +435,14 @@ public class Board {
 	public void postMove() {
 		switch(gamePlayers) {
 		case TWO:
-			if(moveInRound == 2) { 
+			if(moveInRound == 2 || isSettling()) { 
 				nextActivePlayer();
 			}
 			++moveInRound;
-			if(moveInRound == 4) {
+			if(isSettling() == true && moveInRound == 3) {
+				postSettlement();
+			}
+			else if(isSettling() == false && moveInRound == 4) {
 				postRound();
 			}
 			break;
@@ -477,6 +482,15 @@ public class Board {
 		}
 		else {
 			round++;
+		}
+		
+		if(gamePlayers == GamePlayers.TWO
+				&& gameLength == GameLength.LONG
+				&& isSettling() == false
+				&& settlementRound == SettlementRound.D
+				&& unbuiltBuildings.size() <= 3) {
+			setGameOver(true);
+			getMoveList().add(new HistoryEntry("Game Over"));
 		}
 		
 		//5 -- pass starting player
