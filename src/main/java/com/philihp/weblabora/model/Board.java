@@ -330,11 +330,11 @@ public class Board {
 			switch (round) {
 			case 6:
 				return SettlementRound.A;
-			case 12:
+			case 13:
 				return SettlementRound.B;
-			case 19:
+			case 20:
 				return SettlementRound.C;
-			case 26:
+			case 27:
 				return SettlementRound.D;
 			default:
 				return null;
