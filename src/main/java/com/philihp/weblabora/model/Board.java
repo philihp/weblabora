@@ -182,11 +182,27 @@ public class Board {
 	}
 
 	public List<Building> getFutureBuildings() {
+		
 		List<Building> buildings = new ArrayList<Building>();
-		for(BuildingEnum buildingId : BuildingEnum.values()) {
-			Building building = buildingId.getInstance();
-			if(allBuildings.containsKey(buildingId) == false && building.getPlayers().ordinal() <= gamePlayers.ordinal()) {
-				buildings.add(building);
+		if(gamePlayers == GamePlayers.TWO && gameLength == GameLength.LONG) {
+			//two player long game uses all buildings except C-grapevine, C-quarry and Carpentry
+			for (BuildingEnum buildingId : BuildingEnum.values()) {
+				if(buildingId == BuildingEnum.F10) continue;
+				if(buildingId == BuildingEnum.F31) continue;
+				if(buildingId == BuildingEnum.F29) continue;
+				Building building = buildingId.getInstance();
+				if(allBuildings.containsKey(buildingId) == false) {
+					buildings.add(building);
+					allBuildings.put(BuildingEnum.valueOf(building.getId()), building);
+				}
+			}
+		}
+		else {
+			for(BuildingEnum buildingId : BuildingEnum.values()) {
+				Building building = buildingId.getInstance();
+				if(allBuildings.containsKey(buildingId) == false && building.getPlayers().ordinal() <= gamePlayers.ordinal()) {
+					buildings.add(building);
+				}
 			}
 		}
 		return buildings;
