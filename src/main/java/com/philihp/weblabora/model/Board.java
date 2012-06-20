@@ -191,7 +191,7 @@ public class Board {
 				if(buildingId == BuildingEnum.F31) continue;
 				if(buildingId == BuildingEnum.F29) continue;
 				Building building = buildingId.getInstance();
-				if(allBuildings.containsKey(buildingId) == false) {
+				if(allBuildings.containsKey(buildingId) == false && building.getStage().equals("L") == false) {
 					buildings.add(building);
 					allBuildings.put(BuildingEnum.valueOf(building.getId()), building);
 				}
