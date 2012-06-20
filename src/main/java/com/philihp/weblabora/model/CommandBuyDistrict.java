@@ -81,10 +81,11 @@ public class CommandBuyDistrict implements MoveCommand {
 	}
 	private static void checkForConnection(
 			Table<Integer, Integer, Terrain> oldTerrain, int y) throws WeblaboraException {
-		if(oldTerrain.contains(y, -1)==false && //left
-			oldTerrain.contains(y, 5)==false && //right
-			oldTerrain.contains(y-1, 0)==false && //top
-			oldTerrain.contains(y+1, 0)==false) { //bottom
+		boolean west = oldTerrain.contains(y,-1)    && oldTerrain.get(y,-1) != null;
+		boolean east = oldTerrain.contains(y,5)     && oldTerrain.get(y,5) != null;
+		boolean north = oldTerrain.contains(y-1, 0) && oldTerrain.get(y-1,0) != null;
+		boolean south = oldTerrain.contains(y+1, 0) && oldTerrain.get(y+1,0) != null;
+		if( (north || south || east || west) == false) {
 			throw new WeblaboraException("Cannot put a district at "+y+", as it does not connect to the rest of the landscape");
 		}
 		
