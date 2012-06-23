@@ -25,6 +25,10 @@ public class CreateGame extends BaseAction {
 		CreateGameForm form = (CreateGameForm)actionForm;
 		EntityManager em = (EntityManager)request.getAttribute("em");
 		
+		State state = new State();
+		state.setExplorer(user);
+		em.persist(state);
+		
 		Game game = new Game();
 		game.getPlayer1().setUser(user);
 		game.getPlayer1().setColor(Color.RED.toString());
@@ -39,20 +43,10 @@ public class CreateGame extends BaseAction {
 		game.setLength(form.getLength());
 		game.setPlayers(form.getPlayers());
 		user.setActiveGame(game);
-		game.setState(em.find(State.class, startState(form.getPlayers(), form.getLength(), form.getCountry())));
+		game.setState(state);
 		em.persist(game);
 
 		return mapping.findForward("root");
-	}
-	
-	private static int startState(Integer players, String length, String country) {
-		GamePlayers gamePlayers = GamePlayers.valueOf(players);
-		GameLength gameLength = GameLength.valueOf(length);
-		GameCountry gameCountry = GameCountry.valueOf(country);
-		return 1+gamePlayers.ordinal()
-				+(gameLength.ordinal()<<2) 
-				+(gameCountry.ordinal()<<3);
-		//no project is complete until you use bit-shift operators
 	}
 
 }
