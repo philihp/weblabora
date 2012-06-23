@@ -7,6 +7,7 @@ import static javax.persistence.FetchType.LAZY;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Access;
@@ -240,7 +241,12 @@ public class Game extends BasicEntity {
 		return new User[] {player1.user, player2.user, player3.user, player4.user};
 	}
 	
-	
+	@Transient
+	public boolean isUndoable() {
+		long movedAt = this.getState().getDateCreated().getTime();
+		long now = new Date().getTime();
+		return (now-movedAt < 5*60*1000) && (getState().getSrcState() != null);
+	}
 	
 	@Transient
 	public List<State> getStates() {

@@ -186,8 +186,6 @@ function requestCallback(response) {
 			</html:form>
 			|
 			<button id="findGamesButton">Join a Game</button>
-			|
-			<a href="http://github.com/philihp/WebLabora/issues/new">Report Bug</a>
 		</div>
 	</div>
 		
@@ -487,6 +485,13 @@ function requestCallback(response) {
 				</c:when>
 				<c:when test="${move.state.stateId == param.stateId or move.state.stateId == game.state.stateId}">
 					[view] ${move.text}
+					<c:if test="${game.undoable}">
+						<html:form style="display: inline" action="/undoMove.do">
+							<html:hidden property="gameId"/>
+							<html:hidden property="stateId"/>
+							<html:submit>Undo</html:submit>
+						</html:form>
+					</c:if>
 				</c:when>
 				<c:otherwise>
 					[<a href="showGame.do?gameId=${game.gameId}&amp;stateId=${move.state.stateId}">view</a>]<span title="First explored by ${move.state.explorer.name} on <fmt:formatDate value="${move.state.dateCreated}" pattern="yyyy-MM-dd" />"> ${move.text}</span>
@@ -511,7 +516,7 @@ function requestCallback(response) {
 
 		<c:if test="${not empty game.state.dstStates and empty param.stateId}">
 		<hr />
-		Previous Moves:
+		Previous moves from this state:
 		<ul>
 			<c:forEach items="${game.state.dstStates}" var="possibleState">
 				<li>
