@@ -3,3 +3,4 @@
 .project
 .settings/*
 login.properties
+target/*
