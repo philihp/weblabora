@@ -528,6 +528,7 @@ public class Board {
 
 		if(settlementRound == SettlementRound.E) {
 			setGameOver(true);
+			wheel.pushArm(round);
 			getMoveList().add(new HistoryEntry("Game Over"));
 		}
 		
