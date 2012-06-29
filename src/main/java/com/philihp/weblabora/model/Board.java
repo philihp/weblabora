@@ -312,7 +312,9 @@ public class Board {
 	}
 	
 	public float getArmOffset() {
-		return isSettling()?27.692f:13.846f; 
+		if(isSettling()) return 27.692f;
+		else if(isExtraRound()) return 20.769f;
+		else return 13.846f;
 	}
 
 	public void setSettlementRound(SettlementRound settlementRound) {
@@ -544,7 +546,6 @@ public class Board {
 	public void postExtraRound() {
 		setExtraRound(false);
 		setSettling(true);
-		wheel.pushArm(round);
 		moveInRound=1;
 	}
 
