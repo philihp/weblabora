@@ -484,7 +484,7 @@ function requestCallback(response) {
 					[<a href="showGame.do?gameId=${game.gameId}&amp;stateId=${board.nextState.stateId}">view</a>] ...
 				</c:when>
 				<c:when test="${move.state.stateId == param.stateId or move.state.stateId == game.state.stateId}">
-					[view] ${move.text}
+					<span title="First explored by ${move.state.explorer.name} on <fmt:formatDate value="${move.state.dateCreated}" pattern="yyyy-MM-dd" />">[view] ${move.text}</span>
 					<c:if test="${game.undoable}">
 						<html:form style="display: inline" action="/undoMove.do">
 							<html:hidden property="gameId"/>
