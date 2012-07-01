@@ -245,7 +245,7 @@ public class Game extends BasicEntity {
 	public boolean isUndoable() {
 		long movedAt = this.getState().getDateCreated().getTime();
 		long now = new Date().getTime();
-		return (now-movedAt < 5*60*1000) && (getState().getSrcState() != null);
+		return (now-movedAt < 24*60*60*1000) && (getState().getSrcState() != null);
 	}
 	
 	@Transient

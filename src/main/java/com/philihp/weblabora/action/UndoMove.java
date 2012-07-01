@@ -42,7 +42,7 @@ public class UndoMove extends BaseAction {
 		}
 		
 		if(game.isUndoable() == false) {
-			throw new WeblaboraException("More than 5 minutes has elapsed since that move has been made.");
+			throw new WeblaboraException("More than 24 hours has elapsed since that move has been made.");
 		}
 		else if (game.getState().getExplorer().equals(user) == false) {
 			throw new WeblaboraException("Only the user who made a move can undo it");
