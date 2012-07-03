@@ -663,6 +663,10 @@ public class Player {
 		prior.clearLocation();
 	}
 
+	public void resetPrior() {
+		prior.clearLocation();
+	}
+
 	public Clergyman getLayBrother1() {
 		return layBrother1;
 	}

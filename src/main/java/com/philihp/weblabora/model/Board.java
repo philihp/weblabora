@@ -207,7 +207,9 @@ public class Board {
 		return wonders;
 	}
 
-	public Wonder claimWonder() {
+	public Wonder claimWonder() throws WeblaboraException {
+		if(unclaimedWonders.size() == 0)
+			throw new WeblaboraException("No more wonders to claim.");
 		return unclaimedWonders.remove(unclaimedWonders.size() - 1);
 	}
 

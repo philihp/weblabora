@@ -50,7 +50,7 @@ public final class MoveProcessor {
 
 	public static void processSingleAction(Board board, String move, MoveHistory history)
 			throws WeblaboraException {
-		CommandParameters params = new CommandParameters(history.isPreviousBuild());
+		CommandParameters params = new CommandParameters(history);
 		
 		String prefix;
 		String inner;

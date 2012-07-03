@@ -64,6 +64,27 @@ public class Landscape {
 		return terrain.toArray(Terrain.class);
 	}
 
+	private int getNumberOfTerrain(TerrainTypeEnum type) {
+		if(type == null) return 0;
+
+		int count = 0;
+		for(Terrain[] row : getTable()) {
+			for(Terrain cell : row) {
+				if(type.equals(cell.getTerrainType()))
+					count++;
+			}
+		}
+
+		return count;	
+	}
+
+	public int getNumberOfForests() {
+		return getNumberOfTerrain(FOREST);
+	}
+	public int getNumberOfMoors() {
+		return getNumberOfTerrain(MOOR);
+	}
+
 	public List<Erection> getErections() {
 		List<Erection> list = new ArrayList<Erection>(3);
 		for (Terrain[] row : getTable()) {

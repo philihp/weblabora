@@ -13,10 +13,7 @@ public class CommandParameters {
 	/**
 	 * Everything in the middle
 	 */
-	private List<String> params = new ArrayList<String>(2); // default it to an
-															// capacity of 2,
-															// since that's what
-															// it usually is
+	private List<String> params = new ArrayList<String>(2);
 
 	/**
 	 * The last token.
@@ -27,8 +24,15 @@ public class CommandParameters {
 
 	private boolean mustBePrior;
 
-	public CommandParameters(boolean mustBePrior) {
-		this.mustBePrior = mustBePrior;
+	private MoveHistory history;
+
+	public CommandParameters(MoveHistory history) {
+   		this.mustBePrior = history.isPreviousBuild();
+		this.history = history;
+	}
+
+	public MoveHistory getHistory() {
+		return history;
 	}
 
 	public char getCommand() {

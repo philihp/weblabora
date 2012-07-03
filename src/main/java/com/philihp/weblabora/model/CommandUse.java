@@ -57,6 +57,8 @@ public class CommandUse implements MoveCommand, InvalidDuringSettlement {
 				throw new WeblaboraException("Coordinate building usage parameters must come in pairs. Parsed "+x+" for the x, but no y number.");
 			}
 		}
+
+		usageParam.setMoveHistory(params.getHistory());
 		
 		execute(board, buildingId, usageParam, usingPrior, params.getPlaceClergyman());
 

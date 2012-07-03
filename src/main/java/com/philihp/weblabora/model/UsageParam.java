@@ -9,6 +9,9 @@ import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.Erection;
 
 public class UsageParam {
+
+	/* Used for passing along that the next Plot purchase is free, etc */
+	private MoveHistory history;
 	
 	private String param;
 	
@@ -413,6 +416,14 @@ public class UsageParam {
 
 	public void subtractWine(int wine) {
 		this.wine -= wine;
+	}
+
+	public void setHistory(MoveHistory history) {
+		this.history = history;
+	}
+
+	public MoveHistory getHistory() {
+		this.history = history;
 	}
 	
 }

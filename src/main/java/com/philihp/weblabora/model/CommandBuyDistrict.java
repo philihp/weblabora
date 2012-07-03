@@ -31,15 +31,17 @@ public class CommandBuyDistrict implements MoveCommand {
 		
 		execute(board,
 				Integer.parseInt(params.get(0)),
-				Side.valueOf(params.get(1))
+				Side.valueOf(params.get(1)),
+				params.getHistory().isNextDistrictFree()
 				);
+		params.getHistory().setNextDistrictFree(false);
 	}
 
-	public static void execute(Board board, int y, Side side)
+	public static void execute(Board board, int y, Side side, boolean free)
 			throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 		
-		int cost = board.purchaseDistrict();
+		int cost = free ? 0 : board.purchaseDistrict();
 		if(player.getCoins() < cost) 
 			throw new WeblaboraException("Purchase price for a district is "+cost+", but player "+player.getColor()+" only has "+player.getCoins()+".");
 		player.subtractCoins(cost);
