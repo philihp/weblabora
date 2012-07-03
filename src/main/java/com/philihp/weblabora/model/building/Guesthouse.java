@@ -21,7 +21,7 @@ import com.philihp.weblabora.model.Wheel;
 public class Guesthouse extends Building {
 
 	public Guesthouse() {
-		super("I40", SettlementRound.D, 3, "Guesthouse", BuildCost.is().wood(3
+		super("I40", SettlementRound.D, 3, "Guesthouse", BuildCost.is().wood(3)
 				.straw(1), 5, 7, EnumSet.of(PLAINS, HILLSIDE, COAST), false);
 	}
 

@@ -38,7 +38,7 @@ public class Cooperage extends BuildingDoubleUsage {
 		UsageParamSingle output = input.getSecondary();
 		
 		int amount = board.getWheel().getJoker().take();
-		if(output.getBeer() == 1 && output.getWhiskey() == 1))
+		if(output.getBeer() == 1 && output.getWhiskey() == 1)
 			throw new WeblaboraException(getName()+" was asked to output both beer and whiskey, but it can only do one, not both.");
 
 		if(output.getBeer() == 1) {

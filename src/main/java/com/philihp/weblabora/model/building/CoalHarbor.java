@@ -32,6 +32,6 @@ public class CoalHarbor extends BuildingSingleUsage {
 		if(iterations > 3) throw new WeblaboraException(getName()+" was supplied "+iterations+" peat, but can only consume a maximum of 3.");		
 		player.subtractPeat(iterations);
 		player.addCoins(3*iterations);
-		player.addWhiskey(iterations;	
+		player.addWhiskey(iterations);	
 	}
 }
