@@ -11,6 +11,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.Token;
 import com.philihp.weblabora.model.UsageParam;
@@ -19,7 +20,7 @@ import com.philihp.weblabora.model.Wheel;
 public class CloisterOfficeG extends CloisterOffice {
 
 	public CloisterOfficeG() {
-		super("LG3", "L", 2);
+		super("LG3", SettlementRound.L, 2);
 	}
 
 }

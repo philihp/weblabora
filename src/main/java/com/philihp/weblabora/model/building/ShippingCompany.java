@@ -11,6 +11,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.UsageParamDouble;
@@ -21,7 +22,7 @@ import com.philihp.weblabora.model.Wheel;
 public class ShippingCompany extends BuildingDoubleUsage {
 
 	public ShippingCompany() {
-		super("F33", "C", 1, "Shipping Company", BuildCost.is().wood(3).clay(3), 4, 8,
+		super("F33", SettlementRound.C, 1, "Shipping Company", BuildCost.is().wood(3).clay(3), 4, 8,
 				EnumSet.of(COAST), false);
 	}
 

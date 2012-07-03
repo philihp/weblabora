@@ -10,6 +10,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
@@ -17,7 +18,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class Priory extends Building {
 
 	public Priory() {
-		super("G01", "", 3, "Priory", BuildCost.is().wood(1).clay(1), 3, 4,
+		super("G01", SettlementRound.S, 3, "Priory", BuildCost.is().wood(1).clay(1), 3, 4,
 				EnumSet.of(COAST, PLAINS, HILLSIDE), true);
 	}
 

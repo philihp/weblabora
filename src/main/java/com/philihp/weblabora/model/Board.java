@@ -109,7 +109,7 @@ public class Board {
 		unclaimedWonders = gameStartWonders();
 		
 		addLandscapeBuildings();
-		unbuiltBuildings = roundBuildings(SettlementRound.S);
+		unbuiltBuildings = roundBuildings();
 		for(Player player : players) {
 			player.getUnbuiltSettlements().addAll(roundSettlements(SettlementRound.S));
 		}
@@ -148,13 +148,8 @@ public class Board {
 		return settlements;
 	}
 
-	private List<Building> roundBuildings(SettlementRound round) {
+	private List<Building> roundBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
-		if(round == null) return buildings;
-		
-		//TODO: should change this later so buildings use Round enum
-		String phase = round.toString();
-		if(phase.equals("S")) phase = "";
 		
 		if(gamePlayers == GamePlayers.TWO && gameLength == GameLength.LONG) {
 			//two player long game uses all buildings except C-grapevine, C-quarry and Carpentry
@@ -163,7 +158,7 @@ public class Board {
 				if(buildingId == BuildingEnum.F31) continue;
 				if(buildingId == BuildingEnum.F29) continue;
 				Building building = buildingId.getInstance();
-				if (phase.equals(building.getStage())) {
+				if (settlementRound.equals(building.getStage())) {
 					buildings.add(building);
 					allBuildings.put(BuildingEnum.valueOf(building.getId()), building);
 				}
@@ -172,7 +167,7 @@ public class Board {
 		else {
 			for (BuildingEnum buildingId : BuildingEnum.values()) {
 				Building building = buildingId.getInstance();
-				if (phase.equals(building.getStage()) && building.getPlayers().ordinal() <= gamePlayers.ordinal()) {
+				if (settlementRound.equals(building.getStage()) && building.getPlayers().ordinal() <= gamePlayers.ordinal()) {
 					buildings.add(building);
 					allBuildings.put(BuildingEnum.valueOf(building.getId()), building);
 				}
@@ -520,7 +515,7 @@ public class Board {
 		//end of settlement round
 		setSettling(false);
 		
-		List<Building> newBuildings = roundBuildings(settlementRound);
+		List<Building> newBuildings = roundBuildings();
 		unbuiltBuildings.addAll(newBuildings);
 		for(Player player : players) {
 			player.getUnbuiltSettlements().addAll(roundSettlements(settlementRound));

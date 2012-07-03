@@ -10,6 +10,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.Token;
 import com.philihp.weblabora.model.UsageParam;
@@ -18,7 +19,7 @@ import com.philihp.weblabora.model.Wheel;
 
 public class Grapevine extends Building {
 
-	protected Grapevine(String id, String stage, int players) {
+	protected Grapevine(String id, SettlementRound stage, int players) {
 		super(id, stage, players, "Grapevine", BuildCost.is().wood(1), 6, 3,
 				EnumSet.of(HILLSIDE), false);
 	}

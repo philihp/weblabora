@@ -6,6 +6,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 
@@ -14,7 +15,7 @@ import static com.philihp.weblabora.model.TerrainTypeEnum.*;
 public class CloisterChapterHouse extends Building {
 
 	public CloisterChapterHouse() {
-		super("G16", "A", 3, "Cloister Chapter House", BuildCost.is().clay(3).straw(1), 5, 2, EnumSet.of(COAST, PLAINS,
+		super("G16", SettlementRound.A, 3, "Cloister Chapter House", BuildCost.is().clay(3).straw(1), 5, 2, EnumSet.of(COAST, PLAINS,
 				HILLSIDE), true);
 	}
 

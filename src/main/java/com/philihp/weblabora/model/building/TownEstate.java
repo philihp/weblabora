@@ -11,6 +11,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.Wheel;
@@ -18,7 +19,7 @@ import com.philihp.weblabora.model.Wheel;
 public class TownEstate extends Building {
 
 	public TownEstate() {
-		super("F30", "C", 1, "Town Estate", BuildCost.is().stone(2).straw(2), 5, 6,
+		super("F30", SettlementRound.C, 1, "Town Estate", BuildCost.is().stone(2).straw(2), 5, 6,
 				EnumSet.of(COAST, PLAINS, HILLSIDE), false);
 	}
 

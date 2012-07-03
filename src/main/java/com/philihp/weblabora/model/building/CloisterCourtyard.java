@@ -10,6 +10,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.UsageParamDouble;
@@ -19,7 +20,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class CloisterCourtyard extends BuildingDoubleUsage {
 
 	public CloisterCourtyard() {
-		super("G02", "", 1, "Cloister Courtyard", BuildCost.is().wood(2), 4, 4, EnumSet.of(COAST, PLAINS, HILLSIDE), true);
+		super("G02", SettlementRound.S, 1, "Cloister Courtyard", BuildCost.is().wood(2), 4, 4, EnumSet.of(COAST, PLAINS, HILLSIDE), true);
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
@@ -18,6 +19,6 @@ import com.philihp.weblabora.model.Wheel;
 public class GrapevineA extends Grapevine {
 
 	public GrapevineA() {
-		super("F14", "A", 1);
+		super("F14", SettlementRound.A, 1);
 	}
 }

@@ -14,6 +14,7 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Coordinate;
 import com.philihp.weblabora.model.Landscape;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.Terrain;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
@@ -24,7 +25,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class PrintingOffice extends BuildingCoordinateUsage {
 
 	public PrintingOffice() {
-		super("F38", "D", 1, "Printing Office",
+		super("F38", SettlementRound.D, 1, "Printing Office",
 				BuildCost.is().wood(1).stone(2), 5, 5, EnumSet.of(PLAINS,
 						HILLSIDE, COAST), false);
 	}

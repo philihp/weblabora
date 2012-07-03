@@ -5,6 +5,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.GamePlayers;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.Terrain;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
@@ -12,12 +13,12 @@ import com.philihp.weblabora.model.WeblaboraException;
 
 abstract public class Building extends Erection {
 
-	protected final String stage;
+	protected final SettlementRound stage;
 	protected final int players;
 	protected final BuildCost buildCost;
 	protected final boolean cloister;
 
-	public Building(String id, String stage, int players, String name,
+	public Building(String id, SettlementRound stage, int players, String name,
 			BuildCost buildCost, int settlementValue, int shieldValue,
 			Set<TerrainTypeEnum> terrains, boolean cloister) {
 		super(id, name, terrains, settlementValue, shieldValue);
@@ -34,7 +35,7 @@ abstract public class Building extends Erection {
 	public abstract void use(Board board, UsageParam input)
 			throws WeblaboraException;
 
-	public String getStage() {
+	public SettlementRound getStage() {
 		return stage;
 	}
 

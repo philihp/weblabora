@@ -11,6 +11,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.Wheel;
@@ -18,7 +19,7 @@ import com.philihp.weblabora.model.Wheel;
 public class QuarryA extends Quarry {
 
 	public QuarryA() {
-		super("G22", "B", 1);
+		super("G22", SettlementRound.B, 1);
 	}
 	
 }

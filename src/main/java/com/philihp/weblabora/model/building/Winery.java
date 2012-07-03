@@ -10,6 +10,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.UsageParamDouble;
@@ -18,7 +19,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class Winery extends BuildingDoubleUsage {
 
 	public Winery() {
-		super("F21", "B", 1, "Winery", BuildCost.is().clay(2).straw(2), 5, 4,
+		super("F21", SettlementRound.B, 1, "Winery", BuildCost.is().clay(2).straw(2), 5, 4,
 				EnumSet.of(COAST, PLAINS,HILLSIDE), false);
 	}
 

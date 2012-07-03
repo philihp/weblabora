@@ -11,6 +11,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.Wheel;
@@ -18,7 +19,7 @@ import com.philihp.weblabora.model.Wheel;
 public class Castle extends Building {
 
 	public Castle() {
-		super("G28", "C", 1, "Castle", BuildCost.is().wood(6).stone(5), 7, 15,
+		super("G28", SettlementRound.C, 1, "Castle", BuildCost.is().wood(6).stone(5), 7, 15,
 				EnumSet.of(HILLSIDE, MOUNTAIN), false);
 	}
 

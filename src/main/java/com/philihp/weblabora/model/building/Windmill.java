@@ -10,6 +10,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
@@ -17,7 +18,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class Windmill extends Building {
 
 	public Windmill() {
-		super("F04", "", 1, "Windmill", BuildCost.is().wood(3).clay(2), 6, 10,
+		super("F04", SettlementRound.S, 1, "Windmill", BuildCost.is().wood(3).clay(2), 6, 10,
 				EnumSet.of(COAST, HILLSIDE), false);
 	}
 

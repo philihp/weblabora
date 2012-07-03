@@ -10,13 +10,14 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 
 public class Slaughterhouse extends Building {
 
 	public Slaughterhouse() {
-		super("G19", "A", 1, "Slaughterhouse", BuildCost.is().wood(2).clay(2), -3, 8, EnumSet.of(COAST, PLAINS, HILLSIDE),
+		super("G19", SettlementRound.A, 1, "Slaughterhouse", BuildCost.is().wood(2).clay(2), -3, 8, EnumSet.of(COAST, PLAINS, HILLSIDE),
 				false);
 	}
 

@@ -7,12 +7,13 @@ import java.util.EnumSet;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.UsageParam;
 
 public class Shipyard extends Building {
 
 	public Shipyard() {
-		super("G26", "B", 1, "Shipyard", BuildCost.is().clay(4).stone(1), -2, 15, EnumSet.of(COAST), false);
+		super("G26", SettlementRound.B, 1, "Shipyard", BuildCost.is().clay(4).stone(1), -2, 15, EnumSet.of(COAST), false);
 	}
 
 	@Override

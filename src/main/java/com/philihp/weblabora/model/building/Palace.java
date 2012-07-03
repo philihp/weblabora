@@ -10,6 +10,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
@@ -17,7 +18,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class Palace extends Building {
 
 	public Palace() {
-		super("F27", "C", 1, "Palace", BuildCost.is().coin(25), 8, 25, EnumSet.of(HILLSIDE), false);
+		super("F27", SettlementRound.C, 1, "Palace", BuildCost.is().coin(25), 8, 25, EnumSet.of(HILLSIDE), false);
 	}
 
 	@Override

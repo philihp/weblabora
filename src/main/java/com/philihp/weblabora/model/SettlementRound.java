@@ -1,7 +1,7 @@
 package com.philihp.weblabora.model;
 
 public enum SettlementRound {
-	S,A,B,C,D,E;
+	L,S,A,B,C,D,E;
 
 	public SettlementRound next() {
 		if(this.ordinal() < SettlementRound.values().length) {

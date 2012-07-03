@@ -11,6 +11,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.Wheel;
@@ -18,18 +19,18 @@ import com.philihp.weblabora.model.Wheel;
 public class Dormitory extends Building {
 
 	public Dormitory() {
-		super("F37","D",1, "Dormitory", BuildCost.is().clay(3), 4, 3, EnumSet
-				.of(PLAINS, HILLSIDE, COAST), true);
+		super("F37", SettlementRound.D, 1, "Dormitory", BuildCost.is().clay(3),
+				4, 3, EnumSet.of(PLAINS, HILLSIDE, COAST), true);
 	}
 
 	@Override
 	public void use(Board board, UsageParam input) {
 		Player player = board.getPlayer(board.getActivePlayer());
-		
-		//get a pottery
+
+		// get a pottery
 		player.addPottery(1);
-		
-		//additionally, convert straw+wood into bibles
+
+		// additionally, convert straw+wood into bibles
 		int iterations = Math.min(input.getStraw(), input.getWood());
 		player.subtractStraw(iterations);
 		player.subtractWood(iterations);

@@ -10,6 +10,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.Terrain;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
@@ -19,7 +20,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class GrainStorage extends BuildingSingleUsage {
 
 	public GrainStorage() {
-		super("F03", "", 4, "Grain Storage", BuildCost.is().wood(1).straw(1), 4, 3,
+		super("F03", SettlementRound.S, 4, "Grain Storage", BuildCost.is().wood(1).straw(1), 4, 3,
 				EnumSet.of(COAST, PLAINS, HILLSIDE), false);
 	}
 

@@ -10,6 +10,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
@@ -17,7 +18,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class Inn extends Building {
 
 	public Inn() {
-		super("F20", "B", 3, "Inn", BuildCost.is().wood(2).straw(2), 6, 4,
+		super("F20", SettlementRound.B, 3, "Inn", BuildCost.is().wood(2).straw(2), 6, 4,
 				EnumSet.of(COAST, PLAINS, HILLSIDE), false);
 	}
 

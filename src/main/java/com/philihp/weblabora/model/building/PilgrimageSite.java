@@ -13,6 +13,7 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Coordinate;
 import com.philihp.weblabora.model.Landscape;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.UsageParamDouble;
@@ -23,7 +24,7 @@ import com.philihp.weblabora.model.Wheel;
 public class PilgrimageSite extends BuildingDoubleUsage {
 
 	public PilgrimageSite() {
-		super("F36", "D", 3, "Pilgrimage Site", BuildCost.is().coin(6), 6, 2,
+		super("F36", SettlementRound.D, 3, "Pilgrimage Site", BuildCost.is().coin(6), 6, 2,
 				EnumSet.of(PLAINS, HILLSIDE, COAST), false);
 	}
 

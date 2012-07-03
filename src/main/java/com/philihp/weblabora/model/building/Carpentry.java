@@ -10,6 +10,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.Terrain;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
@@ -19,7 +20,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class Carpentry extends BuildingCoordinateUsage {
 
 	public Carpentry() {
-		super("F10", "", 4, "Carpentry", BuildCost.is().wood(2).clay(1), 0, 7,
+		super("F10", SettlementRound.S, 4, "Carpentry", BuildCost.is().wood(2).clay(1), 0, 7,
 				EnumSet.of(COAST, PLAINS, HILLSIDE), false);
 	}
 

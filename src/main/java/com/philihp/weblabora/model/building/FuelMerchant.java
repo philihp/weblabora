@@ -10,6 +10,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
@@ -17,7 +18,7 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class FuelMerchant extends Building {
 
 	public FuelMerchant() {
-		super("G06", "", 3, "Fuel Merchant", BuildCost.is().clay(1).straw(1), 2, 5,
+		super("G06", SettlementRound.S, 3, "Fuel Merchant", BuildCost.is().clay(1).straw(1), 2, 5,
 				EnumSet.of(COAST, PLAINS, HILLSIDE), false);
 	}
 

@@ -11,6 +11,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
@@ -19,7 +20,7 @@ import com.philihp.weblabora.model.Wheel;
 public class Calefactory extends Building {
 
 	public Calefactory() {
-		super("F32", "C", 3, "Calefactory", BuildCost.is().stone(1), 5, 2,
+		super("F32", SettlementRound.C, 3, "Calefactory", BuildCost.is().stone(1), 5, 2,
 				EnumSet.of(COAST, PLAINS, HILLSIDE), true);
 	}
 

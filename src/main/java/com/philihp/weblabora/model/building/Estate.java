@@ -13,6 +13,7 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Coordinate;
 import com.philihp.weblabora.model.Landscape;
 import com.philihp.weblabora.model.Player;
+import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
@@ -21,7 +22,7 @@ import com.philihp.weblabora.model.Wheel;
 public class Estate extends Building {
 
 	public Estate() {
-		super("G39", "D", 4, "Estate", BuildCost.is().wood(2).stone(2), 6, 5,
+		super("G39", SettlementRound.D, 4, "Estate", BuildCost.is().wood(2).stone(2), 6, 5,
 				EnumSet.of(PLAINS, HILLSIDE, COAST), false);
 	}
 
