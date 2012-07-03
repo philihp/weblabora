@@ -221,7 +221,7 @@ function requestCallback(response) {
 				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeL}" />
 				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeM}" />
 				</g>
-				<c:if test="${board.gamePlayers eq 'FOUR'}">
+				<c:if test="${board.mode.players eq 'FOUR'}">
 					<g id="settlement-a" transform="rotate(${wheelArt.rotG})">
 						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">A</text>
@@ -243,7 +243,7 @@ function requestCallback(response) {
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">E</text>
 					</g>
 				</c:if>
-				<c:if test="${board.gamePlayers eq 'THREE'}">
+				<c:if test="${board.mode.players eq 'THREE'}">
 					<g id="settlement-a" transform="rotate(${wheelArt.rotF})">
 						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">A</text>
@@ -265,7 +265,7 @@ function requestCallback(response) {
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">E</text>
 					</g>
 				</c:if>
-				<c:if test="${board.gamePlayers eq 'TWO'}">
+				<c:if test="${board.mode.players eq 'TWO'}">
 					<g id="settlement-a" transform="rotate(${wheelArt.rotG})">
 						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">A</text>

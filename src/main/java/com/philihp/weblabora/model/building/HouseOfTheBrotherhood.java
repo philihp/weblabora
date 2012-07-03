@@ -45,10 +45,10 @@ public class HouseOfTheBrotherhood extends BuildingDoubleUsage {
 				cloisters++;
 		}
 		
-		if(board.getGamePlayers() == GamePlayers.ONE) {
+		if(board.getMode().getPlayers() == GamePlayers.ONE) {
 			possiblePoints = cloisters * 1;
 		}
-		else if(board.getGamePlayers() == GamePlayers.TWO && board.getGameLength() == GameLength.LONG) {
+		else if(board.getMode().getPlayers() == GamePlayers.TWO && board.getMode().getLength() == GameLength.LONG) {
 			possiblePoints = Math.floor(cloisters * 1.5);
 		}
 		else { 

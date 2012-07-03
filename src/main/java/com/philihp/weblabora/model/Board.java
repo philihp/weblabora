@@ -31,15 +31,11 @@ import com.philihp.weblabora.model.building.SettlementEnum;
 
 public class Board {
 	
+	private BoardMode mode;
+	
 	public static final int[] PLOT_PURCHASE_PRICE = {3,4,4,5,5,5,6,6,7};
 	
 	public static final int[] DISTRICT_PURCHASE_PRICE = {2,3,4,4,5,5,6,7,8};
-
-	protected final GamePlayers gamePlayers;
-
-	protected final GameLength gameLength;
-	
-	protected final GameCountry gameCountry;
 
 	protected Wheel wheel;
 
@@ -77,26 +73,20 @@ public class Board {
 	 * This makes lookups from {@link CommandUse CommandUse}
 	 */
 	private EnumMap<BuildingEnum, Building> allBuildings = 
-			new EnumMap<BuildingEnum, Building>(BuildingEnum.class);;
+			new EnumMap<BuildingEnum, Building>(BuildingEnum.class);
 
 	private List<Wonder> unclaimedWonders;
 
 	public Board(GamePlayers gamePlayers, GameLength gameLength, GameCountry gameCountry) {
+		this.mode = BoardMode.getMode(this, gamePlayers, gameLength, gameCountry);
+		
 		int i;
-		this.gamePlayers = gamePlayers;
-		this.gameLength = gameLength;
-		this.gameCountry = gameCountry;
 		
 		settlementRound = SettlementRound.S;
 
-		int[] armValues = null;
-		if(gameLength == GameLength.SHORT && gamePlayers == GamePlayers.TWO) {
-			armValues = new int[]{0, 1, 2, 2, 3, 4, 4, 5, 6, 6, 7, 8, 10};
-		}
-		else {
-			armValues = new int[]{0, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8, 9, 10};
-		}
-		wheel = new Wheel(this,armValues);
+		wheel = new Wheel(this,mode.getWheelArmValues());
+		mode.setWheelTokens(wheel);
+
 
 		activePlayer = 0;
 		players = new Player[gamePlayers.getAsNumber()];
@@ -149,57 +139,20 @@ public class Board {
 	}
 
 	private List<Building> roundBuildings() {
-		List<Building> buildings = new ArrayList<Building>();
-		
-		if(gamePlayers == GamePlayers.TWO && gameLength == GameLength.LONG) {
-			//two player long game uses all buildings except C-grapevine, C-quarry and Carpentry
-			for (BuildingEnum buildingId : BuildingEnum.values()) {
-				if(buildingId == BuildingEnum.F10) continue;
-				if(buildingId == BuildingEnum.F31) continue;
-				if(buildingId == BuildingEnum.F29) continue;
-				Building building = buildingId.getInstance();
-				if (settlementRound.equals(building.getStage())) {
-					buildings.add(building);
-					allBuildings.put(BuildingEnum.valueOf(building.getId()), building);
-				}
-			}
-		}
-		else {
-			for (BuildingEnum buildingId : BuildingEnum.values()) {
-				Building building = buildingId.getInstance();
-				if (settlementRound.equals(building.getStage()) && building.getPlayers().ordinal() <= gamePlayers.ordinal()) {
-					buildings.add(building);
-					allBuildings.put(BuildingEnum.valueOf(building.getId()), building);
-				}
-			}
+		List<Building> buildings = mode.roundBuildings();
+		for(Building building : buildings) {
+			allBuildings.put(BuildingEnum.valueOf(building.getId()), building);
 		}
 		return buildings;
 	}
+	
+	protected EnumMap<BuildingEnum, Building> getAllBuildings() {
+		return allBuildings;
+	}
 
 	public List<Building> getFutureBuildings() {
+		List<Building> buildings = mode.futureBuildings();
 		
-		List<Building> buildings = new ArrayList<Building>();
-		if(gamePlayers == GamePlayers.TWO && gameLength == GameLength.LONG) {
-			//two player long game uses all buildings except C-grapevine, C-quarry and Carpentry
-			for (BuildingEnum buildingId : BuildingEnum.values()) {
-				if(buildingId == BuildingEnum.F10) continue;
-				if(buildingId == BuildingEnum.F31) continue;
-				if(buildingId == BuildingEnum.F29) continue;
-				Building building = buildingId.getInstance();
-				if(allBuildings.containsKey(buildingId) == false && building.getStage().equals("L") == false) {
-					buildings.add(building);
-					allBuildings.put(BuildingEnum.valueOf(building.getId()), building);
-				}
-			}
-		}
-		else {
-			for(BuildingEnum buildingId : BuildingEnum.values()) {
-				Building building = buildingId.getInstance();
-				if(allBuildings.containsKey(buildingId) == false && building.getPlayers().ordinal() <= gamePlayers.ordinal()) {
-					buildings.add(building);
-				}
-			}
-		}
 		return buildings;
 	}
 	
@@ -325,65 +278,11 @@ public class Board {
 	}
 	
 	public boolean isExtraRound(int round) {
-		switch(gamePlayers) {
-		case TWO:
-			//there is no extra round for TWO
-			return false;
-		case THREE:
-		case FOUR:
-			return round >= 24;
-		default:
-			throw new RuntimeException("Unsupported game players for extra round");
-		}
+		return mode.isExtraRound(round);
 	}
 	
 	public SettlementRound roundBeforeSettlement(int round) {
-		switch(gamePlayers) {
-		case TWO:
-			switch (round) {
-			case 6:
-				return SettlementRound.A;
-			case 13:
-				return SettlementRound.B;
-			case 20:
-				return SettlementRound.C;
-			case 27:
-				return SettlementRound.D;
-			default:
-				return null;
-			}
-		case THREE:
-			switch (round) {
-			case 5:
-				return SettlementRound.A;
-			case 10:
-				return SettlementRound.B;
-			case 14:
-				return SettlementRound.C;
-			case 19:
-				return SettlementRound.D;
-			case 25:
-				return SettlementRound.E;
-			default:
-				return null;
-			}
-		case FOUR:
-			switch (round) {
-			case 6:
-				return SettlementRound.A;
-			case 9:
-				return SettlementRound.B;
-			case 15:
-				return SettlementRound.C;
-			case 18:
-				return SettlementRound.D;
-			case 25:
-				return SettlementRound.E;
-			default:
-				return null;
-			}
-		default: throw new RuntimeException("Unknown game players mode "+gamePlayers); 
-		}
+		return mode.roundBeforeSettlement(round);
 	}
 
 	/**
@@ -408,14 +307,11 @@ public class Board {
 	}
 	
 	public void preSettling() {
-		System.out.println("------Begin Settlement------");
 		setSettlementRound(getSettlementRound().next());
 		getMoveList().add(new HistoryEntry("Settlement ("+getSettlementRound()+")"));
 	}
 	
 	public void preExtraRound() {
-		System.out.println("------FINAL ROUND--------");
-
 		for(Player player : players) {
 			player.getPrior().clearLocation();
 		}
@@ -446,69 +342,11 @@ public class Board {
 	 * Called after every move.
 	 */
 	public void postMove() {
-		switch(gamePlayers) {
-		case TWO:
-			if(moveInRound == 2 || isSettling()) { 
-				nextActivePlayer();
-			}
-			++moveInRound;
-			if(isSettling() == true && moveInRound == 3) {
-				postSettlement();
-			}
-			else if(isSettling() == false && moveInRound == 4) {
-				postRound();
-			}
-			break;
-		case THREE:
-		case FOUR:
-			nextActivePlayer();
-			++moveInRound;
-			if(isExtraRound() && moveInRound == players.length+1) {
-				postExtraRound();
-			}
-			if(isSettling() && moveInRound == players.length+1) {
-				postSettlement();
-			}
-			else if(!isSettling() && moveInRound == players.length+2) {
-				postRound();
-			}
-			break;
-		default:
-			throw new RuntimeException("One player mode not supported");
-		}
-		
+		mode.postMove();
 	}
 	
-	/**
-	 * Called after every round.
-	 */
 	public void postRound() {
-		//end of normal round
-		moveInRound = 1;
-		//end of round
-		if(isExtraRound(round)) {
-			round++;
-			setExtraRound(true);
-		}
-		else if(isRoundBeforeSettlement(round)) {
-			setSettling(true);
-		}
-		else {
-			round++;
-		}
-		
-		if(gamePlayers == GamePlayers.TWO
-				&& gameLength == GameLength.LONG
-				&& isSettling() == false
-				&& settlementRound == SettlementRound.D
-				&& unbuiltBuildings.size() <= 3) {
-			setGameOver(true);
-			getMoveList().add(new HistoryEntry("Game Over"));
-		}
-		
-		//5 -- pass starting player
-		if(++startingPlayer == players.length) startingPlayer = 0;
-		startingMarker.setOwner(players[startingPlayer]);
+		mode.postRound();
 	}
 	
 	public void postSettlement() {
@@ -550,50 +388,7 @@ public class Board {
 	}
 
 	public String getMove() {
-		if(isExtraRound()) return "extra";
-		if(gamePlayers == GamePlayers.FOUR) {
-			switch (moveInRound) {
-			case 1:
-				return "first";
-			case 2:
-				return "second";
-			case 3:
-				return "third";
-			case 4:
-				return "fourth";
-			case 5:
-				return "last";
-			default:
-				throw new RuntimeException("Illegal Move Number " + moveInRound);
-			}
-		}
-		else if(gamePlayers == GamePlayers.THREE) {
-			switch (moveInRound) {
-			case 1:
-				return "first";
-			case 2:
-				return "second";
-			case 3:
-				return "third";
-			case 4:
-				return "last";
-			default:
-				throw new RuntimeException("Illegal Move Number " + moveInRound);
-			}
-		}
-		else if(gamePlayers == GamePlayers.TWO) {
-			switch (moveInRound) {
-			case 1:
-				return "first half of first";
-			case 2:
-				return "second half of first";
-			case 3:
-				return "second";
-			default:
-				throw new RuntimeException("Illegal Move Number " + moveInRound);
-			}
-		}
-		else return "ERROR";
+		return mode.getMoveName();
 	}
 	
 	public String getActivePlayerColor() {
@@ -638,40 +433,34 @@ public class Board {
 		this.nextState = nextState;
 	}
 
-	public GamePlayers getGamePlayers() {
-		return gamePlayers;
-	}
-
-	public GameLength getGameLength() {
-		return gameLength;
-	}
-
-	public GameCountry getGameCountry() {
-		return gameCountry;
-	}
-
 	private int grapeActiveOnRound() {
-		switch(gamePlayers) {
-		case TWO:
-			return 11;
-		case THREE:
-		case FOUR:
-			return 8;
-		default:
-			throw new RuntimeException("Unknown Game Players");
-		}
+		return mode.grapeActiveOnRound();
 	}
 
 	private int stoneActiveOnRound() {
-		switch(gamePlayers) {
-		case TWO:
-			return 18;
-		case THREE:
-		case FOUR:
-			return 13;
-		default:
-			throw new RuntimeException("Unknown Game Players");
-		}
+		return mode.stoneActiveOnRound();
 	}
 	
+	public int getMoveInRound() {
+		return this.moveInRound;
+	}
+	protected void setMoveInRound(int moveInRound) {
+		this.moveInRound = moveInRound;
+	}
+
+	protected void setRound(int round) {
+		this.round = round;
+	}
+
+	public int getStartingPlayer() {
+		return startingPlayer;
+	}
+
+	public void setStartingPlayer(int startingPlayer) {
+		this.startingPlayer = startingPlayer % players.length;
+	}
+	
+	public BoardMode getMode() {
+		return this.mode;
+	}
 }

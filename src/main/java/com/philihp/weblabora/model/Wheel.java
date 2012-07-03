@@ -43,16 +43,6 @@ public class Wheel {
 		this.board = board;
 		this.armValues = armValues;
 		this.arm.setPosition(M);
-		switch(board.getGamePlayers()) {
-		case TWO:
-			this.grape.setPosition(K);
-			this.stone.setPosition(E);
-			break;
-		case THREE:
-		case FOUR:
-			this.grape.setPosition(H);
-			break;
-		}
 		this.grape.setActive(false);
 		this.stone.setActive(false);
 	}
