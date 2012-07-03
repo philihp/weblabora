@@ -26,11 +26,13 @@ public class CloisterWorkshop extends Building {
 	public void use(Board board, UsageParam param) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 		
-		//just assume they give us enough energy...
-		player.subtractEnergy(param);
-		
 		int stone = Math.min(param.getStone(),1);
 		int clay = Math.min(param.getClay(),3);
+
+		if(clay+stone > param.getEnergy())
+			throw new WeblaboraException(getName()+" was not supplied enough energy to convert "+clay+" clay and "+stone+" stone.");
+			
+		player.subtractEnergy(param);
 		
 		player.subtractStone(stone);
 		player.addOrnament(stone);
