@@ -31,7 +31,7 @@
 			<fieldset>
 				<legend>Country</legend>
 				<html:radio property="country" value="FRANCE" styleId="country.france"/><label for="country.france"> France</label><br />
-				<html:radio property="country" value="IRELAND" styleId="country.ireland" disabled="true"/><label for="country.ireland"> Ireland</label>
+				<html:radio property="country" value="IRELAND" styleId="country.ireland"/><label for="country.ireland"> Ireland</label>
 			</fieldset>
 			<html:submit>Create New Game</html:submit>
 		</html:form>
