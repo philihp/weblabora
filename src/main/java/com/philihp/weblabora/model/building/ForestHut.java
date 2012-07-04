@@ -25,20 +25,23 @@ import com.philihp.weblabora.model.WeblaboraException;
 public class ForestHut extends BuildingCoordinateUsage {
 
 	public ForestHut() {
-		super("I29", SettlementRound.C, 3, "Forest Hut",
-				BuildCost.is().clay(1).straw(2), 5, 1, EnumSet.of(PLAINS,
-						HILLSIDE, COAST), false);
+		super("I29", SettlementRound.C, 3, "Forest Hut", BuildCost.is().clay(1)
+				.straw(2), 5, 1, EnumSet.of(PLAINS, HILLSIDE, COAST), false);
 	}
 
 	@Override
-	public void use(Board board, UsageParamCoordinates input) throws WeblaboraException {
+	public void use(Board board, UsageParamCoordinates input)
+			throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 
-                Terrain spot = activePlayer.getLandscape().getTerrainAt(input.getCoordinate());
-                if(spot.getTerrainType() != TerrainTypeEnum.FOREST)
-                        throw new WeblaboraException(getName()+" can't remove "+spot.getTerrainType()+" at "+input+", it can only remove FOREST");
-                else
-                        spot.setTerrainType(TerrainTypeEnum.PLAINS);
+		Terrain spot = player.getLandscape()
+				.getTerrainAt(input.getCoordinate());
+		if (spot.getTerrainType() != TerrainTypeEnum.FOREST)
+			throw new WeblaboraException(getName() + " can't remove "
+					+ spot.getTerrainType() + " at " + input
+					+ ", it can only remove FOREST");
+		else
+			spot.setTerrainType(TerrainTypeEnum.PLAINS);
 
 		player.addSheep(2);
 		player.addWood(2);

@@ -67,9 +67,9 @@ public class CommandBuyPlot implements MoveCommand {
 		execute(board,
 				Integer.parseInt(params.get(0)),
 				Side.valueOf(params.get(1)),
-				params.getHistory.isNextPlotFree()
+				params.getHistory().isNextPlotFree()
 				);
-		params.getHistory.setNextPlotFree(false);
+		params.getHistory().setNextPlotFree(false);
 	}
 
 	public static void execute(Board board, int y, Side side, boolean free)

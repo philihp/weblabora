@@ -423,7 +423,7 @@ public class UsageParam {
 	}
 
 	public MoveHistory getHistory() {
-		this.history = history;
+		return history;
 	}
 	
 }

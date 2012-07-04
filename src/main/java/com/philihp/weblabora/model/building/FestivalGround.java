@@ -24,12 +24,12 @@ import com.philihp.weblabora.model.Wheel;
 public class FestivalGround extends BuildingSingleUsage {
 
 	public FestivalGround() {
-		super("I38", SettlementRound.D, 1, "Festival Ground", BuildCost.is().coins(10),
+		super("I38", SettlementRound.D, 1, "Festival Ground", BuildCost.is().coin(10),
 				7, 3, EnumSet.of(PLAINS, HILLSIDE, COAST), false);
 	}
 
 	@Override
-	public void use(Board board, UsageParamSingle input) throws WeblaboraException  {
+	public void use(Board board, UsageParamSingle output) throws WeblaboraException  {
 		Player player = board.getPlayer(board.getActivePlayer());
 		
 		if(player.getBeer() < 1)

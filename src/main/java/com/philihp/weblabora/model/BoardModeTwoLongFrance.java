@@ -37,6 +37,10 @@ public class BoardModeTwoLongFrance extends BoardMode {
 				continue;
 			if (buildingId == BuildingEnum.F29)
 				continue;
+			
+			char c = buildingId.toString().charAt(0);
+			if(c != 'G' && c != 'F') continue;
+			
 			Building building = buildingId.getInstance();
 			if (board.getSettlementRound().equals(building.getStage())) {
 				buildings.add(building);
@@ -57,6 +61,10 @@ public class BoardModeTwoLongFrance extends BoardMode {
 				continue;
 			if (buildingId == BuildingEnum.F29)
 				continue;
+			
+			char c = buildingId.toString().charAt(0);
+			if(c != 'G' && c != 'F') continue;
+			
 			Building building = buildingId.getInstance();
 			if (board.getAllBuildings().containsKey(buildingId) == false
 					&& building.getStage().equals("L") == false) {

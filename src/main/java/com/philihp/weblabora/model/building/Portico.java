@@ -14,6 +14,8 @@ import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.UsageParamSingle;
+import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.model.Wheel;
 
 public class Portico extends BuildingSingleUsage {
@@ -24,11 +26,11 @@ public class Portico extends BuildingSingleUsage {
 	}
 
 	@Override
-	public void use(Board board, UsageParamSingle input) {
+	public void use(Board board, UsageParamSingle input) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
-		if(input.getRelic() != 1)
-			throw new WeblaboraException(getName() + " requires 1 relic as input, but was given " + input.getRelic());
-		player.subtractRelic(1);
+		if(input.getReliquary() != 1)
+			throw new WeblaboraException(getName() + " requires 1 relic as input, but was given " + input.getReliquary());
+		player.subtractReliquary(1);
 		player.addPenny(2);
 		player.addClay(2);
 		player.addGrain(2);

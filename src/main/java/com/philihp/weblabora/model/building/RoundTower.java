@@ -13,6 +13,8 @@ import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.UsageParamSingle;
+import com.philihp.weblabora.model.WeblaboraException;
 
 public class RoundTower extends BuildingSingleUsage {
 
@@ -21,12 +23,12 @@ public class RoundTower extends BuildingSingleUsage {
 	}
 
 	@Override
-	public void use(Board board, UsageParamSingle input) {
+	public void use(Board board, UsageParamSingle input) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 		int whiskey = input.getWhiskey();
 		int nickel = input.getNickel();
 		int penny = input.getPenny();
-		int books = input.getBooks();
+		int books = input.getBook();
 		int pottery = input.getPottery();
 		int ornament = input.getOrnament();
 		int relic = input.getReliquary();
@@ -55,7 +57,7 @@ public class RoundTower extends BuildingSingleUsage {
 
 		player.subtractWhiskey(whiskey);
 		player.subtractNickel(nickel);
-		player.subtractBooks(books);
+		player.subtractBook(books);
 		player.subtractPottery(pottery);
 		player.subtractOrnament(ornament);
 		player.subtractReliquary(relic);

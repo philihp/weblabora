@@ -50,7 +50,7 @@ public enum BuildingEnum {
 	F33(ShippingCompany.class),
 	I33(Cooperage.class),
 	F30(TownEstate.class),
-	I30(Refactory.class),
+	I30(Refectory.class),
 	F32(Calefactory.class),
 	I32(FilialChurch.class),
 	F29(QuarryB.class),

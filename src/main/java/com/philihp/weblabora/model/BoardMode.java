@@ -41,6 +41,10 @@ public abstract class BoardMode {
 		map.get(TWO).get(LONG).put(FRANCE, BoardModeTwoLongFrance.class);
 		map.get(THREE).get(LONG).put(FRANCE, BoardModeThreeLongFrance.class);
 		map.get(FOUR).get(LONG).put(FRANCE, BoardModeFourLongFrance.class);
+		
+		map.get(TWO).get(LONG).put(IRELAND, BoardModeTwoLongIreland.class);
+		map.get(THREE).get(LONG).put(IRELAND, BoardModeThreeLongIreland.class);
+		map.get(FOUR).get(LONG).put(IRELAND, BoardModeFourLongIreland.class);
 	}
 
 	public static BoardMode getMode(Board board, GamePlayers gamePlayers,

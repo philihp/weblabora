@@ -13,6 +13,7 @@ import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.WeblaboraException;
 
 public class Refectory extends Building {
 
@@ -21,7 +22,7 @@ public class Refectory extends Building {
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) {
+	public void use(Board board, UsageParam input) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 		player.addBeer(1);
 		player.addMeat(1);
@@ -33,6 +34,6 @@ public class Refectory extends Building {
 			throw new WeblaboraException(getName()+" was told to consume "+quantity+" meat, but player only has "+player.getMeat()+" meat available");
 
 		player.subtractMeat(quantity);
-		player.addCeramic(quantity);
+		player.addPottery(quantity);
 	}
 }

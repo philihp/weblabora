@@ -28,9 +28,11 @@ public class BoardModeTwoLongIreland extends BoardMode {
 	@Override
 	public List<Building> roundBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
-		// two player long game uses all buildings except C-grapevine, C-quarry
-		// and Carpentry
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
+			
+			char c = buildingId.toString().charAt(0);
+			if(c != 'G' && c != 'I') continue;
+			
 			Building building = buildingId.getInstance();
 			if (board.getSettlementRound().equals(building.getStage())) {
 				buildings.add(building);
@@ -45,6 +47,10 @@ public class BoardModeTwoLongIreland extends BoardMode {
 		// two player long game uses all buildings except C-grapevine, C-quarry
 		// and Carpentry
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
+			
+			char c = buildingId.toString().charAt(0);
+			if(c != 'G' && c != 'I') continue;
+			
 			Building building = buildingId.getInstance();
 			if (board.getAllBuildings().containsKey(buildingId) == false
 					&& building.getStage().equals("L") == false) {

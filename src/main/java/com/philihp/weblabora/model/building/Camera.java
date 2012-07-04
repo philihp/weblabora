@@ -40,9 +40,9 @@ public class Camera extends BuildingSingleUsage {
 
 		int iterations = book;
 
-		player.subtractBooks(iterations);
+		player.subtractBook(iterations);
 		player.subtractPottery(iterations);
-		player.addCoin(iterations);
+		player.addCoins(iterations);
 		player.addClay(iterations);
 		player.addReliquary(iterations);
 	}

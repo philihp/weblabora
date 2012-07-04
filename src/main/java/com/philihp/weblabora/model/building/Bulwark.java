@@ -14,6 +14,8 @@ import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.UsageParamSingle;
+import com.philihp.weblabora.model.WeblaboraException;
 import com.philihp.weblabora.model.Wheel;
 
 public class Bulwark extends BuildingSingleUsage {
@@ -24,15 +26,15 @@ public class Bulwark extends BuildingSingleUsage {
 	}
 
 	@Override
-	public void use(Board board, UsageParam input) {
+	public void use(Board board, UsageParamSingle input) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 
-		if(input.getBooks() != 1)
+		if(input.getBook() != 1)
 			throw new WeblaboraException(getName()+" requires at least 1 book.");
-		if(player.getBooks() < 1)
+		if(player.getBook() < 1)
 			throw new WeblaboraException(getName()+" requires that the player have at least 1 book.");
 
-		player.subtractBooks(1);
+		player.subtractBook(1);
 		input.getHistory().setNextPlotFree(true);
 		input.getHistory().setNextDistrictFree(true);
 	}

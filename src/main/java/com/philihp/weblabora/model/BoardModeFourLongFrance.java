@@ -29,6 +29,10 @@ public class BoardModeFourLongFrance extends BoardMode {
 	public List<Building> roundBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
+			
+			char c = buildingId.toString().charAt(0);
+			if(c != 'G' && c != 'F') continue;
+			
 			Building building = buildingId.getInstance();
 			if (board.getSettlementRound().equals(building.getStage())
 					&& building.getPlayers().ordinal() <= PLAYERS.ordinal()) {
@@ -42,8 +46,13 @@ public class BoardModeFourLongFrance extends BoardMode {
 	public List<Building> futureBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
 		for(BuildingEnum buildingId : BuildingEnum.values()) {
+
+			char c = buildingId.toString().charAt(0);
+			if(c != 'G' && c != 'F') continue;
+			
 			Building building = buildingId.getInstance();
-			if(board.getAllBuildings().containsKey(buildingId) == false && building.getPlayers().ordinal() <= PLAYERS.ordinal()) {
+			if(board.getAllBuildings().containsKey(buildingId) == false
+					&& building.getPlayers().ordinal() <= PLAYERS.ordinal()) {
 				buildings.add(building);
 			}
 		}

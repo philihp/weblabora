@@ -58,7 +58,7 @@ public class CommandUse implements MoveCommand, InvalidDuringSettlement {
 			}
 		}
 
-		usageParam.setMoveHistory(params.getHistory());
+		usageParam.setHistory(params.getHistory());
 		
 		execute(board, buildingId, usageParam, usingPrior, params.getPlaceClergyman());
 

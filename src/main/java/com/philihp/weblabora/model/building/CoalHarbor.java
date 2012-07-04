@@ -13,6 +13,7 @@ import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.UsageParamSingle;
 import com.philihp.weblabora.model.WeblaboraException;
 
 public class CoalHarbor extends BuildingSingleUsage {

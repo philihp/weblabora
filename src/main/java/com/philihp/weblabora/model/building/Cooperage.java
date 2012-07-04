@@ -23,7 +23,7 @@ public class Cooperage extends BuildingDoubleUsage {
 
 	public Cooperage() {
 		super("I33", SettlementRound.C, 1, "Cooperage", BuildCost.is().straw(1).clay(3), 3, 5,
-				EnumSet.of(COAST, PLAINS, HILLS), false);
+				EnumSet.of(COAST, PLAINS, HILLSIDE), false);
 	}
 
 	@Override
