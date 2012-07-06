@@ -193,6 +193,7 @@ function requestCallback(response) {
 	<div class="container">
 		<div id="fb-root"></div>
 		<div class="wheel">
+			<!-- ${board.mode.players} ${board.mode.country} ${board.mode.length} -->
 			<svg style="width: 300px; height: 300px;" viewbox="-150.5 -150.5 300 300">
 			  <defs>
     			<linearGradient id="housefill" x1="0%" y1="0%" x2="100%" y2="0%">

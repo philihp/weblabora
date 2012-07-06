@@ -14,7 +14,7 @@ public class BoardModeFourLongIreland extends BoardMode {
 	
 	private static final GamePlayers PLAYERS = GamePlayers.FOUR;
 	private static final GameLength LENGTH = GameLength.LONG;
-	private static final GameCountry COUNTRY = GameCountry.FRANCE;
+	private static final GameCountry COUNTRY = GameCountry.IRELAND;
 
 	protected BoardModeFourLongIreland(Board board) {
 		super(board);

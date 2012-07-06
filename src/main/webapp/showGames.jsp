@@ -23,6 +23,8 @@
 			  <table>
 			  	<tr>
 			  		<th>ID, Started</th>
+					<th>Country</th>
+					<th>Length</th>
 			  		<th>Red</th>
 			  		<th>Green</th>
 			  		<th>Blue</th>
@@ -31,6 +33,8 @@
 					<c:forEach items="${games}" var="game">
 						<tr>
 							<td>#${game.gameId}, <fmt:formatDate value="${game.dateCreated}" pattern="yyyy-MM-dd" /></td>
+							<td>${game.country}</td>
+							<td>${game.length}</td>
 							<td>
 								<c:if test="${game.players >= 1}">
 									<c:choose>
