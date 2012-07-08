@@ -16,7 +16,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="I35.svg">
+   sodipodi:docname="I08.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -115,15 +115,15 @@
      inkscape:pageshadow="2"
      inkscape:zoom="2"
      inkscape:cx="131.32963"
-     inkscape:cy="431.79658"
+     inkscape:cy="191.79658"
      inkscape:document-units="px"
-     inkscape:current-layer="layer5"
+     inkscape:current-layer="layer4"
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:window-width="1680"
      inkscape:window-height="988"
-     inkscape:window-x="872"
+     inkscape:window-x="2552"
      inkscape:window-y="1016"
      inkscape:window-maximized="1">
     <sodipodi:guide
@@ -159,7 +159,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -370,41 +370,33 @@
     <text
        xml:space="preserve"
        style="font-size:25.69965553px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="152.3008"
-       y="275.53412"
+       x="152.8008"
+       y="308.53412"
        id="text7123"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="152.3008"
-         y="275.53412"
-         id="tspan4095">+1 Penny</tspan><tspan
+         x="152.8008"
+         y="308.53412"
+         id="tspan4095">+3 Pennies</tspan><tspan
          sodipodi:role="line"
-         x="152.3008"
-         y="307.65869"
-         id="tspan4099">and</tspan><tspan
+         x="152.8008"
+         y="340.65869"
+         id="tspan4099">and either</tspan><tspan
          sodipodi:role="line"
-         x="152.3008"
-         y="339.78326"
-         id="tspan4112">+1 Beer</tspan><tspan
+         x="152.8008"
+         y="372.78326"
+         id="tspan4112">( +1 Beer</tspan><tspan
          sodipodi:role="line"
-         x="152.3008"
-         y="371.90784"
-         id="tspan4101">or</tspan><tspan
+         x="152.8008"
+         y="404.90784"
+         id="tspan4110">or</tspan><tspan
          sodipodi:role="line"
-         x="152.3008"
-         y="404.03241"
-         id="tspan4091">+1 Penny</tspan><tspan
+         x="152.8008"
+         y="437.03241"
+         id="tspan4114">+1 Whiskey )</tspan><tspan
          sodipodi:role="line"
-         x="152.3008"
-         y="436.15695"
-         id="tspan4110">and</tspan><tspan
-         sodipodi:role="line"
-         x="152.3008"
-         y="468.28152"
-         id="tspan4114">+1 Whiskey</tspan><tspan
-         sodipodi:role="line"
-         x="152.3008"
-         y="500.40613"
+         x="152.8008"
+         y="469.15695"
          id="tspan4008" /></text>
     <flowRoot
        xml:space="preserve"
