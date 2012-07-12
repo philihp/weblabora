@@ -29,5 +29,6 @@ public class ChamberOfWonders extends Building {
 			player.subtractAll(param);
 			player.claimWonder(board.claimWonder());
 		}
+		else throw new WeblaboraException(getName() + " requires exactly 13 different goods, but was only given "+param.differentSingularGoods());
 	}
 }
