@@ -28,7 +28,7 @@ public class Locutory extends Building {
 
 		if(param.getPenny() != 2)
 			throw new WeblaboraException(getName()+" consumes two pennies, but was given "+param.getPenny()+" instead.");
-		
+		player.subtractPenny(2);
 		player.resetPrior();
 	}
 }

@@ -32,14 +32,14 @@ public class CommandConvert implements MoveCommand {
 		player.subtractGrain(param.getGrain());
 		player.addStraw(param.getGrain());
 		
-		player.subtractBeer(param.getBeer());
-		player.addPenny(param.getBeer()*2);
-		
 		player.subtractWine(param.getWine());
 		player.addPenny(param.getWine());
 		
 		player.subtractNickel(param.getNickel());
 		player.addPenny(param.getNickel()*5);
+
+		player.subtractWhiskey(param.getWhiskey());
+		player.addPenny(param.getWhiskey()*2);
 		
 		player.subtractCoins(param.getPenny());
 		player.addNickel(param.getPenny()/5);
