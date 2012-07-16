@@ -70,7 +70,7 @@ public class Landscape {
 		int count = 0;
 		for(Terrain[] row : getTable()) {
 			for(Terrain cell : row) {
-				if(type.equals(cell.getTerrainType()))
+				if(cell != null && type == cell.getTerrainType())
 					count++;
 			}
 		}
