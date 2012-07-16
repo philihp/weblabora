@@ -29,6 +29,7 @@ public class DruidsHouse extends BuildingDoubleUsage {
 		
 		if(player.getBook() <= 0)
 			throw new WeblaboraException(getName()+" requires that the current player have at least 1 book.");
+		player.subtractBook(1);
 		
 		if(param.getWood() != 0) {
 			player.addWood(5);
