@@ -41,7 +41,8 @@ public class CommandBuyDistrict implements MoveCommand {
 			throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 		
-		int cost = free ? 0 : board.purchaseDistrict();
+		int cost = board.purchaseDistrict();
+		if(free) cost = 0;
 		if(player.getCoins() < cost) 
 			throw new WeblaboraException("Purchase price for a district is "+cost+", but player "+player.getColor()+" only has "+player.getCoins()+".");
 		player.subtractCoins(cost);

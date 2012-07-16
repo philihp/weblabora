@@ -76,7 +76,8 @@ public class CommandBuyPlot implements MoveCommand {
 			throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 		
-		int cost = free ? 0 : board.purchasePlot();
+		int cost = board.purchasePlot();
+		if(free) cost = 0;
 
 		if(player.getCoins() < cost)
 			throw new WeblaboraException("Purchase price for a plot is "+cost+", but player "+player.getColor()+" only has "+player.getCoins()+".");

@@ -37,7 +37,7 @@ public class FestivalGround extends BuildingSingleUsage {
 		
 		player.subtractBeer(1);		
 
-		int possiblePoints = player.getLandscape().getNumberOfForests();
+		int possiblePoints = player.getLandscape().getNumberOfForests() + player.getLandscape().getNumberOfMoors();
 		
 		int requestedPoints = output.getBook()*2 + output.getPottery()*3 + output.getOrnament()*4 + output.getReliquary()*8;
 		
