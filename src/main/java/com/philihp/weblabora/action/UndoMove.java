@@ -41,6 +41,7 @@ public class UndoMove extends BaseAction {
 			return mapping.findForward("root");
 		}
 		
+		/*
 		if(game.isUndoable() == false) {
 			throw new WeblaboraException("More than 24 hours has elapsed since that move has been made.");
 		}
@@ -50,6 +51,9 @@ public class UndoMove extends BaseAction {
 		else {
 			game.setState(game.getState().getSrcState());
 		}
+		*/
+
+		game.setState(game.getState().getSrcState());
 		
 		return mapping.findForward("madeMove");
 	}
