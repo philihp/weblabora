@@ -364,12 +364,12 @@ function requestCallback(response) {
 		<div class="building-list"><!-- comment out white-space for inline-block spacing
 		  <c:forEach items="${board.unbuiltBuildings}" var="building">
 		  	--><div class="building">
-		  	  <a class="building-link" href="images/building/${building.image}.jpg" title="${building.id}"><img src="images/building/${building.image}.jpg" class="building-image" /></a>
+		  	  <a class="building-link" href="images/building/${building.image}.png" title="${building.id}"><img src="images/building/${building.image}.png" class="building-image" /></a>
 		  	</div><!--
 		  </c:forEach>
 		  <c:forEach items="${board.futureBuildings}" var="building">
 		  	--><div class="future-building">
-		  	  <a class="future-building-link" href="images/building/${building.image}.jpg" title="${building.id}"><img src="images/building/${building.image}.jpg" class="future-building-image" /></a>
+		  	  <a class="future-building-link" href="images/building/${building.image}.png" title="${building.id}"><img src="images/building/${building.image}.png" class="future-building-image" /></a>
 		  	</div><!--
 		  </c:forEach>
 		--></div>
@@ -399,14 +399,14 @@ function requestCallback(response) {
 										<c:choose>
 											<c:when test="${not empty cell.erection}">
 												<div class="building building-${fn:toLowerCase(cell.erection.clergyman.type)}-${fn:toLowerCase(player.color)}">
-													<a class="erection-link" href="images/building/${cell.erection.image}.jpg" title="${cell.erection.id}"><img src="images/building/${cell.erection.image}.jpg" class="building-image" /></a>
+													<a class="erection-link" href="images/building/${cell.erection.image}.png" title="${cell.erection.id}"><img src="images/building/${cell.erection.image}.png" class="building-image" /></a>
 											  	</div>
 											</c:when>
 											<c:when test="${cell.terrainType eq 'FOREST'}">
-												<img src="images/building/Wood.jpg" class="landscape-tile" title="${cell.coords}" />
+												<img src="images/building/Wood.png" class="landscape-tile" title="${cell.coords}" />
 											</c:when>
 											<c:when test="${cell.terrainType eq 'MOOR'}">
-												<img src="images/building/Peat.jpg" class="landscape-tile" title="${cell.coords}" />
+												<img src="images/building/Peat.png" class="landscape-tile" title="${cell.coords}" />
 											</c:when>
 											<c:otherwise>
 												${cell.terrainType.properCase}<br />
@@ -436,12 +436,12 @@ function requestCallback(response) {
 				<div class="settlement-list"><!-- comment out white-space for inline-block spacing
 				  <c:forEach items="${player.unbuiltSettlements}" var="settlement">
 				  	--><div class="settlement">
-				  		<a class="settlement-link" href="images/building/${settlement.image}.jpg" title="${settlement.id}"><img src="images/building/${settlement.image}.jpg" class="settlement-image" /></a>
+				  		<a class="settlement-link" href="images/building/${settlement.image}.png" title="${settlement.id}"><img src="images/building/${settlement.image}.png" class="settlement-image" /></a>
 				  	</div><!--
 				  </c:forEach>
 				  <c:forEach items="${board.futureSettlements}" var="settlement">
 				  	--><div class="settlement future-settlement future-settlement-${fn:toLowerCase(player.color)}">
-				  	  <a class="settlement-link settlement-link-${fn:toLowerCase(player.color)}" href="images/building/${settlement.image}.jpg" title="${settlement.id}"><img src="images/building/${settlement.image}.jpg" class="settlement-image settlement-image-${fn:toLowerCase(player.color)}" /></a>
+				  	  <a class="settlement-link settlement-link-${fn:toLowerCase(player.color)}" href="images/building/${settlement.image}.png" title="${settlement.id}"><img src="images/building/${settlement.image}.png" class="settlement-image settlement-image-${fn:toLowerCase(player.color)}" /></a>
 				  	</div><!--
 				  </c:forEach>
 				--></div>
