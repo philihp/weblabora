@@ -127,30 +127,6 @@
 	});
 </script>
 
-<script src="//connect.facebook.net/en_US/all.js"></script>
-<script>
-$(document).ready(function() {
-	FB.init({
-		appId: ${client_id},
-		frictionlessRequests: true
-	});
-});
-
-function poke(id) {
-	console.log('poke');
-	FB.ui({
-		method: 'apprequests',
-		message: 'Your turn',
-		to: id
-	}, requestCallback);
-}
-
-function requestCallback(response) {
-	console.log('callback');
-	console.log(response);
-}
-
-</script>
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -377,7 +353,8 @@ function requestCallback(response) {
 		<ul class="tabs">
 			<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
 				<li id="tab${playerStatus.index+1}" class="tab tab--${player.activeClass} tab--${player.selectedClass} tab--${fn:toLowerCase(player.color)}">
-					<a href="javascript:poke(${player.user.facebookId})"><img src="//graph.facebook.com/${player.user.facebookId}/picture" height="50" width="50" title="${player.user.facebookId}"/></a>
+					<div style="float:right"><a href="http://facebook.com/${player.user.facebookId}" target="_blank"><img src="images/facebook_16.png" /></a></div>
+					<img src="//graph.facebook.com/${player.user.facebookId}/picture" height="50" width="50" title="${player.user.facebookId}"/>
 					${player.user.name}
 				</li>
 			</c:forEach>
