@@ -27,10 +27,15 @@ public class CommandCutPeat implements MoveCommand, InvalidDuringSettlement {
 		Player player = board.getPlayer(board.getActivePlayer());
 		Terrain spot = player.getLandscape().getTerrain().get(y, x);
 
+		if(spot == null) {
+			throw new WeblaboraException("Could not cut peat at ("+x+","+y+") because it does not exist.");
+		}
+		
+		
 		if (spot.getTerrainType() != MOOR)
 			throw new WeblaboraException("Tried to Cut Peat on "
 					+ spot.getTerrainType() + " at (" + x + "," + y
-					+ ") for player " + board.getActivePlayer()
+					+ ") for player " + board.getActivePlayerColor()
 					+ ", but it is not moor");
 
 		spot.setTerrainType(PLAINS);
