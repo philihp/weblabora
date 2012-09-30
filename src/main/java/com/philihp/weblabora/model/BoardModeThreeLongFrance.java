@@ -140,7 +140,7 @@ public class BoardModeThreeLongFrance extends BoardMode {
 
 	@Override
 	public int stoneActiveOnRound() {
-		return 8;
+		return 13;
 	}
 
 	@Override
