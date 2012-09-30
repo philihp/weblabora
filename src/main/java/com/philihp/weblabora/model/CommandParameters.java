@@ -59,7 +59,11 @@ public class CommandParameters {
 		this.suffix = suffix;
 	}
 
-	public String get(int i) {
+	public String get(int i) throws WeblaboraException {
+		
+		if (params.size() <= i) {
+			throw new WeblaboraException("Incorrect number of parameters for command " + command + ".");
+		}
 		return params.get(i);
 	}
 

@@ -32,7 +32,7 @@ public class CommandFellTrees implements MoveCommand, InvalidDuringSettlement {
 		if (spot.getTerrainType() != FOREST)
 			throw new WeblaboraException("Tried to Fell Trees on "
 					+ spot.getTerrainType() + " at (" + x + "," + y
-					+ ") for player " + board.getActivePlayer()
+					+ ") for player " + board.getActivePlayerColor()
 					+ ", but it is not a forest");
 
 		spot.setTerrainType(PLAINS);
