@@ -16,8 +16,8 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="F11.svg"
-   inkscape:export-filename="C:\Users\Philihp\git\WebLabora\src\main\webapp\images\building\F11.png"
+   sodipodi:docname="G26.svg"
+   inkscape:export-filename="C:\Users\Philihp\git\WebLabora\src\main\webapp\images\building\G26.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -455,14 +455,6 @@
          offset="1"
          style="stop-color:#443731;stop-opacity:1;" />
     </linearGradient>
-    <filter
-       id="filter12118"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur12120"
-         stdDeviation="1.0869565"
-         inkscape:collect="always" />
-    </filter>
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient11846-1"
@@ -3578,18 +3570,6 @@
          offset="1"
          id="stop8570-8" />
     </linearGradient>
-    <filter
-       height="1.2209864"
-       y="-0.11049321"
-       width="1.2590502"
-       x="-0.12952512"
-       id="filter8592"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur8594"
-         stdDeviation="0.70069137"
-         inkscape:collect="always" />
-    </filter>
     <radialGradient
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(1,0,0,0.85714283,0,3.418368)"
@@ -5327,7 +5307,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
      inkscape:cx="198.1095"
-     inkscape:cy="125.24663"
+     inkscape:cy="325.90921"
      inkscape:document-units="px"
      inkscape:current-layer="layer4"
      showgrid="false"
@@ -5421,7 +5401,7 @@
          x="198.97209"
          y="41.5"
          style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;font-family:Sans;-inkscape-font-specification:Sans"
-         id="tspan3995">F11</tspan><tspan
+         id="tspan3995">G26</tspan><tspan
          sodipodi:role="line"
          x="198.97209"
          y="76.5"
