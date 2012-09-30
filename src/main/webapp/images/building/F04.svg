@@ -16,12 +16,34 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="F03.svg"
-   inkscape:export-filename="C:\Users\Philihp\git\WebLabora\src\main\webapp\images\building\F03.png"
+   sodipodi:docname="F04.svg"
+   inkscape:export-filename="C:\Users\Philihp\git\WebLabora\src\main\webapp\images\building\F04.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
      id="defs4">
+    <linearGradient
+       id="linearGradient7131">
+      <stop
+         style="stop-color:#e2d19a;stop-opacity:1;"
+         offset="0"
+         id="stop7133" />
+      <stop
+         style="stop-color:#c1d9b9;stop-opacity:1;"
+         offset="1"
+         id="stop7135" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5673">
+      <stop
+         style="stop-color:#96be88;stop-opacity:1;"
+         offset="0"
+         id="stop5675" />
+      <stop
+         style="stop-color:#dfbd48;stop-opacity:1;"
+         offset="1"
+         id="stop5677" />
+    </linearGradient>
     <linearGradient
        id="linearGradient6794">
       <stop
@@ -5944,18 +5966,6 @@
          offset="1"
          style="stop-color:#452727;stop-opacity:1;" />
     </linearGradient>
-    <filter
-       height="1.3771227"
-       y="-0.18856136"
-       width="1.1680842"
-       x="-0.084042114"
-       id="filter12137"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur12139"
-         stdDeviation="0.82241715"
-         inkscape:collect="always" />
-    </filter>
     <linearGradient
        id="linearGradient11846-1-05">
       <stop
@@ -8830,6 +8840,24 @@
          offset="1"
          style="stop-color:#452727;stop-opacity:1;" />
     </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5673"
+       id="linearGradient7129"
+       x1="-6.485714"
+       y1="254.28572"
+       x2="-5.9428711"
+       y2="500.28571"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient7131"
+       id="linearGradient7137"
+       x1="1.9657145"
+       y1="354.42856"
+       x2="-0.49999997"
+       y2="232.42856"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -8838,11 +8866,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2"
-     inkscape:cx="36.53729"
-     inkscape:cy="122.25"
+     inkscape:zoom="1"
+     inkscape:cx="-46.950942"
+     inkscape:cy="280.84646"
      inkscape:document-units="px"
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="layer5"
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -8890,7 +8918,7 @@
      inkscape:label="Background"
      style="display:inline">
     <rect
-       style="fill:#3e9c1a;fill-opacity:1;stroke:none;filter:url(#filter7054)"
+       style="fill:url(#linearGradient7129);fill-opacity:1;stroke:none;filter:url(#filter7054)"
        id="rect6846"
        width="284.28571"
        height="472.85715"
@@ -8898,13 +8926,13 @@
        y="17.857141"
        ry="5.7142859" />
     <rect
-       style="fill:#aced94;fill-opacity:1;stroke:none;filter:url(#filter7060)"
+       style="fill:url(#linearGradient7137);fill-opacity:1;stroke:none;filter:url(#filter7060)"
        id="rect7058"
        width="252.14285"
        height="231.42857"
        x="23.571428"
        y="240.71428"
-       ry="5.7142859" />
+       ry="0" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -8949,12 +8977,12 @@
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan6669"
-         x="59.538395"
+         x="61.341129"
          y="26.428572"
-         style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;font-family:Sans;-inkscape-font-specification:Sans">Coast, Plains,</tspan><tspan
+         style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;font-family:Sans;-inkscape-font-specification:Sans">Coast, </tspan><tspan
          sodipodi:role="line"
          x="59.538395"
-         y="42.67857"
+         y="42.678574"
          style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;font-family:Sans;-inkscape-font-specification:Sans"
          id="tspan6671">Hillside</tspan></text>
     <text
@@ -9733,7 +9761,7 @@
         <path
            inkscape:transform-center-y="1.4285714"
            transform="matrix(0.69720735,-0.06499846,0.04848481,0.8387826,5.5929792,1003.7978)"
-           d="m 29.107142,10.625 a 12.767858,3.125 0 1 1 -25.5357147,0 12.767858,3.125 0 1 1 25.5357147,0 z"
+           d="m 29.107142,10.625 c 0,1.72589 -5.716364,3.125 -12.767857,3.125 -7.0514931,0 -12.7678577,-1.39911 -12.7678577,-3.125 0,-1.7258898 5.7163646,-3.125 12.7678577,-3.125 7.051493,0 12.767857,1.3991102 12.767857,3.125 z"
            sodipodi:ry="3.125"
            sodipodi:rx="12.767858"
            sodipodi:cy="10.625"
