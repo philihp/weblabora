@@ -137,7 +137,7 @@ public class BoardModeFourLongIreland extends BoardMode {
 
 	@Override
 	public int grapeActiveOnRound() {
-		return 8;
+		return GRAPE_INACTIVE_IN_IRELAND;
 	}
 
 	@Override
