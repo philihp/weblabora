@@ -26,7 +26,7 @@ public class ForestHut extends BuildingCoordinateUsage {
 
 	public ForestHut() {
 		super("I29", SettlementRound.C, 3, "Forest Hut", BuildCost.is().clay(1)
-				.straw(2), 5, 1, EnumSet.of(PLAINS, HILLSIDE, COAST), false);
+				.straw(1), 5, 1, EnumSet.of(PLAINS, HILLSIDE, COAST), false);
 	}
 
 	@Override
