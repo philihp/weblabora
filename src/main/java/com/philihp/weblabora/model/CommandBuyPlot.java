@@ -64,8 +64,14 @@ public class CommandBuyPlot implements MoveCommand {
 	public void execute(Board board, CommandParameters params)
 			throws WeblaboraException {
 		
+		String param0 = params.get(0);
+		
+		if (param0.equals("")) {
+			throw new WeblaboraException("Incorrect number of parameters for command P.");
+		}
+		
 		execute(board,
-				Integer.parseInt(params.get(0)),
+				Integer.parseInt(param0),
 				Side.valueOf(params.get(1)),
 				params.getHistory().isNextPlotFree()
 				);

@@ -23,6 +23,8 @@ public abstract class BoardMode {
 	
 	protected final Board board;
 
+	protected final int GRAPE_INACTIVE_IN_IRELAND = 99999;
+	
 	private static final EnumMap<GamePlayers, EnumMap<GameLength, EnumMap<GameCountry, Class<? extends BoardMode>>>> map;
 	static {
 		map = new EnumMap<GamePlayers, EnumMap<GameLength, EnumMap<GameCountry, Class<? extends BoardMode>>>>(
