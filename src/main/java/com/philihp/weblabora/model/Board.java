@@ -160,7 +160,8 @@ public class Board {
 		List<Settlement> settlements = new ArrayList<Settlement>();
 		for(SettlementEnum settlementId : SettlementEnum.values()) {
 			Settlement settlement = settlementId.getInstance();
-			if(settlement.getRound().ordinal() > getSettlementRound().ordinal()) {
+			if(settlement.getRound().ordinal() > getSettlementRound().ordinal() ||
+					isSettling() && settlement.getRound().ordinal() == getSettlementRound().ordinal()) {
 				settlements.add(settlementId.getInstance());
 			}
 		}
