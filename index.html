@@ -127,8 +127,10 @@
 </pre>
 
 
-        <p>Sometimes (a lot of the time) you need to do a lot of things in a turn, such as Workorder someone and then Use a building, or use a building which lets you use another building, such as the Calefactory which lets you fell trees AND cut peat. Rather than trying to figure out some sort of complicated nested nature of the U() command, the syntax just lets you string together many commands into a single move.</p>
-        <p>This means you're allowed to do a lot of things that aren't really legal, such as build multiple times, or Fell-Trees your entire land in one go. The user has to police things like this, since it would be a pain to enforce this in the program. Every building feels like it is an exception to the rule.</p>
+        <p>Sometimes (a lot of the time) you need to do a lot of things in a turn, such as Workorder someone and then Use a building, or use a building which lets you use another building, such as the Calefactory which lets you fell trees AND cut peat. Rather than trying to figure out some sort of complicated nested nature of the U() command, the syntax just lets you string together many commands into a single move, for example:</p>
+	<pre>W(WHITE,Wn)|U(F10,2,-1)|B(G39,2,-1)|U(G39,CoCo)*</pre>
+	<p>This would work-contract White to do something, gifting him a wine (which is consumed). He would use the Carpentry (F10) to remove the forest at 2, -1 and then build the Estate there, and then use it with a prior (because it has an asterisk) and give it 2 coal.</p>
+        <p>You're able to do a lot of things that aren't really legal moves, such as build multiple times, or Fell-Trees your entire land in one go. The players have to police things like this. The game is a little optimistic, in that it assumes players don't cheat. Rather than code as though the exceptions are the legal things, I tried to code as though the exceptions are the illegal things. Some things are caught, such as building a landscape in an illegal spot. Most things aren't.</p>
         <h4>Coordinates</h4>
         <p>The upper left square of your original 5x2 landscape is 0,0. Positive X is right, Positive Y is down. Coordinates can go negative obviously, but 0,0 always stays the origin.</p>
 
