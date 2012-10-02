@@ -26,9 +26,15 @@ public class Grapevine extends Building {
 
 	@Override
 	public void use(Board board, UsageParam input) {
-		Player player = board.getPlayer(board.getActivePlayer());
+		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		Wheel wheel = board.getWheel();
 		Token token = input.isWithJoker()?wheel.getJoker():wheel.getGrape();
-		player.addGrapes(token.take());
+		activePlayer.addGrapes(token.take());
+		
+		if(board.getMode().isProductionBonusActive()) {
+			for(Player player : board.getPlayers()) {
+				player.addGrapes(1);
+			}
+		}
 	}
 }

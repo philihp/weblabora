@@ -26,10 +26,16 @@ public class CloisterOffice extends Building {
 
 	@Override
 	public void use(Board board, UsageParam input) {
-		Player player = board.getPlayer(board.getActivePlayer());
+		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		Wheel wheel = board.getWheel();
 		Token token = input.isWithJoker()?wheel.getJoker():wheel.getCoin();
-		player.addPenny(token.take());
+		activePlayer.addPenny(token.take());
+		
+		if(board.getMode().isProductionBonusActive()) {
+			for(Player player : board.getPlayers()) {
+				player.addPenny(1);
+			}
+		}
 	}
 	
 	@Override

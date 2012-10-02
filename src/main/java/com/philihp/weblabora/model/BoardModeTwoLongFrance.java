@@ -187,4 +187,9 @@ public class BoardModeTwoLongFrance extends BoardMode {
 		return LENGTH;
 	}
 
+	@Override
+	public boolean isProductionBonusActive() {
+		return false;
+	}
+	
 }

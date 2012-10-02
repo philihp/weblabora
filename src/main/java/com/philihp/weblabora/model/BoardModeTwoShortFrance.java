@@ -10,28 +10,36 @@ import java.util.List;
 import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.BuildingEnum;
 
-public class BoardModeTwoLongIreland extends BoardMode {
+public class BoardModeTwoShortFrance extends BoardMode {
 
 	private static final GamePlayers PLAYERS = GamePlayers.TWO;
 	private static final GameLength LENGTH = GameLength.LONG;
-	private static final GameCountry COUNTRY = GameCountry.IRELAND;
+	private static final GameCountry COUNTRY = GameCountry.FRANCE;
 
-	protected BoardModeTwoLongIreland(Board board) {
+	protected BoardModeTwoShortFrance(Board board) {
 		super(board);
 	}
 
 	@Override
 	public int[] getWheelArmValues() {
-		return new int[] { 0, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8, 9, 10 };
+		return new int[] { 0, 1, 2, 3, 4, 4, 5, 6, 6, 7, 8, 10 };
 	}
 
 	@Override
 	public List<Building> roundBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
+		// two player long game uses all buildings except C-grapevine, C-quarry
+		// and Carpentry
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
+			if (buildingId == BuildingEnum.F10)
+				continue;
+			if (buildingId == BuildingEnum.F31)
+				continue;
+			if (buildingId == BuildingEnum.F29)
+				continue;
 			
 			char c = buildingId.toString().charAt(0);
-			if(c != 'G' && c != 'I') continue;
+			if(c != 'G' && c != 'F') continue;
 			
 			Building building = buildingId.getInstance();
 			if (board.getSettlementRound().equals(building.getStage())) {
@@ -47,9 +55,15 @@ public class BoardModeTwoLongIreland extends BoardMode {
 		// two player long game uses all buildings except C-grapevine, C-quarry
 		// and Carpentry
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
+			if (buildingId == BuildingEnum.F10)
+				continue;
+			if (buildingId == BuildingEnum.F31)
+				continue;
+			if (buildingId == BuildingEnum.F29)
+				continue;
 			
 			char c = buildingId.toString().charAt(0);
-			if(c != 'G' && c != 'I') continue;
+			if(c != 'G' && c != 'F') continue;
 			
 			Building building = buildingId.getInstance();
 			if (board.getAllBuildings().containsKey(buildingId) == false
@@ -96,6 +110,10 @@ public class BoardModeTwoLongIreland extends BoardMode {
 		} else if (board.isSettling() == false && board.getMoveInRound() == 4) {
 			board.postRound();
 		}
+	}
+	
+	@Override
+	public void preRound() {
 	}
 
 	@Override

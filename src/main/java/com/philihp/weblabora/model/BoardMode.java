@@ -24,6 +24,8 @@ public abstract class BoardMode {
 	protected final Board board;
 
 	private static final EnumMap<GamePlayers, EnumMap<GameLength, EnumMap<GameCountry, Class<? extends BoardMode>>>> map;
+	
+	//i'm not convinced this is the best way to do this... but whatever, it works.
 	static {
 		map = new EnumMap<GamePlayers, EnumMap<GameLength, EnumMap<GameCountry, Class<? extends BoardMode>>>>(
 				GamePlayers.class);
@@ -45,7 +47,15 @@ public abstract class BoardMode {
 		map.get(TWO).get(LONG).put(IRELAND, BoardModeTwoLongIreland.class);
 		map.get(THREE).get(LONG).put(IRELAND, BoardModeThreeLongIreland.class);
 		map.get(FOUR).get(LONG).put(IRELAND, BoardModeFourLongIreland.class);
-	}
+
+		map.get(TWO).get(SHORT).put(FRANCE, BoardModeTwoShortFrance.class);
+		map.get(THREE).get(SHORT).put(FRANCE, BoardModeThreeShortFrance.class);
+		map.get(FOUR).get(SHORT).put(FRANCE, BoardModeFourShortFrance.class);
+		
+		map.get(TWO).get(SHORT).put(IRELAND, BoardModeTwoShortIreland.class);
+		map.get(THREE).get(SHORT).put(IRELAND, BoardModeThreeShortIreland.class);
+		map.get(FOUR).get(SHORT).put(IRELAND, BoardModeFourShortIreland.class);
+}
 
 	public static BoardMode getMode(Board board, GamePlayers gamePlayers,
 			GameLength gameLength, GameCountry gameCountry) {
@@ -90,6 +100,12 @@ public abstract class BoardMode {
 	abstract public SettlementRound roundBeforeSettlement(int round);
 
 	abstract public void postMove();
+	
+	/**
+	 * Hook for pre-round processing for Short 3/4 player games to dish out resources
+	 */
+	public void preRound() {
+	}
 
 	abstract public void postRound();
 
@@ -106,4 +122,12 @@ public abstract class BoardMode {
 	abstract public GameCountry getCountry();
 
 	abstract public GameLength getLength();
+
+	/**
+	 * Hook for Short 3/4 Player Short games to remove the first peat and forest tiles
+	 */
+	public void customizeLandscape(Landscape landscape) {
+	}
+	
+	abstract public boolean isProductionBonusActive();
 }

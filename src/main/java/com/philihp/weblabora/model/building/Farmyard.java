@@ -27,16 +27,28 @@ public class Farmyard extends Building {
 
 	@Override
 	public void use(Board board, UsageParam input) throws WeblaboraException {
-		Player player = board.getPlayer(board.getActivePlayer());
+		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		Wheel wheel = board.getWheel();
 		
 		if(input.getSheep() != 0) {
 			Token token = input.isWithJoker()?wheel.getJoker():wheel.getSheep();
-			player.addSheep(token.take());
+			activePlayer.addSheep(token.take());
+			
+			if(board.getMode().isProductionBonusActive()) {
+				for(Player player : board.getPlayers()) {
+					player.addSheep(1);
+				}
+			}
 		}
 		else if(input.getGrain() != 0) {
 			Token token = input.isWithJoker()?wheel.getJoker():wheel.getGrain();
-			player.addGrain(token.take());
+			activePlayer.addGrain(token.take());
+			
+			if(board.getMode().isProductionBonusActive()) {
+				for(Player player : board.getPlayers()) {
+					player.addGrain(1);
+				}
+			}
 		}
 		else {
 			throw new WeblaboraException("Usage of Farmyard must specify if Sheep or Grain is desired.");

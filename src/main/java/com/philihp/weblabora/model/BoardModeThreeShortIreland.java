@@ -10,13 +10,13 @@ import java.util.List;
 import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.BuildingEnum;
 
-public class BoardModeFourLongIreland extends BoardMode {
+public class BoardModeThreeShortIreland extends BoardMode {
 	
-	private static final GamePlayers PLAYERS = GamePlayers.FOUR;
+	private static final GamePlayers PLAYERS = GamePlayers.THREE;
 	private static final GameLength LENGTH = GameLength.LONG;
 	private static final GameCountry COUNTRY = GameCountry.IRELAND;
 
-	protected BoardModeFourLongIreland(Board board) {
+	protected BoardModeThreeShortIreland(Board board) {
 		super(board);
 	}
 
@@ -35,7 +35,8 @@ public class BoardModeFourLongIreland extends BoardMode {
 			
 			Building building = buildingId.getInstance();
 			if (board.getSettlementRound().equals(building.getStage())
-					&& building.getPlayers().ordinal() <= PLAYERS.ordinal()) {
+					// less than, not less than or equal to...
+					&& building.getPlayers().ordinal() < PLAYERS.ordinal()) {
 				buildings.add(building);
 			}
 		}
@@ -66,13 +67,13 @@ public class BoardModeFourLongIreland extends BoardMode {
 	@Override
 	public SettlementRound roundBeforeSettlement(int round) {
 		switch (round) {
-		case 6:
+		case 5:
 			return SettlementRound.A;
-		case 9:
+		case 10:
 			return SettlementRound.B;
-		case 15:
+		case 14:
 			return SettlementRound.C;
-		case 18:
+		case 19:
 			return SettlementRound.D;
 		case 25:
 			return SettlementRound.E;
@@ -94,6 +95,10 @@ public class BoardModeFourLongIreland extends BoardMode {
 		else if(!board.isSettling() && board.getMoveInRound() == board.players.length+2) {
 			board.postRound();
 		}
+	}
+	
+	@Override
+	public void preRound() {
 	}
 
 	@Override
@@ -120,18 +125,16 @@ public class BoardModeFourLongIreland extends BoardMode {
 	public String getMoveName() {
 		if(board.isExtraRound()) return "extra";
 		switch (board.getMoveInRound()) {
-		case 1:
-			return "first";
-		case 2:
-			return "second";
-		case 3:
-			return "third";
-		case 4:
-			return "fourth";
-		case 5:
-			return "last";
-		default:
-			throw new RuntimeException("Illegal Move Number " + board.getMoveInRound());
+			case 1:
+				return "first";
+			case 2:
+				return "second";
+			case 3:
+				return "third";
+			case 4:
+				return "last";
+			default:
+				throw new RuntimeException("Illegal Move Number " + board.getMoveInRound());
 		}
 	}
 
@@ -166,7 +169,15 @@ public class BoardModeFourLongIreland extends BoardMode {
 	}
 
 	@Override
+	public void customizeLandscape(Landscape landscape) {
+		landscape.getTerrainAt(new Coordinate(0,0)).setErection(null);
+		landscape.getTerrainAt(new Coordinate(1,0)).setErection(null);
+		super.customizeLandscape(landscape);
+	}
+
+	@Override
 	public boolean isProductionBonusActive() {
-		return false;
-	}			
+		return true;
+	}
+	
 }

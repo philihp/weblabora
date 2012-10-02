@@ -10,19 +10,19 @@ import java.util.List;
 import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.BuildingEnum;
 
-public class BoardModeFourLongIreland extends BoardMode {
-	
-	private static final GamePlayers PLAYERS = GamePlayers.FOUR;
+public class BoardModeTwoShortIreland extends BoardMode {
+
+	private static final GamePlayers PLAYERS = GamePlayers.TWO;
 	private static final GameLength LENGTH = GameLength.LONG;
 	private static final GameCountry COUNTRY = GameCountry.IRELAND;
 
-	protected BoardModeFourLongIreland(Board board) {
+	protected BoardModeTwoShortIreland(Board board) {
 		super(board);
 	}
 
 	@Override
 	public int[] getWheelArmValues() {
-		return new int[] { 0, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8, 9, 10 };
+		return new int[] { 0, 1, 2, 3, 4, 4, 5, 6, 6, 7, 8, 10 };
 	}
 
 	@Override
@@ -34,8 +34,7 @@ public class BoardModeFourLongIreland extends BoardMode {
 			if(c != 'G' && c != 'I') continue;
 			
 			Building building = buildingId.getInstance();
-			if (board.getSettlementRound().equals(building.getStage())
-					&& building.getPlayers().ordinal() <= PLAYERS.ordinal()) {
+			if (board.getSettlementRound().equals(building.getStage())) {
 				buildings.add(building);
 			}
 		}
@@ -45,14 +44,19 @@ public class BoardModeFourLongIreland extends BoardMode {
 	@Override
 	public List<Building> futureBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
-		for(BuildingEnum buildingId : BuildingEnum.values()) {
+		// two player long game uses all buildings except C-grapevine, C-quarry
+		// and Carpentry
+		for (BuildingEnum buildingId : BuildingEnum.values()) {
 			
 			char c = buildingId.toString().charAt(0);
 			if(c != 'G' && c != 'I') continue;
 			
 			Building building = buildingId.getInstance();
-			if(board.getAllBuildings().containsKey(buildingId) == false && building.getPlayers().ordinal() <= PLAYERS.ordinal()) {
+			if (board.getAllBuildings().containsKey(buildingId) == false
+					&& building.getStage().equals("L") == false) {
 				buildings.add(building);
+				board.getAllBuildings().put(
+						BuildingEnum.valueOf(building.getId()), building);
 			}
 		}
 		return buildings;
@@ -60,7 +64,8 @@ public class BoardModeFourLongIreland extends BoardMode {
 
 	@Override
 	public boolean isExtraRound(int round) {
-		return round >= 24;
+		// there is no extra round for TWO
+		return false;
 	}
 
 	@Override
@@ -68,14 +73,12 @@ public class BoardModeFourLongIreland extends BoardMode {
 		switch (round) {
 		case 6:
 			return SettlementRound.A;
-		case 9:
+		case 13:
 			return SettlementRound.B;
-		case 15:
+		case 20:
 			return SettlementRound.C;
-		case 18:
+		case 27:
 			return SettlementRound.D;
-		case 25:
-			return SettlementRound.E;
 		default:
 			return null;
 		}
@@ -83,76 +86,85 @@ public class BoardModeFourLongIreland extends BoardMode {
 
 	@Override
 	public void postMove() {
-		board.nextActivePlayer();
-		board.setMoveInRound(board.getMoveInRound()+1);
-		if(board.isExtraRound() && board.getMoveInRound() == board.players.length+1) {
-			board.postExtraRound();
+		if (board.getMoveInRound() == 2 || board.isSettling()) {
+			board.nextActivePlayer();
 		}
-		if(board.isSettling() && board.getMoveInRound() == board.players.length+1) {
+		board.setMoveInRound(board.getMoveInRound() + 1);
+
+		if (board.isSettling() == true && board.getMoveInRound() == 3) {
 			board.postSettlement();
-		}
-		else if(!board.isSettling() && board.getMoveInRound() == board.players.length+2) {
+		} else if (board.isSettling() == false && board.getMoveInRound() == 4) {
 			board.postRound();
 		}
+	}
+	
+	@Override
+	public void preRound() {
 	}
 
 	@Override
 	public void postRound() {
 		board.setMoveInRound(1);
 
-		if(isExtraRound(board.getRound())) {
-			board.setRound(board.getRound()+1);
+		if (isExtraRound(board.getRound())) {
+			board.setRound(board.getRound() + 1);
 			board.setExtraRound(true);
-		}
-		else if(board.isRoundBeforeSettlement(board.getRound())) {
+		} else if (board.isRoundBeforeSettlement(board.getRound())) {
 			board.setSettling(true);
+		} else {
+			board.setRound(board.getRound() + 1);
 		}
-		else {
-			board.setRound(board.getRound()+1);
+
+		// begin 2-player end-game detection.
+		if (board.isSettling() == false
+				&& board.getSettlementRound() == SettlementRound.D
+				&& board.getUnbuiltBuildings().size() <= 3) {
+			board.setGameOver(true);
+			board.getMoveList().add(new HistoryEntry("Game Over"));
 		}
-		
-		//5 -- pass starting player
+		// end 2-player end-game detection.
+
 		board.setStartingPlayer(board.getStartingPlayer() + 1);
-		board.getStartingMarker().setOwner(board.players[board.getStartingPlayer()]);
+		board.getStartingMarker().setOwner(
+				board.players[board.getStartingPlayer()]);
 	}
 
 	@Override
 	public String getMoveName() {
-		if(board.isExtraRound()) return "extra";
+		if (board.isExtraRound())
+			return "extra";
 		switch (board.getMoveInRound()) {
 		case 1:
-			return "first";
+			return "first half of first";
 		case 2:
-			return "second";
+			return "second half of first";
 		case 3:
-			return "third";
-		case 4:
-			return "fourth";
-		case 5:
-			return "last";
+			return "second";
 		default:
-			throw new RuntimeException("Illegal Move Number " + board.getMoveInRound());
+			throw new RuntimeException("Illegal Move Number "
+					+ board.getMoveInRound());
 		}
 	}
 
 	@Override
 	public int grapeActiveOnRound() {
-		return 8;
+		return 11;
 	}
 
 	@Override
 	public int stoneActiveOnRound() {
-		return 13;
+		return 18;
 	}
 
 	@Override
 	public void setWheelTokens(Wheel wheel) {
-		wheel.grape.setPosition(H);
+		wheel.grape.setPosition(K);
+		wheel.stone.setPosition(E);
 	}
 
 	@Override
 	public GamePlayers getPlayers() {
-		return PLAYERS; 
+		return PLAYERS;
 	}
 
 	@Override
@@ -167,6 +179,7 @@ public class BoardModeFourLongIreland extends BoardMode {
 
 	@Override
 	public boolean isProductionBonusActive() {
-		return false;
-	}			
+		return true;
+	}
+	
 }

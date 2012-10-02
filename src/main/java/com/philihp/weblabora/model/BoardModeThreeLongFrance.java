@@ -163,4 +163,10 @@ public class BoardModeThreeLongFrance extends BoardMode {
 		return LENGTH;
 	}
 	
+	@Override
+	public boolean isProductionBonusActive() {
+		return false;
+	}
+	
+	
 }

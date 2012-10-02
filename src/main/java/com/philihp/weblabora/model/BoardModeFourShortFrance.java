@@ -10,13 +10,13 @@ import java.util.List;
 import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.BuildingEnum;
 
-public class BoardModeFourLongIreland extends BoardMode {
+public class BoardModeFourShortFrance extends BoardMode {
 	
 	private static final GamePlayers PLAYERS = GamePlayers.FOUR;
 	private static final GameLength LENGTH = GameLength.LONG;
-	private static final GameCountry COUNTRY = GameCountry.IRELAND;
+	private static final GameCountry COUNTRY = GameCountry.FRANCE;
 
-	protected BoardModeFourLongIreland(Board board) {
+	protected BoardModeFourShortFrance(Board board) {
 		super(board);
 	}
 
@@ -31,11 +31,12 @@ public class BoardModeFourLongIreland extends BoardMode {
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
 			
 			char c = buildingId.toString().charAt(0);
-			if(c != 'G' && c != 'I') continue;
+			if(c != 'G' && c != 'F') continue;
 			
 			Building building = buildingId.getInstance();
 			if (board.getSettlementRound().equals(building.getStage())
-					&& building.getPlayers().ordinal() <= PLAYERS.ordinal()) {
+					// less than, not less than or equal to...
+					&& building.getPlayers().ordinal() < PLAYERS.ordinal()) {
 				buildings.add(building);
 			}
 		}
@@ -46,12 +47,13 @@ public class BoardModeFourLongIreland extends BoardMode {
 	public List<Building> futureBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
 		for(BuildingEnum buildingId : BuildingEnum.values()) {
-			
+
 			char c = buildingId.toString().charAt(0);
-			if(c != 'G' && c != 'I') continue;
+			if(c != 'G' && c != 'F') continue;
 			
 			Building building = buildingId.getInstance();
-			if(board.getAllBuildings().containsKey(buildingId) == false && building.getPlayers().ordinal() <= PLAYERS.ordinal()) {
+			if(board.getAllBuildings().containsKey(buildingId) == false
+					&& building.getPlayers().ordinal() <= PLAYERS.ordinal()) {
 				buildings.add(building);
 			}
 		}
@@ -95,7 +97,11 @@ public class BoardModeFourLongIreland extends BoardMode {
 			board.postRound();
 		}
 	}
-
+	
+	@Override
+	public void preRound() {
+	}
+	
 	@Override
 	public void postRound() {
 		board.setMoveInRound(1);
@@ -166,7 +172,15 @@ public class BoardModeFourLongIreland extends BoardMode {
 	}
 
 	@Override
+	public void customizeLandscape(Landscape landscape) {
+		landscape.getTerrainAt(new Coordinate(0,0)).setErection(null);
+		landscape.getTerrainAt(new Coordinate(1,0)).setErection(null);
+		super.customizeLandscape(landscape);
+	}
+
+	@Override
 	public boolean isProductionBonusActive() {
-		return false;
-	}			
+		return true;
+	}
+	
 }

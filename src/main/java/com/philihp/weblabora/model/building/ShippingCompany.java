@@ -28,24 +28,39 @@ public class ShippingCompany extends BuildingDoubleUsage {
 
 	@Override
 	public void use(Board board, UsageParamDouble input) throws WeblaboraException {
-		Player player = board.getPlayer(board.getActivePlayer());
+		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		
 		if(input.getEnergy() < 3) {
 			throw new WeblaboraException("Not enough energy. "+getName()+" needs 3 energy, but was only given "+input.getEnergy());
 		}
-		player.subtractEnergy(input);
+		activePlayer.subtractEnergy(input);
 		
 		UsageParamSingle output = input.getSecondary();
 		
 		int amount = board.getWheel().getJoker().take();
 		if(output.getMeat() == 1) {
-			player.addMeat(amount);
+			activePlayer.addMeat(amount);			
+			if(board.getMode().isProductionBonusActive()) {
+				for(Player player : board.getPlayers()) {
+					player.addMeat(1);
+				}
+			}
 		}
 		else if(output.getBread() == 1) {
-			player.addBread(amount);
+			activePlayer.addBread(amount);
+			if(board.getMode().isProductionBonusActive()) {
+				for(Player player : board.getPlayers()) {
+					player.addBread(1);
+				}
+			}
 		}
 		else if(output.getWine() == 1) {
-			player.addWine(amount);
+			activePlayer.addWine(amount);
+			if(board.getMode().isProductionBonusActive()) {
+				for(Player player : board.getPlayers()) {
+					player.addWine(1);
+				}
+			}
 		}
 		else throw new WeblaboraException(getName()+" needs to know if it should give meat, bread, or wine. Its second parameter needs to be 1 meat, 1 bread, or 1 wine.");
 	}
