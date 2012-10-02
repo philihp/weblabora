@@ -47,5 +47,6 @@ public class ShippingCompany extends BuildingDoubleUsage {
 		else if(output.getWine() == 1) {
 			player.addWine(amount);
 		}
+		else throw new WeblaboraException(getName()+" needs to know if it should give meat, bread, or wine. Its second parameter needs to be 1 meat, 1 bread, or 1 wine.");
 	}
 }
