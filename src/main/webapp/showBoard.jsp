@@ -140,6 +140,37 @@
   })();
 
 </script>
+
+<script type="text/javascript">
+  function onBuildingDragStart(event)
+  {
+    event.dataTransfer.effectAllowed = 'move';
+    event.dataTransfer.setData('Text', event.target.parentNode.id);
+  }
+
+
+  function onBuildingDrop(event)
+  {
+    var data = event.dataTransfer.getData('Text');
+
+    event.target.appendChild(document.getElementById(data));
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
+  function onBuildingDragOver(event)
+  {
+    event.preventDefault();
+    return false;
+  }
+
+  function onBuildingDragEnd(event) {
+    //event.target.parentNode.removeChild(event.target);
+    event.preventDefault();
+    return false;
+  }
+</script>
+
 </head>
 
 <body>
@@ -340,14 +371,14 @@
 			<a class="hide-future-building-button">Hide Future Buildings</a>
 		</div>
 		
-		<div class="building-list"><!-- comment out white-space for inline-block spacing
+		<div class="building-list" ondragstart="onBuildingDragStart(event)" ondragend="onBuildingDragEnd(event)"><!-- comment out white-space for inline-block spacing
 		  <c:forEach items="${board.unbuiltBuildings}" var="building">
-		  	--><div class="building">
+		  	--><div class="building" draggable="true" id="building-${building.id}">
 		  	  <a class="building-link" href="images/building/${building.image}.png" title="${building.id}"><img src="images/building/${building.image}.png" class="building-image" /></a>
 		  	</div><!--
 		  </c:forEach>
 		  <c:forEach items="${board.futureBuildings}" var="building">
-		  	--><div class="future-building">
+		  	--><div class="future-building" id="building-${building.id}">
 		  	  <a class="future-building-link" href="images/building/${building.image}.png" title="${building.id}"><img src="images/building/${building.image}.png" class="future-building-image" /></a>
 		  	</div><!--
 		  </c:forEach>
@@ -375,7 +406,7 @@
 						<tr>
 							<c:forEach items="${row}" var="cell">
 								<c:if test="${cell.terrainType ne 'HIDDEN'}">
-									<td${cell.terrainType.rowspanAttr}>
+									<td${cell.terrainType.rowspanAttr} dropzone="move string:Text" ondrop="onBuildingDrop(event)" ondragover="onBuildingDragOver(event)">
 										<c:choose>
 											<c:when test="${not empty cell.erection}">
 												<div class="building building-${fn:toLowerCase(cell.erection.clergyman.type)}-${fn:toLowerCase(player.color)}">
