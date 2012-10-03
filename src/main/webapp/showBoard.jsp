@@ -162,6 +162,9 @@
 			</html:form>
 			|
 			<button id="findGamesButton">Join a Game</button>
+			|
+			<a href="mailto:weblabora@googlegroups.com">Send Feedback</a>
+			
 		</div>
 	</div>
 		
