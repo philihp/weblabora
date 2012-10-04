@@ -61,6 +61,8 @@ public class Player {
 	
 	private List<Settlement> unbuiltSettlements = new ArrayList<Settlement>(5);
 
+	public int actionsBeforeSettlement = 0;
+	
 	public Player(Board board, Color color) {
 		this.board = board;
 		this.color = color;
@@ -760,4 +762,13 @@ public class Player {
 	public void setStartingMarker(StartingMarker startingMarker) {
 		this.startingMarker = startingMarker;
 	}
+
+	public int getActionsBeforeSettlement() {
+		return actionsBeforeSettlement;
+	}
+	
+	public void setActionsBeforeSettlement(int actionsBeforeSettlement) {
+		this.actionsBeforeSettlement = actionsBeforeSettlement;
+	}
+	
 }

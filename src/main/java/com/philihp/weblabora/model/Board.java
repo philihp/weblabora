@@ -339,6 +339,13 @@ public class Board {
 			preRound();
 		}
 		getMoveList().add(new HistoryEntry(state, getPlayer(getActivePlayer()).getColor()));
+	
+		if(!isGameOver()) {
+			for (int i = 0; i < players.length; i++) {
+				players[i].setActionsBeforeSettlement(actionsBeforeSettlement(i));
+			}
+		}
+		
 	}
 	
 	/**
@@ -465,5 +472,65 @@ public class Board {
 	
 	public BoardMode getMode() {
 		return this.mode;
+	}
+	
+	public int actionsBeforeSettlement(int player) {
+		
+		int currentActivePlayer = getActivePlayer();
+		int round = getRound();
+		
+		int actions = 0;
+		
+		
+		
+		// process current round
+		if (isSettling()) {
+			return 0;
+		}
+		
+		if ((getMode() instanceof BoardModeTwoLongFrance || getMode() instanceof BoardModeTwoLongIreland)) {
+			if (getRound() > getMode().getLastSettlementAfterRound() ) {
+				return -1;
+			}
+			
+		}
+		
+		for (int i = getMoveInRound(); i <= getMode().getMovesInRound() &&
+				(i <= getPlayers().length || !mode.isExtraRound(round - 1)); i++) {
+			
+			if (player == currentActivePlayer) {
+				actions++;
+			}
+			if (i == 2 || !(getMode() instanceof BoardModeTwoLongFrance || getMode()
+					instanceof BoardModeTwoLongIreland)) {
+				if (++currentActivePlayer >= players.length) {
+					currentActivePlayer = 0;
+				}
+			}
+		}
+		
+		// process other rounds until settlement
+		for (round++; getMode().roundBeforeSettlement(round - 1) == null; round++) {
+			
+			if (mode.isExtraRound(round - 1)) {
+				actions++;
+			}
+			else {
+				for (int j = 1; j <= getMode().getMovesInRound(); j++) {
+					if (player == currentActivePlayer) {
+						actions++;
+					}
+					if (j == 2 || !(getMode() instanceof BoardModeTwoLongFrance || getMode()
+							instanceof BoardModeTwoLongIreland)) {
+						if (++currentActivePlayer >= players.length) {
+							currentActivePlayer = 0;
+						}
+					}
+				}
+			}
+			
+		}
+		
+		return actions;
 	}
 }

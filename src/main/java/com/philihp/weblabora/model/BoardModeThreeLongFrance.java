@@ -163,4 +163,13 @@ public class BoardModeThreeLongFrance extends BoardMode {
 		return LENGTH;
 	}
 	
+	@Override
+	public int getMovesInRound() {
+		return 4;
+	}
+	
+	public int getLastSettlementAfterRound() {
+		return 25;
+	}
+	
 }
