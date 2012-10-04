@@ -162,5 +162,13 @@ public class BoardModeThreeLongIreland extends BoardMode {
 	public GameLength getLength() {
 		return LENGTH;
 	}
+
+	@Override
+	public int getMovesInRound() {
+		return 4;
+	}
 	
+	public int getLastSettlementAfterRound() {
+		return 25;
+	}
 }

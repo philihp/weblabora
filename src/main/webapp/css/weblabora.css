@@ -120,8 +120,7 @@ div.container {
 
 .settlement-list {
 }
-.settlement-buildable {
-	border: 2px solid #006600;
+.settlement {
 	border-radius: 3px;
 	box-shadow: 0 0 3px rgba(0,0,0,0.3);
 	background-color: #fff;
@@ -134,19 +133,11 @@ div.container {
 	padding: 2px;
 	margin: 3px;
 }
+.settlement-buildable {
+	border: 2px solid #006600;
+}
 .settlement-not-buildable {
 	border: 2px solid #FF0000;
-	border-radius: 3px;
-	box-shadow: 0 0 3px rgba(0,0,0,0.3);
-	background-color: #fff;
-	font-size: 8pt;
-	height: 125px;
-	width: 75px;
-	display: inline-block;
-	vertical-align: top;
-	text-align: left;
-	padding: 2px;
-	margin: 3px;
 }
 .settlement-image {
 	height: 125px;
@@ -346,6 +337,16 @@ div.container {
 	text-align: center;
 }
 
+.actionsBeforeSettlement {
+	color: black;
+	font-weight: bold;
+}
+
+
+.actionsBeforeSettlementRed {
+	color: red;
+	font-weight: bold;
+}
 
 fieldset {
 	border: 1px groove #f0f0f0;

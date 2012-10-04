@@ -166,4 +166,12 @@ public class BoardModeFourLongFrance extends BoardMode {
 		return LENGTH;
 	}
 	
+	@Override
+	public int getMovesInRound() {
+		return 5;
+	}
+	
+	public int getLastSettlementAfterRound() {
+		return 25;
+	}
 }

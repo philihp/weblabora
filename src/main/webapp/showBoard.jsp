@@ -416,12 +416,12 @@
 				<div class="settlement-list"><!-- comment out white-space for inline-block spacing
 				  <c:forEach items="${player.unbuiltSettlements}" var="settlement">
 				  	<c:if test="${player.totalFoodAvailable >= settlement.foodCost and player.totalEnergyAvailable >= settlement.energyCost}">
-				  	--><div class="settlement-buildable">
+				  	--><div class="settlement settlement-buildable">
 				  	<a class="settlement-link" href="images/building/${settlement.image}.png" title="${settlement.id}"><img src="images/building/${settlement.image}.png" class="settlement-image" /></a>
 				  	</div><!--
 				  	</c:if>
 				  	<c:if test="${player.totalFoodAvailable < settlement.foodCost or player.totalEnergyAvailable < settlement.energyCost}">
-				  	--><div class="settlement-not-buildable">
+				  	--><div class="settlement settlement-not-buildable">
 				  	<a class="settlement-link" href="images/building/${settlement.image}.png" title="${settlement.id}"><img src="images/building/${settlement.image}.png" class="settlement-image" /></a>
 				  	</div><!--
 				  	</c:if>	
@@ -429,7 +429,7 @@
 				  
 				  </c:forEach>
 				  <c:forEach items="${board.futureSettlements}" var="settlement">
-				  	--><div class="settlement-buildable future-settlement future-settlement-${fn:toLowerCase(player.color)}">
+				  	--><div class="settlement future-settlement future-settlement-${fn:toLowerCase(player.color)}">
 				  	  <a class="settlement-link settlement-link-${fn:toLowerCase(player.color)}" href="images/building/${settlement.image}.png" title="${settlement.id}"><img src="images/building/${settlement.image}.png" class="settlement-image settlement-image-${fn:toLowerCase(player.color)}" /></a>
 				  	</div><!--
 				  </c:forEach>
@@ -522,7 +522,12 @@
 			</c:import>
 			<b>${player.totalEnergyAvailable} Energy</b>
 			<br/><br/>
-			Actions until Next Settlement:	
+			<c:if test="${player.actionsBeforeSettlement >= 2}">
+				<div class="actionsBeforeSettlement">Actions until Next Settlement: ${player.actionsBeforeSettlement}</div>
+			</c:if>
+			<c:if test="${player.actionsBeforeSettlement >= 0 and player.actionsBeforeSettlement < 2}">
+				<div class="actionsBeforeSettlementRed">Actions until Next Settlement: ${player.actionsBeforeSettlement}</div>
+			</c:if>			
 				<c:remove var="player"/>
 			</div>
 		</c:forEach>
