@@ -415,12 +415,21 @@
 				
 				<div class="settlement-list"><!-- comment out white-space for inline-block spacing
 				  <c:forEach items="${player.unbuiltSettlements}" var="settlement">
-				  	--><div class="settlement">
-				  		<a class="settlement-link" href="images/building/${settlement.image}.png" title="${settlement.id}"><img src="images/building/${settlement.image}.png" class="settlement-image" /></a>
+				  	<c:if test="${player.totalFoodAvailable >= settlement.foodCost and player.totalEnergyAvailable >= settlement.energyCost}">
+				  	--><div class="settlement-buildable">
+				  	<a class="settlement-link" href="images/building/${settlement.image}.png" title="${settlement.id}"><img src="images/building/${settlement.image}.png" class="settlement-image" /></a>
 				  	</div><!--
+				  	</c:if>
+				  	<c:if test="${player.totalFoodAvailable < settlement.foodCost or player.totalEnergyAvailable < settlement.energyCost}">
+				  	--><div class="settlement-not-buildable">
+				  	<a class="settlement-link" href="images/building/${settlement.image}.png" title="${settlement.id}"><img src="images/building/${settlement.image}.png" class="settlement-image" /></a>
+				  	</div><!--
+				  	</c:if>	
+				  
+				  
 				  </c:forEach>
 				  <c:forEach items="${board.futureSettlements}" var="settlement">
-				  	--><div class="settlement future-settlement future-settlement-${fn:toLowerCase(player.color)}">
+				  	--><div class="settlement-buildable future-settlement future-settlement-${fn:toLowerCase(player.color)}">
 				  	  <a class="settlement-link settlement-link-${fn:toLowerCase(player.color)}" href="images/building/${settlement.image}.png" title="${settlement.id}"><img src="images/building/${settlement.image}.png" class="settlement-image settlement-image-${fn:toLowerCase(player.color)}" /></a>
 				  	</div><!--
 				  </c:forEach>
@@ -428,7 +437,92 @@
 				
 			<a class="show-future-settlements-button show-future-settlements-button-${fn:toLowerCase(player.color)}">Show Future Settlements</a>
 			<a class="hide-future-settlements-button hide-future-settlements-button-${fn:toLowerCase(player.color)}">Hide Future Settlements</a>
-				
+			<br/><br/>
+		    <c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="FiveFood" />
+				<c:param name="abbr" value="Beer" />
+				<c:param name="amount" value="${player.beer}" />
+			</c:import>
+		    <c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="FiveFood" />
+				<c:param name="abbr" value="Meat" />
+				<c:param name="amount" value="${player.meat}" />
+			</c:import>
+		    <c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="FiveFood" />
+				<c:param name="abbr" value="Nickel" />
+				<c:param name="amount" value="${player.nickel}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="ThreeFood" />
+				<c:param name="abbr" value="Bread" />
+				<c:param name="amount" value="${player.bread}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="TwoFood" />
+				<c:param name="abbr" value="Sheep" />
+				<c:param name="amount" value="${player.sheep}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="TwoFood" />
+				<c:param name="abbr" value="Whiskey" />
+				<c:param name="amount" value="${player.whiskey}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="OneFood" />
+				<c:param name="abbr" value="Penny" />
+				<c:param name="amount" value="${player.penny}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="OneFood" />
+				<c:param name="abbr" value="Grain" />
+				<c:param name="amount" value="${player.grain}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="OneFood" />
+				<c:param name="abbr" value="Flour" />
+				<c:param name="amount" value="${player.flour}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="OneFood" />
+				<c:param name="abbr" value="Grapes" />
+				<c:param name="amount" value="${player.grapes}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="OneFood" />
+				<c:param name="abbr" value="Hops" />
+				<c:param name="amount" value="${player.hops}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="OneFood" />
+				<c:param name="abbr" value="Wine" />
+				<c:param name="amount" value="${player.wine}" />
+			</c:import>
+			<b>${player.totalFoodAvailable} Food</b>
+			<br/>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="ThreeEnergy" />
+				<c:param name="abbr" value="Coal" />
+				<c:param name="amount" value="${player.coal}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="TwoEnergy" />
+				<c:param name="abbr" value="Peat" />
+				<c:param name="amount" value="${player.peat}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="OneEnergy" />
+				<c:param name="abbr" value="Wood" />
+				<c:param name="amount" value="${player.wood}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="HalfEnergy" />
+				<c:param name="abbr" value="Straw" />
+				<c:param name="amount" value="${player.straw}" />
+			</c:import>
+			<b>${player.totalEnergyAvailable} Energy</b>
+			<br/><br/>
+			Actions until Next Settlement:	
 				<c:remove var="player"/>
 			</div>
 		</c:forEach>

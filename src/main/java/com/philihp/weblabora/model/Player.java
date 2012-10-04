@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import static com.philihp.weblabora.model.Clergyman.Type.*;
 import java.util.List;
 import java.util.Map;
+import java.math.BigDecimal;
 
 import com.google.common.collect.ArrayTable;
 import com.philihp.weblabora.jpa.User;
@@ -41,6 +42,9 @@ public class Player {
 	private int beer = 0;
 	private int reliquary = 0;
 
+	private BigDecimal totalFoodAvailable = new BigDecimal(0);
+	private BigDecimal totalEnergyAvailable = new BigDecimal(0);
+	
 	private Landscape landscape;
 
 	private Board board;
@@ -181,6 +185,20 @@ public class Player {
 		return reliquary;
 	}
 
+	public BigDecimal getTotalFoodAvailable() {
+		return new BigDecimal(beer*5 + bread*3 + flour + grain + grapes + hops + meat*5 + nickel*5
+				+ penny + sheep*2 + whiskey*2 + wine);
+	}
+	
+	public BigDecimal getTotalEnergyAvailable() {
+		
+		BigDecimal one_half = new BigDecimal(0.5);
+		
+		BigDecimal straw_energy = one_half.multiply(new BigDecimal(straw));
+		
+		return new BigDecimal(wood + peat*2 + coal*3).add(straw_energy);
+	}
+	
 	public class InventoryEntry {
 		private final String type;
 		private final int quantity;
