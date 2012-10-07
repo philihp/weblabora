@@ -130,4 +130,8 @@ public abstract class BoardMode {
 	}
 	
 	abstract public boolean isProductionBonusActive();
+	
+	public boolean isSecondLayBrotherUsed() {
+		return true;
+	}
 }

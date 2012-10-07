@@ -1,5 +1,6 @@
 package com.philihp.weblabora.model;
 
+import static com.philihp.weblabora.model.TerrainTypeEnum.PLAINS;
 import static com.philihp.weblabora.model.Wheel.Position.E;
 import static com.philihp.weblabora.model.Wheel.Position.H;
 import static com.philihp.weblabora.model.Wheel.Position.K;
@@ -99,6 +100,62 @@ public class BoardModeFourShortIreland extends BoardMode {
 	
 	@Override
 	public void preRound() {
+		for(Player player : getBoard().getPlayers()) {
+			switch(getBoard().getRound()) {
+			case 1:
+				player.addSheep(1);
+				player.addGrain(1);
+				break;
+			case 2:
+				player.addClay(1);
+				player.addGrain(1);
+				break;
+			case 3:
+				player.addWood(1);
+				player.addGrain(1);
+				break;
+			case 4:
+				player.addStone(1);
+				player.addGrain(1);
+				break;
+			case 5:
+				player.addStone(1);
+				player.addPeat(1);
+				break;
+			case 6:
+				player.addStone(1);
+				player.addClay(1);
+				break;
+			case 7:
+				player.addStone(1);
+				player.addWood(1);
+				break;
+			case 8:
+				player.addStone(1);
+				player.addNickel(1);
+				break;
+			case 9:
+				player.addStone(1);
+				player.addMeat(1);
+				break;
+			case 10:
+				player.addBooks(1);
+				player.addGrain(1);
+				break;
+			case 11:
+				player.addPottery(1);
+				player.addClay(1);
+				break;
+			case 12:
+				player.addOrnament(1);
+				player.addWood(1);
+				break;
+			case 13:
+				System.out.println("Final Round");
+			default: 
+				throw new RuntimeException("Four player Short game should never reach round "+board.getRound());
+			}
+		}
 	}
 
 	@Override
@@ -172,8 +229,8 @@ public class BoardModeFourShortIreland extends BoardMode {
 
 	@Override
 	public void customizeLandscape(Landscape landscape) {
-		landscape.getTerrainAt(new Coordinate(0,0)).setErection(null);
-		landscape.getTerrainAt(new Coordinate(1,0)).setErection(null);
+		landscape.getTerrainAt(new Coordinate(0,0)).setTerrainType(PLAINS);
+		landscape.getTerrainAt(new Coordinate(1,0)).setTerrainType(PLAINS);
 		super.customizeLandscape(landscape);
 	}
 	
@@ -181,6 +238,10 @@ public class BoardModeFourShortIreland extends BoardMode {
 	public boolean isProductionBonusActive() {
 		return true;
 	}
-	
+
+	@Override
+	public boolean isSecondLayBrotherUsed() {
+		return false;
+	}
 	
 }

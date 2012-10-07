@@ -1,5 +1,6 @@
 package com.philihp.weblabora.model;
 
+import static com.philihp.weblabora.model.TerrainTypeEnum.PLAINS;
 import static com.philihp.weblabora.model.Wheel.Position.E;
 import static com.philihp.weblabora.model.Wheel.Position.H;
 import static com.philihp.weblabora.model.Wheel.Position.K;
@@ -170,14 +171,19 @@ public class BoardModeThreeShortFrance extends BoardMode {
 
 	@Override
 	public void customizeLandscape(Landscape landscape) {
-		landscape.getTerrainAt(new Coordinate(0,0)).setErection(null);
-		landscape.getTerrainAt(new Coordinate(1,0)).setErection(null);
+		landscape.getTerrainAt(new Coordinate(0,0)).setTerrainType(PLAINS);
+		landscape.getTerrainAt(new Coordinate(1,0)).setTerrainType(PLAINS);
 		super.customizeLandscape(landscape);
 	}
 
 	@Override
 	public boolean isProductionBonusActive() {
 		return true;
+	}
+
+	@Override
+	public boolean isSecondLayBrotherUsed() {
+		return false;
 	}
 	
 }
