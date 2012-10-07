@@ -141,35 +141,7 @@
 
 </script>
 
-<script type="text/javascript">
-  function onBuildingDragStart(event)
-  {
-    event.dataTransfer.effectAllowed = 'move';
-    event.dataTransfer.setData('Text', event.target.parentNode.id);
-  }
-
-
-  function onBuildingDrop(event)
-  {
-    var data = event.dataTransfer.getData('Text');
-
-    event.target.appendChild(document.getElementById(data));
-    event.stopPropagation();
-    event.preventDefault();
-  }
-
-  function onBuildingDragOver(event)
-  {
-    event.preventDefault();
-    return false;
-  }
-
-  function onBuildingDragEnd(event) {
-    //event.target.parentNode.removeChild(event.target);
-    event.preventDefault();
-    return false;
-  }
-</script>
+<script src="js/drag-and-drop.js" type="text/javascript"></script>
 
 </head>
 
@@ -374,12 +346,12 @@
 		<div class="building-list" ondragstart="onBuildingDragStart(event)" ondragend="onBuildingDragEnd(event)"><!-- comment out white-space for inline-block spacing
 		  <c:forEach items="${board.unbuiltBuildings}" var="building">
 		  	--><div class="building" draggable="true" id="building-${building.id}">
-		  	  <a class="building-link" href="images/building/${building.image}.png" title="${building.id}"><img src="images/building/${building.image}.png" class="building-image" /></a>
+		  	  <a class="building-link" href="images/building/${building.image}.png" title="${building.id}"><img src="images/building/${building.image}.png" class="building-image"/></a>
 		  	</div><!--
 		  </c:forEach>
 		  <c:forEach items="${board.futureBuildings}" var="building">
 		  	--><div class="future-building" id="building-${building.id}">
-		  	  <a class="future-building-link" href="images/building/${building.image}.png" title="${building.id}"><img src="images/building/${building.image}.png" class="future-building-image" /></a>
+		  	  <a class="future-building-link" draggable="false" href="images/building/${building.image}.png" title="${building.id}"><img src="images/building/${building.image}.png" class="future-building-image" draggable="false" /></a>
 		  	</div><!--
 		  </c:forEach>
 		--></div>
