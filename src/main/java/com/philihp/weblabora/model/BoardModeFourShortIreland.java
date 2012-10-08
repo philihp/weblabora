@@ -14,7 +14,7 @@ import com.philihp.weblabora.model.building.BuildingEnum;
 public class BoardModeFourShortIreland extends BoardMode {
 	
 	private static final GamePlayers PLAYERS = GamePlayers.FOUR;
-	private static final GameLength LENGTH = GameLength.LONG;
+	private static final GameLength LENGTH = GameLength.SHORT;
 	private static final GameCountry COUNTRY = GameCountry.IRELAND;
 
 	protected BoardModeFourShortIreland(Board board) {
