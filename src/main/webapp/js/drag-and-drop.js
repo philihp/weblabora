@@ -30,6 +30,8 @@ function onBuildingDragStart(event) {
   var draggableNode = findDraggableAncestor(event.target);
   event.dataTransfer.effectAllowed = 'move';
   event.dataTransfer.setData('Text', draggableNode.id);
+  //event.dataTransfer.addElement(draggableNode);
+  //event.dataTransfer.setDragImage(draggableNode, 0, 0);
 }
 
 function onBuildingDrop(event) {

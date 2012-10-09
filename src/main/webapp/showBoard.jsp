@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/colorbox.css" />
 <link rel="stylesheet" href="css/weblabora.css" />
+<link rel="stylesheet" href="css/quirks.css" />
 <!--<script src="//www.google.com/jsapi"></script>-->
 <!-- <script> -->
 <!-- 	google.load("jquery", "1.7.1");-->
@@ -345,13 +346,13 @@
 		
 		<div class="building-list" ondragstart="onBuildingDragStart(event)" ondragend="onBuildingDragEnd(event)"><!-- comment out white-space for inline-block spacing
 		  <c:forEach items="${board.unbuiltBuildings}" var="building">
-		  	--><div class="building" draggable="true" id="building-${building.id}">
-		  	  <a class="building-link" href="images/building/${building.image}.png" title="${building.id}"><img src="images/building/${building.image}.png" class="building-image"/></a>
+		  	--><div class="building" id="building-${building.id}" draggable="true">
+		  	  <a class="building-link" href="images/building/${building.image}.png" title="${building.id}"><img src="images/building/${building.image}.png" class="building-image" draggable="false"/></a>
 		  	</div><!--
 		  </c:forEach>
 		  <c:forEach items="${board.futureBuildings}" var="building">
 		  	--><div class="future-building" id="building-${building.id}">
-		  	  <a class="future-building-link" draggable="false" href="images/building/${building.image}.png" title="${building.id}"><img src="images/building/${building.image}.png" class="future-building-image" draggable="false" /></a>
+		  	  <a class="future-building-link" href="images/building/${building.image}.png" title="${building.id}" draggable="false"><img src="images/building/${building.image}.png" class="future-building-image" draggable="false"/></a>
 		  	</div><!--
 		  </c:forEach>
 		--></div>

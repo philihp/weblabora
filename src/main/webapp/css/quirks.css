@@ -1,0 +1,9 @@
+/*
+Needed by Safari to allow drag and drop.
+*/
+[draggable=true] {
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+}
