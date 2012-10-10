@@ -377,6 +377,23 @@
 								<c:if test="${cell.terrainType ne 'HIDDEN'}">
 									<td${cell.terrainType.rowspanAttr}>
 										<c:choose>
+											<c:when test="${cell.terrainType eq 'WATER'}">
+												<embed src="images/building/Water.svg" type="image/svg+xml" class="building-image"/>
+											</c:when>
+											<c:when test="${cell.terrainType eq 'COAST'}">
+												<embed src="images/building/Coast.svg" type="image/svg+xml" class="building-image"/>
+											</c:when>
+											<c:when test="${cell.terrainType eq 'PLAINS'}">
+												<embed src="images/building/Plains.svg" type="image/svg+xml" class="building-image"/>
+											</c:when>
+											<c:when test="${cell.terrainType eq 'HILLSIDE'}">
+												<embed src="images/building/Hillside.svg" type="image/svg+xml" class="building-image"/>
+											</c:when>
+											<c:when test="${cell.terrainType eq 'MOUNTAIN'}">
+												<embed src="images/building/Mountain.svg" type="image/svg+xml" class="building-image"/>
+											</c:when>
+										</c:choose>
+										<c:choose>
 											<c:when test="${not empty cell.erection}">
 												<div class="building building-${fn:toLowerCase(cell.erection.clergyman.type)}-${fn:toLowerCase(player.color)}">
 													<a class="erection-link" href="images/building/${cell.erection.image}.png" title="${cell.erection.id}"><img src="images/building/${cell.erection.image}.png" class="building-image" /></a>
@@ -389,8 +406,8 @@
 												<img src="images/building/Peat.png" class="landscape-tile" title="${cell.coords}" />
 											</c:when>
 											<c:otherwise>
-												${cell.terrainType.properCase}<br />
-												${cell.coords}
+												<!--${cell.terrainType.properCase}<br />
+												${cell.coords} -->
 											</c:otherwise>
 										</c:choose>
 									</td>
