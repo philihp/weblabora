@@ -347,7 +347,7 @@
 		<div class="building-list" ondragstart="onBuildingDragStart(event)" ondragend="onBuildingDragEnd(event)"><!-- comment out white-space for inline-block spacing
 		  <c:forEach items="${board.unbuiltBuildings}" var="building">
 		  	--><div class="building" id="building-${building.id}" draggable="true">
-		  	  <a class="building-link" href="images/building/${building.image}.png" title="${building.id}"><img src="images/building/${building.image}.png" class="building-image" draggable="false"/></a>
+		  	  <a class="building-link" href="images/building/${building.image}.png" title="${building.id}" draggable="false"><img src="images/building/${building.image}.png" class="building-image"/></a>
 		  	</div><!--
 		  </c:forEach>
 		  <c:forEach items="${board.futureBuildings}" var="building">
