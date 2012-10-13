@@ -375,24 +375,24 @@
 						<tr>
 							<c:forEach items="${row}" var="cell">
 								<c:if test="${cell.terrainType ne 'HIDDEN'}">
-									<td${cell.terrainType.rowspanAttr}>
-										<c:choose>
-											<c:when test="${cell.terrainType eq 'WATER'}">
-												<embed src="images/building/Water.svg" type="image/svg+xml" class="building-image"/>
-											</c:when>
-											<c:when test="${cell.terrainType eq 'COAST'}">
-												<embed src="images/building/Coast.svg" type="image/svg+xml" class="building-image"/>
-											</c:when>
-											<c:when test="${cell.terrainType eq 'PLAINS'}">
-												<embed src="images/building/Plains.svg" type="image/svg+xml" class="building-image"/>
-											</c:when>
-											<c:when test="${cell.terrainType eq 'HILLSIDE'}">
-												<embed src="images/building/Hillside.svg" type="image/svg+xml" class="building-image"/>
-											</c:when>
-											<c:when test="${cell.terrainType eq 'MOUNTAIN'}">
-												<embed src="images/building/Mountain.svg" type="image/svg+xml" class="building-image"/>
-											</c:when>
+									<c:choose>
+										<c:when test="${cell.terrainType eq 'WATER'}">
+											<c:set var="boardCellType" value="water"/>
+										</c:when>
+										<c:when test="${cell.terrainType eq 'COAST'}">
+											<c:set var="boardCellType" value="coast"/>
+										</c:when>
+										<c:when test="${cell.terrainType eq 'PLAINS'}">
+											<c:set var="boardCellType" value="plains"/>
+										</c:when>
+										<c:when test="${cell.terrainType eq 'HILLSIDE'}">
+											<c:set var="boardCellType" value="hillside"/>
+										</c:when>
+										<c:when test="${cell.terrainType eq 'MOUNTAIN'}">
+											<c:set var="boardCellType" value="mountain"/>
+										</c:when>
 										</c:choose>
+									<td${cell.terrainType.rowspanAttr} class="${boardCellType}">
 										<c:choose>
 											<c:when test="${not empty cell.erection}">
 												<div class="building building-${fn:toLowerCase(cell.erection.clergyman.type)}-${fn:toLowerCase(player.color)}">
