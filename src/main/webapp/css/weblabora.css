@@ -249,19 +249,19 @@ div.container {
 	border-collapse: collapse;
 }
 .board table td.water {
-	background-image: url('../images/building/Water.svg');
+	background-image: url('../images/background/Water.svg');
 }
 .board table td.coast {
-	background-image: url('../images/building/Coast.svg');
+	background-image: url('../images/background/Coast.svg');
 }
 .board table td.plains {
-	background-image: url('../images/building/Plains.svg');
+	background-image: url('../images/background/Plains.svg');
 }
 .board table td.hillside {
-	background-image: url('../images/building/Hillside.svg');
+	background-image: url('../images/background/Hillside.svg');
 }
 .board table td.mountain {
-	background-image: url('../images/building/Mountain.svg');
+	background-image: url('../images/background/Mountain.svg');
 }
 .landscape-tile {
 	height: 125px;

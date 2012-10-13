@@ -400,10 +400,10 @@
 											  	</div>
 											</c:when>
 											<c:when test="${cell.terrainType eq 'FOREST'}">
-												<img src="images/building/Wood.png" class="landscape-tile" title="${cell.coords}" />
+												<img src="images/background/Wood.png" class="landscape-tile" title="${cell.coords}" />
 											</c:when>
 											<c:when test="${cell.terrainType eq 'MOOR'}">
-												<img src="images/building/Peat.png" class="landscape-tile" title="${cell.coords}" />
+												<img src="images/background/Peat.png" class="landscape-tile" title="${cell.coords}" />
 											</c:when>
 											<c:otherwise>
 												<!--${cell.terrainType.properCase}<br />
