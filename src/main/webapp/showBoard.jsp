@@ -404,10 +404,10 @@
 													</a>
 												</div>
 											</c:when>
-											<c:when test="${cell.terrainType eq 'FOREST'}">
+											<c:when test="${cell.terrainUse eq 'FOREST'}">
 												<img src="images/building/Wood.png" class="landscape-tile" title="${cell.coords}" />
 											</c:when>
-											<c:when test="${cell.terrainType eq 'MOOR'}">
+											<c:when test="${cell.terrainUse eq 'MOOR'}">
 												<img src="images/building/Peat.png" class="landscape-tile" title="${cell.coords}" />
 											</c:when>
 											<c:otherwise>

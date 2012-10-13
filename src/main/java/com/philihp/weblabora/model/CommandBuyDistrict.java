@@ -1,7 +1,5 @@
 package com.philihp.weblabora.model;
 
-import static com.philihp.weblabora.model.TerrainTypeEnum.*;
-
 import java.util.Set;
 
 import com.google.common.collect.ArrayTable;
@@ -12,16 +10,55 @@ import com.google.common.collect.Table;
 public class CommandBuyDistrict implements MoveCommand {
 	
 	public static enum Side {
-		HILLS(MOOR, FOREST, FOREST, HILLSIDE, HILLSIDE),
-		PLAINS(FOREST, TerrainTypeEnum.PLAINS, TerrainTypeEnum.PLAINS, TerrainTypeEnum.PLAINS, HILLSIDE);
-		
+		HILLS(0),
+		PLAINS(1);
+
 		private TerrainTypeEnum[] types;
-		
-		Side(TerrainTypeEnum... types) {
-			this.types = types;
+		private TerrainUseEnum[] uses;
+
+		private Side(int type) {
+			switch (type) {
+			case 0:
+				this.types = new TerrainTypeEnum[] {
+					TerrainTypeEnum.PLAINS,
+					TerrainTypeEnum.PLAINS,
+					TerrainTypeEnum.PLAINS,
+					TerrainTypeEnum.HILLSIDE,
+					TerrainTypeEnum.HILLSIDE
+				};
+				this.uses = new TerrainUseEnum[] {
+					TerrainUseEnum.MOOR,
+					TerrainUseEnum.FOREST,
+					TerrainUseEnum.FOREST,
+					TerrainUseEnum.EMPTY,
+					TerrainUseEnum.EMPTY
+				};
+				break;
+			case 1:
+				this.types = new TerrainTypeEnum[] {
+					TerrainTypeEnum.PLAINS,
+					TerrainTypeEnum.PLAINS,
+					TerrainTypeEnum.PLAINS,
+					TerrainTypeEnum.PLAINS,
+					TerrainTypeEnum.HILLSIDE
+				};
+				this.uses = new TerrainUseEnum[] {
+					TerrainUseEnum.FOREST,
+					TerrainUseEnum.EMPTY,
+					TerrainUseEnum.EMPTY,
+					TerrainUseEnum.EMPTY,
+					TerrainUseEnum.EMPTY
+				};
+				break;
+			}
 		}
+
 		public TerrainTypeEnum getType(int column) {
 			return types[column];
+		}
+
+		public TerrainUseEnum getUse(int column) {
+			return uses[column];
 		}
 	};
 
@@ -82,7 +119,7 @@ public class CommandBuyDistrict implements MoveCommand {
 		}
 		
 		for(Integer columnKey : Ranges.closed(0,4).asSet(DiscreteDomains.integers())) {
-			newTerrain.put(y, columnKey, new Terrain(landscape, side.getType(columnKey), null, columnKey, y));	
+			newTerrain.put(y, columnKey, new Terrain(landscape, side.getType(columnKey), side.getUse(columnKey), null, columnKey, y));	
 		}
 		
 		landscape.setTerrain(newTerrain);
