@@ -411,7 +411,9 @@
 												<img src="images/building/Peat.png" class="landscape-tile" title="${cell.coords}" />
 											</c:when>
 											<c:otherwise>
-												<span title="${cell.terrainType.properCase}">${cell.coords}</span>
+												<div class="board-cell-info">
+													<span title="${cell.terrainType.properCase}">${cell.coords}</span>
+												</div>
 											</c:otherwise>
 										</c:choose>
 									</td>
