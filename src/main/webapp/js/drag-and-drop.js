@@ -38,6 +38,12 @@ function onBuildingDrop(event) {
   event.target.appendChild(document.getElementById(data));
   event.stopPropagation();
   event.preventDefault();
+
+  var dropReplacementsList = event.target.getElementsByClassName("drop-replacement");
+  for(var i = 0; i < dropReplacementsList.length; ++i) {
+    var dropReplacement = dropReplacementsList.item(i);
+    dropReplacement.style.display = 'none';
+  }
 }
 
 function onBuildingDragOver(event) {

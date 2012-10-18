@@ -383,8 +383,10 @@
 										<c:choose>
 											<c:when test="${not empty cell.erection}">
 												<div class="building building-${fn:toLowerCase(cell.erection.clergyman.type)}-${fn:toLowerCase(player.color)}">
-													<a class="erection-link" href="images/building/${cell.erection.image}.png" title="${cell.erection.id}"><img src="images/building/${cell.erection.image}.png" class="building-image" /></a>
-											  	</div>
+													<a class="erection-link" href="images/building/${cell.erection.image}.png" title="${cell.erection.id}">
+														<img src="images/building/${cell.erection.image}.png" class="building-image" />
+													</a>
+												</div>
 											</c:when>
 											<c:when test="${cell.terrainType eq 'FOREST'}">
 												<img src="images/building/Wood.png" class="landscape-tile" title="${cell.coords}" />
@@ -393,8 +395,11 @@
 												<img src="images/building/Peat.png" class="landscape-tile" title="${cell.coords}" />
 											</c:when>
 											<c:otherwise>
-												${cell.terrainType.properCase}<br />
-												${cell.coords}
+												<span class="drop-replacement">
+													${cell.terrainType.properCase}
+													<br />
+													${cell.coords}
+												</span>
 											</c:otherwise>
 										</c:choose>
 									</td>
