@@ -377,9 +377,9 @@
 				<table>
 					<c:forEach items="${player.landscape.table}" var="row" varStatus="rowStatus">
 						<tr>
-							<c:forEach items="${row}" var="cell">
+							<c:forEach items="${row}" var="cell" varStatus="columnStatus">
 								<c:if test="${cell.terrainType ne 'HIDDEN'}">
-									<td${cell.terrainType.rowspanAttr} dropzone="move string:Text" ondrop="onBuildingDrop(event)" ondragover="onBuildingDragOver(event)">
+									<td${cell.terrainType.rowspanAttr} dropzone="move string:Text" ondrop="onBuildingDrop(event)" ondragover="onBuildingDragOver(event)" data-position-row="${rowStatus.index}" data-position-column="${columnStatus.index}">
 										<c:choose>
 											<c:when test="${not empty cell.erection}">
 												<div class="building building-${fn:toLowerCase(cell.erection.clergyman.type)}-${fn:toLowerCase(player.color)}">
@@ -445,7 +445,7 @@
 		<c:if test="${empty param.stateId}">
 			<hr />
 			New Move:
-			<html:form action="/makeMove.do">
+			<html:form styleId="moveForm" action="/makeMove.do">
 				<html:hidden property="stateId" value="${game.state.stateId}" />
 				<html:hidden property="gameId" value="${game.gameId}" />
 				<html:text property="token" value="${savedMove}" />

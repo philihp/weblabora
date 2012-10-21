@@ -44,6 +44,13 @@ function onBuildingDrop(event) {
     var dropReplacement = dropReplacementsList.item(i);
     dropReplacement.style.display = 'none';
   }
+
+  var buildingId = data.match('^building-(.*)$')[1];
+  var row = event.target.getAttribute('data-position-row');
+  var column = event.target.getAttribute('data-position-column');
+
+  var moveForm = document.forms['moveForm'];
+  moveForm.token.value = 'B(' + buildingId + ',' + column + ',' + row + ')';
 }
 
 function onBuildingDragOver(event) {
