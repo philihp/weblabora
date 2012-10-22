@@ -375,11 +375,11 @@
 				<hr style="clear: both" />
 	
 				<table>
-					<c:forEach items="${player.landscape.table}" var="row" varStatus="rowStatus">
+					<c:forEach items="${player.landscape.table}" var="row">
 						<tr>
-							<c:forEach items="${row}" var="cell" varStatus="columnStatus">
+							<c:forEach items="${row}" var="cell">
 								<c:if test="${cell.terrainType ne 'HIDDEN'}">
-									<td${cell.terrainType.rowspanAttr} dropzone="move string:Text" ondrop="onBuildingDrop(event)" ondragover="onBuildingDragOver(event)" data-position-row="${rowStatus.index}" data-position-column="${columnStatus.index}">
+									<td${cell.terrainType.rowspanAttr} dropzone="move string:Text" ondrop="onBuildingDrop(event)" ondragover="onBuildingDragOver(event)" data-position-row="${cell.coordinate.y}" data-position-column="${cell.coordinate.x}">
 										<c:choose>
 											<c:when test="${not empty cell.erection}">
 												<div class="building building-${fn:toLowerCase(cell.erection.clergyman.type)}-${fn:toLowerCase(player.color)}">
