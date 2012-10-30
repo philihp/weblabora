@@ -19,11 +19,38 @@ function findDraggableAncestor(node) {
     return null;
   }
   if (node instanceof HTMLElement) {
-    if (node.hasAttribute("draggable") && (node.getAttribute("draggable") == "true")) {
+    if (node.hasAttribute("draggable") && (node.getAttribute("draggable") === "true")) {
       return node;
     }
   }
   return findDraggableAncestor(node.parentNode);
+}
+
+function findBoard(node) {
+  if (node == null) {
+    return null;
+  }
+  if (node instanceof HTMLElement) {
+    var classList = node.className.split(/\s+/);
+    for (var i = 0; i < classList.length; ++i) {
+      if (classList[i] === "board") {
+        return node;
+      }
+    }
+  }
+  return findBoard(node.parentNode);
+}
+
+function countResources(board, resource) {
+  var resources = board.getElementsByClassName("resources")[0];
+  var resourceList = resources.getElementsByClassName("resource");
+  var count = 0;
+  for (var i = 0; i < resourceList.length; ++i) {
+    if (resourceList[i].getAttribute("data-resource") === resource) {
+      ++count;
+    }
+  }
+  return count;
 }
 
 function onBuildingDragStart(event) {
@@ -35,9 +62,15 @@ function onBuildingDragStart(event) {
 function onBuildingDrop(event) {
   var data = event.dataTransfer.getData('Text');
 
-  event.target.appendChild(document.getElementById(data));
+  var droppedBuilding = document.getElementById(data);
+
+  event.target.appendChild(droppedBuilding);
   event.stopPropagation();
   event.preventDefault();
+
+  var board = findBoard(event.target);
+  var strawAvailable = countResources(board, "Straw");
+  var strawNeeded = droppedBuilding.getAttribute("data-cost-straw");
 
   var dropReplacementsList = event.target.getElementsByClassName("drop-replacement");
   for(var i = 0; i < dropReplacementsList.length; ++i) {
@@ -49,8 +82,22 @@ function onBuildingDrop(event) {
   var row = event.target.getAttribute('data-position-row');
   var column = event.target.getAttribute('data-position-column');
 
+  var command = "";
+
+  for (var i = strawAvailable; i < strawNeeded; ++i) {
+    if (command.length > 0 ) {
+      command += "|";
+    }
+    command += "V(Gn)";
+  }
+
+  if (command.length > 0 ) {
+      command += "|";
+  }
+  command += 'B(' + buildingId + ',' + column + ',' + row + ')';
+
   var moveForm = document.forms['moveForm'];
-  moveForm.token.value = 'B(' + buildingId + ',' + column + ',' + row + ')';
+  moveForm.token.value = command;
 }
 
 function onBuildingDragOver(event) {
@@ -59,7 +106,6 @@ function onBuildingDragOver(event) {
 }
 
 function onBuildingDragEnd(event) {
-  //event.target.parentNode.removeChild(event.target);
   event.preventDefault();
   return false;
 }
