@@ -268,6 +268,76 @@
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">E</text>
 					</g>
 				</c:if>
+				<c:if test="${board.mode.players eq 'THREE' and board.mode.length eq 'SHORT'}">
+					<g id="A-welfare" transform="rotate(${wheelArt.rotA})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Sheep.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Grain.png" />
+					</g>
+					<g id="B-welfare" transform="rotate(${wheelArt.rotB})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Clay.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Grain.png" />
+					</g>
+					<g id="C-welfare" transform="rotate(${wheelArt.rotC})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Wood.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Grain.png" />
+					</g>
+					<g id="settlement-a" transform="rotate(${wheelArt.rotC})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">A</text>
+					</g>
+					<g id="D-welfare" transform="rotate(${wheelArt.rotD})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Stone.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Grain.png" />
+					</g>
+					<g id="E-welfare" transform="rotate(${wheelArt.rotE})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Stone.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Peat.png" />
+					</g>
+					<g id="settlement-b" transform="rotate(${wheelArt.rotE})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">B</text>
+					</g>
+					<g id="F-welfare" transform="rotate(${wheelArt.rotF})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Stone.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Clay.png" />
+					</g>
+					<g id="G-welfare" transform="rotate(${wheelArt.rotG})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Stone.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Wood.png" />
+					</g>
+					<g id="settlement-c" transform="rotate(${wheelArt.rotG})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle;  fill:#fff">C</text>
+					</g>
+					<g id="H-welfare" transform="rotate(${wheelArt.rotH})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Stone.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Nickel.png" />
+					</g>
+					<g id="I-welfare" transform="rotate(${wheelArt.rotI})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Stone.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Meat.png" />
+					</g>
+					<g id="settlement-d" transform="rotate(${wheelArt.rotI})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">D</text>
+					</g>
+					<g id="J-welfare" transform="rotate(${wheelArt.rotJ})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Book.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Grain.png" />
+					</g>
+					<g id="K-welfare" transform="rotate(${wheelArt.rotK})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Pot.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Clay.png" />
+					</g>
+					<g id="L-welfare" transform="rotate(${wheelArt.rotL})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Ornament.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Wood.png" />
+					</g>
+					<g id="settlement-e" transform="rotate(${wheelArt.rotM})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">E</text>
+					</g>
+				</c:if>
 				<c:if test="${board.mode.players eq 'TWO' and board.mode.length eq 'LONG'}">
 					<g id="settlement-a" transform="rotate(${wheelArt.rotG})">
 						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
