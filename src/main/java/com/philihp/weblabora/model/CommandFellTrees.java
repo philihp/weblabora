@@ -1,8 +1,6 @@
 package com.philihp.weblabora.model;
 
-import static com.philihp.weblabora.model.TerrainTypeEnum.*;
-
-import java.util.List;
+import com.philihp.weblabora.model.TerrainUseEnum;
 
 public class CommandFellTrees implements MoveCommand, InvalidDuringSettlement {
 
@@ -29,13 +27,13 @@ public class CommandFellTrees implements MoveCommand, InvalidDuringSettlement {
 
 		if(spot == null) throw new WeblaboraException("Could not fell trees at ("+x+","+y+") because it does not exist.");
 		
-		if (spot.getTerrainType() != FOREST)
+		if (spot.getTerrainUse() != TerrainUseEnum.FOREST)
 			throw new WeblaboraException("Tried to Fell Trees on "
-					+ spot.getTerrainType() + " at (" + x + "," + y
+					+ spot.getTerrainUse() + " at (" + x + "," + y
 					+ ") for player " + board.getActivePlayerColor()
 					+ ", but it is not a forest");
 
-		spot.setTerrainType(PLAINS);
+		spot.setTerrainUse(TerrainUseEnum.EMPTY);
 		Token token = joker?board.getWheel().getJoker():board.getWheel().getWood();
 		int woodTaken = token.take();
 		player.setWood(player.getWood() + woodTaken);

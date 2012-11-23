@@ -463,22 +463,45 @@
 						<tr>
 							<c:forEach items="${row}" var="cell">
 								<c:if test="${cell.terrainType ne 'HIDDEN'}">
-									<td${cell.terrainType.rowspanAttr}>
+									<c:choose>
+										<c:when test="${cell.terrainType eq 'WATER'}">
+											<c:set var="boardCellType" value="water"/>
+										</c:when>
+										<c:when test="${cell.terrainType eq 'COAST'}">
+											<c:set var="boardCellType" value="coast"/>
+										</c:when>
+										<c:when test="${cell.terrainType eq 'PLAINS'}">
+											<c:set var="boardCellType" value="plains"/>
+										</c:when>
+										<c:when test="${cell.terrainType eq 'HILLSIDE'}">
+											<c:set var="boardCellType" value="hillside"/>
+										</c:when>
+										<c:when test="${cell.terrainType eq 'MOUNTAIN'}">
+											<c:set var="boardCellType" value="mountain"/>
+										</c:when>
+										<c:otherwise>
+											<c:set var="boardCellType" value="unavailable"/>
+										</c:otherwise>
+									</c:choose>
+									<td${cell.terrainType.rowspanAttr} class="${boardCellType}">
 										<c:choose>
 											<c:when test="${not empty cell.erection}">
 												<div class="building building-${fn:toLowerCase(cell.erection.clergyman.type)}-${fn:toLowerCase(player.color)}">
-													<a class="erection-link" href="images/building/${cell.erection.image}.png" title="${cell.erection.id}"><img src="images/building/${cell.erection.image}.png" class="building-image" /></a>
-											  	</div>
+													<a class="erection-link" href="images/building/${cell.erection.image}.png" title="${cell.erection.id}">
+														<img src="images/building/${cell.erection.image}.png" class="building-image" />
+													</a>
+												</div>
 											</c:when>
-											<c:when test="${cell.terrainType eq 'FOREST'}">
+											<c:when test="${cell.terrainUse eq 'FOREST'}">
 												<img src="images/building/Wood.png" class="landscape-tile" title="${cell.coords}" />
 											</c:when>
-											<c:when test="${cell.terrainType eq 'MOOR'}">
+											<c:when test="${cell.terrainUse eq 'MOOR'}">
 												<img src="images/building/Peat.png" class="landscape-tile" title="${cell.coords}" />
 											</c:when>
 											<c:otherwise>
-												${cell.terrainType.properCase}<br />
-												${cell.coords}
+												<div class="board-cell-info">
+													<span title="${cell.terrainType.properCase}">${cell.coords}</span>
+												</div>
 											</c:otherwise>
 										</c:choose>
 									</td>
