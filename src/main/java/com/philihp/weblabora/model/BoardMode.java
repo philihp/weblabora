@@ -26,6 +26,8 @@ public abstract class BoardMode {
 	protected final int GRAPE_INACTIVE_IN_IRELAND = 99999;
 	
 	private static final EnumMap<GamePlayers, EnumMap<GameLength, EnumMap<GameCountry, Class<? extends BoardMode>>>> map;
+	
+	//i'm not convinced this is the best way to do this... but whatever, it works.
 	static {
 		map = new EnumMap<GamePlayers, EnumMap<GameLength, EnumMap<GameCountry, Class<? extends BoardMode>>>>(
 				GamePlayers.class);
@@ -47,7 +49,15 @@ public abstract class BoardMode {
 		map.get(TWO).get(LONG).put(IRELAND, BoardModeTwoLongIreland.class);
 		map.get(THREE).get(LONG).put(IRELAND, BoardModeThreeLongIreland.class);
 		map.get(FOUR).get(LONG).put(IRELAND, BoardModeFourLongIreland.class);
-	}
+
+		map.get(TWO).get(SHORT).put(FRANCE, BoardModeTwoShortFrance.class);
+		map.get(THREE).get(SHORT).put(FRANCE, BoardModeThreeShortFrance.class);
+		map.get(FOUR).get(SHORT).put(FRANCE, BoardModeFourShortFrance.class);
+		
+		map.get(TWO).get(SHORT).put(IRELAND, BoardModeTwoShortIreland.class);
+		map.get(THREE).get(SHORT).put(IRELAND, BoardModeThreeShortIreland.class);
+		map.get(FOUR).get(SHORT).put(IRELAND, BoardModeFourShortIreland.class);
+}
 
 	public static BoardMode getMode(Board board, GamePlayers gamePlayers,
 			GameLength gameLength, GameCountry gameCountry) {
@@ -92,6 +102,70 @@ public abstract class BoardMode {
 	abstract public SettlementRound roundBeforeSettlement(int round);
 
 	abstract public void postMove();
+	
+	/**
+	 * Hook for pre-round processing for Short 3/4 player games to dish out resources
+	 */
+	public void preRound() {
+		if(isProductionBonusActive()) {
+			for(Player player : getBoard().getPlayers()) {
+				switch(getBoard().getRound()) {
+				case 1:
+					player.addSheep(1);
+					player.addGrain(1);
+					break;
+				case 2:
+					player.addClay(1);
+					player.addGrain(1);
+					break;
+				case 3:
+					player.addWood(1);
+					player.addGrain(1);
+					break;
+				case 4:
+					player.addStone(1);
+					player.addGrain(1);
+					break;
+				case 5:
+					player.addStone(1);
+					player.addPeat(1);
+					break;
+				case 6:
+					player.addStone(1);
+					player.addClay(1);
+					break;
+				case 7:
+					player.addStone(1);
+					player.addWood(1);
+					break;
+				case 8:
+					player.addStone(1);
+					player.addNickel(1);
+					break;
+				case 9:
+					player.addStone(1);
+					player.addMeat(1);
+					break;
+				case 10:
+					player.addBooks(1);
+					player.addGrain(1);
+					break;
+				case 11:
+					player.addPottery(1);
+					player.addClay(1);
+					break;
+				case 12:
+					player.addOrnament(1);
+					player.addWood(1);
+					break;
+				case 13:
+					break;
+				default: 
+					throw new RuntimeException("Should never reach round "+board.getRound()+" when dishing out bonus production at beginning of round.");
+				}
+			}
+		}
+	}
 
 	abstract public void postRound();
 
@@ -108,8 +182,32 @@ public abstract class BoardMode {
 	abstract public GameCountry getCountry();
 
 	abstract public GameLength getLength();
-	
-	abstract public int getMovesInRound();
+
+		abstract public int getMovesInRound();
 	
 	abstract public int getLastSettlementAfterRound();
+
+
+	/**
+	 * Hook for Short 3/4 Player Short games to remove the first peat and forest tiles
+	 */
+	public void customizeLandscape(Landscape landscape) {
+	}
+	
+	abstract protected boolean isProductionBonusActive();
+	
+	public boolean isSecondLayBrotherUsed() {
+		return true;
+	}
+	
+	/**
+	 * Distributes bonus production when the wheel is used for Short 3/4 games
+	 */
+	public void distributeBonusProduction(UsageParam items) {
+		if(isProductionBonusActive()) {
+			for(Player player : board.getPlayers()) {
+				player.addAll(items);
+			}
+		}
+	}
 }

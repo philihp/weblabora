@@ -1,5 +1,6 @@
 package com.philihp.weblabora.model;
 
+import static com.philihp.weblabora.model.TerrainTypeEnum.PLAINS;
 import static com.philihp.weblabora.model.Wheel.Position.E;
 import static com.philihp.weblabora.model.Wheel.Position.H;
 import static com.philihp.weblabora.model.Wheel.Position.K;
@@ -10,13 +11,13 @@ import java.util.List;
 import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.BuildingEnum;
 
-public class BoardModeFourLongIreland extends BoardMode {
+public class BoardModeThreeShortFrance extends BoardMode {
 	
-	private static final GamePlayers PLAYERS = GamePlayers.FOUR;
-	private static final GameLength LENGTH = GameLength.LONG;
-	private static final GameCountry COUNTRY = GameCountry.IRELAND;
+	private static final GamePlayers PLAYERS = GamePlayers.THREE;
+	private static final GameLength LENGTH = GameLength.SHORT;
+	private static final GameCountry COUNTRY = GameCountry.FRANCE;
 
-	protected BoardModeFourLongIreland(Board board) {
+	protected BoardModeThreeShortFrance(Board board) {
 		super(board);
 	}
 
@@ -31,11 +32,12 @@ public class BoardModeFourLongIreland extends BoardMode {
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
 			
 			char c = buildingId.toString().charAt(0);
-			if(c != 'G' && c != 'I') continue;
+			if(c != 'G' && c != 'F') continue;
 			
 			Building building = buildingId.getInstance();
 			if (board.getSettlementRound().equals(building.getStage())
-					&& building.getPlayers().ordinal() <= PLAYERS.ordinal()) {
+					// less than, not less than or equal to...
+					&& building.getPlayers().ordinal() < PLAYERS.ordinal()) {
 				buildings.add(building);
 			}
 		}
@@ -48,7 +50,7 @@ public class BoardModeFourLongIreland extends BoardMode {
 		for(BuildingEnum buildingId : BuildingEnum.values()) {
 			
 			char c = buildingId.toString().charAt(0);
-			if(c != 'G' && c != 'I') continue;
+			if(c != 'G' && c != 'F') continue;
 			
 			Building building = buildingId.getInstance();
 			if(board.getAllBuildings().containsKey(buildingId) == false && building.getPlayers().ordinal() <= PLAYERS.ordinal()) {
@@ -66,15 +68,15 @@ public class BoardModeFourLongIreland extends BoardMode {
 	@Override
 	public SettlementRound roundBeforeSettlement(int round) {
 		switch (round) {
-		case 6:
+		case 2:
 			return SettlementRound.A;
-		case 9:
+		case 4:
 			return SettlementRound.B;
-		case 15:
+		case 6:
 			return SettlementRound.C;
-		case 18:
+		case 8:
 			return SettlementRound.D;
-		case 25:
+		case 12:
 			return SettlementRound.E;
 		default:
 			return null;
@@ -120,24 +122,22 @@ public class BoardModeFourLongIreland extends BoardMode {
 	public String getMoveName() {
 		if(board.isExtraRound()) return "extra";
 		switch (board.getMoveInRound()) {
-		case 1:
-			return "first";
-		case 2:
-			return "second";
-		case 3:
-			return "third";
-		case 4:
-			return "fourth";
-		case 5:
-			return "last";
-		default:
-			throw new RuntimeException("Illegal Move Number " + board.getMoveInRound());
+			case 1:
+				return "first";
+			case 2:
+				return "second";
+			case 3:
+				return "third";
+			case 4:
+				return "last";
+			default:
+				throw new RuntimeException("Illegal Move Number " + board.getMoveInRound());
 		}
 	}
 
 	@Override
 	public int grapeActiveOnRound() {
-		return GRAPE_INACTIVE_IN_IRELAND;
+		return 8;
 	}
 
 	@Override
@@ -164,18 +164,21 @@ public class BoardModeFourLongIreland extends BoardMode {
 	public GameLength getLength() {
 		return LENGTH;
 	}
-	
+
 	@Override
-	public int getMovesInRound() {
-		return 5;
+	public void customizeLandscape(Landscape landscape) {
+		landscape.getTerrainAt(new Coordinate(0,0)).setTerrainType(PLAINS);
+		landscape.getTerrainAt(new Coordinate(1,0)).setTerrainType(PLAINS);
+		super.customizeLandscape(landscape);
 	}
 
 	@Override
 	public boolean isProductionBonusActive() {
+		return true;
+	}
+
+	@Override
+	public boolean isSecondLayBrotherUsed() {
 		return false;
-	}			
-	
-	public int getLastSettlementAfterRound() {
-		return 25;
 	}
 }

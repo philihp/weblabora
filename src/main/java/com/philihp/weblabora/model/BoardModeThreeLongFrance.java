@@ -162,7 +162,12 @@ public class BoardModeThreeLongFrance extends BoardMode {
 	public GameLength getLength() {
 		return LENGTH;
 	}
-	
+
+	@Override
+	public boolean isProductionBonusActive() {
+		return false;
+	}
+		
 	@Override
 	public int getMovesInRound() {
 		return 4;

@@ -173,21 +173,25 @@ public class Board {
 			allBuildings.put(LR1, (ClayMound)players[0].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
 			allBuildings.put(LR2, (Farmyard)players[0].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
 			allBuildings.put(LR3, (CloisterOffice)players[0].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
+			mode.customizeLandscape(players[0].getLandscape());
 		}
 		if(players.length >= 2) {
 			allBuildings.put(LG1, (ClayMound)players[1].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
 			allBuildings.put(LG2, (Farmyard)players[1].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
 			allBuildings.put(LG3, (CloisterOffice)players[1].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
+			mode.customizeLandscape(players[1].getLandscape());
 		}
 		if(players.length >= 3) {
 			allBuildings.put(LB1, (ClayMound)players[2].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
 			allBuildings.put(LB2, (Farmyard)players[2].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
 			allBuildings.put(LB3, (CloisterOffice)players[2].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
+			mode.customizeLandscape(players[2].getLandscape());
 		}
 		if(players.length >= 4) {
 			allBuildings.put(LW1, (ClayMound)players[3].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
 			allBuildings.put(LW2, (Farmyard)players[3].getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
 			allBuildings.put(LW3, (CloisterOffice)players[3].getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
+			mode.customizeLandscape(players[3].getLandscape());
 		}
 	}
 	
@@ -303,6 +307,7 @@ public class Board {
 		
 		//2 - push arm
 		getWheel().pushArm(round);
+		mode.preRound();
 		
 		//3 - check to see if grapes/stone should become active
 		if(round == grapeActiveOnRound()) getWheel().getGrape().setActive(true);
@@ -474,8 +479,11 @@ public class Board {
 		return this.mode;
 	}
 	
-	public int actionsBeforeSettlement(int player) {
-		
+public void distributeBonusProduction(UsageParam item) {
+  getMode().distributeBonusProduction(item);
+}
+
+public int actionsBeforeSettlement(int player) {
 		int currentActivePlayer = getActivePlayer();
 		int round = getRound();
 		

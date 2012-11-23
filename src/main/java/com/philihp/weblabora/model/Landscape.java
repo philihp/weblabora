@@ -128,7 +128,6 @@ public class Landscape {
 
 	public void checkValidity() {
 		//TODO: check the validity of the arrangement of the landscape. plots need to be touching a district/homeland
-		
-		//might not be necessary since i did such a swell job of plot and district commands :)
+		// sanity check. probably a good idea to do this.
 	}
 }

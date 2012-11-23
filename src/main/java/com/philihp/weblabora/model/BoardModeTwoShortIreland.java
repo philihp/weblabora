@@ -10,19 +10,19 @@ import java.util.List;
 import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.BuildingEnum;
 
-public class BoardModeTwoLongIreland extends BoardMode {
+public class BoardModeTwoShortIreland extends BoardMode {
 
 	private static final GamePlayers PLAYERS = GamePlayers.TWO;
-	private static final GameLength LENGTH = GameLength.LONG;
+	private static final GameLength LENGTH = GameLength.SHORT;
 	private static final GameCountry COUNTRY = GameCountry.IRELAND;
 
-	protected BoardModeTwoLongIreland(Board board) {
+	protected BoardModeTwoShortIreland(Board board) {
 		super(board);
 	}
 
 	@Override
 	public int[] getWheelArmValues() {
-		return new int[] { 0, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8, 9, 10 };
+		return new int[] { 0, 1, 2, 3, 4, 4, 5, 6, 6, 7, 8, 10 };
 	}
 
 	@Override
@@ -144,7 +144,7 @@ public class BoardModeTwoLongIreland extends BoardMode {
 
 	@Override
 	public int grapeActiveOnRound() {
-		return GRAPE_INACTIVE_IN_IRELAND;
+		return 11;
 	}
 
 	@Override
@@ -172,19 +172,10 @@ public class BoardModeTwoLongIreland extends BoardMode {
 	public GameLength getLength() {
 		return LENGTH;
 	}
-	
+
 	@Override
 	public boolean isProductionBonusActive() {
-		return false;
-	}
-	
-	@Override
-	public int getMovesInRound() {
-		return 3;
-	}
-	
-	public int getLastSettlementAfterRound() {
-		return 27;
+		return true;
 	}
 	
 }

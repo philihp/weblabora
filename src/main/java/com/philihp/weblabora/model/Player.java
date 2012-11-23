@@ -645,18 +645,42 @@ public class Player {
 		subtractBeer(param.getBeer());
 		subtractReliquary(param.getReliquary());
 	}
+	public void addAll(UsageParam param) {
+		addPeat(param.getPeat());
+		addClay(param.getClay());
+		addWood(param.getWood());
+		addGrain(param.getGrain());
+		addSheep(param.getSheep());
+		addStone(param.getStone());
+		addFlour(param.getFlour());
+		addGrapes(param.getGrapes());
+		addPenny(param.getPenny());
+		addNickel(param.getNickel());
+		addHops(param.getHops());
+		addCoal(param.getCoal());
+		addBooks(param.getBook());
+		addPottery(param.getPottery());
+		addWhiskey(param.getWhiskey());
+		addStraw(param.getStraw());
+		addMeat(param.getMeat());
+		addOrnament(param.getOrnament());
+		addBread(param.getBread());
+		addWine(param.getWine());
+		addBeer(param.getBeer());
+		addReliquary(param.getReliquary());
+	}
 	
 	public void placeClergyman(Terrain location) throws WeblaboraException {
 		Clergyman dude = null;
 		if(layBrother1.getLocation() == null) dude = layBrother1;
-		else if(layBrother2.getLocation() == null) dude = layBrother2;
+		else if(layBrother2.getLocation() == null && board.getMode().isSecondLayBrotherUsed()) dude = layBrother2;
 		else if(prior.getLocation() == null) dude = prior;
 		else
 			throw new WeblaboraException("Attempted to place " + color
 					+ " clergyman when none were free. They are on the "
-					+ layBrother1.getLocation().getErection() + ", the "
-					+ layBrother2.getLocation().getErection() + ", and the "
-					+ prior.getLocation().getErection() + ".");
+					+ layBrother1.getLocation().getErection()
+					+ (board.getMode().isSecondLayBrotherUsed()?(", the "+layBrother2.getLocation().getErection()):"")
+					+ ", and the " + prior.getLocation().getErection() + ".");
 		
 		dude.setLocation(location);
 	}
@@ -672,7 +696,7 @@ public class Player {
 	
 	public boolean isClergymenAllPlaced() {
 		return layBrother1.getLocation() != null &&
-				layBrother2.getLocation() != null &&
+				(layBrother2.getLocation() != null || board.getMode().isSecondLayBrotherUsed() == false) &&
 				prior.getLocation() != null;
 	}
 	

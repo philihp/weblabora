@@ -188,6 +188,11 @@ public class BoardModeTwoLongFrance extends BoardMode {
 	}
 
 	@Override
+	public boolean isProductionBonusActive() {
+		return false;
+	}
+
+	@Override
 	public int getMovesInRound() {
 		return 3;
 	}

@@ -28,12 +28,12 @@ public class Cooperage extends BuildingDoubleUsage {
 
 	@Override
 	public void use(Board board, UsageParamDouble input) throws WeblaboraException {
-		Player player = board.getPlayer(board.getActivePlayer());
+		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		
 		if(input.getWood() != 3) {
 			throw new WeblaboraException("Not enough wood. "+getName()+" needs 3 wood, but was given "+input.getWood()+" instead.");
 		}
-		player.subtractWood(input.getWood());
+		activePlayer.subtractWood(input.getWood());
 		
 		UsageParamSingle output = input.getSecondary();
 		
@@ -42,10 +42,12 @@ public class Cooperage extends BuildingDoubleUsage {
 			throw new WeblaboraException(getName()+" was asked to output both beer and whiskey, but it can only do one, not both.");
 
 		if(output.getBeer() == 1) {
-			player.addBeer(amount);
+			activePlayer.addBeer(amount);
+			board.distributeBonusProduction(UsageParam.is().beer(1));
 		}
 		else if(output.getWhiskey() == 1) {
-			player.addWhiskey(amount);
+			activePlayer.addWhiskey(amount);
+			board.distributeBonusProduction(UsageParam.is().whiskey(1));
 		}
 		else throw new WeblaboraException(getName()+" needs to know if it should give beer or whiskey. Its second parameter needs to be 1 beer or 1 whiskey.");
 	}
