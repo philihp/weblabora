@@ -168,7 +168,7 @@
 		</div>
 	</div>
 		
-	MODE: ${board.mode.players} ${board.mode.length} ${board.mode.country}
+	
 	<div class="container">
 		<div id="fb-root"></div>
 		<div class="wheel">

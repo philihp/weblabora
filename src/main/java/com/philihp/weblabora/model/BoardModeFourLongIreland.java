@@ -170,6 +170,7 @@ public class BoardModeFourLongIreland extends BoardMode {
 		return false;
 	}		
 	
+	
 	@Override
 	public int getMovesInRound() {
 		return 5;
