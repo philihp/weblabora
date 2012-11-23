@@ -183,7 +183,7 @@ public abstract class BoardMode {
 
 	abstract public GameLength getLength();
 
-		abstract public int getMovesInRound();
+	abstract public int getMovesInRound();
 	
 	abstract public int getLastSettlementAfterRound();
 

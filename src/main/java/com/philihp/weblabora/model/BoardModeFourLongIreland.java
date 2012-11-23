@@ -164,16 +164,16 @@ public class BoardModeFourLongIreland extends BoardMode {
 	public GameLength getLength() {
 		return LENGTH;
 	}
-	
-	@Override
-	public int getMovesInRound() {
-		return 5;
-	}
 
 	@Override
 	public boolean isProductionBonusActive() {
 		return false;
-	}			
+	}		
+	
+	@Override
+	public int getMovesInRound() {
+		return 5;
+	}	
 	
 	public int getLastSettlementAfterRound() {
 		return 25;

@@ -181,5 +181,14 @@ public class BoardModeThreeShortIreland extends BoardMode {
 	public boolean isSecondLayBrotherUsed() {
 		return false;
 	}
-	
+
+	@Override
+	public int getMovesInRound() {
+		return 4;
+	}
+
+	@Override
+	public int getLastSettlementAfterRound() {
+		return 13;
+	}
 }

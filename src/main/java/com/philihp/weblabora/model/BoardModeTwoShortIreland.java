@@ -177,5 +177,14 @@ public class BoardModeTwoShortIreland extends BoardMode {
 	public boolean isProductionBonusActive() {
 		return true;
 	}
+
+	@Override
+	public int getMovesInRound() {
+		return 1;
+	}
 	
+	@Override
+	public int getLastSettlementAfterRound() {
+		return 28;
+	}
 }

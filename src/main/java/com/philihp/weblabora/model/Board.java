@@ -500,7 +500,6 @@ public int actionsBeforeSettlement(int player) {
 			if (getRound() > getMode().getLastSettlementAfterRound() ) {
 				return -1;
 			}
-			
 		}
 		
 		for (int i = getMoveInRound(); i <= getMode().getMovesInRound() &&
