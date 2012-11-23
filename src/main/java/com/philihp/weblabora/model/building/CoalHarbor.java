@@ -27,11 +27,11 @@ public class CoalHarbor extends BuildingSingleUsage {
 	public void use(Board board, UsageParamSingle param) throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 	
-		int iterations = param.getPeat();
+		int iterations = param.getCoal();
 
-		if(iterations == 0) throw new WeblaboraException(getName()+" was not supplied any peat.");
-		if(iterations > 3) throw new WeblaboraException(getName()+" was supplied "+iterations+" peat, but can only consume a maximum of 3.");		
-		player.subtractPeat(iterations);
+		if(iterations == 0) throw new WeblaboraException(getName()+" was not supplied any coal.");
+		if(iterations > 3) throw new WeblaboraException(getName()+" was supplied "+iterations+" coal, but can only consume a maximum of 3.");		
+		player.subtractCoal(iterations);
 		player.addCoins(3*iterations);
 		player.addWhiskey(iterations);	
 	}

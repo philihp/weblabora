@@ -1,12 +1,8 @@
 package com.philihp.weblabora.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-
-import static com.philihp.weblabora.model.TerrainTypeEnum.*;
 
 import com.google.common.collect.ArrayTable;
 import com.google.common.collect.DiscreteDomains;
@@ -36,20 +32,22 @@ public class Landscape {
 		Set<Integer> cols = Ranges.closed(0, 4).asSet(DiscreteDomains.integers());
 		this.terrain = ArrayTable.create(rows,cols);
 		
-		terrainPut(0, 0, MOOR, null);
-		terrainPut(0, 1, FOREST, null);
-		terrainPut(0, 2, FOREST, null);
-		terrainPut(0, 3, PLAINS, null);
-		terrainPut(0, 4, HILLSIDE, clayMound);
-		terrainPut(1, 0, MOOR, null);
-		terrainPut(1, 1, FOREST, null);
-		terrainPut(1, 2, PLAINS, farmyard);
-		terrainPut(1, 3, PLAINS, null);
-		terrainPut(1, 4, PLAINS, cloisterOffice);
+		terrainPut(0, 0, TerrainTypeEnum.PLAINS,   TerrainUseEnum.MOOR,    null);
+		terrainPut(0, 1, TerrainTypeEnum.PLAINS,   TerrainUseEnum.FOREST,   null);
+		terrainPut(0, 2, TerrainTypeEnum.PLAINS,   TerrainUseEnum.FOREST,   null);
+		terrainPut(0, 3, TerrainTypeEnum.PLAINS,   TerrainUseEnum.EMPTY,    null);
+		terrainPut(0, 4, TerrainTypeEnum.HILLSIDE, TerrainUseEnum.BUILDING, clayMound);
+		terrainPut(1, 0, TerrainTypeEnum.PLAINS,   TerrainUseEnum.MOOR,     null);
+		terrainPut(1, 1, TerrainTypeEnum.PLAINS,   TerrainUseEnum.FOREST,   null);
+		terrainPut(1, 2, TerrainTypeEnum.PLAINS,   TerrainUseEnum.BUILDING, farmyard);
+		terrainPut(1, 3, TerrainTypeEnum.PLAINS,   TerrainUseEnum.EMPTY,    null);
+		terrainPut(1, 4, TerrainTypeEnum.PLAINS,   TerrainUseEnum.BUILDING, cloisterOffice);
 	}
 	
-	private void terrainPut(int y, int x, TerrainTypeEnum type, Erection erection) {
-		terrain.put(y, x, new Terrain(this, type, erection, x, y));
+	private void terrainPut(int y, int x, TerrainTypeEnum type, TerrainUseEnum use, Erection erection) {
+		if ((erection != null) && (use != TerrainUseEnum.BUILDING))
+			throw new IllegalArgumentException();
+		terrain.put(y, x, new Terrain(this, type, use, erection, x, y));
 	}
 	
 	public Table<Integer, Integer, Terrain> getTerrain() {
@@ -64,13 +62,13 @@ public class Landscape {
 		return terrain.toArray(Terrain.class);
 	}
 
-	private int getNumberOfTerrain(TerrainTypeEnum type) {
-		if(type == null) return 0;
+	private int getNumberOfTerrain(TerrainUseEnum use) {
+		if(use == null) return 0;
 
 		int count = 0;
 		for(Terrain[] row : getTable()) {
 			for(Terrain cell : row) {
-				if(cell != null && type == cell.getTerrainType())
+				if(cell != null && use == cell.getTerrainUse())
 					count++;
 			}
 		}
@@ -79,10 +77,10 @@ public class Landscape {
 	}
 
 	public int getNumberOfForests() {
-		return getNumberOfTerrain(FOREST);
+		return getNumberOfTerrain(TerrainUseEnum.FOREST);
 	}
 	public int getNumberOfMoors() {
-		return getNumberOfTerrain(MOOR);
+		return getNumberOfTerrain(TerrainUseEnum.MOOR);
 	}
 
 	public List<Erection> getErections() {
@@ -128,7 +126,6 @@ public class Landscape {
 
 	public void checkValidity() {
 		//TODO: check the validity of the arrangement of the landscape. plots need to be touching a district/homeland
-		
-		//might not be necessary since i did such a swell job of plot and district commands :)
+		// sanity check. probably a good idea to do this.
 	}
 }

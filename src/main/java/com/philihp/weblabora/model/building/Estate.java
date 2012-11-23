@@ -37,7 +37,7 @@ public class Estate extends Building {
 		for (int iterations = 0; iterations < 2; iterations++) {
 			if (energy >= 6)
 				energy -= 6;
-			else if (food >= 0)
+			else if (food >= 10)
 				food -= 10;
 			else
 				break;

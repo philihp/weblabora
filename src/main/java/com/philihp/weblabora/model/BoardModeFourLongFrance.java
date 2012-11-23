@@ -165,5 +165,18 @@ public class BoardModeFourLongFrance extends BoardMode {
 	public GameLength getLength() {
 		return LENGTH;
 	}
+
+	@Override
+	public boolean isProductionBonusActive() {
+		return false;
+	}
 	
+	@Override
+	public int getMovesInRound() {
+		return 5;
+	}
+	
+	public int getLastSettlementAfterRound() {
+		return 25;
+	}
 }

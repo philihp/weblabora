@@ -1,9 +1,5 @@
 package com.philihp.weblabora.model;
 
-import static com.philihp.weblabora.model.TerrainTypeEnum.*;
-
-import java.util.List;
-
 public class CommandCutPeat implements MoveCommand, InvalidDuringSettlement {
 
 	@Override
@@ -32,16 +28,18 @@ public class CommandCutPeat implements MoveCommand, InvalidDuringSettlement {
 		}
 		
 		
-		if (spot.getTerrainType() != MOOR)
+		if (spot.getTerrainUse() != TerrainUseEnum.MOOR)
 			throw new WeblaboraException("Tried to Cut Peat on "
-					+ spot.getTerrainType() + " at (" + x + "," + y
+					+ spot.getTerrainUse() + " at (" + x + "," + y
 					+ ") for player " + board.getActivePlayerColor()
 					+ ", but it is not moor");
 
-		spot.setTerrainType(PLAINS);
+		spot.setTerrainUse(TerrainUseEnum.EMPTY);
 		Token token = joker?board.getWheel().getJoker():board.getWheel().getPeat();
 		int peatTaken = token.take();
 		player.setPeat(player.getPeat() + peatTaken);
+		
+		board.distributeBonusProduction(UsageParam.is().peat(1));
 
 		System.out.println("Cutting peat at " + x + "," + y + "; got peat: "
 				+ peatTaken);

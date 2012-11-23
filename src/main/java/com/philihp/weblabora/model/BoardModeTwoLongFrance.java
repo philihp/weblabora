@@ -187,4 +187,17 @@ public class BoardModeTwoLongFrance extends BoardMode {
 		return LENGTH;
 	}
 
+	@Override
+	public boolean isProductionBonusActive() {
+		return false;
+	}
+
+	@Override
+	public int getMovesInRound() {
+		return 3;
+	}
+	
+	public int getLastSettlementAfterRound() {
+		return 27;
+	}
 }

@@ -25,7 +25,7 @@
 			</fieldset>
 			<fieldset>
 				<legend>Length</legend>
-				<html:radio property="length" value="SHORT" styleId="length.short" disabled="true"/><label for="length.short"> Short</label><br />
+				<html:radio property="length" value="SHORT" styleId="length.short"/><label for="length.short"> Short</label><br />
 				<html:radio property="length" value="LONG" styleId="length.long"/><label for="length.long"> Long</label>
 			</fieldset>
 			<fieldset>
