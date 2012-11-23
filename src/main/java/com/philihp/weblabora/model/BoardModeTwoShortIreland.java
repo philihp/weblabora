@@ -97,10 +97,6 @@ public class BoardModeTwoShortIreland extends BoardMode {
 			board.postRound();
 		}
 	}
-	
-	@Override
-	public void preRound() {
-	}
 
 	@Override
 	public void postRound() {

@@ -97,10 +97,6 @@ public class BoardModeThreeShortFrance extends BoardMode {
 			board.postRound();
 		}
 	}
-	
-	@Override
-	public void preRound() {
-	}
 
 	@Override
 	public void postRound() {
@@ -185,5 +181,4 @@ public class BoardModeThreeShortFrance extends BoardMode {
 	public boolean isSecondLayBrotherUsed() {
 		return false;
 	}
-	
 }

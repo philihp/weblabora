@@ -43,19 +43,11 @@ public class Cooperage extends BuildingDoubleUsage {
 
 		if(output.getBeer() == 1) {
 			activePlayer.addBeer(amount);
-			if(board.getMode().isProductionBonusActive()) {
-				for(Player player : board.getPlayers()) {
-					player.addBeer(1);
-				}
-			}
+			board.distributeBonusProduction(UsageParam.is().beer(1));
 		}
 		else if(output.getWhiskey() == 1) {
 			activePlayer.addWhiskey(amount);
-			if(board.getMode().isProductionBonusActive()) {
-				for(Player player : board.getPlayers()) {
-					player.addWhiskey(1);
-				}
-			}
+			board.distributeBonusProduction(UsageParam.is().whiskey(1));
 		}
 		else throw new WeblaboraException(getName()+" needs to know if it should give beer or whiskey. Its second parameter needs to be 1 beer or 1 whiskey.");
 	}

@@ -470,4 +470,8 @@ public class Board {
 	public BoardMode getMode() {
 		return this.mode;
 	}
+	
+	public void distributeBonusProduction(UsageParam item) {
+		getMode().distributeBonusProduction(item);
+	}
 }

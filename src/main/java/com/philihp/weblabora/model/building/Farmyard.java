@@ -33,22 +33,12 @@ public class Farmyard extends Building {
 		if(input.getSheep() != 0) {
 			Token token = input.isWithJoker()?wheel.getJoker():wheel.getSheep();
 			activePlayer.addSheep(token.take());
-			
-			if(board.getMode().isProductionBonusActive()) {
-				for(Player player : board.getPlayers()) {
-					player.addSheep(1);
-				}
-			}
+			board.distributeBonusProduction(UsageParam.is().sheep(1));
 		}
 		else if(input.getGrain() != 0) {
 			Token token = input.isWithJoker()?wheel.getJoker():wheel.getGrain();
 			activePlayer.addGrain(token.take());
-			
-			if(board.getMode().isProductionBonusActive()) {
-				for(Player player : board.getPlayers()) {
-					player.addGrain(1);
-				}
-			}
+			board.distributeBonusProduction(UsageParam.is().grain(1));
 		}
 		else {
 			throw new WeblaboraException("Usage of Farmyard must specify if Sheep or Grain is desired.");

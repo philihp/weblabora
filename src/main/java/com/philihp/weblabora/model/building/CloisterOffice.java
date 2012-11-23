@@ -30,12 +30,7 @@ public class CloisterOffice extends Building {
 		Wheel wheel = board.getWheel();
 		Token token = input.isWithJoker()?wheel.getJoker():wheel.getCoin();
 		activePlayer.addPenny(token.take());
-		
-		if(board.getMode().isProductionBonusActive()) {
-			for(Player player : board.getPlayers()) {
-				player.addPenny(1);
-			}
-		}
+		board.distributeBonusProduction(UsageParam.is().penny(1));
 	}
 	
 	@Override

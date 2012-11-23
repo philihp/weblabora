@@ -100,10 +100,6 @@ public class BoardModeFourShortFrance extends BoardMode {
 	}
 	
 	@Override
-	public void preRound() {
-	}
-	
-	@Override
 	public void postRound() {
 		board.setMoveInRound(1);
 

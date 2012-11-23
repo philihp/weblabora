@@ -33,11 +33,6 @@ abstract class Quarry extends Building {
 				.getStone();
 
 		activePlayer.addStone(token.take());
-		
-		if(board.getMode().isProductionBonusActive()) {
-			for(Player player : board.getPlayers()) {
-				player.addStone(1);
-			}
-		}
+		board.distributeBonusProduction(UsageParam.is().stone(1));
 	}
 }

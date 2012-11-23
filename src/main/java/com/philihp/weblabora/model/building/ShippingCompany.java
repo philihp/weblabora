@@ -39,28 +39,16 @@ public class ShippingCompany extends BuildingDoubleUsage {
 		
 		int amount = board.getWheel().getJoker().take();
 		if(output.getMeat() == 1) {
-			activePlayer.addMeat(amount);			
-			if(board.getMode().isProductionBonusActive()) {
-				for(Player player : board.getPlayers()) {
-					player.addMeat(1);
-				}
-			}
+			activePlayer.addMeat(amount);
+			board.distributeBonusProduction(UsageParam.is().meat(1));
 		}
 		else if(output.getBread() == 1) {
 			activePlayer.addBread(amount);
-			if(board.getMode().isProductionBonusActive()) {
-				for(Player player : board.getPlayers()) {
-					player.addBread(1);
-				}
-			}
+			board.distributeBonusProduction(UsageParam.is().bread(1));
 		}
 		else if(output.getWine() == 1) {
 			activePlayer.addWine(amount);
-			if(board.getMode().isProductionBonusActive()) {
-				for(Player player : board.getPlayers()) {
-					player.addWine(1);
-				}
-			}
+			board.distributeBonusProduction(UsageParam.is().wine(1));
 		}
 		else throw new WeblaboraException(getName()+" needs to know if it should give meat, bread, or wine. Its second parameter needs to be 1 meat, 1 bread, or 1 wine.");
 	}

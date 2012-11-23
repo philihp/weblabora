@@ -30,12 +30,7 @@ public class ClayMound extends Building {
 		Wheel wheel = board.getWheel();
 		Token token = input.isWithJoker()?wheel.getJoker():wheel.getClay();
 		activePlayer.addClay(token.take());
-		
-		if(board.getMode().isProductionBonusActive()) {
-			for(Player player : board.getPlayers()) {
-				player.addClay(1);
-			}
-		}
+		board.distributeBonusProduction(UsageParam.is().clay(1));
 	}
 	
 	@Override

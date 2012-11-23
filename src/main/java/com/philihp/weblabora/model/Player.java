@@ -625,6 +625,30 @@ public class Player {
 		subtractBeer(param.getBeer());
 		subtractReliquary(param.getReliquary());
 	}
+	public void addAll(UsageParam param) {
+		addPeat(param.getPeat());
+		addClay(param.getClay());
+		addWood(param.getWood());
+		addGrain(param.getGrain());
+		addSheep(param.getSheep());
+		addStone(param.getStone());
+		addFlour(param.getFlour());
+		addGrapes(param.getGrapes());
+		addPenny(param.getPenny());
+		addNickel(param.getNickel());
+		addHops(param.getHops());
+		addCoal(param.getCoal());
+		addBooks(param.getBook());
+		addPottery(param.getPottery());
+		addWhiskey(param.getWhiskey());
+		addStraw(param.getStraw());
+		addMeat(param.getMeat());
+		addOrnament(param.getOrnament());
+		addBread(param.getBread());
+		addWine(param.getWine());
+		addBeer(param.getBeer());
+		addReliquary(param.getReliquary());
+	}
 	
 	public void placeClergyman(Terrain location) throws WeblaboraException {
 		Clergyman dude = null;

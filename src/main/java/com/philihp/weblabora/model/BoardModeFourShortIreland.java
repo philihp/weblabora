@@ -97,66 +97,6 @@ public class BoardModeFourShortIreland extends BoardMode {
 			board.postRound();
 		}
 	}
-	
-	@Override
-	public void preRound() {
-		for(Player player : getBoard().getPlayers()) {
-			switch(getBoard().getRound()) {
-			case 1:
-				player.addSheep(1);
-				player.addGrain(1);
-				break;
-			case 2:
-				player.addClay(1);
-				player.addGrain(1);
-				break;
-			case 3:
-				player.addWood(1);
-				player.addGrain(1);
-				break;
-			case 4:
-				player.addStone(1);
-				player.addGrain(1);
-				break;
-			case 5:
-				player.addStone(1);
-				player.addPeat(1);
-				break;
-			case 6:
-				player.addStone(1);
-				player.addClay(1);
-				break;
-			case 7:
-				player.addStone(1);
-				player.addWood(1);
-				break;
-			case 8:
-				player.addStone(1);
-				player.addNickel(1);
-				break;
-			case 9:
-				player.addStone(1);
-				player.addMeat(1);
-				break;
-			case 10:
-				player.addBooks(1);
-				player.addGrain(1);
-				break;
-			case 11:
-				player.addPottery(1);
-				player.addClay(1);
-				break;
-			case 12:
-				player.addOrnament(1);
-				player.addWood(1);
-				break;
-			case 13:
-				System.out.println("Final Round");
-			default: 
-				throw new RuntimeException("Four player Short game should never reach round "+board.getRound());
-			}
-		}
-	}
 
 	@Override
 	public void postRound() {
