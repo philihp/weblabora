@@ -501,7 +501,7 @@
 				
 				<h3>Clergymen</h3>
 				<c:if test="${empty player.layBrother1.location}"><img src="images/laybrother-${fn:toLowerCase(player.color)}.svg" alt="Lay Brother" /></c:if>
-				<c:if test="${empty player.layBrother2.location}"><img src="images/laybrother-${fn:toLowerCase(player.color)}.svg" alt="Lay Brother" /></c:if>
+				<c:if test="${board.mode.secondLayBrotherUsed and empty player.layBrother2.location}"><img src="images/laybrother-${fn:toLowerCase(player.color)}.svg" alt="Lay Brother" /></c:if>
 				<c:if test="${empty player.prior.location}"><img src="images/prior-${fn:toLowerCase(player.color)}.svg" /></c:if>
 								
 				<hr />
