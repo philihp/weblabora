@@ -198,32 +198,6 @@
 				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeL}" />
 				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeM}" />
 				</g>
-				<c:if test="${board.mode.players eq 'FOUR' and board.mode.length eq 'SHORT'}">
-					<g id="production-1" transform="rotate(${wheelArt.rotA})">
-						<text x="0" y="-111" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Sh</text>
-						<text x="0" y="-100" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Gn</text>
-					</g>
-					<g id="settlement-a" transform="rotate(${wheelArt.rotC})">
-						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
-						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">A</text>
-					</g>
-					<g id="settlement-b" transform="rotate(${wheelArt.rotE})">
-						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
-						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">B</text>
-					</g>
-					<g id="settlement-c" transform="rotate(${wheelArt.rotG})">
-						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
-						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle;  fill:#fff">C</text>
-					</g>
-					<g id="settlement-d" transform="rotate(${wheelArt.rotI})">
-						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
-						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">D</text>
-					</g>
-					<g id="settlement-e" transform="rotate(${wheelArt.rotM})">
-						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
-						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">E</text>
-					</g>
-				</c:if>
 				<c:if test="${board.mode.players eq 'FOUR' and board.mode.length eq 'LONG'}">
 					<g id="settlement-a" transform="rotate(${wheelArt.rotG})">
 						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
@@ -268,7 +242,7 @@
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">E</text>
 					</g>
 				</c:if>
-				<c:if test="${board.mode.players eq 'THREE' and board.mode.length eq 'SHORT'}">
+				<c:if test="${(board.mode.players eq 'THREE' or board.mode.players eq 'FOUR') and board.mode.length eq 'SHORT'}">
 					<g id="A-welfare" transform="rotate(${wheelArt.rotA})">
 						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Sheep.png" />
 						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Grain.png" />
@@ -338,7 +312,25 @@
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">E</text>
 					</g>
 				</c:if>
-				<c:if test="${board.mode.players eq 'TWO' and board.mode.length eq 'LONG'}">
+				<c:if test="${board.mode.players eq 'ONE'}">
+					<g id="settlement-a" transform="rotate(${wheelArt.rotL})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">A</text>
+					</g>
+					<g id="settlement-b" transform="rotate(${wheelArt.rotC})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">B</text>
+					</g>
+					<g id="settlement-c" transform="rotate(${wheelArt.rotI})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle;  fill:#fff">C</text>
+					</g>
+					<g id="settlement-d" transform="rotate(${wheelArt.rotM})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">D</text>
+					</g>
+				</c:if>
+				<c:if test="${board.mode.players eq 'TWO'}"><%-- this is the same for both short and long --%>
 					<g id="settlement-a" transform="rotate(${wheelArt.rotG})">
 						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">A</text>

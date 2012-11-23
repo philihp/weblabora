@@ -68,15 +68,15 @@ public class BoardModeThreeShortFrance extends BoardMode {
 	@Override
 	public SettlementRound roundBeforeSettlement(int round) {
 		switch (round) {
-		case 5:
+		case 2:
 			return SettlementRound.A;
-		case 10:
+		case 4:
 			return SettlementRound.B;
-		case 14:
+		case 6:
 			return SettlementRound.C;
-		case 19:
+		case 8:
 			return SettlementRound.D;
-		case 25:
+		case 12:
 			return SettlementRound.E;
 		default:
 			return null;
