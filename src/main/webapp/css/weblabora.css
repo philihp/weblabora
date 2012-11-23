@@ -258,19 +258,19 @@ border-color: gray;
 	border-collapse: collapse;
 }
 .board table td.water {
-	background-color: #2C71E8; 
+	background-color: #87b6ff; 
 	background-image: url('../images/background/Water.svg');
 }
 .board table td.coast {
-	background-color: #DFBD48; 
+	background-color: #ffdd67; 
 	background-image: url('../images/background/Coast.svg');
 }
 .board table td.plains {
-	background-color: #3E9C1A; 
+	background-color: #7cd958; 
 	background-image: url('../images/background/Plains.svg');
 }
 .board table td.hillside {
-	background-color: #96BE88; 
+	background-color: #bdd6b5; 
 	background-image: url('../images/background/Hillside.svg');
 }
 .board table td.mountain {

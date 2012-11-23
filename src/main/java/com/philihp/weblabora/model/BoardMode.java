@@ -186,9 +186,6 @@ public abstract class BoardMode {
 	abstract public int getMovesInRound();
 	
 	abstract public int getLastSettlementAfterRound();
-	abstract public int getMovesInRound();
-	
-	abstract public int getLastSettlementAfterRound();
 
 
 	/**
