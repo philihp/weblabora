@@ -35,7 +35,7 @@ public class ForestHut extends BuildingCoordinateUsage {
 					+ spot.getTerrainUse() + " at " + input
 					+ ", it can only remove FOREST");
 		else
-			spot.setTerrainType(TerrainTypeEnum.PLAINS);
+			spot.setTerrainUse(TerrainUseEnum.EMPTY);
 
 		player.addSheep(2);
 		player.addWood(2);
