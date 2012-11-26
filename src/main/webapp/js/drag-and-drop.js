@@ -19,7 +19,7 @@ function findDraggableAncestor(node) {
     return null;
   }
   if (node instanceof HTMLElement) {
-    if (node.hasAttribute("draggable") && (node.getAttribute("draggable") === "true")) {
+    if (node.hasAttribute('draggable') && (node.getAttribute('draggable') === 'true')) {
       return node;
     }
   }
@@ -33,7 +33,7 @@ function findBoard(node) {
   if (node instanceof HTMLElement) {
     var classList = node.className.split(/\s+/);
     for (var i = 0; i < classList.length; ++i) {
-      if (classList[i] === "board") {
+      if (classList[i] === 'board') {
         return node;
       }
     }
@@ -42,11 +42,11 @@ function findBoard(node) {
 }
 
 function countResources(board, resource) {
-  var resources = board.getElementsByClassName("resources")[0];
-  var resourceList = resources.getElementsByClassName("resource");
+  var resources = board.getElementsByClassName('resources')[0];
+  var resourceList = resources.getElementsByClassName('resource');
   var count = 0;
   for (var i = 0; i < resourceList.length; ++i) {
-    if (resourceList[i].getAttribute("data-resource") === resource) {
+    if (resourceList[i].getAttribute('data-resource') === resource) {
       ++count;
     }
   }
@@ -69,10 +69,10 @@ function onBuildingDrop(event) {
   event.preventDefault();
 
   var board = findBoard(event.target);
-  var strawAvailable = countResources(board, "Straw");
-  var strawNeeded = droppedBuilding.getAttribute("data-cost-straw");
+  var strawAvailable = countResources(board, 'Straw');
+  var strawNeeded = droppedBuilding.getAttribute('data-cost-straw');
 
-  var dropReplacementsList = event.target.getElementsByClassName("drop-replacement");
+  var dropReplacementsList = event.target.getElementsByClassName('drop-replacement');
   for(var i = 0; i < dropReplacementsList.length; ++i) {
     var dropReplacement = dropReplacementsList.item(i);
     dropReplacement.style.display = 'none';
@@ -82,17 +82,17 @@ function onBuildingDrop(event) {
   var row = event.target.getAttribute('data-position-row');
   var column = event.target.getAttribute('data-position-column');
 
-  var command = "";
+  var command = '';
 
   for (var i = strawAvailable; i < strawNeeded; ++i) {
     if (command.length > 0 ) {
-      command += "|";
+      command += '|';
     }
-    command += "V(Gn)";
+    command += 'V(Gn)';
   }
 
   if (command.length > 0 ) {
-      command += "|";
+      command += '|';
   }
   command += 'B(' + buildingId + ',' + column + ',' + row + ')';
 
@@ -101,8 +101,23 @@ function onBuildingDrop(event) {
 }
 
 function onBuildingDragOver(event) {
-  event.preventDefault();
-  return false;
+  var data = event.dataTransfer.getData('Text');
+
+  var allowDrop = true;
+
+  var droppedBuilding = document.getElementById(data);
+  var allowedTerrainTypes = droppedBuilding.getAttribute('data-terrain-types');
+  var currentTerrainType = event.target.getAttribute('data-terrain-type');
+
+  if (allowedTerrainTypes.indexOf(currentTerrainType, 0) == -1) {
+    allowDrop = false;
+  }
+
+  if (allowDrop) {
+    event.preventDefault();
+  }
+
+  return true;
 }
 
 function onBuildingDragEnd(event) {
