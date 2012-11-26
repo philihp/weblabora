@@ -5,7 +5,6 @@ import static com.philihp.weblabora.model.TerrainTypeEnum.HILLSIDE;
 import static com.philihp.weblabora.model.TerrainTypeEnum.PLAINS;
 
 import java.util.EnumSet;
-import java.util.Set;
 
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
@@ -13,7 +12,7 @@ import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.Terrain;
 import com.philihp.weblabora.model.TerrainTypeEnum;
-import com.philihp.weblabora.model.UsageParam;
+import com.philihp.weblabora.model.TerrainUseEnum;
 import com.philihp.weblabora.model.UsageParamCoordinates;
 import com.philihp.weblabora.model.WeblaboraException;
 
@@ -28,8 +27,8 @@ public class Carpentry extends BuildingCoordinateUsage {
 	public void use(Board board, UsageParamCoordinates input) throws WeblaboraException {
 		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		Terrain spot = activePlayer.getLandscape().getTerrainAt(input.getCoordinate());
-		if(spot.getTerrainType() != TerrainTypeEnum.FOREST)
-			throw new WeblaboraException("Carpentry can't remove "+spot.getTerrainType()+" at "+input+", it can only remove FOREST");
+		if(spot.getTerrainUse() != TerrainUseEnum.FOREST)
+			throw new WeblaboraException("Carpentry can't remove "+spot.getTerrainUse()+" at "+input+", it can only remove FOREST");
 		else
 			spot.setTerrainType(TerrainTypeEnum.PLAINS);
 	}

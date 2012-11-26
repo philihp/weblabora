@@ -26,12 +26,13 @@ abstract class Quarry extends Building {
 
 	@Override
 	public void use(Board board, UsageParam input) {
-		Player player = board.getPlayer(board.getActivePlayer());
+		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		Wheel wheel = board.getWheel();
 
 		Token token = input.isWithJoker() ? wheel.getJoker() : wheel
 				.getStone();
 
-		player.addStone(token.take());
+		activePlayer.addStone(token.take());
+		board.distributeBonusProduction(UsageParam.is().stone(1));
 	}
 }

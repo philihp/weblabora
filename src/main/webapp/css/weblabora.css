@@ -134,12 +134,18 @@ div.container {
 	padding: 2px;
 	margin: 3px;
 }
+.settlement-buildable {
+	border: 2px solid #006600;
+}
+.settlement-not-buildable {
+	border: 2px solid #FF0000;
+}
 .settlement-image {
 	height: 125px;
 	width: 75px;
 }
 .future-settlement {
-	border: 1px solid #FBEC00;
+	border: 2px solid #FBEC00;
 	display: none;
 }
 
@@ -243,10 +249,33 @@ div.container {
 	font-size: 8pt;
 	text-align: center;
 	vertical-align: middle;
-	border-color: gray;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+border-color: gray;
 	border-width: 1px;
 	border-style: inset;
 	border-collapse: collapse;
+}
+.board table td.water {
+	background-color: #87b6ff; 
+	background-image: url('../images/background/Water.svg');
+}
+.board table td.coast {
+	background-color: #ffdd67; 
+	background-image: url('../images/background/Coast.svg');
+}
+.board table td.plains {
+	background-color: #7cd958; 
+	background-image: url('../images/background/Plains.svg');
+}
+.board table td.hillside {
+	background-color: #bdd6b5; 
+	background-image: url('../images/background/Hillside.svg');
+}
+.board table td.mountain {
+	background-color: #A2A6A0; 
+	background-image: url('../images/background/Mountain.svg');
 }
 .landscape-tile {
 	height: 125px;
@@ -332,6 +361,16 @@ div.container {
 	text-align: center;
 }
 
+.actionsBeforeSettlement {
+	color: black;
+	font-weight: bold;
+}
+
+
+.actionsBeforeSettlementRed {
+	color: red;
+	font-weight: bold;
+}
 
 fieldset {
 	border: 1px groove #f0f0f0;

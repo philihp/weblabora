@@ -205,7 +205,7 @@
 				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeL}" />
 				<polyline fill="#fcfcfc" stroke="#b3b3b3" stroke-width="1" points="${wheelArt.wedgeM}" />
 				</g>
-				<c:if test="${board.mode.players eq 'FOUR'}">
+				<c:if test="${board.mode.players eq 'FOUR' and board.mode.length eq 'LONG'}">
 					<g id="settlement-a" transform="rotate(${wheelArt.rotG})">
 						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">A</text>
@@ -227,7 +227,7 @@
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">E</text>
 					</g>
 				</c:if>
-				<c:if test="${board.mode.players eq 'THREE'}">
+				<c:if test="${board.mode.players eq 'THREE' and board.mode.length eq 'LONG'}">
 					<g id="settlement-a" transform="rotate(${wheelArt.rotF})">
 						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">A</text>
@@ -249,7 +249,95 @@
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">E</text>
 					</g>
 				</c:if>
-				<c:if test="${board.mode.players eq 'TWO'}">
+				<c:if test="${(board.mode.players eq 'THREE' or board.mode.players eq 'FOUR') and board.mode.length eq 'SHORT'}">
+					<g id="A-welfare" transform="rotate(${wheelArt.rotA})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Sheep.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Grain.png" />
+					</g>
+					<g id="B-welfare" transform="rotate(${wheelArt.rotB})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Clay.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Grain.png" />
+					</g>
+					<g id="C-welfare" transform="rotate(${wheelArt.rotC})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Wood.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Grain.png" />
+					</g>
+					<g id="settlement-a" transform="rotate(${wheelArt.rotC})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">A</text>
+					</g>
+					<g id="D-welfare" transform="rotate(${wheelArt.rotD})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Stone.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Grain.png" />
+					</g>
+					<g id="E-welfare" transform="rotate(${wheelArt.rotE})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Stone.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Peat.png" />
+					</g>
+					<g id="settlement-b" transform="rotate(${wheelArt.rotE})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">B</text>
+					</g>
+					<g id="F-welfare" transform="rotate(${wheelArt.rotF})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Stone.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Clay.png" />
+					</g>
+					<g id="G-welfare" transform="rotate(${wheelArt.rotG})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Stone.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Wood.png" />
+					</g>
+					<g id="settlement-c" transform="rotate(${wheelArt.rotG})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle;  fill:#fff">C</text>
+					</g>
+					<g id="H-welfare" transform="rotate(${wheelArt.rotH})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Stone.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Nickel.png" />
+					</g>
+					<g id="I-welfare" transform="rotate(${wheelArt.rotI})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Stone.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Meat.png" />
+					</g>
+					<g id="settlement-d" transform="rotate(${wheelArt.rotI})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">D</text>
+					</g>
+					<g id="J-welfare" transform="rotate(${wheelArt.rotJ})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Book.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Grain.png" />
+					</g>
+					<g id="K-welfare" transform="rotate(${wheelArt.rotK})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Pot.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Clay.png" />
+					</g>
+					<g id="L-welfare" transform="rotate(${wheelArt.rotL})">
+						<image height="24" width="24" x="-25" y="-135" xlink:href="images/chit/Ornament.png" />
+						<image height="24" width="24" x="0" y="-135" xlink:href="images/chit/Wood.png" />
+					</g>
+					<g id="settlement-e" transform="rotate(${wheelArt.rotM})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">E</text>
+					</g>
+				</c:if>
+				<c:if test="${board.mode.players eq 'ONE'}">
+					<g id="settlement-a" transform="rotate(${wheelArt.rotL})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">A</text>
+					</g>
+					<g id="settlement-b" transform="rotate(${wheelArt.rotC})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">B</text>
+					</g>
+					<g id="settlement-c" transform="rotate(${wheelArt.rotI})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle;  fill:#fff">C</text>
+					</g>
+					<g id="settlement-d" transform="rotate(${wheelArt.rotM})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">D</text>
+					</g>
+				</c:if>
+				<c:if test="${board.mode.players eq 'TWO'}"><%-- this is the same for both short and long --%>
 					<g id="settlement-a" transform="rotate(${wheelArt.rotG})">
 						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">A</text>
@@ -383,7 +471,27 @@
 						<tr>
 							<c:forEach items="${row}" var="cell">
 								<c:if test="${cell.terrainType ne 'HIDDEN'}">
-									<td${cell.terrainType.rowspanAttr} dropzone="move string:Text" ondrop="onBuildingDrop(event)" ondragover="onBuildingDragOver(event)" data-position-row="${cell.coordinate.y}" data-position-column="${cell.coordinate.x}">
+									<c:choose>
+										<c:when test="${cell.terrainType eq 'WATER'}">
+											<c:set var="boardCellType" value="water"/>
+										</c:when>
+										<c:when test="${cell.terrainType eq 'COAST'}">
+											<c:set var="boardCellType" value="coast"/>
+										</c:when>
+										<c:when test="${cell.terrainType eq 'PLAINS'}">
+											<c:set var="boardCellType" value="plains"/>
+										</c:when>
+										<c:when test="${cell.terrainType eq 'HILLSIDE'}">
+											<c:set var="boardCellType" value="hillside"/>
+										</c:when>
+										<c:when test="${cell.terrainType eq 'MOUNTAIN'}">
+											<c:set var="boardCellType" value="mountain"/>
+										</c:when>
+										<c:otherwise>
+											<c:set var="boardCellType" value="unavailable"/>
+										</c:otherwise>
+									</c:choose>
+									<td${cell.terrainType.rowspanAttr} class="${boardCellType}" dropzone="move string:Text" ondrop="onBuildingDrop(event)" ondragover="onBuildingDragOver(event)" data-position-row="${cell.coordinate.y}" data-position-column="${cell.coordinate.x}">
 										<c:choose>
 											<c:when test="${not empty cell.erection}">
 												<div class="building building-${fn:toLowerCase(cell.erection.clergyman.type)}-${fn:toLowerCase(player.color)}">
@@ -392,18 +500,16 @@
 													</a>
 												</div>
 											</c:when>
-											<c:when test="${cell.terrainType eq 'FOREST'}">
+											<c:when test="${cell.terrainUse eq 'FOREST'}">
 												<img src="images/building/Wood.png" class="landscape-tile" title="${cell.coords}" />
 											</c:when>
-											<c:when test="${cell.terrainType eq 'MOOR'}">
+											<c:when test="${cell.terrainUse eq 'MOOR'}">
 												<img src="images/building/Peat.png" class="landscape-tile" title="${cell.coords}" />
 											</c:when>
 											<c:otherwise>
-												<span class="drop-replacement">
-													${cell.terrainType.properCase}
-													<br />
-													${cell.coords}
-												</span>
+												<div class="board-cell-info drop-replacement">
+													<span title="${cell.terrainType.properCase}">${cell.coords}</span>
+												</div>
 											</c:otherwise>
 										</c:choose>
 									</td>
@@ -421,16 +527,25 @@
 				
 				<h3>Clergymen</h3>
 				<c:if test="${empty player.layBrother1.location}"><img src="images/laybrother-${fn:toLowerCase(player.color)}.svg" alt="Lay Brother" /></c:if>
-				<c:if test="${empty player.layBrother2.location}"><img src="images/laybrother-${fn:toLowerCase(player.color)}.svg" alt="Lay Brother" /></c:if>
+				<c:if test="${board.mode.secondLayBrotherUsed and empty player.layBrother2.location}"><img src="images/laybrother-${fn:toLowerCase(player.color)}.svg" alt="Lay Brother" /></c:if>
 				<c:if test="${empty player.prior.location}"><img src="images/prior-${fn:toLowerCase(player.color)}.svg" /></c:if>
 								
 				<hr />
 				
 				<div class="settlement-list"><!-- comment out white-space for inline-block spacing
 				  <c:forEach items="${player.unbuiltSettlements}" var="settlement">
-				  	--><div class="settlement">
-				  		<a class="settlement-link" href="images/building/${settlement.image}.png" title="${settlement.id}"><img src="images/building/${settlement.image}.png" class="settlement-image" /></a>
+				  	<c:if test="${player.totalFoodAvailable >= settlement.foodCost and player.totalEnergyAvailable >= settlement.energyCost}">
+				  	--><div class="settlement settlement-buildable">
+				  	<a class="settlement-link" href="images/building/${settlement.image}.png" title="${settlement.id}"><img src="images/building/${settlement.image}.png" class="settlement-image" /></a>
 				  	</div><!--
+				  	</c:if>
+				  	<c:if test="${player.totalFoodAvailable < settlement.foodCost or player.totalEnergyAvailable < settlement.energyCost}">
+				  	--><div class="settlement settlement-not-buildable">
+				  	<a class="settlement-link" href="images/building/${settlement.image}.png" title="${settlement.id}"><img src="images/building/${settlement.image}.png" class="settlement-image" /></a>
+				  	</div><!--
+				  	</c:if>	
+				  
+				  
 				  </c:forEach>
 				  <c:forEach items="${board.futureSettlements}" var="settlement">
 				  	--><div class="settlement future-settlement future-settlement-${fn:toLowerCase(player.color)}">
@@ -441,7 +556,97 @@
 				
 			<a class="show-future-settlements-button show-future-settlements-button-${fn:toLowerCase(player.color)}">Show Future Settlements</a>
 			<a class="hide-future-settlements-button hide-future-settlements-button-${fn:toLowerCase(player.color)}">Hide Future Settlements</a>
-				
+			<br/><br/>
+		    <c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="FiveFood" />
+				<c:param name="abbr" value="Beer" />
+				<c:param name="amount" value="${player.beer}" />
+			</c:import>
+		    <c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="FiveFood" />
+				<c:param name="abbr" value="Meat" />
+				<c:param name="amount" value="${player.meat}" />
+			</c:import>
+		    <c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="FiveFood" />
+				<c:param name="abbr" value="Nickel" />
+				<c:param name="amount" value="${player.nickel}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="ThreeFood" />
+				<c:param name="abbr" value="Bread" />
+				<c:param name="amount" value="${player.bread}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="TwoFood" />
+				<c:param name="abbr" value="Sheep" />
+				<c:param name="amount" value="${player.sheep}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="TwoFood" />
+				<c:param name="abbr" value="Whiskey" />
+				<c:param name="amount" value="${player.whiskey}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="OneFood" />
+				<c:param name="abbr" value="Penny" />
+				<c:param name="amount" value="${player.penny}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="OneFood" />
+				<c:param name="abbr" value="Grain" />
+				<c:param name="amount" value="${player.grain}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="OneFood" />
+				<c:param name="abbr" value="Flour" />
+				<c:param name="amount" value="${player.flour}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="OneFood" />
+				<c:param name="abbr" value="Grapes" />
+				<c:param name="amount" value="${player.grapes}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="OneFood" />
+				<c:param name="abbr" value="Hops" />
+				<c:param name="amount" value="${player.hops}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="OneFood" />
+				<c:param name="abbr" value="Wine" />
+				<c:param name="amount" value="${player.wine}" />
+			</c:import>
+			<b>${player.totalFoodAvailable} Food</b>
+			<br/>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="ThreeEnergy" />
+				<c:param name="abbr" value="Coal" />
+				<c:param name="amount" value="${player.coal}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="TwoEnergy" />
+				<c:param name="abbr" value="Peat" />
+				<c:param name="amount" value="${player.peat}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="OneEnergy" />
+				<c:param name="abbr" value="Wood" />
+				<c:param name="amount" value="${player.wood}" />
+			</c:import>
+			<c:import url="jsp/inventoryType.jsp">
+				<c:param name="type" value="HalfEnergy" />
+				<c:param name="abbr" value="Straw" />
+				<c:param name="amount" value="${player.straw}" />
+			</c:import>
+			<b>${player.totalEnergyAvailable} Energy</b>
+			<br/><br/>
+			<c:if test="${player.actionsBeforeSettlement >= 2}">
+				<div class="actionsBeforeSettlement">Actions until Next Settlement: ${player.actionsBeforeSettlement}</div>
+			</c:if>
+			<c:if test="${player.actionsBeforeSettlement >= 0 and player.actionsBeforeSettlement < 2}">
+				<div class="actionsBeforeSettlementRed">Actions until Next Settlement: ${player.actionsBeforeSettlement}</div>
+			</c:if>			
 				<c:remove var="player"/>
 			</div>
 		</c:forEach>

@@ -16,7 +16,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="F30.svg"
+   sodipodi:docname="F20.svg"
    inkscape:export-filename="C:\Users\Philihp\git\WebLabora\src\main\webapp\images\building\F30.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
@@ -673,66 +673,6 @@
          offset="1"
          style="stop-color:#452727;stop-opacity:1;" />
     </linearGradient>
-    <filter
-       height="3.1914246"
-       y="-1.0957123"
-       width="1.3652141"
-       x="-0.18260703"
-       id="filter12315"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur12317"
-         stdDeviation="0.40760498"
-         inkscape:collect="always" />
-    </filter>
-    <filter
-       height="1.3811756"
-       y="-0.19058779"
-       width="1.6480025"
-       x="-0.32400127"
-       id="filter12307"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur12309"
-         stdDeviation="0.72321715"
-         inkscape:collect="always" />
-    </filter>
-    <filter
-       height="1.5008723"
-       y="-0.25043615"
-       width="1.4607977"
-       x="-0.23039884"
-       id="filter12295"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur12297"
-         stdDeviation="0.4285693"
-         inkscape:collect="always" />
-    </filter>
-    <filter
-       height="1.4333325"
-       y="-0.21666625"
-       width="1.5379323"
-       x="-0.26896616"
-       id="filter12287"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur12289"
-         stdDeviation="0.5803586"
-         inkscape:collect="always" />
-    </filter>
-    <filter
-       height="1.4268307"
-       y="-0.21341537"
-       width="1.5483004"
-       x="-0.27415022"
-       id="filter12279"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur12281"
-         stdDeviation="0.63516479"
-         inkscape:collect="always" />
-    </filter>
     <linearGradient
        id="linearGradient11846-1-0">
       <stop
@@ -4577,7 +4517,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="2"
      inkscape:cx="36.53729"
-     inkscape:cy="202.25"
+     inkscape:cy="373.07929"
      inkscape:document-units="px"
      inkscape:current-layer="layer4"
      showgrid="false"
@@ -4617,7 +4557,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -4671,12 +4611,12 @@
          x="193.97209"
          y="36"
          style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;font-family:Sans;-inkscape-font-specification:Sans"
-         id="tspan4715">F30</tspan><tspan
+         id="tspan4715">F20</tspan><tspan
          sodipodi:role="line"
          x="193.97209"
          y="71"
          style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;font-family:Sans;-inkscape-font-specification:Sans"
-         id="tspan5127">Town Estate</tspan></text>
+         id="tspan5127">Inn</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -5337,7 +5277,7 @@
                sodipodi:cy="-0.95535719"
                sodipodi:rx="5.7142859"
                sodipodi:ry="6.3839288"
-               d="m 22.857142,-0.95535719 a 5.7142859,6.3839288 0 1 1 -11.428571,0 5.7142859,6.3839288 0 1 1 11.428571,0 z"
+               d="m 22.857142,-0.95535719 c 0,3.52574649 -2.558372,6.38392879 -5.714285,6.38392879 -3.155913,0 -5.714286,-2.8581823 -5.714286,-6.38392879 0,-3.52574651 2.558373,-6.38392881 5.714286,-6.38392881 3.155913,0 5.714285,2.8581823 5.714285,6.38392881 z"
                transform="matrix(0.273449,0,0,0.24188646,6.312303,3.274902)" />
           </g>
           <g
@@ -5382,7 +5322,7 @@
          id="layer11-4">
         <path
            transform="matrix(1.0357598,0,0,0.99941739,-3.1967276,0.00495081)"
-           d="m 47.47717,8.4574766 a 6.9447989,7.1973367 0 1 1 -13.889597,0 6.9447989,7.1973367 0 1 1 13.889597,0 z"
+           d="m 47.47717,8.4574766 c 0,3.9749794 -3.109292,7.1973364 -6.944798,7.1973364 -3.835507,0 -6.944799,-3.222357 -6.944799,-7.1973364 0,-3.9749793 3.109292,-7.1973367 6.944799,-7.1973367 3.835506,0 6.944798,3.2223574 6.944798,7.1973367 z"
            sodipodi:ry="7.1973367"
            sodipodi:rx="6.9447989"
            sodipodi:cy="8.4574766"
@@ -5519,7 +5459,7 @@
                sodipodi:cy="-0.95535719"
                sodipodi:rx="5.7142859"
                sodipodi:ry="6.3839288"
-               d="m 22.857142,-0.95535719 a 5.7142859,6.3839288 0 1 1 -11.428571,0 5.7142859,6.3839288 0 1 1 11.428571,0 z"
+               d="m 22.857142,-0.95535719 c 0,3.52574649 -2.558372,6.38392879 -5.714285,6.38392879 -3.155913,0 -5.714286,-2.8581823 -5.714286,-6.38392879 0,-3.52574651 2.558373,-6.38392881 5.714286,-6.38392881 3.155913,0 5.714285,2.8581823 5.714285,6.38392881 z"
                transform="matrix(0.273449,0,0,0.24188646,6.312303,3.274902)" />
           </g>
           <g
@@ -5607,7 +5547,7 @@
            id="layer11-2">
           <path
              transform="matrix(1.0357598,0,0,0.99941739,-0.67134623,0.51002708)"
-             d="m 47.47717,8.4574766 a 6.9447989,7.1973367 0 1 1 -13.889597,0 6.9447989,7.1973367 0 1 1 13.889597,0 z"
+             d="m 47.47717,8.4574766 c 0,3.9749794 -3.109292,7.1973364 -6.944798,7.1973364 -3.835507,0 -6.944799,-3.222357 -6.944799,-7.1973364 0,-3.9749793 3.109292,-7.1973367 6.944799,-7.1973367 3.835506,0 6.944798,3.2223574 6.944798,7.1973367 z"
              sodipodi:ry="7.1973367"
              sodipodi:rx="6.9447989"
              sodipodi:cy="8.4574766"

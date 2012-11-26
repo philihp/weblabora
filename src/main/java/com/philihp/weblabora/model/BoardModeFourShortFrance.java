@@ -1,5 +1,6 @@
 package com.philihp.weblabora.model;
 
+import static com.philihp.weblabora.model.TerrainTypeEnum.PLAINS;
 import static com.philihp.weblabora.model.Wheel.Position.E;
 import static com.philihp.weblabora.model.Wheel.Position.H;
 import static com.philihp.weblabora.model.Wheel.Position.K;
@@ -10,13 +11,13 @@ import java.util.List;
 import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.BuildingEnum;
 
-public class BoardModeTwoLongIreland extends BoardMode {
+public class BoardModeFourShortFrance extends BoardMode {
+	
+	private static final GamePlayers PLAYERS = GamePlayers.FOUR;
+	private static final GameLength LENGTH = GameLength.SHORT;
+	private static final GameCountry COUNTRY = GameCountry.FRANCE;
 
-	private static final GamePlayers PLAYERS = GamePlayers.TWO;
-	private static final GameLength LENGTH = GameLength.LONG;
-	private static final GameCountry COUNTRY = GameCountry.IRELAND;
-
-	protected BoardModeTwoLongIreland(Board board) {
+	protected BoardModeFourShortFrance(Board board) {
 		super(board);
 	}
 
@@ -31,10 +32,12 @@ public class BoardModeTwoLongIreland extends BoardMode {
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
 			
 			char c = buildingId.toString().charAt(0);
-			if(c != 'G' && c != 'I') continue;
+			if(c != 'G' && c != 'F') continue;
 			
 			Building building = buildingId.getInstance();
-			if (board.getSettlementRound().equals(building.getStage())) {
+			if (board.getSettlementRound().equals(building.getStage())
+					// less than, not less than or equal to...
+					&& building.getPlayers().ordinal() < PLAYERS.ordinal()) {
 				buildings.add(building);
 			}
 		}
@@ -44,19 +47,15 @@ public class BoardModeTwoLongIreland extends BoardMode {
 	@Override
 	public List<Building> futureBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
-		// two player long game uses all buildings except C-grapevine, C-quarry
-		// and Carpentry
-		for (BuildingEnum buildingId : BuildingEnum.values()) {
-			
+		for(BuildingEnum buildingId : BuildingEnum.values()) {
+
 			char c = buildingId.toString().charAt(0);
-			if(c != 'G' && c != 'I') continue;
+			if(c != 'G' && c != 'F') continue;
 			
 			Building building = buildingId.getInstance();
-			if (board.getAllBuildings().containsKey(buildingId) == false
-					&& building.getStage().equals("L") == false) {
+			if(board.getAllBuildings().containsKey(buildingId) == false
+					&& building.getPlayers().ordinal() <= PLAYERS.ordinal()) {
 				buildings.add(building);
-				board.getAllBuildings().put(
-						BuildingEnum.valueOf(building.getId()), building);
 			}
 		}
 		return buildings;
@@ -64,21 +63,22 @@ public class BoardModeTwoLongIreland extends BoardMode {
 
 	@Override
 	public boolean isExtraRound(int round) {
-		// there is no extra round for TWO
-		return false;
+		return round >= 24;
 	}
 
 	@Override
 	public SettlementRound roundBeforeSettlement(int round) {
 		switch (round) {
-		case 6:
+		case 2:
 			return SettlementRound.A;
-		case 13:
+		case 4:
 			return SettlementRound.B;
-		case 20:
+		case 6:
 			return SettlementRound.C;
-		case 27:
+		case 8:
 			return SettlementRound.D;
+		case 12:
+			return SettlementRound.E;
 		default:
 			return null;
 		}
@@ -86,81 +86,76 @@ public class BoardModeTwoLongIreland extends BoardMode {
 
 	@Override
 	public void postMove() {
-		if (board.getMoveInRound() == 2 || board.isSettling()) {
-			board.nextActivePlayer();
+		board.nextActivePlayer();
+		board.setMoveInRound(board.getMoveInRound()+1);
+		if(board.isExtraRound() && board.getMoveInRound() == board.players.length+1) {
+			board.postExtraRound();
 		}
-		board.setMoveInRound(board.getMoveInRound() + 1);
-
-		if (board.isSettling() == true && board.getMoveInRound() == 3) {
+		if(board.isSettling() && board.getMoveInRound() == board.players.length+1) {
 			board.postSettlement();
-		} else if (board.isSettling() == false && board.getMoveInRound() == 4) {
+		}
+		else if(!board.isSettling() && board.getMoveInRound() == board.players.length+2) {
 			board.postRound();
 		}
 	}
-
+	
 	@Override
 	public void postRound() {
 		board.setMoveInRound(1);
 
-		if (isExtraRound(board.getRound())) {
-			board.setRound(board.getRound() + 1);
+		if(isExtraRound(board.getRound())) {
+			board.setRound(board.getRound()+1);
 			board.setExtraRound(true);
-		} else if (board.isRoundBeforeSettlement(board.getRound())) {
+		}
+		else if(board.isRoundBeforeSettlement(board.getRound())) {
 			board.setSettling(true);
-		} else {
-			board.setRound(board.getRound() + 1);
 		}
-
-		// begin 2-player end-game detection.
-		if (board.isSettling() == false
-				&& board.getSettlementRound() == SettlementRound.D
-				&& board.getUnbuiltBuildings().size() <= 3) {
-			board.setGameOver(true);
-			board.getMoveList().add(new HistoryEntry("Game Over"));
+		else {
+			board.setRound(board.getRound()+1);
 		}
-		// end 2-player end-game detection.
-
+		
+		//5 -- pass starting player
 		board.setStartingPlayer(board.getStartingPlayer() + 1);
-		board.getStartingMarker().setOwner(
-				board.players[board.getStartingPlayer()]);
+		board.getStartingMarker().setOwner(board.players[board.getStartingPlayer()]);
 	}
 
 	@Override
 	public String getMoveName() {
-		if (board.isExtraRound())
-			return "extra";
+		if(board.isExtraRound()) return "extra";
 		switch (board.getMoveInRound()) {
 		case 1:
-			return "first half of first";
+			return "first";
 		case 2:
-			return "second half of first";
-		case 3:
 			return "second";
+		case 3:
+			return "third";
+		case 4:
+			return "fourth";
+		case 5:
+			return "last";
 		default:
-			throw new RuntimeException("Illegal Move Number "
-					+ board.getMoveInRound());
+			throw new RuntimeException("Illegal Move Number " + board.getMoveInRound());
 		}
 	}
 
 	@Override
 	public int grapeActiveOnRound() {
-		return GRAPE_INACTIVE_IN_IRELAND;
+		return 8;
 	}
 
 	@Override
 	public int stoneActiveOnRound() {
-		return 18;
+		return 13;
 	}
 
 	@Override
 	public void setWheelTokens(Wheel wheel) {
-		wheel.grape.setPosition(K);
-		wheel.stone.setPosition(E);
+		wheel.grape.setPosition(H);
 	}
 
 	@Override
 	public GamePlayers getPlayers() {
-		return PLAYERS;
+		return PLAYERS; 
 	}
 
 	@Override
@@ -172,19 +167,31 @@ public class BoardModeTwoLongIreland extends BoardMode {
 	public GameLength getLength() {
 		return LENGTH;
 	}
-	
+
+	@Override
+	public void customizeLandscape(Landscape landscape) {
+		landscape.getTerrainAt(new Coordinate(0,0)).setTerrainType(PLAINS);
+		landscape.getTerrainAt(new Coordinate(1,0)).setTerrainType(PLAINS);
+		super.customizeLandscape(landscape);
+	}
+
 	@Override
 	public boolean isProductionBonusActive() {
+		return true;
+	}
+
+	@Override
+	public boolean isSecondLayBrotherUsed() {
 		return false;
 	}
 	
 	@Override
 	public int getMovesInRound() {
-		return 3;
-	}
+		return 5;
+	}	
 	
+	@Override
 	public int getLastSettlementAfterRound() {
-		return 27;
+		return 13;
 	}
-	
 }

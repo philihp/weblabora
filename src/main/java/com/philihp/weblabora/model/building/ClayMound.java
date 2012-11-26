@@ -26,10 +26,11 @@ public class ClayMound extends Building {
 
 	@Override
 	public void use(Board board, UsageParam input) {
-		Player player = board.getPlayer(board.getActivePlayer());
+		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		Wheel wheel = board.getWheel();
 		Token token = input.isWithJoker()?wheel.getJoker():wheel.getClay();
-		player.addClay(token.take());
+		activePlayer.addClay(token.take());
+		board.distributeBonusProduction(UsageParam.is().clay(1));
 	}
 	
 	@Override
