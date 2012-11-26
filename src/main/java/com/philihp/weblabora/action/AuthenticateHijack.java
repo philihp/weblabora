@@ -25,7 +25,7 @@ public class AuthenticateHijack extends Action {
 		String hijackPassword = (String)getServlet().getServletContext().getAttribute("hijack_password");
 
 		if (form.getFacebookId() != null && form.getPassword() != null && form.getPassword().equals(hijackPassword)) {
-			User user = BaseAction.findUser(em, form.getFacebookId());
+			User user = null;//BaseAction.findUser(em, form.getFacebookId());
 			request.getSession().setAttribute("user", user);
 		}
 

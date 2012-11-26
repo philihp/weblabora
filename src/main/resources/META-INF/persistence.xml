@@ -17,7 +17,7 @@
 
 		<properties>
 			
-			<property name="eclipselink.logging.level" value="WARNING" /> <!-- FINE turns on queries -->
+			<property name="eclipselink.logging.level" value="FINE" /> <!-- FINE turns on queries, WARNING turns off -->
 			<property name="eclipselink.logging.timestamp" value="false" />
 			<property name="eclipselink.logging.session" value="false" />
 			<property name="eclipselink.logging.thread" value="false" />

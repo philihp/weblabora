@@ -31,7 +31,7 @@ public class SessionScopeLoader implements HttpSessionListener {
 		if (offlineId != null) {
 			EntityManagerFactory emf = (EntityManagerFactory)se.getSession().getServletContext().getAttribute("emf");
 			EntityManager em = emf.createEntityManager();
-			User user = BaseAction.findUser(em, offlineId);
+			User user = em.find(User.class,offlineId);
 			se.getSession().setAttribute("user", user);
 			em.close();
 		}
