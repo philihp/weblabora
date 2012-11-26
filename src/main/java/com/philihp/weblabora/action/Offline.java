@@ -19,7 +19,7 @@ public class Offline extends BaseAction {
 			throws Exception {
 		EntityManager em = (EntityManager)request.getAttribute("em");
 
-		user = findUser(em, "11803742");
+		user = null;//findUser(em, "11803742");
 		request.getSession().setAttribute("user", user);
 		
 		return mapping.findForward("root");

@@ -28,8 +28,6 @@ public class ShowGameState extends BaseAction {
 		GameForm form = (GameForm)actionForm;
 		EntityManager em = (EntityManager)request.getAttribute("em");
 		
-		request.setAttribute("myGames", ShowGame.findGamesForUser(em, user));
-		
 		Game game = (Game)request.getAttribute("game");
 		
 		request.setAttribute("board", prepareBoard(game, form.getStateId()));

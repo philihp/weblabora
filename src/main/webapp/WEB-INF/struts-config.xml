@@ -14,7 +14,7 @@
 	</form-beans>
 
 	<global-exceptions>
-		<exception type="com.philihp.weblabora.action.AuthenticationException" path="/authenticate.do" key="" />
+		<!--exception type="com.philihp.weblabora.action.AuthenticationException" path="/login.do" key="" /-->
 		<exception type="java.net.UnknownHostException" path="/error.jsp" key="exception.unknownHost" />
 	</global-exceptions>
 
@@ -23,7 +23,7 @@
 		<forward name="root" redirect="true" path="/" />
 
 		<!-- only index.jsp should use this, but it must be global -->
-		<forward name="board" redirect="false" path="/showGame.do" />
+		<forward name="lobby" redirect="true" path="/showLobby.do" />
 	</global-forwards>
 
 	<action-mappings>
@@ -50,8 +50,8 @@
 		<action path="/showGames" type="com.philihp.weblabora.action.ShowGames">
 			<forward name="view" path="/showGames.jsp" />
 		</action>
-		<action path="/showGamePicker" type="com.philihp.weblabora.action.ShowGamePicker">
-			<forward name="view" path="/showGamePicker.jsp" />
+		<action path="/showLobby" type="com.philihp.weblabora.action.ShowLobby">
+			<forward name="view" path="/showLobby.jsp" />
 		</action>
 		<action path="/createGame" name="createGameForm" type="com.philihp.weblabora.action.CreateGame" />
 		<action path="/createGameForm" name="createGameForm" type="org.apache.struts.actions.ForwardAction" parameter="/createGameForm.jsp" />

@@ -19,6 +19,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -36,6 +37,12 @@ import static javax.persistence.EnumType.STRING;
 @Table(name = "weblabora_game")
 public class Game extends BasicEntity {
 
+	public enum Stage {
+		RECRUITING,
+		IN_PROGRESS,
+		FINISHED
+	}
+	
 	@Embeddable
 	@Access(FIELD)
 	public static class Player {
@@ -129,6 +136,10 @@ public class Game extends BasicEntity {
 	@Column(name = "country")
 	@Basic
 	private String country;
+	
+	@Column(name = "stage")
+	@Enumerated(EnumType.STRING)
+	private Stage stage;
 
 	public Game() {
 		// player1-4 must not be null
@@ -208,6 +219,14 @@ public class Game extends BasicEntity {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+	
+	public Stage getStage() {
+		return stage;
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
 	}
 
 	@Transient

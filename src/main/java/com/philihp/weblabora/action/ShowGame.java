@@ -53,22 +53,5 @@ public class ShowGame extends BaseAction {
 	protected static Game findGame(EntityManager em, int gameId) {
 		return em.find(Game.class, gameId);
 	}
-
-	protected static List<Game> findGamesForUser(EntityManager em, User user) {
-		TypedQuery<Game> query = em
-				.createQuery(
-						"SELECT g " +
-						"FROM Game g " +
-						"WHERE g.player1.user = :user " +
-						   "OR g.player2.user = :user " +
-						   "OR g.player3.user = :user " +
-						   "OR g.player4.user = :user " +
-						"ORDER BY g.gameId",
-						Game.class);
-		query.setParameter("user", user);
-		
-		List<Game> results = query.getResultList();
-		return results;
-	}
-
+	
 }

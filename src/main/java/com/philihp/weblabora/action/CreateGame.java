@@ -30,6 +30,7 @@ public class CreateGame extends BaseAction {
 		em.persist(state);
 		
 		Game game = new Game();
+		game.setStage(Game.Stage.RECRUITING);
 		game.getPlayer1().setUser(user);
 		game.getPlayer1().setColor(Color.RED.toString());
 		game.getPlayer1().setMove("");
