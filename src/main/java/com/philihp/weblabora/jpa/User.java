@@ -32,6 +32,18 @@ public class User extends BasicEntity {
 	@Basic(optional = false)
 	@Column(name = "name", nullable = false)
 	private String name;
+
+	@Basic(optional = false)
+	@Column(name = "username", nullable = false)
+	private String username;
+
+	@Basic(optional = false)
+	@Column(name = "email", nullable = false)
+	private String email;
+	
+	@Basic(optional = false)
+	@Column(name = "password", nullable = false)
+	private String password;
 	
 	@ManyToOne(fetch = LAZY, targetEntity = com.philihp.weblabora.jpa.Game.class)
 	@JoinColumn(name = "active_game_id", referencedColumnName = "game_id")
@@ -74,6 +86,30 @@ public class User extends BasicEntity {
 	
 	public String toString() {
 		return getName()+" ("+getFacebookId()+")";
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

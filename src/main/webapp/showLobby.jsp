@@ -59,10 +59,7 @@ td.avatar-cell {
 
 <body>
 
-
-    <c:import url="jsp/userbar.jsp">
-		<c:param name="user" value="${user}" />
-	</c:import>
+    <c:import url="jsp/userbar.jsp" />
 	
 	<div class="container">
 	
@@ -85,7 +82,10 @@ td.avatar-cell {
 			  	</tr>
 					<c:forEach items="${myGames}" var="game">
 						<tr>
-							<td>#${game.gameId}, <fmt:formatDate value="${game.dateCreated}" pattern="yyyy-MM-dd" /></td>
+							<td>
+								#${game.gameId}, <fmt:formatDate value="${game.dateCreated}" pattern="yyyy-MM-dd" /><br />
+								<html:link action="/showGame.do" paramId="gameId" paramName="game" paramProperty="gameId">View Game</html:link>
+							</td>
 							<td>${game.country}</td>
 							<td>
 								<c:choose>

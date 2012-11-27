@@ -27,7 +27,7 @@ import com.philihp.weblabora.util.FacebookUtil;
 abstract public class BaseAction extends Action {
 	
 	@SuppressWarnings("unchecked")
-	private static final Set<Object> PUBLIC_ACTIONS = new HashSet<Object>(Arrays.asList(ShowGame.class, ShowGameState.class, ShowLobby.class, Offline.class));
+	private static final Set<Object> PUBLIC_ACTIONS = new HashSet<Object>(Arrays.asList(ShowGame.class, ShowGameState.class, ShowLobby.class, Offline.class, Login.class));
 	
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm,

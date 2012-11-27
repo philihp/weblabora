@@ -28,10 +28,10 @@ public class ShowGame extends BaseAction {
 		}
 		
 		Game game = findGame(em, form.getGameId());
-		user.setActiveGame(game);
+		if(user != null) user.setActiveGame(game);
 		request.setAttribute("game", game);
 		
-		if(form.getStateId() == null) {
+		if(form.getStateId() == null && game != null) {
 			form.setStateId(game.getState().getStateId());
 		}
 		
