@@ -143,34 +143,11 @@
 </head>
 
 <body>
-	<div class="userbar">
-		<div class="container">
-			<img src="//graph.facebook.com/${user.facebookId}/picture" height="50" width="50" title="${user.facebookId}"/>
-			
-			${user.name}
-			|
-			<html:form action="/showGame.do" method="GET" style="display: inline">
-				<html:select property="gameId" value="${user.activeGame.gameId}" styleId="gamesList">
-					<html:options collection="myGames" property="gameId" labelProperty="name" />
-					<html:submit>&#x25B6;</html:submit>
-				</html:select>
-			</html:form>
-			|
-			<html:form action="/leaveGame.do" method="POST" style="display: inline">
-				<html:hidden property="gameId" />
-				<html:submit>Leave Game</html:submit>
-			</html:form>
-			|
-			<button id="findGamesButton">Join a Game</button>
-			|
-			<a href="mailto:weblabora@googlegroups.com">Send Feedback</a>
-			
-		</div>
-	</div>
-		
+
+    <c:import url="jsp/userbar.jsp" />		
 	
 	<div class="container">
-		<div id="fb-root"></div>
+	
 		<div class="wheel">
 			<!-- ${board.mode.players} ${board.mode.country} ${board.mode.length} -->
 			<svg style="width: 300px; height: 300px;" viewbox="-150.5 -150.5 300 300">
