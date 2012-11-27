@@ -38,7 +38,10 @@ abstract public class BaseAction extends Action {
 		EntityManager em = (EntityManager)request.getAttribute("em");
 		
 		User user = (User)request.getSession().getAttribute("user");
-		if(user != null) em.persist(user);
+		if(user != null) {
+			user = em.merge(user);
+			request.getSession().setAttribute("user", user);
+		}
 		
 		//if still no user, restart authentication process
 		if(user == null && isActionPrivate()) {
