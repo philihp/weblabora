@@ -24,7 +24,7 @@ public class SaveMove extends BaseAction {
 		MoveForm form = (MoveForm) actionForm;
 		EntityManager em = (EntityManager)request.getAttribute("em");
 
-		Game game = ShowGame.findGame(em, form.getGameId());
+		Game game = em.find(Game.class, form.getGameId());
 		Game.Player player = ShowGame.findPlayerInGame(game, user);
 		if(player != null) {
 			player.setMove(form.getToken());

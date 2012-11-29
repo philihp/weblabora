@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.ActionMap;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -39,7 +40,7 @@ public class MakeMove extends BaseAction {
 		Game game = query.getSingleResult();
 		
 		if(game.getState().getStateId() != form.getStateId()) {
-			return mapping.findForward("root");
+			return calculateGameForward(mapping, game);
 		}
 		
 		
@@ -99,7 +100,13 @@ public class MakeMove extends BaseAction {
 		request.setAttribute("to",to);
 		request.setAttribute("move",form.getToken());
 
-		return mapping.findForward("madeMove");
+		return calculateGameForward(mapping, game);
+	}
+	
+	private ActionForward calculateGameForward(ActionMapping mapping, Game game) {
+		ActionForward forward = mapping.findForward("show-game");
+		String path = forward.getPath()+"?gameId="+game.getGameId();
+		return new ActionForward(forward.getName(), path, forward.getRedirect(), forward.getModule());
 	}
 
 	protected State searchForExploredState(Game game, String token) throws WeblaboraException {
