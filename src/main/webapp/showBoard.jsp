@@ -328,9 +328,11 @@
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">D</text>
 					</g>
 				</c:if>
-				<g id="grape" transform="rotate(${ora:deg(board.wheel.grape.position)})">
-					<text x="0" y="${board.wheel.grape.radius}" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Grape</text>
-				</g>
+				<c:if test="${board.mode.country eq 'FRANCE'}">
+					<g id="grape" transform="rotate(${ora:deg(board.wheel.grape.position)})">
+						<text x="0" y="${board.wheel.grape.radius}" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Grape</text>
+					</g>
+				</c:if>
 				<g id="stone" transform="rotate(${ora:deg(board.wheel.stone.position)})">
 					<text x="0" y="${board.wheel.stone.radius}" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Stone</text>
 				</g>
