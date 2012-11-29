@@ -20,6 +20,7 @@ import org.apache.struts.action.ActionMapping;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.philihp.weblabora.jpa.User;
+import com.philihp.weblabora.util.AuthenticationException;
 import com.philihp.weblabora.util.FacebookSignedRequest;
 import com.philihp.weblabora.util.FacebookSignedRequestDeserializer;
 import com.philihp.weblabora.util.FacebookUtil;

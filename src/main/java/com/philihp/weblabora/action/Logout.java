@@ -8,13 +8,20 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.philihp.weblabora.form.LoginForm;
 import com.philihp.weblabora.jpa.User;
 
 public class Logout extends BaseAction {
 
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response, User user) throws Exception {
+		
+		LoginForm form = (LoginForm)actionForm;
+		String referer = form.getReferer();
+		if(referer == null) {
+			referer = mapping.findForward("root").getPath();
+		}
 		
 		request.getSession().setAttribute("user", null);
 		for(Cookie cookie : request.getCookies()) {
@@ -25,7 +32,7 @@ public class Logout extends BaseAction {
 			}
 		}
 
-		return mapping.findForward("root");
+		return new ActionForward(referer, true);
 	}
 
 }

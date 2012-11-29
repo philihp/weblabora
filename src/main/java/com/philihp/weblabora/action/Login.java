@@ -27,9 +27,14 @@ public class Login extends BaseAction {
 
 		LoginForm form = (LoginForm) actionForm;
 		
+		String referer = form.getReferer();
+		if(referer == null) {
+			referer = mapping.findForward("root").getPath();
+		}
+		
 		// stale browser window
 		if (user != null)
-			return new ActionForward(form.getReferer(), true);
+			return new ActionForward(referer, true);
 
 		if (form.getUsername() == null || form.getPassword() == null) {
 			return mapping.findForward("input");
@@ -66,7 +71,7 @@ public class Login extends BaseAction {
 		//HOWEVER 
 		form.setPassword(null);
 
-		return new ActionForward(form.getReferer(), true);
+		return new ActionForward(referer, true);
 	}
 
 	private void saveUserFingerprint(EntityManager em, HttpServletResponse response,

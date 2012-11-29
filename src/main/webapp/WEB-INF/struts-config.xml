@@ -18,6 +18,7 @@
 	<global-exceptions>
 		<!--exception type="com.philihp.weblabora.action.AuthenticationException" path="/login.do" key="" /-->
 		<exception type="java.net.UnknownHostException" path="/error.jsp" key="exception.unknownHost" />
+		<exception type="com.philihp.weblabora.util.AuthenticationException" path="/login.do" key="exception.notLoggedIn" />
 	</global-exceptions>
 
 	<global-forwards>
@@ -26,6 +27,7 @@
 
 		<!-- only index.jsp should use this, but it must be global -->
 		<forward name="lobby" redirect="true" path="/showLobby.do" />
+		<forward name="show-game" redirect="true" path="/showGame.do" />
 	</global-forwards>
 
 	<action-mappings>
@@ -34,7 +36,7 @@
 		<action path="/login" name="loginForm" scope="session" type="com.philihp.weblabora.action.Login">
 			<forward name="input" path="/login.jsp" />
 		</action>
-		<action path="/logout" type="com.philihp.weblabora.action.Logout" />
+		<action path="/logout" name="loginForm" scope="session" type="com.philihp.weblabora.action.Logout" />
 		<action path="/register" name="registerForm" type="com.philihp.weblabora.action.Register" />
 
 		<action path="/showGame" name="gameForm" scope="request" type="com.philihp.weblabora.action.ShowGame">
@@ -60,13 +62,11 @@
 		<action path="/leaveGame" name="gameForm" scope="request" type="com.philihp.weblabora.action.LeaveGame" />
 		<action path="/makeMove" name="moveForm" type="com.philihp.weblabora.action.MakeMove">
 			<forward name="badMove" path="/badMove.jsp" />
-			<forward name="madeMove" path="/madeMove.jsp" />
 			<forward name="save" path="/saveMove.do" />
 		</action>
 		
 		<action path="/undoMove" name="gameForm" scope="request" type="com.philihp.weblabora.action.UndoMove">
 			<forward name="tooLate" path="/tooLate.jsp" />
-			<forward name="madeMove" path="/madeMove.jsp" />
 		</action>
 		
 		<action path="/saveMove" name="moveForm" type="com.philihp.weblabora.action.SaveMove" />

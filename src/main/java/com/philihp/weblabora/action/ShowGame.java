@@ -27,7 +27,11 @@ public class ShowGame extends BaseAction {
 			return mapping.findForward("no-game");
 		}
 		
-		Game game = findGame(em, form.getGameId());
+		Game game = em.find(Game.class, form.getGameId());
+		if(game == null) {
+			return mapping.findForward("no-game");
+		}
+		
 		if(user != null) user.setActiveGame(game);
 		request.setAttribute("game", game);
 		
@@ -48,10 +52,6 @@ public class ShowGame extends BaseAction {
 			}
 		}
 		return null;
-	}
-
-	protected static Game findGame(EntityManager em, int gameId) {
-		return em.find(Game.class, gameId);
 	}
 	
 }
