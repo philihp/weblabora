@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.philihp.weblabora.form.JoinGameForm;
 import com.philihp.weblabora.jpa.Game;
+import com.philihp.weblabora.jpa.Game.Stage;
 import com.philihp.weblabora.jpa.User;
 
 public class JoinGame extends BaseAction {
@@ -33,6 +34,9 @@ public class JoinGame extends BaseAction {
 
 		game.getSeat(form.getSeat()).setUser(user);
 		user.setActiveGame(game);
+		
+		if(game.isGameFull())
+			game.setStage(Stage.IN_PROGRESS);
 		
 		return mapping.findForward("root");
 	}

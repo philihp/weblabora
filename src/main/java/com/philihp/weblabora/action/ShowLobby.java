@@ -22,14 +22,14 @@ public class ShowLobby extends BaseAction {
 		EntityManager em = (EntityManager)request.getAttribute("em");
 
 		request.setAttribute("myGames", findGamesForUser(em, user));
-		request.setAttribute("recruitingGames", findGamesOfStage(em, user, Game.Stage.RECRUITING));
-		request.setAttribute("inProgressGames", findGamesOfStage(em, user, Game.Stage.IN_PROGRESS));
-		request.setAttribute("finishedGames", findGamesOfStage(em, user, Game.Stage.FINISHED));
+		request.setAttribute("recruitingGames", findGamesOfStageWithoutUser(em, user, Game.Stage.RECRUITING));
+		request.setAttribute("inProgressGames", findGamesOfStageWithoutUser(em, user, Game.Stage.IN_PROGRESS));
+		request.setAttribute("finishedGames", findGamesOfStage(em, Game.Stage.FINISHED));
 		
 		return mapping.findForward("view");
 	}
 
-	private static List<Game> findGamesOfStage(EntityManager em, User user, Game.Stage stage) {
+	private static List<Game> findGamesOfStageWithoutUser(EntityManager em, User user, Game.Stage stage) {
 		if(user == null) {
 			user = new User();
 		}
@@ -46,18 +46,29 @@ public class ShowLobby extends BaseAction {
 		return results;
 	}
 
+	private static List<Game> findGamesOfStage(EntityManager em, Game.Stage stage) {
+		TypedQuery<Game> query = em.createQuery("SELECT g FROM Game g " +
+				"WHERE g.stage = :state " +
+				"ORDER BY g.gameId", Game.class);
+		query.setParameter("state", stage);
+		List<Game> results = query.getResultList();
+		return results;
+	}
+
 	protected static List<Game> findGamesForUser(EntityManager em, User user) {
 		TypedQuery<Game> query = em
 				.createQuery(
 						"SELECT g " +
 						"FROM Game g " +
-						"WHERE g.player1.user = :user " +
+						"WHERE (g.player1.user = :user " +
 						   "OR g.player2.user = :user " +
 						   "OR g.player3.user = :user " +
 						   "OR g.player4.user = :user " +
+						   ") AND g.stage != :stage " +
 						"ORDER BY g.gameId",
 						Game.class);
 		query.setParameter("user", user);
+		query.setParameter("stage", Game.Stage.FINISHED);
 		
 		List<Game> results = query.getResultList();
 		return results;

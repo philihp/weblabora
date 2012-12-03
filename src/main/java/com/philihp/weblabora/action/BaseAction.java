@@ -32,7 +32,9 @@ abstract public class BaseAction extends Action {
 	protected static final String COOKIE_KEY = "weblabora-login";
 	
 	@SuppressWarnings("unchecked")
-	private static final Set<Object> PUBLIC_ACTIONS = new HashSet<Object>(Arrays.asList(ShowGame.class, ShowGameState.class, ShowLobby.class, Offline.class, Login.class));
+	private static final Set<Object> PUBLIC_ACTIONS = new HashSet<Object>(Arrays.asList(ShowGame.class, ShowGameState.class,
+			ShowLobby.class, Offline.class, LoginSubmit.class, Register.class, RegisterSubmit.class, RegisterValidate.class,
+			Login.class, ForgotPasswordSubmit.class, ResetPassword.class, ResetPasswordSubmit.class));
 	
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm,
@@ -48,7 +50,7 @@ abstract public class BaseAction extends Action {
 			request.getSession().setAttribute("user", user);
 		}
 		else {
-			user = Login.getUserFromFingerprint(em, request);
+			user = LoginSubmit.getUserFromFingerprint(em, request);
 		}
 		
 		//if still no user, restart authentication process

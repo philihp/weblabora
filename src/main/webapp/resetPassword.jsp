@@ -19,43 +19,44 @@
 <!-- <script> -->
 <!-- 	google.load("jquery", "1.7.1");-->
 <!-- </script> -->
-<script src="js/lib/jquery-1.7.1.js"></script>
-<script src="js/lib/jquery.colorbox.js"></script>
 
+<script src="js/lib/jquery-1.7.1.js"></script>
 </head>
 
 <body>
 
-
     <c:import url="jsp/userbar.jsp">
-		<c:param name="user" value="${user}" />
+		<c:param name="title" value="Register" />
+		<c:param name="referer" value="/" />
 	</c:import>
 	
 	<div class="container">
-
-	<c:import url="jsp/notifications.jsp" />
 	
-<html:form action="loginSubmit.do">
+	<html:errors />
 
+Please choose a new password.
+	
+<html:form action="/resetPasswordSubmit.do">
+
+<html:hidden property="validator"/>
 Username:<br />
-<html:text property="username" errorStyleClass="error" /><br />
+<html:text property="username" disabled="true" errorStyleClass="error" /><br />
 <br />
 Password:<br />
-<html:password property="password" styleId="password" errorStyleClass="error" redisplay="false" /><br />
-<html:link action="/forgotPassword.do">Forgot Password?</html:link>
+<html:password property="password" errorStyleClass="error" redisplay="false" /><br />
 <br />
-
-
-<html:submit>Sign in</html:submit>
+Confirm Password:<br />
+<html:password property="confirmPassword" errorStyleClass="error" redisplay="false" /><br />
+<br />
+<html:submit>Set Password</html:submit>
 
 </html:form>
-	
-	</div>
 
 <script>
-$('#password').focus();
 $('input.error').first().focus();
 </script>
 	
+	</div>
+
 </body>
 </html:html>

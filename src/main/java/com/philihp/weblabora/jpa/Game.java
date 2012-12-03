@@ -261,6 +261,30 @@ public class Game extends BasicEntity {
 	}
 	
 	@Transient
+	public boolean isGameFull() {
+		switch(players) {
+		case 4:
+			if (player4 == null || player4.getUser() == null)
+				return false;
+			//fall through
+		case 3:
+			if (player3 == null || player3.getUser() == null)
+				return false;
+			//fall through
+		case 2:
+			if (player2 == null || player2.getUser() == null)
+				return false;
+			//fall through
+		case 1:
+			if (player1 == null || player1.getUser() == null)
+				return false;
+			//fall through
+		default:
+			return true;
+		}
+	}
+	
+	@Transient
 	public boolean isUndoable() {
 		/*
 		long movedAt = this.getState().getDateCreated().getTime();

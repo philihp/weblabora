@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.philihp.weblabora.form.GameForm;
 import com.philihp.weblabora.jpa.Game;
+import com.philihp.weblabora.jpa.Game.Stage;
 import com.philihp.weblabora.jpa.State;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.model.Board;
@@ -26,12 +27,10 @@ public class ShowGameState extends BaseAction {
 			HttpServletResponse response, User user) throws Exception {
 
 		GameForm form = (GameForm)actionForm;
-		EntityManager em = (EntityManager)request.getAttribute("em");
-		
 		Game game = (Game)request.getAttribute("game");
 		
 		request.setAttribute("board", prepareBoard(game, form.getStateId()));
-		request.setAttribute("savedMove", findSavedMove(game, user)); 
+		request.setAttribute("savedMove", findSavedMove(game, user));
 		
 		return mapping.findForward("view");
 	}
@@ -47,7 +46,9 @@ public class ShowGameState extends BaseAction {
 			board.populateDetails(game);
 			MoveProcessor.processMoves(board, game.getStates(), endState);
 			if(board.isGameOver() == false)
-				board.preMove(new State()); //upkeep stuff before player makes a move	
+				board.preMove(new State()); //upkeep stuff before player makes a move
+			else
+				game.setStage(Stage.FINISHED);
 		}
 		return board;
 	}

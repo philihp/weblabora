@@ -24,18 +24,16 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.util.UserUtil;
 
-public class Login extends BaseAction {
+public class ShowAccount extends BaseAction {
 
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm,
 			HttpServletRequest request, HttpServletResponse response, User user)
 			throws Exception {
-
-		if(user == null) {
-			return new ActionForward(mapping.getParameter());
-		}
-		else {
-			return mapping.findForward("root");
-		}
+		DynaActionForm form = (DynaActionForm)actionForm;
+		
+		form.set("email", user.getEmail());
+		
+		return mapping.findForward("view");
 	}
 }
