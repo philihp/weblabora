@@ -6,6 +6,7 @@ import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
+import com.philihp.weblabora.model.TerrainUseEnum;
 
 abstract public class Settlement extends Erection {
 
@@ -21,6 +22,17 @@ abstract public class Settlement extends Erection {
 		this.round = round;
 		this.foodCost = foodCost;
 		this.energyCost = energyCost;
+	}
+
+	/**
+	 * Returns terrain use corresponding to this erection.
+	 * 
+	 * @return Terrain use corresponding to this erection.
+	 * @return Always {@link TerrainUseEnum#BUILDING}.
+	 */
+	public TerrainUseEnum getTerrainUse()
+	{
+		return TerrainUseEnum.BUILDING;
 	}
 
 	public Board getBoard() {

@@ -139,23 +139,44 @@ function onBuildingDrop(event) {
 function onBuildingDragOver(event) {
   var allowDrop = true;
 
-  // Check whether we are over active player board.
+  // Player board element over which the drag is.
+  var board = findBoard(event.target);
 
-  if (allowDrop) {
-    var board = findBoard(event.target);
-    if (!hasClass(board, "board--active")) {
-      allowDrop = false;
-    }
-  }
+  // Check whether the drag is over active player board.
 
-  var data = event.dataTransfer.getData('Text');
-
-  var droppedBuilding = document.getElementById(data);
-  var allowedTerrainTypes = droppedBuilding.getAttribute('data-terrain-types');
-  var currentTerrainType = event.target.getAttribute('data-terrain-type');
-
-  if (allowedTerrainTypes.indexOf(currentTerrainType, 0) == -1) {
+  if (!hasClass(board, "board--active")) {
     allowDrop = false;
+  } else {
+    // Cell over which the drag is.
+    var cell = event.target;
+
+    // Keep in mind that cells that are not part of the board landscape will
+    // never get here since they do not handle d'n'd and thus preemptively
+    // reject any drag.
+
+    // Check whether the cell over which the drag is is empty.
+
+    if (!cell.hasAttribute('data-is-empty') || (cell.getAttribute('data-is-empty') !== 'true')) {
+      allowDrop = false;
+    } else {
+      // Dragged building.
+      var dragData = event.dataTransfer.getData('Text');
+      var dragBuilding = document.getElementById(dragData);
+
+      // Terrain types the dragged building can be erected on.
+      var buildingTerrainTypes = dragBuilding.getAttribute('data-terrain-types');
+      // Terrain type of the cell over which the drag is.
+      var cellTerrainType = cell.getAttribute('data-terrain-type');
+
+      // Check whether the cell over which the drag is is of proper terrain
+      // type.
+
+      if (buildingTerrainTypes.indexOf(cellTerrainType, 0) == -1) {
+        allowDrop = false;
+      } else {
+        // TODO: cloister, resources
+      }
+    }
   }
 
   if (allowDrop) {

@@ -9,6 +9,7 @@ import com.philihp.weblabora.model.GamePlayers;
 import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.Terrain;
 import com.philihp.weblabora.model.TerrainTypeEnum;
+import com.philihp.weblabora.model.TerrainUseEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 
@@ -28,7 +29,18 @@ abstract public class Building extends Erection {
 		this.buildCost = buildCost;
 		this.cloister = cloister;
 	}
-	
+
+	/**
+	 * Returns terrain use corresponding to this erection.
+	 * 
+	 * @return Terrain use corresponding to this erection.
+	 * @return Always {@link TerrainUseEnum#BUILDING}.
+	 */
+	public TerrainUseEnum getTerrainUse()
+	{
+		return TerrainUseEnum.BUILDING;
+	}
+
 	public void build(Board board) {
 		//hook for winery, usually useless
 	}

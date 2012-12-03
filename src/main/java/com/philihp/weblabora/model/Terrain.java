@@ -33,6 +33,7 @@ public class Terrain {
 
 	public void setErection(Erection erection) {
 		this.erection = erection;
+		this.terrainUse = erection.getTerrainUse();
 		if(erection.getLocation() != this)
 			erection.setLocation(this);
 	}

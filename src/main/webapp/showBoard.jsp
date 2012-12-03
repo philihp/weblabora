@@ -470,7 +470,7 @@
 					<c:forEach items="${player.landscape.table}" var="row">
 						<tr>
 							<c:forEach items="${row}" var="cell">
-								<c:if test="${cell.terrainType ne 'HIDDEN'}">
+								<c:if test="${not cell.terrainType.isMerged()}">
 									<c:choose>
 										<c:when test="${cell.terrainType eq 'WATER'}">
 											<c:set var="boardCellType" value="water"/>
@@ -488,30 +488,37 @@
 											<c:set var="boardCellType" value="mountain"/>
 										</c:when>
 										<c:otherwise>
-											<c:set var="boardCellType" value="unavailable"/>
+											<c:set var="boardCellType" value="${cell.terrainType}"/>
 										</c:otherwise>
 									</c:choose>
-									<td${cell.terrainType.rowspanAttr} class="${boardCellType}" dropzone="move string:Text" ondrop="onBuildingDrop(event)" ondragover="onBuildingDragOver(event)" data-position-row="${cell.coordinate.y}" data-position-column="${cell.coordinate.x}" data-terrain-type="${cell.terrainType}">
-										<c:choose>
-											<c:when test="${not empty cell.erection}">
-												<div class="building building-${fn:toLowerCase(cell.erection.clergyman.type)}-${fn:toLowerCase(player.color)}">
-													<a class="erection-link" href="images/building/${cell.erection.image}.png" title="${cell.erection.id}">
-														<img src="images/building/${cell.erection.image}.png" class="building-image" />
-													</a>
-												</div>
-											</c:when>
-											<c:when test="${cell.terrainUse eq 'FOREST'}">
-												<img src="images/building/Wood.png" class="landscape-tile" title="${cell.coords}" />
-											</c:when>
-											<c:when test="${cell.terrainUse eq 'MOOR'}">
-												<img src="images/building/Peat.png" class="landscape-tile" title="${cell.coords}" />
-											</c:when>
-											<c:otherwise>
-												<div class="board-cell-info drop-replacement">
-													<span title="${cell.terrainType.properCase}">${cell.coords}</span>
-												</div>
-											</c:otherwise>
-										</c:choose>
+									<c:choose>
+										<c:when test="${cell eq null}">
+											<td class="${boardCellType}">
+										</c:when>
+										<c:otherwise>
+											<td${cell.terrainType.rowspanAttr} class="${boardCellType}" dropzone="move string:Text" ondrop="onBuildingDrop(event)" ondragover="onBuildingDragOver(event)" data-position-row="${cell.coordinate.y}" data-position-column="${cell.coordinate.x}" data-is-empty="${cell.terrainUse eq 'EMPTY'}" data-terrain-type="${cell.terrainType}">
+										</c:otherwise>
+									</c:choose>
+									<c:choose>
+										<c:when test="${not empty cell.erection}">
+											<div class="building building-${fn:toLowerCase(cell.erection.clergyman.type)}-${fn:toLowerCase(player.color)}">
+												<a class="erection-link" href="images/building/${cell.erection.image}.png" title="${cell.erection.id}">
+													<img src="images/building/${cell.erection.image}.png" class="building-image" />
+												</a>
+											</div>
+										</c:when>
+										<c:when test="${cell.terrainUse eq 'FOREST'}">
+											<img src="images/building/Wood.png" class="landscape-tile" title="${cell.coords}" />
+										</c:when>
+										<c:when test="${cell.terrainUse eq 'MOOR'}">
+											<img src="images/building/Peat.png" class="landscape-tile" title="${cell.coords}" />
+										</c:when>
+										<c:otherwise>
+											<div class="board-cell-info drop-replacement">
+												<span title="${cell.terrainType.properCase}">${cell.coords}</span>
+											</div>
+										</c:otherwise>
+									</c:choose>
 									</td>
 								</c:if>
 							</c:forEach>
