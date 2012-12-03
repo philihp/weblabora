@@ -16,21 +16,24 @@
 </c:choose>
 <div class="userbar">
 	<div class="container">
-			<c:choose>
-				<c:when test="${empty user}">
-					<div style="float: right; margin-top: 8px;">
-						<html:link action="/register.do" style="color: white; border-color: #74bb5a; border-bottom-color: #509338; background-color: #60b044; background-image: -webkit-linear-gradient(#8add6d,#60b044); border-radius: 3px; border: 1px solid #ddd; display: inline-block; padding: 8px 15px; cursor: pointer; text-decoration: none;">Sign up for free</html:link>
-   						<html:link action="/login.do" paramId="referer" paramName="referer" style="display: inline-block; padding: 8px 15px; background-color: #e5e5e5; background-image: -webkit-linear-gradient(whiteSmoke,#e5e5e5);border-radius: 3px;border: 1px solid #ddd; border-bottom-color: #bbb; cursor: pointer; text-decoration: none; color: #666;">Sign in</html:link>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div style="float: right;">
-						${user.name}
-						<img src="http://graph.facebook.com/${user.facebookId}/picture" height="50" width="50" title="${user.facebookId}"/>
-						<html:link action="/logout.do" paramId="referer" paramName="referer" style="display: inline-block; padding: 8px 15px; background-color: #e5e5e5; background-image: -webkit-linear-gradient(whiteSmoke,#e5e5e5);border-radius: 3px;border: 1px solid #ddd; border-bottom-color: #bbb; cursor: pointer; text-decoration: none; color: #666;">Sign out</html:link>
-					</div>
-				</c:otherwise>
-			</c:choose>
+		<c:choose>
+			<c:when test="${empty user}">
+				<div style="float: right; margin-top: 8px;">
+					<html:link action="/register.do" style="color: white; border-color: #74bb5a; border-bottom-color: #509338; background-color: #60b044; background-image: -webkit-linear-gradient(#8add6d,#60b044); border-radius: 3px; border: 1px solid #ddd; display: inline-block; padding: 8px 15px; cursor: pointer; text-decoration: none;">Sign up for free</html:link>
+  						<html:link action="/login.do" paramId="referer" paramName="referer" style="display: inline-block; padding: 8px 15px; background-color: #e5e5e5; background-image: -webkit-linear-gradient(whiteSmoke,#e5e5e5);border-radius: 3px;border: 1px solid #ddd; border-bottom-color: #bbb; cursor: pointer; text-decoration: none; color: #666;">Sign in</html:link>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div style="float: right;">
+					${user.username}
+					<img src="http://www.gravatar.com/avatar/${user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${user.username}" />
+					<html:link action="/showAccount.do" style="display: inline-block; padding: 8px 15px; background-color: #e5e5e5; background-image: -webkit-linear-gradient(whiteSmoke,#e5e5e5);border-radius: 3px;border: 1px solid #ddd; border-bottom-color: #bbb; cursor: pointer; text-decoration: none; color: #666;">Edit Account</html:link>
+					<html:link action="/logout.do" paramId="referer" paramName="referer" style="display: inline-block; padding: 8px 15px; background-color: #e5e5e5; background-image: -webkit-linear-gradient(whiteSmoke,#e5e5e5);border-radius: 3px;border: 1px solid #ddd; border-bottom-color: #bbb; cursor: pointer; text-decoration: none; color: #666;">Sign out</html:link>
+				</div>
+			</c:otherwise>
+		</c:choose>
+		<div id="title" style="line-height: 50px">
+		  ${param.title}
 		</div>
 	</div>
 </div>

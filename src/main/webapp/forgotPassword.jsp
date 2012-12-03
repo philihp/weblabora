@@ -19,43 +19,40 @@
 <!-- <script> -->
 <!-- 	google.load("jquery", "1.7.1");-->
 <!-- </script> -->
-<script src="js/lib/jquery-1.7.1.js"></script>
-<script src="js/lib/jquery.colorbox.js"></script>
 
+<script src="js/lib/jquery-1.7.1.js"></script>
 </head>
 
 <body>
 
-
     <c:import url="jsp/userbar.jsp">
-		<c:param name="user" value="${user}" />
+		<c:param name="title" value="Register" />
+		<c:param name="referer" value="/" />
 	</c:import>
 	
 	<div class="container">
-
-	<c:import url="jsp/notifications.jsp" />
 	
-<html:form action="loginSubmit.do">
+	<html:errors />
+
+To recover your password, please enter the username and email you used to sign up.
+	
+<html:form action="/forgotPasswordSubmit.do">
 
 Username:<br />
 <html:text property="username" errorStyleClass="error" /><br />
 <br />
-Password:<br />
-<html:password property="password" styleId="password" errorStyleClass="error" redisplay="false" /><br />
-<html:link action="/forgotPassword.do">Forgot Password?</html:link>
+Email:<br />
+<html:text property="email" errorStyleClass="error" /><br />
 <br />
-
-
-<html:submit>Sign in</html:submit>
+<html:submit>Recover Password</html:submit>
 
 </html:form>
-	
-	</div>
 
 <script>
-$('#password').focus();
 $('input.error').first().focus();
 </script>
 	
+	</div>
+
 </body>
 </html:html>

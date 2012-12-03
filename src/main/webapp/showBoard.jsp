@@ -144,9 +144,15 @@
 
 <body>
 
-    <c:import url="jsp/userbar.jsp" />		
+    <c:import url="jsp/userbar.jsp">
+    	<c:param name="title">
+    		&#x25e4; <html:link action="/showLobby.do">Return to Lobby</html:link>
+    	</c:param>
+    </c:import>
 	
 	<div class="container">
+		
+		<c:import url="jsp/notifications.jsp" />
 	
 		<div class="wheel">
 			<!-- ${board.mode.players} ${board.mode.country} ${board.mode.length} -->
@@ -423,9 +429,8 @@
 		<ul class="tabs">
 			<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
 				<li id="tab${playerStatus.index+1}" class="tab tab--${player.activeClass} tab--${player.selectedClass} tab--${fn:toLowerCase(player.color)}">
-					<div style="float:right"><a href="http://facebook.com/${player.user.facebookId}" target="_blank"><img src="images/facebook_16.png" /></a></div>
-					<img src="//graph.facebook.com/${player.user.facebookId}/picture" height="50" width="50" title="${player.user.facebookId}"/>
-					${player.user.name}
+					<img src="http://www.gravatar.com/avatar/${player.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${player.user.username}" />
+					${player.user.username}
 				</li>
 			</c:forEach>
 		</ul>
@@ -628,7 +633,7 @@
 			<html:form action="/makeMove.do">
 				<html:hidden property="stateId" value="${game.state.stateId}" />
 				<html:hidden property="gameId" value="${game.gameId}" />
-				<html:text property="token" value="${savedMove}" />
+				<html:text property="token" styleId="token" value="${savedMove}" />
 				<html:submit property="submit">Explore</html:submit>
 				<html:submit property="submit">Save (for later)</html:submit>
 			</html:form>
@@ -703,6 +708,8 @@
 		
 		<hr />
 	</div>
+	
+	<script>$('#token').focus();</script>
 
 </body>
 </html:html>
