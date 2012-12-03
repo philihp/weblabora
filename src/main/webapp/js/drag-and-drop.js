@@ -1,21 +1,26 @@
-/** Returns draggable HTMLElement containing specified node.
- * @param node Node from which lookup will start.
- * @returns node if node is an HTMLElement with draggable attribute set to true.
- *          Otherwise if node has an ancestor HTMLElement with draggable
- *          attribute set to true then deepest (first when going up from node)
- *          such element. Otherwise (which also includes a case when node is
- *          null) null is returned.
+/**
+ * Returns {@code draggable} {@code HTMLElement} containing specified node.
  * 
  * This function allows to deal with incompatibilities among browsers on what
- * is actually being dragged. Some browsers select inner A element while others
- * inner IMG element. The function allows to get to the ancestor element that
- * was actually supposed to be dragged (has draggable attribute set to true).
+ * is actually being dragged. Some browsers select inner {@code a} element while
+ * others inner {@code img} element. The function allows to get to the ancestor
+ * element that was actually supposed to be dragged (has {@code draggable}
+ * attribute set to {@code true}).
  * 
- * Keep in mind the HTML5 standard states that IMG and A elements have the
- * draggable attribute set to true by default.
+ * Keep in mind the HTML5 standard states that {@code img} and {@code a}
+ * elements have the {@code draggable} attribute set to {@code true} by default.
+ * 
+ * @param node Node from which lookup will start.
+ * @returns {@code node} if it is an {@code HTMLElement} with {@code draggable}
+ *          attribute set to {@code true}. Otherwise if it has an ancestor
+ *          {@code HTMLElement} with {@code draggable} attribute set to
+ *          {@code true} then deepest (first when going up from {@code node})
+ *          such element. Otherwise (which also includes a case when
+ *          {@code true} is {@code null}) {@code null} is returned.
+ * @returns This is always an {@code HTMLElement} object or {@code null}.
  */
 function findDraggableAncestor(node) {
-  if (node == null) {
+  if (node === null) {
     return null;
   }
   if (node instanceof HTMLElement) {
@@ -26,16 +31,47 @@ function findDraggableAncestor(node) {
   return findDraggableAncestor(node.parentNode);
 }
 
+/**
+ * Determines whether specified element has specified class.
+ * 
+ * @param element Element which {@code class} attribute will be checked.
+ * @param cls Class looked for in {@code element}.
+ * @returns {@code true} if {@code element} is not {@code null}, is of
+ *          {@code HTMLElement} type and its {@code class} attribute contains
+ *          {@code cls} class; {@code false} otherwise.
+ * @todo Once {@code classList} in HTML5 gains wider support consider using it
+ *       instead.
+ */
+function hasClass(element, cls) {
+  if (element === null) {
+    return false;
+  }
+  if (element instanceof HTMLElement) {
+    return element.className.search('(^|\\s)' + cls + '(\\s|$)') != -1;
+  }
+  return false;
+}
+
+/**
+ * Returns player board element containing specified node.
+ * 
+ * Player boards are contained in {@code div} elements with {@code board}
+ * {@code class} (among other classes). This function returns such a board
+ * element being an ancestor of the specified node.
+ * 
+ * @param node Node which player board element is to be found.
+ * @returns Player board element containing {@code node} or {@code null} if
+ *          {@code node} is neither a player board element nor a descendant of
+ *          one.
+ * @returns This is always an {@code HTMLElement} object or {@code null}.
+ */
 function findBoard(node) {
-  if (node == null) {
+  if (node === null) {
     return null;
   }
   if (node instanceof HTMLElement) {
-    var classList = node.className.split(/\s+/);
-    for (var i = 0; i < classList.length; ++i) {
-      if (classList[i] === 'board') {
-        return node;
-      }
+    if (hasClass(node, 'board')) {
+      return node;
     }
   }
   return findBoard(node.parentNode);
@@ -101,9 +137,18 @@ function onBuildingDrop(event) {
 }
 
 function onBuildingDragOver(event) {
-  var data = event.dataTransfer.getData('Text');
-
   var allowDrop = true;
+
+  // Check whether we are over active player board.
+
+  if (allowDrop) {
+    var board = findBoard(event.target);
+    if (!hasClass(board, "board--active")) {
+      allowDrop = false;
+    }
+  }
+
+  var data = event.dataTransfer.getData('Text');
 
   var droppedBuilding = document.getElementById(data);
   var allowedTerrainTypes = droppedBuilding.getAttribute('data-terrain-types');
