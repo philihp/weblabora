@@ -38,7 +38,7 @@
 
 <p>
 <h2>Avatar</h2> 
-<img src="http://www.gravatar.com/avatar/${user.emailMD5}.jpg?s=100&amp;d=identicon" height="100" width="100" title="${user.username}" /><br />
+<img src="https://secure.gravatar.com/avatar/${user.emailMD5}.jpg?s=100&amp;d=identicon" height="100" width="100" title="${user.username}" /><br />
 <a href="http://www.gravatar.com">Change your avatar at Gravatar.com</a>
 </p>
 

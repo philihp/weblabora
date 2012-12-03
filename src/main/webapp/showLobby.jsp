@@ -117,7 +117,7 @@ td.avatar-cell {
 											</html:form>
 										</c:when>
 										<c:otherwise>
-											<img src="http://www.gravatar.com/avatar/${game.player1.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${game.player1.user.username}" />
+											<img src="https://secure.gravatar.com/avatar/${game.player1.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${game.player1.user.username}" />
 										</c:otherwise>
 									</c:choose>
 								</c:if>
@@ -133,7 +133,7 @@ td.avatar-cell {
 											</html:form>
 										</c:when>
 										<c:otherwise>
-											<img src="http://www.gravatar.com/avatar/${game.player2.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${game.player2.user.username}" />
+											<img src="https://secure.gravatar.com/avatar/${game.player2.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${game.player2.user.username}" />
 										</c:otherwise>
 									</c:choose>
 								</c:if>
@@ -149,7 +149,7 @@ td.avatar-cell {
 											</html:form>
 										</c:when>
 										<c:otherwise>
-											<img src="http://www.gravatar.com/avatar/${game.player3.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${game.player3.user.username}" />
+											<img src="https://secure.gravatar.com/avatar/${game.player3.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${game.player3.user.username}" />
 										</c:otherwise>
 									</c:choose>
 								</c:if>
@@ -165,7 +165,7 @@ td.avatar-cell {
 											</html:form>
 										</c:when>
 										<c:otherwise>
-											<img src="http://www.gravatar.com/avatar/${game.player4.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${game.player4.user.username}" />
+											<img src="https://secure.gravatar.com/avatar/${game.player4.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${game.player4.user.username}" />
 										</c:otherwise>
 									</c:choose>
 								</c:if>
