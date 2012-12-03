@@ -429,7 +429,7 @@
 		<ul class="tabs">
 			<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
 				<li id="tab${playerStatus.index+1}" class="tab tab--${player.activeClass} tab--${player.selectedClass} tab--${fn:toLowerCase(player.color)}">
-					<img src="http://www.gravatar.com/avatar/${player.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${player.user.username}" />
+					<img src="https://secure.gravatar.com/avatar/${player.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${player.user.username}" />
 					${player.user.username}
 				</li>
 			</c:forEach>
