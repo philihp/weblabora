@@ -1,12 +1,6 @@
 package com.philihp.weblabora.model.building;
 
-import static com.philihp.weblabora.model.TerrainTypeEnum.COAST;
-import static com.philihp.weblabora.model.TerrainTypeEnum.MOUNTAIN;
-import static com.philihp.weblabora.model.TerrainTypeEnum.HILLSIDE;
-import static com.philihp.weblabora.model.TerrainTypeEnum.PLAINS;
-
 import java.util.EnumSet;
-import java.util.Set;
 
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
@@ -22,7 +16,7 @@ import com.philihp.weblabora.model.Wheel;
 public class Farmyard extends Building {
 
 	public Farmyard(String id, SettlementRound stage, int players) {
-		super(id, stage, players, "Farmyard", BuildCost.is(), 2, 0, EnumSet.of(PLAINS), true);
+		super(id, stage, players, "Farmyard", BuildCost.is(), 2, 0, EnumSet.of(TerrainTypeEnum.PLAINS), false);
 	}
 
 	@Override
