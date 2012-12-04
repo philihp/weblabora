@@ -174,7 +174,17 @@ function onBuildingDragOver(event) {
       if (buildingTerrainTypes.indexOf(cellTerrainType, 0) == -1) {
         allowDrop = false;
       } else {
-        // TODO: cloister, resources
+        // Determines whether dragged building is a cloister building.
+        var isCloister = (dragBuilding.hasAttribute('data-is-cloister') && (dragBuilding.getAttribute('data-is-cloister') === 'true'));
+        // Determines whether the cell over which the drag is has a cloister
+        // neighbor.
+        var isCellACloisterNeighbor = (cell.hasAttribute('data-has-cloister-neighbor') && (cell.getAttribute('data-has-cloister-neighbor') === 'true'));
+
+        if (isCloister && !isCellACloisterNeighbor) {
+          allowDrop = false;
+        } else {
+          // TODO: Still need to check for resources and possible second drop.
+        }
       }
     }
   }
