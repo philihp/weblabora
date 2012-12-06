@@ -151,7 +151,7 @@
 			<forward name="failure" path="/showAccount.do" />
 		</action>
 
-		<action path="/showGame" name="gameForm" scope="request" type="com.philihp.weblabora.action.ShowGame">
+		<action path="/showGame" name="gameForm" validate="true" input="/showLobby.do" scope="request" type="com.philihp.weblabora.action.ShowGame">
 			<forward name="game-state" path="/showGameState.do" />
 			<forward name="no-game" path="/selectGame.do" />
 		</action>

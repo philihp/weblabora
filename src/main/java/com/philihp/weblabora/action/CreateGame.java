@@ -43,9 +43,10 @@ public class CreateGame extends BaseAction {
 		game.setCountry(form.getCountry());
 		game.setLength(form.getLength());
 		game.setPlayers(form.getPlayers());
-		user.setActiveGame(game);
 		game.setState(state);
 		em.persist(game);
+		
+		state.setGame(game);
 
 		return mapping.findForward("root");
 	}
