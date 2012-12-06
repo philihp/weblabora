@@ -74,7 +74,7 @@ public class ForgotPasswordSubmit extends BaseAction {
 				+ request.getServerName()
 				+ request.getContextPath()
 				+ "/resetPassword.do?validator="
-				+ user.getEmailValidator()
+				+ user.getPasswordValidator()
 				+ "\n\nIf you didn't request to reset your password, please ignore this email; it was requested by someone at "
 				+ request.getRemoteAddr() + ".\n\nLove,\nTeam Weblabora";
 		UserUtil.sendEmail(user.getEmail(), emailSubject, emailBody, (String)getServlet().getServletContext().getAttribute("gmail_password"));
