@@ -638,6 +638,11 @@
 				<html:submit property="submit">Save (for later)</html:submit>
 			</html:form>
 			<a href="http://philihp.github.com/WebLabora/">Command Syntax Reference</a>
+			
+			<html:form action="/leaveGame.do">
+				<html:hidden property="gameId" value="${game.gameId}" />
+				<html:submit style="color: red" onclick="return confirm('Are you sure you want to leave the game?');">Leave Game</html:submit>
+			</html:form>
 		</c:if>
 		
 		<hr />
