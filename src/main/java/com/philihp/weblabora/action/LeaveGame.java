@@ -34,6 +34,8 @@ public class LeaveGame extends BaseAction {
 			for(Game.Player player : game.getAllPlayers()) {
 				if(user.equals(player.getUser())) {
 					player.setUser(null);
+					if(game.getStage() == Game.Stage.IN_PROGRESS)
+						game.setStage(Game.Stage.RECRUITING);
 				}
 			}
 		}
