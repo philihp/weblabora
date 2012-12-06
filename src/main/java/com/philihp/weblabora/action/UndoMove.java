@@ -41,21 +41,11 @@ public class UndoMove extends BaseAction {
 			return mapping.findForward("root");
 		}
 		
-		/*
-		if(game.isUndoable() == false) {
-			throw new WeblaboraException("More than 24 hours has elapsed since that move has been made.");
-		}
-		else if (game.getState().getExplorer().equals(user) == false) {
-			throw new WeblaboraException("Only the user who made a move can undo it");
-		}
-		else {
-			game.setState(game.getState().getSrcState());
-		}
-		*/
-
 		game.setState(game.getState().getSrcState());
 		
-		return mapping.findForward("madeMove");
+		ActionForward forward = mapping.findForward("undone");
+		forward = new ActionForward(forward.getPath()+"?gameId="+game.getGameId(), forward.getRedirect());
+		return forward;
 	}
 	
 

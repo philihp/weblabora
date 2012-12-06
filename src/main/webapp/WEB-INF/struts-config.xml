@@ -178,7 +178,7 @@
 		</action>
 		
 		<action path="/undoMove" name="gameForm" scope="request" type="com.philihp.weblabora.action.UndoMove">
-			<forward name="tooLate" path="/tooLate.jsp" />
+			<forward name="undone" path="/showGame.do" redirect="true" />
 		</action>
 		
 		<action path="/saveMove" name="moveForm" type="com.philihp.weblabora.action.SaveMove" />

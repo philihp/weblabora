@@ -79,6 +79,7 @@ public class MakeMove extends BaseAction {
 			}
 			
 			em.persist(state);
+			game.getState().getDstStates().add(state);
 			game.setState(state);
 
 			Game.Player player = ShowGame.findPlayerInGame(game, user);
