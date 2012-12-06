@@ -7,7 +7,15 @@
 <%@ taglib uri="http://philihp.com/jsp/ora" prefix="ora" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-<h2>Games looking for players:</h2>
+	<c:if test="${not empty user}">
+	
+		<h2>Your Games:</h2>
+
+		<c:choose>
+			<c:when test="${empty myGames}">
+				<span style="font-style: italic">You are not in any games.</span>
+			</c:when>
+			<c:otherwise>
 			  <table border="1" cellspacing="0" cellpadding="3">
 			  	<tr>
 			  		<th>ID, Started</th>
@@ -18,10 +26,11 @@
 			  		<th>Blue</th>
 			  		<th>White</th>
 			  	</tr>
-					<c:forEach items="${recruitingGames}" var="game">
+					<c:forEach items="${myGames}" var="game">
 						<tr>
 							<td>
 								#${game.gameId}, <fmt:formatDate value="${game.dateCreated}" pattern="yyyy-MM-dd" /><br />
+								<html:link action="/showGame.do" paramId="gameId" paramName="game" paramProperty="gameId">View Game</html:link> &#x25e2;
 							</td>
 							<td>
 								<c:choose>
@@ -61,11 +70,11 @@
 											<html:form action="/joinGame.do">
 												<html:hidden property="gameId" value="${game.gameId}" />
 												<html:hidden property="seat" value="1"/>
-												<html:submit>Join</html:submit>
+												<html:submit>Sit</html:submit>
 											</html:form>
 										</c:when>
 										<c:otherwise>
-											<img src="https://secure.gravatar.com/avatar/${game.player1.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${user.username}" />
+											<img src="https://secure.gravatar.com/avatar/${game.player1.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${game.player1.user.username}" />
 										</c:otherwise>
 									</c:choose>
 								</c:if>
@@ -77,7 +86,7 @@
 											<html:form action="/joinGame.do">
 												<html:hidden property="gameId" value="${game.gameId}" />
 												<html:hidden property="seat" value="2"/>
-												<html:submit>Join</html:submit>
+												<html:submit>Sit</html:submit>
 											</html:form>
 										</c:when>
 										<c:otherwise>
@@ -93,7 +102,7 @@
 											<html:form action="/joinGame.do">
 												<html:hidden property="gameId" value="${game.gameId}" />
 												<html:hidden property="seat" value="3"/>
-												<html:submit>Join</html:submit>
+												<html:submit>Sit</html:submit>
 											</html:form>
 										</c:when>
 										<c:otherwise>
@@ -109,7 +118,7 @@
 											<html:form action="/joinGame.do">
 												<html:hidden property="gameId" value="${game.gameId}" />
 												<html:hidden property="seat" value="4"/>
-												<html:submit>Join</html:submit>
+												<html:submit>Sit</html:submit>
 											</html:form>
 										</c:when>
 										<c:otherwise>
@@ -121,4 +130,7 @@
 						</tr>
 					</c:forEach>
 				</table>
-<button id="createGameButton">Create New Game</button>
+			</c:otherwise>
+		</c:choose>
+		
+	</c:if>
