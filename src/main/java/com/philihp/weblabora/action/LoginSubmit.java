@@ -69,6 +69,7 @@ public class LoginSubmit extends BaseAction {
 			return mapping.findForward("input");
 		}
 		
+		user.setPasswordValidator(null);
 		request.getSession().setAttribute("user", user);
 		saveUserFingerprint(em, response, user);
 		
