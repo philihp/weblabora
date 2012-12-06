@@ -66,10 +66,10 @@ public class User extends BasicEntity {
 	@Basic
 	@Column(name = "password_validator")
 	private String passwordValidator;
-	
-	@ManyToOne(fetch = LAZY, targetEntity = com.philihp.weblabora.jpa.Game.class)
-	@JoinColumn(name = "active_game_id", referencedColumnName = "game_id")
-	private Game activeGame;
+
+//	@ManyToOne(fetch = LAZY, targetEntity = com.philihp.weblabora.jpa.Game.class)
+//	@JoinColumn(name = "active_game_id", referencedColumnName = "game_id")
+//	private Game activeGame;
 
 	public int getUserId() {
 		return userId;
@@ -95,17 +95,6 @@ public class User extends BasicEntity {
 		this.name = name;
 	}
 
-	public Game getActiveGame() {
-		return activeGame;
-	}
-	public Integer getActiveGameId() {
-		return activeGame==null?null:activeGame.getGameId();
-	}
-
-	public void setActiveGame(Game activeGame) {
-		this.activeGame = activeGame;
-	}
-	
 	public String toString() {
 		return getName()+" ("+getFacebookId()+")";
 	}

@@ -19,24 +19,7 @@ public class SelectGame extends BaseAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
 			HttpServletResponse response, User user) throws Exception {
 
-		ActionForward forward = mapping.findForward("show-board");
-		EntityManager em = (EntityManager)request.getAttribute("em");
-		
-		Integer gameId = user.getActiveGameId();
-		if(gameId == null) {
-			List<Game> games = ShowLobby.findGamesForUser(em, user);
-			if(games.size() >= 1) {
-				user.setActiveGame(games.get(0));
-				gameId = user.getActiveGameId();
-			}
-			else {
-				return mapping.findForward("no-games");
-			}
-		}
-		
-		ActionForward modifiedForward = new ActionForward(forward.getPath()+"?gameId="+gameId, forward.getRedirect());
-		
-		return modifiedForward;
+		return mapping.findForward("root");
 	}
 	
 }

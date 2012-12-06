@@ -33,7 +33,6 @@ public class JoinGame extends BaseAction {
 		}
 
 		game.getSeat(form.getSeat()).setUser(user);
-		user.setActiveGame(game);
 		
 		if(game.isGameFull())
 			game.setStage(Stage.IN_PROGRESS);
