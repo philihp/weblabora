@@ -27,6 +27,7 @@ public class CreateGame extends BaseAction {
 		
 		State state = new State();
 		state.setExplorer(user);
+		state.setActive(true);
 		em.persist(state);
 		
 		Game game = new Game();
@@ -43,7 +44,7 @@ public class CreateGame extends BaseAction {
 		game.setCountry(form.getCountry());
 		game.setLength(form.getLength());
 		game.setPlayers(form.getPlayers());
-		game.setState(state);
+		game.getStates().add(state);
 		em.persist(game);
 		
 		state.setGame(game);

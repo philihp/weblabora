@@ -49,6 +49,10 @@ public class State extends BasicEntity {
 	@ManyToOne(fetch = LAZY, targetEntity = com.philihp.weblabora.jpa.Game.class)
 	@JoinColumn(name = "game_id", referencedColumnName="game_id")
 	private Game game;
+	
+	@Basic
+	@Column(name = "active")
+	private boolean active;
 
 	public int getStateId() {
 		return stateId;
@@ -109,6 +113,14 @@ public class State extends BasicEntity {
 		} while(state != null);
 		Collections.reverse(list);
 		return list;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }

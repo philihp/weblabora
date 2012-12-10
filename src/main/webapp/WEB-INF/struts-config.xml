@@ -10,7 +10,7 @@
 		<form-bean name="hijackForm" type="com.philihp.weblabora.form.HijackForm" />
 		<form-bean name="gameForm" type="com.philihp.weblabora.form.GameForm" />
 		<form-bean name="joinGameForm" type="com.philihp.weblabora.form.JoinGameForm" />
-		<form-bean name="moveForm" type="com.philihp.weblabora.form.MoveForm" />
+		<form-bean name="moveForm"  type="com.philihp.weblabora.form.MoveForm" />
 		<form-bean name="createGameForm" type="com.philihp.weblabora.form.CreateGameForm" />
 		<form-bean name="registerForm" type="org.apache.struts.validator.DynaValidatorForm">
 			<form-property name="username" type="java.lang.String" />
