@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 
 import com.philihp.weblabora.form.GameForm;
 import com.philihp.weblabora.form.MoveForm;
@@ -33,19 +35,32 @@ public class UndoMove extends BaseAction {
 		GameForm form = (GameForm) actionForm;
 		EntityManager em = (EntityManager)request.getAttribute("em");
 
-		TypedQuery<Game> query = em.createQuery("SELECT g FROM Game g WHERE g.gameId = :gameId", Game.class);
-		query.setParameter("gameId", form.getGameId());
-		Game game = query.getSingleResult();
-		
-		if(game.getState().getStateId() != form.getStateId()) {
-			return mapping.findForward("root");
+		Game game = em.find(Game.class, form.getGameId());
+
+		int gameCurrentStateId = game.getState().getStateId();
+		if(gameCurrentStateId != form.getStateId()) {
+			ActionMessages messages = getMessages(request);
+			messages.add(
+					ActionMessages.GLOBAL_MESSAGE,
+					new ActionMessage(
+							"message.detail",
+							"Cannot revert the state #"
+									+ form.getStateId()
+									+ " from game #"
+									+ form.getGameId()
+									+ " because it is not the current state. The current state is #"
+									+ gameCurrentStateId));
+			saveMessages(request.getSession(), messages);
+			return mapping.findForward("root"); 
 		}
+		else {
+			game.getState().setActive(false);
+			game.updateTimeStamps();
 		
-		game.setState(game.getState().getSrcState());
-		
-		ActionForward forward = mapping.findForward("undone");
-		forward = new ActionForward(forward.getPath()+"?gameId="+game.getGameId(), forward.getRedirect());
-		return forward;
+			ActionForward forward = mapping.findForward("undone");
+			forward = new ActionForward(forward.getPath()+"?gameId="+game.getGameId(), forward.getRedirect());
+			return forward;
+		}
 	}
 	
 

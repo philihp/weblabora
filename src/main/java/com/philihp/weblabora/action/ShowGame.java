@@ -30,9 +30,9 @@ public class ShowGame extends BaseAction {
 		Game game = em.find(Game.class, form.getGameId());
 		request.setAttribute("game", game);
 		
-		if(form.getStateId() == null && game != null) {
-			form.setStateId(game.getState().getStateId());
-		}
+//		if(form.getStateId() == null && game != null) {
+//			form.setStateId(game.getState().getStateId());
+//		}
 		
 		return mapping.findForward("game-state");
 	}

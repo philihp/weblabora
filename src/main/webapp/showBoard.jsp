@@ -3,14 +3,14 @@
 <%@ taglib uri="http://struts.apache.org/tags-html-el" prefix="html"%>
 <%@ taglib uri="http://struts.apache.org/tags-logic-el" prefix="logic"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://philihp.com/jsp/ora" prefix="ora" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://philihp.com/jsp/ora" prefix="ora"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <!DOCTYPE html>
 <html:html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
 <title>WebLabora</title>
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/colorbox.css" />
@@ -38,122 +38,150 @@
 		$('#tab2').removeClass('tab--selected').addClass('tab--unselected');
 		$('#tab3').removeClass('tab--selected').addClass('tab--unselected');
 		$('#tab4').removeClass('tab--selected').addClass('tab--unselected');
-		$('#tab'+player).removeClass('tab--unselected').addClass('tab--selected');
-		$('#board1').removeClass('board--selected').addClass('board--unselected');
-		$('#board2').removeClass('board--selected').addClass('board--unselected');
-		$('#board3').removeClass('board--selected').addClass('board--unselected');
-		$('#board4').removeClass('board--selected').addClass('board--unselected');
-		$('#board'+player).removeClass('board--unselected').addClass('board--selected');
+		$('#tab' + player).removeClass('tab--unselected').addClass(
+				'tab--selected');
+		$('#board1').removeClass('board--selected').addClass(
+				'board--unselected');
+		$('#board2').removeClass('board--selected').addClass(
+				'board--unselected');
+		$('#board3').removeClass('board--selected').addClass(
+				'board--unselected');
+		$('#board4').removeClass('board--selected').addClass(
+				'board--unselected');
+		$('#board' + player).removeClass('board--unselected').addClass(
+				'board--selected');
 	}
-	
+
 	$(function() {
 		$('#findGamesButton').colorbox({
 			href : "showGames.do",
 			speed : 200,
-			transition: "elastic"
+			transition : "elastic"
 		});
 
 		$(".building-link").colorbox({
-			rel:'building-link',
+			rel : 'building-link',
 			speed : 200,
-			transition: "elastic",
-			current: "",
-			next: "",
-			previous: ""
+			transition : "elastic",
+			current : "",
+			next : "",
+			previous : ""
 		});
 		$(".future-building-link").colorbox({
-			rel:'future-building-link',
+			rel : 'future-building-link',
 			speed : 200,
-			transition: "elastic",
-			current: "",
-			next: "",
-			previous: ""
+			transition : "elastic",
+			current : "",
+			next : "",
+			previous : ""
 		});
 		$(".erection-link").colorbox({
-			rel:'erection-link',
+			rel : 'erection-link',
 			speed : 200,
-			transition: "elastic",
-			current: "",
-			next: "",
-			previous: ""
+			transition : "elastic",
+			current : "",
+			next : "",
+			previous : ""
 		});
 		$(".settlement-link").colorbox({
-			rel:'settlement-link',
+			rel : 'settlement-link',
 			speed : 200,
-			transition: "elastic",
-			current: "",
-			next: "",
-			previous: ""
+			transition : "elastic",
+			current : "",
+			next : "",
+			previous : ""
 		});
 
 		$(".show-future-building-button").click(function(event) {
 			event.preventDefault();
-			$(".future-building").css('display','inline-block');
+			$(".future-building").css('display', 'inline-block');
 			$(this).hide();
 			$('.hide-future-building-button').show();
 		});
 		$(".hide-future-building-button").click(function(event) {
 			event.preventDefault();
-			$(".future-building").css('display','none');
+			$(".future-building").css('display', 'none');
 			$(this).hide();
 			$('.show-future-building-button').show();
 		});
-		
 
 		<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
-		$(".show-future-settlements-button-${fn:toLowerCase(player.color)}").click(function(event) {
-			event.preventDefault();
-			$(".future-settlement-${fn:toLowerCase(player.color)}").css('display','inline-block');
-			$(this).hide();
-			$('.hide-future-settlements-button-${fn:toLowerCase(player.color)}').show();
-		});
-		$(".hide-future-settlements-button-${fn:toLowerCase(player.color)}").click(function(event) {
-			event.preventDefault();
-			$(".future-settlement-${fn:toLowerCase(player.color)}").css('display','none');
-			$(this).hide();
-			$('.show-future-settlements-button-${fn:toLowerCase(player.color)}').show();
-		});
+		$(".show-future-settlements-button-${fn:toLowerCase(player.color)}")
+				.click(
+						function(event) {
+							event.preventDefault();
+							$(
+									".future-settlement-${fn:toLowerCase(player.color)}")
+									.css('display', 'inline-block');
+							$(this).hide();
+							$(
+									'.hide-future-settlements-button-${fn:toLowerCase(player.color)}')
+									.show();
+						});
+		$(".hide-future-settlements-button-${fn:toLowerCase(player.color)}")
+				.click(
+						function(event) {
+							event.preventDefault();
+							$(
+									".future-settlement-${fn:toLowerCase(player.color)}")
+									.css('display', 'none');
+							$(this).hide();
+							$(
+									'.show-future-settlements-button-${fn:toLowerCase(player.color)}')
+									.show();
+						});
 		</c:forEach>
-		
-		$('#tab1').click(function() {showboard(1);});
-		$('#tab2').click(function() {showboard(2);});
-		$('#tab3').click(function() {showboard(3);});
-		$('#tab4').click(function() {showboard(4);});
-		
+
+		$('#tab1').click(function() {
+			showboard(1);
+		});
+		$('#tab2').click(function() {
+			showboard(2);
+		});
+		$('#tab3').click(function() {
+			showboard(3);
+		});
+		$('#tab4').click(function() {
+			showboard(4);
+		});
+
 		$('#gamesList').change(function() {
 			$(this).closest('form').submit();
 		});
-		
+
 	});
 </script>
 
 <script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push([ '_setAccount', 'UA-27506789-5' ]);
+	_gaq.push([ '_trackPageview' ]);
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-27506789-5']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+				: 'http://www')
+				+ '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
 </script>
 </head>
 
 <body>
 
-    <c:import url="jsp/userbar.jsp">
-    	<c:param name="title">
+	<c:import url="jsp/userbar.jsp">
+		<c:param name="title">
     		&#x25e4; <html:link action="/showLobby.do">Return to Lobby</html:link>
-    	</c:param>
-    </c:import>
-	
+		</c:param>
+	</c:import>
+
 	<div class="container">
-		
+
 		<c:import url="jsp/notifications.jsp" />
-	
+
 		<div class="wheel">
 			<!-- ${board.mode.players} ${board.mode.country} ${board.mode.length} -->
 			<svg style="width: 300px; height: 300px;" viewbox="-150.5 -150.5 300 300">
@@ -316,7 +344,8 @@
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">D</text>
 					</g>
 				</c:if>
-				<c:if test="${board.mode.players eq 'TWO'}"><%-- this is the same for both short and long --%>
+				<c:if test="${board.mode.players eq 'TWO'}">
+					<%-- this is the same for both short and long --%>
 					<g id="settlement-a" transform="rotate(${wheelArt.rotG})">
 						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">A</text>
@@ -336,36 +365,45 @@
 				</c:if>
 				<c:if test="${board.mode.country eq 'FRANCE'}">
 					<g id="grape" transform="rotate(${ora:deg(board.wheel.grape.position)})">
-						<text x="0" y="${board.wheel.grape.radius}" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Grape</text>
+						<text x="0" y="${board.wheel.grape.radius}"
+						style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Grape</text>
 					</g>
 				</c:if>
 				<g id="stone" transform="rotate(${ora:deg(board.wheel.stone.position)})">
-					<text x="0" y="${board.wheel.stone.radius}" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Stone</text>
+					<text x="0" y="${board.wheel.stone.radius}"
+					style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Stone</text>
 				</g>
 				<g id="grain" transform="rotate(${ora:deg(board.wheel.grain.position)})">
-					<text x="0" y="${board.wheel.grain.radius}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Grain</text>
+					<text x="0" y="${board.wheel.grain.radius}"
+					style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Grain</text>
 				</g>
 				<g id="sheep" transform="rotate(${ora:deg(board.wheel.sheep.position)})">
-					<text x="0" y="${board.wheel.sheep.radius}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Sheep</text>
+					<text x="0" y="${board.wheel.sheep.radius}"
+					style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Sheep</text>
 				</g>
 				<g id="joker" transform="rotate(${ora:deg(board.wheel.joker.position)})">
-					<text x="0" y="${board.wheel.joker.radius}" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Joker</text>
+					<text x="0" y="${board.wheel.joker.radius}"
+					style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Joker</text>
 				</g>
 				<g id="wood" transform="rotate(${ora:deg(board.wheel.wood.position)})">
-					<text x="0" y="${board.wheel.wood.radius}" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Wood</text>
+					<text x="0" y="${board.wheel.wood.radius}"
+					style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Wood</text>
 				</g>
 				<g id="clay" transform="rotate(${ora:deg(board.wheel.clay.position)})">
-					<text x="0" y="${board.wheel.clay.radius}" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Clay</text>
+					<text x="0" y="${board.wheel.clay.radius}"
+					style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Clay</text>
 				</g>
 				<g id="peat" transform="rotate(${ora:deg(board.wheel.peat.position)})">
-					<text x="0" y="${board.wheel.peat.radius}" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Peat</text>
+					<text x="0" y="${board.wheel.peat.radius}"
+					style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Peat</text>
 				</g>
 				<g id="coin" transform="rotate(${ora:deg(board.wheel.coin.position)})">
-					<text x="0" y="${board.wheel.coin.radius}" style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Coin</text>
+					<text x="0" y="${board.wheel.coin.radius}"
+					style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Coin</text>
 				</g>
-				<g id="arm"  transform="rotate(${ora:deg(board.wheel.arm.position)-board.armOffset})" style="font-size: 10px; text-anchor: middle">
-				  <path d="${wheelArt.armPath}"
-				        style="fill:#ffffff; fill-opacity: 1; stroke:#686868; stroke-width: 1" />
+				<g id="arm" transform="rotate(${ora:deg(board.wheel.arm.position)-board.armOffset})"
+					style="font-size: 10px; text-anchor: middle">
+				  <path d="${wheelArt.armPath}" style="fill:#ffffff; fill-opacity: 1; stroke:#686868; stroke-width: 1" />
 				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotA})">${board.wheel.armValues[12]}</text>
 				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotB})">${board.wheel.armValues[11]}</text>
 				  <text x="0" y="${wheelArt.armTextY}" transform="rotate(${wheelArt.rotC})">${board.wheel.armValues[10]}</text>
@@ -383,7 +421,7 @@
 				</g>
 			</svg>
 		</div>
-		
+
 		<div class="info">
 			<c:choose>
 				<c:when test="${board.gameOver}">
@@ -399,49 +437,59 @@
 				</c:otherwise>
 			</c:choose>
 			<hr />
-			<h4 class="info-line">Plot Costs: 
+			<h4 class="info-line">
+				Plot Costs:
 				<c:forEach items="${board.plotCosts}" var="cost" varStatus="costStatus">
 					${cost}<c:if test="${not costStatus.last}">,</c:if>
 				</c:forEach>
 			</h4>
-			<h4 class="info-line">District Costs: 
+			<h4 class="info-line">
+				District Costs:
 				<c:forEach items="${board.districtCosts}" var="cost" varStatus="costStatus">
 					${cost}<c:if test="${not costStatus.last}">,</c:if>
 				</c:forEach>
 			</h4>
-			<a class="show-future-building-button">Show Future Buildings</a>
-			<a class="hide-future-building-button">Hide Future Buildings</a>
+			<a class="show-future-building-button">Show Future Buildings</a> <a class="hide-future-building-button">Hide
+				Future Buildings</a>
 		</div>
-		
-		<div class="building-list"><!-- comment out white-space for inline-block spacing
+
+		<div class="building-list">
+			<!-- comment out white-space for inline-block spacing
 		  <c:forEach items="${board.unbuiltBuildings}" var="building">
-		  	--><div class="building">
-		  	  <a class="building-link" href="images/building/${building.image}.png" title="${building.id}"><img src="images/building/${building.image}.png" class="building-image" /></a>
-		  	</div><!--
+		  	-->
+			<div class="building">
+				<a class="building-link" href="images/building/${building.image}.png" title="${building.id}"><img
+					src="images/building/${building.image}.png" class="building-image" /></a>
+			</div>
+			<!--
 		  </c:forEach>
 		  <c:forEach items="${board.futureBuildings}" var="building">
-		  	--><div class="future-building">
-		  	  <a class="future-building-link" href="images/building/${building.image}.png" title="${building.id}"><img src="images/building/${building.image}.png" class="future-building-image" /></a>
-		  	</div><!--
+		  	-->
+			<div class="future-building">
+				<a class="future-building-link" href="images/building/${building.image}.png" title="${building.id}"><img
+					src="images/building/${building.image}.png" class="future-building-image" /></a>
+			</div>
+			<!--
 		  </c:forEach>
-		--></div>
-			
+		-->
+		</div>
+
 		<ul class="tabs">
 			<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
-				<li id="tab${playerStatus.index+1}" class="tab tab--${player.activeClass} tab--${player.selectedClass} tab--${fn:toLowerCase(player.color)}">
-					<img src="https://secure.gravatar.com/avatar/${player.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${player.user.username}" />
-					${player.user.username}
-				</li>
+				<li id="tab${playerStatus.index+1}"
+					class="tab tab--${player.activeClass} tab--${player.selectedClass} tab--${fn:toLowerCase(player.color)}"><img
+					src="https://secure.gravatar.com/avatar/${player.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50"
+					title="${player.user.username}" /> ${player.user.username}</li>
 			</c:forEach>
 		</ul>
 		<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
 			<div class="board board--${player.activeClass} board--${player.selectedClass}" id="board${playerStatus.index+1}">
-	
+
 				<c:set var="player" value="${player}" scope="request" />
 				<c:import url="jsp/inventory.jsp" />
-				
+
 				<hr style="clear: both" />
-	
+
 				<table>
 					<c:forEach items="${player.landscape.table}" var="row" varStatus="rowStatus">
 						<tr>
@@ -449,28 +497,28 @@
 								<c:if test="${cell.terrainType ne 'HIDDEN'}">
 									<c:choose>
 										<c:when test="${cell.terrainType eq 'WATER'}">
-											<c:set var="boardCellType" value="water"/>
+											<c:set var="boardCellType" value="water" />
 										</c:when>
 										<c:when test="${cell.terrainType eq 'COAST'}">
-											<c:set var="boardCellType" value="coast"/>
+											<c:set var="boardCellType" value="coast" />
 										</c:when>
 										<c:when test="${cell.terrainType eq 'PLAINS'}">
-											<c:set var="boardCellType" value="plains"/>
+											<c:set var="boardCellType" value="plains" />
 										</c:when>
 										<c:when test="${cell.terrainType eq 'HILLSIDE'}">
-											<c:set var="boardCellType" value="hillside"/>
+											<c:set var="boardCellType" value="hillside" />
 										</c:when>
 										<c:when test="${cell.terrainType eq 'MOUNTAIN'}">
-											<c:set var="boardCellType" value="mountain"/>
+											<c:set var="boardCellType" value="mountain" />
 										</c:when>
 										<c:otherwise>
-											<c:set var="boardCellType" value="unavailable"/>
+											<c:set var="boardCellType" value="unavailable" />
 										</c:otherwise>
 									</c:choose>
-									<td${cell.terrainType.rowspanAttr} class="${boardCellType}">
-										<c:choose>
+									<td ${cell.terrainType.rowspanAttr} class="${boardCellType}"><c:choose>
 											<c:when test="${not empty cell.erection}">
-												<div class="building building-${fn:toLowerCase(cell.erection.clergyman.type)}-${fn:toLowerCase(player.color)}">
+												<div
+													class="building building-${fn:toLowerCase(cell.erection.clergyman.type)}-${fn:toLowerCase(player.color)}">
 													<a class="erection-link" href="images/building/${cell.erection.image}.png" title="${cell.erection.id}">
 														<img src="images/building/${cell.erection.image}.png" class="building-image" />
 													</a>
@@ -487,199 +535,165 @@
 													<span title="${cell.terrainType.properCase}">${cell.coords}</span>
 												</div>
 											</c:otherwise>
-										</c:choose>
-									</td>
+										</c:choose></td>
 								</c:if>
 							</c:forEach>
 						</tr>
 					</c:forEach>
 				</table>
-				
+
 				<hr />
-				
+
 				<c:if test="${not empty player.startingMarker}">
 				[Starting Player (contract cost is ${board.startingMarker.cost})]
 				</c:if>
-				
+
 				<h3>Clergymen</h3>
-				<c:if test="${empty player.layBrother1.location}"><img src="images/laybrother-${fn:toLowerCase(player.color)}.svg" alt="Lay Brother" /></c:if>
-				<c:if test="${board.mode.secondLayBrotherUsed and empty player.layBrother2.location}"><img src="images/laybrother-${fn:toLowerCase(player.color)}.svg" alt="Lay Brother" /></c:if>
-				<c:if test="${empty player.prior.location}"><img src="images/prior-${fn:toLowerCase(player.color)}.svg" /></c:if>
-								
+				<c:if test="${empty player.layBrother1.location}">
+					<img src="images/laybrother-${fn:toLowerCase(player.color)}.svg" alt="Lay Brother" />
+				</c:if>
+				<c:if test="${board.mode.secondLayBrotherUsed and empty player.layBrother2.location}">
+					<img src="images/laybrother-${fn:toLowerCase(player.color)}.svg" alt="Lay Brother" />
+				</c:if>
+				<c:if test="${empty player.prior.location}">
+					<img src="images/prior-${fn:toLowerCase(player.color)}.svg" />
+				</c:if>
+
 				<hr />
-				
-				<div class="settlement-list"><!-- comment out white-space for inline-block spacing
+
+				<div class="settlement-list">
+					<!-- comment out white-space for inline-block spacing
 				  <c:forEach items="${player.unbuiltSettlements}" var="settlement">
 				  	<c:if test="${player.totalFoodAvailable >= settlement.foodCost and player.totalEnergyAvailable >= settlement.energyCost}">
-				  	--><div class="settlement settlement-buildable">
-				  	<a class="settlement-link" href="images/building/${settlement.image}.png" title="${settlement.id}"><img src="images/building/${settlement.image}.png" class="settlement-image" /></a>
-				  	</div><!--
+				  	-->
+					<div class="settlement settlement-buildable">
+						<a class="settlement-link" href="images/building/${settlement.image}.png" title="${settlement.id}"><img
+							src="images/building/${settlement.image}.png" class="settlement-image" /></a>
+					</div>
+					<!--
 				  	</c:if>
 				  	<c:if test="${player.totalFoodAvailable < settlement.foodCost or player.totalEnergyAvailable < settlement.energyCost}">
-				  	--><div class="settlement settlement-not-buildable">
-				  	<a class="settlement-link" href="images/building/${settlement.image}.png" title="${settlement.id}"><img src="images/building/${settlement.image}.png" class="settlement-image" /></a>
-				  	</div><!--
+				  	-->
+					<div class="settlement settlement-not-buildable">
+						<a class="settlement-link" href="images/building/${settlement.image}.png" title="${settlement.id}"><img
+							src="images/building/${settlement.image}.png" class="settlement-image" /></a>
+					</div>
+					<!--
 				  	</c:if>	
 				  
 				  
 				  </c:forEach>
 				  <c:forEach items="${board.futureSettlements}" var="settlement">
-				  	--><div class="settlement future-settlement future-settlement-${fn:toLowerCase(player.color)}">
-				  	  <a class="settlement-link settlement-link-${fn:toLowerCase(player.color)}" href="images/building/${settlement.image}.png" title="${settlement.id}"><img src="images/building/${settlement.image}.png" class="settlement-image settlement-image-${fn:toLowerCase(player.color)}" /></a>
-				  	</div><!--
+				  	-->
+					<div class="settlement future-settlement future-settlement-${fn:toLowerCase(player.color)}">
+						<a class="settlement-link settlement-link-${fn:toLowerCase(player.color)}"
+							href="images/building/${settlement.image}.png" title="${settlement.id}"><img
+							src="images/building/${settlement.image}.png"
+							class="settlement-image settlement-image-${fn:toLowerCase(player.color)}" /></a>
+					</div>
+					<!--
 				  </c:forEach>
-				--></div>
-				
-			<a class="show-future-settlements-button show-future-settlements-button-${fn:toLowerCase(player.color)}">Show Future Settlements</a>
-			<a class="hide-future-settlements-button hide-future-settlements-button-${fn:toLowerCase(player.color)}">Hide Future Settlements</a>
-			<br/><br/>
-		    <c:import url="jsp/inventoryType.jsp">
-				<c:param name="type" value="FiveFood" />
-				<c:param name="abbr" value="Beer" />
-				<c:param name="amount" value="${player.beer}" />
-			</c:import>
-		    <c:import url="jsp/inventoryType.jsp">
-				<c:param name="type" value="FiveFood" />
-				<c:param name="abbr" value="Meat" />
-				<c:param name="amount" value="${player.meat}" />
-			</c:import>
-		    <c:import url="jsp/inventoryType.jsp">
-				<c:param name="type" value="FiveFood" />
-				<c:param name="abbr" value="Nickel" />
-				<c:param name="amount" value="${player.nickel}" />
-			</c:import>
-			<c:import url="jsp/inventoryType.jsp">
-				<c:param name="type" value="ThreeFood" />
-				<c:param name="abbr" value="Bread" />
-				<c:param name="amount" value="${player.bread}" />
-			</c:import>
-			<c:import url="jsp/inventoryType.jsp">
-				<c:param name="type" value="TwoFood" />
-				<c:param name="abbr" value="Sheep" />
-				<c:param name="amount" value="${player.sheep}" />
-			</c:import>
-			<c:import url="jsp/inventoryType.jsp">
-				<c:param name="type" value="TwoFood" />
-				<c:param name="abbr" value="Whiskey" />
-				<c:param name="amount" value="${player.whiskey}" />
-			</c:import>
-			<c:import url="jsp/inventoryType.jsp">
-				<c:param name="type" value="OneFood" />
-				<c:param name="abbr" value="Penny" />
-				<c:param name="amount" value="${player.penny}" />
-			</c:import>
-			<c:import url="jsp/inventoryType.jsp">
-				<c:param name="type" value="OneFood" />
-				<c:param name="abbr" value="Grain" />
-				<c:param name="amount" value="${player.grain}" />
-			</c:import>
-			<c:import url="jsp/inventoryType.jsp">
-				<c:param name="type" value="OneFood" />
-				<c:param name="abbr" value="Flour" />
-				<c:param name="amount" value="${player.flour}" />
-			</c:import>
-			<c:import url="jsp/inventoryType.jsp">
-				<c:param name="type" value="OneFood" />
-				<c:param name="abbr" value="Grapes" />
-				<c:param name="amount" value="${player.grapes}" />
-			</c:import>
-			<c:import url="jsp/inventoryType.jsp">
-				<c:param name="type" value="OneFood" />
-				<c:param name="abbr" value="Hops" />
-				<c:param name="amount" value="${player.hops}" />
-			</c:import>
-			<c:import url="jsp/inventoryType.jsp">
-				<c:param name="type" value="OneFood" />
-				<c:param name="abbr" value="Wine" />
-				<c:param name="amount" value="${player.wine}" />
-			</c:import>
-			<b>${player.totalFoodAvailable} Food</b>
-			<br/>
-			<c:import url="jsp/inventoryType.jsp">
-				<c:param name="type" value="ThreeEnergy" />
-				<c:param name="abbr" value="Coal" />
-				<c:param name="amount" value="${player.coal}" />
-			</c:import>
-			<c:import url="jsp/inventoryType.jsp">
-				<c:param name="type" value="TwoEnergy" />
-				<c:param name="abbr" value="Peat" />
-				<c:param name="amount" value="${player.peat}" />
-			</c:import>
-			<c:import url="jsp/inventoryType.jsp">
-				<c:param name="type" value="OneEnergy" />
-				<c:param name="abbr" value="Wood" />
-				<c:param name="amount" value="${player.wood}" />
-			</c:import>
-			<c:import url="jsp/inventoryType.jsp">
-				<c:param name="type" value="HalfEnergy" />
-				<c:param name="abbr" value="Straw" />
-				<c:param name="amount" value="${player.straw}" />
-			</c:import>
-			<b>${player.totalEnergyAvailable} Energy</b>
-			<br/><br/>
-			<c:if test="${player.actionsBeforeSettlement >= 2}">
-				<div class="actionsBeforeSettlement">Actions until Next Settlement: ${player.actionsBeforeSettlement}</div>
-			</c:if>
-			<c:if test="${player.actionsBeforeSettlement >= 0 and player.actionsBeforeSettlement < 2}">
-				<div class="actionsBeforeSettlementRed">Actions until Next Settlement: ${player.actionsBeforeSettlement}</div>
-			</c:if>			
-				<c:remove var="player"/>
+				-->
+				</div>
+
+				<a class="show-future-settlements-button show-future-settlements-button-${fn:toLowerCase(player.color)}">Show
+					Future Settlements</a> <a
+					class="hide-future-settlements-button hide-future-settlements-button-${fn:toLowerCase(player.color)}">Hide
+					Future Settlements</a> <br />
+				<br />
+				<c:import url="jsp/inventoryType.jsp">
+					<c:param name="type" value="FiveFood" />
+					<c:param name="abbr" value="Beer" />
+					<c:param name="amount" value="${player.beer}" />
+				</c:import>
+				<c:import url="jsp/inventoryType.jsp">
+					<c:param name="type" value="FiveFood" />
+					<c:param name="abbr" value="Meat" />
+					<c:param name="amount" value="${player.meat}" />
+				</c:import>
+				<c:import url="jsp/inventoryType.jsp">
+					<c:param name="type" value="FiveFood" />
+					<c:param name="abbr" value="Nickel" />
+					<c:param name="amount" value="${player.nickel}" />
+				</c:import>
+				<c:import url="jsp/inventoryType.jsp">
+					<c:param name="type" value="ThreeFood" />
+					<c:param name="abbr" value="Bread" />
+					<c:param name="amount" value="${player.bread}" />
+				</c:import>
+				<c:import url="jsp/inventoryType.jsp">
+					<c:param name="type" value="TwoFood" />
+					<c:param name="abbr" value="Sheep" />
+					<c:param name="amount" value="${player.sheep}" />
+				</c:import>
+				<c:import url="jsp/inventoryType.jsp">
+					<c:param name="type" value="TwoFood" />
+					<c:param name="abbr" value="Whiskey" />
+					<c:param name="amount" value="${player.whiskey}" />
+				</c:import>
+				<c:import url="jsp/inventoryType.jsp">
+					<c:param name="type" value="OneFood" />
+					<c:param name="abbr" value="Penny" />
+					<c:param name="amount" value="${player.penny}" />
+				</c:import>
+				<c:import url="jsp/inventoryType.jsp">
+					<c:param name="type" value="OneFood" />
+					<c:param name="abbr" value="Grain" />
+					<c:param name="amount" value="${player.grain}" />
+				</c:import>
+				<c:import url="jsp/inventoryType.jsp">
+					<c:param name="type" value="OneFood" />
+					<c:param name="abbr" value="Flour" />
+					<c:param name="amount" value="${player.flour}" />
+				</c:import>
+				<c:import url="jsp/inventoryType.jsp">
+					<c:param name="type" value="OneFood" />
+					<c:param name="abbr" value="Grapes" />
+					<c:param name="amount" value="${player.grapes}" />
+				</c:import>
+				<c:import url="jsp/inventoryType.jsp">
+					<c:param name="type" value="OneFood" />
+					<c:param name="abbr" value="Hops" />
+					<c:param name="amount" value="${player.hops}" />
+				</c:import>
+				<c:import url="jsp/inventoryType.jsp">
+					<c:param name="type" value="OneFood" />
+					<c:param name="abbr" value="Wine" />
+					<c:param name="amount" value="${player.wine}" />
+				</c:import>
+				<b>${player.totalFoodAvailable} Food</b> <br />
+				<c:import url="jsp/inventoryType.jsp">
+					<c:param name="type" value="ThreeEnergy" />
+					<c:param name="abbr" value="Coal" />
+					<c:param name="amount" value="${player.coal}" />
+				</c:import>
+				<c:import url="jsp/inventoryType.jsp">
+					<c:param name="type" value="TwoEnergy" />
+					<c:param name="abbr" value="Peat" />
+					<c:param name="amount" value="${player.peat}" />
+				</c:import>
+				<c:import url="jsp/inventoryType.jsp">
+					<c:param name="type" value="OneEnergy" />
+					<c:param name="abbr" value="Wood" />
+					<c:param name="amount" value="${player.wood}" />
+				</c:import>
+				<c:import url="jsp/inventoryType.jsp">
+					<c:param name="type" value="HalfEnergy" />
+					<c:param name="abbr" value="Straw" />
+					<c:param name="amount" value="${player.straw}" />
+				</c:import>
+				<b>${player.totalEnergyAvailable} Energy</b> <br />
+				<br />
+				<c:if test="${player.actionsBeforeSettlement >= 2}">
+					<div class="actionsBeforeSettlement">Actions until Next Settlement: ${player.actionsBeforeSettlement}</div>
+				</c:if>
+				<c:if test="${player.actionsBeforeSettlement >= 0 and player.actionsBeforeSettlement < 2}">
+					<div class="actionsBeforeSettlementRed">Actions until Next Settlement: ${player.actionsBeforeSettlement}</div>
+				</c:if>
+				<c:remove var="player" />
 			</div>
 		</c:forEach>
-		
-		<c:if test="${empty param.stateId}">
-			<hr />
-			New Move:
-			<html:form action="/makeMove.do">
-				<html:hidden property="stateId" value="${game.state.stateId}" />
-				<html:hidden property="gameId" value="${game.gameId}" />
-				<html:text property="token" styleId="token" value="${savedMove}" />
-				<html:submit property="submit">Explore</html:submit>
-				<html:submit property="submit">Save (for later)</html:submit>
-			</html:form>
-			<a href="http://philihp.github.com/WebLabora/">Command Syntax Reference</a>
-			
-			<html:form action="/leaveGame.do">
-				<html:hidden property="gameId" value="${game.gameId}" />
-				<html:submit style="color: red" onclick="return confirm('Are you sure you want to leave the game?');">Leave Game</html:submit>
-			</html:form>
-		</c:if>
-		
-		<hr />
-		
-		<c:forEach items="${board.moveListReversed}" var="move">
-			<div class="movelist-color">${move.color}</div>
-			<div class="movelist-move">
-			<c:choose>
-				<c:when test="${empty move.state}">
-					<b>${move.text}</b>
-				</c:when>
-				<c:when test="${move.state.stateId == 0 and empty board.nextState}">
-					...
-				</c:when>
-				<c:when test="${move.state.stateId == 0 and board.nextState.stateId == game.state.stateId}">
-					[<a href="showGame.do?gameId=${game.gameId}">view</a>] ...
-				</c:when>
-				<c:when test="${move.state.stateId == 0}">
-					[<a href="showGame.do?gameId=${game.gameId}&amp;stateId=${board.nextState.stateId}">view</a>] ...
-				</c:when>
-				<c:when test="${move.state.stateId == param.stateId or move.state.stateId == game.state.stateId}">
-					<span title="First explored by ${move.state.explorer.name} on <fmt:formatDate value="${move.state.dateCreated}" pattern="yyyy-MM-dd" />">[view] ${move.text}</span>
-					<c:if test="${game.undoable}">
-						<html:form style="display: inline" action="/undoMove.do">
-							<html:hidden property="gameId"/>
-							<html:hidden property="stateId"/>
-							<html:submit>Undo</html:submit>
-						</html:form>
-					</c:if>
-				</c:when>
-				<c:otherwise>
-					[<a href="showGame.do?gameId=${game.gameId}&amp;stateId=${move.state.stateId}">view</a>]<span title="First explored by ${move.state.explorer.name} on <fmt:formatDate value="${move.state.dateCreated}" pattern="yyyy-MM-dd" />"> ${move.text}</span>
-				</c:otherwise>
-			</c:choose>
-			</div>
-		</c:forEach>
-		
+
 		<c:if test="${board.gameOver}">
 			<c:forEach items="${board.scorecard.scores}" var="entry">
 				<br />
@@ -690,9 +704,66 @@
 				Settlement Score: ${entry.value.settlementTotalScore}<br />
 				Shield Score: ${entry.value.shieldScore}<br />
 				Item Score: ${entry.value.itemScore}<br />
-				<i>Total Score: ${entry.value.settlementTotalScore + entry.value.shieldScore + entry.value.itemScore}</i><br />
+				<i>Total Score: ${entry.value.settlementTotalScore + entry.value.shieldScore + entry.value.itemScore}</i>
+				<br />
 			</c:forEach>
 		</c:if>
+
+		<c:if test="${empty param.stateId}">
+			<hr />
+			New Move:
+			<html:form action="/makeMove.do">
+				<html:hidden property="stateId" value="${game.activeStates[fn:length(game.activeStates)-1].stateId}" />
+				<html:hidden property="gameId" value="${game.gameId}" />
+				<html:text property="token" styleId="token" value="${savedMove}" />
+				<html:submit property="submit">Explore</html:submit>
+				<html:submit property="submit">Save (for later)</html:submit>
+			</html:form>
+			<a href="http://philihp.github.com/WebLabora/">Command Syntax Reference</a>
+
+			<html:form action="/leaveGame.do">
+				<html:hidden property="gameId" value="${game.gameId}" />
+				<html:submit style="color: red" onclick="return confirm('Are you sure you want to leave the game?');">Leave Game</html:submit>
+			</html:form>
+		</c:if>
+
+		<hr />
+		<c:forEach items="${board.moveListReversed}" var="move">
+			<div class="movelist-color">${move.color}</div>
+			<div class="movelist-move">
+				<c:choose>
+					<c:when test="${empty move.state}">
+						<b>${move.text}</b>
+					</c:when>
+					<c:when test="${move.state.stateId == 0 and empty board.nextState}">
+					...
+				</c:when>
+					<c:when test="${move.state.stateId == 0 and board.nextState.stateId == game.state.stateId}">
+					[<a href="showGame.do?gameId=${game.gameId}">view</a>] ...
+				</c:when>
+					<c:when test="${move.state.stateId == 0}">
+					[<a href="showGame.do?gameId=${game.gameId}&amp;stateId=${board.nextState.stateId}">view</a>] ...
+				</c:when>
+					<c:when test="${move.state.stateId == param.stateId or move.state.stateId == game.state.stateId}">
+						<span
+							title="First explored by ${move.state.explorer.name} on <fmt:formatDate value="${move.state.dateCreated}" pattern="yyyy-MM-dd" />">[view]
+							${move.text}</span>
+						<c:if test="${game.undoable}">
+							<html:form style="display: inline" action="/undoMove.do">
+								<html:hidden property="gameId" />
+								<html:hidden property="stateId" value="${move.state.stateId}"/>
+								<html:submit>Undo</html:submit>
+							</html:form>
+						</c:if>
+					</c:when>
+					<c:otherwise>
+					[<a href="showGame.do?gameId=${game.gameId}&amp;stateId=${move.state.stateId}">view</a>]<span
+							title="First explored by ${move.state.explorer.name} on <fmt:formatDate value="${move.state.dateCreated}" pattern="yyyy-MM-dd" />">
+							${move.text}</span>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</c:forEach>
 
 		<c:if test="${not empty game.state.dstStates and empty param.stateId}">
 		<hr />
@@ -713,8 +784,10 @@
 		
 		<hr />
 	</div>
-	
-	<script>$('#token').focus();</script>
+
+	<script>
+		$('#token').focus();
+	</script>
 
 </body>
 </html:html>

@@ -26,7 +26,6 @@ public final class MoveProcessor {
 				board.setNextState(state);
 				break;
 			}
-			System.out.println("State: "+state.getStateId());
 			board.preMove(state);
 			processActions(board,state.getToken());
 			board.postMove();
