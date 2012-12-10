@@ -40,7 +40,6 @@ public class CommandFellTrees implements MoveCommand, InvalidDuringSettlement {
 		
 		board.distributeBonusProduction(UsageParam.is().wood(1));
 
-		System.out.println("Felling trees at " + x + "," + y + "; got wood: "
-				+ woodTaken);
+		//System.out.println("Felling trees at " + x + "," + y + "; got wood: " + woodTaken);
 	}
 }

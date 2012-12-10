@@ -18,7 +18,7 @@ public class CommandConvert implements MoveCommand {
 
 		execute(board, usageParam);
 
-		System.out.println("Converting " + usageParam);
+		//System.out.println("Converting " + usageParam);
 	}
 
 	public static void execute(Board board, UsageParam param) throws WeblaboraException {

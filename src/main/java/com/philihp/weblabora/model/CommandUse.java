@@ -62,7 +62,7 @@ public class CommandUse implements MoveCommand, InvalidDuringSettlement {
 		
 		execute(board, buildingId, usageParam, usingPrior, params.getPlaceClergyman());
 
-		System.out.println("Using " + buildingId + " with " + usageParam);
+		//System.out.println("Using " + buildingId + " with " + usageParam);
 	}
 
 	private static void execute(Board board, BuildingEnum buildingId,

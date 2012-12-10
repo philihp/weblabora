@@ -20,7 +20,7 @@ public class CommandBuild implements MoveCommand, InvalidDuringSettlement {
 				Integer.parseInt(params.get(1)),
 				Integer.parseInt(params.get(2)));
 		
-		System.out.println("Building "+params.get(0)+" at ("+params.get(1)+","+params.get(2)+")");
+		//System.out.println("Building "+params.get(0)+" at ("+params.get(1)+","+params.get(2)+")");
 	}
 	
 	public static void execute(Board board, String buildingId, int x, int y)

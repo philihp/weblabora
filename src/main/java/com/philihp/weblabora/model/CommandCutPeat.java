@@ -41,7 +41,6 @@ public class CommandCutPeat implements MoveCommand, InvalidDuringSettlement {
 		
 		board.distributeBonusProduction(UsageParam.is().peat(1));
 
-		System.out.println("Cutting peat at " + x + "," + y + "; got peat: "
-				+ peatTaken);
+		//System.out.println("Cutting peat at " + x + "," + y + "; got peat: " + peatTaken);
 	}
 }
