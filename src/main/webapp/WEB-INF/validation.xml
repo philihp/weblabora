@@ -22,6 +22,8 @@
 	
 		<form name="gameForm" />
 	
+		<form name="moveForm" />
+	
 		<form name="loginForm">
 			<field property="username" depends="required,minlength">
 				<arg key="prompt.username" />
