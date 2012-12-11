@@ -408,3 +408,27 @@ input.error {
     border: 1px solid red;
   }
 }
+
+.errorBox,
+.messageBox {
+		border-radius: 25px;
+		border: 1px solid;
+		margin: 10px 0px;
+		padding: 15px 10px;
+}
+
+.errorBox:before {
+		content: "(x) ";
+}
+.errorBox {
+		color: #d8000c;
+		background-color: #ffbaba;
+}
+
+.messageBox:before {
+		content: "(!) ";
+}
+.messageBox {
+		color: #00529b;
+		background-color: #bde5f8;
+}
