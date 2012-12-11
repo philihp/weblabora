@@ -29,12 +29,15 @@
 
     <c:import url="jsp/userbar.jsp">
 		<c:param name="user" value="${user}" />
+		<c:param name="title">Login</c:param>
 	</c:import>
 	
 	<div class="container">
 
 	<c:import url="jsp/notifications.jsp" />
 	
+<p><html:link action="/loginFacebook.do">Sign in with Facebook</html:link></p>
+
 <html:form action="loginSubmit.do">
 
 Username:<br />

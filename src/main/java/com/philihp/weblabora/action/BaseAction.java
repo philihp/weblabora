@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -19,6 +20,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.philihp.weblabora.jpa.Fingerprint;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.util.AuthenticationException;
 import com.philihp.weblabora.util.FacebookSignedRequest;
@@ -34,7 +36,7 @@ abstract public class BaseAction extends Action {
 	@SuppressWarnings("unchecked")
 	private static final Set<Object> PUBLIC_ACTIONS = new HashSet<Object>(Arrays.asList(ShowGame.class, ShowGameState.class,
 			ShowLobby.class, Offline.class, LoginSubmit.class, Register.class, RegisterSubmit.class, RegisterValidate.class,
-			Login.class, ForgotPasswordSubmit.class, ResetPassword.class, ResetPasswordSubmit.class));
+			Login.class, ForgotPasswordSubmit.class, ResetPassword.class, ResetPasswordSubmit.class, LoginFacebook.class));
 	
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm,
@@ -84,5 +86,17 @@ abstract public class BaseAction extends Action {
 	        }
 	    }
 	    return null;
+	}
+
+	protected void saveUserFingerprint(EntityManager em, HttpServletResponse response,
+			User user) {
+		Fingerprint loginToken = new Fingerprint();
+		loginToken.setUser(user);
+		loginToken.setUuid(UUID.randomUUID().toString());
+		em.persist(loginToken);
+		Cookie cookie = new Cookie(COOKIE_KEY, loginToken.getUuid());
+		cookie.setMaxAge(COOKIE_EXPIRES);
+		cookie.setPath(this.getServlet().getServletContext().getContextPath());
+		response.addCookie(cookie);
 	}
 }

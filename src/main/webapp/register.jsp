@@ -32,7 +32,11 @@
 	
 	<div class="container">
 	
-	<html:errors />
+	<c:import url="jsp/notifications.jsp" />
+	
+<p><html:link action="/loginFacebook.do">Sign up with Facebook</html:link></p>
+
+<p><i>or</i></p>
 	
 <html:form action="/registerSubmit.do">
 
@@ -42,16 +46,10 @@ Username:<br />
 Password:<br />
 <html:password property="password" errorStyleClass="error" redisplay="false" /><br />
 <br />
-Confirm Password:<br />
-<html:password property="confirmPassword" errorStyleClass="error" redisplay="false" /><br />
-<br />
 Email:<br />
 <html:text property="email" errorStyleClass="error" /><br />
 <br />
-Confirm Email<br />
-<html:text property="confirmEmail" errorStyleClass="error" /><br />
-<br />
-<html:submit>Register</html:submit>
+<html:submit>Sign Up</html:submit>
 
 </html:form>
 

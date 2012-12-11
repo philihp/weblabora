@@ -344,8 +344,7 @@ public class Board {
 			preRound();
 		}
 		
-		if(state.getToken() != null)
-			getMoveList().add(new HistoryEntry(state, getPlayer(getActivePlayer()).getColor()));
+		getMoveList().add(new HistoryEntry(state, getPlayer(getActivePlayer()).getColor()));
 	
 		if(!isGameOver()) {
 			for (int i = 0; i < players.length; i++) {

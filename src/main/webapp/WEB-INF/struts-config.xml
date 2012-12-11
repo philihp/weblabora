@@ -12,31 +12,11 @@
 		<form-bean name="joinGameForm" type="com.philihp.weblabora.form.JoinGameForm" />
 		<form-bean name="moveForm"  type="com.philihp.weblabora.form.MoveForm" />
 		<form-bean name="createGameForm" type="com.philihp.weblabora.form.CreateGameForm" />
-		<form-bean name="registerForm" type="org.apache.struts.validator.DynaValidatorForm">
-			<form-property name="username" type="java.lang.String" />
-			<form-property name="password" type="java.lang.String" />
-			<form-property name="confirmPassword" type="java.lang.String" />
-			<form-property name="email" type="java.lang.String" />
-			<form-property name="confirmEmail" type="java.lang.String" />
-		</form-bean>
-		<form-bean name="forgotPasswordForm" type="org.apache.struts.validator.DynaValidatorForm">
-			<form-property name="username" type="java.lang.String" />
-			<form-property name="email" type="java.lang.String" />
-		</form-bean>
-		<form-bean name="accountForm" type="org.apache.struts.validator.DynaValidatorForm">
-			<form-property name="email" type="java.lang.String" />
-		</form-bean>
-		<form-bean name="resetPasswordForm" type="org.apache.struts.validator.DynaValidatorForm">
-			<form-property name="validator" type="java.lang.String" />
-			<form-property name="username" type="java.lang.String" />
-			<form-property name="password" type="java.lang.String" />
-			<form-property name="confirmPassword" type="java.lang.String" />
-		</form-bean>
-		<form-bean name="resetAccountPasswordForm" type="org.apache.struts.validator.DynaValidatorForm">
-			<form-property name="currentPassword" type="java.lang.String" />
-			<form-property name="newPassword" type="java.lang.String" />
-			<form-property name="confirmPassword" type="java.lang.String" />
-		</form-bean>
+		<form-bean name="registerForm" type="com.philihp.weblabora.form.RegisterForm"/>
+		<form-bean name="forgotPasswordForm" type="com.philihp.weblabora.form.ForgotPasswordForm" />
+		<form-bean name="accountForm" type="com.philihp.weblabora.form.AccountForm" />
+		<form-bean name="resetPasswordForm" type="com.philihp.weblabora.form.ResetPasswordForm" />
+		<form-bean name="resetAccountPasswordForm" type="com.philihp.weblabora.form.ResetAccountPasswordForm" />
 	</form-beans>
 
 	<global-exceptions>
@@ -85,6 +65,15 @@
 				>
 			<forward name="input" path="/register.jsp" />
 		</action>
+		<action path="/loginFacebook"
+				name="registerForm"
+				scope="request"
+				validate="false"
+				type="com.philihp.weblabora.action.LoginFacebook">
+			<forward name="register" path="/register.do" />
+			<forward name="account" path="/showAccount.do" redirect="true" />
+			<forward name="error" path="/login.do" />
+		</action>
 		<action path="/forgotPassword"
 				name="forgotPasswordForm"
 				scope="request"
@@ -131,6 +120,12 @@
 				validate="false"
 				type="com.philihp.weblabora.action.ShowAccount">
 			<forward name="view" path="/showAccount.jsp" />
+		</action>
+		<action path="/editAccountUnlinkFacebook"
+				name="nullForm"
+				scope="request"
+				type="com.philihp.weblabora.action.EditAccountUnlinkFacebook">
+			<forward name="success" path="/showAccount.do" redirect="true" />
 		</action>
 		<action path="/editAccountEmail"
 				name="accountForm"

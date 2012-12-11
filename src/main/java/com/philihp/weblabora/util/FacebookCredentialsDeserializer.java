@@ -29,6 +29,8 @@ public class FacebookCredentialsDeserializer implements
 				credentials.setLink(entry.getValue().getAsString());
 			else if ("username".equals(entry.getKey()))
 				credentials.setUsername(entry.getValue().getAsString());
+			else if ("email".equals(entry.getKey()))
+				credentials.setEmail(entry.getValue().getAsString());
 		}
 		return credentials;
 	}
