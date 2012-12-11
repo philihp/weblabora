@@ -4,14 +4,27 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
+<%--
+kinda going for something like
+http://www.jankoatwarpspeed.com/post/2008/05/22/css-message-boxes-for-different-message-types.aspx
+--%>
+
 <logic:messagesPresent message="false">
-	<html:messages id="error" message="false">
-		<div style="color: red">ERROR: ${error}</div>
-	</html:messages>
+	<div class="errorBox">
+		<ul>
+		<html:messages id="error" message="false">
+			<li>${error}</li>
+		</html:messages>
+		</ul>
+	</div>
 </logic:messagesPresent>
 
 <logic:messagesPresent message="true">
-	<html:messages id="message" message="true">
-		<div style="color: blue">NOTE: ${message}</div>
-	</html:messages>
+	<div class="messageBox">
+		<ul>
+		<html:messages id="message" message="true">
+			<li>${message}</li>
+		</html:messages>
+		</ul>
+	</div>
 </logic:messagesPresent>
