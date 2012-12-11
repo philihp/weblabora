@@ -60,24 +60,8 @@
 					<var-value>5</var-value>
 				</var>
 			</field>
-			<field property="confirmPassword" depends="required,twofields">
-				<arg key="prompt.confirmPassword" />
-				<arg name="twofields" key="prompt.confirmPassword" position="1"/>
-				<var>
-					<var-name>secondProperty</var-name>
-					<var-value>password</var-value>
-				</var>
-			</field>
 			<field property="email" depends="required,email">
 				<arg key="prompt.email" />
-			</field>
-			<field property="confirmEmail" depends="required,twofields">
-				<arg key="prompt.confirmEmail" />
-				<arg name="twofields" key="prompt.confirmEmail" position="1"/>
-				<var>
-					<var-name>secondProperty</var-name>
-					<var-value>email</var-value>
-				</var>
 			</field>
 		</form>
 		

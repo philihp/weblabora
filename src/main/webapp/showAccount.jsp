@@ -37,9 +37,23 @@
 	<c:import url="jsp/notifications.jsp" />
 
 <p>
-<h2>Avatar</h2> 
-<img src="https://secure.gravatar.com/avatar/${user.emailMD5}.jpg?s=100&amp;d=identicon" height="100" width="100" title="${user.username}" /><br />
-<a href="http://www.gravatar.com">Change your avatar at Gravatar.com</a>
+<h2>Avatar</h2>  
+<img src="https://secure.gravatar.com/avatar/${user.emailMD5}.jpg?s=100&amp;d=identicon" height="100" width="100" title="${user.username}" /> 
+<a href="http://www.gravatar.com">Change your avatar at Gravatar.com</a> 
+</p>
+
+<p>
+<h2>Facebook</h2>
+<c:choose>
+	<c:when test="${empty user.facebookId}">
+		Account is not linked to Facebook. 
+		<html:link action="/loginFacebook.do">Link with the Facebook</html:link>
+	</c:when>
+	<c:otherwise>
+		Account is linked to Facebook ID ${user.facebookId}
+		<html:link action="/editAccountUnlinkFacebook.do">Unlink it</html:link>
+	</c:otherwise>
+</c:choose>
 </p>
 
 <p>
@@ -51,6 +65,7 @@
 <c:if test="${not empty user.unvalidatedEmail}">
 Currently waiting for confirmation at ${user.unvalidatedEmail}
 </c:if>
+</p>
 
 <p>
 <h2>Reset Password</h2>

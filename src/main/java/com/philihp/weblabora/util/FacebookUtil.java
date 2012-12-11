@@ -10,6 +10,9 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 
 public class FacebookUtil {
+	
+	public static final String CREDENTIALS_ATTRIBUTE = "CREDENTIALS_ATTRIBUTE";
+	public static final String FACEBOOK_ID = "FACEBOOK_ID";
 
 	public static boolean isValidSignedRequest(String clientSecret,
 			String givenSignature, String payload) {

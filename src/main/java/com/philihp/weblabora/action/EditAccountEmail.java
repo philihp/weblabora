@@ -32,6 +32,7 @@ import org.apache.struts.action.DynaActionForm;
 import org.apache.struts.taglib.html.Constants;
 import org.apache.struts.validator.DynaValidatorForm;
 
+import com.philihp.weblabora.form.AccountForm;
 import com.philihp.weblabora.form.LoginForm;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.util.UserUtil;
@@ -43,10 +44,10 @@ public class EditAccountEmail extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response, User user)
 			throws Exception {
 
-		DynaActionForm form = (DynaActionForm)actionForm;
+		AccountForm form = (AccountForm)actionForm;
 
 		EntityManager em = (EntityManager) request.getAttribute("em");
-		String email = form.getString("email");
+		String email = form.getEmail();
 		
 		TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.email = :email OR u.unvalidatedEmail = :email", User.class);
 		query.setParameter("email", email);

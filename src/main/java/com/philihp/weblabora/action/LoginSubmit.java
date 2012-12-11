@@ -80,18 +80,6 @@ public class LoginSubmit extends BaseAction {
 		return new ActionForward(referer, true);
 	}
 
-	private void saveUserFingerprint(EntityManager em, HttpServletResponse response,
-			User user) {
-		Fingerprint loginToken = new Fingerprint();
-		loginToken.setUser(user);
-		loginToken.setUuid(UUID.randomUUID().toString());
-		em.persist(loginToken);
-		Cookie cookie = new Cookie(COOKIE_KEY, loginToken.getUuid());
-		cookie.setMaxAge(COOKIE_EXPIRES);
-		cookie.setPath(this.getServlet().getServletContext().getContextPath());
-		response.addCookie(cookie);
-	}
-
 
 	protected static List<Game> findGamesForUser(EntityManager em, User user) {
 		TypedQuery<Game> query = em.createQuery("SELECT g " + "FROM Game g "

@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.philihp.weblabora.form.LoginForm;
 import com.philihp.weblabora.jpa.User;
+import com.philihp.weblabora.util.FacebookUtil;
 
 public class Logout extends BaseAction {
 
@@ -24,6 +25,7 @@ public class Logout extends BaseAction {
 		}
 		
 		request.getSession().setAttribute("user", null);
+		request.getSession().setAttribute(FacebookUtil.FACEBOOK_ID, null);
 		for(Cookie cookie : request.getCookies()) {
 			if(COOKIE_KEY.equals(cookie.getName())) {
 				cookie.setMaxAge(0);
