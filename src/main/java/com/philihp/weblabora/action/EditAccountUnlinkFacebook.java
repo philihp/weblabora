@@ -48,7 +48,7 @@ public class EditAccountUnlinkFacebook extends BaseAction {
 		
 		ActionMessages messages = getMessages(request);
 		messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.detail", "Facebook account has been unlinked."));
-		saveMessages(request, messages);
+		saveMessages(request.getSession(), messages);
 		
 		return mapping.findForward("success");
 	
