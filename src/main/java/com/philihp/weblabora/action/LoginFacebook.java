@@ -74,6 +74,9 @@ public class LoginFacebook extends BaseAction {
 					}
 					else {
 						user.setFacebookId(credentials.getFacebookId());
+						ActionMessages messages = getMessages(request);
+						messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.detail", "Facebook account has been linked."));
+						saveMessages(request.getSession(), messages);
 						return mapping.findForward("account");
 					}
 				}

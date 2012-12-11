@@ -39,7 +39,9 @@
 <p>
 <h2>Avatar</h2>  
 <img src="https://secure.gravatar.com/avatar/${user.emailMD5}.jpg?s=100&amp;d=identicon" height="100" width="100" title="${user.username}" /> 
-<a href="http://www.gravatar.com">Change your avatar at Gravatar.com</a> 
+<a href="http://www.gravatar.com">Change your avatar at Gravatar.com</a><br /><br />
+Why don't you use my Facebook picture? Because not everyone links their account to the Facebook. Everyone has an email, and if you don't
+have a gravatar, a neat design will be created for you based on it.
 </p>
 
 <p>
@@ -50,8 +52,13 @@
 		<html:link action="/loginFacebook.do">Link with the Facebook</html:link>
 	</c:when>
 	<c:otherwise>
-		Account is linked to Facebook ID ${user.facebookId}
-		<html:link action="/editAccountUnlinkFacebook.do">Unlink it</html:link>
+		<img src="http://graph.facebook.com/${user.facebookId}/picture" />
+		Account is linked to Facebook ID ${user.facebookId}.<br /><br />
+		
+		This lets you login with Facebook, and that's about it. Nothing will be posted on your profile, and your friends won't get
+		news feed spam, nor any of your personal information aside from your email address will be stored.
+		
+		<html:link action="/editAccountUnlinkFacebook.do">Unlink it.</html:link>
 	</c:otherwise>
 </c:choose>
 </p>

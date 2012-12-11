@@ -33,10 +33,11 @@
 	<div class="container">
 	
 	<c:import url="jsp/notifications.jsp" />
-	
-<p><html:link action="/loginFacebook.do">Sign up with Facebook</html:link></p>
 
-<p><i>or</i></p>
+<c:if test="${empty FACEBOOK_ID}">
+	<p><html:link action="/loginFacebook.do">Sign up with Facebook</html:link></p>
+	<p><i>or</i></p>
+</c:if>	
 	
 <html:form action="/registerSubmit.do">
 
