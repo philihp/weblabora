@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionMessages;
 
 import com.philihp.weblabora.form.GameForm;
 import com.philihp.weblabora.jpa.Game;
+import com.philihp.weblabora.jpa.Game.Stage;
 import com.philihp.weblabora.jpa.User;
 
 public class LeaveGame extends BaseAction {
@@ -28,6 +29,11 @@ public class LeaveGame extends BaseAction {
 		if(game == null) {
 			ActionMessages messages = getMessages(request);
 			messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("messages.invalidGameId", form.getGameId()));
+			saveMessages(request.getSession(), messages);
+		}
+		else if(game.getStage().equals(Stage.FINISHED)) {
+			ActionMessages messages = getMessages(request);
+			messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.detail", "You can't leave a game once it has finished."));
 			saveMessages(request.getSession(), messages);
 		}
 		else {
