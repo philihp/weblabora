@@ -83,18 +83,21 @@ public class BoardModeTwoShortIreland extends BoardMode {
 			return null;
 		}
 	}
-
+	
 	@Override
 	public void postMove() {
-		if (board.getMoveInRound() == 2 || board.isSettling()) {
-			board.nextActivePlayer();
-		}
 		board.setMoveInRound(board.getMoveInRound() + 1);
-
-		if (board.isSettling() == true && board.getMoveInRound() == 3) {
-			board.postSettlement();
-		} else if (board.isSettling() == false && board.getMoveInRound() == 4) {
-			board.postRound();
+		if(board.isSettling()) {
+			board.nextActivePlayer();
+			if(board.getMoveInRound() > 2) {
+				board.postSettlement();
+			}
+		}
+		else {
+			if(board.getMoveInRound() > 2) {
+				board.nextActivePlayer();  
+				board.postRound();
+			}
 		}
 	}
 
