@@ -22,7 +22,7 @@ public class BoardModeTwoShortFrance extends BoardMode {
 
 	@Override
 	public int[] getWheelArmValues() {
-		return new int[] { 0, 1, 2, 3, 4, 4, 5, 6, 6, 7, 8, 10 };
+		return new int[] { 0, 1, 2, 2, 3, 4, 4, 5, 6, 6, 7, 8, 10 };
 	}
 
 	@Override
