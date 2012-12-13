@@ -81,7 +81,12 @@ public class RegisterSubmit extends BaseAction {
 		user.setUnvalidatedEmail(email);
 		user.setFacebookId(facebookId);
 		user.setEmailValidator(UUID.randomUUID().toString());
-		user.setPassword(UserUtil.md5(password));
+		if(password == null || password.equals("")) {
+			user.setPassword(null);
+		}
+		else {
+			user.setPassword(UserUtil.md5(password));
+		}
 		em.persist(user);
 		
 		//send confirm email
@@ -100,7 +105,7 @@ public class RegisterSubmit extends BaseAction {
 		
 		
 		ActionMessages messages = getMessages(request);
-		messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.detail", "An email has been sent to "+user.getUnvalidatedEmail()+" with instructions for validating your username."));
+		messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.needEmailValidation", user.getUnvalidatedEmail()));
 		saveMessages(request.getSession(), messages);
 		
 		

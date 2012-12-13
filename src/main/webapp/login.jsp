@@ -36,7 +36,9 @@
 
 	<c:import url="jsp/notifications.jsp" />
 	
-<p><html:link action="/loginFacebook.do">Sign in with Facebook</html:link></p>
+<p><html:link action="/loginFacebook.do"><img src="images/facebook-signin.png" /></html:link></p>
+
+<i style="font-size: x-large; font-family: serif">or</i>
 
 <html:form action="loginSubmit.do">
 

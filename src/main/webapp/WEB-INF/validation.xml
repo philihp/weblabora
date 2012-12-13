@@ -52,6 +52,7 @@
 					<var-value>5</var-value>
 				</var>
 			</field>
+			<!-- this is done in validate()
 			<field property="password" depends="required,minlength">
 				<arg key="prompt.password" />
 				<arg name="minlength" key="${var:minlength}" resource="false"  position="1"/>
@@ -60,6 +61,7 @@
 					<var-value>5</var-value>
 				</var>
 			</field>
+			-->
 			<field property="email" depends="required,email">
 				<arg key="prompt.email" />
 			</field>
@@ -83,7 +85,7 @@
 			<field property="validator" depends="required">
 				<arg key="prompt.validator" />
 			</field>
-			<field property="password" depends="required,minlength">
+			<field property="newPassword" depends="required,minlength">
 				<arg key="prompt.password" />
 				<arg name="minlength" key="${var:minlength}" resource="false"  position="1"/>
 				<var>
@@ -96,15 +98,12 @@
 				<arg name="twofields" key="prompt.confirmPassword" position="1"/>
 				<var>
 					<var-name>secondProperty</var-name>
-					<var-value>password</var-value>
+					<var-value>newPassword</var-value>
 				</var>
 			</field>
 		</form>
 		
 		<form name="resetAccountPasswordForm">
-			<field property="currentPassword" depends="required">
-				<arg key="prompt.currentPassword" />
-			</field>
 			<field property="newPassword" depends="required,minlength">
 				<arg key="prompt.newPassword" />
 				<arg name="minlength" key="${var:minlength}" resource="false"  position="1"/>

@@ -23,6 +23,7 @@ import org.apache.struts.taglib.html.Constants;
 import org.apache.struts.validator.DynaValidatorForm;
 
 import com.philihp.weblabora.form.LoginForm;
+import com.philihp.weblabora.form.ResetAccountPasswordForm;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.util.UserUtil;
 
@@ -33,13 +34,13 @@ public class EditAccountPassword extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response, User user)
 			throws Exception {
 
-		DynaActionForm form = (DynaActionForm)actionForm;
+		ResetAccountPasswordForm form = (ResetAccountPasswordForm)actionForm;
 		
 		String userPassword = user.getPassword();
-		String currentPassword = UserUtil.md5(form.getString("currentPassword"));
-		String newPassword = UserUtil.md5(form.getString("newPassword"));
+		String currentPassword = UserUtil.md5(form.getCurrentPassword());
+		String newPassword = UserUtil.md5(form.getNewPassword());
 		
-		if(currentPassword.equals(userPassword) == false) {
+		if(userPassword != null && userPassword.equals(currentPassword) == false) {
 			ActionMessages errors = getErrors(request);
 			errors.add("currentPassword", new ActionMessage("message.detail", "Current password was incorrect. Password was not changed."));
 			saveErrors(request.getSession(), errors);

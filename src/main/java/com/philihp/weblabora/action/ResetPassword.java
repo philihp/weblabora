@@ -23,6 +23,7 @@ import org.apache.struts.taglib.html.Constants;
 import org.apache.struts.validator.DynaValidatorForm;
 
 import com.philihp.weblabora.form.LoginForm;
+import com.philihp.weblabora.form.ResetPasswordForm;
 import com.philihp.weblabora.jpa.User;
 
 public class ResetPassword extends BaseAction {
@@ -32,11 +33,11 @@ public class ResetPassword extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response, User user)
 			throws Exception {
 
-		DynaActionForm form = (DynaActionForm)actionForm;
+		ResetPasswordForm form = (ResetPasswordForm)actionForm;
 		EntityManager em = (EntityManager) request.getAttribute("em");
 
 		TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.passwordValidator = :validator", User.class);
-		query.setParameter("validator", form.get("validator"));
+		query.setParameter("validator", form.getValidator());
 		List<User> results = query.getResultList();
 		
 		if(results.size() == 0) {
@@ -48,7 +49,7 @@ public class ResetPassword extends BaseAction {
 		else {
 			user = results.get(0);
 			
-			form.set("username",user.getUsername());
+			form.setUsername(user.getUsername());
 
 			return mapping.findForward("success");
 		}

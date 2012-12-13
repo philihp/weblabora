@@ -34,6 +34,10 @@ public class ShowAccount extends BaseAction {
 		AccountForm form = (AccountForm)actionForm;
 		
 		form.setEmail(user.getEmail());
+
+		//if the user never set a password (like if they just signed up with facebook
+		//then let them just set a password without saying their current password.
+		request.setAttribute("ALLOW_HARD_RESET", user.getPassword() == null);
 		
 		return mapping.findForward("view");
 	}

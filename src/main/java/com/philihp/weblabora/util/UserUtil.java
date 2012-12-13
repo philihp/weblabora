@@ -25,6 +25,7 @@ public class UserUtil {
 	
 	public static String md5(String srcString) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		final MessageDigest md = MessageDigest.getInstance("MD5");
+		if(srcString == null) srcString = "";
 		final byte[] hash = md.digest(srcString.getBytes("UTF-8"));
 		return Hex.encodeHexString(hash);
 	}

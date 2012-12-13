@@ -26,7 +26,7 @@
 <body>
 
     <c:import url="jsp/userbar.jsp">
-		<c:param name="title" value="Register" />
+		<c:param name="title">Sign Up</c:param>
 		<c:param name="referer" value="/" />
 	</c:import>
 	
@@ -35,18 +35,23 @@
 	<c:import url="jsp/notifications.jsp" />
 
 <c:if test="${empty FACEBOOK_ID}">
-	<p><html:link action="/loginFacebook.do">Sign up with Facebook</html:link></p>
-	<p><i>or</i></p>
-</c:if>	
+	<p><html:link action="/loginFacebook.do"><img src="images/facebook-signup.png" /></html:link></p>
+	<p><i style="font-size: x-large; font-family: serif">or</i></p>
+</c:if>
+<c:if test="${not empty FACEBOOK_ID}">
+	<p><img src="//graph.facebook.com/${FACEBOOK_ID}/picture" /> Create an account linked to Facebook...</p>
+</c:if>
 	
 <html:form action="/registerSubmit.do">
 
 Username:<br />
 <html:text property="username" errorStyleClass="error" /><br />
 <br />
-Password:<br />
-<html:password property="password" errorStyleClass="error" redisplay="false" /><br />
-<br />
+<c:if test="${empty FACEBOOK_ID}">
+	Password:<br />
+	<html:password property="password" errorStyleClass="error" redisplay="false" /><br />
+	<br />
+</c:if>
 Email:<br />
 <html:text property="email" errorStyleClass="error" /><br />
 <br />
