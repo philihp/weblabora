@@ -43,7 +43,7 @@ Username:<br />
 <html:text property="username" disabled="true" errorStyleClass="error" /><br />
 <br />
 Password:<br />
-<html:password property="password" errorStyleClass="error" redisplay="false" /><br />
+<html:password property="newPassword" errorStyleClass="error" redisplay="false" /><br />
 <br />
 Confirm Password:<br />
 <html:password property="confirmPassword" errorStyleClass="error" redisplay="false" /><br />

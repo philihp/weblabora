@@ -31,6 +31,7 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.validator.DynaValidatorForm;
 
+import com.philihp.weblabora.form.ForgotPasswordForm;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.util.UserUtil;
 
@@ -41,10 +42,10 @@ public class ForgotPasswordSubmit extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response, User user)
 			throws Exception {
 
-		DynaValidatorForm form = (DynaValidatorForm) actionForm;
+		ForgotPasswordForm form = (ForgotPasswordForm) actionForm;
 		
-		String username = form.getString("username").trim();
-		String email = form.getString("email").trim();
+		String username = form.getUsername().trim();
+		String email = form.getEmail().trim();
 
 		EntityManager em = (EntityManager) request.getAttribute("em");
 		TypedQuery<User> query;

@@ -53,12 +53,12 @@
 		<action path="/logout" name="loginForm" validate="false" scope="session" type="com.philihp.weblabora.action.Logout" />
 		<action path="/register"
 		        name="registerForm"
-		        scope="request"
+		        scope="session"
 		        validate="false"
 		        type="com.philihp.weblabora.action.Register" parameter="/register.jsp" />
 		<action path="/registerSubmit"
 				name="registerForm"
-				scope="request"
+				scope="session"
 				input="/register.jsp"
 				validate="true"
 				type="com.philihp.weblabora.action.RegisterSubmit"
@@ -67,7 +67,7 @@
 		</action>
 		<action path="/loginFacebook"
 				name="registerForm"
-				scope="request"
+				scope="session"
 				validate="false"
 				type="com.philihp.weblabora.action.LoginFacebook">
 			<forward name="register" path="/register.do" />
@@ -91,7 +91,7 @@
 		</action>
 		<action path="/resetPassword"
 				name="resetPasswordForm"
-				scope="request"
+				scope="session"
 				validate="false"
 				type="com.philihp.weblabora.action.ResetPassword"
 				>
@@ -99,7 +99,7 @@
 		</action>
 		<action path="/resetPasswordSubmit"
 				name="resetPasswordForm"
-				scope="request"
+				scope="session"
 				validate="true"
 				input="/resetPassword.jsp"
 				type="com.philihp.weblabora.action.ResetPasswordSubmit">

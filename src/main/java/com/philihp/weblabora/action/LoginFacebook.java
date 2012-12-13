@@ -4,23 +4,31 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.*;
-import org.apache.struts.validator.DynaValidatorForm;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
+import org.scribe.builder.ServiceBuilder;
+import org.scribe.builder.api.FacebookApi;
+import org.scribe.exceptions.OAuthException;
+import org.scribe.model.OAuthRequest;
+import org.scribe.model.Response;
+import org.scribe.model.Token;
+import org.scribe.model.Verb;
+import org.scribe.model.Verifier;
+import org.scribe.oauth.OAuthService;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.philihp.weblabora.form.RegisterForm;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.util.FacebookCredentials;
 import com.philihp.weblabora.util.FacebookCredentialsDeserializer;
 import com.philihp.weblabora.util.FacebookUtil;
-
-import org.scribe.builder.*;
-import org.scribe.builder.api.*;
-import org.scribe.exceptions.OAuthException;
-import org.scribe.model.*;
-import org.scribe.oauth.*;
 
 public class LoginFacebook extends BaseAction {
 
@@ -57,40 +65,55 @@ public class LoginFacebook extends BaseAction {
 				Gson gson = new GsonBuilder().registerTypeAdapter(FacebookCredentials.class, new FacebookCredentialsDeserializer()).create();
 				FacebookCredentials credentials = gson.fromJson(jsonData, FacebookCredentials.class);
 
-				TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.facebookId = :facebookId", User.class);
+				TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.facebookId = :facebookId OR u.email = :email", User.class);
 				query.setParameter("facebookId", credentials.getFacebookId());
+				query.setParameter("email", credentials.getEmail());
 				List<User> results = query.getResultList();
 				
+				boolean alreadySignedIn = (user != null);
+
+				ActionMessages messages = getMessages(request);
 				if(results.size() == 0) {
-					if(user == null) {
+					if(alreadySignedIn) {
+						//user was already logged in -- they are trying to link their facebook, and the emails on facebook
+						//and the email we have are different.... this is rare
+						user.setFacebookId(credentials.getFacebookId());
+						messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.facebookLinked"));
+						saveMessages(request.getSession(), messages);
+						return mapping.findForward("account");
+					}
+					else {
+						//user is trying to sign up with facebook, and we don't know that facebook user's email
 						RegisterForm form = (RegisterForm)actionForm;
 						form.setEmail(credentials.getEmail());
 						form.setUsername(credentials.getUsername());
 						request.getSession().setAttribute(FacebookUtil.FACEBOOK_ID, credentials.getFacebookId());
-						ActionMessages messages = getMessages(request);
-						messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.detail","The form has been populated with your Facebook information. Please check and make sure it is still accurate."));
+						messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.facebookSignup"));
 						saveMessages(request, messages);
 						return mapping.findForward("register");
-					}
-					else {
-						user.setFacebookId(credentials.getFacebookId());
-						ActionMessages messages = getMessages(request);
-						messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.detail", "Facebook account has been linked."));
-						saveMessages(request.getSession(), messages);
-						return mapping.findForward("account");
 					}
 				}
 				else {
 					user = results.get(0);
-					user.setEmail(credentials.getEmail());
+					//System.out.println("OLD EMAIL = "+user.getEmail());
+					//System.out.println("NEW EMAIL = "+credentials.getEmail());
+					//user.setEmail(credentials.getEmail());
+					user.setFacebookId(credentials.getFacebookId());
 					request.getSession().setAttribute("user", user);
-					saveUserFingerprint(em, response, user);	
-					return mapping.findForward("root");
+					saveUserFingerprint(em, response, user);
+					if(alreadySignedIn) {
+						messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.facebookLinked"));
+						saveMessages(request.getSession(), messages);
+						return mapping.findForward("account");
+					}
+					else {
+						return mapping.findForward("root");
+					}
 				}
 			}
 			catch(OAuthException e) {
 				ActionMessages errors = getErrors(request);
-				errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.detail", "Please try again. The Facebook API returned this error: "+e.getLocalizedMessage()));
+				errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.facebookError",e.getLocalizedMessage()));
 				saveErrors(request, errors);
 				return mapping.findForward("error");
 			}
