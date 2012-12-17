@@ -45,6 +45,10 @@ public class State extends BasicEntity {
 	@ManyToOne(fetch = LAZY, targetEntity = com.philihp.weblabora.jpa.User.class)
 	@JoinColumn(name = "explorer_id", referencedColumnName = "user_id")
 	private User explorer;
+	
+	@ManyToOne(fetch = LAZY, targetEntity = com.philihp.weblabora.jpa.Game.class)
+	@JoinColumn(name = "game_id", referencedColumnName="game_id")
+	private Game game;
 
 	public int getStateId() {
 		return stateId;
@@ -84,6 +88,14 @@ public class State extends BasicEntity {
 
 	public void setExplorer(User explorer) {
 		this.explorer = explorer;
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
 	}
 
 	@Transient

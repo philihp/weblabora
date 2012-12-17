@@ -15,8 +15,8 @@
 		<class>com.philihp.weblabora.jpa.Config</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 
-		<shared-cache-mode>NONE</shared-cache-mode>
 		<properties>
+			
 			<property name="eclipselink.logging.level" value="WARNING" /> <!-- FINE turns on queries -->
 			<property name="eclipselink.logging.timestamp" value="false" />
 			<property name="eclipselink.logging.session" value="false" />
@@ -26,9 +26,6 @@
 			
 			<!-- this is a workaround for Tomcat, otherwise Eclipselink can't find the JNDI datasource -->
 			<property name="eclipselink.session.customizer" value="com.philihp.weblabora.util.JPAEclipseLinkSessionCustomizer" />
-
-			<!-- meh caching. synchronization issues. headaches. -->
-			<property name="eclipselink.query-results-cache" value="false" />
 
 			<property name="eclipselink.ddl-generation" value="none" />
 			<!-- BE VERY CAREFUL ABOUT COMMITTING WITH DROP -->

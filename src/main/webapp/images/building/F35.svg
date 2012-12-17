@@ -16,8 +16,8 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="F25.svg"
-   inkscape:export-filename="C:\Users\Philihp\git\WebLabora\src\main\webapp\images\building\F25.png"
+   sodipodi:docname="F35.svg"
+   inkscape:export-filename="C:\Users\Philihp\git\WebLabora\src\main\webapp\images\building\F35.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -6989,7 +6989,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="2"
      inkscape:cx="36.53729"
-     inkscape:cy="342.25"
+     inkscape:cy="316.96837"
      inkscape:document-units="px"
      inkscape:current-layer="layer4"
      showgrid="false"
@@ -7365,7 +7365,7 @@
          sodipodi:role="line"
          x="155.87256"
          y="304.55212"
-         id="tspan3158">–∞→</tspan><tspan
+         id="tspan3158">–1×→</tspan><tspan
          sodipodi:role="line"
          x="159.43637"
          y="336.6767"
@@ -7381,7 +7381,7 @@
          sodipodi:role="line"
          x="155.87256"
          y="433.05042"
-         id="tspan46378">–1×→</tspan><tspan
+         id="tspan46378">–∞→</tspan><tspan
          sodipodi:role="line"
          x="155.87256"
          y="465.17496"
@@ -7528,7 +7528,7 @@
            style="fill:url(#linearGradient6438);fill-opacity:1;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
         <path
            transform="translate(0,1002.3622)"
-           d="m 35.178573,6.3392859 a 2.2321429,2.5892856 0 1 1 -4.464286,0 2.2321429,2.5892856 0 1 1 4.464286,0 z"
+           d="m 35.178573,6.3392859 c 0,1.4300229 -0.999364,2.5892856 -2.232143,2.5892856 -1.232778,0 -2.232143,-1.1592627 -2.232143,-2.5892856 0,-1.430023 0.999365,-2.5892857 2.232143,-2.5892857 1.232779,0 2.232143,1.1592627 2.232143,2.5892857 z"
            sodipodi:ry="2.5892856"
            sodipodi:rx="2.2321429"
            sodipodi:cy="6.3392859"
@@ -7734,7 +7734,7 @@
            style="fill:url(#linearGradient6438-9);fill-opacity:1;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
         <path
            transform="translate(0,1002.3622)"
-           d="m 35.178573,6.3392859 a 2.2321429,2.5892856 0 1 1 -4.464286,0 2.2321429,2.5892856 0 1 1 4.464286,0 z"
+           d="m 35.178573,6.3392859 c 0,1.4300229 -0.999364,2.5892856 -2.232143,2.5892856 -1.232778,0 -2.232143,-1.1592627 -2.232143,-2.5892856 0,-1.430023 0.999365,-2.5892857 2.232143,-2.5892857 1.232779,0 2.232143,1.1592627 2.232143,2.5892857 z"
            sodipodi:ry="2.5892856"
            sodipodi:rx="2.2321429"
            sodipodi:cy="6.3392859"
