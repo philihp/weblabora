@@ -35,8 +35,8 @@ public class Camera extends BuildingSingleUsage {
 		int book = input.getBook();
 		int pottery = input.getPottery();
 
-		if(book == 0 || pottery == 0 || book != pottery || book > 2 || pottery > 0)
-			throw new WeblaboraException(getName()+" takes either 1 pair of book and pottery, or 2 pairs of book and pottery.");
+		if(book == 0 || pottery == 0 || book != pottery || book > 2 || pottery > 2)
+			throw new WeblaboraException(getName()+" takes either 1 pair of book and pottery, or 2 pairs of book and pottery. It was given "+input.getBook()+" books and "+input.getPottery()+" pottery.");
 
 		int iterations = book;
 
