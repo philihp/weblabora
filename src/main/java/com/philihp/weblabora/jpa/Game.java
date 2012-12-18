@@ -143,6 +143,10 @@ public class Game extends BasicEntity {
 	@OrderBy("dateCreated ASC")
 	private List<State> states;
 	
+	@Column(name = "state_id")
+	@Basic
+	private Integer stateId;
+	
 	public Game() {
 		// player1-4 must not be null
 		this.player1 = new Player();
@@ -321,5 +325,12 @@ public class Game extends BasicEntity {
 	public State getState() {
 		List<State> states = getActiveStates();
 		return states.get(states.size()-1);
+	}
+	
+	public Integer getStateId() {
+		return stateId;
+	}
+	public void setStateId(Integer stateId) {
+		this.stateId = stateId;
 	}
 }

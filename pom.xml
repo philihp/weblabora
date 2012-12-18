@@ -40,7 +40,7 @@
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<version>2.8</version>
 				<configuration>
-					<wtpContextName>list</wtpContextName>
+					<wtpContextName>weblabora</wtpContextName>
 					<wtpversion>1.5</wtpversion>
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
@@ -154,11 +154,6 @@
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>1.4.5</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>catalina</artifactId>
-			<version>6.0.36</version>
 		</dependency>
 	</dependencies>
 	<repositories>

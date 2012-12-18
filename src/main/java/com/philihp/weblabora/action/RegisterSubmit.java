@@ -48,8 +48,9 @@ public class RegisterSubmit extends BaseAction {
 			return mapping.findForward("input");
 		}
 		
-		query = em.createQuery("SELECT u FROM User u WHERE u.email = :email OR u.unvalidatedEmail = :email", User.class);
+		query = em.createQuery("SELECT u FROM User u WHERE u.email = :email AND u.facebookId != :facebookId OR u.unvalidatedEmail = :email", User.class);
 		query.setParameter("email", email);
+		query.setParameter("facebookId", facebookId);
 		results = query.getResultList();
 		
 		if(results.size() != 0) {
@@ -59,10 +60,18 @@ public class RegisterSubmit extends BaseAction {
 			return mapping.findForward("input");
 		}
 		
-		user = new User();
+		query = em.createQuery("SELECT u FROM User u WHERE u.facebookId = :facebookId", User.class);
+		query.setParameter("facebookId", facebookId);
+		results = query.getResultList();
+		if(results.size() == 0) {
+			user = new User();
+			user.setFacebookId(facebookId);
+		}
+		else {
+			user = results.get(0);
+		}
 		user.setUsername(username);
 		user.setUnvalidatedEmail(email);
-		user.setFacebookId(facebookId);
 		user.setEmailValidator(UUID.randomUUID().toString());
 		if(password == null || password.equals("")) {
 			user.setPassword(null);

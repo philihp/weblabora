@@ -65,6 +65,7 @@
 				>
 			<forward name="input" path="/register.jsp" />
 		</action>
+		<action path="/authenticate" type="org.apache.struts.actions.ForwardAction" parameter="/loginFacebook.do" />
 		<action path="/loginFacebook"
 				name="registerForm"
 				scope="session"
@@ -177,6 +178,9 @@
 		</action>
 		
 		<action path="/saveMove" name="moveForm" type="com.philihp.weblabora.action.SaveMove" />
+
+		<action path="/normalizeGame" name="nullForm" type="com.philihp.weblabora.action.NormalizeGame" />
+
 
 	</action-mappings>
 

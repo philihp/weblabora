@@ -13,8 +13,7 @@
     <listener-class>com.philihp.weblabora.util.JPAContextListener</listener-class>
   </listener>
   <listener>
-		 <!-- must come second because it relies on JPA to load config -->
-     <listener-class>com.philihp.weblabora.util.ApplicationScopeLoader</listener-class>
+    <listener-class>com.philihp.weblabora.util.ApplicationScopeLoader</listener-class>
   </listener>
   <listener>
     <listener-class>com.philihp.weblabora.util.SessionScopeLoader</listener-class>

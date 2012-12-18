@@ -73,50 +73,86 @@ public class LoginFacebook extends BaseAction {
 				boolean alreadySignedIn = (user != null);
 
 				ActionMessages messages = getMessages(request);
-				if(results.size() == 0) {
-					if(alreadySignedIn) {
-						//user was already logged in -- they are trying to link their facebook, and the emails on facebook
-						//and the email we have are different.... this is rare
-						user.setFacebookId(credentials.getFacebookId());
-						messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.facebookLinked"));
-						saveMessages(request.getSession(), messages);
-						return mapping.findForward("account");
-					}
-					else {
-						//user is trying to sign up with facebook, and we don't know that facebook user's email
-						RegisterForm form = (RegisterForm)actionForm;
-						form.setEmail(credentials.getEmail());
-						form.setUsername(credentials.getUsername());
-						request.getSession().setAttribute(FacebookUtil.FACEBOOK_ID, credentials.getFacebookId());
-						messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.facebookSignup"));
-						saveMessages(request, messages);
-						return mapping.findForward("register");
-					}
+				if(results.size() == 0 && alreadySignedIn == true) {
+					return doLinkFacebook(mapping, request, user, credentials, messages);
 				}
-				else {
-					user = results.get(0);
-					//System.out.println("OLD EMAIL = "+user.getEmail());
-					//System.out.println("NEW EMAIL = "+credentials.getEmail());
-					//user.setEmail(credentials.getEmail());
-					user.setFacebookId(credentials.getFacebookId());
-					request.getSession().setAttribute("user", user);
-					saveUserFingerprint(em, response, user);
-					if(alreadySignedIn) {
-						messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.facebookLinked"));
-						saveMessages(request.getSession(), messages);
-						return mapping.findForward("account");
-					}
-					else {
-						return mapping.findForward("root");
-					}
+				else if(results.size() == 0 && alreadySignedIn == false){
+					return doPopulateSignup(mapping, actionForm, request, credentials, messages);
+				}
+				else if((user = results.get(0)).getUsername() == null) {
+					return doPopulateSignup(mapping, actionForm, request, credentials, messages);
+				}
+				else {	
+					return doLogin(mapping, request, response, user, em,
+							credentials, alreadySignedIn, messages);
 				}
 			}
 			catch(OAuthException e) {
 				ActionMessages errors = getErrors(request);
-				errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.facebookError",e.getLocalizedMessage()));
+				errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("errors.facebookError",e.getLocalizedMessage()));
 				saveErrors(request, errors);
 				return mapping.findForward("error");
 			}
 		}
+	}
+
+	
+	private ActionForward doLogin(ActionMapping mapping,
+			HttpServletRequest request, HttpServletResponse response,
+			User user, EntityManager em, FacebookCredentials credentials,
+			boolean alreadySignedIn, ActionMessages messages) {
+		user.setFacebookId(credentials.getFacebookId());
+		
+		request.getSession().setAttribute("user", user);
+		saveUserFingerprint(em, response, user);
+		if(alreadySignedIn) {
+			messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.facebookLinked"));
+			saveMessages(request.getSession(), messages);
+			return mapping.findForward("account");
+		}
+		else {
+			return mapping.findForward("root");
+		}
+	}
+
+	/**
+	 * user is trying to sign up with facebook, and we don't know that facebook user's email
+	 * 
+	 * @param mapping
+	 * @param actionForm
+	 * @param request
+	 * @param credentials
+	 * @param messages
+	 * @return
+	 */
+	private ActionForward doPopulateSignup(ActionMapping mapping,
+			ActionForm actionForm, HttpServletRequest request,
+			FacebookCredentials credentials, ActionMessages messages) {
+		RegisterForm form = (RegisterForm)actionForm;
+		form.setEmail(credentials.getEmail());
+		form.setUsername(credentials.getUsername());
+		request.getSession().setAttribute(FacebookUtil.FACEBOOK_ID, credentials.getFacebookId());
+		messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.facebookSignup"));
+		saveMessages(request, messages);
+		return mapping.findForward("register");
+	}
+
+	/**
+	 * user was already logged in -- they are trying to link their facebook, and the emails on facebook 
+	 * and the email we have are different.... this is rare
+	 * @param mapping
+	 * @param request
+	 * @param user
+	 * @param credentials
+	 * @param messages
+	 * @return
+	 */
+	private ActionForward doLinkFacebook(ActionMapping mapping,
+			HttpServletRequest request, User user,
+			FacebookCredentials credentials, ActionMessages messages) {
+		user.setFacebookId(credentials.getFacebookId());
+		messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.facebookLinked"));
+		saveMessages(request.getSession(), messages);
+		return mapping.findForward("account");
 	}
 }
