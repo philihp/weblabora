@@ -1,9 +1,6 @@
 package com.philihp.weblabora.action;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

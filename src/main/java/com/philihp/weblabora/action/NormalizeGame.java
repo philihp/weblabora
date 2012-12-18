@@ -14,7 +14,6 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import com.philihp.weblabora.form.GameForm;
 import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.Game.Stage;
 import com.philihp.weblabora.jpa.State;

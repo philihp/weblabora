@@ -7,10 +7,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.philihp.weblabora.form.RegisterForm;
 import com.philihp.weblabora.jpa.User;
-import com.philihp.weblabora.util.FacebookCredentials;
-import com.philihp.weblabora.util.FacebookUtil;
 
 public class Register extends BaseAction {
 

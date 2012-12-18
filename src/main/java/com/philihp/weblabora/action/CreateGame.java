@@ -13,9 +13,6 @@ import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.State;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.model.Color;
-import com.philihp.weblabora.model.GameCountry;
-import com.philihp.weblabora.model.GameLength;
-import com.philihp.weblabora.model.GamePlayers;
 
 public class CreateGame extends BaseAction {
 

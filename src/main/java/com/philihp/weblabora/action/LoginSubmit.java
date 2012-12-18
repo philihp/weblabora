@@ -1,11 +1,9 @@
 package com.philihp.weblabora.action;
 
 import java.util.List;
-import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,7 +14,6 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import com.philihp.weblabora.form.LoginForm;
-import com.philihp.weblabora.jpa.Fingerprint;
 import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.util.UserUtil;

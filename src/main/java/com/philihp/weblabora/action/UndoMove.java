@@ -1,11 +1,8 @@
 package com.philihp.weblabora.action;
 
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,15 +13,9 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import com.philihp.weblabora.form.GameForm;
-import com.philihp.weblabora.form.MoveForm;
 import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.State;
 import com.philihp.weblabora.jpa.User;
-import com.philihp.weblabora.model.Board;
-import com.philihp.weblabora.model.GameCountry;
-import com.philihp.weblabora.model.GameLength;
-import com.philihp.weblabora.model.GamePlayers;
-import com.philihp.weblabora.model.MoveProcessor;
 import com.philihp.weblabora.model.WeblaboraException;
 
 public class UndoMove extends BaseAction {

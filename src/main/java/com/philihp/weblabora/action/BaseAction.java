@@ -2,7 +2,6 @@ package com.philihp.weblabora.action;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -12,20 +11,14 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.philihp.weblabora.jpa.Fingerprint;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.util.AuthenticationException;
-import com.philihp.weblabora.util.FacebookSignedRequest;
-import com.philihp.weblabora.util.FacebookSignedRequestDeserializer;
-import com.philihp.weblabora.util.FacebookUtil;
 
 
 abstract public class BaseAction extends Action {
@@ -35,7 +28,7 @@ abstract public class BaseAction extends Action {
 	
 	@SuppressWarnings("unchecked")
 	private static final Set<Object> PUBLIC_ACTIONS = new HashSet<Object>(Arrays.asList(ShowGame.class, ShowGameState.class,
-			ShowLobby.class, Offline.class, LoginSubmit.class, Register.class, RegisterSubmit.class, RegisterValidate.class,
+			ShowLobby.class, LoginSubmit.class, Register.class, RegisterSubmit.class, RegisterValidate.class,
 			Login.class, ForgotPasswordSubmit.class, ResetPassword.class, ResetPasswordSubmit.class, LoginFacebook.class));
 	
 	@Override
