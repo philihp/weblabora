@@ -1,6 +1,8 @@
 package com.philihp.weblabora.action;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 import javax.persistence.EntityManager;
@@ -52,6 +54,7 @@ public class NormalizeGame extends BaseAction {
 			}
 			
 			try {
+				PlayerGuesser guesser = new PlayerGuesser();
 				Board board = new Board(
 						GamePlayers.valueOf(game.getPlayers()),
 						GameLength.valueOf(game.getLength()),
@@ -62,6 +65,7 @@ public class NormalizeGame extends BaseAction {
 					while(states.isEmpty() == false) {
 						State state = states.pop();
 						moves++;
+						guesser.addGuess(board.getActivePlayer(), state.getExplorer());
 						if(state.getToken() == null) continue; //ignore the first null state.
 						board.preMove(state);
 						MoveProcessor.processActions(board,state.getToken());
@@ -74,6 +78,14 @@ public class NormalizeGame extends BaseAction {
 				
 				if(board.isGameOver()) {
 					game.setStage(Stage.FINISHED);
+					if(game.getPlayer1().getUser() == null)
+						game.getPlayer1().setUser(guesser.guessProbableUser(0));
+					if(game.getPlayer2().getUser() == null)
+						game.getPlayer2().setUser(guesser.guessProbableUser(1));
+					if(game.getPlayer3().getUser() == null && game.getPlayers() >= 3)
+						game.getPlayer3().setUser(guesser.guessProbableUser(2));
+					if(game.getPlayer4().getUser() == null && game.getPlayers() >= 4)
+						game.getPlayer4().setUser(guesser.guessProbableUser(3));
 				}
 			}
 			catch(WeblaboraException e) {
@@ -86,4 +98,44 @@ public class NormalizeGame extends BaseAction {
 		saveMessages(request.getSession(), messages);
 		return mapping.findForward("root");
 	}
+	
+	private class PlayerGuesser {
+		@SuppressWarnings("unchecked")
+		private Map<User,Integer> slots[] = (HashMap<User,Integer>[])new HashMap<?,?>[4];
+		
+		public PlayerGuesser() {
+			slots[0] = new HashMap<User,Integer>();
+			slots[1] = new HashMap<User,Integer>();
+			slots[2] = new HashMap<User,Integer>();
+			slots[3] = new HashMap<User,Integer>();
+		}
+		public void addGuess(int slot,User user) {
+			if(slots[slot].containsKey(user)) {
+				slots[slot].put(user, slots[slot].get(user)+1);
+			}
+			else {
+				slots[slot].put(user, 1);
+			}
+		}
+		public User guessProbableUser(int slot) {
+			Map<User,Integer> map = slots[slot];
+			User guess = null;
+			int max = 0;
+			for(Object key : map.keySet()) {
+				if(map.get(key) > max) {
+					max = map.get(key);
+					guess = (User)key;
+				}
+			}
+			return guess;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }
