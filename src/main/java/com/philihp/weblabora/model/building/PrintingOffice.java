@@ -37,6 +37,7 @@ public class PrintingOffice extends BuildingCoordinateUsage {
 			else if(terrain.getTerrainUse() == TerrainUseEnum.FOREST) {
 				player.addBooks(1);
 				terrain.setTerrainType(PLAINS);
+				terrain.setTerrainUse(TerrainUseEnum.EMPTY);
 			}
 			else
 				throw new WeblaboraException(getName()+" is trying to clear forest at "+coord+" but found "+terrain.getTerrainUse());
