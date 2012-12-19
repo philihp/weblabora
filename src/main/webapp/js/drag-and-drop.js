@@ -77,7 +77,23 @@ function findBoard(node) {
   return findBoard(node.parentNode);
 }
 
-function countResources(board, resource) {
+/**
+ * Returns number of resources of specified type a player has available without
+ * doing any conversions.
+ * 
+ * The function is not "smart" in that it does not include convertible
+ * resources. If you ask for {@code Straw} {@code Grain} will not be counted in
+ * even thou a player may convert {@code Grain} to {@code Straw} at any time.
+ * Also if you ask for {@code Penny} no {@code Nickel}s will be counted.
+ * 
+ * @param board {@code div} element with {@code board} {@code class} being the
+ *              player's board. This identifies player.
+ * @param resource Name of the resource asked for. For example "{@code Wood}".
+ * @returns Number of resources of the {@code resource} type the player has
+ *          available without doing any conversions.
+ * @returns This will always be at least {@code 0}.
+ */
+function getAvailableResources(board, resource) {
   var resources = board.getElementsByClassName('resources')[0];
   var resourceList = resources.getElementsByClassName('resource');
   var count = 0;
@@ -87,6 +103,48 @@ function countResources(board, resource) {
     }
   }
   return count;
+}
+
+/**
+ * Returns number of resources of specified type a player has available
+ * including possibility of doing conversions.
+ * 
+ * The function is "smart" in that it does include convertible resources. If you
+ * ask for {@code Straw} {@code Grain} will be counted in as well. Also if you
+ * ask for {@code Penny} {@code Nickel}s, {@code Wine} and {@code Beer} will be
+ * counted as well.
+ * 
+ * @param board {@code div} element with {@code board} {@code class} being the
+ *              player's board. This identifies player.
+ * @param resource Name of the resource asked for. For example "{@code Wood}".
+ * @returns Number of resources of the {@code resource} type the player has
+ *          available including possibility of doing conversions.
+ * @returns This will always be at least {@code 0}.
+ */
+function getAvailableResourcesWithConversions(board, resource) {
+  // First get the available resources of the asked type without any
+  // conversions.
+  var baseCount = getAvailableResources(board, resource);
+
+  // Now include convertible resources.
+  var convertedCount = 0;
+
+  if (resource === 'Straw') {
+    convertedCount = getAvailableResources(board, 'Grain');
+  }
+  else if (resource === 'Penny') {
+    convertedCount = getAvailableResources(board, 'Nickel') * 5;
+    convertedCount += getAvailableResources(board, 'Wine');
+    convertedCount += getAvailableResources(board, 'Beer') * 2;
+  }
+  else if (resource === 'Nickel') {
+    var pennies = getAvailableResources(board, 'Penny');
+    pennies += getAvailableResources(board, 'Wine');
+    pennies += getAvailableResources(board, 'Beer') * 2;
+    convertedCount = pennies / 5;
+  }
+
+  return baseCount + convertedCount;
 }
 
 function onBuildingDragStart(event) {
@@ -105,11 +163,11 @@ function onBuildingDrop(event) {
   event.preventDefault();
 
   var board = findBoard(event.target);
-  var strawAvailable = countResources(board, 'Straw');
+  var strawAvailable = getAvailableResources(board, 'Straw');
   var strawNeeded = droppedBuilding.getAttribute('data-cost-straw');
 
   var dropReplacementsList = event.target.getElementsByClassName('drop-replacement');
-  for(var i = 0; i < dropReplacementsList.length; ++i) {
+  for (var i = 0; i < dropReplacementsList.length; ++i) {
     var dropReplacement = dropReplacementsList.item(i);
     dropReplacement.style.display = 'none';
   }
@@ -183,7 +241,38 @@ function onBuildingDragOver(event) {
         if (isCloister && !isCellACloisterNeighbor) {
           allowDrop = false;
         } else {
-          // TODO: Still need to check for resources and possible second drop.
+          // Check available resources.
+
+          var hasEnoughResources = true;
+          // Instead of checking for ahead-known resources used for building
+          // enumerate all the attributes looking for ones named data-cost-*
+          // (where * is the resource type). This way the code is independent
+          // from types of resources used for building.
+          for (var i = 0; i < dragBuilding.attributes.length; ++i) {
+            var attributeNode = dragBuilding.attributes[i];
+            var result = attributeNode.nodeName.match('^data-cost-(.*)$');
+            if (result === null) {
+              continue;
+            }
+            // else the name matched and result[1] is the lower-case resource
+            // name.
+            var resourceName = result[1];
+            // Normalize the name.
+            resourceName = resourceName.charAt(0).toUpperCase() + resourceName.slice(1);
+
+            var availableResources = getAvailableResourcesWithConversions(board, resourceName);
+            var requiredResources = attributeNode.nodeValue;
+
+            if (availableResources < requiredResources) {
+              allowDrop = false;
+              hasEnoughResources = false;
+              break;
+            }
+          }
+
+          if (hasEnoughResources) {
+            // TODO: Still need to check for possible second drop.
+          }
         }
       }
     }
