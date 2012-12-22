@@ -43,7 +43,7 @@ public class ResetPasswordSubmit extends BaseAction {
 			user.setPassword(UserUtil.md5(form.getNewPassword()));
 			
 			ActionMessages messages = getMessages(request);
-			messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.detail", "Password has been reset"));
+			messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.passwordChanged"));
 			saveMessages(request.getSession(), messages);
 
 			request.getSession().setAttribute("user", user);

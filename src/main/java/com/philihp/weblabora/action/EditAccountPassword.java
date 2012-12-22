@@ -28,7 +28,7 @@ public class EditAccountPassword extends BaseAction {
 		
 		if(userPassword != null && userPassword.equals(currentPassword) == false) {
 			ActionMessages errors = getErrors(request);
-			errors.add("currentPassword", new ActionMessage("message.detail", "Current password was incorrect. Password was not changed."));
+			errors.add("currentPassword", new ActionMessage("errors.passwordIncorrect"));
 			saveErrors(request.getSession(), errors);
 			
 			return mapping.findForward("failure");
@@ -37,7 +37,7 @@ public class EditAccountPassword extends BaseAction {
 			user.setPassword(newPassword);
 			
 			ActionMessages messages = getMessages(request);
-			messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.detail", "Password has been changed."));
+			messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.passwordChanged"));
 			saveMessages(request.getSession(), messages);
 			
 			return mapping.findForward("success");

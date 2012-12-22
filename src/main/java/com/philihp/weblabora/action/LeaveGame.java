@@ -28,12 +28,12 @@ public class LeaveGame extends BaseAction {
 		
 		if(game == null) {
 			ActionMessages messages = getMessages(request);
-			messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("messages.invalidGameId", form.getGameId()));
+			messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.invalidGameId", form.getGameId()));
 			saveMessages(request.getSession(), messages);
 		}
 		else if(game.getStage().equals(Stage.FINISHED)) {
 			ActionMessages messages = getMessages(request);
-			messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.detail", "You can't leave a game once it has finished."));
+			messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.cantLeave"));
 			saveMessages(request.getSession(), messages);
 		}
 		else {

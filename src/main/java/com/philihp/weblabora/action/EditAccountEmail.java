@@ -56,7 +56,7 @@ public class EditAccountEmail extends BaseAction {
 			UserUtil.sendEmail(user.getUnvalidatedEmail(), emailSubject, emailBody, (String)getServlet().getServletContext().getAttribute("gmail_password"));
 			
 			ActionMessages messages = getMessages(request);
-			messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.detail", "A confirmation email has been sent to that email. It must be confirmed before it is active."));
+			messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.emailConfirmationSent", user.getUnvalidatedEmail()));
 			saveMessages(request.getSession(), messages);
 			
 			return mapping.findForward("success");

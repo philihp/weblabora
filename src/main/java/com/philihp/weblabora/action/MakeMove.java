@@ -45,11 +45,9 @@ public class MakeMove extends BaseAction {
 			messages.add(
 					ActionMessages.GLOBAL_MESSAGE,
 					new ActionMessage(
-							"message.detail",
-							"Cannot make move from the state #"
-									+ form.getStateId()
-									+ " because it is not the current state. The current state is #"
-									+ game.getState().getStateId() + ". Probably because you submitted from a stale version of the page. Please refresh and try again."));
+							"message.badState",form.getStateId(),game.getState().getStateId()));
+			
+
 			saveMessages(request.getSession(), messages);
 			return calculateGameForward(mapping, game);
 		}

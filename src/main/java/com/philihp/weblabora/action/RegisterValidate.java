@@ -42,7 +42,7 @@ public class RegisterValidate extends BaseAction {
 			user.setUnvalidatedEmail(null);
 			user.setEmailValidator(null);
 			ActionMessages messages = getMessages(request);
-			messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.detail", "Email address "+user.getEmail()+" has been validated"));
+			messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.emailValidated", user.getEmail()));
 			saveMessages(request.getSession(), messages);
 				
 			form.setUsername(user.getUsername());

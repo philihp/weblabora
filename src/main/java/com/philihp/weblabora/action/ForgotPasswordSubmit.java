@@ -64,7 +64,7 @@ public class ForgotPasswordSubmit extends BaseAction {
 		UserUtil.sendEmail(user.getEmail(), emailSubject, emailBody, (String)getServlet().getServletContext().getAttribute("gmail_password"));
 		
 		ActionMessages messages = getMessages(request);
-		messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.detail", "An email has been sent to "+user.getEmail()+" containing a link to reset your password."));
+		messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("message.emailPasswordChangeSent"));
 		saveMessages(request.getSession(), messages);
 		
 		

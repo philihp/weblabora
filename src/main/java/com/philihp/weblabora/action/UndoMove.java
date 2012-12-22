@@ -34,13 +34,8 @@ public class UndoMove extends BaseAction {
 			messages.add(
 					ActionMessages.GLOBAL_MESSAGE,
 					new ActionMessage(
-							"message.detail",
-							"Cannot revert the state #"
-									+ form.getStateId()
-									+ " from game #"
-									+ form.getGameId()
-									+ " because it is not the current state. The current state is #"
-									+ gameCurrentStateId));
+							"message.cantUndo",form.getStateId(), form.getGameId(), gameCurrentStateId));
+			
 			saveMessages(request.getSession(), messages);
 			return mapping.findForward("root"); 
 		}
