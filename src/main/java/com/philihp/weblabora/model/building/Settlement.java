@@ -3,7 +3,6 @@ package com.philihp.weblabora.model.building;
 import java.util.Set;
 
 import com.philihp.weblabora.model.Board;
-import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 

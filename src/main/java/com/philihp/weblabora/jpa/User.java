@@ -2,27 +2,17 @@ package com.philihp.weblabora.jpa;
 
 import static javax.persistence.AccessType.FIELD;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import javax.persistence.Access;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Basic;
-import javax.persistence.JoinColumn;
 import javax.persistence.Transient;
 
-import org.apache.commons.codec.binary.Hex;
-
 import com.philihp.weblabora.util.UserUtil;
-
-import static javax.persistence.FetchType.LAZY;
 
 @Entity(name = "User")
 @Table(name = "weblabora_user")

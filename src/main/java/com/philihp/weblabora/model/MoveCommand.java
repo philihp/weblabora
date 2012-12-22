@@ -1,6 +1,5 @@
 package com.philihp.weblabora.model;
 
-import java.util.List;
 
 public interface MoveCommand {
 

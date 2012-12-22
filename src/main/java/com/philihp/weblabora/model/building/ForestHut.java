@@ -11,7 +11,6 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.Terrain;
-import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.TerrainUseEnum;
 import com.philihp.weblabora.model.UsageParamCoordinates;
 import com.philihp.weblabora.model.WeblaboraException;

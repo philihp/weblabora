@@ -1,8 +1,9 @@
 package com.philihp.weblabora.model;
 
-import static com.philihp.weblabora.model.TerrainTypeEnum.*;
+import static com.philihp.weblabora.model.TerrainTypeEnum.HIDDEN;
+import static com.philihp.weblabora.model.TerrainTypeEnum.HILLSIDE;
+import static com.philihp.weblabora.model.TerrainTypeEnum.WATER;
 
-import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.ArrayTable;

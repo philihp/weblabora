@@ -1,23 +1,19 @@
 package com.philihp.weblabora.model;
 
+import static com.philihp.weblabora.model.GameCountry.FRANCE;
+import static com.philihp.weblabora.model.GameCountry.IRELAND;
+import static com.philihp.weblabora.model.GameLength.LONG;
+import static com.philihp.weblabora.model.GameLength.SHORT;
+import static com.philihp.weblabora.model.GamePlayers.FOUR;
+import static com.philihp.weblabora.model.GamePlayers.THREE;
+import static com.philihp.weblabora.model.GamePlayers.TWO;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.NotImplementedException;
 
 import com.philihp.weblabora.model.building.Building;
-import com.philihp.weblabora.model.building.BuildingEnum;
-
-import static com.philihp.weblabora.model.GameLength.*;
-import static com.philihp.weblabora.model.GameCountry.*;
-import static com.philihp.weblabora.model.GamePlayers.*;
-import static com.philihp.weblabora.model.Wheel.Position.E;
-import static com.philihp.weblabora.model.Wheel.Position.H;
-import static com.philihp.weblabora.model.Wheel.Position.K;
 
 public abstract class BoardMode {
 	

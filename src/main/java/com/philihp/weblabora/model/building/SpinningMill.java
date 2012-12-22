@@ -5,16 +5,12 @@ import static com.philihp.weblabora.model.TerrainTypeEnum.HILLSIDE;
 import static com.philihp.weblabora.model.TerrainTypeEnum.PLAINS;
 
 import java.util.EnumSet;
-import java.util.Set;
 
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.SettlementRound;
-import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
-import com.philihp.weblabora.model.UsageParamDouble;
-import com.philihp.weblabora.model.UsageParamSingle;
 import com.philihp.weblabora.model.WeblaboraException;
 
 public class SpinningMill extends Building {

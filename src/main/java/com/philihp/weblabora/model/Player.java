@@ -1,14 +1,13 @@
 package com.philihp.weblabora.model;
 
-import java.util.ArrayList;
-import static com.philihp.weblabora.model.Clergyman.Type.*;
-import java.util.List;
-import java.util.Map;
-import java.math.BigDecimal;
+import static com.philihp.weblabora.model.Clergyman.Type.LAYBROTHER;
+import static com.philihp.weblabora.model.Clergyman.Type.PRIOR;
 
-import com.google.common.collect.ArrayTable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.philihp.weblabora.jpa.User;
-import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.Settlement;
 
 public class Player {

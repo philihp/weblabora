@@ -3,8 +3,6 @@ package com.philihp.weblabora.model.building;
 import java.util.Set;
 
 import com.philihp.weblabora.model.Clergyman;
-import com.philihp.weblabora.model.Landscape;
-import com.philihp.weblabora.model.Player;
 import com.philihp.weblabora.model.Terrain;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.WeblaboraException;

@@ -1,12 +1,5 @@
 package com.philihp.weblabora.model;
 
-import static com.philihp.weblabora.model.TerrainTypeEnum.*;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-
-import com.philihp.weblabora.model.building.*;
 
 public class CommandWorkorder implements MoveCommand, InvalidDuringSettlement {
 

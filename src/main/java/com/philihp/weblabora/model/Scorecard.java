@@ -5,9 +5,6 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-
-import com.philihp.weblabora.model.Scorecard.PlayerScore;
 import com.philihp.weblabora.model.building.Erection;
 import com.philihp.weblabora.model.building.Settlement;
 

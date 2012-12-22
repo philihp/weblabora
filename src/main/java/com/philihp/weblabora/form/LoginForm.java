@@ -1,6 +1,5 @@
 package com.philihp.weblabora.form;
 
-import org.apache.struts.action.ActionForm;
 import org.apache.struts.validator.ValidatorForm;
 
 public class LoginForm extends ValidatorForm {

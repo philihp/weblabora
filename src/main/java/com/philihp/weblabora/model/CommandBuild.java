@@ -1,12 +1,6 @@
 package com.philihp.weblabora.model;
 
-import static com.philihp.weblabora.model.TerrainTypeEnum.*;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-
-import com.philihp.weblabora.model.building.*;
+import com.philihp.weblabora.model.building.Building;
 
 public class CommandBuild implements MoveCommand, InvalidDuringSettlement {
 
