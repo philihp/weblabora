@@ -190,4 +190,10 @@ public class BoardModeTwoShortIreland extends BoardMode {
 	public int getLastSettlementAfterRound() {
 		return 28;
 	}
+
+	@Override
+	protected boolean isRoundStartBonusActive() {
+		return false;
+	}
+
 }
