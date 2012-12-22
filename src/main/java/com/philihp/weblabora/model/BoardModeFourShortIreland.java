@@ -196,4 +196,10 @@ public class BoardModeFourShortIreland extends BoardMode {
 	public int getLastSettlementAfterRound() {
 		return 13;
 	}
+
+	@Override
+	protected boolean isRoundStartBonusActive() {
+		return true;
+	}
+
 }

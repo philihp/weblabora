@@ -187,4 +187,9 @@ public class BoardModeTwoLongIreland extends BoardMode {
 		return 27;
 	}
 	
+	@Override
+	protected boolean isRoundStartBonusActive() {
+		return false;
+	}
+
 }

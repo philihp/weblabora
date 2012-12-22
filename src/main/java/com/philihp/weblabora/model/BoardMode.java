@@ -107,7 +107,7 @@ public abstract class BoardMode {
 	 * Hook for pre-round processing for Short 3/4 player games to dish out resources
 	 */
 	public void preRound() {
-		if(isProductionBonusActive()) {
+		if(isRoundStartBonusActive()) {
 			for(Player player : getBoard().getPlayers()) {
 				switch(getBoard().getRound()) {
 				case 1:
@@ -195,6 +195,8 @@ public abstract class BoardMode {
 	}
 	
 	abstract protected boolean isProductionBonusActive();
+	
+	abstract protected boolean isRoundStartBonusActive();
 	
 	public boolean isSecondLayBrotherUsed() {
 		return true;

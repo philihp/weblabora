@@ -177,4 +177,9 @@ public class BoardModeThreeLongFrance extends BoardMode {
 		return 25;
 	}
 	
+	@Override
+	protected boolean isRoundStartBonusActive() {
+		return false;
+	}
+
 }

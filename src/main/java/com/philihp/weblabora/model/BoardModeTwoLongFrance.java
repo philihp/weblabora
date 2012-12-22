@@ -200,4 +200,10 @@ public class BoardModeTwoLongFrance extends BoardMode {
 	public int getLastSettlementAfterRound() {
 		return 27;
 	}
+
+	@Override
+	protected boolean isRoundStartBonusActive() {
+		return false;
+	}
+
 }
