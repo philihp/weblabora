@@ -40,9 +40,6 @@ public class Player {
 	private int wine = 0;
 	private int beer = 0;
 	private int reliquary = 0;
-
-	private BigDecimal totalFoodAvailable = new BigDecimal(0);
-	private BigDecimal totalEnergyAvailable = new BigDecimal(0);
 	
 	private Landscape landscape;
 

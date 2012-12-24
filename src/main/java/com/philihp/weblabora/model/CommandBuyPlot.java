@@ -1,8 +1,6 @@
 package com.philihp.weblabora.model;
 
-import static com.philihp.weblabora.model.TerrainTypeEnum.HIDDEN;
-import static com.philihp.weblabora.model.TerrainTypeEnum.HILLSIDE;
-import static com.philihp.weblabora.model.TerrainTypeEnum.WATER;
+import static com.philihp.weblabora.model.TerrainTypeEnum.*;
 
 import java.util.Set;
 

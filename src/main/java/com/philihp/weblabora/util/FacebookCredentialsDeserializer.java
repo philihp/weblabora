@@ -2,7 +2,6 @@ package com.philihp.weblabora.util;
 
 import java.lang.reflect.Type;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;

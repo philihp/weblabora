@@ -2,12 +2,10 @@ package com.philihp.weblabora.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-
-import com.philihp.weblabora.action.*;
-import com.philihp.weblabora.jpa.User;
-
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
+
+import com.philihp.weblabora.jpa.User;
 
 /**
  * Application Lifecycle Listener implementation class SessionScopeLoader

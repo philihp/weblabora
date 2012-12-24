@@ -16,8 +16,6 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.codec.binary.Hex;
 
-import com.philihp.weblabora.jpa.User;
-
 public class UserUtil {
 	
 	private UserUtil() {
