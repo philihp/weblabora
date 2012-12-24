@@ -36,7 +36,7 @@ public class Scorecard {
 			if(spot == null) return 0;
 			
 			//handle mountain offsets
-			if(spot.getTerrainType() == TerrainTypeEnum.HIDDEN)
+			if(spot.getTerrainType() == TerrainTypeEnum.MERGED_NORTH)
 				spot = settlement.getLocation().getLandscape().getTerrainAt(c.north());
 
 			Erection erection = spot.getErection();

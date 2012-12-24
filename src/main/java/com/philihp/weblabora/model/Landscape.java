@@ -120,6 +120,44 @@ public class Landscape {
 		return null;
 	}
 
+	/**
+	 * Determines whether specified terrain contains a cloister erection.
+	 * 
+	 * @param coord Coordinates of the terrain to be checked.
+	 * @return {@code true} if terrain at {@code coord} contains a cloister
+	 *         erection. {@code false} otherwise.
+	 */
+	public boolean isCloisterAt(Coordinate coord) {
+		// First check if coord belongs to landscape.
+		if(!getTerrain().contains(coord.getY(), coord.getX())) {
+			return false;
+		}
+
+		// If it does then get the corresponding Terrain object.
+		Terrain terrain = getTerrain().get(coord.getY(), coord.getX());
+		// TODO: Not sure if this is really needed.
+		if (terrain == null) {
+			return false;
+		}
+
+		// If this is a slave cell then forward to master cell.
+		if (terrain.getTerrainType().isMerged())
+			return isCloisterAt(terrain.getTerrainType().getMasterCoordinateFrom(coord));
+
+		// Otherwise (either master cell or non-merged cell) check if there is
+		// any erection on the cell...
+		if (terrain.getErection() == null) {
+			return false;
+		}
+		// ...and if there is check whether it is a building...
+		if (!(terrain.getErection() instanceof Building)) {
+			return false;
+		}
+		Building building = (Building)terrain.getErection();
+		// ...and if it is then just determine whether it is a cloister.
+		return building.isCloister();
+	}
+
 	public Player getPlayer() {
 		return player;
 	}

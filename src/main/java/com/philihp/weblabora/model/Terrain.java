@@ -1,5 +1,7 @@
 package com.philihp.weblabora.model;
 
+import java.util.HashSet;
+
 import com.philihp.weblabora.model.building.Erection;
 
 public class Terrain {
@@ -33,6 +35,7 @@ public class Terrain {
 
 	public void setErection(Erection erection) {
 		this.erection = erection;
+		this.terrainUse = erection.getTerrainUse();
 		if(erection.getLocation() != this)
 			erection.setLocation(this);
 	}
@@ -55,6 +58,50 @@ public class Terrain {
 
 	public TerrainUseEnum getTerrainUse() {
 		return terrainUse;
+	}
+
+	/**
+	 * Determines whether this terrain is a neighbor to a terrain containing a
+	 * cloister erection.
+	 * 
+	 * @return {@code true} if this terrain is a neighbor to a terrain
+	 *         containing a cloister erection. {@code false} otherwise.
+	 */
+	public boolean hasCloisterNeighbor() {
+		Coordinate thisCoord = new Coordinate(x, y);
+		Coordinate masterCoord = terrainType.getMasterCoordinateFrom(thisCoord);
+		Coordinate slaveCoord = terrainType.getSlaveCoordinateFrom(masterCoord);
+
+		// Form a set of coordinates of neighbors for both cells.
+		// Note that if masterCoord and slaveCoord are same (the cell is not
+		// merged) then duplicates will be added. However HashSet ignored
+		// duplicates.
+		HashSet<Coordinate> neighbors = new HashSet<Coordinate>();
+		// Master...
+		neighbors.add(masterCoord.north());
+		neighbors.add(masterCoord.south());
+		neighbors.add(masterCoord.west());
+		neighbors.add(masterCoord.east());
+		// Slave...
+		neighbors.add(slaveCoord.north());
+		neighbors.add(slaveCoord.south());
+		neighbors.add(slaveCoord.west());
+		neighbors.add(slaveCoord.east());
+		// Finally remove both master and slave. We added them since they are
+		// neighbors for each other. While they should not be counted.
+		// Again if masterCoord and slaveCoord are same (the cell is not merged)
+		// neither of them will be added so removing them changes nothing.
+		neighbors.remove(masterCoord);
+		neighbors.remove(slaveCoord);
+
+		// Finally check all the neighbors.
+		for(Coordinate coord : neighbors) {
+			if (landscape.isCloisterAt(coord)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public void setTerrainUse(TerrainUseEnum terrainUse) {

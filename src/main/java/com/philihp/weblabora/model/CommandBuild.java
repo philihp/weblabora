@@ -47,6 +47,10 @@ public class CommandBuild implements MoveCommand, InvalidDuringSettlement {
 			throw new WeblaboraException("The location at ("+x+","+y+") has a terrain of "+location.getTerrainType()+", but "+building.getName()+" can only be built on "+building.getTerrains());
 		}
 		
+		if(building.isCloister() && !location.hasCloisterNeighbor()) {
+			throw new WeblaboraException("The location at ("+x+","+y+") is not a neighbor to a cloister erection, but "+building.getName()+" is a cloister erection");
+		}
+		
 		if(player.canAffordCost(building.getBuildCost()) == false) {
 			throw new WeblaboraException("Player does not have "+building.getBuildCost()+" necessary to build "+building.getName());
 		}

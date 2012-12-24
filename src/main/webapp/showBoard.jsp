@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/colorbox.css" />
 <link rel="stylesheet" href="css/weblabora.css" />
+<link rel="stylesheet" href="css/quirks.css" />
 <!--<script src="//www.google.com/jsapi"></script>-->
 <!-- <script> -->
 <!-- 	google.load("jquery", "1.7.1");-->
@@ -38,18 +39,12 @@
 		$('#tab2').removeClass('tab--selected').addClass('tab--unselected');
 		$('#tab3').removeClass('tab--selected').addClass('tab--unselected');
 		$('#tab4').removeClass('tab--selected').addClass('tab--unselected');
-		$('#tab' + player).removeClass('tab--unselected').addClass(
-				'tab--selected');
-		$('#board1').removeClass('board--selected').addClass(
-				'board--unselected');
-		$('#board2').removeClass('board--selected').addClass(
-				'board--unselected');
-		$('#board3').removeClass('board--selected').addClass(
-				'board--unselected');
-		$('#board4').removeClass('board--selected').addClass(
-				'board--unselected');
-		$('#board' + player).removeClass('board--unselected').addClass(
-				'board--selected');
+		$('#tab'+player).removeClass('tab--unselected').addClass('tab--selected');
+		$('#board1').removeClass('board--selected').addClass('board--unselected');
+		$('#board2').removeClass('board--selected').addClass('board--unselected');
+		$('#board3').removeClass('board--selected').addClass('board--unselected');
+		$('#board4').removeClass('board--selected').addClass('board--unselected');
+		$('#board'+player).removeClass('board--unselected').addClass('board--selected');
 	}
 
 	$(function() {
@@ -106,45 +101,25 @@
 		});
 
 		<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
-		$(".show-future-settlements-button-${fn:toLowerCase(player.color)}")
-				.click(
-						function(event) {
-							event.preventDefault();
-							$(
-									".future-settlement-${fn:toLowerCase(player.color)}")
-									.css('display', 'inline-block');
-							$(this).hide();
-							$(
-									'.hide-future-settlements-button-${fn:toLowerCase(player.color)}')
-									.show();
-						});
-		$(".hide-future-settlements-button-${fn:toLowerCase(player.color)}")
-				.click(
-						function(event) {
-							event.preventDefault();
-							$(
-									".future-settlement-${fn:toLowerCase(player.color)}")
-									.css('display', 'none');
-							$(this).hide();
-							$(
-									'.show-future-settlements-button-${fn:toLowerCase(player.color)}')
-									.show();
-						});
+		$(".show-future-settlements-button-${fn:toLowerCase(player.color)}").click(function(event) {
+			event.preventDefault();
+			$(".future-settlement-${fn:toLowerCase(player.color)}").css('display','inline-block');
+			$(this).hide();
+			$('.hide-future-settlements-button-${fn:toLowerCase(player.color)}').show();
+		});
+		$(".hide-future-settlements-button-${fn:toLowerCase(player.color)}").click(function(event) {
+			event.preventDefault();
+			$(".future-settlement-${fn:toLowerCase(player.color)}").css('display','none');
+			$(this).hide();
+			$('.show-future-settlements-button-${fn:toLowerCase(player.color)}').show();
+		});
 		</c:forEach>
-
-		$('#tab1').click(function() {
-			showboard(1);
-		});
-		$('#tab2').click(function() {
-			showboard(2);
-		});
-		$('#tab3').click(function() {
-			showboard(3);
-		});
-		$('#tab4').click(function() {
-			showboard(4);
-		});
-
+		
+		$('#tab1').click(function() {showboard(1);});
+		$('#tab2').click(function() {showboard(2);});
+		$('#tab3').click(function() {showboard(3);});
+		$('#tab4').click(function() {showboard(4);});
+		
 		$('#gamesList').change(function() {
 			$(this).closest('form').submit();
 		});
@@ -168,6 +143,9 @@
 		s.parentNode.insertBefore(ga, s);
 	})();
 </script>
+
+<script src="js/drag-and-drop.js" type="text/javascript"></script>
+
 </head>
 
 <body>
@@ -453,26 +431,25 @@
 				Future Buildings</a>
 		</div>
 
-		<div class="building-list">
+		<div class="building-list" ondragstart="onBuildingDragStart(event)" ondragend="onBuildingDragEnd(event)"><!-- comment out white-space for inline-block spacing
 			<!-- comment out white-space for inline-block spacing
-		  <c:forEach items="${board.unbuiltBuildings}" var="building">
-		  	-->
-			<div class="building">
-				<a class="building-link" href="images/building/${building.image}.png" title="${building.id}"><img
-					src="images/building/${building.image}.png" class="building-image" /></a>
-			</div>
+			<c:forEach items="${board.unbuiltBuildings}" var="building">
+				--><div class="building" id="building-${building.id}" draggable="true" data-is-cloister="${building.isCloister()}" data-cost-wood="${building.buildCost.wood}" data-cost-clay="${building.buildCost.clay}" data-cost-stone="${building.buildCost.stone}" data-cost-straw="${building.buildCost.straw}" data-cost-coin="${building.buildCost.coin}" data-terrain-types="${building.terrains}">
+					<a class="building-link" href="images/building/${building.image}.png" title="${building.id}" draggable="false">
+						<img src="images/building/${building.image}.png" class="building-image"/>
+					</a>
+				</div><!--
 			<!--
-		  </c:forEach>
-		  <c:forEach items="${board.futureBuildings}" var="building">
-		  	-->
-			<div class="future-building">
-				<a class="future-building-link" href="images/building/${building.image}.png" title="${building.id}"><img
-					src="images/building/${building.image}.png" class="future-building-image" /></a>
-			</div>
+			</c:forEach>
+			<c:forEach items="${board.futureBuildings}" var="building">
+				--><div class="future-building" id="building-${building.id}" draggable="false" data-is-cloister="${building.isCloister()}" data-cost-wood="${building.buildCost.wood}" data-cost-clay="${building.buildCost.clay}" data-cost-stone="${building.buildCost.stone}" data-cost-straw="${building.buildCost.straw}" data-cost-coin="${building.buildCost.coin}" data-terrain-types="${building.terrains}">
+					<a class="future-building-link" href="images/building/${building.image}.png" title="${building.id}" draggable="false">
+						<img src="images/building/${building.image}.png" class="future-building-image" draggable="false"/>
+					</a>
+				</div><!--
 			<!--
-		  </c:forEach>
-		-->
-		</div>
+			</c:forEach>
+		--></div>
 
 		<ul class="tabs">
 			<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
@@ -491,10 +468,10 @@
 				<hr style="clear: both" />
 
 				<table>
-					<c:forEach items="${player.landscape.table}" var="row" varStatus="rowStatus">
+					<c:forEach items="${player.landscape.table}" var="row">
 						<tr>
 							<c:forEach items="${row}" var="cell">
-								<c:if test="${cell.terrainType ne 'HIDDEN'}">
+								<c:if test="${not cell.terrainType.isMerged()}">
 									<c:choose>
 										<c:when test="${cell.terrainType eq 'WATER'}">
 											<c:set var="boardCellType" value="water" />
@@ -512,36 +489,46 @@
 											<c:set var="boardCellType" value="mountain" />
 										</c:when>
 										<c:otherwise>
-											<c:set var="boardCellType" value="unavailable" />
+											<c:set var="boardCellType" value="${cell.terrainType}"/>
 										</c:otherwise>
 									</c:choose>
-									<td ${cell.terrainType.rowspanAttr} class="${boardCellType}"><c:choose>
-											<c:when test="${not empty cell.erection}">
-												<div
+									<c:choose>
+										<c:when test="${cell eq null}">
+											<td class="${boardCellType}">
+										</c:when>
+										<c:otherwise>
+											<td${cell.terrainType.rowspanAttr} class="${boardCellType}" dropzone="move string:Text" ondrop="onBuildingDrop(event)" ondragover="onBuildingDragOver(event)" data-position-row="${cell.coordinate.y}" data-position-column="${cell.coordinate.x}" data-terrain-type="${cell.terrainType}" data-is-empty="${cell.terrainUse eq 'EMPTY'}" data-has-cloister-neighbor="${cell.hasCloisterNeighbor()}">
+										</c:otherwise>
+									</c:choose>
+									<c:choose>
+										<c:when test="${not empty cell.erection}">
+											<div class="building building-${fn:toLowerCase(cell.erection.clergyman.type)}-${fn:toLowerCase(player.color)}">
 													class="building building-${fn:toLowerCase(cell.erection.clergyman.type)}-${fn:toLowerCase(player.color)}">
-													<a class="erection-link" href="images/building/${cell.erection.image}.png" title="${cell.erection.id}">
-														<img src="images/building/${cell.erection.image}.png" class="building-image" />
-													</a>
-												</div>
-											</c:when>
-											<c:when test="${cell.terrainUse eq 'FOREST'}">
-												<img src="images/building/Wood.png" class="landscape-tile" title="${cell.coords}" />
-											</c:when>
-											<c:when test="${cell.terrainUse eq 'MOOR'}">
-												<img src="images/building/Peat.png" class="landscape-tile" title="${cell.coords}" />
-											</c:when>
-											<c:otherwise>
-												<div class="board-cell-info">
-													<span title="${cell.terrainType.properCase}">${cell.coords}</span>
-												</div>
-											</c:otherwise>
-										</c:choose></td>
+												<a class="erection-link" href="images/building/${cell.erection.image}.png" title="${cell.erection.id}">
+													<img src="images/building/${cell.erection.image}.png" class="building-image" />
+												</a>
+											</div>
+										</c:when>
+										<c:when test="${cell.terrainUse eq 'FOREST'}">
+											<img src="images/building/Wood.png" class="landscape-tile" title="${cell.coords}" />
+										</c:when>
+										<c:when test="${cell.terrainUse eq 'MOOR'}">
+											<img src="images/building/Peat.png" class="landscape-tile" title="${cell.coords}" />
+										</c:when>
+										<c:otherwise>
+											<div class="board-cell-info drop-replacement">
+												<span title="${cell.terrainType.properCase}">${cell.coords}</span>
+											</div>
+										</c:otherwise>
+									</c:choose>
+									</td>
 								</c:if>
 							</c:forEach>
 						</tr>
 					</c:forEach>
 				</table>
 
+				
 				<hr />
 
 				<c:if test="${not empty player.startingMarker}">
@@ -712,7 +699,7 @@
 		<c:if test="${empty param.stateId}">
 			<hr />
 			New Move:
-			<html:form action="/makeMove.do">
+			<html:form styleId="moveForm" action="/makeMove.do">
 				<html:hidden property="stateId" value="${game.activeStates[fn:length(game.activeStates)-1].stateId}" />
 				<html:hidden property="gameId" value="${game.gameId}" />
 				<html:text property="token" styleId="token" value="${savedMove}" />
@@ -728,6 +715,7 @@
 		</c:if>
 
 		<hr />
+		
 		<c:forEach items="${board.moveListReversed}" var="move">
 			<div class="movelist-color">${move.color}</div>
 			<div class="movelist-move">
@@ -765,6 +753,21 @@
 			</div>
 		</c:forEach>
 
+		
+		<c:if test="${board.gameOver}">
+			<c:forEach items="${board.scorecard.scores}" var="entry">
+				<br />
+				<b>${entry.key}</b>:<br />
+				<c:forEach items="${entry.value.settlementScores}" var="settlementScore">
+					${settlementScore.settlement.name}: ${settlementScore.score}<br />
+				</c:forEach>
+				Settlement Score: ${entry.value.settlementTotalScore}<br />
+				Shield Score: ${entry.value.shieldScore}<br />
+				Item Score: ${entry.value.itemScore}<br />
+				<i>Total Score: ${entry.value.settlementTotalScore + entry.value.shieldScore + entry.value.itemScore}</i><br />
+			</c:forEach>
+		</c:if>
+
 		<c:if test="${not empty game.state.dstStates and empty param.stateId}">
 		<hr />
 		Previous moves from this state:
@@ -784,10 +787,6 @@
 		
 		<hr />
 	</div>
-
-	<script>
-		$('#token').focus();
-	</script>
 
 </body>
 </html:html>

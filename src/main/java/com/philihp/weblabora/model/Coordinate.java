@@ -36,4 +36,19 @@ public class Coordinate {
 	public String toString() {
 		return "("+x+","+y+")";
 	}
+
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Coordinate)) {
+			return false;
+		}
+		Coordinate right = (Coordinate)obj;
+		return (x == right.x) && (y == right.y);
+	}
+
+	public int hashCode() {
+		return x ^ y;
+	}
 }

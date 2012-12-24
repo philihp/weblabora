@@ -5,6 +5,7 @@ import java.util.Set;
 import com.philihp.weblabora.model.Clergyman;
 import com.philihp.weblabora.model.Terrain;
 import com.philihp.weblabora.model.TerrainTypeEnum;
+import com.philihp.weblabora.model.TerrainUseEnum;
 import com.philihp.weblabora.model.WeblaboraException;
 
 public abstract class Erection {
@@ -72,7 +73,14 @@ public abstract class Erection {
 	public String getName() {
 		return name;
 	}
-	
+
+	/**
+	 * Returns terrain use corresponding to this erection.
+	 * 
+	 * @return Terrain use corresponding to this erection.
+	 */
+	public abstract TerrainUseEnum getTerrainUse();
+
 	public Set<TerrainTypeEnum> getTerrains() {
 		return terrains;
 	}
