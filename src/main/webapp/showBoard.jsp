@@ -15,11 +15,9 @@
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/colorbox.css" />
 <link rel="stylesheet" href="css/weblabora.css" />
-<!--<script src="//www.google.com/jsapi"></script>-->
-<!-- <script> -->
-<!-- 	google.load("jquery", "1.7.1");-->
-<!-- </script> -->
-<script src="js/lib/jquery-1.7.1.js"></script>
+<link href="css/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+<script src="js/lib/jquery-1.8.3.js"></script>
+<script src="js/lib/jquery-ui-1.8.3.js"></script>
 <script src="js/lib/jquery.colorbox.js"></script>
 <script>
 	$(document).bind('cbox_complete', function() {
@@ -151,6 +149,7 @@
 
 	});
 </script>
+<script src="js/movebuilder.js"></script>
 
 <script type="text/javascript">
 	var _gaq = _gaq || [];
@@ -711,6 +710,7 @@
 
 		<c:if test="${empty param.stateId}">
 			<hr />
+			<div id="newMoveBlock">
 			New Move:
 			<html:form action="/makeMove.do">
 				<html:hidden property="stateId" value="${game.activeStates[fn:length(game.activeStates)-1].stateId}" />
@@ -720,6 +720,7 @@
 				<html:submit property="submit">Save (for later)</html:submit>
 			</html:form>
 			<a href="http://philihp.github.com/WebLabora/">Command Syntax Reference</a>
+			</div>
 
 			<html:form action="/leaveGame.do">
 				<html:hidden property="gameId" value="${game.gameId}" />

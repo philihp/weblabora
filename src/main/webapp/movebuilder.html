@@ -1,0 +1,78 @@
+<html>
+<head>
+
+<link href="css/jquery-ui.css" rel="stylesheet">
+<script src="js/lib/jquery-1.8.3.js"></script>
+<script src="js/lib/jquery-ui-1.8.3.js"></script>
+<style>
+#movebuilder {
+  width: 12em;
+  background-color: #B0E0FF;
+  position: fixed;
+  top: 75px;
+  z-index: 10000;
+  border-radius: 4px;
+}
+#movebuilder ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+#movebuilder ul li {
+  margin: 0.5em;
+  background-color: #B0E0FF;
+}
+#actions .handle {
+  cursor: move;
+  float: right;
+  background-color: #8080FF;
+}
+</style>
+<script>
+
+$(document).ready(function() {
+	$('.sortable').sortable({
+		handle:'.handle',
+		axis: 'y',
+		revert: 'invalid'
+	});
+	$('div').disableSelection();
+	console.log('ready');
+});
+</script>
+
+</head>
+<body>
+
+<div id="movebuilder">
+
+Actions Actions:
+
+<ul id="actions" class="sortable">
+  <li><div class="handle">==</div>P(0,COAST)</li>
+  <li><div class="handle">==</div>B(I08,-1,0)</li>
+  <li><div class="handle">==</div>U(I08,Be)</li>
+  <li>
+  
+  	<select>
+  	  <option>
+      <option>Build</option>
+      <option>Buy District</option>
+      <option>Buy Plot</option>
+      <option>Convert</option>
+      <option>Cut Peat</option>
+      <option>Fell Trees</option>
+      <option>Settle</option>
+      <option>Use</option>
+      <option>Work Order</option>
+  	</select>
+    
+  
+  </li>
+</ul>
+
+
+</div>
+
+</body>
+</html>
