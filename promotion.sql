@@ -22,4 +22,6 @@ update weblabora_game set stage='IN_PROGRESS' where player1_user_id is not null 
 update weblabora_game set stage='IN_PROGRESS' where player1_user_id is not null and player2_user_id is not null and player3_user_id is not null and player4_user_id is not null and players = 4;
 
 alter table weblabora_state add active int(0);
+update weblabora_state set active = 0;
 delete from weblabora_game where game_id=10767;
+update weblabora_state set active=1 where state_id in (select state_id from weblabora_game);
