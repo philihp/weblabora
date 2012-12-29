@@ -142,7 +142,9 @@
 	})();
 </script>
 
+<%--
 <script src="js/movebuilder.js" type="text/javascript"></script>
+--%>
 
 </head>
 
