@@ -7,6 +7,7 @@ public class FacebookCredentials {
 	private String firstName;
 	private String link;
 	private String username;
+	private String email;
 
 	public String getUsername() {
 		return username;
@@ -51,5 +52,13 @@ public class FacebookCredentials {
 
 	public void setFacebookId(String facebookId) {
 		this.facebookId = facebookId;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

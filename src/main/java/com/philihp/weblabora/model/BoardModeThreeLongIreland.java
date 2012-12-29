@@ -1,8 +1,6 @@
 package com.philihp.weblabora.model;
 
-import static com.philihp.weblabora.model.Wheel.Position.E;
 import static com.philihp.weblabora.model.Wheel.Position.H;
-import static com.philihp.weblabora.model.Wheel.Position.K;
 
 import java.util.ArrayList;
 import java.util.List;

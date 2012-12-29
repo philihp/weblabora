@@ -1,7 +1,5 @@
 package com.philihp.weblabora.util;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.servlet.ServletContextEvent;

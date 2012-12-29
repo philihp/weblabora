@@ -2,7 +2,6 @@ package com.philihp.weblabora.util;
 
 import java.lang.reflect.Type;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -29,6 +28,8 @@ public class FacebookCredentialsDeserializer implements
 				credentials.setLink(entry.getValue().getAsString());
 			else if ("username".equals(entry.getKey()))
 				credentials.setUsername(entry.getValue().getAsString());
+			else if ("email".equals(entry.getKey()))
+				credentials.setEmail(entry.getValue().getAsString());
 		}
 		return credentials;
 	}

@@ -1,12 +1,6 @@
 package com.philihp.weblabora.model;
 
-import static com.philihp.weblabora.model.TerrainTypeEnum.*;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-
-import com.philihp.weblabora.model.building.*;
+import com.philihp.weblabora.model.building.Building;
 
 public class CommandBuild implements MoveCommand, InvalidDuringSettlement {
 
@@ -20,7 +14,7 @@ public class CommandBuild implements MoveCommand, InvalidDuringSettlement {
 				Integer.parseInt(params.get(1)),
 				Integer.parseInt(params.get(2)));
 		
-		System.out.println("Building "+params.get(0)+" at ("+params.get(1)+","+params.get(2)+")");
+		//System.out.println("Building "+params.get(0)+" at ("+params.get(1)+","+params.get(2)+")");
 	}
 	
 	public static void execute(Board board, String buildingId, int x, int y)
@@ -51,6 +45,10 @@ public class CommandBuild implements MoveCommand, InvalidDuringSettlement {
 		
 		if(building.getTerrains().contains(location.getTerrainType()) == false) {
 			throw new WeblaboraException("The location at ("+x+","+y+") has a terrain of "+location.getTerrainType()+", but "+building.getName()+" can only be built on "+building.getTerrains());
+		}
+		
+		if(building.isCloister() && !location.isCloisterLinked()) {
+			throw new WeblaboraException("The location at ("+x+","+y+") is not a neighbor to a cloister erection, but "+building.getName()+" is a cloister erection");
 		}
 		
 		if(player.canAffordCost(building.getBuildCost()) == false) {

@@ -1,6 +1,5 @@
 package com.philihp.weblabora.action;
 
-import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,12 +19,11 @@ public class AuthenticateHijack extends Action {
 			throws Exception {
 
 		HijackForm form = (HijackForm) actionForm;
-		EntityManager em = (EntityManager)request.getAttribute("em");
 		
 		String hijackPassword = (String)getServlet().getServletContext().getAttribute("hijack_password");
 
 		if (form.getFacebookId() != null && form.getPassword() != null && form.getPassword().equals(hijackPassword)) {
-			User user = BaseAction.findUser(em, form.getFacebookId());
+			User user = null;//BaseAction.findUser(em, form.getFacebookId());
 			request.getSession().setAttribute("user", user);
 		}
 

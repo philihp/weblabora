@@ -6,7 +6,6 @@ public class BuildCost {
 	private int stone = 0;
 	private int straw = 0;
 	private int coin = 0;
-	private int peat = 0;
 
 	private BuildCost() {
 	}
@@ -18,7 +17,6 @@ public class BuildCost {
 		if(getStone() > 0) s.append(", "+getStone()+" stone");
 		if(getStraw() > 0) s.append(", "+getStraw()+" straw");
 		if(getCoin() > 0) s.append(", "+getCoin()+" coins");
-		if(getPeat() > 0) s.append(", "+getPeat()+" peat");
 		if("".equals(s.toString())) return "";
 		return s.toString().substring(2);
 	}
@@ -51,11 +49,6 @@ public class BuildCost {
 		coin += quantity;
 		return this;
 	}
-	
-	public BuildCost peat(int quantity) {
-		peat += quantity;
-		return this;
-	}
 
 	public int getWood() {
 		return wood;
@@ -75,10 +68,6 @@ public class BuildCost {
 
 	public int getCoin() {
 		return coin;
-	}
-	
-	public int getPeat() {
-		return peat;
 	}
 
 }

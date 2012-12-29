@@ -1,25 +1,23 @@
 package com.philihp.weblabora.jpa;
 
 import static javax.persistence.AccessType.FIELD;
+import static javax.persistence.FetchType.LAZY;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Access;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Basic;
-import javax.persistence.JoinColumn;
 import javax.persistence.Transient;
-
-import static javax.persistence.FetchType.LAZY;
 
 @Entity(name = "State")
 @Table(name = "weblabora_state")
@@ -49,6 +47,10 @@ public class State extends BasicEntity {
 	@ManyToOne(fetch = LAZY, targetEntity = com.philihp.weblabora.jpa.Game.class)
 	@JoinColumn(name = "game_id", referencedColumnName="game_id")
 	private Game game;
+	
+	@Basic
+	@Column(name = "active")
+	private boolean active;
 
 	public int getStateId() {
 		return stateId;
@@ -109,6 +111,14 @@ public class State extends BasicEntity {
 		} while(state != null);
 		Collections.reverse(list);
 		return list;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }

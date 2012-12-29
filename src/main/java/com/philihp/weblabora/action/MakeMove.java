@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 
 import com.philihp.weblabora.form.MoveForm;
 import com.philihp.weblabora.jpa.Game;
@@ -39,66 +41,71 @@ public class MakeMove extends BaseAction {
 		Game game = query.getSingleResult();
 		
 		if(game.getState().getStateId() != form.getStateId()) {
-			return mapping.findForward("root");
+			ActionMessages messages = getMessages(request);
+			messages.add(
+					ActionMessages.GLOBAL_MESSAGE,
+					new ActionMessage(
+							"message.badState",form.getStateId(),game.getState().getStateId()));
+			
+
+			saveMessages(request.getSession(), messages);
+			return calculateGameForward(mapping, game);
 		}
 		
+		Board board = new Board(
+				GamePlayers.valueOf(game.getPlayers()),
+				GameLength.valueOf(game.getLength()),
+				GameCountry.valueOf(game.getCountry())
+				);
+		MoveProcessor.processMoves(board, game.getActiveStates(), null);
+		try {
+			if(Arrays.asList(game.getAllUsers()).contains(user) == false)
+				throw new WeblaboraException("User "+user+" is not one of the players in game "+game.getGameId()); 
+			
+			if(board.isGameOver())
+				throw new WeblaboraException("Game has already ended.");
+			
+			board.preMove(new State());
+			MoveProcessor.processActions(board, form.getToken());
+			board.testValidity();
+		}
+		catch(WeblaboraException e) {
+			request.setAttribute("error", e);
+			request.setAttribute("game", game);
+			request.setAttribute("token", form.getToken());
+			return mapping.findForward("badMove");
+		}
 		
 		State state = searchForExploredState(game, form.getToken());
 		if (state != null) {
 			// all of this has happened before. all of this will happen again.
-			game.setState(state);
+			state.setActive(true);
 		} else {
-			Board board = new Board(
-					GamePlayers.valueOf(game.getPlayers()),
-					GameLength.valueOf(game.getLength()),
-					GameCountry.valueOf(game.getCountry())
-					);
-			MoveProcessor.processMoves(board, user.getActiveGame().getStates(),null);
-			try {
-				if(Arrays.asList(game.getAllUsers()).contains(user) == false)
-					throw new WeblaboraException("User "+user+" is not one of the players in game "+game.getGameId()); 
-				
-				if(board.isGameOver())
-					throw new WeblaboraException("Game has already ended.");
-				
-				state = new State();
-				state.setToken(form.getToken());
-				state.setSrcState(game.getState());
-				state.setExplorer(user);
-				board.preMove(state);
-				MoveProcessor.processActions(board, form.getToken());
-				board.testValidity();
-			}
-			catch(WeblaboraException e) {
-				request.setAttribute("error", e);
-				request.setAttribute("game", game);
-				request.setAttribute("token", form.getToken());
-				return mapping.findForward("badMove");
-			}
-			
-			em.persist(state);
-			game.setState(state);
+			state = new State();
+			state.setToken(form.getToken());
+			state.setSrcState(game.getState());
+			state.getSrcState().getDstStates().add(state); //needed for bidirectional relationships
+			state.setExplorer(user);
+			state.setGame(game);
+			state.setActive(true);
+			em.persist(state); //dstStates isn't updated automatically
+			game.getStates().add(state);
 
 			Game.Player player = ShowGame.findPlayerInGame(game, user);
 			if(player != null) {
 				player.setMove("");
 			}
-			
 		}
+		game.updateTimeStamps();
 		
-		String to = null;
-		for(User gameUser : game.getAllUsers()) {
-			if(gameUser != null) {
-				if(to == null) 
-					to = gameUser.getFacebookId();
-				else
-					to += ","+gameUser.getFacebookId();
-			}
-		}
-		request.setAttribute("to",to);
-		request.setAttribute("move",form.getToken());
-
-		return mapping.findForward("madeMove");
+		
+		return calculateGameForward(mapping, game);
+	}
+	
+	private ActionForward calculateGameForward(ActionMapping mapping, Game game) {
+		ActionForward forward = mapping.findForward("show-game");
+		String path = forward.getPath()+"?gameId="+game.getGameId();
+		return new ActionForward(forward.getName(), path, forward.getRedirect(), forward.getModule());
 	}
 
 	protected State searchForExploredState(Game game, String token) throws WeblaboraException {

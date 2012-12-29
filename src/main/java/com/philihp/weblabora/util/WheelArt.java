@@ -1,8 +1,5 @@
 package com.philihp.weblabora.util;
 
-import com.philihp.weblabora.model.GameLength;
-import com.philihp.weblabora.model.GamePlayers;
-import com.philihp.weblabora.model.Wheel;
 
 public class WheelArt {
 

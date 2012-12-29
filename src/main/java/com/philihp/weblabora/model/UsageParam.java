@@ -1,11 +1,5 @@
 package com.philihp.weblabora.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-
-import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.Erection;
 
 public class UsageParam {

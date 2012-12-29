@@ -1,12 +1,5 @@
 package com.philihp.weblabora.model;
 
-import static com.philihp.weblabora.model.TerrainTypeEnum.*;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-
-import com.philihp.weblabora.model.building.*;
 
 public class CommandConvert implements MoveCommand {
 
@@ -18,7 +11,7 @@ public class CommandConvert implements MoveCommand {
 
 		execute(board, usageParam);
 
-		System.out.println("Converting " + usageParam);
+		//System.out.println("Converting " + usageParam);
 	}
 
 	public static void execute(Board board, UsageParam param) throws WeblaboraException {

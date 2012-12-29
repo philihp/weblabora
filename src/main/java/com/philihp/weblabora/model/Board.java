@@ -343,6 +343,7 @@ public class Board {
 		else if(moveInRound == 1) {
 			preRound();
 		}
+		
 		getMoveList().add(new HistoryEntry(state, getPlayer(getActivePlayer()).getColor()));
 	
 		if(!isGameOver()) {

@@ -2,10 +2,6 @@ package com.philihp.weblabora.form;
 
 import org.apache.struts.action.ActionForm;
 
-import com.philihp.weblabora.model.GamePlayers;
-
-import static com.philihp.weblabora.model.GamePlayers.*;
-
 public class CreateGameForm extends ActionForm {
 
 	Integer players;

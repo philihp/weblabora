@@ -1,16 +1,5 @@
 package com.philihp.weblabora.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.StringTokenizer;
-
-import org.apache.commons.chain.Command;
-import org.apache.commons.chain.Context;
-
 import com.philihp.weblabora.jpa.State;
 
 public final class MoveProcessor {
@@ -22,11 +11,11 @@ public final class MoveProcessor {
 	public static void processMoves(Board board, Iterable<State> allMoves, Integer endStateId) throws WeblaboraException {
 		boolean breakNextIteration = false;
 		for(State state : allMoves) {
+			if(state.getToken() == null) continue; //ignore the first null state.
 			if(breakNextIteration) {
 				board.setNextState(state);
 				break;
 			}
-			System.out.println("State: "+state.getStateId());
 			board.preMove(state);
 			processActions(board,state.getToken());
 			board.postMove();

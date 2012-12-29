@@ -1,9 +1,8 @@
 package com.philihp.weblabora.model;
 
 import static com.philihp.weblabora.model.TerrainTypeEnum.PLAINS;
-import static com.philihp.weblabora.model.Wheel.Position.E;
-import static com.philihp.weblabora.model.Wheel.Position.H;
-import static com.philihp.weblabora.model.Wheel.Position.K;
+import static com.philihp.weblabora.model.Wheel.Position.D;
+import static com.philihp.weblabora.model.Wheel.Position.F;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,17 +139,18 @@ public class BoardModeFourShortFrance extends BoardMode {
 
 	@Override
 	public int grapeActiveOnRound() {
-		return 8;
+		return 4;
 	}
 
 	@Override
 	public int stoneActiveOnRound() {
-		return 13;
+		return 6;
 	}
 
 	@Override
 	public void setWheelTokens(Wheel wheel) {
-		wheel.grape.setPosition(H);
+		wheel.grape.setPosition(D);
+		wheel.stone.setPosition(F);
 	}
 
 	@Override

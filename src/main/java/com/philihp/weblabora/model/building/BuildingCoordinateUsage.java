@@ -8,7 +8,6 @@ import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.UsageParamCoordinates;
-import com.philihp.weblabora.model.UsageParamDouble;
 import com.philihp.weblabora.model.WeblaboraException;
 
 abstract class BuildingCoordinateUsage extends Building {

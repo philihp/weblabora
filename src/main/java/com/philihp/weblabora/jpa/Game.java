@@ -1,13 +1,10 @@
 package com.philihp.weblabora.jpa;
 
 import static javax.persistence.AccessType.FIELD;
-import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Access;
@@ -19,23 +16,30 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.philihp.weblabora.model.WeblaboraException;
-import javax.persistence.Enumerated;
-import static javax.persistence.EnumType.STRING;
 
 @Entity(name = "Game")
 @Access(FIELD)
 @Table(name = "weblabora_game")
 public class Game extends BasicEntity {
 
+	public enum Stage {
+		RECRUITING,
+		IN_PROGRESS,
+		FINISHED
+	}
+	
 	@Embeddable
 	@Access(FIELD)
 	public static class Player {
@@ -114,9 +118,9 @@ public class Game extends BasicEntity {
 	@AssociationOverride(name = "user", joinColumns = @JoinColumn(name = "player4_user_id", referencedColumnName = "user_id"))
 	private Player player4;
 	
-	@ManyToOne(fetch = LAZY, targetEntity = com.philihp.weblabora.jpa.State.class)
-	@JoinColumn(name = "state_id", referencedColumnName = "state_id")
-	private State state;
+//	@ManyToOne(fetch = LAZY, targetEntity = com.philihp.weblabora.jpa.State.class)
+//	@JoinColumn(name = "state_id", referencedColumnName = "state_id")
+//	private State state;
 
 	@Column(name = "length")
 	@Basic
@@ -129,7 +133,19 @@ public class Game extends BasicEntity {
 	@Column(name = "country")
 	@Basic
 	private String country;
-
+	
+	@Column(name = "stage")
+	@Enumerated(EnumType.STRING)
+	private Stage stage;
+	
+	@OneToMany(mappedBy="game", fetch=LAZY)
+	@OrderBy("dateCreated ASC")
+	private List<State> states;
+	
+	@Column(name = "state_id")
+	@Basic
+	private Integer stateId;
+	
 	public Game() {
 		// player1-4 must not be null
 		this.player1 = new Player();
@@ -178,14 +194,6 @@ public class Game extends BasicEntity {
 		this.player4 = player4;
 	}
 
-	public State getState() {
-		return state;
-	}
-
-	public void setState(State currentState) {
-		this.state = currentState;
-	}
-
 	public String getLength() {
 		return length;
 	}
@@ -208,6 +216,14 @@ public class Game extends BasicEntity {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+	
+	public Stage getStage() {
+		return stage;
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
 	}
 
 	@Transient
@@ -242,6 +258,30 @@ public class Game extends BasicEntity {
 	}
 	
 	@Transient
+	public boolean isGameFull() {
+		switch(players) {
+		case 4:
+			if (player4 == null || player4.getUser() == null)
+				return false;
+			//fall through
+		case 3:
+			if (player3 == null || player3.getUser() == null)
+				return false;
+			//fall through
+		case 2:
+			if (player2 == null || player2.getUser() == null)
+				return false;
+			//fall through
+		case 1:
+			if (player1 == null || player1.getUser() == null)
+				return false;
+			//fall through
+		default:
+			return true;
+		}
+	}
+	
+	@Transient
 	public boolean isUndoable() {
 		/*
 		long movedAt = this.getState().getDateCreated().getTime();
@@ -252,21 +292,44 @@ public class Game extends BasicEntity {
 	}
 	
 	@Transient
-	public List<State> getStates() {
-		if(getState() != null) {
-			return getState().getStates();
-		}
-		else {
-			return new ArrayList<State>();
-		}
-	}
-
-	@Transient
 	public String getName() {
 		String name = "Game #"+gameId+", " + new SimpleDateFormat("yyyy-MM-dd").format(getDateCreated());
 		// if(player1.user != null) {
 		// name += " by "+player1.user.getName();
 		// }
 		return name;
+	}
+
+	public List<State> getStates() {
+		if(states == null) states = new ArrayList<State>();
+		return states;
+	}
+
+	public void setStates(List<State> states) {
+		this.states = states;
+	}
+	
+	@Transient
+	public List<State> getActiveStates() {
+		List<State> activeStates = new ArrayList<State>();
+		for(State state : getStates()) {
+			if(state.isActive()) {
+				activeStates.add(state);
+			}
+		}
+		return activeStates;
+	}
+	
+	@Transient
+	public State getState() {
+		List<State> states = getActiveStates();
+		return states.get(states.size()-1);
+	}
+	
+	public Integer getStateId() {
+		return stateId;
+	}
+	public void setStateId(Integer stateId) {
+		this.stateId = stateId;
 	}
 }

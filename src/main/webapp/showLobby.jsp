@@ -19,6 +19,12 @@
 <!-- <script> -->
 <!-- 	google.load("jquery", "1.7.1");-->
 <!-- </script> -->
+<style>
+td.avatar-cell {
+	height: 50px;
+	width: 50px;
+}
+</style>
 <script src="js/lib/jquery-1.7.1.js"></script>
 <script src="js/lib/jquery.colorbox.js"></script>
 <script>
@@ -39,24 +45,61 @@
 			speed : 200,
 			transition: "elastic"
 		});
+		$('#createGameButton').colorbox({
+			href : "createGameForm.do",
+			speed : 200,
+			transition: "elastic"
+		});
 		
-		$('#findGamesButton').click();
+		//$('#findGamesButton').click();
 	});
-</script>
+</script>		
 
 </head>
 
 <body>
 
-	<div class="userbar">
-		<div class="container">
-			<img src="http://graph.facebook.com/${user.facebookId}/picture" height="50" width="50" title="${user.facebookId}"/>
-			
-			${user.name}
-			|
-			<button id="findGamesButton">Find A Game To Join</button>
-		</div>
+    <c:import url="jsp/userbar.jsp">
+    	<c:param name="title">Weblabora</c:param>
+    </c:import>
+    
+    <div class="container">
+		<c:import url="jsp/notifications.jsp" />
 	</div>
+	
+	<div class="container">
+		<c:import url="jsp/showYourGames.jsp" />
+	</div>
+	
+	<div class="container">
+    	<c:import url="jsp/showRecruitingGames.jsp" />
+	</div>
+	
+	<div class="container">
+		<h2>Games currently in progress:</h2>
+		<ul>
+			<logic:iterate id="game" name="inProgressGames">
+				<li>
+					<html:link action="/showGame.do" paramId="gameId" paramName="game" paramProperty="gameId">
+						#${game.gameId}, <fmt:formatDate value="${game.dateCreated}" pattern="yyyy-MM-dd" />
+					</html:link> &#x25e2;
+				</li>
+			</logic:iterate>
+		</ul>
+	</div>
+
+	<div class="container">
+		<h2>Finished Games:</h2>
+		<ul>
+			<logic:iterate id="game" name="finishedGames">
+				<li>
+					<html:link action="/showGame.do" paramId="gameId" paramName="game" paramProperty="gameId">
+						#${game.gameId}, <fmt:formatDate value="${game.dateCreated}" pattern="yyyy-MM-dd" />
+					</html:link> &#x25e2;
+				</li>
+			</logic:iterate>
+		</ul>
+	</div>	
 
 </body>
 </html:html>

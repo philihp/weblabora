@@ -13,9 +13,6 @@ import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.State;
 import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.model.Color;
-import com.philihp.weblabora.model.GameCountry;
-import com.philihp.weblabora.model.GameLength;
-import com.philihp.weblabora.model.GamePlayers;
 
 public class CreateGame extends BaseAction {
 
@@ -27,9 +24,11 @@ public class CreateGame extends BaseAction {
 		
 		State state = new State();
 		state.setExplorer(user);
+		state.setActive(true);
 		em.persist(state);
 		
 		Game game = new Game();
+		game.setStage(Game.Stage.RECRUITING);
 		game.getPlayer1().setUser(user);
 		game.getPlayer1().setColor(Color.RED.toString());
 		game.getPlayer1().setMove("");
@@ -42,9 +41,10 @@ public class CreateGame extends BaseAction {
 		game.setCountry(form.getCountry());
 		game.setLength(form.getLength());
 		game.setPlayers(form.getPlayers());
-		user.setActiveGame(game);
-		game.setState(state);
+		game.getStates().add(state);
 		em.persist(game);
+		
+		state.setGame(game);
 
 		return mapping.findForward("root");
 	}

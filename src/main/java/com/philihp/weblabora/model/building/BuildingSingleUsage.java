@@ -7,7 +7,6 @@ import com.philihp.weblabora.model.BuildCost;
 import com.philihp.weblabora.model.SettlementRound;
 import com.philihp.weblabora.model.TerrainTypeEnum;
 import com.philihp.weblabora.model.UsageParam;
-import com.philihp.weblabora.model.UsageParamDouble;
 import com.philihp.weblabora.model.UsageParamSingle;
 import com.philihp.weblabora.model.WeblaboraException;
 

@@ -5,9 +5,6 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-
-import com.philihp.weblabora.model.Scorecard.PlayerScore;
 import com.philihp.weblabora.model.building.Erection;
 import com.philihp.weblabora.model.building.Settlement;
 
@@ -39,7 +36,7 @@ public class Scorecard {
 			if(spot == null) return 0;
 			
 			//handle mountain offsets
-			if(spot.getTerrainType() == TerrainTypeEnum.HIDDEN)
+			if(spot.getTerrainType() == TerrainTypeEnum.MERGED_NORTH)
 				spot = settlement.getLocation().getLandscape().getTerrainAt(c.north());
 
 			Erection erection = spot.getErection();

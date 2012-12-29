@@ -1,12 +1,7 @@
 package com.philihp.weblabora.model;
 
-import static com.philihp.weblabora.model.TerrainTypeEnum.*;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-
-import com.philihp.weblabora.model.building.*;
+import com.philihp.weblabora.model.building.Building;
+import com.philihp.weblabora.model.building.BuildingEnum;
 import com.philihp.weblabora.util.IntegerUtil;
 
 public class CommandUse implements MoveCommand, InvalidDuringSettlement {
@@ -62,7 +57,7 @@ public class CommandUse implements MoveCommand, InvalidDuringSettlement {
 		
 		execute(board, buildingId, usageParam, usingPrior, params.getPlaceClergyman());
 
-		System.out.println("Using " + buildingId + " with " + usageParam);
+		//System.out.println("Using " + buildingId + " with " + usageParam);
 	}
 
 	private static void execute(Board board, BuildingEnum buildingId,

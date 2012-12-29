@@ -1,28 +1,21 @@
 package com.philihp.weblabora.action;
 
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 
 import com.philihp.weblabora.form.GameForm;
-import com.philihp.weblabora.form.MoveForm;
 import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.State;
 import com.philihp.weblabora.jpa.User;
-import com.philihp.weblabora.model.Board;
-import com.philihp.weblabora.model.GameCountry;
-import com.philihp.weblabora.model.GameLength;
-import com.philihp.weblabora.model.GamePlayers;
-import com.philihp.weblabora.model.MoveProcessor;
 import com.philihp.weblabora.model.WeblaboraException;
 
 public class UndoMove extends BaseAction {
@@ -33,29 +26,27 @@ public class UndoMove extends BaseAction {
 		GameForm form = (GameForm) actionForm;
 		EntityManager em = (EntityManager)request.getAttribute("em");
 
-		TypedQuery<Game> query = em.createQuery("SELECT g FROM Game g WHERE g.gameId = :gameId", Game.class);
-		query.setParameter("gameId", form.getGameId());
-		Game game = query.getSingleResult();
-		
-		if(game.getState().getStateId() != form.getStateId()) {
-			return mapping.findForward("root");
-		}
-		
-		/*
-		if(game.isUndoable() == false) {
-			throw new WeblaboraException("More than 24 hours has elapsed since that move has been made.");
-		}
-		else if (game.getState().getExplorer().equals(user) == false) {
-			throw new WeblaboraException("Only the user who made a move can undo it");
+		Game game = em.find(Game.class, form.getGameId());
+
+		int gameCurrentStateId = game.getState().getStateId();
+		if(gameCurrentStateId != form.getStateId()) {
+			ActionMessages messages = getMessages(request);
+			messages.add(
+					ActionMessages.GLOBAL_MESSAGE,
+					new ActionMessage(
+							"message.cantUndo",form.getStateId(), form.getGameId(), gameCurrentStateId));
+			
+			saveMessages(request.getSession(), messages);
+			return mapping.findForward("root"); 
 		}
 		else {
-			game.setState(game.getState().getSrcState());
-		}
-		*/
-
-		game.setState(game.getState().getSrcState());
+			game.getState().setActive(false);
+			game.updateTimeStamps();
 		
-		return mapping.findForward("madeMove");
+			ActionForward forward = mapping.findForward("undone");
+			forward = new ActionForward(forward.getPath()+"?gameId="+game.getGameId(), forward.getRedirect());
+			return forward;
+		}
 	}
 	
 

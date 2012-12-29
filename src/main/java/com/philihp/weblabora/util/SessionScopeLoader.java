@@ -2,12 +2,10 @@ package com.philihp.weblabora.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-
-import com.philihp.weblabora.action.*;
-import com.philihp.weblabora.jpa.User;
-
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
+
+import com.philihp.weblabora.jpa.User;
 
 /**
  * Application Lifecycle Listener implementation class SessionScopeLoader
@@ -31,7 +29,7 @@ public class SessionScopeLoader implements HttpSessionListener {
 		if (offlineId != null) {
 			EntityManagerFactory emf = (EntityManagerFactory)se.getSession().getServletContext().getAttribute("emf");
 			EntityManager em = emf.createEntityManager();
-			User user = BaseAction.findUser(em, offlineId);
+			User user = em.find(User.class,offlineId);
 			se.getSession().setAttribute("user", user);
 			em.close();
 		}

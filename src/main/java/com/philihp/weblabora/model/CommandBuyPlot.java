@@ -2,7 +2,6 @@ package com.philihp.weblabora.model;
 
 import static com.philihp.weblabora.model.TerrainTypeEnum.*;
 
-import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.ArrayTable;
@@ -18,7 +17,7 @@ public class CommandBuyPlot implements MoveCommand {
 	
 	public static enum Side {
 		COAST(-2, WATER, TerrainTypeEnum.COAST, WATER, TerrainTypeEnum.COAST),
-		MOUNTAIN(5, HILLSIDE, TerrainTypeEnum.MOUNTAIN, HILLSIDE, HIDDEN);
+		MOUNTAIN(5, HILLSIDE, TerrainTypeEnum.MOUNTAIN, HILLSIDE, MERGED_NORTH);
 		
 		private int originColumn;
 		private TerrainTypeEnum[] terrains;

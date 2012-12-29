@@ -6,35 +6,36 @@
     version="2.0">
 	<persistence-unit name="labora-pu" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<non-jta-data-source>java:comp/env/jdbc/LaboraDB</non-jta-data-source>
 		<class>com.philihp.weblabora.jpa.BasicEntity</class>
 		<class>com.philihp.weblabora.jpa.User</class>
 		<class>com.philihp.weblabora.jpa.Game</class>
 		<class>com.philihp.weblabora.jpa.Game$Player</class>
 		<class>com.philihp.weblabora.jpa.State</class>
 		<class>com.philihp.weblabora.jpa.Config</class>
+		<class>com.philihp.weblabora.jpa.Fingerprint</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 
 		<properties>
 			
-			<property name="eclipselink.logging.level" value="WARNING" /> <!-- FINE turns on queries -->
+			<property name="eclipselink.logging.level" value="WARNING" /> <!-- FINE turns on queries, WARNING turns off -->
 			<property name="eclipselink.logging.timestamp" value="false" />
 			<property name="eclipselink.logging.session" value="false" />
 			<property name="eclipselink.logging.thread" value="false" />
 			
 			<property name="eclipselink.target-database" value="MySQL" />
 			
-			<!-- this is a workaround for Tomcat, otherwise Eclipselink can't find the JNDI datasource -->
-			<property name="eclipselink.session.customizer" value="com.philihp.weblabora.util.JPAEclipseLinkSessionCustomizer" />
-
 			<property name="eclipselink.ddl-generation" value="none" />
 			<!-- BE VERY CAREFUL ABOUT COMMITTING WITH DROP -->
 			<!--<property name="eclipselink.ddl-generation" value="create-tables" />-->
 			<!--<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />-->
 			<property name="eclipselink.ddl-generation.output-mode" value="database" />
-			
-			
-			
+		
+			<!-- so much easier than JNDI -->
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/philihp?zeroDateTimeBehavior=convertToNull" />
+			<property name="javax.persistence.jdbc.user" value="philihp" />
+			<property name="javax.persistence.jdbc.password" value="philihp1" />
+					
 		</properties>
 	</persistence-unit>
 </persistence>

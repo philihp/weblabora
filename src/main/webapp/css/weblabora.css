@@ -385,3 +385,50 @@ legend {
 	display: block;
 	padding: 2px;
 }
+
+
+input.error {
+  border: 1px solid red;
+  -webkit-animation-name: glow;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+}
+@-webkit-keyframes glow {
+  0% {
+    -webkit-box-shadow: 0 0 6px -1px #ff0000;
+    border: 1px solid red;
+  }
+  50% {
+    -webkit-box-shadow: 0 0 6px -1px #ff7f7f;
+    border: 1px solid black;
+  }
+  100% {
+    -webkit-box-shadow: 0 0 6px -1px #ff0000;
+    border: 1px solid red;
+  }
+}
+
+.errorBox,
+.messageBox {
+		border-radius: 25px;
+		border: 1px solid;
+		margin: 10px 0px;
+		padding: 15px 10px;
+}
+
+.errorBox:before {
+		content: "(x) ";
+}
+.errorBox {
+		color: #d8000c;
+		background-color: #ffbaba;
+}
+
+.messageBox:before {
+		content: "(!) ";
+}
+.messageBox {
+		color: #00529b;
+		background-color: #bde5f8;
+}

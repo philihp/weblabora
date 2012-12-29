@@ -1,12 +1,8 @@
 package com.philihp.weblabora.model;
 
-import static com.philihp.weblabora.model.TerrainTypeEnum.*;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-import com.philihp.weblabora.model.building.*;
+import com.philihp.weblabora.model.building.Settlement;
 
 public class CommandSettle implements MoveCommand {
 	
@@ -30,8 +26,7 @@ public class CommandSettle implements MoveCommand {
 				new UsageParam(params.get(3))
 				);
 		
-		
-		System.out.println("Settling "+params.get(0)+" at ("+params.get(1)+","+params.get(2)+")");
+		//System.out.println("Settling "+params.get(0)+" at ("+params.get(1)+","+params.get(2)+")");
 	}
 	
 	public static void execute(Board board, String settlementId, int x, int y, UsageParam payment)
