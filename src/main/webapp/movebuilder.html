@@ -6,73 +6,82 @@
 <script src="js/lib/jquery-ui-1.8.3.js"></script>
 <style>
 #movebuilder {
-  width: 12em;
-  background-color: #B0E0FF;
-  position: fixed;
-  top: 75px;
-  z-index: 10000;
-  border-radius: 4px;
+	width: 12em;
+	background-color: #B0E0FF;
+	position: fixed;
+	top: 75px;
+	z-index: 10000;
+	border-radius: 4px;
 }
+
 #movebuilder ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
 }
+
 #movebuilder ul li {
-  margin: 0.5em;
-  background-color: #B0E0FF;
+	margin: 0 0;
+	padding: 4px;
+	background-color: #B0E0FF;
 }
+
 #actions .handle {
-  cursor: move;
-  float: right;
-  background-color: #8080FF;
+	cursor: move;
+	float: right;
+	background-color: #8080FF;
+}
+#actions .deleter {
+	cursor: pointer;
+	float: right;
+	background-color: #FF8080; 
 }
 </style>
 <script>
-
-$(document).ready(function() {
-	$('.sortable').sortable({
-		handle:'.handle',
-		axis: 'y',
-		revert: 'invalid'
+	$(document).ready(function() {
+		$('.sortable').sortable({
+			handle : '.handle',
+			axis : 'y',
+			revert : 'invalid'
+		});
+		$('div .handle').disableSelection();
+		$('div .deleter').click(function() {
+			$(this).parent('li').hide('blind', function() { $(this).remove() });
+		});
+		
+		console.log('ready');
 	});
-	$('div').disableSelection();
-	console.log('ready');
-});
 </script>
 
 </head>
 <body>
 
-<div id="movebuilder">
+	<div id="movebuilder">
 
-Actions Actions:
+		Actions:
 
-<ul id="actions" class="sortable">
-  <li><div class="handle">==</div>P(0,COAST)</li>
-  <li><div class="handle">==</div>B(I08,-1,0)</li>
-  <li><div class="handle">==</div>U(I08,Be)</li>
-  <li>
-  
-  	<select>
-  	  <option>
-      <option>Build</option>
-      <option>Buy District</option>
-      <option>Buy Plot</option>
-      <option>Convert</option>
-      <option>Cut Peat</option>
-      <option>Fell Trees</option>
-      <option>Settle</option>
-      <option>Use</option>
-      <option>Work Order</option>
-  	</select>
-    
-  
-  </li>
-</ul>
+		<ul id="actions" class="sortable">
+			<li><div class="deleter">[X]</div><div class="handle">==</div>P(0,COAST)</li>
+			<li><div class="deleter">[X]</div><div class="handle">==</div>B(I08,-1,0)</li>
+			<li><div class="deleter">[X]</div><div class="handle">==</div>U(I08,Be)</li>
+			<li></li>
+		</ul>
+
+		<select id="moveselector">
+			<option></option>
+			<option value="B">Build</option>
+			<option value="D">Buy District</option>
+			<option value="P">Buy Plot</option>
+			<option value="V">Convert</option>
+			<option value="C">Cut Peat</option>
+			<option value="F">Fell Trees</option>
+			<option value="S">Settle</option>
+			<option value="U">Use</option>
+			<option value="W">Work Order</option>
+		</select>
 
 
-</div>
+	</div>
 
 </body>
 </html>

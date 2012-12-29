@@ -67,7 +67,7 @@ public class Terrain {
 	 * @return {@code true} if this terrain is a neighbor to a terrain
 	 *         containing a cloister erection. {@code false} otherwise.
 	 */
-	public boolean hasCloisterNeighbor() {
+	public boolean isCloisterLinked() {
 		Coordinate thisCoord = new Coordinate(x, y);
 		Coordinate masterCoord = terrainType.getMasterCoordinateFrom(thisCoord);
 		Coordinate slaveCoord = terrainType.getSlaveCoordinateFrom(masterCoord);
