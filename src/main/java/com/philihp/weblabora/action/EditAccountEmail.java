@@ -46,10 +46,8 @@ public class EditAccountEmail extends BaseAction {
 			return mapping.findForward("failure");
 		}
 		else {
-			
 			user.setUnvalidatedEmail(email);
 			user.setEmailValidator(UUID.randomUUID().toString());
-
 			
 			String emailSubject = "Weblabora Confirm Email";
 			String emailBody = "Hi "+user.getUsername()+",\n\nPlease confirm your new email by visiting this link:\n\nhttp://"+request.getServerName()+request.getContextPath()+"/registerValidate.do?validator="+user.getEmailValidator()+"\n\nIf you didn't sign up, please ignore this email. Someone at "+request.getRemoteAddr()+" tried (and failed) to register using your email address.\n\nLove,\nTeam Weblabora";

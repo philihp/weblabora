@@ -19,6 +19,7 @@ public class ShowAccount extends BaseAction {
 		AccountForm form = (AccountForm)actionForm;
 		
 		form.setEmail(user.getEmail());
+		form.setUsername(user.getUsername());
 
 		//if the user never set a password (like if they just signed up with facebook
 		//then let them just set a password without saying their current password.

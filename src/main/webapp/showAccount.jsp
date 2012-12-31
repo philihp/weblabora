@@ -68,11 +68,19 @@ have a gravatar, a neat design will be created for you based on it.
 <h2>Change Email</h2>
 <html:form action="/editAccountEmail.do">
 	<html:text property="email" errorStyleClass="error"></html:text>
-	<html:submit>Update Email</html:submit>
+	<html:submit>Change Email</html:submit>
 </html:form>
 <c:if test="${not empty user.unvalidatedEmail}">
 Currently waiting for confirmation at ${user.unvalidatedEmail}
 </c:if>
+</p>
+
+<p>
+<h2>Change Username</h2>
+<html:form action="/editAccountUsername.do">
+	<html:text property="username" errorStyleClass="error"></html:text>
+	<html:submit>Change Username</html:submit>
+</html:form>
 </p>
 
 <p>

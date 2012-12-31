@@ -132,8 +132,17 @@
 				name="accountForm"
 				scope="request"
 				validate="true"
-				input="/showAccount.do"
+				input="/showAccount.jsp"
 				type="com.philihp.weblabora.action.EditAccountEmail">
+			<forward name="success" path="/showAccount.do" redirect="true" />
+			<forward name="failure" path="/showAccount.jsp" />
+		</action>
+		<action path="/editAccountUsername"
+				name="accountForm"
+				scope="request"
+				validate="true"
+				input="/showAccount.jsp"
+				type="com.philihp.weblabora.action.EditAccountUsername">
 			<forward name="success" path="/showAccount.do" redirect="true" />
 			<forward name="failure" path="/showAccount.jsp" />
 		</action>

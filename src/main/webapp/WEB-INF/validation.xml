@@ -123,8 +123,16 @@
 		</form>
 		
 		<form name="accountForm">
-			<field property="email" depends="required,email">
+			<field property="email" depends="email">
 				<arg key="prompt.email" />
+			</field>
+			<field property="username" depends="required,minlength">
+				<arg key="prompt.username" />
+				<arg name="minlength" key="${var:minlength}" resource="false"  position="1"/>
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>5</var-value>
+				</var>
 			</field>
 		</form>
 		
