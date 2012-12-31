@@ -146,6 +146,10 @@ public class Game extends BasicEntity {
 	@Basic
 	private Integer stateId;
 	
+	@Column(name = "active_player")
+	@Basic
+	private Integer activePlayer;
+
 	public Game() {
 		// player1-4 must not be null
 		this.player1 = new Player();
@@ -331,5 +335,13 @@ public class Game extends BasicEntity {
 	}
 	public void setStateId(Integer stateId) {
 		this.stateId = stateId;
+	}
+	
+	public Integer getActivePlayer() {
+		return activePlayer;
+	}
+
+	public void setActivePlayer(Integer activePlayer) {
+		this.activePlayer = activePlayer;
 	}
 }

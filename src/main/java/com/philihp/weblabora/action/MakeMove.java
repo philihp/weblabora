@@ -18,6 +18,7 @@ import com.philihp.weblabora.form.MoveForm;
 import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.State;
 import com.philihp.weblabora.jpa.User;
+import com.philihp.weblabora.jpa.Game.Stage;
 import com.philihp.weblabora.model.Board;
 import com.philihp.weblabora.model.GameCountry;
 import com.philihp.weblabora.model.GameLength;
@@ -67,7 +68,16 @@ public class MakeMove extends BaseAction {
 			
 			board.preMove(new State());
 			MoveProcessor.processActions(board, form.getToken());
+			board.postMove();
 			board.testValidity();
+			
+			if(board.isGameOver()) {
+				game.setActivePlayer(null);
+				game.setStage(Stage.FINISHED);
+			}
+			else {
+				game.setActivePlayer(board.getActivePlayer());
+			}
 		}
 		catch(WeblaboraException e) {
 			request.setAttribute("error", e);

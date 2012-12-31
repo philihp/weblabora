@@ -44,10 +44,9 @@ public class ShowGameState extends BaseAction {
 					);
 			board.populateDetails(game);
 			MoveProcessor.processMoves(board, game.getActiveStates(), endState);
-			if(board.isGameOver() == false)
+			if(board.isGameOver() == false) {
 				board.preMove(new State()); //upkeep stuff before player makes a move
-			else
-				game.setStage(Stage.FINISHED);
+			}
 		}
 		return board;
 	}

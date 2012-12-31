@@ -86,6 +86,10 @@ public class NormalizeGame extends BaseAction {
 						game.getPlayer3().setUser(guesser.guessProbableUser(2));
 					if(game.getPlayer4().getUser() == null && game.getPlayers() >= 4)
 						game.getPlayer4().setUser(guesser.guessProbableUser(3));
+					game.setActivePlayer(null);
+				}
+				else {
+					game.setActivePlayer(board.getActivePlayer());
 				}
 			}
 			catch(WeblaboraException e) {

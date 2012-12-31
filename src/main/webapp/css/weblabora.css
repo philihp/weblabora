@@ -409,6 +409,10 @@ input.error {
   }
 }
 
+.yourTurn {
+	background-color: #fff373;
+}
+
 .errorBox,
 .messageBox {
 		border-radius: 25px;

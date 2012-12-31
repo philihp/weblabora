@@ -27,7 +27,11 @@
 			  		<th>White</th>
 			  	</tr>
 					<c:forEach items="${myGames}" var="game">
-						<tr>
+						<c:set var="yourTurn" value="${ (game.player1.user == user && game.activePlayer == 0 || 
+											             game.player2.user == user && game.activePlayer == 1 ||
+											             game.player3.user == user && game.activePlayer == 2 ||
+											             game.player4.user == user && game.activePlayer == 3)?true:false }"/>
+						<tr class="${yourTurn?'yourTurn':''}">
 							<td>
 								#${game.gameId}, <fmt:formatDate value="${game.dateCreated}" pattern="yyyy-MM-dd" /><br />
 								<html:link action="/showGame.do" paramId="gameId" paramName="game" paramProperty="gameId">View Game</html:link> &#x25e2;
@@ -126,6 +130,11 @@
 										</c:otherwise>
 									</c:choose>
 								</c:if>
+							</td>
+							<td>
+							<c:if test="${yourTurn}">
+								Your Turn!
+							</c:if>
 							</td>
 						</tr>
 					</c:forEach>
