@@ -196,6 +196,10 @@ div.container {
 
 .info {
 	float: right;
+	position: fixed;
+	top: 80px;
+	right: 0px;
+	width: 200px;
 }
 .info-line {
 	margin: 0;

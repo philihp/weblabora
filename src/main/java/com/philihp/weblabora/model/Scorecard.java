@@ -89,6 +89,10 @@ public class Scorecard {
 		public int getItemScore() {
 			return itemScore;
 		}
+		
+		public int getScore() {
+			return getSettlementTotalScore() + getShieldScore() + getItemScore();
+		}
 	}
 
 	private Map<Color, PlayerScore> scores = new EnumMap<Color, PlayerScore>(

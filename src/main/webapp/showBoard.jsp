@@ -160,6 +160,43 @@
 
 		<c:import url="jsp/notifications.jsp" />
 
+
+		<div class="info">
+			<c:choose>
+				<c:when test="${board.gameOver}">
+					<h3 class="info-line">Game Over</h3>
+				</c:when>
+				<c:when test="${board.settling}">
+					<h3 class="info-line">Settlement ${board.settlementRound}</h3>
+					<h3 class="info-line">Waiting on ${board.activePlayerColor}.</h3>
+				</c:when>
+				<c:otherwise>
+					<h3 class="info-line">Round ${board.round}, ${board.move} move.</h3>
+					<h3 class="info-line">Waiting on ${board.activePlayerColor}.</h3>
+				</c:otherwise>
+			</c:choose>
+			<hr />
+			<h4 class="info-line">
+				Plot Costs:
+				<c:forEach items="${board.plotCosts}" var="cost" varStatus="costStatus">
+					${cost}<c:if test="${not costStatus.last}">,</c:if>
+				</c:forEach>
+			</h4>
+			<h4 class="info-line">
+				District Costs:
+				<c:forEach items="${board.districtCosts}" var="cost" varStatus="costStatus">
+					${cost}<c:if test="${not costStatus.last}">,</c:if>
+				</c:forEach>
+			</h4>
+			<hr />
+			Scores:<br />
+			<c:forEach items="${board.scorecard.scores}" var="entry">
+				<b>${entry.key}</b>: ${entry.value.score}<br />
+			</c:forEach>
+			<hr />
+			<a class="show-future-building-button">Show Future Buildings</a>
+			<a class="hide-future-building-button">Hide	Future Buildings</a>
+		</div>
 		<div class="wheel">
 			<!-- ${board.mode.players} ${board.mode.country} ${board.mode.length} -->
 			<svg style="width: 300px; height: 300px;" viewbox="-150.5 -150.5 300 300">
@@ -400,37 +437,6 @@
 			</svg>
 		</div>
 
-		<div class="info">
-			<c:choose>
-				<c:when test="${board.gameOver}">
-					<h3 class="info-line">Game Over</h3>
-				</c:when>
-				<c:when test="${board.settling}">
-					<h3 class="info-line">Settlement ${board.settlementRound}</h3>
-					<h3 class="info-line">Waiting on ${board.activePlayerColor}.</h3>
-				</c:when>
-				<c:otherwise>
-					<h3 class="info-line">Round ${board.round}, ${board.move} move.</h3>
-					<h3 class="info-line">Waiting on ${board.activePlayerColor}.</h3>
-				</c:otherwise>
-			</c:choose>
-			<hr />
-			<h4 class="info-line">
-				Plot Costs:
-				<c:forEach items="${board.plotCosts}" var="cost" varStatus="costStatus">
-					${cost}<c:if test="${not costStatus.last}">,</c:if>
-				</c:forEach>
-			</h4>
-			<h4 class="info-line">
-				District Costs:
-				<c:forEach items="${board.districtCosts}" var="cost" varStatus="costStatus">
-					${cost}<c:if test="${not costStatus.last}">,</c:if>
-				</c:forEach>
-			</h4>
-			<a class="show-future-building-button">Show Future Buildings</a> <a class="hide-future-building-button">Hide
-				Future Buildings</a>
-		</div>
-
 		<div class="building-list" ondragstart="onBuildingDragStart(event)" ondragend="onBuildingDragEnd(event)"><!-- comment out white-space for inline-block spacing
 			<!-- comment out white-space for inline-block spacing
 			<c:forEach items="${board.unbuiltBuildings}" var="building">
@@ -582,10 +588,9 @@
 				-->
 				</div>
 
-				<a class="show-future-settlements-button show-future-settlements-button-${fn:toLowerCase(player.color)}">Show
-					Future Settlements</a> <a
-					class="hide-future-settlements-button hide-future-settlements-button-${fn:toLowerCase(player.color)}">Hide
-					Future Settlements</a> <br />
+				<a class="show-future-settlements-button show-future-settlements-button-${fn:toLowerCase(player.color)}">Show Future Settlements</a>
+				<a class="hide-future-settlements-button hide-future-settlements-button-${fn:toLowerCase(player.color)}">Hide Future Settlements</a>
+				<br />
 				<br />
 				<c:import url="jsp/inventoryType.jsp">
 					<c:param name="type" value="FiveFood" />
@@ -690,7 +695,7 @@
 				Settlement Score: ${entry.value.settlementTotalScore}<br />
 				Shield Score: ${entry.value.shieldScore}<br />
 				Item Score: ${entry.value.itemScore}<br />
-				<i>Total Score: ${entry.value.settlementTotalScore + entry.value.shieldScore + entry.value.itemScore}</i>
+				<i>Total Score: ${entry.value.score}</i>
 				<br />
 			</c:forEach>
 		</c:if>
@@ -753,21 +758,6 @@
 				</c:choose>
 			</div>
 		</c:forEach>
-
-		
-		<c:if test="${board.gameOver}">
-			<c:forEach items="${board.scorecard.scores}" var="entry">
-				<br />
-				<b>${entry.key}</b>:<br />
-				<c:forEach items="${entry.value.settlementScores}" var="settlementScore">
-					${settlementScore.settlement.name}: ${settlementScore.score}<br />
-				</c:forEach>
-				Settlement Score: ${entry.value.settlementTotalScore}<br />
-				Shield Score: ${entry.value.shieldScore}<br />
-				Item Score: ${entry.value.itemScore}<br />
-				<i>Total Score: ${entry.value.settlementTotalScore + entry.value.shieldScore + entry.value.itemScore}</i><br />
-			</c:forEach>
-		</c:if>
 
 		<c:if test="${not empty game.state.dstStates and empty param.stateId}">
 		<hr />
