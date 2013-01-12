@@ -177,7 +177,7 @@ public class BoardModeTwoShortIreland extends BoardMode {
 
 	@Override
 	public boolean isProductionBonusActive() {
-		return true;
+		return false;
 	}
 
 	@Override
