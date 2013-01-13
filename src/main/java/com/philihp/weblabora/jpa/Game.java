@@ -37,7 +37,8 @@ public class Game extends BasicEntity {
 	public enum Stage {
 		RECRUITING,
 		IN_PROGRESS,
-		FINISHED
+		FINISHED,
+		ABANDONED
 	}
 	
 	@Embeddable
