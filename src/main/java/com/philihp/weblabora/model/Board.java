@@ -33,10 +33,6 @@ public class Board {
 	
 	private BoardMode mode;
 	
-	public static final int[] PLOT_PURCHASE_PRICE = {3,4,4,5,5,5,6,6,7};
-	
-	public static final int[] DISTRICT_PURCHASE_PRICE = {2,3,4,4,5,5,6,7,8};
-
 	protected Wheel wheel;
 
 	protected Player[] players;
@@ -44,10 +40,6 @@ public class Board {
 	private int activePlayer;
 
 	private List<Building> unbuiltBuildings;
-	
-	private int plotsPurchased;
-	
-	private int districtsPurchased;
 	
 	private int startingPlayer;
 	
@@ -108,6 +100,8 @@ public class Board {
 		moveInRound = 1;
 		startingPlayer = 0;
 		startingMarker = new StartingMarker(players[0]);
+		
+		mode.setup();
 	}
 
 	public Wheel getWheel() {
@@ -120,6 +114,10 @@ public class Board {
 
 	public Player[] getPlayers() {
 		return players;
+	}
+	
+	protected void setPlayers(Player[] players) {
+		this.players = players;
 	}
 
 	public int getActivePlayer() {
@@ -246,12 +244,18 @@ public class Board {
 		}
 	}
 	
+	/**
+	 * @deprecated Moved to BoardMode.purchasePlot();
+	 */
 	public int purchasePlot() {
-		return PLOT_PURCHASE_PRICE[plotsPurchased++];
+		return mode.purchasePlot();
 	}
 	
+	/**
+	 * @deprecated Moved to BoardMode.purchaseDistrict();
+	 */
 	public int purchaseDistrict() {
-		return DISTRICT_PURCHASE_PRICE[districtsPurchased++];
+		return mode.purchaseDistrict();
 	}
 	
 	public StartingMarker getStartingMarker() {
@@ -310,10 +314,11 @@ public class Board {
 		mode.preRound();
 		
 		//3 - check to see if grapes/stone should become active
-		if(round == grapeActiveOnRound()) getWheel().getGrape().setActive(true);
-		if(round == stoneActiveOnRound()) getWheel().getStone().setActive(true);
+		if(round == mode.grapeActiveOnRound()) getWheel().getGrape().setActive(true);
+		if(round == mode.stoneActiveOnRound()) getWheel().getStone().setActive(true);
+		if(round == mode.jokerActiveOnRound()) getWheel().getJoker().setActive(true);
 	}
-	
+
 	public void preSettling() {
 		setSettlementRound(getSettlementRound().next());
 		getMoveList().add(new HistoryEntry("Settlement ("+getSettlementRound()+")"));
@@ -410,13 +415,19 @@ public class Board {
 	public String getActivePlayerColor() {
 		return getPlayer(getActivePlayer()).getColor().toString();
 	}
-	
+
+	/**
+	 * @deprecated Moved to BoardMode.getPlotCosts();
+	 */
 	public int[] getPlotCosts() {
-		return Arrays.copyOfRange(PLOT_PURCHASE_PRICE, plotsPurchased, PLOT_PURCHASE_PRICE.length); 
+		return mode.getPlotCosts();
 	}
-	
+
+	/**
+	 * @deprecated Moved to BoardMode.getDistrictCosts();
+	 */
 	public int[] getDistrictCosts() {
-		return Arrays.copyOfRange(DISTRICT_PURCHASE_PRICE, districtsPurchased, DISTRICT_PURCHASE_PRICE.length); 
+		return mode.getDistrictCosts();
 	}
 
 	public List<HistoryEntry> getMoveList() {
@@ -449,13 +460,6 @@ public class Board {
 		this.nextState = nextState;
 	}
 
-	private int grapeActiveOnRound() {
-		return mode.grapeActiveOnRound();
-	}
-
-	private int stoneActiveOnRound() {
-		return mode.stoneActiveOnRound();
-	}
 	
 	public int getMoveInRound() {
 		return this.moveInRound;

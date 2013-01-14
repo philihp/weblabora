@@ -460,9 +460,19 @@
 		<ul class="tabs">
 			<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
 				<li id="tab${playerStatus.index+1}"
-					class="tab tab--${player.activeClass} tab--${player.selectedClass} tab--${fn:toLowerCase(player.color)}"><img
-					src="https://secure.gravatar.com/avatar/${player.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50"
-					title="${player.user.username}" /> ${player.user.username}</li>
+					class="tab tab--${player.activeClass} tab--${player.selectedClass} tab--${fn:toLowerCase(player.color)}">
+					<c:choose>
+						<c:when test="${board.mode.neutralPlayerUsed and player.color eq 'WHITE'}">
+							<img src="images/Switzerland_256.png" />
+							<i>Neutral Player</i>
+						</c:when>
+						<c:otherwise>
+							<img src="https://secure.gravatar.com/avatar/${player.user.emailMD5}.jpg?s=50&amp;d=identicon"
+							     height="50" width="50" title="${player.user.username}" />
+							${player.user.username}
+						</c:otherwise>
+					</c:choose>
+				</li>
 			</c:forEach>
 		</ul>
 		<c:forEach items="${board.players}" var="player" varStatus="playerStatus">

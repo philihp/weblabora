@@ -56,9 +56,9 @@ public class NormalizeGame extends BaseAction {
 			try {
 				PlayerGuesser guesser = new PlayerGuesser();
 				Board board = new Board(
-						GamePlayers.valueOf(game.getPlayers()),
-						GameLength.valueOf(game.getLength()),
-						GameCountry.valueOf(game.getCountry())
+						GamePlayers.value(game.getPlayers()),
+						GameLength.value(game.getLength()),
+						GameCountry.value(game.getCountry())
 						);
 				board.populateDetails(game);
 				{
