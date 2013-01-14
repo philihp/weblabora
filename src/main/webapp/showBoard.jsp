@@ -197,6 +197,9 @@
 			<a class="show-future-building-button">Show Future Buildings</a>
 			<a class="hide-future-building-button">Hide	Future Buildings</a>
 		</div>
+		<aside class="withBorder chat">
+			<iframe src="/weblabora/chat.jsp"></iframe>
+		</aside>
 		<div class="wheel">
 			<!-- ${board.mode.players} ${board.mode.country} ${board.mode.length} -->
 			<svg style="width: 300px; height: 300px;" viewbox="-150.5 -150.5 300 300">
@@ -466,7 +469,7 @@
 			</c:forEach>
 		</ul>
 		<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
-			<div class="board board--${player.activeClass} board--${player.selectedClass}" id="board${playerStatus.index+1}">
+			<div class="withBorder board board--${player.activeClass} board--${player.selectedClass}" id="board${playerStatus.index+1}">
 
 				<c:set var="player" value="${player}" scope="request" />
 				<c:import url="jsp/inventory.jsp" />

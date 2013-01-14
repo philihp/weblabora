@@ -19,6 +19,13 @@ div.userbar {
 	box-shadow:0 0 0 rgba(255,255,255,0.4),0 0 10px rgba(0,0,0,0.1);
 }
 
+.withBorder {
+	background: #fcfcfc;
+	padding: 5px;
+	border: 1px solid #b3b3b3;
+	border-radius: 5px;
+}
+
 div.userbar img {
 }
 
@@ -205,6 +212,21 @@ div.container {
 	margin: 0;
 }
 
+.chat {
+	position: fixed;
+	/* .userbar has: 50px height + 1px border + 10px bottom margin */
+	top: 61px;
+	left: 0px;
+	/* TODO: I'm not sure what this value really should be. */
+	margin: 10px;
+	/* TODO: I'm not sure what this value really should be. */
+	width: 400px;
+}
+.chat iframe {
+	background: green;
+}
+
+
 .tabs {
 	clear: both;
 	list-style: none;
@@ -234,12 +256,8 @@ div.container {
 }
 
 .board {
-	padding: 5px;
-	border: 1px solid #b3b3b3;
-	background: #fcfcfc;
-	border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
-	border-top-right-radius: 5px;
+	/* This overwrites .withBorder class style. */
+	border-top-left-radius: 0px;
 }
 .board table {
 	border-color: gray;
