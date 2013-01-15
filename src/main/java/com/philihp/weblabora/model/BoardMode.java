@@ -230,7 +230,7 @@ public abstract class BoardMode {
 	}
 	
 	public int purchasePlot() {
-		return PLOT_PURCHASE_PRICE[districtsPurchased++];
+		return PLOT_PURCHASE_PRICE[plotsPurchased++];
 	}
 	
 	public int purchaseDistrict() {
