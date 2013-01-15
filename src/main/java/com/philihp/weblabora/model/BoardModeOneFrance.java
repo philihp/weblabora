@@ -291,4 +291,9 @@ public class BoardModeOneFrance extends BoardMode {
 	public Player getNeutralPlayer() {
 		return neutralPlayer;
 	}
+	
+	@Override
+	public boolean isGrapesUsed() {
+		return false;
+	}
 }

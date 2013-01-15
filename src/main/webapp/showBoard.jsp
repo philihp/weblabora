@@ -378,7 +378,7 @@
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">D</text>
 					</g>
 				</c:if>
-				<c:if test="${board.mode.country eq 'FRANCE'}">
+				<c:if test="${board.mode.grapesUsed}">
 					<g id="grape" transform="rotate(${ora:deg(board.wheel.grape.position)})">
 						<text x="0" y="${board.wheel.grape.radius}"
 						style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Grape</text>

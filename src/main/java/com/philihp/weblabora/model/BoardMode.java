@@ -254,4 +254,6 @@ public abstract class BoardMode {
 	public boolean isNeutralPlayerUsed() {
 		return getNeutralPlayer() != null;
 	}
+	
+	abstract boolean isGrapesUsed();
 }

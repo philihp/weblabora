@@ -194,5 +194,10 @@ public class BoardModeTwoShortIreland extends BoardMode {
 	protected boolean isRoundStartBonusActive() {
 		return false;
 	}
+	
+	@Override
+	public boolean isGrapesUsed() {
+		return false;
+	}
 
 }
