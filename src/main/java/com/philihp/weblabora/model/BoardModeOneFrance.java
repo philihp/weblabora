@@ -258,10 +258,6 @@ public class BoardModeOneFrance extends BoardMode {
 		player.setGrain(0);
 		player.setSheep(0);
 		
-		Token joker = board.getWheel().getJoker();
-		joker.setActive(false);
-		joker.setPosition(Position.L);
-		
 		neutralPlayer = new Player(board,Color.WHITE);
 		Player[] players = new Player[2];
 		players[0] = board.getPlayer(0);
