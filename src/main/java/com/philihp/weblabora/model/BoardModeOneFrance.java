@@ -2,6 +2,9 @@ package com.philihp.weblabora.model;
 
 import static com.philihp.weblabora.model.Wheel.Position.E;
 import static com.philihp.weblabora.model.Wheel.Position.K;
+import static com.philihp.weblabora.model.building.BuildingEnum.LW1;
+import static com.philihp.weblabora.model.building.BuildingEnum.LW2;
+import static com.philihp.weblabora.model.building.BuildingEnum.LW3;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +14,9 @@ import com.philihp.weblabora.model.Wheel.Position;
 import com.philihp.weblabora.model.building.BuildersMarket;
 import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.BuildingEnum;
+import com.philihp.weblabora.model.building.ClayMound;
+import com.philihp.weblabora.model.building.CloisterOffice;
+import com.philihp.weblabora.model.building.Farmyard;
 
 public class BoardModeOneFrance extends BoardMode {
 
@@ -281,6 +287,10 @@ public class BoardModeOneFrance extends BoardMode {
 		}
 		
 		neutralPlayer.getLandscape().getTerrainAt(new Coordinate(0,0)).setErection(buildersMarket);
+
+		board.getAllBuildings().put(LW1, (ClayMound)neutralPlayer.getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
+		board.getAllBuildings().put(LW2, (Farmyard)neutralPlayer.getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
+		board.getAllBuildings().put(LW3, (CloisterOffice)neutralPlayer.getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
 	}
 	
 	@Override
