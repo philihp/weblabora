@@ -101,6 +101,11 @@ public class BoardModeOneIreland extends BoardMode {
 	}
 
 	@Override
+	boolean isNeutralBuildingPhase() {
+		return false;
+	}
+
+	@Override
 	public void postRound() {
 		board.setMoveInRound(1);
 

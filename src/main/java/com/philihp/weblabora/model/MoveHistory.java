@@ -6,13 +6,19 @@ public class MoveHistory {
 	private boolean previousBuild = false;
 	private boolean nextPlotFree = false;
 	private boolean nextDistrictFree = false;
+	private boolean neutralBuildingPhase = false;
 
-	public MoveHistory(boolean settling) {
+	public MoveHistory(boolean settling, boolean neutralBuildingPhase) {
 		this.settling = settling;
+		this.neutralBuildingPhase = neutralBuildingPhase;
 	}
 
 	public boolean isSettling() {
 		return settling;
+	}
+	
+	public boolean isNeutralBuildingPhase() {
+		return neutralBuildingPhase;
 	}
 
 	public boolean isPreviousBuild() {

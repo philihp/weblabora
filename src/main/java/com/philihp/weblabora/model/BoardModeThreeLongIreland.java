@@ -184,5 +184,10 @@ public class BoardModeThreeLongIreland extends BoardMode {
 	public boolean isGrapesUsed() {
 		return false;
 	}
+
+	@Override
+	boolean isNeutralBuildingPhase() {
+		return false;
+	}
 	
 }

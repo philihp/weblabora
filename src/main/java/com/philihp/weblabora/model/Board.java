@@ -121,6 +121,8 @@ public class Board {
 	}
 
 	public int getActivePlayer() {
+		//this makes it so any builds/uses during solo neutral building use player 0's inventory
+		if(mode.isNeutralPlayerUsed()) return 0;
 		return activePlayer;
 	}
 

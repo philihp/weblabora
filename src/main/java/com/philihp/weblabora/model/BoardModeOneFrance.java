@@ -25,6 +25,8 @@ public class BoardModeOneFrance extends BoardMode {
 	private static final GameCountry COUNTRY = GameCountry.FRANCE;
 	
 	private Player neutralPlayer = null;
+	
+	private boolean neutralBuildingPhase = false;
 
 	protected BoardModeOneFrance(Board board) {
 		super(board);
@@ -111,20 +113,27 @@ public class BoardModeOneFrance extends BoardMode {
 		}
 	}
 	
+	public boolean isNeutralBuildingPhase() {
+		return neutralBuildingPhase;
+	}
+	
 	@Override
 	public void postMove() {
 		//clear any coins that may have been paid to neutral player
 		getNeutralPlayer().setPenny(0);
 		
-		board.setMoveInRound(board.getMoveInRound() + 1);
-		if(board.isSettling()) {
+		if(board.isSettling() && board.getUnbuiltBuildings().size() == 0 && neutralBuildingPhase == true ) {
 			board.nextActivePlayer();
-			if(board.getMoveInRound() > 2) {
-				board.postSettlement();
-			}
+			neutralBuildingPhase = false;
+			if(neutralPlayer.isClergymenAllPlaced())
+				neutralPlayer.resetClergymen();
+		}
+		else if(board.isSettling() && board.getUnbuiltBuildings().size() == 0 && neutralBuildingPhase == false) {
+			board.postSettlement();
 		}
 		else {
-			if(board.getMoveInRound() > 2) {
+			board.setMoveInRound(board.getMoveInRound() + 1);
+			if(board.isSettling() == false && board.getMoveInRound() > 2) {
 				board.postRound();
 			}
 		}
@@ -138,19 +147,23 @@ public class BoardModeOneFrance extends BoardMode {
 			board.setRound(board.getRound() + 1);
 			board.setExtraRound(true);
 		} else if (board.isRoundBeforeSettlement(board.getRound())) {
+			if(neutralPlayer.isClergymenAllPlaced())
+				neutralPlayer.resetClergymen();
 			board.setSettling(true);
+			neutralBuildingPhase = true;
+			board.nextActivePlayer();
 		} else {
 			board.setRound(board.getRound() + 1);
 		}
 
-		// begin 2-player end-game detection.
-		if (board.isSettling() == false
-				&& board.getSettlementRound() == SettlementRound.D
-				&& board.getUnbuiltBuildings().size() <= 3) {
-			board.setGameOver(true);
-			board.getMoveList().add(new HistoryEntry("Game Over"));
-		}
-		// end 2-player end-game detection.
+//		// begin 2-player end-game detection.
+//		if (board.isSettling() == false
+//				&& board.getSettlementRound() == SettlementRound.D
+//				&& board.getUnbuiltBuildings().size() <= 3) {
+//			board.setGameOver(true);
+//			board.getMoveList().add(new HistoryEntry("Game Over"));
+//		}
+//		// end 2-player end-game detection.
 
 		board.setStartingPlayer(board.getStartingPlayer() + 1);
 		board.getStartingMarker().setOwner(

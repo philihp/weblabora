@@ -185,4 +185,9 @@ public class BoardModeThreeLongFrance extends BoardMode {
 		return true;
 	}
 
+	@Override
+	boolean isNeutralBuildingPhase() {
+		return false;
+	}
+
 }

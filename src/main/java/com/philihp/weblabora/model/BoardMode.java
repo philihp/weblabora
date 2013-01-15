@@ -99,6 +99,8 @@ public abstract class BoardMode {
 
 	abstract public void postMove();
 	
+	abstract boolean isNeutralBuildingPhase();
+	
 	/**
 	 * Hook for pre-round processing for Short 3/4 player games to dish out resources
 	 */

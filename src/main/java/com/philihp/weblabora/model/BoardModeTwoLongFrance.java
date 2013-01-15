@@ -209,5 +209,10 @@ public class BoardModeTwoLongFrance extends BoardMode {
 	public boolean isGrapesUsed() {
 		return true;
 	}
+
+	@Override
+	boolean isNeutralBuildingPhase() {
+		return false;
+	}
 	
 }

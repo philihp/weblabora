@@ -188,4 +188,9 @@ public class BoardModeFourLongIreland extends BoardMode {
 		return false;
 	}
 
+	@Override
+	boolean isNeutralBuildingPhase() {
+		return false;
+	}
+
 }

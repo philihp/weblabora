@@ -21,6 +21,7 @@ public class CommandWorkorder implements MoveCommand, InvalidDuringSettlement {
 		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		Player orderedPlayer = null;
 		if(board.getMode().isNeutralPlayerUsed() && orderedPlayerColor.equals(Color.WHITE)) {
+			activePlayer = board.getPlayer(0);
 			orderedPlayer = board.getMode().getNeutralPlayer();
 		}
 		else {

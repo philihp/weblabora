@@ -203,4 +203,9 @@ public class BoardModeFourShortIreland extends BoardMode {
 		return false;
 	}
 
+	@Override
+	boolean isNeutralBuildingPhase() {
+		return false;
+	}
+
 }

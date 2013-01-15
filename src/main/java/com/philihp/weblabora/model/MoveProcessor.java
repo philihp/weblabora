@@ -31,7 +31,7 @@ public final class MoveProcessor {
 		if(actions != null) actions = actions.trim();
 		if(actions == null) return;
 		
-		MoveHistory history = new MoveHistory(board.isSettling());
+		MoveHistory history = new MoveHistory(board.isSettling(), board.getMode().isNeutralBuildingPhase());
 		for (String action : actions.split("\\|")) {
 			processSingleAction(board, action, history);
 		}
@@ -109,7 +109,7 @@ public final class MoveProcessor {
 			throw new WeblaboraException("Unknown Command \""+commandChar+"\"");
 		}
 		
-		if(history.isSettling() && (command instanceof InvalidDuringSettlement)) {
+		if(history.isNeutralBuildingPhase() == false && history.isSettling() && (command instanceof InvalidDuringSettlement)) {
 			throw new WeblaboraException("Invalid Command \""+commandChar+"\" during settlement.");
 		}
 		
