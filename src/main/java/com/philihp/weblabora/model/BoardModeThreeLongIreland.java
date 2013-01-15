@@ -190,4 +190,9 @@ public class BoardModeThreeLongIreland extends BoardMode {
 		return false;
 	}
 	
+	@Override
+	public boolean isStoneUsed() {
+		return true;
+	}
+	
 }

@@ -315,4 +315,9 @@ public class BoardModeOneFrance extends BoardMode {
 	public boolean isGrapesUsed() {
 		return false;
 	}
+	
+	@Override
+	public boolean isStoneUsed() {
+		return false;
+	}
 }

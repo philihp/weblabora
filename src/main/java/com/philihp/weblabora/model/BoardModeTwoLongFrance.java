@@ -215,4 +215,9 @@ public class BoardModeTwoLongFrance extends BoardMode {
 		return false;
 	}
 	
+	@Override
+	public boolean isStoneUsed() {
+		return true;
+	}
+	
 }

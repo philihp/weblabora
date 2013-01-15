@@ -258,4 +258,6 @@ public abstract class BoardMode {
 	}
 	
 	abstract boolean isGrapesUsed();
+	
+	abstract boolean isStoneUsed();
 }

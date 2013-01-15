@@ -204,4 +204,9 @@ public class BoardModeTwoShortIreland extends BoardMode {
 	boolean isNeutralBuildingPhase() {
 		return false;
 	}
+	
+	@Override
+	public boolean isStoneUsed() {
+		return true;
+	}
 }

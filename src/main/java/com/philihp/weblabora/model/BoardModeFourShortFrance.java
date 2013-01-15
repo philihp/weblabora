@@ -208,5 +208,10 @@ public class BoardModeFourShortFrance extends BoardMode {
 	boolean isNeutralBuildingPhase() {
 		return false;
 	}
+	
+	@Override
+	public boolean isStoneUsed() {
+		return true;
+	}
 
 }

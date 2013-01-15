@@ -189,5 +189,10 @@ public class BoardModeThreeLongFrance extends BoardMode {
 	boolean isNeutralBuildingPhase() {
 		return false;
 	}
+	
+	@Override
+	public boolean isStoneUsed() {
+		return true;
+	}
 
 }

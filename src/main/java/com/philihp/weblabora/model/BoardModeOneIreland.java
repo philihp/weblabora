@@ -204,5 +204,10 @@ public class BoardModeOneIreland extends BoardMode {
 	public boolean isGrapesUsed() {
 		return false;
 	}
+	
+	@Override
+	public boolean isStoneUsed() {
+		return true;
+	}
 
 }
