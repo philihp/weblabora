@@ -93,8 +93,7 @@ public class BoardModeOneFrance extends BoardMode {
 
 	@Override
 	public boolean isExtraRound(int round) {
-		// there is no extra round for TWO
-		return false;
+		return round >= 31;
 	}
 
 	@Override
@@ -108,6 +107,8 @@ public class BoardModeOneFrance extends BoardMode {
 			return SettlementRound.C;
 		case 25:
 			return SettlementRound.D;
+		case 31:
+			return SettlementRound.E;
 		default:
 			return null;
 		}

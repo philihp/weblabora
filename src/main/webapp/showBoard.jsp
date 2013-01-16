@@ -358,6 +358,10 @@
 						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">D</text>
 					</g>
+					<g id="settlement-e" transform="rotate(${wheelArt.rotF})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">E</text>
+					</g>
 				</c:if>
 				<c:if test="${board.mode.players eq 'TWO'}">
 					<%-- this is the same for both short and long --%>

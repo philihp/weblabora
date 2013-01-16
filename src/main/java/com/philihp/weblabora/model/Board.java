@@ -526,6 +526,11 @@ public int actionsBeforeSettlement(int player) {
 		// process other rounds until settlement
 		for (round++; getMode().roundBeforeSettlement(round - 1) == null; round++) {
 			
+			if(round > 500) {
+				System.out.println("Round in actionsBeforeSettlement incremented past 500. Probable error in mode constants.");
+				return actions;
+			}
+			
 			if (mode.isExtraRound(round - 1)) {
 				actions++;
 			}
