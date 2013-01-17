@@ -2,18 +2,31 @@ package com.philihp.weblabora.model;
 
 import static com.philihp.weblabora.model.Wheel.Position.E;
 import static com.philihp.weblabora.model.Wheel.Position.K;
+import static com.philihp.weblabora.model.building.BuildingEnum.LW1;
+import static com.philihp.weblabora.model.building.BuildingEnum.LW2;
+import static com.philihp.weblabora.model.building.BuildingEnum.LW3;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import com.philihp.weblabora.model.Wheel.Position;
+import com.philihp.weblabora.model.building.BuildersMarket;
 import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.BuildingEnum;
+import com.philihp.weblabora.model.building.ClayMound;
+import com.philihp.weblabora.model.building.CloisterOffice;
+import com.philihp.weblabora.model.building.Farmyard;
 
 public class BoardModeOneIreland extends BoardMode {
 
-	private static final GamePlayers PLAYERS = GamePlayers.TWO;
-	private static final GameLength LENGTH = GameLength.SHORT;
+	private static final GamePlayers PLAYERS = GamePlayers.ONE;
+	private static final GameLength LENGTH = GameLength.NULL;
 	private static final GameCountry COUNTRY = GameCountry.IRELAND;
+	
+	private Player neutralPlayer = null;
+	
+	private boolean neutralBuildingPhase = false;
 
 	protected BoardModeOneIreland(Board board) {
 		super(board);
@@ -21,13 +34,22 @@ public class BoardModeOneIreland extends BoardMode {
 
 	@Override
 	public int[] getWheelArmValues() {
-		return new int[] { 0, 1, 2, 2, 3, 4, 4, 5, 6, 6, 7, 8, 10 };
+		return new int[] { 0, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8, 9, 10 };
 	}
 
 	@Override
 	public List<Building> roundBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
+		// solo game uses all buildings except either grapevine, C-quarry, and Carpentry
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
+			if (buildingId == BuildingEnum.F10)
+				continue;
+			if (buildingId == BuildingEnum.F14)
+				continue;
+			if (buildingId == BuildingEnum.F31)
+				continue;
+			if (buildingId == BuildingEnum.F29)
+				continue;
 			
 			char c = buildingId.toString().charAt(0);
 			if(c != 'G' && c != 'I') continue;
@@ -43,10 +65,10 @@ public class BoardModeOneIreland extends BoardMode {
 	@Override
 	public List<Building> futureBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
-		// two player long game uses all buildings except C-grapevine, C-quarry
+		// solo game uses all buildings except either grapevine, C-quarry, and Carpentry
 		// and Carpentry
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
-			
+
 			char c = buildingId.toString().charAt(0);
 			if(c != 'G' && c != 'I') continue;
 			
@@ -63,46 +85,61 @@ public class BoardModeOneIreland extends BoardMode {
 
 	@Override
 	public boolean isExtraRound(int round) {
-		// there is no extra round for TWO
-		return false;
+		return round >= 31;
 	}
 
 	@Override
 	public SettlementRound roundBeforeSettlement(int round) {
 		switch (round) {
-		case 6:
+		case 11:
 			return SettlementRound.A;
-		case 13:
+		case 15:
 			return SettlementRound.B;
-		case 20:
+		case 21:
 			return SettlementRound.C;
-		case 27:
+		case 25:
 			return SettlementRound.D;
+		case 31:
+			return SettlementRound.E;
 		default:
 			return null;
 		}
 	}
 	
+	public boolean isNeutralBuildingPhase() {
+		return neutralBuildingPhase;
+	}
+	
 	@Override
 	public void postMove() {
-		board.setMoveInRound(board.getMoveInRound() + 1);
-		if(board.isSettling()) {
+		//clear any coins that may have been paid to neutral player
+		getNeutralPlayer().setPenny(0);
+		
+		if(board.isExtraRound()) {
+			board.setMoveInRound(2);
+			board.setSettling(true);
+			board.setSettlementRound(SettlementRound.E);
+			board.setExtraRound(false);
+		}
+		else if(board.getSettlementRound() == SettlementRound.E) {
+			board.setGameOver(true);
+		}
+		
+		if(board.isSettling() && board.getUnbuiltBuildings().size() == 0 && neutralBuildingPhase == true ) {
 			board.nextActivePlayer();
-			if(board.getMoveInRound() > 2) {
-				board.postSettlement();
-			}
+			neutralBuildingPhase = false;
+			if(neutralPlayer.isClergymenAllPlaced())
+				neutralPlayer.resetClergymen();
+		}
+		else if(board.isSettling() && board.getUnbuiltBuildings().size() == 0 && neutralBuildingPhase == false) {
+			board.postSettlement();
 		}
 		else {
-			if(board.getMoveInRound() > 2) {
-				board.nextActivePlayer();  
+			board.setMoveInRound(board.getMoveInRound() + 1);
+			if(board.isSettling() == false && board.getMoveInRound() > 2) {
 				board.postRound();
 			}
 		}
-	}
-
-	@Override
-	boolean isNeutralBuildingPhase() {
-		return false;
 	}
 
 	@Override
@@ -113,19 +150,14 @@ public class BoardModeOneIreland extends BoardMode {
 			board.setRound(board.getRound() + 1);
 			board.setExtraRound(true);
 		} else if (board.isRoundBeforeSettlement(board.getRound())) {
+			if(neutralPlayer.isClergymenAllPlaced())
+				neutralPlayer.resetClergymen();
 			board.setSettling(true);
+			neutralBuildingPhase = true;
+			board.nextActivePlayer();
 		} else {
 			board.setRound(board.getRound() + 1);
 		}
-
-		// begin 2-player end-game detection.
-		if (board.isSettling() == false
-				&& board.getSettlementRound() == SettlementRound.D
-				&& board.getUnbuiltBuildings().size() <= 3) {
-			board.setGameOver(true);
-			board.getMoveList().add(new HistoryEntry("Game Over"));
-		}
-		// end 2-player end-game detection.
 
 		board.setStartingPlayer(board.getStartingPlayer() + 1);
 		board.getStartingMarker().setOwner(
@@ -134,15 +166,15 @@ public class BoardModeOneIreland extends BoardMode {
 
 	@Override
 	public String getMoveName() {
-		if (board.isExtraRound())
+		if(board.getRound() == 32) {
 			return "extra";
+		}
+		
 		switch (board.getMoveInRound()) {
 		case 1:
-			return "first half of first";
+			return "first half of";
 		case 2:
-			return "second half of first";
-		case 3:
-			return "second";
+			return "second half of";
 		default:
 			throw new RuntimeException("Illegal Move Number "
 					+ board.getMoveInRound());
@@ -157,6 +189,11 @@ public class BoardModeOneIreland extends BoardMode {
 	@Override
 	public int stoneActiveOnRound() {
 		return 18;
+	}
+	
+	@Override
+	public int jokerActiveOnRound() {
+		return 12;
 	}
 
 	@Override
@@ -199,6 +236,78 @@ public class BoardModeOneIreland extends BoardMode {
 	protected boolean isRoundStartBonusActive() {
 		return false;
 	}
+
+	public static final int[] PLOT_PURCHASE_PRICE = {7,6,6,5,5,5,4,4,3};
+	
+	public static final int[] DISTRICT_PURCHASE_PRICE = {8,7,6,5,5,4,4,3,2};
+	
+	private int plotsPurchased;
+	
+	private int districtsPurchased;
+	
+	@Override
+	public int[] getPlotCosts() {
+		return Arrays.copyOfRange(PLOT_PURCHASE_PRICE, plotsPurchased, PLOT_PURCHASE_PRICE.length);
+	}
+
+	@Override
+	public int[] getDistrictCosts() {
+		return Arrays.copyOfRange(DISTRICT_PURCHASE_PRICE, districtsPurchased, DISTRICT_PURCHASE_PRICE.length); 
+	}
+
+	@Override
+	public int purchasePlot() {
+		return PLOT_PURCHASE_PRICE[districtsPurchased++];
+	}
+
+	@Override
+	public int purchaseDistrict() {
+		return DISTRICT_PURCHASE_PRICE[districtsPurchased++];
+	}
+	
+	@Override
+	public void setup() {
+		Player player = board.getPlayer(0);
+		player.setWood(0);
+		player.setClay(0);
+		player.setPeat(0);
+		player.setPenny(0);
+		player.setGrain(0);
+		player.setSheep(0);
+		
+		neutralPlayer = new Player(board,Color.WHITE);
+		Player[] players = new Player[2];
+		players[0] = board.getPlayer(0);
+		players[1] = neutralPlayer;
+		board.setPlayers(players);
+
+		neutralPlayer.getLandscape().getTerrainAt(new Coordinate(0,0)).setTerrainUse(TerrainUseEnum.EMPTY);
+		neutralPlayer.getLandscape().getTerrainAt(new Coordinate(1,0)).setTerrainUse(TerrainUseEnum.EMPTY);
+		neutralPlayer.getLandscape().getTerrainAt(new Coordinate(2,0)).setTerrainUse(TerrainUseEnum.EMPTY);
+		neutralPlayer.getLandscape().getTerrainAt(new Coordinate(0,1)).setTerrainUse(TerrainUseEnum.EMPTY);
+		neutralPlayer.getLandscape().getTerrainAt(new Coordinate(1,1)).setTerrainUse(TerrainUseEnum.EMPTY);
+
+		Building buildersMarket = null;
+		//TODO probably an easier way to do this
+		for(Building possibleBuilding : board.getUnbuiltBuildings()) {
+			if(possibleBuilding.getId().equals(BuildersMarket.ID)) {
+				buildersMarket = possibleBuilding;
+				board.getUnbuiltBuildings().remove(buildersMarket);
+				break;
+			}
+		}
+		
+		neutralPlayer.getLandscape().getTerrainAt(new Coordinate(0,0)).setErection(buildersMarket);
+
+		board.getAllBuildings().put(LW1, (ClayMound)neutralPlayer.getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
+		board.getAllBuildings().put(LW2, (Farmyard)neutralPlayer.getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
+		board.getAllBuildings().put(LW3, (CloisterOffice)neutralPlayer.getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
+	}
+	
+	@Override
+	public Player getNeutralPlayer() {
+		return neutralPlayer;
+	}
 	
 	@Override
 	public boolean isGrapesUsed() {
@@ -207,7 +316,6 @@ public class BoardModeOneIreland extends BoardMode {
 	
 	@Override
 	public boolean isStoneUsed() {
-		return true;
+		return false;
 	}
-
 }

@@ -123,6 +123,16 @@ public class BoardModeOneFrance extends BoardMode {
 		//clear any coins that may have been paid to neutral player
 		getNeutralPlayer().setPenny(0);
 		
+		if(board.isExtraRound()) {
+			board.setMoveInRound(2);
+			board.setSettling(true);
+			board.setSettlementRound(SettlementRound.E);
+			board.setExtraRound(false);
+		}
+		else if(board.getSettlementRound() == SettlementRound.E) {
+			board.setGameOver(true);
+		}
+		
 		if(board.isSettling() && board.getUnbuiltBuildings().size() == 0 && neutralBuildingPhase == true ) {
 			board.nextActivePlayer();
 			neutralBuildingPhase = false;
@@ -157,15 +167,6 @@ public class BoardModeOneFrance extends BoardMode {
 			board.setRound(board.getRound() + 1);
 		}
 
-//		// begin 2-player end-game detection.
-//		if (board.isSettling() == false
-//				&& board.getSettlementRound() == SettlementRound.D
-//				&& board.getUnbuiltBuildings().size() <= 3) {
-//			board.setGameOver(true);
-//			board.getMoveList().add(new HistoryEntry("Game Over"));
-//		}
-//		// end 2-player end-game detection.
-
 		board.setStartingPlayer(board.getStartingPlayer() + 1);
 		board.getStartingMarker().setOwner(
 				board.players[board.getStartingPlayer()]);
@@ -173,6 +174,10 @@ public class BoardModeOneFrance extends BoardMode {
 
 	@Override
 	public String getMoveName() {
+		if(board.getRound() == 32) {
+			return "extra";
+		}
+		
 		switch (board.getMoveInRound()) {
 		case 1:
 			return "first half of";
