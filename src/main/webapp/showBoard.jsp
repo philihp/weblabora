@@ -768,7 +768,7 @@
 					</c:when>
 					<c:otherwise>
 					[<a href="showGame.do?gameId=${game.gameId}&amp;stateId=${move.state.stateId}">view</a>]<span
-							title="First explored by ${move.state.explorer.name} on <fmt:formatDate value="${move.state.dateCreated}" pattern="yyyy-MM-dd" />">
+							title="First explored by ${move.state.explorer.username} on <fmt:formatDate value="${move.state.dateCreated}" pattern="yyyy-MM-dd" />">
 							${move.text}</span>
 					</c:otherwise>
 				</c:choose>
