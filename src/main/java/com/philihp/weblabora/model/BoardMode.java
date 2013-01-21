@@ -261,4 +261,8 @@ public abstract class BoardMode {
 	
 	abstract boolean isStoneUsed();
 	
+	public boolean isPriorSpecialInExtraRound() {
+		return true;
+	}
+	
 }

@@ -327,8 +327,16 @@ public class Board {
 	}
 	
 	public void preExtraRound() {
-		for(Player player : players) {
-			player.getPrior().clearLocation();
+		if(getMode().isPriorSpecialInExtraRound()) {
+			for(Player player : players) {
+				player.getPrior().clearLocation();
+			}
+		}
+		else {
+			for(Player player : getPlayers()) {
+				if(player.isClergymenAllPlaced())
+					player.resetClergymen();
+			}
 		}
 		
 		setExtraRound(true);
@@ -526,9 +534,9 @@ public int actionsBeforeSettlement(int player) {
 		// process other rounds until settlement
 		for (round++; getMode().roundBeforeSettlement(round - 1) == null; round++) {
 			
-			if(round > 500) {
-				System.out.println("Round in actionsBeforeSettlement incremented past 500. Probable error in mode constants.");
-				return actions;
+			if(round > 100) {
+				// escape for when we don't actually find the end of the game?
+				return 0;
 			}
 			
 			if (mode.isExtraRound(round - 1)) {

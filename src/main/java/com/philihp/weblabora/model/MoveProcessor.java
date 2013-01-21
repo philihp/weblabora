@@ -54,7 +54,7 @@ public final class MoveProcessor {
 		}
 		
 		params.setCommand(Character.toUpperCase(prefix.charAt(0)));
-		if(board.isExtraRound()) {
+		if(board.isExtraRound() && board.getMode().isPriorSpecialInExtraRound()) {
 			params.setPlaceClergyman(false);
 		}
 		else {

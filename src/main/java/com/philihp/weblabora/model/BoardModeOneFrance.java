@@ -265,7 +265,7 @@ public class BoardModeOneFrance extends BoardMode {
 
 	@Override
 	public int purchasePlot() {
-		return PLOT_PURCHASE_PRICE[districtsPurchased++];
+		return PLOT_PURCHASE_PRICE[plotsPurchased++];
 	}
 
 	@Override
@@ -324,6 +324,11 @@ public class BoardModeOneFrance extends BoardMode {
 	
 	@Override
 	public boolean isStoneUsed() {
+		return false;
+	}
+	
+	@Override
+	public boolean isPriorSpecialInExtraRound() {
 		return false;
 	}
 }

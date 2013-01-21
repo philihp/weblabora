@@ -115,8 +115,7 @@ public class BoardModeOneIreland extends BoardMode {
 		//clear any coins that may have been paid to neutral player
 		getNeutralPlayer().setPenny(0);
 		
-		if(board.isExtraRound()) {
-			board.setMoveInRound(2);
+		if(board.isExtraRound() && board.getMoveInRound() == 2) {
 			board.setSettling(true);
 			board.setSettlementRound(SettlementRound.E);
 			board.setExtraRound(false);
@@ -166,10 +165,6 @@ public class BoardModeOneIreland extends BoardMode {
 
 	@Override
 	public String getMoveName() {
-		if(board.getRound() == 32) {
-			return "extra";
-		}
-		
 		switch (board.getMoveInRound()) {
 		case 1:
 			return "first half of";
@@ -257,7 +252,7 @@ public class BoardModeOneIreland extends BoardMode {
 
 	@Override
 	public int purchasePlot() {
-		return PLOT_PURCHASE_PRICE[districtsPurchased++];
+		return PLOT_PURCHASE_PRICE[plotsPurchased++];
 	}
 
 	@Override
@@ -316,6 +311,11 @@ public class BoardModeOneIreland extends BoardMode {
 	
 	@Override
 	public boolean isStoneUsed() {
+		return false;
+	}
+	
+	@Override
+	public boolean isPriorSpecialInExtraRound() {
 		return false;
 	}
 }
