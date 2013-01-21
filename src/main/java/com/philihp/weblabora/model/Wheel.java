@@ -97,16 +97,29 @@ public class Wheel {
 	
 	public void pushArm(int round) {
 		Position next = arm.getPosition().next();
-		// this ensures that if something is at 10, it stays at 10
-		if(grain.getPosition() == next && grain.isActive()) grain.setPosition(grain.getPosition().next());
-		if(sheep.getPosition() == next && sheep.isActive()) sheep.setPosition(sheep.getPosition().next());
-		if(clay.getPosition() == next  && clay.isActive())  clay.setPosition( clay.getPosition().next());
-		if(coin.getPosition() == next  && coin.isActive())  coin.setPosition( coin.getPosition().next());
-		if(wood.getPosition() == next  && wood.isActive())  wood.setPosition( wood.getPosition().next());
-		if(joker.getPosition() == next && joker.isActive()) joker.setPosition(joker.getPosition().next());
-		if(peat.getPosition() == next  && peat.isActive())  peat.setPosition( peat.getPosition().next());
-		if(grape.getPosition() == next && grape.isActive()) grape.setPosition(grape.getPosition().next());
-		if(stone.getPosition() == next && stone.isActive()) stone.setPosition(stone.getPosition().next());
+		// this ensures that if something is at 10, it stays at 10, unless we don't want it to.
+		if(board.getMode().getPlayers() == GamePlayers.ONE) {
+			if(grain.getPosition() == next && grain.isActive()) grain.setActive(false);
+			if(sheep.getPosition() == next && sheep.isActive()) sheep.setActive(false);
+			if(clay.getPosition() == next  && clay.isActive())  clay.setActive(false);
+			if(coin.getPosition() == next  && coin.isActive())  coin.setActive(false);
+			if(wood.getPosition() == next  && wood.isActive())  wood.setActive(false);
+			if(joker.getPosition() == next && joker.isActive()) joker.setActive(false);
+			if(peat.getPosition() == next  && peat.isActive())  peat.setActive(false);
+			if(grape.getPosition() == next && grape.isActive()) grape.setActive(false);
+			if(stone.getPosition() == next && stone.isActive()) stone.setActive(false);
+		}
+		else {
+			if(grain.getPosition() == next && grain.isActive()) grain.setPosition(grain.getPosition().next());
+			if(sheep.getPosition() == next && sheep.isActive()) sheep.setPosition(sheep.getPosition().next());
+			if(clay.getPosition() == next  && clay.isActive())  clay.setPosition( clay.getPosition().next());
+			if(coin.getPosition() == next  && coin.isActive())  coin.setPosition( coin.getPosition().next());
+			if(wood.getPosition() == next  && wood.isActive())  wood.setPosition( wood.getPosition().next());
+			if(joker.getPosition() == next && joker.isActive()) joker.setPosition(joker.getPosition().next());
+			if(peat.getPosition() == next  && peat.isActive())  peat.setPosition( peat.getPosition().next());
+			if(grape.getPosition() == next && grape.isActive()) grape.setPosition(grape.getPosition().next());
+			if(stone.getPosition() == next && stone.isActive()) stone.setPosition(stone.getPosition().next());
+		}
 		arm.setPosition(next);
 	}
 	

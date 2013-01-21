@@ -14,9 +14,11 @@ import com.philihp.weblabora.model.UsageParam;
 import com.philihp.weblabora.model.WeblaboraException;
 
 public class BuildersMarket extends Building {
+	
+	public static final String ID = "G13";
 
 	public BuildersMarket() {
-		super("G13", SettlementRound.S, 4, "Builders' Market", BuildCost.is().clay(2), 1, 6, EnumSet.of(COAST, PLAINS, HILLSIDE), false);
+		super(ID, SettlementRound.S, 4, "Builders' Market", BuildCost.is().clay(2), 1, 6, EnumSet.of(COAST, PLAINS, HILLSIDE), false);
 	}
 
 	@Override

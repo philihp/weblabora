@@ -2,6 +2,7 @@ package com.philihp.weblabora.action;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -72,8 +73,13 @@ abstract public class BaseAction extends Action {
 	                String uuid = cookie.getValue();
 	                TypedQuery<User> query = em.createQuery("SELECT f.user FROM Fingerprint f WHERE f.uuid = :uuid", User.class);
 	                query.setParameter("uuid", uuid);
-	                User user = query.getSingleResult();
-	                request.getSession().setAttribute("user", user);
+	                
+	                List<User> results = query.getResultList();
+	                User user = null;
+	                if(results.size() == 1) {
+	                	user = results.get(0);
+		                request.getSession().setAttribute("user", user);
+	                }
 	                return user;
 	            }
 	        }

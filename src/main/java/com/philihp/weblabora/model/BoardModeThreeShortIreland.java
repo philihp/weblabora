@@ -1,6 +1,5 @@
 package com.philihp.weblabora.model;
 
-import static com.philihp.weblabora.model.TerrainTypeEnum.PLAINS;
 import static com.philihp.weblabora.model.Wheel.Position.D;
 import static com.philihp.weblabora.model.Wheel.Position.F;
 
@@ -167,8 +166,8 @@ public class BoardModeThreeShortIreland extends BoardMode {
 
 	@Override
 	public void customizeLandscape(Landscape landscape) {
-		landscape.getTerrainAt(new Coordinate(0,0)).setTerrainType(PLAINS);
-		landscape.getTerrainAt(new Coordinate(1,0)).setTerrainType(PLAINS);
+		landscape.getTerrainAt(new Coordinate(0,0)).setTerrainUse(TerrainUseEnum.EMPTY);
+		landscape.getTerrainAt(new Coordinate(1,0)).setTerrainUse(TerrainUseEnum.EMPTY);
 		super.customizeLandscape(landscape);
 	}
 
@@ -194,6 +193,21 @@ public class BoardModeThreeShortIreland extends BoardMode {
 
 	@Override
 	protected boolean isRoundStartBonusActive() {
+		return true;
+	}
+	
+	@Override
+	public boolean isGrapesUsed() {
+		return false;
+	}
+
+	@Override
+	boolean isNeutralBuildingPhase() {
+		return false;
+	}
+	
+	@Override
+	public boolean isStoneUsed() {
 		return true;
 	}
 

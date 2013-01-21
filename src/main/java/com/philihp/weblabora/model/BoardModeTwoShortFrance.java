@@ -208,5 +208,19 @@ public class BoardModeTwoShortFrance extends BoardMode {
 	protected boolean isRoundStartBonusActive() {
 		return false;
 	}
+	
+	@Override
+	public boolean isGrapesUsed() {
+		return true;
+	}
 
+	@Override
+	boolean isNeutralBuildingPhase() {
+		return false;
+	}
+	
+	@Override
+	public boolean isStoneUsed() {
+		return true;
+	}
 }

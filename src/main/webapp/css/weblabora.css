@@ -196,6 +196,10 @@ div.container {
 
 .info {
 	float: right;
+	position: fixed;
+	top: 80px;
+	right: 0px;
+	width: 200px;
 }
 .info-line {
 	margin: 0;
@@ -407,6 +411,10 @@ input.error {
     -webkit-box-shadow: 0 0 6px -1px #ff0000;
     border: 1px solid red;
   }
+}
+
+.yourTurn {
+	background-color: #fff373;
 }
 
 .errorBox,

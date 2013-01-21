@@ -1,3 +1,7 @@
+------
+Changes required for moving to Kennerspiel
+
+
 alter table weblabora_game add stage varchar(255);
 alter table weblabora_user add email varchar(255);
 alter table weblabora_user add email_validator varchar(255);
@@ -25,3 +29,8 @@ alter table weblabora_state add active int(0);
 update weblabora_state set active = 0;
 delete from weblabora_game where game_id=10767;
 update weblabora_state set active=1 where state_id in (select state_id from weblabora_game);
+
+--------
+Changes required for current player marker
+
+alter table weblabora_game add active_player int;

@@ -1,5 +1,6 @@
 package com.philihp.weblabora.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -64,11 +65,15 @@ public class ShowLobby extends BaseAction {
 						   "OR g.player2.user = :user " +
 						   "OR g.player3.user = :user " +
 						   "OR g.player4.user = :user " +
-						   ") AND g.stage != :stage " +
+						   ") AND g.stage NOT IN :stages " +
 						"ORDER BY g.gameId",
 						Game.class);
 		query.setParameter("user", user);
-		query.setParameter("stage", Game.Stage.FINISHED);
+		
+		List<Game.Stage> stages = new ArrayList<Game.Stage>();
+		stages.add(Game.Stage.FINISHED);
+		stages.add(Game.Stage.ABANDONED);
+		query.setParameter("stages", stages);
 		
 		List<Game> results = query.getResultList();
 		return results;

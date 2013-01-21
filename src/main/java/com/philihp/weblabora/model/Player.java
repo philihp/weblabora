@@ -384,6 +384,8 @@ public class Player {
 			return false;
 		if (buildCost.getStraw() > this.getStraw())
 			return false;
+		if (buildCost.getCoin() > this.getCoins())
+			return false;
 		return true;
 	}
 
@@ -393,6 +395,14 @@ public class Player {
 		subtractStone(buildCost.getStone());
 		subtractStraw(buildCost.getStraw());
 		subtractCoins(buildCost.getCoin());
+	}
+
+	public void addAll(BuildCost buildCost) throws WeblaboraException  {
+		addWood(buildCost.getWood());
+		addClay(buildCost.getClay());
+		addStone(buildCost.getStone());
+		addStraw(buildCost.getStraw());
+		addCoins(buildCost.getCoin());
 	}
 
 	public void addPeat(int peat) {

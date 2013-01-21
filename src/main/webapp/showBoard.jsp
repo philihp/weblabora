@@ -160,6 +160,43 @@
 
 		<c:import url="jsp/notifications.jsp" />
 
+
+		<div class="info">
+			<c:choose>
+				<c:when test="${board.gameOver}">
+					<h3 class="info-line">Game Over</h3>
+				</c:when>
+				<c:when test="${board.settling}">
+					<h3 class="info-line">Settlement ${board.settlementRound}</h3>
+					<h3 class="info-line">Waiting on ${board.activePlayerColor}.</h3>
+				</c:when>
+				<c:otherwise>
+					<h3 class="info-line">Round ${board.round}, ${board.move} move.</h3>
+					<h3 class="info-line">Waiting on ${board.activePlayerColor}.</h3>
+				</c:otherwise>
+			</c:choose>
+			<hr />
+			<h4 class="info-line">
+				Plot Costs:
+				<c:forEach items="${board.plotCosts}" var="cost" varStatus="costStatus">
+					${cost}<c:if test="${not costStatus.last}">,</c:if>
+				</c:forEach>
+			</h4>
+			<h4 class="info-line">
+				District Costs:
+				<c:forEach items="${board.districtCosts}" var="cost" varStatus="costStatus">
+					${cost}<c:if test="${not costStatus.last}">,</c:if>
+				</c:forEach>
+			</h4>
+			<hr />
+			Scores:<br />
+			<c:forEach items="${board.scorecard.scores}" var="entry">
+				<b>${entry.key}</b>: ${entry.value.score}<br />
+			</c:forEach>
+			<hr />
+			<a class="show-future-building-button">Show Future Buildings</a>
+			<a class="hide-future-building-button">Hide	Future Buildings</a>
+		</div>
 		<div class="wheel">
 			<!-- ${board.mode.players} ${board.mode.country} ${board.mode.length} -->
 			<svg style="width: 300px; height: 300px;" viewbox="-150.5 -150.5 300 300">
@@ -321,6 +358,10 @@
 						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">D</text>
 					</g>
+					<g id="settlement-e" transform="rotate(${wheelArt.rotF})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">E</text>
+					</g>
 				</c:if>
 				<c:if test="${board.mode.players eq 'TWO'}">
 					<%-- this is the same for both short and long --%>
@@ -341,16 +382,18 @@
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">D</text>
 					</g>
 				</c:if>
-				<c:if test="${board.mode.country eq 'FRANCE'}">
+				<c:if test="${board.mode.grapesUsed}">
 					<g id="grape" transform="rotate(${ora:deg(board.wheel.grape.position)})">
 						<text x="0" y="${board.wheel.grape.radius}"
 						style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Grape</text>
 					</g>
 				</c:if>
-				<g id="stone" transform="rotate(${ora:deg(board.wheel.stone.position)})">
-					<text x="0" y="${board.wheel.stone.radius}"
-					style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Stone</text>
-				</g>
+				<c:if test="${board.mode.stoneUsed}">
+					<g id="stone" transform="rotate(${ora:deg(board.wheel.stone.position)})">
+						<text x="0" y="${board.wheel.stone.radius}"
+						style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Stone</text>
+					</g>
+				</c:if>
 				<g id="grain" transform="rotate(${ora:deg(board.wheel.grain.position)})">
 					<text x="0" y="${board.wheel.grain.radius}"
 					style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Grain</text>
@@ -400,37 +443,6 @@
 			</svg>
 		</div>
 
-		<div class="info">
-			<c:choose>
-				<c:when test="${board.gameOver}">
-					<h3 class="info-line">Game Over</h3>
-				</c:when>
-				<c:when test="${board.settling}">
-					<h3 class="info-line">Settlement ${board.settlementRound}</h3>
-					<h3 class="info-line">Waiting on ${board.activePlayerColor}.</h3>
-				</c:when>
-				<c:otherwise>
-					<h3 class="info-line">Round ${board.round}, ${board.move} move.</h3>
-					<h3 class="info-line">Waiting on ${board.activePlayerColor}.</h3>
-				</c:otherwise>
-			</c:choose>
-			<hr />
-			<h4 class="info-line">
-				Plot Costs:
-				<c:forEach items="${board.plotCosts}" var="cost" varStatus="costStatus">
-					${cost}<c:if test="${not costStatus.last}">,</c:if>
-				</c:forEach>
-			</h4>
-			<h4 class="info-line">
-				District Costs:
-				<c:forEach items="${board.districtCosts}" var="cost" varStatus="costStatus">
-					${cost}<c:if test="${not costStatus.last}">,</c:if>
-				</c:forEach>
-			</h4>
-			<a class="show-future-building-button">Show Future Buildings</a> <a class="hide-future-building-button">Hide
-				Future Buildings</a>
-		</div>
-
 		<div class="building-list" ondragstart="onBuildingDragStart(event)" ondragend="onBuildingDragEnd(event)"><!-- comment out white-space for inline-block spacing
 			<!-- comment out white-space for inline-block spacing
 			<c:forEach items="${board.unbuiltBuildings}" var="building">
@@ -454,9 +466,19 @@
 		<ul class="tabs">
 			<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
 				<li id="tab${playerStatus.index+1}"
-					class="tab tab--${player.activeClass} tab--${player.selectedClass} tab--${fn:toLowerCase(player.color)}"><img
-					src="https://secure.gravatar.com/avatar/${player.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50"
-					title="${player.user.username}" /> ${player.user.username}</li>
+					class="tab tab--${player.activeClass} tab--${player.selectedClass} tab--${fn:toLowerCase(player.color)}">
+					<c:choose>
+						<c:when test="${board.mode.neutralPlayerUsed and player.color eq 'WHITE'}">
+							<img src="images/Switzerland_256.png" />
+							<i>Neutral Player</i>
+						</c:when>
+						<c:otherwise>
+							<img src="https://secure.gravatar.com/avatar/${player.user.emailMD5}.jpg?s=50&amp;d=identicon"
+							     height="50" width="50" title="${player.user.username}" />
+							${player.user.username}
+						</c:otherwise>
+					</c:choose>
+				</li>
 			</c:forEach>
 		</ul>
 		<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
@@ -582,10 +604,9 @@
 				-->
 				</div>
 
-				<a class="show-future-settlements-button show-future-settlements-button-${fn:toLowerCase(player.color)}">Show
-					Future Settlements</a> <a
-					class="hide-future-settlements-button hide-future-settlements-button-${fn:toLowerCase(player.color)}">Hide
-					Future Settlements</a> <br />
+				<a class="show-future-settlements-button show-future-settlements-button-${fn:toLowerCase(player.color)}">Show Future Settlements</a>
+				<a class="hide-future-settlements-button hide-future-settlements-button-${fn:toLowerCase(player.color)}">Hide Future Settlements</a>
+				<br />
 				<br />
 				<c:import url="jsp/inventoryType.jsp">
 					<c:param name="type" value="FiveFood" />
@@ -690,7 +711,7 @@
 				Settlement Score: ${entry.value.settlementTotalScore}<br />
 				Shield Score: ${entry.value.shieldScore}<br />
 				Item Score: ${entry.value.itemScore}<br />
-				<i>Total Score: ${entry.value.settlementTotalScore + entry.value.shieldScore + entry.value.itemScore}</i>
+				<i>Total Score: ${entry.value.score}</i>
 				<br />
 			</c:forEach>
 		</c:if>
@@ -747,27 +768,12 @@
 					</c:when>
 					<c:otherwise>
 					[<a href="showGame.do?gameId=${game.gameId}&amp;stateId=${move.state.stateId}">view</a>]<span
-							title="First explored by ${move.state.explorer.name} on <fmt:formatDate value="${move.state.dateCreated}" pattern="yyyy-MM-dd" />">
+							title="First explored by ${move.state.explorer.username} on <fmt:formatDate value="${move.state.dateCreated}" pattern="yyyy-MM-dd" />">
 							${move.text}</span>
 					</c:otherwise>
 				</c:choose>
 			</div>
 		</c:forEach>
-
-		
-		<c:if test="${board.gameOver}">
-			<c:forEach items="${board.scorecard.scores}" var="entry">
-				<br />
-				<b>${entry.key}</b>:<br />
-				<c:forEach items="${entry.value.settlementScores}" var="settlementScore">
-					${settlementScore.settlement.name}: ${settlementScore.score}<br />
-				</c:forEach>
-				Settlement Score: ${entry.value.settlementTotalScore}<br />
-				Shield Score: ${entry.value.shieldScore}<br />
-				Item Score: ${entry.value.itemScore}<br />
-				<i>Total Score: ${entry.value.settlementTotalScore + entry.value.shieldScore + entry.value.itemScore}</i><br />
-			</c:forEach>
-		</c:if>
 
 		<c:if test="${not empty game.state.dstStates and empty param.stateId}">
 		<hr />

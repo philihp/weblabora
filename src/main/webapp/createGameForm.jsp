@@ -10,32 +10,39 @@
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/colorbox.css" />
 <link rel="stylesheet" href="css/weblabora.css" />
+<script src="js/lib/jquery-1.8.3.js"></script>
 </head>
 <body>
 
 	<div>
 		
 		<html:form action="/createGame.do">
-			<fieldset>
+			<fieldset id="playersFieldset">
 				<legend>Players</legend>
-				<html:radio property="players" value="1" styleId="players.one" disabled="true"/><label for="players.one"> One</label><br />
-				<html:radio property="players" value="2" styleId="players.two"/><label for="players.two"> Two</label><br />
-				<html:radio property="players" value="3" styleId="players.three"/><label for="players.three"> Three</label><br />
-				<html:radio property="players" value="4" styleId="players.four"/><label for="players.four"> Four</label>
+				<html:radio property="players" value="1" styleId="playersOne"/><label for="playersOne"> One</label><br />
+				<html:radio property="players" value="2" styleId="playersTwo"/><label for="playersTwo"> Two</label><br />
+				<html:radio property="players" value="3" styleId="playersThree"/><label for="playersThree"> Three</label><br />
+				<html:radio property="players" value="4" styleId="playersFour"/><label for="playersFour"> Four</label>
 			</fieldset>
-			<fieldset>
+			<fieldset id="lengthFieldset">
 				<legend>Length</legend>
-				<html:radio property="length" value="SHORT" styleId="length.short"/><label for="length.short"> Short</label><br />
-				<html:radio property="length" value="LONG" styleId="length.long"/><label for="length.long"> Long</label>
+				<html:radio property="length" value="SHORT" styleId="lengthShort"/><label for="lengthShort"> Short</label><br />
+				<html:radio property="length" value="LONG" styleId="lengthLong"/><label for="lengthLong"> Long</label>
 			</fieldset>
 			<fieldset>
 				<legend>Country</legend>
-				<html:radio property="country" value="FRANCE" styleId="country.france"/><label for="country.france"> France</label><br />
-				<html:radio property="country" value="IRELAND" styleId="country.ireland"/><label for="country.ireland"> Ireland</label>
+				<html:radio property="country" value="FRANCE" styleId="countryFrance"/><label for="countryFrance"> France</label><br />
+				<html:radio property="country" value="IRELAND" styleId="countryIreland"/><label for="countryIreland"> Ireland</label>
 			</fieldset>
 			<html:submit>Create New Game</html:submit>
 		</html:form>
-
+		
+		<script>
+			$('#playersFieldset input[type=\'radio\']').change(function() {
+				$('#lengthFieldset input[type=\'radio\']').prop('disabled', $(this).val() == 1);
+			});
+		</script>
+		
 	</div>
 
 </body>

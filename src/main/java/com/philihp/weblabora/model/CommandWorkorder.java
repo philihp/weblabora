@@ -19,7 +19,15 @@ public class CommandWorkorder implements MoveCommand, InvalidDuringSettlement {
 	public static void execute(Board board, Color orderedPlayerColor, UsageParam payment)
 			throws WeblaboraException {
 		Player activePlayer = board.getPlayer(board.getActivePlayer());
-		Player orderedPlayer = board.getPlayer(orderedPlayerColor.ordinal());
+		Player orderedPlayer = null;
+		if(board.getMode().isNeutralPlayerUsed() && orderedPlayerColor.equals(Color.WHITE)) {
+			activePlayer = board.getPlayer(0);
+			orderedPlayer = board.getMode().getNeutralPlayer();
+		}
+		else {
+			orderedPlayer = board.getPlayer(orderedPlayerColor.ordinal());
+		}
+		
 		if(payment.isWithGift()) {
 			activePlayer.subtractWhiskey(payment.getWhiskey());
 			activePlayer.subtractWine(payment.getWine());
