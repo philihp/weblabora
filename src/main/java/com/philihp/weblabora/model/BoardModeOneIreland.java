@@ -125,6 +125,7 @@ public class BoardModeOneIreland extends BoardMode {
 		}
 		
 		if(board.isSettling() && board.getUnbuiltBuildings().size() == 0 && neutralBuildingPhase == true ) {
+			board.setMoveInRound(board.getMoveInRound() + 1);
 			board.nextActivePlayer();
 			neutralBuildingPhase = false;
 			if(neutralPlayer.isClergymenAllPlaced())
