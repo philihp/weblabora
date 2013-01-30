@@ -191,6 +191,10 @@
 		<action path="/normalizeGame" name="nullForm" type="com.philihp.weblabora.action.NormalizeGame" />
 
 
+		<action path="/showChat" name="gameForm" type="com.philihp.weblabora.action.ShowChat">
+			<forward name="view" path="/showChat.jsp" />
+			<forward name="no-game" path="/offline.do" />
+		</action>
 	</action-mappings>
 
 	<message-resources parameter="MessageResources" />

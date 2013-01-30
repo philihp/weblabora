@@ -195,10 +195,10 @@
 			</c:forEach>
 			<hr />
 			<a class="show-future-building-button">Show Future Buildings</a>
-			<a class="hide-future-building-button">Hide	Future Buildings</a>
+			<a class="hide-future-building-button">Hide Future Buildings</a>
 		</div>
 		<aside class="withBorder chat">
-			<iframe src="/weblabora/chat.jsp"></iframe>
+			<iframe src="<html:rewrite action="/showChat.do" paramId="gameId" paramName="game" paramProperty="gameId" />"></iframe>
 		</aside>
 		<div class="wheel">
 			<!-- ${board.mode.players} ${board.mode.country} ${board.mode.length} -->
