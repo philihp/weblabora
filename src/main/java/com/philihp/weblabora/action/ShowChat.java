@@ -11,7 +11,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.philihp.weblabora.form.GameForm;
+import com.philihp.weblabora.form.CreateChatForm;
 import com.philihp.weblabora.jpa.Chat;
 import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.User;
@@ -25,7 +25,7 @@ public class ShowChat extends BaseAction {
 			throws AuthenticationException, Exception {
 		EntityManager em = (EntityManager)request.getAttribute("em");
 
-		GameForm form = (GameForm)actionForm;
+		CreateChatForm form = (CreateChatForm)actionForm;
 		if(form.getGameId() == null) {
 			return mapping.findForward("no-game");
 		}

@@ -13,6 +13,7 @@
 		<class>com.philihp.weblabora.jpa.State</class>
 		<class>com.philihp.weblabora.jpa.Config</class>
 		<class>com.philihp.weblabora.jpa.Fingerprint</class>
+		<class>com.philihp.weblabora.jpa.Chat</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 
 		<properties>

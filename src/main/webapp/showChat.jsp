@@ -28,6 +28,13 @@
 						</section>
 					</li>
 				</core:forEach>
+				<li>
+					<html:form action="/makeCreateChat.do">
+						<html:hidden property="gameId" value="${game.gameId}" />
+						<html:text property="text" value="" />
+						<html:submit property="submit">Post</html:submit>
+					</html:form>
+				</li>
 			</ol>
 		</article>
 	</body>

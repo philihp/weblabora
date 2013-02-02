@@ -17,6 +17,7 @@
 		<form-bean name="accountForm" type="com.philihp.weblabora.form.AccountForm" />
 		<form-bean name="resetPasswordForm" type="com.philihp.weblabora.form.ResetPasswordForm" />
 		<form-bean name="resetAccountPasswordForm" type="com.philihp.weblabora.form.ResetAccountPasswordForm" />
+		<form-bean name="createChatForm" type="com.philihp.weblabora.form.CreateChatForm" />
 	</form-beans>
 
 	<global-exceptions>
@@ -191,9 +192,12 @@
 		<action path="/normalizeGame" name="nullForm" type="com.philihp.weblabora.action.NormalizeGame" />
 
 
-		<action path="/showChat" name="gameForm" type="com.philihp.weblabora.action.ShowChat">
+		<action path="/showChat" name="createChatForm" type="com.philihp.weblabora.action.ShowChat">
 			<forward name="view" path="/showChat.jsp" />
 			<forward name="no-game" path="/offline.do" />
+		</action>
+		<action path="/makeCreateChat" name="createChatForm" type="com.philihp.weblabora.action.MakeCreateChat">
+			<forward name="show-chat" path="/showChat.do" />
 		</action>
 	</action-mappings>
 
