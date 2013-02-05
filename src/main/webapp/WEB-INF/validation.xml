@@ -136,5 +136,7 @@
 			</field>
 		</form>
 		
+		<form name="createChatForm" />
+		
 	</formset>
 </form-validation>

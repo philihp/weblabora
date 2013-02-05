@@ -197,7 +197,7 @@
 			<a class="show-future-building-button">Show Future Buildings</a>
 			<a class="hide-future-building-button">Hide Future Buildings</a>
 		</div>
-		<aside class="withBorder chat">
+		<aside class="with-border chat">
 			<iframe src="<html:rewrite action="/showChat.do" paramId="gameId" paramName="game" paramProperty="gameId" />"></iframe>
 		</aside>
 		<div class="wheel">
@@ -469,7 +469,7 @@
 			</c:forEach>
 		</ul>
 		<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
-			<div class="withBorder board board--${player.activeClass} board--${player.selectedClass}" id="board${playerStatus.index+1}">
+			<div class="with-border board board--${player.activeClass} board--${player.selectedClass}" id="board${playerStatus.index+1}">
 
 				<c:set var="player" value="${player}" scope="request" />
 				<c:import url="jsp/inventory.jsp" />

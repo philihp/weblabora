@@ -1,0 +1,74 @@
+@import url("common.css");
+
+body {
+	background: transparent;
+}
+
+ol {
+	background: blue;
+	list-style: none inside;
+	margin: 0;
+	padding: 0.1em;
+}
+
+/*
+li that is an adjacent sibling of previous li gets the margin.
+
+This way there is a free space between items but only between two actual items.
+Without any extra free space for first/last/single item.
+*/
+li + li {
+	margin-top: 0.5em;
+}
+
+.chat-message {
+	background: cyan;
+	border: medium solid;
+}
+
+.chat-message p {
+	min-height: 50px;
+	/* top right bottom left */
+	margin: 0 0 0.2em 0;
+	text-align: justify;
+}
+
+.chat-message p img {
+	float: left;
+	margin-right: 0.2em;
+	margin-bottom: 0.2em;
+}
+
+.chat-message footer {
+	border-top-width: thin;
+	border-top-color: #b3b3b3;
+	border-top-style: solid;
+	display: table;
+	table-layout: auto;
+	width: 100%;
+}
+
+.chat-message footer .author {
+	display: table-cell;
+}
+
+.chatMessage footer .date {
+	display: table-cell;
+	text-align: right;
+}
+
+.player-red {
+	border-color: red;
+}
+
+.player-green {
+	border-color: green;
+}
+
+.player-blue {
+	border-color: blue;
+}
+
+.player-white {
+	border-color: grey;
+}

@@ -15,7 +15,7 @@ import com.philihp.weblabora.jpa.Chat.Action;
 import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.User;
 
-public class MakeCreateChat extends BaseAction {
+public class CreateChat extends BaseAction {
 
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
@@ -27,9 +27,14 @@ public class MakeCreateChat extends BaseAction {
 		gameQuery.setParameter("gameId", form.getGameId());
 		Game game = gameQuery.getSingleResult();
 
+		// Note that this silently assumes that a user may take only one player
+		// seat in a game even thou it does not have to be so.
+		Integer playerSeat = game.getUsersPlayerSeat(user);
+
 		Chat chat = new Chat();
 		chat.setGame(game);
 		chat.setUser(user);
+		chat.setPlayerSeat(playerSeat);
 		chat.setAction(Action.create);
 		chat.setText(form.getText());
 		em.persist(chat);

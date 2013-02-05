@@ -196,7 +196,7 @@
 			<forward name="view" path="/showChat.jsp" />
 			<forward name="no-game" path="/offline.do" />
 		</action>
-		<action path="/makeCreateChat" name="createChatForm" type="com.philihp.weblabora.action.MakeCreateChat">
+		<action path="/createChat" name="createChatForm" type="com.philihp.weblabora.action.CreateChat">
 			<forward name="show-chat" path="/showChat.do" />
 		</action>
 	</action-mappings>
