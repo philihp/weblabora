@@ -1,14 +1,17 @@
-@import url("common.css");
-
 body {
 	background: transparent;
 }
 
 ol {
-	background: blue;
 	list-style: none inside;
 	margin: 0;
 	padding: 0.1em;
+	/*
+	Thanks to this the min-width on .chat-message p doesn't cause the text to
+	overflow parents (in case of very narrow width) while everything still takes
+	all the width available.
+	*/
+	display: table;
 }
 
 /*
@@ -21,54 +24,115 @@ li + li {
 	margin-top: 0.5em;
 }
 
-.chat-message {
-	background: cyan;
+
+.chat-entry {
+	/* Border color depends on who authored the message and is set bellow. */ 
+	border: medium dotted;
+	border-radius: 10px;
+	padding: 5px;
+}
+
+.chat-entry.chat-message {
+	/* Border color depends on who authored the message and is set bellow. */ 
 	border: medium solid;
 }
 
-.chat-message p {
+.chat-entry p {
+	/*
+	Minimal size corresponds to image size and assures that the floating image
+	will not get beyond the message itself (by granting extra size if it is
+	needed).
+	*/
 	min-height: 50px;
+	min-width: 50px;
 	/* top right bottom left */
 	margin: 0 0 0.2em 0;
 	text-align: justify;
 }
 
-.chat-message p img {
+.chat-entry.user-system p {
+	/* System messages have no image thus they do not need minimal size. */
+	min-height: 0;
+	min-width: 0;
+}
+
+.chat-entry p img {
 	float: left;
 	margin-right: 0.2em;
 	margin-bottom: 0.2em;
 }
 
-.chat-message footer {
+.chat-entry footer {
 	border-top-width: thin;
-	border-top-color: #b3b3b3;
 	border-top-style: solid;
-	display: table;
-	table-layout: auto;
-	width: 100%;
+	font-size: smaller;
 }
 
-.chat-message footer .author {
-	display: table-cell;
-}
-
-.chatMessage footer .date {
-	display: table-cell;
+.chat-entry footer .date {
 	text-align: right;
 }
 
-.player-red {
-	border-color: red;
+.chat-entry.user-player-red {
+	background-color: rgba(255, 0, 0, 0.2);
 }
 
-.player-green {
-	border-color: green;
+.chat-entry.user-player-green {
+	background-color: rgba(0, 128, 0, 0.2);
 }
 
-.player-blue {
-	border-color: blue;
+.chat-entry.user-player-blue {
+	background-color: rgba(0, 0, 255, 0.2);
 }
 
-.player-white {
-	border-color: grey;
+.chat-entry.user-player-white {
+	background-color: rgba(128, 128, 128, 0.2);
+}
+
+.chat-entry.user-observer {
+	background-color: rgba(192, 192, 192, 0.2);
+	}
+
+.chat-entry.user-system {
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+
+.chat-entry.user-player-red, .chat-entry.user-player-red footer {
+	border-color: rgb(255, 0, 0);
+}
+
+.chat-entry.user-player-green, .chat-entry.user-player-green footer {
+	border-color: rgb(0, 128, 0);
+}
+
+.chat-entry.user-player-blue, .chat-entry.user-player-blue footer {
+	border-color: rgb(0, 0, 255);
+}
+
+.chat-entry.user-player-white, .chat-entry.user-player-white footer {
+	border-color: rgb(128, 128, 128);
+}
+
+.chat-entry.user-observer, .chat-entry.user-observer footer {
+	border-color: black;
+}
+
+.chat-entry.user-system, .chat-entry.user-system footer {
+	border-color: rgb(0, 0, 0);
+}
+
+.user-player-red .user-role {
+	color: rgb(255, 0, 0);
+}
+
+.user-player-green .user-role {
+	color: rgb(0, 128, 0);
+}
+
+.user-player-blue .user-role {
+	color: rgb(0, 0, 255);
+}
+
+.user-player-white .user-role {
+	color: rgb(128, 128, 128);
 }

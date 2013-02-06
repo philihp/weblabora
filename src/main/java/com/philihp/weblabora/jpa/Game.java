@@ -272,15 +272,34 @@ public class Game extends BasicEntity {
 		return null;
 	}
 
+	/**
+	 * Returns player taken by specified user in the game.
+	 *
+	 * Note that this function silently assumes that given user may be only a
+	 * single player in the game. Thus after finding first such player the
+	 * function returns immediately.
+	 *
+	 * Yet it seems that there is no technical reason for which a user would not
+	 * be able to be more than one player. The only thing preventing that from
+	 * happening are extra checks in the code (most notably in
+	 * {@link com.philihp.weblabora.action.JoinGame}).
+	 *
+	 * @param user User which player we are asking for.
+	 * @return Player taken by {@code user} or {@code null} if either
+	 *         {@code user} is {@code null} or {@code user} is not a player in
+	 *         the game.
+	 */
 	@Transient
-	public Player getSeat(int seat) throws WeblaboraException {
-		switch(seat) {
-		case 1: return player1;
-		case 2: return player2;
-		case 3: return player3;
-		case 4: return player4;
-		default: throw new WeblaboraException("Invalid seat "+seat+", a game only has four seats");
-		}
+	public Player getUsersPlayer(User user) {
+		Integer seat = getUsersPlayerSeat(user);
+		if (seat == null)
+			return null;
+		return getSeat(seat);
+	}
+
+	@Transient
+	public Player getSeat(int seat) {
+		return getAllPlayers()[seat - 1];
 	}
 	
 	@Transient
