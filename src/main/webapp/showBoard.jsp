@@ -195,8 +195,11 @@
 			</c:forEach>
 			<hr />
 			<a class="show-future-building-button">Show Future Buildings</a>
-			<a class="hide-future-building-button">Hide	Future Buildings</a>
+			<a class="hide-future-building-button">Hide Future Buildings</a>
 		</div>
+		<aside class="with-border chat">
+			<iframe src="<html:rewrite action="/showChat.do" paramId="gameId" paramName="game" paramProperty="gameId" />"></iframe>
+		</aside>
 		<div class="wheel">
 			<!-- ${board.mode.players} ${board.mode.country} ${board.mode.length} -->
 			<svg style="width: 300px; height: 300px;" viewbox="-150.5 -150.5 300 300">
@@ -482,7 +485,7 @@
 			</c:forEach>
 		</ul>
 		<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
-			<div class="board board--${player.activeClass} board--${player.selectedClass}" id="board${playerStatus.index+1}">
+			<div class="with-border board board--${player.activeClass} board--${player.selectedClass}" id="board${playerStatus.index+1}">
 
 				<c:set var="player" value="${player}" scope="request" />
 				<c:import url="jsp/inventory.jsp" />

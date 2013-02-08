@@ -233,12 +233,43 @@ public class Game extends BasicEntity {
 
 	@Transient
 	public boolean isUserAPlayer(User user) {
-		if(user == null) return false;
-		boolean player1Match = player1.user != null && player1.user.getUserId() == user.getUserId();
-		boolean player2Match = player2.user != null && player2.user.getUserId() == user.getUserId();
-		boolean player3Match = player3.user != null && player3.user.getUserId() == user.getUserId();
-		boolean player4Match = player4.user != null && player4.user.getUserId() == user.getUserId();
-		return player1Match || player2Match || player3Match || player4Match;
+		return getUsersPlayerSeat(user) != null;
+	}
+
+	/**
+	 * Returns player seat taken by specified user in the game.
+	 *
+	 * Note that this function silently assumes that given user may take only
+	 * one player seat in the game. Thus after finding first such seat the
+	 * function returns immediately.
+	 *
+	 * Yet it seems that there is no technical reason for which a user would not
+	 * be able to take more than one player seat. The only thing preventing that
+	 * from happening are extra checks in the code (most notably in
+	 * {@link com.philihp.weblabora.action.JoinGame}).
+	 *
+	 * @param user User which player seat we are asking for.
+	 * @return Player seat ({@code 1}-based index) taken by {@code user} or
+	 *         {@code null} if either {@code user} is {@code null} or
+	 *         {@code user} is not a player in the game.
+	 */
+	@Transient
+	public Integer getUsersPlayerSeat(User user) {
+		if(user == null) {
+			return null;
+		}
+
+		int playerSeat = 1;
+		for(Player player : getAllPlayers()) {
+			// TODO: Is the comparison of getUserId() needed? Shouldn't those
+			//       user objects be the same object?
+			if((player.user != null) && (player.user.getUserId() == user.getUserId())) {
+				return playerSeat;
+			}
+			++playerSeat;
+		}
+
+		return null;
 	}
 
 	@Transient

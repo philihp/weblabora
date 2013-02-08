@@ -1,3 +1,5 @@
+@import url("common.css");
+
 body {
 	background: #f0f0f0; 
 }
@@ -205,6 +207,26 @@ div.container {
 	margin: 0;
 }
 
+.chat {
+	position: fixed;
+	/* .userbar has: 50px height + 1px border + 10px bottom margin */
+	top: 61px;
+	left: 0px;
+	/* TODO: I'm not sure what this value really should be. */
+	margin: 10px;
+	/* TODO: I'm not sure what this value really should be. */
+	width: 400px;
+	height: 800px;
+}
+.chat iframe {
+	border: none;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+}
+
+
 .tabs {
 	clear: both;
 	list-style: none;
@@ -234,12 +256,8 @@ div.container {
 }
 
 .board {
-	padding: 5px;
-	border: 1px solid #b3b3b3;
-	background: #fcfcfc;
-	border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
-	border-top-right-radius: 5px;
+	/* This overwrites .with-border class style. */
+	border-top-left-radius: 0px;
 }
 .board table {
 	border-color: gray;
