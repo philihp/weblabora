@@ -6,12 +6,6 @@ ol {
 	list-style: none inside;
 	margin: 0;
 	padding: 0.1em;
-	/*
-	Thanks to this the min-width on .chat-message p doesn't cause the text to
-	overflow parents (in case of very narrow width) while everything still takes
-	all the width available.
-	*/
-	display: table;
 }
 
 /*
@@ -28,8 +22,8 @@ li + li {
 .chat-entry {
 	/* Border color depends on who authored the message and is set bellow. */ 
 	border: medium solid;
-	border-radius: 10px;
-	padding: 5px;
+	border-radius: 1em;
+	padding: 0.5em;
 }
 
 .chat-entry.edited {
