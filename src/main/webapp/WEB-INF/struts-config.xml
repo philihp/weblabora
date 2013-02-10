@@ -197,7 +197,7 @@
 			<forward name="no-game" path="/offline.do" />
 		</action>
 		<action path="/createChat" name="createChatForm" type="com.philihp.weblabora.action.CreateChat">
-			<forward name="show-chat" path="/showChat.do" />
+			<forward name="show-chat" redirect="true" path="/showChat.do" />
 		</action>
 	</action-mappings>
 
