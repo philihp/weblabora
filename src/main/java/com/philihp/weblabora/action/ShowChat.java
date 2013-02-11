@@ -40,6 +40,8 @@ public class ShowChat extends BaseAction {
 		List<Chat> chat = query.getResultList();
 
 		request.setAttribute("chat", chat);
+		
+		request.setAttribute("player", game.getUsersPlayer(user));
 
 		return mapping.findForward("view");
 	}
