@@ -26,13 +26,13 @@
 					</li>
 				</c:forEach>
 				<c:if test="${not empty user}">
-					<li class="chat-entry edited ${(empty player) ? 'user-observer' : player.color}">
+					<li class="chat-entry edited ${(empty player) ? 'user-observer' : 'user-player-' player.color}">
 						<section>
 							<html:form action="/createChat.do" acceptCharset="UTF-8" >
 								<div class="contents"><html:textarea property="text" value="" /></div>
 								<footer>
 									<html:hidden property="gameId" value="${game.gameId}" />
-									<div class="author">by <span class="user-name">${(empty user) ? 'WebLabora' : fn:escapeXml(user.username)}</span><c:if test="${not empty user}"> (as <span class="user-role">${(empty player) ? 'observer' : player.color}</span>)</c:if></div>
+									<div class="author">by <span class="user-name">${(empty user) ? 'WebLabora' : fn:escapeXml(user.username)}</span><c:if test="${not empty user}"> (as <span class="user-role">${(empty player) ? 'observer' : player.color ' player'}</span>)</c:if></div>
 									<div class="date"><html:submit property="submit">Post</html:submit></div>
 								</footer>
 							</html:form>
