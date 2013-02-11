@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Weblabora</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="js/lib/modernizr-2.6.2.min.js"></script>
+    
+    <style>
+    #west {
+      position: absolute;
+      top: 0;
+      bottom:2em;
+      left: 0;
+      width: 60%;
+      background-color: #dfef9f;
+    }
+    #buildings {
+      overflow-x: hidden;
+      overflow-y: scroll;
+      height: 10em;
+    }
+    #buildingsdragbar {
+      cursor: row-resize;
+      background-color: #afb0cf;
+    }
+    #east {
+      position: absolute;
+      top: 0;
+      bottom: 2em;
+      right: 0;
+      width: 40%;
+      background-color: #9fefdf;
+    }
+    #south {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2em;
+      background-color: #ef8f5f;
+    }
+    </style>
+    
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div id="west">
+      
+      <div id="buildings">
+        <img src="images/building/G01.jpg" />
+        <img src="images/building/G02.jpg" />
+        <img src="images/building/F03.jpg" />
+        <img src="images/building/F04.jpg" />
+        <img src="images/building/F05.jpg" />
+        <img src="images/building/G06.jpg" />
+        <img src="images/building/G07.jpg" />
+        <img src="images/building/F08.jpg" />
+        <img src="images/building/F09.jpg" />
+        <img src="images/building/F10.jpg" />
+        <img src="images/building/F11.jpg" />
+        <img src="images/building/G12.jpg" />
+        <img src="images/building/G13.jpg" />
+        <img src="images/building/F14.jpg" />
+        <img src="images/building/F15.jpg" />
+        <img src="images/building/G16.jpg" />
+        <img src="images/building/F17.jpg" />
+        <img src="images/building/G18.jpg" />
+        <img src="images/building/G19.jpg" />
+        <img src="images/building/F20.jpg" />
+        <img src="images/building/F21.jpg" />
+        <img src="images/building/G22.jpg" />
+        <img src="images/building/F23.jpg" />
+        <img src="images/building/F24.jpg" />
+        <img src="images/building/F25.jpg" />
+        <img src="images/building/G26.jpg" />
+        <img src="images/building/F27.jpg" />
+        <img src="images/building/G28.jpg" />
+        <img src="images/building/F29.jpg" />
+        <img src="images/building/F30.jpg" />
+        <img src="images/building/F31.jpg" />
+        <img src="images/building/F32.jpg" />
+        <img src="images/building/F33.jpg" />
+        <img src="images/building/G34.jpg" />
+        <img src="images/building/F35.jpg" />
+        <img src="images/building/F36.jpg" />
+        <img src="images/building/F37.jpg" />
+        <img src="images/building/F38.jpg" />
+        <img src="images/building/G39.jpg" />
+        <img src="images/building/F40.jpg" />
+      </div>
+      <div id="buildingsdragbar">===========</div>
+      
+      this is the player board
+      
+      
+      
+      
+      
+      
+    </div>
+    <div id="east">
+      east
+    </div>
+    <div id="south">
+      south
+    </div>
+
+    <script src="js/lib/jquery-1.9.0.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      var i=0;
+      $('#buildingsdragbar').mousedown(function(e) {
+        e.preventDefault();
+        $(document).mousemove(function(f){
+          $('#buildings').css("height", f.pageY-e.offsetY);
+        });
+      });
+      $(document).mouseup(function(e){
+        $(document).unbind('mousemove');
+      });
+    </script>
+  </body>
+</html>
