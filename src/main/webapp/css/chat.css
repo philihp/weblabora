@@ -31,7 +31,7 @@ li + li {
 	border: medium dotted;
 }
 
-.chat-entry p {
+.chat-entry div.contents {
 	/*
 	Minimal size corresponds to image size and assures that the floating image
 	will not get beyond the message itself (by granting extra size if it is
@@ -44,13 +44,22 @@ li + li {
 	text-align: justify;
 }
 
-.chat-entry.user-system p {
+.chat-entry.user-system div.contents {
 	/* System messages have no image thus they do not need minimal size. */
 	min-height: 0;
 	min-width: 0;
 }
 
-.chat-entry p img {
+br, p {
+	margin: 0;
+	padding: 0;
+}
+
+p + p, p + br, br + p, br + br {
+	margin-top: 0.1em;
+}
+
+.chat-entry div.contents img {
 	float: left;
 	margin-right: 0.2em;
 	margin-bottom: 0.2em;

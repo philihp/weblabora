@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.commons.lang.StringEscapeUtils;
 
 import com.philihp.weblabora.form.CreateChatForm;
 import com.philihp.weblabora.jpa.Chat;
@@ -32,14 +31,12 @@ public class CreateChat extends BaseAction {
 		// seat in a game even thou it does not have to be so.
 		Integer playerSeat = game.getUsersPlayerSeat(user);
 
-		String escapedText = StringEscapeUtils.escapeXml(form.getText());
-
 		Chat chat = new Chat();
 		chat.setGame(game);
 		chat.setUser(user);
 		chat.setPlayerSeat(playerSeat);
 		chat.setAction(Action.create);
-		chat.setText(escapedText);
+		chat.setText(form.getText());
 		em.persist(chat);
 
 		ActionForward forward = mapping.findForward("show-chat");

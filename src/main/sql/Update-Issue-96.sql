@@ -18,7 +18,9 @@ CREATE  TABLE `philihp`.`weblabora_chat` (
 
   `action` ENUM('create','edit','delete') NOT NULL COMMENT 'Type of chat action. This column also determines meaning and validity of other columns (see those columns for details).' ,
 
-  `text` LONGTEXT NULL DEFAULT NULL COMMENT 'If `action` is `create` then this is the text of the chat message that is created. If `action` is `edit` then this is the new text of the chat message that is edited. Otherwise this is unspecified (use NULL on write but do not depend on NULL on read).' ,
+  `original_text` LONGTEXT NULL DEFAULT NULL COMMENT 'If `action` is `create` then this is the original text of the chat message that is created. If `action` is `edit` then this is the new original text of the chat message that is edited. Otherwise this is unspecified (use NULL on write but do not depend on NULL on read). Original text is the one entered by user.' ,
+
+  `transformed_text` LONGTEXT NULL DEFAULT NULL COMMENT 'If `action` is `create` then this is the transformed text of the chat message that is created. If `action` is `edit` then this is the new transformed text of the chat message that is edited. Otherwise this is unspecified (use NULL on write but do not depend on NULL on read). Transformed text is the one that results after applying markup and other features it must be used directly without escaping.' ,
 
   `ref_chat_id` INT NULL DEFAULT NULL COMMENT 'If `action` is `edit` then this is the `chat_id` of the row that previously manipulated (possibly created) the chat message that is edited. If `action` is `delete` then this is the `chat_id` of the row that previously manipulated (possibly created) the chat message that is deleted. Otherwise this is unspecified (use NULL on write but do not depend on NULL on read).' ,
 
