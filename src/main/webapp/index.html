@@ -24,7 +24,7 @@
     #buildings {
       overflow-x: hidden;
       overflow-y: scroll;
-      height: 10em;
+      height: 13em;
     }
     #buildingsdragbar {
       cursor: row-resize;
@@ -122,6 +122,7 @@
       $('#buildingsdragbar').mousedown(function(e) {
         e.preventDefault();
         $(document).mousemove(function(f){
+          if(!e.offsetY) e.offsetY = e.pageY - $(e.target).offset().top;
           $('#buildings').css("height", f.pageY-e.offsetY);
         });
       });
