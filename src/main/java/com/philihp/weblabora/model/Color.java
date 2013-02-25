@@ -16,6 +16,7 @@ public enum Color {
 			return BLUE;
 		case '3':
 		case 'W':
+		case 'N':
 			return WHITE;
 		}
 		return null;

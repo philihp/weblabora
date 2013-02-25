@@ -1,15 +1,12 @@
 package com.philihp.weblabora.model;
 
-import static com.philihp.weblabora.model.GameCountry.FRANCE;
-import static com.philihp.weblabora.model.GameCountry.IRELAND;
-import static com.philihp.weblabora.model.GameLength.LONG;
-import static com.philihp.weblabora.model.GameLength.SHORT;
-import static com.philihp.weblabora.model.GamePlayers.FOUR;
-import static com.philihp.weblabora.model.GamePlayers.THREE;
-import static com.philihp.weblabora.model.GamePlayers.TWO;
+import static com.philihp.weblabora.model.GameCountry.*;
+import static com.philihp.weblabora.model.GameLength.*;
+import static com.philihp.weblabora.model.GamePlayers.*;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 
@@ -53,6 +50,9 @@ public abstract class BoardMode {
 		map.get(TWO).get(SHORT).put(IRELAND, BoardModeTwoShortIreland.class);
 		map.get(THREE).get(SHORT).put(IRELAND, BoardModeThreeShortIreland.class);
 		map.get(FOUR).get(SHORT).put(IRELAND, BoardModeFourShortIreland.class);
+		
+		map.get(ONE).get(NULL).put(FRANCE, BoardModeOneFrance.class);
+		map.get(ONE).get(NULL).put(IRELAND, BoardModeOneIreland.class);
 }
 
 	public static BoardMode getMode(Board board, GamePlayers gamePlayers,
@@ -98,6 +98,8 @@ public abstract class BoardMode {
 	abstract public SettlementRound roundBeforeSettlement(int round);
 
 	abstract public void postMove();
+	
+	abstract boolean isNeutralBuildingPhase();
 	
 	/**
 	 * Hook for pre-round processing for Short 3/4 player games to dish out resources
@@ -170,6 +172,10 @@ public abstract class BoardMode {
 	abstract public int grapeActiveOnRound();
 
 	abstract public int stoneActiveOnRound();
+	
+	public int jokerActiveOnRound() {
+		return 0;
+	}
 
 	abstract public void setWheelTokens(Wheel wheel);
 
@@ -208,4 +214,55 @@ public abstract class BoardMode {
 			}
 		}
 	}
+
+	public static final int[] PLOT_PURCHASE_PRICE = {3,4,4,5,5,5,6,6,7};
+	
+	public static final int[] DISTRICT_PURCHASE_PRICE = {2,3,4,4,5,5,6,7,8};
+	
+	private int plotsPurchased;
+	
+	private int districtsPurchased;
+	
+	public int[] getPlotCosts() {
+		return Arrays.copyOfRange(PLOT_PURCHASE_PRICE, plotsPurchased, PLOT_PURCHASE_PRICE.length);
+	}
+	
+	public int[] getDistrictCosts() {
+		return Arrays.copyOfRange(DISTRICT_PURCHASE_PRICE, districtsPurchased, DISTRICT_PURCHASE_PRICE.length); 
+	}
+	
+	public int purchasePlot() {
+		return PLOT_PURCHASE_PRICE[plotsPurchased++];
+	}
+	
+	public int purchaseDistrict() {
+		return DISTRICT_PURCHASE_PRICE[districtsPurchased++];
+	}
+	
+	/**
+	 * Special mode-specific setup.
+	 */
+	public void setup() {
+	}
+	
+	/**
+	 * Netural player, for use in Solo game.
+	 * @return
+	 */
+	public Player getNeutralPlayer() {
+		return null;
+	}
+	
+	public boolean isNeutralPlayerUsed() {
+		return getNeutralPlayer() != null;
+	}
+	
+	abstract boolean isGrapesUsed();
+	
+	abstract boolean isStoneUsed();
+	
+	public boolean isPriorSpecialInExtraRound() {
+		return true;
+	}
+	
 }

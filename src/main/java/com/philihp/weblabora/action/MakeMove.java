@@ -54,9 +54,9 @@ public class MakeMove extends BaseAction {
 		}
 		
 		Board board = new Board(
-				GamePlayers.valueOf(game.getPlayers()),
-				GameLength.valueOf(game.getLength()),
-				GameCountry.valueOf(game.getCountry())
+				GamePlayers.value(game.getPlayers()),
+				GameLength.value(game.getLength()),
+				GameCountry.value(game.getCountry())
 				);
 		MoveProcessor.processMoves(board, game.getActiveStates(), null);
 		try {

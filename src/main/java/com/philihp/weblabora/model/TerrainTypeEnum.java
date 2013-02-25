@@ -46,12 +46,7 @@ public enum TerrainTypeEnum {
 	 * @see #getSlaveCoordinateFrom(Coordinate)
 	 */
 	public boolean isMerged() {
-		switch(this) {
-		case MERGED_NORTH:
-			return true;
-		default:
-			return false;
-		}
+		return this==MERGED_NORTH;
 	}
 
 	/**

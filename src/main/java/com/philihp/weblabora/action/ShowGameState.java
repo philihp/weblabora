@@ -38,12 +38,13 @@ public class ShowGameState extends BaseAction {
 		Board board = null;
 		if(game != null) {
 			board = new Board(
-					GamePlayers.valueOf(game.getPlayers()),
-					GameLength.valueOf(game.getLength()),
-					GameCountry.valueOf(game.getCountry())
+					GamePlayers.value(game.getPlayers()),
+					GameLength.value(game.getLength()),
+					GameCountry.value(game.getCountry())
 					);
 			board.populateDetails(game);
 			MoveProcessor.processMoves(board, game.getActiveStates(), endState);
+			
 			if(board.isGameOver() == false) {
 				board.preMove(new State()); //upkeep stuff before player makes a move
 			}

@@ -63,7 +63,7 @@ abstract public class Building extends Erection {
 	}
 	
 	public GamePlayers getPlayers() {
-		return GamePlayers.valueOf(players);
+		return GamePlayers.value(players);
 	}
 
 }
