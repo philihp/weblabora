@@ -361,6 +361,10 @@
 						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">D</text>
 					</g>
+					<g id="settlement-e" transform="rotate(${wheelArt.rotF})">
+						<path d="${wheelArt.housePath}" style="fill:url(#housefill); fill-opacity: 1; stroke:#202020; stroke-width: 1" />
+						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">E</text>
+					</g>
 				</c:if>
 				<c:if test="${board.mode.players eq 'TWO'}">
 					<%-- this is the same for both short and long --%>
@@ -381,16 +385,18 @@
 						<text x="0" y="${wheelArt.houseTextY}" style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#fff">D</text>
 					</g>
 				</c:if>
-				<c:if test="${board.mode.country eq 'FRANCE'}">
+				<c:if test="${board.mode.grapesUsed}">
 					<g id="grape" transform="rotate(${ora:deg(board.wheel.grape.position)})">
 						<text x="0" y="${board.wheel.grape.radius}"
 						style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Grape</text>
 					</g>
 				</c:if>
-				<g id="stone" transform="rotate(${ora:deg(board.wheel.stone.position)})">
-					<text x="0" y="${board.wheel.stone.radius}"
-					style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Stone</text>
-				</g>
+				<c:if test="${board.mode.stoneUsed}">
+					<g id="stone" transform="rotate(${ora:deg(board.wheel.stone.position)})">
+						<text x="0" y="${board.wheel.stone.radius}"
+						style="font-size: 9px; font-weight: 100; kerning:-0.5; text-anchor: middle; fill:#000">Stone</text>
+					</g>
+				</c:if>
 				<g id="grain" transform="rotate(${ora:deg(board.wheel.grain.position)})">
 					<text x="0" y="${board.wheel.grain.radius}"
 					style="font-size: 9px; font-weight: 100; text-anchor: middle; fill:#000">Grain</text>
@@ -463,9 +469,19 @@
 		<ul class="tabs">
 			<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
 				<li id="tab${playerStatus.index+1}"
-					class="tab tab--${player.activeClass} tab--${player.selectedClass} tab--${fn:toLowerCase(player.color)}"><img
-					src="https://secure.gravatar.com/avatar/${player.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50"
-					title="${player.user.username}" /> ${player.user.username}</li>
+					class="tab tab--${player.activeClass} tab--${player.selectedClass} tab--${fn:toLowerCase(player.color)}">
+					<c:choose>
+						<c:when test="${board.mode.neutralPlayerUsed and player.color eq 'WHITE'}">
+							<img src="images/Switzerland_256.png" />
+							<i>Neutral Player</i>
+						</c:when>
+						<c:otherwise>
+							<img src="https://secure.gravatar.com/avatar/${player.user.emailMD5}.jpg?s=50&amp;d=identicon"
+							     height="50" width="50" title="${player.user.username}" />
+							${player.user.username}
+						</c:otherwise>
+					</c:choose>
+				</li>
 			</c:forEach>
 		</ul>
 		<c:forEach items="${board.players}" var="player" varStatus="playerStatus">
@@ -755,7 +771,7 @@
 					</c:when>
 					<c:otherwise>
 					[<a href="showGame.do?gameId=${game.gameId}&amp;stateId=${move.state.stateId}">view</a>]<span
-							title="First explored by ${move.state.explorer.name} on <fmt:formatDate value="${move.state.dateCreated}" pattern="yyyy-MM-dd" />">
+							title="First explored by ${move.state.explorer.username} on <fmt:formatDate value="${move.state.dateCreated}" pattern="yyyy-MM-dd" />">
 							${move.text}</span>
 					</c:otherwise>
 				</c:choose>
