@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ taglib uri="http://struts.apache.org/tags-html-el" prefix="html"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="core"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib uri="http://struts.apache.org/tags-html-el" prefix="html" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="functions"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 <html:html>
@@ -14,26 +14,55 @@
 	<body>
 		<article>
 			<ol>
-				<core:forEach items="${chat}" var="message">
-					<li class="with-border chat-message${(not empty message.player) ? ' player-'.concat(functions:toLowerCase(message.player.color)) : ''}">
+				<c:forEach items="${chat}" var="message">
+					<c:choose>
+						<c:when test="${empty message.user}">
+							<c:set var="posterClass" value="user-system" />
+							<c:set var="posterName" value="" />
+						</c:when>
+						<c:when test="${empty message.player}">
+							<c:set var="posterClass" value="user-observer" />
+							<c:set var="posterName" value="observer" />
+						</c:when>
+						<c:otherwise>
+							<c:set var="posterClass" value="user-player-${fn:toLowerCase(message.player.color)}" />
+							<c:set var="posterName" value="${fn:toLowerCase(message.player.color)} player" />
+						</c:otherwise>
+					</c:choose>
+					<li class="chat-entry chat-message ${posterClass}">
 						<section>
-							<p><img src="https://secure.gravatar.com/avatar/${message.user.emailMD5}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${message.user.username}" />${message.text}</p>
+							<div class="contents"><c:if test="${not empty message.user}"><img src="https://secure.gravatar.com/avatar/${fn:escapeXml(message.user.emailMD5)}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${fn:escapeXml(message.user.username)}" /></c:if>${message.transformedText}</div>
 							<footer>
-								<span class="author">by ${message.user.username}</span>
-								<span class="date">posted on <fmt:formatDate value="${message.dateCreated}" pattern="yyyy-MM-dd" /></span>
+								<div class="author">by <span class="user-name">${(empty message.user) ? 'WebLabora' : fn:escapeXml(message.user.username)}</span><c:if test="${not empty posterName}"> (as <span class="user-role">${posterName}</span>)</c:if></div>
+								<div class="date">posted on <time><fmt:formatDate value="${message.dateCreated}" pattern="yyyy-MM-dd HH:mm:ss" /></time></div>
 							</footer>
 						</section>
 					</li>
-				</core:forEach>
-				<li class="with-border">
-					<section>
-						<html:form action="/createChat.do">
-							<html:hidden property="gameId" value="${game.gameId}" />
-							<html:text property="text" value="" />
-							<html:submit property="submit">Post</html:submit>
-						</html:form>
-					</section>
-				</li>
+				</c:forEach>
+				<c:if test="${not empty user}">
+					<c:choose>
+						<c:when test="${empty player}">
+							<c:set var="posterClass" value="user-observer" />
+							<c:set var="posterName" value="observer" />
+						</c:when>
+						<c:otherwise>
+							<c:set var="posterClass" value="user-player-${fn:toLowerCase(player.color)}" />
+							<c:set var="posterName" value="${fn:toLowerCase(player.color)} player" />
+						</c:otherwise>
+					</c:choose>
+					<li class="chat-entry edited ${posterClass}">
+						<section>
+							<html:form action="/createChat.do" acceptCharset="UTF-8" >
+								<div class="contents"><html:textarea property="text" value="" /></div>
+								<footer>
+									<html:hidden property="gameId" value="${game.gameId}" />
+									<div class="author">by <span class="user-name">${(empty user) ? 'WebLabora' : fn:escapeXml(user.username)}</span><c:if test="${not empty posterName}"> (as <span class="user-role">${posterName}</span>)</c:if></div>
+									<div class="date"><html:submit property="submit">Post</html:submit></div>
+								</footer>
+							</html:form>
+						</section>
+					</li>
+				</c:if>
 			</ol>
 		</article>
 	</body>

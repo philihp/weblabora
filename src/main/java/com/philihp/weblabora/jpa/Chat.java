@@ -17,6 +17,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 import com.philihp.weblabora.model.WeblaboraException;
 
 @Entity(name = "Chat")
@@ -51,9 +53,13 @@ public class Chat extends BasicEntity {
 	@Enumerated(STRING)
 	private Action action;
 
+	@Basic(fetch=LAZY)
+	@Column(name="original_text", nullable=true)
+	private String originalText;
+
 	@Basic
-	@Column(name="text", nullable=true)
-	private String text;
+	@Column(name="transformed_text", nullable=true)
+	private String transformedText;
 
 	@OneToOne(fetch=LAZY, targetEntity=com.philihp.weblabora.jpa.Chat.class)
 	@JoinColumn(name="ref_chat_id", referencedColumnName="chat_id")
@@ -108,12 +114,19 @@ public class Chat extends BasicEntity {
 		this.action = action;
 	}
 
-	public String getText() {
-		return text;
+	public String getOriginalText() {
+		return originalText;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setText(String originalText) {
+		String transformedText = applyTextTransformation(originalText);
+
+		this.originalText = originalText;
+		this.transformedText = transformedText;
+	}
+
+	public String getTransformedText() {
+		return transformedText;
 	}
 
 	public Chat getRefChat() {
@@ -122,5 +135,37 @@ public class Chat extends BasicEntity {
 
 	public void setRefChat(Chat refChat) {
 		this.refChat = refChat;
+	}
+
+	/**
+	 * Returns text escaped and extended with mark-up.
+	 *
+	 * This function makes user provided text usable directly in HTML.
+	 *
+	 * We keep the original (user provided) text anyway to be able later to
+	 * regenerate with new features. Also future editing of the text would
+	 * better use the original text.
+	 *
+	 * @param source Text to be transformed.
+	 * @return Text escaped and extended with mark-up.
+	 */
+	// TODO: Add at least links and emails detection.
+	private String applyTextTransformation(String source) {
+		String escaped = StringEscapeUtils.escapeXml(source);
+
+		String[] lines = escaped.split("\\r\\n|\\r|\\n", -1);
+
+		StringBuilder builder = new StringBuilder();
+		for(int i = 0; i < lines.length; ++i) {
+			if(lines[i].isEmpty()) {
+				builder.append("<br />");
+			} else {
+				builder.append("<p>");
+				builder.append(lines[i]);
+				builder.append("</p>");
+			}
+		}
+
+		return builder.toString();
 	}
 }
