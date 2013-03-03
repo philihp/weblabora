@@ -122,6 +122,9 @@
 			$(this).closest('form').submit();
 		});
 
+		$('#chatClose').click(function() {
+			$('#chatBox').toggleClass('chatHidden');
+		});
 	});
 </script>
 
@@ -197,8 +200,9 @@
 			<a class="show-future-building-button">Show Future Buildings</a>
 			<a class="hide-future-building-button">Hide Future Buildings</a>
 		</div>
-		<aside class="with-border chat">
-			<iframe src="<html:rewrite action="/showChat.do" paramId="gameId" paramName="game" paramProperty="gameId" />"></iframe>
+		<aside class="with-border chat" id="chatBox">
+		    <div id="chatClose" style="float: right;">close</div>
+			<iframe id="chat" src="<html:rewrite action="/showChat.do" paramId="gameId" paramName="game" paramProperty="gameId" />"></iframe>
 		</aside>
 		<div class="wheel">
 			<!-- ${board.mode.players} ${board.mode.country} ${board.mode.length} -->

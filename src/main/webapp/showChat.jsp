@@ -10,6 +10,7 @@
 		<title>WebLabora</title>
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/chat.css" />
+		<script src="js/lib/jquery-1.8.3.js"></script>
 	</head>
 	<body>
 		<article>
@@ -31,11 +32,13 @@
 					</c:choose>
 					<li class="chat-entry chat-message ${posterClass}">
 						<section>
-							<div class="contents"><c:if test="${not empty message.user}"><img src="https://secure.gravatar.com/avatar/${fn:escapeXml(message.user.emailMD5)}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${fn:escapeXml(message.user.username)}" /></c:if>${message.transformedText}</div>
+							<div class="contents"><c:if test="${not empty message.user}"><img src="https://secure.gravatar.com/avatar/${fn:escapeXml(message.user.emailMD5)}.jpg?s=50&amp;d=identicon" height="50" width="50" title="${fn:escapeXml(message.user.username)} on <fmt:formatDate value="${message.dateCreated}" pattern="yyyy-MM-dd HH:mm:ss" />" /></c:if>${message.transformedText}</div>
+							<%--
 							<footer>
 								<div class="author">by <span class="user-name">${(empty message.user) ? 'WebLabora' : fn:escapeXml(message.user.username)}</span><c:if test="${not empty posterName}"> (as <span class="user-role">${posterName}</span>)</c:if></div>
 								<div class="date">posted on <time><fmt:formatDate value="${message.dateCreated}" pattern="yyyy-MM-dd HH:mm:ss" /></time></div>
 							</footer>
+							--%>
 						</section>
 					</li>
 				</c:forEach>
@@ -50,7 +53,7 @@
 							<c:set var="posterName" value="${fn:toLowerCase(player.color)} player" />
 						</c:otherwise>
 					</c:choose>
-					<li class="chat-entry edited ${posterClass}">
+					<li id="chat-entry" class="chat-entry edited ${posterClass}">
 						<section>
 							<html:form action="/createChat.do" acceptCharset="UTF-8" >
 								<div class="contents"><html:textarea property="text" value="" /></div>
@@ -66,4 +69,9 @@
 			</ol>
 		</article>
 	</body>
+	<script>
+	$(function() {
+		$(this).scrollTop($(this).height());
+	});
+	</script>
 </html:html>
