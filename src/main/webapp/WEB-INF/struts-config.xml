@@ -15,6 +15,7 @@
 		<form-bean name="registerForm" type="com.philihp.weblabora.form.RegisterForm"/>
 		<form-bean name="forgotPasswordForm" type="com.philihp.weblabora.form.ForgotPasswordForm" />
 		<form-bean name="accountForm" type="com.philihp.weblabora.form.AccountForm" />
+		<form-bean name="chatHiddenForm" type="com.philihp.weblabora.form.ChatHiddenForm" />
 		<form-bean name="resetPasswordForm" type="com.philihp.weblabora.form.ResetPasswordForm" />
 		<form-bean name="resetAccountPasswordForm" type="com.philihp.weblabora.form.ResetAccountPasswordForm" />
 		<form-bean name="createChatForm" type="com.philihp.weblabora.form.CreateChatForm" />
@@ -171,6 +172,8 @@
 		<action path="/showGames" type="com.philihp.weblabora.action.ShowGames">
 			<forward name="view" path="/showGames.jsp" />
 		</action>
+		<action path="/setChatHidden" name="chatHiddenForm" scope="request" validate="false" 
+			type="com.philihp.weblabora.action.SetChatHidden" />
 		<action path="/showLobby" type="com.philihp.weblabora.action.ShowLobby">
 			<forward name="view" path="/showLobby.jsp" />
 		</action>

@@ -124,6 +124,11 @@
 
 		$('#chatClose').click(function() {
 			$('#chatBox').toggleClass('chatHidden');
+			$.ajax({
+				type: "POST",
+				url: "setChatHidden.do",
+				data: { chatHidden: $('#chatBox').hasClass('chatHidden') }
+			});
 		});
 	});
 </script>
@@ -200,7 +205,7 @@
 			<a class="show-future-building-button">Show Future Buildings</a>
 			<a class="hide-future-building-button">Hide Future Buildings</a>
 		</div>
-		<aside class="with-border chat" id="chatBox">
+		<aside class="with-border chat <c:if test="${not empty user and user.chatHidden}">chatHidden</c:if>" id="chatBox">
 		    <div id="chatClose" style="float: right;">close</div>
 			<iframe id="chat" src="<html:rewrite action="/showChat.do" paramId="gameId" paramName="game" paramProperty="gameId" />"></iframe>
 		</aside>

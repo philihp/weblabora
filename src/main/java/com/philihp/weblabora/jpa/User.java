@@ -56,13 +56,21 @@ public class User extends BasicEntity {
 	@Basic
 	@Column(name = "password_validator")
 	private String passwordValidator;
-
-//	@ManyToOne(fetch = LAZY, targetEntity = com.philihp.weblabora.jpa.Game.class)
-//	@JoinColumn(name = "active_game_id", referencedColumnName = "game_id")
-//	private Game activeGame;
-
+	
+	@Basic
+	@Column(name="is_chat_hidden")
+	private boolean isChatHidden;
+	
 	public int getUserId() {
 		return userId;
+	}
+
+	public boolean isChatHidden() {
+		return isChatHidden;
+	}
+
+	public void setChatHidden(boolean isChatHidden) {
+		this.isChatHidden = isChatHidden;
 	}
 
 	public void setUserId(int userId) {
