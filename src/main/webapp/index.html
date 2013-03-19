@@ -47,7 +47,13 @@
       background-color: #ef8f5f;
     }
     </style>
-    
+
+    <script id="buildingTmpl" type="text/html">
+      <img src="images/building/{{id}}.jpg" />
+    </script>
+    <script src="js/lib/jquery-1.9.0.js"></script>
+    <script src="js/lib/icanhaz.js"></script>
+    <script src="js/main.js"></script>
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -57,54 +63,11 @@
     <div id="west">
       
       <div id="buildings">
-        <img src="images/building/G01.jpg" />
-        <img src="images/building/G02.jpg" />
-        <img src="images/building/F03.jpg" />
-        <img src="images/building/F04.jpg" />
-        <img src="images/building/F05.jpg" />
-        <img src="images/building/G06.jpg" />
-        <img src="images/building/G07.jpg" />
-        <img src="images/building/F08.jpg" />
-        <img src="images/building/F09.jpg" />
-        <img src="images/building/F10.jpg" />
-        <img src="images/building/F11.jpg" />
-        <img src="images/building/G12.jpg" />
-        <img src="images/building/G13.jpg" />
-        <img src="images/building/F14.jpg" />
-        <img src="images/building/F15.jpg" />
-        <img src="images/building/G16.jpg" />
-        <img src="images/building/F17.jpg" />
-        <img src="images/building/G18.jpg" />
-        <img src="images/building/G19.jpg" />
-        <img src="images/building/F20.jpg" />
-        <img src="images/building/F21.jpg" />
-        <img src="images/building/G22.jpg" />
-        <img src="images/building/F23.jpg" />
-        <img src="images/building/F24.jpg" />
-        <img src="images/building/F25.jpg" />
-        <img src="images/building/G26.jpg" />
-        <img src="images/building/F27.jpg" />
-        <img src="images/building/G28.jpg" />
-        <img src="images/building/F29.jpg" />
-        <img src="images/building/F30.jpg" />
-        <img src="images/building/F31.jpg" />
-        <img src="images/building/F32.jpg" />
-        <img src="images/building/F33.jpg" />
-        <img src="images/building/G34.jpg" />
-        <img src="images/building/F35.jpg" />
-        <img src="images/building/F36.jpg" />
-        <img src="images/building/F37.jpg" />
-        <img src="images/building/F38.jpg" />
-        <img src="images/building/G39.jpg" />
-        <img src="images/building/F40.jpg" />
+
       </div>
       <div id="buildingsdragbar">===========</div>
       
       this is the player board
-      
-      
-      
-      
       
       
     </div>
@@ -114,40 +77,5 @@
     <div id="south">
       south
     </div>
-
-    <script src="js/lib/jquery-1.9.0.js"></script>
-    <script src="js/main.js"></script>
-    <script>
-      var offset = 0;
-      var grabTarget = null;
-    
-      $(document).ready(function() {
-        
-        $('#buildingsdragbar').on({
-          mousedown:function(e){
-            e.preventDefault();
-            $(document).on({mousemove:function(f){
-              if(!e.offsetY) e.offsetY = e.pageY - $(e.target).offset().top;
-              $('#buildings').css("height", f.pageY-e.offsetY);
-            }});
-          },
-          touchstart:function(e) {
-            grabTarget = $(this);
-            offset = e.originalEvent.changedTouches[0].pageY - $(e.target).offset().top;
-          },
-          touchmove:function(e) {
-            e.preventDefault();
-            $('#buildings').css("height", e.originalEvent.changedTouches[0].pageY - offset);
-          }
-        });
-        $(document).on({
-          mouseup:function(e){
-            $(document).unbind('mousemove');
-          }
-        })
-        
-        
-      });
-    </script>
   </body>
 </html>
