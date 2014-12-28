@@ -14,12 +14,10 @@ import static com.philihp.weblabora.model.building.BuildingEnum.LW2;
 import static com.philihp.weblabora.model.building.BuildingEnum.LW3;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 
-import com.philihp.weblabora.jpa.Game;
 import com.philihp.weblabora.jpa.State;
 import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.BuildingEnum;
@@ -227,17 +225,6 @@ public class Board {
 		if (++activePlayer >= players.length)
 			activePlayer = 0;
 		players[activePlayer].setActive(true);
-	}
-
-	public void populateDetails(Game game) {
-		if(players.length >= 1)
-			players[0].populatePlayer(game.getPlayer1());
-		if(players.length >= 2)
-			players[1].populatePlayer(game.getPlayer2());
-		if(players.length >= 3)
-			players[2].populatePlayer(game.getPlayer3());
-		if(players.length >= 4)
-			players[3].populatePlayer(game.getPlayer4());
 	}
 
 	public void testValidity() throws WeblaboraException {

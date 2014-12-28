@@ -1,6 +1,8 @@
 package com.philihp.weblabora.model;
 
-import static com.philihp.weblabora.model.TerrainTypeEnum.*;
+import static com.philihp.weblabora.model.TerrainTypeEnum.HILLSIDE;
+import static com.philihp.weblabora.model.TerrainTypeEnum.MERGED_NORTH;
+import static com.philihp.weblabora.model.TerrainTypeEnum.WATER;
 
 import java.util.Set;
 
@@ -81,7 +83,7 @@ public class CommandBuyPlot implements MoveCommand {
 			throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 		
-		int cost = board.purchasePlot();
+		int cost = board.getMode().purchasePlot();
 		if(free) cost = 0;
 
 		if(player.getCoins() < cost)

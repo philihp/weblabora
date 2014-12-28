@@ -1,4 +1,4 @@
-package com.philihp.weblabora.jpa;
+package com.philihp.weblabora.entities;
 
 import java.beans.Transient;
 import java.util.ArrayList;
@@ -6,19 +6,9 @@ import java.util.List;
 
 public class Game {
 
-	public enum Stage {
-		RECRUITING,
-		IN_PROGRESS,
-		FINISHED,
-		ABANDONED
-	}
-	
 	public static class Player {
 
 		private String color;
-		
-		private String move;
-
 
 		public String getColor() {
 			return color;
@@ -26,14 +16,6 @@ public class Game {
 
 		public void setColor(String color) {
 			this.color = color;
-		}
-		
-		public String getMove() {
-			return move;
-		}
-
-		public void setMove(String move) {
-			this.move = move;
 		}
 
 	}
@@ -47,19 +29,17 @@ public class Game {
 	private Player player3;
 
 	private Player player4;
-	
+
 	private String length;
 
 	private Integer players;
-	
+
 	private String country;
-	
-	private Stage stage;
-	
+
 	private List<State> states;
-	
+
 	private Integer stateId;
-	
+
 	private Integer activePlayer;
 
 	public Game() {
@@ -133,68 +113,62 @@ public class Game {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
-	public Stage getStage() {
-		return stage;
-	}
-
-	public void setStage(Stage stage) {
-		this.stage = stage;
-	}
 
 	@Transient
 	public Player getSeat(int seat) {
 		return getAllPlayers()[seat - 1];
 	}
-	
+
 	@Transient
 	public Player[] getAllPlayers() {
-		return new Player[] {player1, player2, player3, player4};
+		return new Player[] { player1, player2, player3, player4 };
 	}
-	
+
 	@Transient
 	public boolean isUndoable() {
 		/*
-		long movedAt = this.getState().getDateCreated().getTime();
-		long now = new Date().getTime();
-		return (now-movedAt < 24*60*60*1000) && (getState().getSrcState() != null);
-		*/
+		 * long movedAt = this.getState().getDateCreated().getTime(); long now =
+		 * new Date().getTime(); return (now-movedAt < 24*60*60*1000) &&
+		 * (getState().getSrcState() != null);
+		 */
 		return true;
 	}
 
 	public List<State> getStates() {
-		if(states == null) states = new ArrayList<State>();
+		if (states == null)
+			states = new ArrayList<State>();
 		return states;
 	}
 
 	public void setStates(List<State> states) {
 		this.states = states;
 	}
-	
+
 	@Transient
 	public List<State> getActiveStates() {
 		List<State> activeStates = new ArrayList<State>();
-		for(State state : getStates()) {
-			if(state.isActive()) {
+		for (State state : getStates()) {
+			if (state.isActive()) {
 				activeStates.add(state);
 			}
 		}
 		return activeStates;
 	}
-	
+
 	@Transient
 	public State getState() {
 		List<State> states = getActiveStates();
-		return states.get(states.size()-1);
+		return states.get(states.size() - 1);
 	}
-	
+
 	public Integer getStateId() {
 		return stateId;
 	}
+
 	public void setStateId(Integer stateId) {
 		this.stateId = stateId;
 	}
-	
+
 	public Integer getActivePlayer() {
 		return activePlayer;
 	}

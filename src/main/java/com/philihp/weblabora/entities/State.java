@@ -1,4 +1,4 @@
-package com.philihp.weblabora.jpa;
+package com.philihp.weblabora.entities;
 
 import java.util.ArrayList;
 import java.util.Collections;
