@@ -18,7 +18,6 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 
-import com.philihp.weblabora.jpa.State;
 import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.BuildingEnum;
 import com.philihp.weblabora.model.building.ClayMound;
@@ -55,9 +54,9 @@ public class Board {
 	
 	private boolean gameOver = false;
 	
-	private List<HistoryEntry> moveList = new ArrayList<HistoryEntry>();
-	
-	private State nextState;
+	private String nextState;
+
+	private List<String> moveList = new ArrayList<String>();
 	
 	/**
 	 * This makes lookups from {@link CommandUse CommandUse}
@@ -259,6 +258,14 @@ public class Board {
 		this.settling = settling;
 	}
 	
+	public String getNextState() {
+		return nextState;
+	}
+
+	public void setNextState(String nextState) {
+		this.nextState = nextState;
+	}
+	
 	public float getArmOffset() {
 		if(isSettling()) return 27.692f;
 		else if(isExtraRound()) return 20.769f;
@@ -290,7 +297,7 @@ public class Board {
 	 */
 	public void preRound() {
 		
-		getMoveList().add(new HistoryEntry("Round "+round));
+		getMoveList().add("Round "+round);
 
 		//1 - reset clergymen
 		for(Player player : getPlayers()) {
@@ -310,7 +317,7 @@ public class Board {
 
 	public void preSettling() {
 		setSettlementRound(getSettlementRound().next());
-		getMoveList().add(new HistoryEntry("Settlement ("+getSettlementRound()+")"));
+		getMoveList().add("Settlement ("+getSettlementRound()+")");
 	}
 	
 	public void preExtraRound() {
@@ -327,13 +334,13 @@ public class Board {
 		}
 		
 		setExtraRound(true);
-		getMoveList().add(new HistoryEntry("Extra Round"));
+		getMoveList().add("Extra Round");
 	}
 	
 	/**
 	 * Called before every move.
 	 */
-	public void preMove(State state) {
+	public void preMove(String state) {
 		if(isGameOver()) return;
 		
 		if(isExtraRound() && moveInRound == 1) {
@@ -346,7 +353,7 @@ public class Board {
 			preRound();
 		}
 		
-		getMoveList().add(new HistoryEntry(state, getPlayer(getActivePlayer()).getColor()));
+		getMoveList().add( getPlayer(getActivePlayer()).getColor() + ":" +state);
 	
 		if(!isGameOver()) {
 			for (int i = 0; i < players.length; i++) {
@@ -380,7 +387,7 @@ public class Board {
 		if(settlementRound == SettlementRound.E) {
 			setGameOver(true);
 			wheel.pushArm(round);
-			getMoveList().add(new HistoryEntry("Game Over"));
+			getMoveList().add("Game Over");
 		}
 		
 		round++;
@@ -427,12 +434,12 @@ public class Board {
 		return mode.getDistrictCosts();
 	}
 
-	public List<HistoryEntry> getMoveList() {
+	public List<String> getMoveList() {
 		return moveList;
 	}
 	
-	public List<HistoryEntry> getMoveListReversed() {
-		List<HistoryEntry> newList = new ArrayList<HistoryEntry>(getMoveList());
+	public List<String> getMoveListReversed() {
+		List<String> newList = new ArrayList<String>(getMoveList());
 		Collections.reverse(newList);
 		return newList;
 	}
@@ -448,15 +455,6 @@ public class Board {
 	public Scorecard getScorecard() {
 		return new Scorecard(this);
 	}
-
-	public State getNextState() {
-		return nextState;
-	}
-
-	public void setNextState(State nextState) {
-		this.nextState = nextState;
-	}
-
 	
 	public int getMoveInRound() {
 		return this.moveInRound;

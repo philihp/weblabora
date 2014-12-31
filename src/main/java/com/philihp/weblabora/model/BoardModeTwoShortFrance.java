@@ -132,7 +132,7 @@ public class BoardModeTwoShortFrance extends BoardMode {
 				&& board.getSettlementRound() == SettlementRound.D
 				&& board.getUnbuiltBuildings().size() <= 3) {
 			board.setGameOver(true);
-			board.getMoveList().add(new HistoryEntry("Game Over"));
+			board.getMoveList().add("Game Over");
 		}
 		// end 2-player end-game detection.
 
