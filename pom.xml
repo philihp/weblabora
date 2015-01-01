@@ -3,8 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.philihp</groupId>
 	<artifactId>weblabora</artifactId>
-	<version>0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<version>2.0</version>
+	<packaging>jar</packaging>
 	<name>WebLabora</name>
 	<description>Web-enabled Ora et Labora Game</description>
 	<url>http://philihp.com/weblabora</url>
