@@ -1,4 +1,4 @@
 WebLabora
 =========
 
-Website based Ora et Labora board game online engine
+Website based Ora et Labora board game online engine. Built on Circle.
