@@ -7,7 +7,7 @@ public final class MoveProcessor {
 	private MoveProcessor() {
 	}
 	
-	public static void processMoves(Board board, Iterable<String> allMoves, Integer endStateId) throws WeblaboraException {
+	public static void processMoves(Board board, Iterable<String> allMoves) throws WeblaboraException {
 		boolean breakNextIteration = false;
 		for(String state : allMoves) {
 			if(state == null) continue; //ignore the first null state.
