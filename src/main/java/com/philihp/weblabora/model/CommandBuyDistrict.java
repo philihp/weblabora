@@ -2,10 +2,7 @@ package com.philihp.weblabora.model;
 
 import java.util.Set;
 
-import com.google.common.collect.ArrayTable;
-import com.google.common.collect.DiscreteDomains;
-import com.google.common.collect.Ranges;
-import com.google.common.collect.Table;
+import com.google.common.collect.*;
 
 public class CommandBuyDistrict implements MoveCommand {
 	
@@ -84,7 +81,7 @@ public class CommandBuyDistrict implements MoveCommand {
 			throws WeblaboraException {
 		Player player = board.getPlayer(board.getActivePlayer());
 		
-		int cost = board.purchaseDistrict();
+		int cost = board.getMode().purchaseDistrict();
 		if(free) cost = 0;
 		if(player.getCoins() < cost) 
 			throw new WeblaboraException("Purchase price for a district is "+cost+", but player "+player.getColor()+" only has "+player.getCoins()+".");
@@ -107,7 +104,7 @@ public class CommandBuyDistrict implements MoveCommand {
 			if(i > maxRow) maxRow = i;
 		}
 		
-		Set<Integer> newRows = Ranges.closed(minRow, maxRow).asSet(DiscreteDomains.integers());
+		Set<Integer> newRows = ContiguousSet.create(Range.closed(minRow, maxRow),DiscreteDomain.integers());
 		
 		ArrayTable<Integer, Integer, Terrain> newTerrain = ArrayTable.create(newRows, oldColumns);
 		for(Integer rowKey : newRows) {
@@ -118,7 +115,7 @@ public class CommandBuyDistrict implements MoveCommand {
 			}
 		}
 		
-		for(Integer columnKey : Ranges.closed(0,4).asSet(DiscreteDomains.integers())) {
+		for(Integer columnKey : ContiguousSet.create(Range.closed(0,4),DiscreteDomain.integers())) {
 			newTerrain.put(y, columnKey, new Terrain(landscape, side.getType(columnKey), side.getUse(columnKey), null, columnKey, y));	
 		}
 		

@@ -1,6 +1,5 @@
 package com.philihp.weblabora.model;
 
-import com.philihp.weblabora.jpa.State;
 
 public final class MoveProcessor {
 
@@ -8,20 +7,17 @@ public final class MoveProcessor {
 	private MoveProcessor() {
 	}
 	
-	public static void processMoves(Board board, Iterable<State> allMoves, Integer endStateId) throws WeblaboraException {
+	public static void processMoves(Board board, Iterable<String> allMoves) throws WeblaboraException {
 		boolean breakNextIteration = false;
-		for(State state : allMoves) {
-			if(state.getToken() == null) continue; //ignore the first null state.
+		for(String state : allMoves) {
+			if(state == null) continue; //ignore the first null state.
 			if(breakNextIteration) {
 				board.setNextState(state);
 				break;
 			}
 			board.preMove(state);
-			processActions(board,state.getToken());
+			processActions(board,state);
 			board.postMove();
-			if(endStateId != null && state.getStateId() == endStateId) {
-				breakNextIteration = true;
-			}
 		}
 	}
 

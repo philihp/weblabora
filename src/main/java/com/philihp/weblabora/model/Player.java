@@ -7,12 +7,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.philihp.weblabora.jpa.User;
 import com.philihp.weblabora.model.building.Settlement;
 
 public class Player {
-	
-	private User user;
 	
 	private boolean active;
 	
@@ -728,14 +725,7 @@ public class Player {
 	public Clergyman getPrior() {
 		return prior;
 	}
-
-	public void populatePlayer(com.philihp.weblabora.jpa.Game.Player player) {
-		user = player.getUser();
-	}
-	public User getUser() {
-		return user;
-	}
-
+	
 	public void testValidity() throws WeblaboraException {
 		if(getPeat() < 0)
 			throw new WeblaboraException(color + " has "+getPeat()+" peat");

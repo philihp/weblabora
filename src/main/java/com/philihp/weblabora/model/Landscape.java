@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.google.common.collect.ArrayTable;
-import com.google.common.collect.DiscreteDomains;
-import com.google.common.collect.Ranges;
-import com.google.common.collect.Table;
+import com.google.common.collect.*;
 import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.ClayMound;
 import com.philihp.weblabora.model.building.CloisterOffice;
@@ -28,8 +25,8 @@ public class Landscape {
 		Farmyard farmyard = Farmyard.make(player.getColor());
 		CloisterOffice cloisterOffice = CloisterOffice.make(player.getColor());
 		
-		Set<Integer> rows = Ranges.closed(0, 1).asSet(DiscreteDomains.integers());
-		Set<Integer> cols = Ranges.closed(0, 4).asSet(DiscreteDomains.integers());
+		Set<Integer> rows = ContiguousSet.create(Range.closed(0, 1),DiscreteDomain.integers());
+		Set<Integer> cols = ContiguousSet.create(Range.closed(0, 4),DiscreteDomain.integers());
 		this.terrain = ArrayTable.create(rows,cols);
 		
 		terrainPut(0, 0, TerrainTypeEnum.PLAINS,   TerrainUseEnum.MOOR,    null);

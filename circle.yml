@@ -1,0 +1,7 @@
+machine:
+  java:
+    version: oraclejdk8
+
+general:
+  artifacts:
+    - "target/*.jar"

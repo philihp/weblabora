@@ -1,126 +1,69 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.philihp</groupId>
 	<artifactId>weblabora</artifactId>
-	<version>0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<version>2.0.0</version>
+	<packaging>jar</packaging>
 	<name>WebLabora</name>
 	<description>Web-enabled Ora et Labora Game</description>
-	<url>http://philihp.com/weblabora</url>
-	
+	<url>http://kennerspiel.com</url>
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
 	<developers>
 		<developer>
 			<id>philihp</id>
 			<name>Philihp Busby</name>
 			<email>philihp@gmail.com</email>
+			<url>http://philihp.com</url>
 		</developer>
 	</developers>
 
 	<scm>
-		<connection>scm:git:ssh://github.com/philihp/${project.artifactId}.git</connection>
-		<developerConnection>scm:git:ssh://github.com/philihp/${project.artifactId}.git</developerConnection>
-		<url>http://github.com:philihp/${project.artifactId}</url>
+		<connection>scm:git:ssh://github.com/philihp/WebLabora.git</connection>
+		<developerConnection>scm:git:ssh://github.com/philihp/WebLabora.git</developerConnection>
+		<url>http://github.com:philihp/WebLabora</url>
 	</scm>
-	
-	
+
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.1</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-        				<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<version>2.8</version>
 				<configuration>
-					<wtpContextName>weblabora</wtpContextName>
-					<wtpversion>1.5</wtpversion>
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
-					<additionalProjectFacets>
-						<jpt.jpa>2.0</jpt.jpa>
-					</additionalProjectFacets>
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>tomcat-maven-plugin</artifactId>
-				<version>1.1</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
 				<configuration>
-					<server>philihp.com</server>
-					<url>http://www.philihp.com:8080/manager</url>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.0-SNAPSHOT</version>
-				<configuration>
-					<server>philihp.com</server>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.14</version>
+			<!-- Tests -->
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.struts</groupId>
-			<artifactId>struts-core</artifactId>
-			<version>1.3.10</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.struts</groupId>
-			<artifactId>struts-taglib</artifactId>
-			<version>1.3.10</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.struts</groupId>
-			<artifactId>struts-extras</artifactId>
-			<version>1.3.10</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.struts</groupId>
-			<artifactId>struts-el</artifactId>
-			<version>1.3.10</version>
-			<exclusions>
-				<exclusion>
-					<!-- this conflicts with 1.2 -->
-					<artifactId>jstl</artifactId>
-					<groupId>javax.servlet</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>eclipselink</artifactId>
-			<version>2.2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>javax.persistence</artifactId>
-			<version>2.0.0</version>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<!-- for decoding Facebook entities -->
@@ -132,41 +75,15 @@
 			<!-- for ArrayTable & Ranges, used for Landscape -->
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>11.0.1</version>
+			<version>18.0</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>
 		</dependency>
-		<dependency>
-			<!-- for oauth to the facebook -->
-			<groupId>org.scribe</groupId>
-			<artifactId>scribe</artifactId>
-			<version>1.3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<version>1.6</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4.5</version>
-		</dependency>
 	</dependencies>
-	<repositories>
-		<repository>
-		   <id>EclipseLink</id>
-		   <url>http://download.eclipse.org/rt/eclipselink/maven.repo</url>
-		</repository>
-		<repository>
-			<id>EclipseLink Repo</id>
-			<url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo
-			</url>
-			<!-- use this for javax.persistence <snapshots> <enabled>true</enabled> </snapshots> -->
-		</repository>
-	</repositories>
-
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 </project>
