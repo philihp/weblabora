@@ -6,10 +6,7 @@ import static com.philihp.weblabora.model.TerrainTypeEnum.WATER;
 
 import java.util.Set;
 
-import com.google.common.collect.ArrayTable;
-import com.google.common.collect.DiscreteDomains;
-import com.google.common.collect.Ranges;
-import com.google.common.collect.Table;
+import com.google.common.collect.*;
 
 public class CommandBuyPlot implements MoveCommand {
 	
@@ -108,7 +105,7 @@ public class CommandBuyPlot implements MoveCommand {
 			if(i > maxRow) maxRow = i;
 		}
 		
-		Set<Integer> newRows = Ranges.closed(minRow, maxRow).asSet(DiscreteDomains.integers());
+		Set<Integer> newRows = ContiguousSet.create(Range.closed(minRow, maxRow), DiscreteDomain.integers());
 		
 		int minColumn = (side==Side.COAST) ? -2 : 0;
 		int maxColumn = (side==Side.COAST) ?  0 : 6;
@@ -117,7 +114,7 @@ public class CommandBuyPlot implements MoveCommand {
 			if(i > maxColumn) maxColumn = i;
 		}
 		
-		Set<Integer> newColumns = Ranges.closed(minColumn, maxColumn).asSet(DiscreteDomains.integers()); 
+		Set<Integer> newColumns = ContiguousSet.create(Range.closed(minColumn, maxColumn), DiscreteDomain.integers()); 
 		
 		ArrayTable<Integer, Integer, Terrain> newTerrain = ArrayTable.create(newRows, newColumns);
 		for(Integer rowKey : newRows) {
@@ -128,8 +125,8 @@ public class CommandBuyPlot implements MoveCommand {
 			}
 		}
 
-		for(Integer rowKey : Ranges.closed(y,y+1).asSet(DiscreteDomains.integers())) {
-			for(Integer columnKey : Ranges.closed(side.getOriginColumn(),side.getOriginColumn()+1).asSet(DiscreteDomains.integers())) {
+		for(Integer rowKey : ContiguousSet.create(Range.closed(y,y+1), DiscreteDomain.integers())) {
+			for(Integer columnKey : ContiguousSet.create(Range.closed(side.getOriginColumn(),side.getOriginColumn()+1),DiscreteDomain.integers())) {
 				newTerrain.put(rowKey, columnKey, new Terrain(landscape, side.getType(rowKey-y,columnKey), TerrainUseEnum.EMPTY, null, columnKey, rowKey));
 			}
 		}
