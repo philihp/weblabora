@@ -3,24 +3,30 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.philihp</groupId>
 	<artifactId>weblabora</artifactId>
-	<version>2.0</version>
+	<version>2.0.0</version>
 	<packaging>jar</packaging>
 	<name>WebLabora</name>
 	<description>Web-enabled Ora et Labora Game</description>
-	<url>http://philihp.com/weblabora</url>
-
+	<url>http://kennerspiel.com</url>
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
 	<developers>
 		<developer>
 			<id>philihp</id>
 			<name>Philihp Busby</name>
 			<email>philihp@gmail.com</email>
+			<url>http://philihp.com</url>
 		</developer>
 	</developers>
 
 	<scm>
-		<connection>scm:git:ssh://github.com/philihp/${project.artifactId}.git</connection>
-		<developerConnection>scm:git:ssh://github.com/philihp/${project.artifactId}.git</developerConnection>
-		<url>http://github.com:philihp/${project.artifactId}</url>
+		<connection>scm:git:ssh://github.com/philihp/WebLabora.git</connection>
+		<developerConnection>scm:git:ssh://github.com/philihp/WebLabora.git</developerConnection>
+		<url>http://github.com:philihp/WebLabora</url>
 	</scm>
 
 	<build>
