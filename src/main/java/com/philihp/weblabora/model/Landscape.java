@@ -55,7 +55,7 @@ public class Landscape {
 		this.terrain = terrain;
 	}
 
-	public Terrain[][] getTable() {
+	public Terrain[][] asTable() {
 		return terrain.toArray(Terrain.class);
 	}
 
@@ -63,7 +63,7 @@ public class Landscape {
 		if(use == null) return 0;
 
 		int count = 0;
-		for(Terrain[] row : getTable()) {
+		for(Terrain[] row : asTable()) {
 			for(Terrain cell : row) {
 				if(cell != null && use == cell.getTerrainUse())
 					count++;
@@ -82,7 +82,7 @@ public class Landscape {
 
 	public List<Erection> getErections() {
 		List<Erection> list = new ArrayList<Erection>(3);
-		for (Terrain[] row : getTable()) {
+		for (Terrain[] row : asTable()) {
 			for (Terrain cell : row) {
 				if(cell != null && cell.getErection() != null) 
 					list.add(cell.getErection());
@@ -155,7 +155,7 @@ public class Landscape {
 		return building.isCloister();
 	}
 
-	public Player getPlayer() {
+	protected Player getPlayer() {
 		return player;
 	}
 

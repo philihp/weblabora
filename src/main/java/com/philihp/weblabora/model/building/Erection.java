@@ -56,7 +56,7 @@ public abstract class Erection {
 		this.clergyman = clergyman;
 	}
 
-	public Terrain getLocation() {
+	public Terrain findLocation() {
 		return location;
 	}
 

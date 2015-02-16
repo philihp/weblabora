@@ -63,12 +63,12 @@ public class CommandUse implements MoveCommand, InvalidDuringSettlement {
 	private static void execute(Board board, BuildingEnum buildingId,
 			UsageParam param, boolean usingPrior, boolean placeClergyman) throws WeblaboraException {
 		Building building = board.findBuildingInstance(buildingId);
-		Terrain location = building.getLocation();
+		Terrain location = building.findLocation();
 
 		if (placeClergyman) {
-			if(building.getLocation() == null)
+			if(building.findLocation() == null)
 				throw new WeblaboraException("Can't place a clergyman on "+building+" because it hasn't been built yet.");
-			Player buildingOwner = building.getLocation().getLandscape().getPlayer();
+			Player buildingOwner = building.findLocation().getLandscape().getPlayer();
 			if (usingPrior) {
 				buildingOwner.placePrior(location);
 			} else {

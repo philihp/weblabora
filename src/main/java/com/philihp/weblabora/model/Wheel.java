@@ -4,7 +4,7 @@ import static com.philihp.weblabora.model.Wheel.Position.*;
 
 public class Wheel {
 	
-	protected Board board;
+	private Board board;
 	
 	protected int[] armValues;  
 	
@@ -17,7 +17,6 @@ public class Wheel {
 			return Position.values()[i];
 		}
 	}
-	
 
 	protected Token grain = new Token(this,-87);
 
@@ -45,10 +44,6 @@ public class Wheel {
 		this.arm.setPosition(M);
 		this.grape.setActive(false);
 		this.stone.setActive(false);
-	}
-
-	public Board getBoard() {
-		return board;
 	}
 
 	public Token getGrain() {

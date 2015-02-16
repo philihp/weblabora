@@ -17,7 +17,7 @@ public class Clergyman {
 		this.type = type;
 	}
 
-	public Player getOwner() {
+	protected Player getOwner() {
 		return owner;
 	}
 

@@ -341,7 +341,7 @@ public class Player {
 		return nickel;
 	}
 
-	public Board getBoard() {
+	protected Board getBoard() {
 		return board;
 	}
 

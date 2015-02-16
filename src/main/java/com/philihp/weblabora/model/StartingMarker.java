@@ -10,11 +10,11 @@ public class StartingMarker {
 		setOwner(owner);
 	}
 
-	public Player getOwner() {
+	protected Player getOwner() {
 		return owner;
 	}
 
-	public void setOwner(Player newOwner) {
+	protected void setOwner(Player newOwner) {
 		if(this.owner != null && this.owner != newOwner) //if marker changes hands
 			this.owner.setStartingMarker(null);
 		

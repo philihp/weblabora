@@ -4,3 +4,5 @@
 target
 login.properties
 *.orig
+weblabora.iml
+.idea/

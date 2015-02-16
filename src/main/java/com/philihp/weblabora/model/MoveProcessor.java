@@ -6,20 +6,20 @@ public final class MoveProcessor {
 
 	private MoveProcessor() {
 	}
-	
-	public static void processMoves(Board board, Iterable<String> allMoves) throws WeblaboraException {
-		boolean breakNextIteration = false;
-		for(String state : allMoves) {
-			if(state == null) continue; //ignore the first null state.
-			if(breakNextIteration) {
-				board.setNextState(state);
-				break;
-			}
-			board.preMove(state);
-			processActions(board,state);
-			board.postMove();
-		}
-	}
+
+    public static void processMoves(Board board, Iterable<String> allMoves) throws WeblaboraException {
+        for(String move : allMoves) {
+            if(move == null) continue; //ignore the first null state.
+            processMove(board, move);
+        }
+    }
+
+    public static void processMove(Board board, String move) throws WeblaboraException {
+        if(move == null) return;
+        board.preMove(move);
+        processActions(board,move);
+        board.postMove();
+    }
 
 	public static void processActions(Board board, String actions)
 			throws WeblaboraException {

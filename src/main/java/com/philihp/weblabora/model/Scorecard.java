@@ -23,7 +23,7 @@ public class Scorecard {
 
 		public SettlementScore(Settlement settlement) {
 			this.settlement = settlement;
-			Coordinate c = settlement.getLocation().getCoordinate();
+			Coordinate c = settlement.findLocation().getCoordinate();
 			this.score = settlement.getSettlementValue();
 			this.score += getSettlementScoreAt(c.north());
 			this.score += getSettlementScoreAt(c.south());
@@ -32,12 +32,12 @@ public class Scorecard {
 		}
 		
 		private int getSettlementScoreAt(Coordinate c) {
-			Terrain spot = settlement.getLocation().getLandscape().getTerrainAt(c);
+			Terrain spot = settlement.findLocation().getLandscape().getTerrainAt(c);
 			if(spot == null) return 0;
 			
 			//handle mountain offsets
 			if(spot.getTerrainType() == TerrainTypeEnum.MERGED_NORTH)
-				spot = settlement.getLocation().getLandscape().getTerrainAt(c.north());
+				spot = settlement.findLocation().getLandscape().getTerrainAt(c.north());
 
 			Erection erection = spot.getErection();
 			if(erection != null) {
