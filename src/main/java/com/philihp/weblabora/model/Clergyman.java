@@ -25,7 +25,7 @@ public class Clergyman {
 		return type;
 	}
 
-	public Terrain getLocation() {
+	protected Terrain getLocation() {
 		return location;
 	}
 	
@@ -37,7 +37,7 @@ public class Clergyman {
 		}
 	}
 
-	public void setLocation(Terrain location) throws WeblaboraException {
+	protected void setLocation(Terrain location) throws WeblaboraException {
 		if (location.getErection().getClergyman() != null)
 			throw new WeblaboraException("The building "
 					+ location.getErection() + " already has a clergyman "
