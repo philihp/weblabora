@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.*;
 import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.ClayMound;
@@ -47,6 +48,7 @@ public class Landscape {
 		terrain.put(y, x, new Terrain(this, type, use, erection, x, y));
 	}
 
+	@JsonIgnore
 	protected Table<Integer, Integer, Terrain> getTerrain() {
 		return terrain;
 	}
@@ -73,14 +75,18 @@ public class Landscape {
 		return count;
 	}
 
+	@JsonIgnore
 	public int getNumberOfForests() {
 		return getNumberOfTerrain(TerrainUseEnum.FOREST);
 	}
+
+	@JsonIgnore
 	public int getNumberOfMoors() {
 		return getNumberOfTerrain(TerrainUseEnum.MOOR);
 	}
 
-	protected List<Erection> getErections() {
+	@JsonIgnore
+	public List<Erection> getErections() {
 		List<Erection> list = new ArrayList<Erection>(3);
 		for (Terrain[] row : getTerrainTable()) {
 			for (Terrain cell : row) {
@@ -91,7 +97,8 @@ public class Landscape {
 		return list;
 	}
 
-	protected List<Settlement> getSettlements() {
+	@JsonIgnore
+	public List<Settlement> getSettlements() {
 		List<Settlement> list = new ArrayList<Settlement>(8);
 		for(Erection erection : getErections()) {
 			if(erection instanceof Settlement) {
@@ -101,7 +108,8 @@ public class Landscape {
 		return list;
 	}
 
-	protected List<Building> getBuildings() {
+	@JsonIgnore
+	public List<Building> getBuildings() {
 		List<Building> list = new ArrayList<Building>(3);
 		for (Erection erection : getErections()) {
 			if (erection instanceof Building) {

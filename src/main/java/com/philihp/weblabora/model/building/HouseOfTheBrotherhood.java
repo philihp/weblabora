@@ -27,10 +27,10 @@ public class HouseOfTheBrotherhood extends BuildingDoubleUsage {
 	public void use(Board board, UsageParamDouble input) throws WeblaboraException  {
 		Player player = board.getPlayer(board.getActivePlayer());
 		UsageParamSingle output = input.getSecondary();
-		
+
 		if(input.getCoins() < 5)
 			throw new WeblaboraException(getName()+" requires 5 coins.");
-		
+
 		player.subtractAll(input);
 
 		double possiblePoints = 0;
@@ -39,26 +39,26 @@ public class HouseOfTheBrotherhood extends BuildingDoubleUsage {
 			if (building.isCloister())
 				cloisters++;
 		}
-		
+
 		if(board.getMode().getPlayers() == GamePlayers.ONE) {
 			possiblePoints = cloisters * 1;
 		}
 		else if(board.getMode().getPlayers() == GamePlayers.TWO && board.getMode().getLength() == GameLength.LONG) {
 			possiblePoints = Math.floor(cloisters * 1.5);
 		}
-		else { 
+		else {
 			possiblePoints = cloisters * 2;
 		}
-		
+
 		int requestedPoints = output.getBook()*2 + output.getPottery()*3 + output.getOrnament()*4 + output.getReliquary()*8;
-		
+
 		if(possiblePoints < requestedPoints)
 			throw new WeblaboraException(getName()+" was asked to make "+requestedPoints+" points, but only "+possiblePoints+" is allowed.");
-		
+
 		player.addBooks(output.getBook());
 		player.addPottery(output.getPottery());
 		player.addOrnament(output.getOrnament());
 		player.addReliquary(output.getReliquary());
-		
+
 	}
 }
