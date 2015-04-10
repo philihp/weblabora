@@ -20,7 +20,7 @@ public class BoardModeTwoLongFrance extends BoardMode {
 	}
 
 	@Override
-	public int[] getWheelArmValues() {
+	protected int[] getWheelArmValues() {
 		return new int[] { 0, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8, 9, 10 };
 	}
 
@@ -36,10 +36,10 @@ public class BoardModeTwoLongFrance extends BoardMode {
 				continue;
 			if (buildingId == BuildingEnum.F29)
 				continue;
-			
+
 			char c = buildingId.toString().charAt(0);
 			if(c != 'G' && c != 'F') continue;
-			
+
 			Building building = buildingId.getInstance();
 			if (board.getSettlementRound().equals(building.getStage())) {
 				buildings.add(building);
@@ -60,10 +60,10 @@ public class BoardModeTwoLongFrance extends BoardMode {
 				continue;
 			if (buildingId == BuildingEnum.F29)
 				continue;
-			
+
 			char c = buildingId.toString().charAt(0);
 			if(c != 'G' && c != 'F') continue;
-			
+
 			Building building = buildingId.getInstance();
 			if (board.getAllBuildings().containsKey(buildingId) == false
 					&& building.getStage().equals("L") == false) {
@@ -195,7 +195,7 @@ public class BoardModeTwoLongFrance extends BoardMode {
 	public int getMovesInRound() {
 		return 3;
 	}
-	
+
 	public int getLastSettlementAfterRound() {
 		return 27;
 	}
@@ -204,7 +204,7 @@ public class BoardModeTwoLongFrance extends BoardMode {
 	protected boolean isRoundStartBonusActive() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isGrapesUsed() {
 		return true;
@@ -214,10 +214,10 @@ public class BoardModeTwoLongFrance extends BoardMode {
 	boolean isNeutralBuildingPhase() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isStoneUsed() {
 		return true;
 	}
-	
+
 }

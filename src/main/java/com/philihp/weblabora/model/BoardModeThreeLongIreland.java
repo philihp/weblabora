@@ -9,7 +9,7 @@ import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.BuildingEnum;
 
 public class BoardModeThreeLongIreland extends BoardMode {
-	
+
 	private static final GamePlayers PLAYERS = GamePlayers.THREE;
 	private static final GameLength LENGTH = GameLength.LONG;
 	private static final GameCountry COUNTRY = GameCountry.IRELAND;
@@ -19,7 +19,7 @@ public class BoardModeThreeLongIreland extends BoardMode {
 	}
 
 	@Override
-	public int[] getWheelArmValues() {
+	protected int[] getWheelArmValues() {
 		return new int[] { 0, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8, 9, 10 };
 	}
 
@@ -27,10 +27,10 @@ public class BoardModeThreeLongIreland extends BoardMode {
 	public List<Building> roundBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
-			
+
 			char c = buildingId.toString().charAt(0);
 			if(c != 'G' && c != 'I') continue;
-			
+
 			Building building = buildingId.getInstance();
 			if (board.getSettlementRound().equals(building.getStage())
 					&& building.getPlayers().ordinal() <= PLAYERS.ordinal()) {
@@ -44,10 +44,10 @@ public class BoardModeThreeLongIreland extends BoardMode {
 	public List<Building> futureBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
 		for(BuildingEnum buildingId : BuildingEnum.values()) {
-			
+
 			char c = buildingId.toString().charAt(0);
 			if(c != 'G' && c != 'I') continue;
-			
+
 			Building building = buildingId.getInstance();
 			if(board.getAllBuildings().containsKey(buildingId) == false && building.getPlayers().ordinal() <= PLAYERS.ordinal()) {
 				buildings.add(building);
@@ -108,7 +108,7 @@ public class BoardModeThreeLongIreland extends BoardMode {
 		else {
 			board.setRound(board.getRound()+1);
 		}
-		
+
 		//5 -- pass starting player
 		board.setStartingPlayer(board.getStartingPlayer() + 1);
 		board.getStartingMarker().setOwner(board.players[board.getStartingPlayer()]);
@@ -148,7 +148,7 @@ public class BoardModeThreeLongIreland extends BoardMode {
 
 	@Override
 	public GamePlayers getPlayers() {
-		return PLAYERS; 
+		return PLAYERS;
 	}
 
 	@Override
@@ -160,7 +160,7 @@ public class BoardModeThreeLongIreland extends BoardMode {
 	public GameLength getLength() {
 		return LENGTH;
 	}
-	
+
 	@Override
 	public boolean isProductionBonusActive() {
 		return false;
@@ -170,7 +170,7 @@ public class BoardModeThreeLongIreland extends BoardMode {
 	public int getMovesInRound() {
 		return 4;
 	}
-	
+
 	public int getLastSettlementAfterRound() {
 		return 25;
 	}
@@ -179,7 +179,7 @@ public class BoardModeThreeLongIreland extends BoardMode {
 	protected boolean isRoundStartBonusActive() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isGrapesUsed() {
 		return false;
@@ -189,10 +189,10 @@ public class BoardModeThreeLongIreland extends BoardMode {
 	boolean isNeutralBuildingPhase() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isStoneUsed() {
 		return true;
 	}
-	
+
 }

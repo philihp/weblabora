@@ -13,13 +13,13 @@ import java.util.List;
 import com.philihp.weblabora.model.building.Building;
 
 public abstract class BoardMode {
-	
+
 	protected final Board board;
 
 	protected final int GRAPE_INACTIVE_IN_IRELAND = 99999;
-	
+
 	private static final EnumMap<GamePlayers, EnumMap<GameLength, EnumMap<GameCountry, Class<? extends BoardMode>>>> map;
-	
+
 	//i'm not convinced this is the best way to do this... but whatever, it works.
 	static {
 		map = new EnumMap<GamePlayers, EnumMap<GameLength, EnumMap<GameCountry, Class<? extends BoardMode>>>>(
@@ -38,7 +38,7 @@ public abstract class BoardMode {
 		map.get(TWO).get(LONG).put(FRANCE, BoardModeTwoLongFrance.class);
 		map.get(THREE).get(LONG).put(FRANCE, BoardModeThreeLongFrance.class);
 		map.get(FOUR).get(LONG).put(FRANCE, BoardModeFourLongFrance.class);
-		
+
 		map.get(TWO).get(LONG).put(IRELAND, BoardModeTwoLongIreland.class);
 		map.get(THREE).get(LONG).put(IRELAND, BoardModeThreeLongIreland.class);
 		map.get(FOUR).get(LONG).put(IRELAND, BoardModeFourLongIreland.class);
@@ -46,11 +46,11 @@ public abstract class BoardMode {
 		map.get(TWO).get(SHORT).put(FRANCE, BoardModeTwoShortFrance.class);
 		map.get(THREE).get(SHORT).put(FRANCE, BoardModeThreeShortFrance.class);
 		map.get(FOUR).get(SHORT).put(FRANCE, BoardModeFourShortFrance.class);
-		
+
 		map.get(TWO).get(SHORT).put(IRELAND, BoardModeTwoShortIreland.class);
 		map.get(THREE).get(SHORT).put(IRELAND, BoardModeThreeShortIreland.class);
 		map.get(FOUR).get(SHORT).put(IRELAND, BoardModeFourShortIreland.class);
-		
+
 		map.get(ONE).get(NULL).put(FRANCE, BoardModeOneFrance.class);
 		map.get(ONE).get(NULL).put(IRELAND, BoardModeOneIreland.class);
 }
@@ -87,7 +87,7 @@ public abstract class BoardMode {
 		return this.board;
 	}
 
-	abstract public int[] getWheelArmValues();
+	abstract protected int[] getWheelArmValues();
 
 	abstract public List<Building> roundBuildings();
 
@@ -98,9 +98,9 @@ public abstract class BoardMode {
 	abstract public SettlementRound roundBeforeSettlement(int round);
 
 	abstract public void postMove();
-	
+
 	abstract boolean isNeutralBuildingPhase();
-	
+
 	/**
 	 * Hook for pre-round processing for Short 3/4 player games to dish out resources
 	 */
@@ -158,7 +158,7 @@ public abstract class BoardMode {
 					break;
 				case 13:
 					break;
-				default: 
+				default:
 					throw new RuntimeException("Should never reach round "+board.getRound()+" when dishing out bonus production at beginning of round.");
 				}
 			}
@@ -172,7 +172,7 @@ public abstract class BoardMode {
 	abstract public int grapeActiveOnRound();
 
 	abstract public int stoneActiveOnRound();
-	
+
 	public int jokerActiveOnRound() {
 		return 0;
 	}
@@ -186,7 +186,7 @@ public abstract class BoardMode {
 	abstract public GameLength getLength();
 
 	abstract public int getMovesInRound();
-	
+
 	abstract public int getLastSettlementAfterRound();
 
 
@@ -195,15 +195,15 @@ public abstract class BoardMode {
 	 */
 	public void customizeLandscape(Landscape landscape) {
 	}
-	
+
 	abstract protected boolean isProductionBonusActive();
-	
+
 	abstract protected boolean isRoundStartBonusActive();
-	
+
 	public boolean isSecondLayBrotherUsed() {
 		return true;
 	}
-	
+
 	/**
 	 * Distributes bonus production when the wheel is used for Short 3/4 games
 	 */
@@ -216,35 +216,35 @@ public abstract class BoardMode {
 	}
 
 	public static final int[] PLOT_PURCHASE_PRICE = {3,4,4,5,5,5,6,6,7};
-	
+
 	public static final int[] DISTRICT_PURCHASE_PRICE = {2,3,4,4,5,5,6,7,8};
-	
+
 	private int plotsPurchased;
-	
+
 	private int districtsPurchased;
-	
+
 	public int[] getPlotCosts() {
 		return Arrays.copyOfRange(PLOT_PURCHASE_PRICE, plotsPurchased, PLOT_PURCHASE_PRICE.length);
 	}
-	
+
 	public int[] getDistrictCosts() {
-		return Arrays.copyOfRange(DISTRICT_PURCHASE_PRICE, districtsPurchased, DISTRICT_PURCHASE_PRICE.length); 
+		return Arrays.copyOfRange(DISTRICT_PURCHASE_PRICE, districtsPurchased, DISTRICT_PURCHASE_PRICE.length);
 	}
-	
+
 	public int purchasePlot() {
 		return PLOT_PURCHASE_PRICE[plotsPurchased++];
 	}
-	
+
 	public int purchaseDistrict() {
 		return DISTRICT_PURCHASE_PRICE[districtsPurchased++];
 	}
-	
+
 	/**
 	 * Special mode-specific setup.
 	 */
 	public void setup() {
 	}
-	
+
 	/**
 	 * Netural player, for use in Solo game.
 	 * @return
@@ -252,17 +252,17 @@ public abstract class BoardMode {
 	public Player getNeutralPlayer() {
 		return null;
 	}
-	
+
 	public boolean isNeutralPlayerUsed() {
 		return getNeutralPlayer() != null;
 	}
-	
+
 	abstract boolean isGrapesUsed();
-	
+
 	abstract boolean isStoneUsed();
-	
+
 	public boolean isPriorSpecialInExtraRound() {
 		return true;
 	}
-	
+
 }

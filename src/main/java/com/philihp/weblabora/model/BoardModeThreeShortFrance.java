@@ -10,7 +10,7 @@ import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.BuildingEnum;
 
 public class BoardModeThreeShortFrance extends BoardMode {
-	
+
 	private static final GamePlayers PLAYERS = GamePlayers.THREE;
 	private static final GameLength LENGTH = GameLength.SHORT;
 	private static final GameCountry COUNTRY = GameCountry.FRANCE;
@@ -20,7 +20,7 @@ public class BoardModeThreeShortFrance extends BoardMode {
 	}
 
 	@Override
-	public int[] getWheelArmValues() {
+	protected int[] getWheelArmValues() {
 		return new int[] { 0, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8, 9, 10 };
 	}
 
@@ -28,10 +28,10 @@ public class BoardModeThreeShortFrance extends BoardMode {
 	public List<Building> roundBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
-			
+
 			char c = buildingId.toString().charAt(0);
 			if(c != 'G' && c != 'F') continue;
-			
+
 			Building building = buildingId.getInstance();
 			if (board.getSettlementRound().equals(building.getStage())
 					// less than, not less than or equal to...
@@ -46,10 +46,10 @@ public class BoardModeThreeShortFrance extends BoardMode {
 	public List<Building> futureBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
 		for(BuildingEnum buildingId : BuildingEnum.values()) {
-			
+
 			char c = buildingId.toString().charAt(0);
 			if(c != 'G' && c != 'F') continue;
-			
+
 			Building building = buildingId.getInstance();
 			if(board.getAllBuildings().containsKey(buildingId) == false && building.getPlayers().ordinal() <= PLAYERS.ordinal()) {
 				buildings.add(building);
@@ -110,7 +110,7 @@ public class BoardModeThreeShortFrance extends BoardMode {
 		else {
 			board.setRound(board.getRound()+1);
 		}
-		
+
 		//5 -- pass starting player
 		board.setStartingPlayer(board.getStartingPlayer() + 1);
 		board.getStartingMarker().setOwner(board.players[board.getStartingPlayer()]);
@@ -151,7 +151,7 @@ public class BoardModeThreeShortFrance extends BoardMode {
 
 	@Override
 	public GamePlayers getPlayers() {
-		return PLAYERS; 
+		return PLAYERS;
 	}
 
 	@Override
@@ -185,7 +185,7 @@ public class BoardModeThreeShortFrance extends BoardMode {
 	public int getMovesInRound() {
 		return 4;
 	}
-	
+
 	@Override
 	public int getLastSettlementAfterRound() {
 		return 13;
@@ -195,7 +195,7 @@ public class BoardModeThreeShortFrance extends BoardMode {
 	protected boolean isRoundStartBonusActive() {
 		return true;
 	}
-	
+
 	@Override
 	public boolean isGrapesUsed() {
 		return true;
@@ -205,7 +205,7 @@ public class BoardModeThreeShortFrance extends BoardMode {
 	boolean isNeutralBuildingPhase() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isStoneUsed() {
 		return true;

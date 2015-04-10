@@ -24,7 +24,7 @@ public class Terrain {
 		this.terrainUse = terrainUse;
 		this.landscape = landscape;
 		this.erection = erection;
-		
+
 		if(erection != null)
 			erection.setLocation(this);
 	}
@@ -40,7 +40,7 @@ public class Terrain {
 			erection.setLocation(this);
 	}
 
-	public Landscape getLandscape() {
+	protected Landscape getLandscape() {
 		return landscape;
 	}
 
@@ -63,7 +63,7 @@ public class Terrain {
 	/**
 	 * Determines whether this terrain is a neighbor to a terrain containing a
 	 * cloister erection.
-	 * 
+	 *
 	 * @return {@code true} if this terrain is a neighbor to a terrain
 	 *         containing a cloister erection. {@code false} otherwise.
 	 */
@@ -108,10 +108,10 @@ public class Terrain {
 		this.terrainUse = terrainUse;
 	}
 
-	public String getCoords() {
+	protected String getCoords() {
 		return "("+x+","+y+")";
 	}
-	
+
 	public Coordinate getCoordinate() {
 		return new Coordinate(x, y);
 	}

@@ -9,7 +9,7 @@ import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.BuildingEnum;
 
 public class BoardModeFourLongIreland extends BoardMode {
-	
+
 	private static final GamePlayers PLAYERS = GamePlayers.FOUR;
 	private static final GameLength LENGTH = GameLength.LONG;
 	private static final GameCountry COUNTRY = GameCountry.IRELAND;
@@ -19,7 +19,7 @@ public class BoardModeFourLongIreland extends BoardMode {
 	}
 
 	@Override
-	public int[] getWheelArmValues() {
+	protected int[] getWheelArmValues() {
 		return new int[] { 0, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8, 9, 10 };
 	}
 
@@ -27,10 +27,10 @@ public class BoardModeFourLongIreland extends BoardMode {
 	public List<Building> roundBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
-			
+
 			char c = buildingId.toString().charAt(0);
 			if(c != 'G' && c != 'I') continue;
-			
+
 			Building building = buildingId.getInstance();
 			if (board.getSettlementRound().equals(building.getStage())
 					&& building.getPlayers().ordinal() <= PLAYERS.ordinal()) {
@@ -44,10 +44,10 @@ public class BoardModeFourLongIreland extends BoardMode {
 	public List<Building> futureBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
 		for(BuildingEnum buildingId : BuildingEnum.values()) {
-			
+
 			char c = buildingId.toString().charAt(0);
 			if(c != 'G' && c != 'I') continue;
-			
+
 			Building building = buildingId.getInstance();
 			if(board.getAllBuildings().containsKey(buildingId) == false && building.getPlayers().ordinal() <= PLAYERS.ordinal()) {
 				buildings.add(building);
@@ -108,7 +108,7 @@ public class BoardModeFourLongIreland extends BoardMode {
 		else {
 			board.setRound(board.getRound()+1);
 		}
-		
+
 		//5 -- pass starting player
 		board.setStartingPlayer(board.getStartingPlayer() + 1);
 		board.getStartingMarker().setOwner(board.players[board.getStartingPlayer()]);
@@ -150,7 +150,7 @@ public class BoardModeFourLongIreland extends BoardMode {
 
 	@Override
 	public GamePlayers getPlayers() {
-		return PLAYERS; 
+		return PLAYERS;
 	}
 
 	@Override
@@ -166,14 +166,14 @@ public class BoardModeFourLongIreland extends BoardMode {
 	@Override
 	public boolean isProductionBonusActive() {
 		return false;
-	}		
-	
-	
+	}
+
+
 	@Override
 	public int getMovesInRound() {
 		return 5;
-	}	
-	
+	}
+
 	public int getLastSettlementAfterRound() {
 		return 25;
 	}
@@ -182,7 +182,7 @@ public class BoardModeFourLongIreland extends BoardMode {
 	protected boolean isRoundStartBonusActive() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isGrapesUsed() {
 		return false;
@@ -192,7 +192,7 @@ public class BoardModeFourLongIreland extends BoardMode {
 	boolean isNeutralBuildingPhase() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isStoneUsed() {
 		return true;

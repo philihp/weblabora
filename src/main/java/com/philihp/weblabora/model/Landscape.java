@@ -24,11 +24,11 @@ public class Landscape {
 		ClayMound clayMound = ClayMound.make(player.getColor());
 		Farmyard farmyard = Farmyard.make(player.getColor());
 		CloisterOffice cloisterOffice = CloisterOffice.make(player.getColor());
-		
+
 		Set<Integer> rows = ContiguousSet.create(Range.closed(0, 1),DiscreteDomain.integers());
 		Set<Integer> cols = ContiguousSet.create(Range.closed(0, 4),DiscreteDomain.integers());
 		this.terrain = ArrayTable.create(rows,cols);
-		
+
 		terrainPut(0, 0, TerrainTypeEnum.PLAINS,   TerrainUseEnum.MOOR,    null);
 		terrainPut(0, 1, TerrainTypeEnum.PLAINS,   TerrainUseEnum.FOREST,   null);
 		terrainPut(0, 2, TerrainTypeEnum.PLAINS,   TerrainUseEnum.FOREST,   null);
@@ -40,22 +40,22 @@ public class Landscape {
 		terrainPut(1, 3, TerrainTypeEnum.PLAINS,   TerrainUseEnum.EMPTY,    null);
 		terrainPut(1, 4, TerrainTypeEnum.PLAINS,   TerrainUseEnum.BUILDING, cloisterOffice);
 	}
-	
+
 	private void terrainPut(int y, int x, TerrainTypeEnum type, TerrainUseEnum use, Erection erection) {
 		if ((erection != null) && (use != TerrainUseEnum.BUILDING))
 			throw new IllegalArgumentException();
 		terrain.put(y, x, new Terrain(this, type, use, erection, x, y));
 	}
-	
-	public Table<Integer, Integer, Terrain> getTerrain() {
+
+	protected Table<Integer, Integer, Terrain> getTerrain() {
 		return terrain;
 	}
-	
+
 	public void setTerrain(ArrayTable<Integer, Integer, Terrain> terrain) {
 		this.terrain = terrain;
 	}
 
-	public Terrain[][] asTable() {
+	public Terrain[][] getTerrainTable() {
 		return terrain.toArray(Terrain.class);
 	}
 
@@ -63,14 +63,14 @@ public class Landscape {
 		if(use == null) return 0;
 
 		int count = 0;
-		for(Terrain[] row : asTable()) {
+		for(Terrain[] row : getTerrainTable()) {
 			for(Terrain cell : row) {
 				if(cell != null && use == cell.getTerrainUse())
 					count++;
 			}
 		}
 
-		return count;	
+		return count;
 	}
 
 	public int getNumberOfForests() {
@@ -80,18 +80,18 @@ public class Landscape {
 		return getNumberOfTerrain(TerrainUseEnum.MOOR);
 	}
 
-	public List<Erection> getErections() {
+	protected List<Erection> getErections() {
 		List<Erection> list = new ArrayList<Erection>(3);
-		for (Terrain[] row : asTable()) {
+		for (Terrain[] row : getTerrainTable()) {
 			for (Terrain cell : row) {
-				if(cell != null && cell.getErection() != null) 
+				if(cell != null && cell.getErection() != null)
 					list.add(cell.getErection());
 			}
 		}
 		return list;
 	}
-	
-	public List<Settlement> getSettlements() {
+
+	protected List<Settlement> getSettlements() {
 		List<Settlement> list = new ArrayList<Settlement>(8);
 		for(Erection erection : getErections()) {
 			if(erection instanceof Settlement) {
@@ -101,7 +101,7 @@ public class Landscape {
 		return list;
 	}
 
-	public List<Building> getBuildings() {
+	protected List<Building> getBuildings() {
 		List<Building> list = new ArrayList<Building>(3);
 		for (Erection erection : getErections()) {
 			if (erection instanceof Building) {
@@ -119,7 +119,7 @@ public class Landscape {
 
 	/**
 	 * Determines whether specified terrain contains a cloister erection.
-	 * 
+	 *
 	 * @param coord Coordinates of the terrain to be checked.
 	 * @return {@code true} if terrain at {@code coord} contains a cloister
 	 *         erection. {@code false} otherwise.

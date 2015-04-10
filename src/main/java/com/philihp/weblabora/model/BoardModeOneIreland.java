@@ -22,9 +22,9 @@ public class BoardModeOneIreland extends BoardMode {
 	private static final GamePlayers PLAYERS = GamePlayers.ONE;
 	private static final GameLength LENGTH = GameLength.NULL;
 	private static final GameCountry COUNTRY = GameCountry.IRELAND;
-	
+
 	private Player neutralPlayer = null;
-	
+
 	private boolean neutralBuildingPhase = false;
 
 	protected BoardModeOneIreland(Board board) {
@@ -32,7 +32,7 @@ public class BoardModeOneIreland extends BoardMode {
 	}
 
 	@Override
-	public int[] getWheelArmValues() {
+	protected int[] getWheelArmValues() {
 		return new int[] { 0, 2, 3, 4, 5, 6, 6, 7, 7, 8, 8, 9, 10 };
 	}
 
@@ -49,10 +49,10 @@ public class BoardModeOneIreland extends BoardMode {
 				continue;
 			if (buildingId == BuildingEnum.F29)
 				continue;
-			
+
 			char c = buildingId.toString().charAt(0);
 			if(c != 'G' && c != 'I') continue;
-			
+
 			Building building = buildingId.getInstance();
 			if (board.getSettlementRound().equals(building.getStage())) {
 				buildings.add(building);
@@ -70,7 +70,7 @@ public class BoardModeOneIreland extends BoardMode {
 
 			char c = buildingId.toString().charAt(0);
 			if(c != 'G' && c != 'I') continue;
-			
+
 			Building building = buildingId.getInstance();
 			if (board.getAllBuildings().containsKey(buildingId) == false
 					&& building.getStage().equals("L") == false) {
@@ -104,16 +104,16 @@ public class BoardModeOneIreland extends BoardMode {
 			return null;
 		}
 	}
-	
+
 	public boolean isNeutralBuildingPhase() {
 		return neutralBuildingPhase;
 	}
-	
+
 	@Override
 	public void postMove() {
 		//clear any coins that may have been paid to neutral player
 		getNeutralPlayer().setPenny(0);
-		
+
 		if(board.isExtraRound() && board.getMoveInRound() == 2) {
 			board.setSettling(true);
 			board.setSettlementRound(SettlementRound.E);
@@ -122,7 +122,7 @@ public class BoardModeOneIreland extends BoardMode {
 		else if(board.getSettlementRound() == SettlementRound.E) {
 			board.setGameOver(true);
 		}
-		
+
 		if(board.isSettling() && board.getUnbuiltBuildings().size() == 0 && neutralBuildingPhase == true ) {
 			board.setMoveInRound(board.getMoveInRound() + 1);
 			board.nextActivePlayer();
@@ -185,7 +185,7 @@ public class BoardModeOneIreland extends BoardMode {
 	public int stoneActiveOnRound() {
 		return 18;
 	}
-	
+
 	@Override
 	public int jokerActiveOnRound() {
 		return 12;
@@ -221,7 +221,7 @@ public class BoardModeOneIreland extends BoardMode {
 	public int getMovesInRound() {
 		return 1;
 	}
-	
+
 	@Override
 	public int getLastSettlementAfterRound() {
 		return 28;
@@ -233,13 +233,13 @@ public class BoardModeOneIreland extends BoardMode {
 	}
 
 	public static final int[] PLOT_PURCHASE_PRICE = {7,6,6,5,5,5,4,4,3};
-	
+
 	public static final int[] DISTRICT_PURCHASE_PRICE = {8,7,6,5,5,4,4,3,2};
-	
+
 	private int plotsPurchased;
-	
+
 	private int districtsPurchased;
-	
+
 	@Override
 	public int[] getPlotCosts() {
 		return Arrays.copyOfRange(PLOT_PURCHASE_PRICE, plotsPurchased, PLOT_PURCHASE_PRICE.length);
@@ -247,7 +247,7 @@ public class BoardModeOneIreland extends BoardMode {
 
 	@Override
 	public int[] getDistrictCosts() {
-		return Arrays.copyOfRange(DISTRICT_PURCHASE_PRICE, districtsPurchased, DISTRICT_PURCHASE_PRICE.length); 
+		return Arrays.copyOfRange(DISTRICT_PURCHASE_PRICE, districtsPurchased, DISTRICT_PURCHASE_PRICE.length);
 	}
 
 	@Override
@@ -259,7 +259,7 @@ public class BoardModeOneIreland extends BoardMode {
 	public int purchaseDistrict() {
 		return DISTRICT_PURCHASE_PRICE[districtsPurchased++];
 	}
-	
+
 	@Override
 	public void setup() {
 		Player player = board.getPlayer(0);
@@ -269,7 +269,7 @@ public class BoardModeOneIreland extends BoardMode {
 		player.setPenny(0);
 		player.setGrain(0);
 		player.setSheep(0);
-		
+
 		neutralPlayer = new Player(board,Color.WHITE);
 		Player[] players = new Player[2];
 		players[0] = board.getPlayer(0);
@@ -291,29 +291,29 @@ public class BoardModeOneIreland extends BoardMode {
 				break;
 			}
 		}
-		
+
 		neutralPlayer.getLandscape().getTerrainAt(new Coordinate(0,0)).setErection(buildersMarket);
 
 		board.getAllBuildings().put(LW1, (ClayMound)neutralPlayer.getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
 		board.getAllBuildings().put(LW2, (Farmyard)neutralPlayer.getLandscape().getTerrainAt(new Coordinate(2, 1)).getErection());
 		board.getAllBuildings().put(LW3, (CloisterOffice)neutralPlayer.getLandscape().getTerrainAt(new Coordinate(4, 1)).getErection());
 	}
-	
+
 	@Override
 	public Player getNeutralPlayer() {
 		return neutralPlayer;
 	}
-	
+
 	@Override
 	public boolean isGrapesUsed() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isStoneUsed() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isPriorSpecialInExtraRound() {
 		return false;

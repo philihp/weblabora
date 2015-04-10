@@ -20,7 +20,7 @@ public class BoardModeTwoShortIreland extends BoardMode {
 	}
 
 	@Override
-	public int[] getWheelArmValues() {
+	protected int[] getWheelArmValues() {
 		return new int[] { 0, 1, 2, 2, 3, 4, 4, 5, 6, 6, 7, 8, 10 };
 	}
 
@@ -28,10 +28,10 @@ public class BoardModeTwoShortIreland extends BoardMode {
 	public List<Building> roundBuildings() {
 		List<Building> buildings = new ArrayList<Building>();
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
-			
+
 			char c = buildingId.toString().charAt(0);
 			if(c != 'G' && c != 'I') continue;
-			
+
 			Building building = buildingId.getInstance();
 			if (board.getSettlementRound().equals(building.getStage())) {
 				buildings.add(building);
@@ -46,10 +46,10 @@ public class BoardModeTwoShortIreland extends BoardMode {
 		// two player long game uses all buildings except C-grapevine, C-quarry
 		// and Carpentry
 		for (BuildingEnum buildingId : BuildingEnum.values()) {
-			
+
 			char c = buildingId.toString().charAt(0);
 			if(c != 'G' && c != 'I') continue;
-			
+
 			Building building = buildingId.getInstance();
 			if (board.getAllBuildings().containsKey(buildingId) == false
 					&& building.getStage().equals("L") == false) {
@@ -82,7 +82,7 @@ public class BoardModeTwoShortIreland extends BoardMode {
 			return null;
 		}
 	}
-	
+
 	@Override
 	public void postMove() {
 		board.setMoveInRound(board.getMoveInRound() + 1);
@@ -94,7 +94,7 @@ public class BoardModeTwoShortIreland extends BoardMode {
 		}
 		else {
 			if(board.getMoveInRound() > 2) {
-				board.nextActivePlayer();  
+				board.nextActivePlayer();
 				board.postRound();
 			}
 		}
@@ -184,7 +184,7 @@ public class BoardModeTwoShortIreland extends BoardMode {
 	public int getMovesInRound() {
 		return 1;
 	}
-	
+
 	@Override
 	public int getLastSettlementAfterRound() {
 		return 28;
@@ -194,7 +194,7 @@ public class BoardModeTwoShortIreland extends BoardMode {
 	protected boolean isRoundStartBonusActive() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isGrapesUsed() {
 		return false;
@@ -204,7 +204,7 @@ public class BoardModeTwoShortIreland extends BoardMode {
 	boolean isNeutralBuildingPhase() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isStoneUsed() {
 		return true;
