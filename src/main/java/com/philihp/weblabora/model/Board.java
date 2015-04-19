@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.philihp.weblabora.model.building.Building;
 import com.philihp.weblabora.model.building.BuildingEnum;
 import com.philihp.weblabora.model.building.ClayMound;
@@ -27,7 +28,7 @@ import com.philihp.weblabora.model.building.Settlement;
 import com.philihp.weblabora.model.building.SettlementEnum;
 
 public class Board {
-	
+
 	private BoardMode mode;
 	
 	protected Wheel wheel;
@@ -51,7 +52,9 @@ public class Board {
 	private boolean settling;
 	
 	private boolean extraRound;
-	
+
+	private boolean started = false;
+
 	private boolean gameOver = false;
 	
 	private String nextState;
@@ -66,16 +69,35 @@ public class Board {
 
 	private List<Wonder> unclaimedWonders;
 
-	public Board(GamePlayers gamePlayers, GameLength gameLength, GameCountry gameCountry) {
+	private GamePlayers gamePlayers;
+	private GameLength gameLength = GameLength.NULL;
+	private GameCountry gameCountry;
+
+	public Board() {
+	}
+
+	public void setPlayers(GamePlayers gamePlayers) {
+		this.gamePlayers = gamePlayers;
+	}
+
+	public void setLength(GameLength gameLength) {
+		this.gameLength = gameLength;
+	}
+
+	public void setCountry(GameCountry gameCountry) {
+		this.gameCountry = gameCountry;
+	}
+
+	public void start() throws WeblaboraException {
 		this.mode = BoardMode.getMode(this, gamePlayers, gameLength, gameCountry);
-		
+		this.started = true;
+
 		int i;
 		
 		settlementRound = SettlementRound.S;
 
 		wheel = new Wheel(this,mode.getWheelArmValues());
 		mode.setWheelTokens(wheel);
-
 
 		activePlayer = 0;
 		players = new Player[gamePlayers.getAsNumber()];
@@ -265,12 +287,6 @@ public class Board {
 	public void setNextState(String nextState) {
 		this.nextState = nextState;
 	}
-	
-	public float getArmOffset() {
-		if(isSettling()) return 27.692f;
-		else if(isExtraRound()) return 20.769f;
-		else return 13.846f;
-	}
 
 	public void setSettlementRound(SettlementRound settlementRound) {
 		this.settlementRound = settlementRound;
@@ -297,7 +313,7 @@ public class Board {
 	 */
 	public void preRound() {
 		
-		getMoveList().add("Round "+round);
+		getMoveList().add("Round " + round);
 
 		//1 - reset clergymen
 		for(Player player : getPlayers()) {
@@ -341,6 +357,7 @@ public class Board {
 	 * Called before every move.
 	 */
 	public void preMove(String state) {
+		if(!isGameStarted()) return;
 		if(isGameOver()) return;
 		
 		if(isExtraRound() && moveInRound == 1) {
@@ -366,8 +383,13 @@ public class Board {
 	/**
 	 * Called after every move.
 	 */
-	public void postMove() {
-		mode.postMove();
+	public void postMove() throws WeblaboraException {
+		if(isGameStarted()) {
+			mode.postMove();
+		}
+		else {
+			start();
+		}
 	}
 	
 	public void postRound() {
@@ -393,10 +415,13 @@ public class Board {
 		round++;
 		moveInRound=1;
 	}
-	
+
 	public boolean isGameOver() {
 		return gameOver;
 	}
+
+	@JsonIgnore
+	public boolean isGameStarted() { return started; }
 
 	public void setGameOver(boolean gameOver) {
 		this.gameOver = gameOver;

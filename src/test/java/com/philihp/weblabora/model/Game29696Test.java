@@ -21,7 +21,8 @@ public class Game29696Test {
 
   @Before
   public void setUp() throws Exception {
-    board = new Board(GamePlayers.FOUR, GameLength.LONG, GameCountry.FRANCE);
+    board = new Board();
+    MoveProcessor.processMove(board, "CONFIG(PLAYERS,4)|CONFIG(LENGTH,LONG)|CONFIG(COUNTRY,FRANCE)");
     MoveProcessor.processMove(board, "U(LR3,Jo)|D(2,HILLS)");
     MoveProcessor.processMove(board, "B(G01,3,1)");
     MoveProcessor.processMove(board, "F(2,0)");

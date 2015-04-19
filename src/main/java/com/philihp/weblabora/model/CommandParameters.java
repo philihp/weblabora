@@ -5,10 +5,7 @@ import java.util.List;
 
 public class CommandParameters {
 
-	/**
-	 * The first token's first character.
-	 */
-	private char command;
+	private String command;
 
 	/**
 	 * Everything in the middle
@@ -27,7 +24,7 @@ public class CommandParameters {
 	private MoveHistory history;
 
 	public CommandParameters(MoveHistory history) {
-   		this.mustBePrior = history.isPreviousBuild();
+		this.mustBePrior = (history!=null ? history.isPreviousBuild() : false);
 		this.history = history;
 	}
 
@@ -35,11 +32,11 @@ public class CommandParameters {
 		return history;
 	}
 
-	public char getCommand() {
+	public String getCommand() {
 		return command;
 	}
 
-	public void setCommand(char command) {
+	public void setCommand(String command) {
 		this.command = command;
 	}
 

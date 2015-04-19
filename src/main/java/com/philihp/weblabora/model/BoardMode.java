@@ -62,10 +62,7 @@ public abstract class BoardMode {
 			EnumMap<GameCountry, Class<? extends BoardMode>> subsubmap = submap.get(gameLength);
 			Class<? extends BoardMode> clazz = subsubmap.get(gameCountry);
 			Constructor<? extends BoardMode> constructor = clazz.getDeclaredConstructor(Board.class);
-//			Constructor<? extends BoardMode> constructor = map.get(gamePlayers)
-//					.get(gameLength).get(gameCountry)
-//					.getDeclaredConstructor(Board.class);
-			return (BoardMode) constructor.newInstance(board);
+			return constructor.newInstance(board);
 		} catch (NoSuchMethodException e) {
 			throw new RuntimeException(e);
 		} catch (InstantiationException e) {
