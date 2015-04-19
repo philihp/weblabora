@@ -23,7 +23,7 @@ public class Game44462Test {
   public void setUp() throws Exception {
     board = new Board();
     MoveProcessor.processMove(board, "CONFIG(PLAYERS,3)|CONFIG(LENGTH,SHORT)|CONFIG(COUNTRY,IRELAND)");
-    MoveProcessor.processMove(board, "F(2,0)");
+    MoveProcessor.processMove(board, "F (2,0)");
     MoveProcessor.processMove(board, "F(1,1,Jo)");
     MoveProcessor.processMove(board, "B(G02,3,1)|U(G02,GnShCl,Sh)*");
     MoveProcessor.processMove(board, "B(G12,2,0)|U(G12,ShWo,Sn)|U(G12,ShWo,Sn)*");

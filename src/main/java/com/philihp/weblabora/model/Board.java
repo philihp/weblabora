@@ -30,7 +30,7 @@ import com.philihp.weblabora.model.building.SettlementEnum;
 public class Board {
 
 	private BoardMode mode;
-	
+
 	protected Wheel wheel;
 
 	protected Player[] players;
@@ -38,33 +38,33 @@ public class Board {
 	private int activePlayer;
 
 	private List<Building> unbuiltBuildings;
-	
+
 	private int startingPlayer;
-	
+
 	private StartingMarker startingMarker;
-	
+
 	private int round;
-	
+
 	private SettlementRound settlementRound;
 
 	private int moveInRound;
 
 	private boolean settling;
-	
+
 	private boolean extraRound;
 
 	private boolean started = false;
 
 	private boolean gameOver = false;
-	
+
 	private String nextState;
 
 	private List<String> moveList = new ArrayList<String>();
-	
+
 	/**
 	 * This makes lookups from {@link CommandUse CommandUse}
 	 */
-	private EnumMap<BuildingEnum, Building> allBuildings = 
+	private EnumMap<BuildingEnum, Building> allBuildings =
 			new EnumMap<BuildingEnum, Building>(BuildingEnum.class);
 
 	private List<Wonder> unclaimedWonders;
@@ -93,7 +93,7 @@ public class Board {
 		this.started = true;
 
 		int i;
-		
+
 		settlementRound = SettlementRound.S;
 
 		wheel = new Wheel(this,mode.getWheelArmValues());
@@ -108,18 +108,18 @@ public class Board {
 		players[0].setActive(true);
 
 		unclaimedWonders = gameStartWonders();
-		
+
 		addLandscapeBuildings();
 		unbuiltBuildings = roundBuildings();
 		for(Player player : players) {
 			player.getUnbuiltSettlements().addAll(roundSettlements(SettlementRound.S));
 		}
-		
+
 		round = 1;
 		moveInRound = 1;
 		startingPlayer = 0;
 		startingMarker = new StartingMarker(players[0]);
-		
+
 		mode.setup();
 	}
 
@@ -134,7 +134,7 @@ public class Board {
 	public Player[] getPlayers() {
 		return players;
 	}
-	
+
 	protected void setPlayers(Player[] players) {
 		this.players = players;
 	}
@@ -164,17 +164,17 @@ public class Board {
 		}
 		return buildings;
 	}
-	
+
 	protected EnumMap<BuildingEnum, Building> getAllBuildings() {
 		return allBuildings;
 	}
 
 	public List<Building> getFutureBuildings() {
 		List<Building> buildings = mode.futureBuildings();
-		
+
 		return buildings;
 	}
-	
+
 	public List<Settlement> getFutureSettlements() {
 		List<Settlement> settlements = new ArrayList<Settlement>();
 		for(SettlementEnum settlementId : SettlementEnum.values()) {
@@ -186,7 +186,7 @@ public class Board {
 		}
 		return settlements;
 	}
-	
+
 	private void addLandscapeBuildings() {
 		if(players.length >= 1) {
 			allBuildings.put(LR1, (ClayMound)players[0].getLandscape().getTerrainAt(new Coordinate(4, 0)).getErection());
@@ -213,21 +213,21 @@ public class Board {
 			mode.customizeLandscape(players[3].getLandscape());
 		}
 	}
-	
+
 	public Building findBuildingInstance(BuildingEnum buildingId) {
 		return allBuildings.get(buildingId);
 	}
 
 	private List<Wonder> gameStartWonders() {
 		List<Wonder> wonders = new ArrayList<Wonder>(8);
-		wonders.add(new Wonder());
-		wonders.add(new Wonder());
-		wonders.add(new Wonder());
-		wonders.add(new Wonder());
-		wonders.add(new Wonder());
-		wonders.add(new Wonder());
-		wonders.add(new Wonder());
-		wonders.add(new Wonder());
+		wonders.add(new Wonder("A"));
+		wonders.add(new Wonder("B"));
+		wonders.add(new Wonder("C"));
+		wonders.add(new Wonder("D"));
+		wonders.add(new Wonder("E"));
+		wonders.add(new Wonder("F"));
+		wonders.add(new Wonder("G"));
+		wonders.add(new Wonder("H"));
 		return wonders;
 	}
 
@@ -253,25 +253,25 @@ public class Board {
 			player.testValidity();
 		}
 	}
-	
+
 	/**
 	 * @deprecated Moved to BoardMode.purchasePlot();
 	 */
 	public int purchasePlot() {
 		return mode.purchasePlot();
 	}
-	
+
 	/**
 	 * @deprecated Moved to BoardMode.purchaseDistrict();
 	 */
 	public int purchaseDistrict() {
 		return mode.purchaseDistrict();
 	}
-	
+
 	public StartingMarker getStartingMarker() {
 		return startingMarker;
 	}
-	
+
 	public boolean isSettling() {
 		return settling;
 	}
@@ -279,7 +279,7 @@ public class Board {
 	public void setSettling(boolean settling) {
 		this.settling = settling;
 	}
-	
+
 	public String getNextState() {
 		return nextState;
 	}
@@ -295,15 +295,15 @@ public class Board {
 	public SettlementRound getSettlementRound() {
 		return settlementRound;
 	}
-	
+
 	public boolean isRoundBeforeSettlement(int round) {
 		return roundBeforeSettlement(round) != null;
 	}
-	
+
 	public boolean isExtraRound(int round) {
 		return mode.isExtraRound(round);
 	}
-	
+
 	public SettlementRound roundBeforeSettlement(int round) {
 		return mode.roundBeforeSettlement(round);
 	}
@@ -312,7 +312,7 @@ public class Board {
 	 * Called before every round.
 	 */
 	public void preRound() {
-		
+
 		getMoveList().add("Round " + round);
 
 		//1 - reset clergymen
@@ -320,11 +320,11 @@ public class Board {
 			if(player.isClergymenAllPlaced())
 				player.resetClergymen();
 		}
-		
+
 		//2 - push arm
 		getWheel().pushArm(round);
 		mode.preRound();
-		
+
 		//3 - check to see if grapes/stone should become active
 		if(round == mode.grapeActiveOnRound()) getWheel().getGrape().setActive(true);
 		if(round == mode.stoneActiveOnRound()) getWheel().getStone().setActive(true);
@@ -335,7 +335,7 @@ public class Board {
 		setSettlementRound(getSettlementRound().next());
 		getMoveList().add("Settlement ("+getSettlementRound()+")");
 	}
-	
+
 	public void preExtraRound() {
 		if(getMode().isPriorSpecialInExtraRound()) {
 			for(Player player : players) {
@@ -348,18 +348,18 @@ public class Board {
 					player.resetClergymen();
 			}
 		}
-		
+
 		setExtraRound(true);
 		getMoveList().add("Extra Round");
 	}
-	
+
 	/**
 	 * Called before every move.
 	 */
 	public void preMove(String state) {
 		if(!isGameStarted()) return;
 		if(isGameOver()) return;
-		
+
 		if(isExtraRound() && moveInRound == 1) {
 			preExtraRound();
 		}
@@ -369,17 +369,17 @@ public class Board {
 		else if(moveInRound == 1) {
 			preRound();
 		}
-		
+
 		getMoveList().add( getPlayer(getActivePlayer()).getColor() + ":" +state);
-	
+
 		if(!isGameOver()) {
 			for (int i = 0; i < players.length; i++) {
 				players[i].setActionsBeforeSettlement(actionsBeforeSettlement(i));
 			}
 		}
-		
+
 	}
-	
+
 	/**
 	 * Called after every move.
 	 */
@@ -391,15 +391,15 @@ public class Board {
 			start();
 		}
 	}
-	
+
 	public void postRound() {
 		mode.postRound();
 	}
-	
+
 	public void postSettlement() {
 		//end of settlement round
 		setSettling(false);
-		
+
 		List<Building> newBuildings = roundBuildings();
 		unbuiltBuildings.addAll(newBuildings);
 		for(Player player : players) {
@@ -411,7 +411,7 @@ public class Board {
 			wheel.pushArm(round);
 			getMoveList().add("Game Over");
 		}
-		
+
 		round++;
 		moveInRound=1;
 	}
@@ -440,7 +440,7 @@ public class Board {
 	public String getMove() {
 		return mode.getMoveName();
 	}
-	
+
 	public String getActivePlayerColor() {
 		return getPlayer(getActivePlayer()).getColor().toString();
 	}
@@ -462,7 +462,7 @@ public class Board {
 	public List<String> getMoveList() {
 		return moveList;
 	}
-	
+
 	public List<String> getMoveListReversed() {
 		List<String> newList = new ArrayList<String>(getMoveList());
 		Collections.reverse(newList);
@@ -476,11 +476,11 @@ public class Board {
 	public void setExtraRound(boolean extraRound) {
 		this.extraRound = extraRound;
 	}
-	
+
 	public Scorecard getScorecard() {
 		return new Scorecard(this);
 	}
-	
+
 	public int getMoveInRound() {
 		return this.moveInRound;
 	}
@@ -499,11 +499,11 @@ public class Board {
 	public void setStartingPlayer(int startingPlayer) {
 		this.startingPlayer = startingPlayer % players.length;
 	}
-	
+
 	public BoardMode getMode() {
 		return this.mode;
 	}
-	
+
 public void distributeBonusProduction(UsageParam item) {
   getMode().distributeBonusProduction(item);
 }
@@ -511,25 +511,25 @@ public void distributeBonusProduction(UsageParam item) {
 public int actionsBeforeSettlement(int player) {
 		int currentActivePlayer = getActivePlayer();
 		int round = getRound();
-		
+
 		int actions = 0;
-		
-		
-		
+
+
+
 		// process current round
 		if (isSettling()) {
 			return 0;
 		}
-		
+
 		if ((getMode() instanceof BoardModeTwoLongFrance || getMode() instanceof BoardModeTwoLongIreland)) {
 			if (getRound() > getMode().getLastSettlementAfterRound() ) {
 				return -1;
 			}
 		}
-		
+
 		for (int i = getMoveInRound(); i <= getMode().getMovesInRound() &&
 				(i <= getPlayers().length || !mode.isExtraRound(round - 1)); i++) {
-			
+
 			if (player == currentActivePlayer) {
 				actions++;
 			}
@@ -540,15 +540,15 @@ public int actionsBeforeSettlement(int player) {
 				}
 			}
 		}
-		
+
 		// process other rounds until settlement
 		for (round++; getMode().roundBeforeSettlement(round - 1) == null; round++) {
-			
+
 			if(round > 100) {
 				// escape for when we don't actually find the end of the game?
 				return 0;
 			}
-			
+
 			if (mode.isExtraRound(round - 1)) {
 				actions++;
 			}
@@ -565,9 +565,9 @@ public int actionsBeforeSettlement(int player) {
 					}
 				}
 			}
-			
+
 		}
-		
+
 		return actions;
 	}
 }

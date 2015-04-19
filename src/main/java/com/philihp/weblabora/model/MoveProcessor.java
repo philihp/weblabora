@@ -71,7 +71,7 @@ public final class MoveProcessor {
 
   private static MoveCommand pickCommand(String commandString, MoveHistory history) throws WeblaboraException {
     MoveCommand command = null;
-    switch (commandString.toUpperCase()) {
+    switch (commandString.toUpperCase().trim()) {
       case "CONFIG":
         if(history.isStarted())
           throw new WeblaboraException("Unable to configure game once it has begun");
