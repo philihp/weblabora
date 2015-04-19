@@ -5,4 +5,18 @@ WebLabora
 
 Website based Ora et Labora board game online engine. Built on Circle.
 
-.
+To install current snapshot locally, do this:
+
+`mvn install`
+
+To deploy a snapshot, do this:
+
+`mvn deploy`
+
+To release a new non-snapshot version, do this:
+
+`mvn release:clean release:prepare`
+
+follow the onscreen instructions, and then
+
+`mvn release:perform`
