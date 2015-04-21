@@ -254,20 +254,6 @@ public class Board {
 		}
 	}
 
-	/**
-	 * @deprecated Moved to BoardMode.purchasePlot();
-	 */
-	public int purchasePlot() {
-		return mode.purchasePlot();
-	}
-
-	/**
-	 * @deprecated Moved to BoardMode.purchaseDistrict();
-	 */
-	public int purchaseDistrict() {
-		return mode.purchaseDistrict();
-	}
-
 	public StartingMarker getStartingMarker() {
 		return startingMarker;
 	}
@@ -461,12 +447,6 @@ public class Board {
 
 	public List<String> getMoveList() {
 		return moveList;
-	}
-
-	public List<String> getMoveListReversed() {
-		List<String> newList = new ArrayList<String>(getMoveList());
-		Collections.reverse(newList);
-		return newList;
 	}
 
 	public boolean isExtraRound() {

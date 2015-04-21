@@ -9,13 +9,11 @@ public final class MoveProcessor {
 
   public static void processMoves(Board board, Iterable<String> allMoves) throws WeblaboraException {
     for (String move : allMoves) {
-      if (move == null) continue; //ignore the first null state.
       processMove(board, move);
     }
   }
 
   public static void processMove(Board board, String move) throws WeblaboraException {
-    if (move == null) return;
     board.preMove(move);
     processActions(board, move);
     board.postMove();
