@@ -26,8 +26,8 @@ public class Landscape {
 		Farmyard farmyard = Farmyard.make(player.getColor());
 		CloisterOffice cloisterOffice = CloisterOffice.make(player.getColor());
 
-		Set<Integer> rows = ContiguousSet.create(Range.closed(0, 1),DiscreteDomain.integers());
-		Set<Integer> cols = ContiguousSet.create(Range.closed(0, 4),DiscreteDomain.integers());
+		Set<Integer> rows = ContiguousSet.create(Range.closed(-9, 10),DiscreteDomain.integers());
+		Set<Integer> cols = ContiguousSet.create(Range.closed(-2, 6),DiscreteDomain.integers());
 		this.terrain = ArrayTable.create(rows,cols);
 
 		terrainPut(0, 0, TerrainTypeEnum.PLAINS,   TerrainUseEnum.MOOR,    null);
