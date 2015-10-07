@@ -20,3 +20,5 @@ To release a new non-snapshot version, do this:
 follow the onscreen instructions, and then
 
 `mvn release:perform`
+
+
