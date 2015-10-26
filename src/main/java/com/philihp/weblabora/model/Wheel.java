@@ -1,5 +1,7 @@
 package com.philihp.weblabora.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.*;
 import static com.philihp.weblabora.model.Wheel.Position.*;
 
@@ -106,6 +108,8 @@ public class Wheel {
 		return positionsFromArm;
 	}
 
+	@JsonIgnore
+	// this might be useful for a more tabular rondel
 	public String[][] getTable() {
 		Token[] tokens = { grain, peat, sheep, clay, coin, wood, grape, stone, joker };
 		String[] names = { "grain", "peat", "sheep", "clay", "coin", "wood", "grape", "stone", "joker" };
