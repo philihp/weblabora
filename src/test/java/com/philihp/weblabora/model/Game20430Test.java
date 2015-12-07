@@ -81,7 +81,7 @@ public class Game20430Test {
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use LR2 Sh");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "work_contract Gn Pn");
+    MoveProcessor.processMove(board, "work_contract F05 Pn");
     MoveProcessor.processMove(board, "with CLERGYMAN");
     MoveProcessor.processMove(board, "use F05 FlFlFlFlFlCoCo BrBr");
     MoveProcessor.processMove(board, "commit");
@@ -91,7 +91,7 @@ public class Game20430Test {
     MoveProcessor.processMove(board, "use LG3 Jo");
     MoveProcessor.processMove(board, "buy_district 3 PLAINS");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "work_contract G Pn");
+    MoveProcessor.processMove(board, "work_contract G02 Pn");
     MoveProcessor.processMove(board, "with CLERGYMAN");
     MoveProcessor.processMove(board, "use G02 PnWoCl Wo");
     MoveProcessor.processMove(board, "buy_plot -1 COAST");
@@ -116,7 +116,7 @@ public class Game20430Test {
     MoveProcessor.processMove(board, "use F09");
     MoveProcessor.processMove(board, "use LG3");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "work_contract RED Pn");
+    MoveProcessor.processMove(board, "work_contract LR2 Pn");
     MoveProcessor.processMove(board, "with CLERGYMAN");
     MoveProcessor.processMove(board, "use LR2 Gn");
     MoveProcessor.processMove(board, "commit");
@@ -133,7 +133,7 @@ public class Game20430Test {
     MoveProcessor.processMove(board, "build F11 -1 -1");
     MoveProcessor.processMove(board, "use F11 *");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "work_contract G Pn");
+    MoveProcessor.processMove(board, "work_contract G13 Pn");
     MoveProcessor.processMove(board, "with CLERGYMAN");
     MoveProcessor.processMove(board, "use G13 PnPn");
     MoveProcessor.processMove(board, "commit");
@@ -175,7 +175,7 @@ public class Game20430Test {
     MoveProcessor.processMove(board, "build F21 1 3");
     MoveProcessor.processMove(board, "use F21 GpGpGpGpGpGpGpGp Wn");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "work_contract G PnPn");
+    MoveProcessor.processMove(board, "work_contract F14 PnPn");
     MoveProcessor.processMove(board, "with CLERGYMAN");
     MoveProcessor.processMove(board, "use F14");
     MoveProcessor.processMove(board, "commit");
@@ -224,7 +224,7 @@ public class Game20430Test {
     MoveProcessor.processMove(board, "buy_plot 3 COAST");
     MoveProcessor.processMove(board, "build F36 -1 3");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "work_contract G Wn");
+    MoveProcessor.processMove(board, "work_contract G22 Wn");
     MoveProcessor.processMove(board, "with CLERGYMAN");
     MoveProcessor.processMove(board, "use G22");
     MoveProcessor.processMove(board, "commit");
@@ -242,11 +242,11 @@ public class Game20430Test {
     MoveProcessor.processMove(board, "use F40");
     MoveProcessor.processMove(board, "use G18 ClClClSnCoWo");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "work_contract RED Wn");
+    MoveProcessor.processMove(board, "work_contract G07 Wn");
     MoveProcessor.processMove(board, "with CLERGYMAN");
     MoveProcessor.processMove(board, "use G07 PtPtPtPt");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "work_contract RED Wn");
+    MoveProcessor.processMove(board, "work_contract G28 Wn");
     MoveProcessor.processMove(board, "with CLERGYMAN");
     MoveProcessor.processMove(board, "use G28");
     MoveProcessor.processMove(board, "settle S07 1 0 CoCoCoMtMtMt");
@@ -255,7 +255,7 @@ public class Game20430Test {
     MoveProcessor.processMove(board, "build G34 3 2");
     MoveProcessor.processMove(board, "use G34 *");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "work_contract G Wn");
+    MoveProcessor.processMove(board, "work_contract LG1 Wn");
     MoveProcessor.processMove(board, "with CLERGYMAN");
     MoveProcessor.processMove(board, "use LG1");
     MoveProcessor.processMove(board, "commit");
@@ -264,7 +264,7 @@ public class Game20430Test {
     MoveProcessor.processMove(board, "build G41 4 2");
     MoveProcessor.processMove(board, "use G41 Ni RqOr");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "work_contract G Wn");
+    MoveProcessor.processMove(board, "work_contract G22 Wn");
     MoveProcessor.processMove(board, "with CLERGYMAN");
     MoveProcessor.processMove(board, "use G22");
     MoveProcessor.processMove(board, "commit");
@@ -275,12 +275,12 @@ public class Game20430Test {
     MoveProcessor.processMove(board, "convert Gn");
     MoveProcessor.processMove(board, "use G02 GnSwBo Wo");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "work_contract RED Wn");
+    MoveProcessor.processMove(board, "work_contract G28 Wn");
     MoveProcessor.processMove(board, "with CLERGYMAN");
     MoveProcessor.processMove(board, "use G28");
     MoveProcessor.processMove(board, "settle S05 -1 2 MtWo");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "work_contract G Wn");
+    MoveProcessor.processMove(board, "work_contract F20 Wn");
     MoveProcessor.processMove(board, "with CLERGYMAN");
     MoveProcessor.processMove(board, "use F20 WnShShShFl");
     MoveProcessor.processMove(board, "commit");
@@ -290,7 +290,7 @@ public class Game20430Test {
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use F20 MtGnGnWn");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "work_contract RED Wn");
+    MoveProcessor.processMove(board, "work_contract G28 Wn");
     MoveProcessor.processMove(board, "with CLERGYMAN");
     MoveProcessor.processMove(board, "use G28");
     MoveProcessor.processMove(board, "settle S02 0 3 CoMt");
@@ -313,7 +313,7 @@ public class Game20430Test {
     MoveProcessor.processMove(board, "build G18 5 2");
     MoveProcessor.processMove(board, "use G18 ClClClSnWoWoWoWo");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "work_contract RED Wn");
+    MoveProcessor.processMove(board, "work_contract G07 Wn");
     MoveProcessor.processMove(board, "with CLERGYMAN");
     MoveProcessor.processMove(board, "use G07 PtPtPtPtPtPt");
     MoveProcessor.processMove(board, "commit");
@@ -340,15 +340,13 @@ public class Game20430Test {
     MoveProcessor.processMove(board, "use F09");
     MoveProcessor.processMove(board, "use G13 PnPn");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "work_contract RED Wn");
+    MoveProcessor.processMove(board, "work_contract F27 Wn");
     MoveProcessor.processMove(board, "with CLERGYMAN");
     MoveProcessor.processMove(board, "use F27 Wn");
     MoveProcessor.processMove(board, "use F25 WoClSnSwPnPtShGpCoMtBoPoOr");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "work_contract G PnPn");
-    MoveProcessor.processMove(board, "commit");
+    MoveProcessor.processMove(board, "work_contract F36 PnPn");
     MoveProcessor.processMove(board, "with CLERGYMAN");
-    MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use F36 Or Or");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use LR1");
@@ -356,7 +354,7 @@ public class Game20430Test {
     MoveProcessor.processMove(board, "use F09");
     MoveProcessor.processMove(board, "use G02 WoPtCo Sh");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "work_contract RED Wn");
+    MoveProcessor.processMove(board, "work_contract G28 Wn");
     MoveProcessor.processMove(board, "with CLERGYMAN");
     MoveProcessor.processMove(board, "use G28");
     MoveProcessor.processMove(board, "settle S08 3 4 ShShShShShShShShShShShShShPnPnGpGpCo");
