@@ -1,6 +1,6 @@
 package com.philihp.weblabora.model;
 
-public class CommandConfig implements MoveCommand, InvalidDuringSettlement {
+public class CommandConfig implements MoveCommand, InvalidDuringSettlement, SafeBeforeStart {
 
 	@Override
 	public void execute(Board board, CommandParameters params)

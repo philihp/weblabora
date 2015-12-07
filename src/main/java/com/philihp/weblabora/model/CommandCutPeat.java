@@ -26,8 +26,7 @@ public class CommandCutPeat implements MoveCommand, InvalidDuringSettlement {
 		if(spot == null) {
 			throw new WeblaboraException("Could not cut peat at ("+x+","+y+") because it does not exist.");
 		}
-		
-		
+
 		if (spot.getTerrainUse() != TerrainUseEnum.MOOR)
 			throw new WeblaboraException("Tried to Cut Peat on "
 					+ spot.getTerrainUse() + " at (" + x + "," + y
@@ -40,7 +39,5 @@ public class CommandCutPeat implements MoveCommand, InvalidDuringSettlement {
 		player.setPeat(player.getPeat() + peatTaken);
 		
 		board.distributeBonusProduction(UsageParam.is().peat(1));
-
-		//System.out.println("Cutting peat at " + x + "," + y + "; got peat: " + peatTaken);
 	}
 }

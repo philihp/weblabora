@@ -74,7 +74,7 @@ public class Game27378Test {
     MoveProcessor.processMove(board, "use LR3");
     MoveProcessor.processMove(board, "buy_district 2 PLAINS");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "work_contract WHITE Pn");
+    MoveProcessor.processMove(board, "work_contract LW2 Pn");
     MoveProcessor.processMove(board, "with LAYBROTHER");
     MoveProcessor.processMove(board, "use LW2 Gn");
     MoveProcessor.processMove(board, "commit");

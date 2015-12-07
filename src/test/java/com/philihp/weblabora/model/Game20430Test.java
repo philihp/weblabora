@@ -83,7 +83,7 @@ public class Game20430Test {
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "work_contract F05 Pn");
     MoveProcessor.processMove(board, "with LAYBROTHER");
-    MoveProcessor.processMove(board, "use F05 FlFlFlFlFlCoCo BrBr");
+    MoveProcessor.processMove(board, "use F05 FlFlFlFlFlCoCoBrBr");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "fell_trees 1 1");
     MoveProcessor.processMove(board, "commit");

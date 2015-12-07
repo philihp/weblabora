@@ -61,7 +61,7 @@ public class Game29767Test {
     MoveProcessor.processMove(board, "use LR2 Sh");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "build F05 0 2");
-    MoveProcessor.processMove(board, "use F05 FlFlFlFlFlFlCo BrBr");
+    MoveProcessor.processMove(board, "use F05 FlFlFlFlFlFlCoBrBr");
     MoveProcessor.processMove(board, "buy_plot 2 COAST");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "fell_trees 2 0");

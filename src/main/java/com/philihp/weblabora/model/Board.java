@@ -59,7 +59,7 @@ public class Board {
 
 	private String nextState;
 
-	private List<String> moveList = new ArrayList<String>();
+	private TurnHistory turnHistory;
 
 	/**
 	 * This makes lookups from {@link CommandUse CommandUse}
@@ -74,6 +74,15 @@ public class Board {
 	private GameCountry gameCountry;
 
 	public Board() {
+		turnHistory = new TurnHistory(isSettling(), isNeutralBuildingPhase(), isGameStarted());
+	}
+
+	public TurnHistory getTurnHistory() {
+		return turnHistory;
+	}
+
+	public void setTurnHistory(TurnHistory turnHistory) {
+		this.turnHistory = turnHistory;
 	}
 
 	public void setPlayers(GamePlayers gamePlayers) {
@@ -299,8 +308,6 @@ public class Board {
 	 */
 	public void preRound() {
 
-		getMoveList().add("Round " + round);
-
 		//1 - reset clergymen
 		for(Player player : getPlayers()) {
 			if(player.isClergymenAllPlaced())
@@ -319,7 +326,6 @@ public class Board {
 
 	public void preSettling() {
 		setSettlementRound(getSettlementRound().next());
-		getMoveList().add("Settlement ("+getSettlementRound()+")");
 	}
 
 	public void preExtraRound() {
@@ -336,13 +342,12 @@ public class Board {
 		}
 
 		setExtraRound(true);
-		getMoveList().add("Extra Round");
 	}
 
 	/**
 	 * Called before every move.
 	 */
-	public void preMove(String state) {
+	public void preMove() {
 		if(!isGameStarted()) return;
 		if(isGameOver()) return;
 
@@ -355,8 +360,6 @@ public class Board {
 		else if(moveInRound == 1) {
 			preRound();
 		}
-
-		getMoveList().add( getPlayer(getActivePlayer()).getColor() + ":" +state);
 
 		if(!isGameOver()) {
 			for (int i = 0; i < players.length; i++) {
@@ -372,9 +375,6 @@ public class Board {
 	public void postMove() throws WeblaboraException {
 		if(isGameStarted()) {
 			mode.postMove();
-		}
-		else {
-			start();
 		}
 	}
 
@@ -395,7 +395,6 @@ public class Board {
 		if(settlementRound == SettlementRound.E) {
 			setGameOver(true);
 			wheel.pushArm(round);
-			getMoveList().add("Game Over");
 		}
 
 		round++;
@@ -408,6 +407,11 @@ public class Board {
 
 	@JsonIgnore
 	public boolean isGameStarted() { return started; }
+
+	public boolean isNeutralBuildingPhase() {
+		if(mode == null) return false;
+		return mode.isNeutralBuildingPhase();
+	}
 
 	public void setGameOver(boolean gameOver) {
 		this.gameOver = gameOver;
@@ -443,10 +447,6 @@ public class Board {
 	 */
 	public int[] getDistrictCosts() {
 		return mode.getDistrictCosts();
-	}
-
-	public List<String> getMoveList() {
-		return moveList;
 	}
 
 	public boolean isExtraRound() {

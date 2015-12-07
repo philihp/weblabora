@@ -21,14 +21,14 @@ public class CommandParameters {
 
 	private boolean mustBePrior;
 
-	private MoveHistory history;
+	private TurnHistory history;
 
-	public CommandParameters(MoveHistory history) {
+	public CommandParameters(TurnHistory history) {
 		this.mustBePrior = (history!=null ? history.isPreviousBuild() : false);
 		this.history = history;
 	}
 
-	public MoveHistory getHistory() {
+	public TurnHistory getHistory() {
 		return history;
 	}
 
@@ -80,4 +80,7 @@ public class CommandParameters {
 		return mustBePrior;
 	}
 
+	public void setMustBePrior(boolean mustBePrior) {
+		this.mustBePrior = mustBePrior;
+	}
 }

@@ -29,8 +29,6 @@ public class Game53955Test {
     MoveProcessor.processMove(board, "start");
     MoveProcessor.processMove(board, "cut_peat 0 1");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use LG3");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use LB3 Jo");
@@ -134,7 +132,7 @@ public class Game53955Test {
     MoveProcessor.processMove(board, "cut_peat 0 1 Jo");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "build F05 1 2");
-    MoveProcessor.processMove(board, "use F05 FlFlFlFlPt BrBr *");
+    MoveProcessor.processMove(board, "use F05 FlFlFlFlPtBrBr *");
     MoveProcessor.processMove(board, "buy_plot 0 MOUNTAIN");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use LR2 Sh");

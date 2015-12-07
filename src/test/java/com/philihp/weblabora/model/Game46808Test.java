@@ -38,7 +38,7 @@ public class Game46808Test {
     MoveProcessor.processMove(board, "build I03 3 1");
     MoveProcessor.processMove(board, "use I03 Pn *");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "fell_trees1 0");
+    MoveProcessor.processMove(board, "fell_trees 1 0");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use LG2 Sh");
     MoveProcessor.processMove(board, "commit");
@@ -60,7 +60,7 @@ public class Game46808Test {
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use LG1");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "fell_trees1 0");
+    MoveProcessor.processMove(board, "fell_trees 1 0");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use I03 Pn");
     MoveProcessor.processMove(board, "commit");
@@ -88,7 +88,7 @@ public class Game46808Test {
     MoveProcessor.processMove(board, "use I10 *");
     MoveProcessor.processMove(board, "use LB2 Sh");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "fell_trees1 0");
+    MoveProcessor.processMove(board, "fell_trees 1 0");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use LR3");
     MoveProcessor.processMove(board, "commit");
@@ -120,14 +120,14 @@ public class Game46808Test {
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use LG2 Sh");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "fell_trees1 1");
+    MoveProcessor.processMove(board, "fell_trees 1 1");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "build I04 0 0");
     MoveProcessor.processMove(board, "use I04 GnGnGnGnGnGnGnGnGnGnGnGnGnGnGnGn *");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use I11");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "fell_trees2 0");
+    MoveProcessor.processMove(board, "fell_trees 2 0");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use I14 GnGn Be");
     MoveProcessor.processMove(board, "commit");
@@ -157,7 +157,7 @@ public class Game46808Test {
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use LR1");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "fell_trees1 0");
+    MoveProcessor.processMove(board, "fell_trees 1 0");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use I10");
     MoveProcessor.processMove(board, "use LB3");
@@ -171,7 +171,7 @@ public class Game46808Test {
     MoveProcessor.processMove(board, "buy_district 2 PLAINS");
     MoveProcessor.processMove(board, "use LB3 Jo");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "fell_trees1 1");
+    MoveProcessor.processMove(board, "fell_trees 1 1");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "work_contract G13 Pn");
     MoveProcessor.processMove(board, "with LAYBROTHER");
@@ -223,7 +223,7 @@ public class Game46808Test {
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use I11");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "fell_trees1 1");
+    MoveProcessor.processMove(board, "fell_trees 1 1");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "cut_peat 0 1");
     MoveProcessor.processMove(board, "commit");
@@ -289,7 +289,7 @@ public class Game46808Test {
     MoveProcessor.processMove(board, "buy_district 3 PLAINS");
     MoveProcessor.processMove(board, "build I21 1 3");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "fell_trees1 1");
+    MoveProcessor.processMove(board, "fell_trees 1 1");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use LG2 Gn");
     MoveProcessor.processMove(board, "commit");
@@ -314,9 +314,9 @@ public class Game46808Test {
     MoveProcessor.processMove(board, "with LAYBROTHER");
     MoveProcessor.processMove(board, "use G13 PnPn");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "fell_trees1 2 Jo");
+    MoveProcessor.processMove(board, "fell_trees 1 2 Jo");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "fell_trees2 2");
+    MoveProcessor.processMove(board, "fell_trees 2 2");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "work_contract G22 PnPn");
     MoveProcessor.processMove(board, "with LAYBROTHER");
@@ -374,7 +374,7 @@ public class Game46808Test {
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use G18 ClClClSnCoWo");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "fell_trees2 0");
+    MoveProcessor.processMove(board, "fell_trees 2 0");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "build I40 3 2");
     MoveProcessor.processMove(board, "use I40 *");

@@ -5,7 +5,7 @@ import com.philihp.weblabora.model.building.Erection;
 public class UsageParam {
 
 	/* Used for passing along that the next Plot purchase is free, etc */
-	private MoveHistory history;
+	private TurnHistory history;
 	
 	private String param;
 	
@@ -412,11 +412,11 @@ public class UsageParam {
 		this.wine -= wine;
 	}
 
-	public void setHistory(MoveHistory history) {
+	public void setHistory(TurnHistory history) {
 		this.history = history;
 	}
 
-	public MoveHistory getHistory() {
+	public TurnHistory getHistory() {
 		return history;
 	}
 	

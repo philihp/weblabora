@@ -34,7 +34,6 @@ public class Game44462Test {
     MoveProcessor.processMove(board, "use G02 GnShCl Sh *");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "build G12 2 0");
-    MoveProcessor.processMove(board, "use G12 ShWo Sn");
     MoveProcessor.processMove(board, "use G12 ShWo Sn *");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use LR3 Pn");

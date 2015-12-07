@@ -169,7 +169,7 @@ public class Game21872Test {
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "work_contract F05 PnPn");
     MoveProcessor.processMove(board, "with LAYBROTHER");
-    MoveProcessor.processMove(board, "use F05 FlFlFlFlFlFlPtPt BrBr");
+    MoveProcessor.processMove(board, "use F05 FlFlFlFlFlFlPtPtBrBr");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "convert GnGn");
     MoveProcessor.processMove(board, "buy_district -2 PLAINS");
@@ -233,7 +233,7 @@ public class Game21872Test {
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use G02 ClPnFl Wo");
     MoveProcessor.processMove(board, "commit");
-    MoveProcessor.processMove(board, "use F05 FlFlFlFlFlFlFlCoSw BrBr");
+    MoveProcessor.processMove(board, "use F05 FlFlFlFlFlFlFlCoSwBrBr");
     MoveProcessor.processMove(board, "buy_plot 0 MOUNTAIN");
     MoveProcessor.processMove(board, "commit");
     MoveProcessor.processMove(board, "use F09");
