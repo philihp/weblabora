@@ -21,4 +21,7 @@ follow the onscreen instructions, and then
 
 `mvn release:perform`
 
+New Features
+------------
 
+Instead of using `|` between commands in a move, each command is a separate command. Player must fin
