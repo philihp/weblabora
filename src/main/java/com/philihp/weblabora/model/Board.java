@@ -35,10 +35,21 @@ public class Board {
 
 	protected Player[] players;
 
+	/**
+	 * The current player taking a turn.
+	 */
 	private int activePlayer;
+
+	/**
+	 * The player who has the initive. We are waiting on this guy.
+	 */
+	private int waitingForPlayer;
 
 	private List<Building> unbuiltBuildings;
 
+	/**
+	 * The player who started the round. They get 2 turns in the round.
+	 */
 	private int startingPlayer;
 
 	private StartingMarker startingMarker;
@@ -59,6 +70,7 @@ public class Board {
 
 	private String nextState;
 
+	@JsonIgnore
 	private TurnHistory turnHistory;
 
 	/**
@@ -148,12 +160,28 @@ public class Board {
 		this.players = players;
 	}
 
+	@JsonIgnore
 	public int getActivePlayer() {
 		//this makes it so any builds/uses during solo neutral building use player 0's inventory
-		if(mode.isNeutralPlayerUsed()) return 0;
+		if(mode != null && mode.isNeutralPlayerUsed()) return 0;
 		return activePlayer;
 	}
 
+	public void setWaitingForPlayer(int playerIndex) {
+		this.waitingForPlayer = playerIndex;
+	}
+
+	public void setWaitingForPlayer(Player player) {
+		for(int i = 0; i < players.length; i++) {
+			if(player == players[i]) {
+				this.waitingForPlayer = i;
+			}
+		}
+	}
+
+	public int getWaitingForPlayer() {
+		return waitingForPlayer;
+	}
 
 	private List<Settlement> roundSettlements(SettlementRound round) {
 		List<Settlement> settlements = new ArrayList<Settlement>(8);
@@ -178,13 +206,15 @@ public class Board {
 		return allBuildings;
 	}
 
+	@JsonIgnore
 	public List<Building> getFutureBuildings() {
-		List<Building> buildings = mode.futureBuildings();
-
-		return buildings;
+		return (mode != null) ? mode.futureBuildings() : new ArrayList<>();
 	}
 
+	@JsonIgnore
 	public List<Settlement> getFutureSettlements() {
+		if(mode == null) return new ArrayList<>();
+
 		List<Settlement> settlements = new ArrayList<Settlement>();
 		for(SettlementEnum settlementId : SettlementEnum.values()) {
 			Settlement settlement = settlementId.getInstance();
@@ -246,6 +276,7 @@ public class Board {
 		return unclaimedWonders.remove(unclaimedWonders.size() - 1);
 	}
 
+	@JsonIgnore
 	public List<Building> getUnbuiltBuildings() {
 		return unbuiltBuildings;
 	}
@@ -255,6 +286,7 @@ public class Board {
 		if (++activePlayer >= players.length)
 			activePlayer = 0;
 		players[activePlayer].setActive(true);
+		waitingForPlayer = activePlayer;
 	}
 
 	public void testValidity() throws WeblaboraException {
@@ -263,10 +295,12 @@ public class Board {
 		}
 	}
 
+	@JsonIgnore
 	public StartingMarker getStartingMarker() {
 		return startingMarker;
 	}
 
+	@JsonIgnore
 	public boolean isSettling() {
 		return settling;
 	}
@@ -275,6 +309,7 @@ public class Board {
 		this.settling = settling;
 	}
 
+	@JsonIgnore
 	public String getNextState() {
 		return nextState;
 	}
@@ -287,20 +322,22 @@ public class Board {
 		this.settlementRound = settlementRound;
 	}
 
+	@JsonIgnore
 	public SettlementRound getSettlementRound() {
 		return settlementRound;
 	}
 
+	@JsonIgnore
 	public boolean isRoundBeforeSettlement(int round) {
 		return roundBeforeSettlement(round) != null;
 	}
 
 	public boolean isExtraRound(int round) {
-		return mode.isExtraRound(round);
+		return mode != null ? mode.isExtraRound(round) : false;
 	}
 
 	public SettlementRound roundBeforeSettlement(int round) {
-		return mode.roundBeforeSettlement(round);
+		return mode != null ? mode.roundBeforeSettlement(round) : null;
 	}
 
 	/**
@@ -401,6 +438,7 @@ public class Board {
 		moveInRound=1;
 	}
 
+	@JsonIgnore
 	public boolean isGameOver() {
 		return gameOver;
 	}
@@ -408,6 +446,7 @@ public class Board {
 	@JsonIgnore
 	public boolean isGameStarted() { return started; }
 
+	@JsonIgnore
 	public boolean isNeutralBuildingPhase() {
 		if(mode == null) return false;
 		return mode.isNeutralBuildingPhase();
@@ -423,32 +462,39 @@ public class Board {
 		moveInRound=1;
 	}
 
+	@JsonIgnore
 	public int getRound() {
 		return round;
 	}
 
+	@JsonIgnore
 	public String getMove() {
-		return mode.getMoveName();
+		return mode != null ? mode.getMoveName() : "";
 	}
 
+	@JsonIgnore
 	public String getActivePlayerColor() {
+		if(isGameStarted() == false) return "";
 		return getPlayer(getActivePlayer()).getColor().toString();
 	}
 
 	/**
 	 * @deprecated Moved to BoardMode.getPlotCosts();
 	 */
+	@JsonIgnore
 	public int[] getPlotCosts() {
-		return mode.getPlotCosts();
+		return mode != null ? mode.getPlotCosts() : new int[0];
 	}
 
 	/**
 	 * @deprecated Moved to BoardMode.getDistrictCosts();
 	 */
+	@JsonIgnore
 	public int[] getDistrictCosts() {
-		return mode.getDistrictCosts();
+		return mode != null ? mode.getDistrictCosts() : new int[0];
 	}
 
+	@JsonIgnore
 	public boolean isExtraRound() {
 		return extraRound;
 	}
@@ -457,10 +503,13 @@ public class Board {
 		this.extraRound = extraRound;
 	}
 
+	@JsonIgnore
 	public Scorecard getScorecard() {
+		if(isGameStarted() == false) return null;
 		return new Scorecard(this);
 	}
 
+	@JsonIgnore
 	public int getMoveInRound() {
 		return this.moveInRound;
 	}
@@ -472,6 +521,7 @@ public class Board {
 		this.round = round;
 	}
 
+	@JsonIgnore
 	public int getStartingPlayer() {
 		return startingPlayer;
 	}
@@ -480,15 +530,16 @@ public class Board {
 		this.startingPlayer = startingPlayer % players.length;
 	}
 
+	@JsonIgnore
 	public BoardMode getMode() {
 		return this.mode;
 	}
 
-public void distributeBonusProduction(UsageParam item) {
-  getMode().distributeBonusProduction(item);
-}
+	public void distributeBonusProduction(UsageParam item) {
+		getMode().distributeBonusProduction(item);
+	}
 
-public int actionsBeforeSettlement(int player) {
+	public int actionsBeforeSettlement(int player) {
 		int currentActivePlayer = getActivePlayer();
 		int round = getRound();
 

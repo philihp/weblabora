@@ -17,10 +17,10 @@ public class CommandWorkorder implements MoveCommand, InvalidDuringSettlement {
 				buildingId,
 				new UsageParam(params.get(1))
 				);
-		
+
 		//System.out.println("Workorder "+params.get(0)+" with payment "+params.get(1));
 	}
-	
+
 	public static void execute(Board board, BuildingEnum buildingId, UsageParam payment)
 			throws WeblaboraException {
 		Player activePlayer = board.getPlayer(board.getActivePlayer());
@@ -31,7 +31,7 @@ public class CommandWorkorder implements MoveCommand, InvalidDuringSettlement {
 			activePlayer = board.getPlayer(0);
 			orderedPlayer = board.getMode().getNeutralPlayer();
 		}
-		
+
 		if(payment.isWithGift()) {
 			activePlayer.subtractWhiskey(payment.getWhiskey());
 			activePlayer.subtractWine(payment.getWine());
@@ -43,5 +43,7 @@ public class CommandWorkorder implements MoveCommand, InvalidDuringSettlement {
 			}
 			else throw new WeblaboraException("Insufficient payment, work contracts cost "+board.getStartingMarker().getCost()+" coins, or a wine or whiskey.");
 		}
+
+		board.setWaitingForPlayer(orderedPlayer);
 	}
 }

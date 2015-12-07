@@ -7,12 +7,13 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.philihp.weblabora.model.building.Settlement;
 
 public class Player {
-	
+
 	private boolean active;
-	
+
 	private int peat = 0;
 	private int penny = 0;
 	private int clay = 0;
@@ -37,7 +38,7 @@ public class Player {
 	private int wine = 0;
 	private int beer = 0;
 	private int reliquary = 0;
-	
+
 	private Landscape landscape;
 
 	private Board board;
@@ -45,21 +46,21 @@ public class Player {
 	private Color color;
 
 	private List<Wonder> wonders = new ArrayList<Wonder>(0);
-	
+
 	private Clergyman layBrother1 = new Clergyman(this, LAYBROTHER);
 	private Clergyman layBrother2 = new Clergyman(this, LAYBROTHER);
 	private Clergyman prior = new Clergyman(this, PRIOR);
-	
+
 	private StartingMarker startingMarker = null;
-	
+
 	private List<Settlement> unbuiltSettlements = new ArrayList<Settlement>(5);
 
 	public int actionsBeforeSettlement = 0;
-	
+
 	public Player(Board board, Color color) {
 		this.board = board;
 		this.color = color;
-		//landscape must be initialized AFTER color, because it uses that color's 
+		//landscape must be initialized AFTER color, because it uses that color's
 		this.landscape = new Landscape(this);
 	}
 
@@ -85,7 +86,7 @@ public class Player {
 		bread = 0;
 		wine = 0;
 		beer = 0;
-		reliquary = 0;		
+		reliquary = 0;
 	}
 
 	public List<Settlement> getUnbuiltSettlements() {
@@ -96,104 +97,127 @@ public class Player {
 		this.unbuiltSettlements = unbuiltSettlements;
 	}
 
+	@JsonIgnore
 	public Color getColor() {
 		return color;
 	}
-	
+
+	@JsonIgnore
 	public int getPeat() {
 		return peat;
 	}
 
+	@JsonIgnore
 	public int getClay() {
 		return clay;
 	}
 
+	@JsonIgnore
 	public int getWood() {
 		return wood;
 	}
 
+	@JsonIgnore
 	public int getGrain() {
 		return grain;
 	}
 
+	@JsonIgnore
 	public int getSheep() {
 		return sheep;
 	}
 
+	@JsonIgnore
 	public int getStone() {
 		return stone;
 	}
 
+	@JsonIgnore
 	public int getFlour() {
 		return flour;
 	}
 
+	@JsonIgnore
 	public int getGrapes() {
 		return grapes;
 	}
 
+	@JsonIgnore
 	public int getHops() {
 		return hops;
 	}
 
+	@JsonIgnore
 	public int getCoal() {
 		return coal;
 	}
 
+	@JsonIgnore
 	public int getBook() {
 		return book;
 	}
 
+	@JsonIgnore
 	public int getPottery() {
 		return pottery;
 	}
 
+	@JsonIgnore
 	public int getWhiskey() {
 		return whiskey;
 	}
 
+	@JsonIgnore
 	public int getStraw() {
 		return straw;
 	}
 
+	@JsonIgnore
 	public int getMeat() {
 		return meat;
 	}
 
+	@JsonIgnore
 	public int getOrnament() {
 		return ornament;
 	}
 
+	@JsonIgnore
 	public int getBread() {
 		return bread;
 	}
 
+	@JsonIgnore
 	public int getWine() {
 		return wine;
 	}
 
+	@JsonIgnore
 	public int getBeer() {
 		return beer;
 	}
 
+	@JsonIgnore
 	public int getReliquary() {
 		return reliquary;
 	}
 
+	@JsonIgnore
 	public BigDecimal getTotalFoodAvailable() {
 		return new BigDecimal(beer*5 + bread*3 + flour + grain + grapes + hops + meat*5 + nickel*5
 				+ penny + sheep*2 + whiskey*2 + wine);
 	}
-	
+
+	@JsonIgnore
 	public BigDecimal getTotalEnergyAvailable() {
-		
+
 		BigDecimal one_half = new BigDecimal(0.5);
-		
+
 		BigDecimal straw_energy = one_half.multiply(new BigDecimal(straw));
-		
+
 		return new BigDecimal(wood + peat*2 + coal*3).add(straw_energy);
 	}
-	
+
 	public class InventoryEntry {
 		private final String type;
 		private final int quantity;
@@ -356,20 +380,13 @@ public class Player {
 	public Landscape getLandscape() {
 		return landscape;
 	}
-	
+
 	public boolean isActive() {
 		return active;
 	}
 
 	public void setActive(boolean active) {
 		this.active = active;
-	}
-
-	public String getActiveClass() {
-		return isActive()?"active":"inactive";
-	}
-	public String getSelectedClass() {
-		return isActive()?"selected":"unselected";
 	}
 
 	public boolean canAffordCost(BuildCost buildCost) {
@@ -525,7 +542,7 @@ public class Player {
 	public void subtractCoins(int penniesToSubtract) throws WeblaboraException {
 		if(getCoins() < penniesToSubtract)
 			throw new WeblaboraException("Unable to subtract "+penniesToSubtract+" coins, player only had "+getCoins()+" coins.");
-				
+
 		this.penny -= penniesToSubtract;
 		//if subtracting those pennies pushes us into the negative, then convert the pennies into nickels
 		while(this.penny < 0 && this.nickel > 0) {
@@ -539,17 +556,18 @@ public class Player {
 		while(penny < 0 && whiskey > 0) {
 			penny += 2;
 			whiskey -= 1;
-		} 
+		}
 	}
 	public void addCoins(int penniesToAdd) {
 		addPenny(penniesToAdd%5);
 		addNickel(penniesToAdd/5);
 	}
-	
+
 	public void subtractPenny(int penny) {
 		this.penny -= penny;
 	}
-	
+
+	@JsonIgnore
 	public int getCoins() {
 		return getNickel()*5 + getPenny() + getWine();
 	}
@@ -580,7 +598,7 @@ public class Player {
 
 	public void subtractStraw(int straw) {
 		this.straw -= straw;
-		
+
 		//if we are negative on straw, and there is enough grain to convert it into straw, then do it
 		if(this.straw < 0 && this.grain + this.straw > 0) {
 			this.grain += this.straw;
@@ -672,7 +690,7 @@ public class Player {
 		addBeer(param.getBeer());
 		addReliquary(param.getReliquary());
 	}
-	
+
 	public void placeClergyman(Terrain location) throws WeblaboraException {
 		Clergyman dude = null;
 		if(layBrother1.getLocation() == null) dude = layBrother1;
@@ -684,25 +702,26 @@ public class Player {
 					+ layBrother1.getLocation().getErection()
 					+ (board.getMode().isSecondLayBrotherUsed()?(", the "+layBrother2.getLocation().getErection()):"")
 					+ ", and the " + prior.getLocation().getErection() + ".");
-		
+
 		dude.setLocation(location);
 	}
-	
+
 	public void placePrior(Terrain location) throws WeblaboraException {
 		if (prior.getLocation() != null)
 			throw new WeblaboraException("Attempted to place " + color
 					+ " prior when it is already on "
 					+ prior.getLocation().getErection() + ".");
-		
+
 		prior.setLocation(location);
 	}
-	
+
+	@JsonIgnore
 	public boolean isClergymenAllPlaced() {
 		return layBrother1.getLocation() != null &&
 				(layBrother2.getLocation() != null || board.getMode().isSecondLayBrotherUsed() == false) &&
 				prior.getLocation() != null;
 	}
-	
+
 	public void resetClergymen() {
 		//doing this directly circumvents the bi-directional protections in the setter
 		layBrother1.clearLocation();
@@ -714,18 +733,21 @@ public class Player {
 		prior.clearLocation();
 	}
 
+	@JsonIgnore
 	public Clergyman getLayBrother1() {
 		return layBrother1;
 	}
 
+	@JsonIgnore
 	public Clergyman getLayBrother2() {
 		return layBrother2;
 	}
 
+	@JsonIgnore
 	public Clergyman getPrior() {
 		return prior;
 	}
-	
+
 	public void testValidity() throws WeblaboraException {
 		if(getPeat() < 0)
 			throw new WeblaboraException(color + " has "+getPeat()+" peat");
@@ -771,10 +793,11 @@ public class Player {
 			throw new WeblaboraException(color + " has "+getReliquary()+" reliquary");
 		if(getBread() < 0)
 			throw new WeblaboraException(color + " has "+getBread()+" bread");
-		
+
 		landscape.checkValidity();
 	}
 
+	@JsonIgnore
 	public StartingMarker getStartingMarker() {
 		return startingMarker;
 	}
@@ -783,12 +806,13 @@ public class Player {
 		this.startingMarker = startingMarker;
 	}
 
+	@JsonIgnore
 	public int getActionsBeforeSettlement() {
 		return actionsBeforeSettlement;
 	}
-	
+
 	public void setActionsBeforeSettlement(int actionsBeforeSettlement) {
 		this.actionsBeforeSettlement = actionsBeforeSettlement;
 	}
-	
+
 }

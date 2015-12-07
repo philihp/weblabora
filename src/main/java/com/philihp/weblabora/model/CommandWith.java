@@ -12,6 +12,7 @@ public class CommandWith implements InvalidDuringSettlement, MoveCommand {
     if(type == Clergyman.Type.PRIOR)
       params.setMustBePrior(true);
 
+    board.setWaitingForPlayer(board.getActivePlayer());
   }
 
 }

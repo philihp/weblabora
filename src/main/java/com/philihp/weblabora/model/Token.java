@@ -2,6 +2,7 @@ package com.philihp.weblabora.model;
 
 import static com.philihp.weblabora.model.Wheel.Position.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.philihp.weblabora.model.Wheel.Position;
 
 public class Token {
@@ -35,6 +36,8 @@ public class Token {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+
+	@JsonIgnore
 	public int getRadius() {
 		if(isActive()) {
 			return radius;
