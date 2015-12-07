@@ -6,3 +6,4 @@ login.properties
 *.orig
 weblabora.iml
 .idea/
+pom.xml.versionsBackup
