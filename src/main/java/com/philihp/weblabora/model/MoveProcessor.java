@@ -7,113 +7,86 @@ public final class MoveProcessor {
   private MoveProcessor() {
   }
 
-  public static void processMoves(Board board, Iterable<String> allMoves) throws WeblaboraException {
-    for (String move : allMoves) {
-      processMove(board, move);
-    }
-  }
-
   public static void processMove(Board board, String move) throws WeblaboraException {
-    board.preMove(move);
-    processActions(board, move);
-    board.postMove();
-  }
+    TurnHistory history = board.getTurnHistory();
 
-  public static void processActions(Board board, String actions)
-      throws WeblaboraException {
-    if (board.isGameOver()) return;
-    if (actions != null) actions = actions.trim();
-    if (actions == null) return;
-
-    boolean neutral = (board.getMode() != null) ? board.getMode().isNeutralBuildingPhase() : false;
-    MoveHistory history = new MoveHistory(board.isSettling(), neutral, board.isGameStarted());
-    for (String action : actions.split("\\|")) {
-      processSingleAction(board, action, history);
-    }
-  }
-
-  public static void processSingleAction(Board board, String move, MoveHistory history)
-      throws WeblaboraException {
     CommandParameters params = new CommandParameters(history);
 
-    String prefix;
-    String inner;
-    String suffix;
-    try {
-      prefix = move.substring(0, move.indexOf('('));
-      inner = move.substring(move.indexOf('(') + 1, move.indexOf(')'));
-      suffix = move.substring(move.indexOf(')') + 1);
-    } catch (Exception e) {
-      throw new WeblaboraException("Every action must have exactly one '(' and one ')'.");
-    }
+    String[] args = move.split(" +");
 
-    params.setCommand(prefix);
+    params.setCommand(args[0]);
+
     if (!board.isGameStarted() || board.isExtraRound() && board.getMode().isPriorSpecialInExtraRound()) {
       params.setPlaceClergyman(false);
     } else {
       params.setPlaceClergyman(history.isPreviousUse() == false);
     }
 
-    for (String param : inner.split(",", -1)) {
-      params.getParams().add(param);
+    params.setSuffix("");
+    for(int i = 1; i < args.length; i++) {
+      if(i == args.length-1 && "*".equals(args[i])) {
+        params.setSuffix("*");
+      }
+      else {
+        params.getParams().add(args[i]);
+      }
     }
 
-    params.setSuffix(suffix);
-
     MoveCommand moveCommand = pickCommand(params.getCommand(), history);
+
+    if((board.isGameStarted() == false) && (moveCommand instanceof SafeBeforeStart == false)) {
+      throw new WeblaboraException("Game has not started yet. Can only run CONFIG and START commands.");
+    }
+
     moveCommand.execute(board, params);
 
     history.setPreviousUse(moveCommand instanceof CommandUse);
     history.setPreviousBuild(moveCommand instanceof CommandBuild);
   }
 
-  private static MoveCommand pickCommand(String commandString, MoveHistory history) throws WeblaboraException {
-    MoveCommand command = null;
-    switch (commandString.toUpperCase().trim()) {
-      case "CONFIG":
+  private static MoveCommand pickCommand(String commandString, TurnHistory history) throws WeblaboraException {
+    MoveCommand command;
+    switch (commandString.toLowerCase().trim()) {
+      case "config":
         if(history.isStarted())
           throw new WeblaboraException("Unable to configure game once it has begun");
         command = new CommandConfig();
         break;
-      case "F":
-      case "FELL":
-      case "FELLTREES":
+      case "fell_trees":
         command = new CommandFellTrees();
         break;
-      case "C":
-      case "CUT":
-      case "CUTPEAT":
+      case "cut_peat":
         command = new CommandCutPeat();
         break;
-      case "B":
-      case "BUILD":
+      case "build":
         command = new CommandBuild();
         break;
-      case "U":
-      case "USE":
+      case "use":
         command = new CommandUse();
         break;
-      case "W":
-      case "WORK":
-      case "WORKORDER":
-      case "K":
+      case "work_contract":
         command = new CommandWorkorder();
         break;
-      case "D":
-      case "DISTRICT":
+      case "buy_district":
         command = new CommandBuyDistrict();
         break;
-      case "P":
-      case "PLOT":
+      case "buy_plot":
         command = new CommandBuyPlot();
         break;
-      case "V":
-      case "CONVERT":
+      case "convert":
         command = new CommandConvert();
         break;
-      case "S":
-      case "SETTLE":
+      case "settle":
         command = new CommandSettle();
+        break;
+      case "start":
+        command = new CommandStart();
+        break;
+      case "commit":
+        command = new CommandCommit();
+        break;
+      case "with":
+        command = new CommandWith();
         break;
       default:
         throw new WeblaboraException("Unknown Command \"" + commandString + "\"");

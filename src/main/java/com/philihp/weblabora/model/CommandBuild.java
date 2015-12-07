@@ -5,7 +5,6 @@ import com.philihp.weblabora.model.building.Erection;
 
 public class CommandBuild implements MoveCommand, InvalidDuringSettlement {
 
-
 	@Override
 	public void execute(Board board, CommandParameters params)
 			throws WeblaboraException {

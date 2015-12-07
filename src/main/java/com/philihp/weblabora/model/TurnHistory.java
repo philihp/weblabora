@@ -1,6 +1,6 @@
 package com.philihp.weblabora.model;
 
-public class MoveHistory {
+public class TurnHistory {
 	private boolean previousUse = false;
 	private boolean settling;
 	private boolean previousBuild = false;
@@ -9,7 +9,7 @@ public class MoveHistory {
 	private boolean neutralBuildingPhase = false;
 	private boolean started;
 
-	public MoveHistory(boolean settling, boolean neutralBuildingPhase, boolean started) {
+	public TurnHistory(boolean settling, boolean neutralBuildingPhase, boolean started) {
 		this.settling = settling;
 	  this.neutralBuildingPhase = neutralBuildingPhase;
     this.started = started;

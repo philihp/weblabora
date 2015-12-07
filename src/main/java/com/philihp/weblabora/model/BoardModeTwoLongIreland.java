@@ -115,7 +115,6 @@ public class BoardModeTwoLongIreland extends BoardMode {
 				&& board.getSettlementRound() == SettlementRound.D
 				&& board.getUnbuiltBuildings().size() <= 3) {
 			board.setGameOver(true);
-			board.getMoveList().add("Game Over");
 		}
 		// end 2-player end-game detection.
 

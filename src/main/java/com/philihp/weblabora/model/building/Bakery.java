@@ -6,21 +6,16 @@ import static com.philihp.weblabora.model.TerrainTypeEnum.PLAINS;
 
 import java.util.EnumSet;
 
-import com.philihp.weblabora.model.Board;
-import com.philihp.weblabora.model.BuildCost;
-import com.philihp.weblabora.model.Player;
-import com.philihp.weblabora.model.SettlementRound;
-import com.philihp.weblabora.model.UsageParamDouble;
-import com.philihp.weblabora.model.WeblaboraException;
+import com.philihp.weblabora.model.*;
 
-public class Bakery extends BuildingDoubleUsage {
+public class Bakery extends BuildingSingleUsage {
 
 	public Bakery() {
 		super("F05", SettlementRound.S, 1, "Bakery", BuildCost.is().clay(2).straw(1), 5, 4, EnumSet.of(COAST, PLAINS, HILLSIDE), false);
 	}
 
 	@Override
-	public void use(Board board, UsageParamDouble input) throws WeblaboraException {
+	public void use(Board board, UsageParamSingle input) throws WeblaboraException {
 		Player activePlayer = board.getPlayer(board.getActivePlayer());
 		
 		if(input.getFlour() > input.getEnergy()/0.5)
@@ -34,7 +29,7 @@ public class Bakery extends BuildingDoubleUsage {
 		activePlayer.addBread(quantity);
 		
 		//convert up to two bread to money
-		activePlayer.addCoins(Math.min(input.getSecondary().getBread(), 2) * 4);
-		activePlayer.subtractBread(Math.min(input.getSecondary().getBread(), 2));
+		activePlayer.addCoins(Math.min(input.getBread(), 2) * 4);
+		activePlayer.subtractBread(Math.min(input.getBread(), 2));
 	}
 }
