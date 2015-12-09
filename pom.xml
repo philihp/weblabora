@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.philihp</groupId>
 	<artifactId>weblabora</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>weblabora</name>
 	<description>Web-enabled Ora et Labora Game</description>
@@ -26,7 +26,7 @@
 		<connection>scm:git:git://github.com/philihp/weblabora.git</connection>
 		<developerConnection>scm:git:git@github.com:philihp/weblabora.git</developerConnection>
 		<url>https://github.com:philihp/weblabora</url>
-    <tag>v3.0.0</tag>
+    <tag>weblabora-2.1.1</tag>
   </scm>
 
 	<build>
