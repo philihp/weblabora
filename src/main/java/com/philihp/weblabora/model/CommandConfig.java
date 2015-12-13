@@ -5,15 +5,15 @@ public class CommandConfig implements MoveCommand, InvalidDuringSettlement, Safe
 	@Override
 	public void execute(Board board, CommandParameters params)
 			throws WeblaboraException {
-		switch(params.get(0)) {
+		switch(params.getUpperCased(0)) {
 			case "LENGTH":
-				board.setLength(GameLength.value(params.get(1)));
+				board.setLength(GameLength.value(params.getUpperCased(1)));
 				break;
 			case "PLAYERS":
-				board.setPlayers(GamePlayers.value(Integer.parseInt(params.get(1))));
+				board.setPlayers(GamePlayers.value(Integer.parseInt(params.getUpperCased(1))));
 				break;
 			case "COUNTRY":
-				board.setCountry(GameCountry.value(params.get(1)));
+				board.setCountry(GameCountry.value(params.getUpperCased(1)));
 				break;
 			default:
 				throw new WeblaboraException("Config's first parameter must be LENGTH, PLAYERS, or COUNTRY");

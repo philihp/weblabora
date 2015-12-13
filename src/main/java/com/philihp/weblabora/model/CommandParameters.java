@@ -57,11 +57,16 @@ public class CommandParameters {
 	}
 
 	public String get(int i) throws WeblaboraException {
-		
 		if (params.size() <= i) {
 			throw new WeblaboraException("Incorrect number of parameters for command " + command + ".");
 		}
 		return params.get(i);
+	}
+
+	public String getUpperCased(int i) throws WeblaboraException {
+		String s = get(i);
+		if(s != null) s = s.toUpperCase();
+		return s;
 	}
 
 	public int size() {
