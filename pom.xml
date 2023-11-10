@@ -98,7 +98,7 @@
 			<!-- for ArrayTable & Ranges, used for Landscape -->
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>18.0</version>
+			<version>32.0.0-android</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
